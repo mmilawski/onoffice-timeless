@@ -52,12 +52,12 @@ $anchor = isset($headline['text']) ? clean_id($headline['text']) : '';
 <?php if ($pEstates->getEstateOverallCount() > 0) { ?>
     <?php if (!$is_slider) { ?>
         <?php if ($map) { ?>
-            <div class="c-property-list__wrapper o-col-12 o-col-xl-10">
+            <div class="c-property-list__wrapper o-col-12 o-col-xl-12">
                 <?php echo $map; ?>
             </div>
         <?php } ?>
 
-        <div class="c-property-list__wrapper o-col-12 o-col-xl-10">
+        <div class="c-property-list__wrapper o-col-12 o-col-xl-12">
             <div class="c-property-list__nav">
                 <?php if ($generateSortDropDown()) { ?>
                     <div class="c-property-list__sort">

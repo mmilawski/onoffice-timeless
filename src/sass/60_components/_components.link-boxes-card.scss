@@ -6,6 +6,7 @@
   color: var(--oo-color-text);
   background-color: var(--oo-color-bg);
   border: 2px solid var(--oo-color-bg);
+  border-radius: $button-border-radius;
 
   &__wrapper {
     display: flex;
@@ -14,6 +15,7 @@
     width: 100%;
     height: auto;
     aspect-ratio: 4 / 3;
+    border-radius: $button-border-radius $button-border-radius 0 0;
 
     &.--has-image {
     }

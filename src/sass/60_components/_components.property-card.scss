@@ -4,11 +4,13 @@
   display: grid;
   grid-template-rows: min-content;
   border: 2px solid var(--oo-color-bg);
+  border-radius: $button-border-radius;
 
   &__inner {
     position: relative;
     background-color: var(--oo-color-mix-bg-text-20);
     border-bottom: 2px solid var(--oo-color-primary);
+    border-radius: $button-border-radius $button-border-radius 0 0;
   }
 
   &__link {
@@ -28,6 +30,7 @@
   &__picture {
     overflow: hidden;
     aspect-ratio: 3 / 2;
+    border-radius: $button-border-radius $button-border-radius 0 0;
   }
 
   &__image {
