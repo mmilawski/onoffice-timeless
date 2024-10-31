@@ -1,0 +1,12 @@
+.c-button-group {
+  $c-button-group: &;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  &__item {
+  }
+
+  &__link {
+  }
+}

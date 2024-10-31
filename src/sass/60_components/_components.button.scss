@@ -1,0 +1,351 @@
+.c-button {
+  $c-button: &;
+  display: inline-block;
+  position: relative;
+  font-family: $font-family-button;
+  font-weight: $font-weight-button;
+  @include font-size($mobile-global-font-size, $mobile-global-line-height);
+  text-align: center;
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  color: var(--oo-color-contrast-primary);
+  background-color: var(--oo-color-primary);
+  border: 2px solid var(--oo-color-primary);
+  transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
+    border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+
+  @include visited-active() {
+    color: var(--oo-color-contrast-primary);
+    background-color: var(--oo-color-primary);
+    border-color: var(--oo-color-primary);
+  }
+
+  @include hover-focus() {
+    color: var(--oo-color-contrast-primary);
+    background-color: var(--oo-color-lighten-primary-40);
+    box-shadow: 0px 0px 0px 2px var(--oo-color-primary);
+  }
+
+  @include media-breakpoint-up(xl) {
+    @include font-size($desktop-global-font-size, $desktop-global-line-height);
+  }
+
+  &.--on-bg-light,
+  .--bg-light & {
+    color: var(--oo-color-light-contrast-primary);
+    background-color: var(--oo-color-light-primary, var(--oo-color-primary));
+    border-color: var(--oo-color-light-primary, var(--oo-color-primary));
+
+    @include visited-active() {
+      color: var(--oo-color-light-contrast-primary);
+      background-color: var(--oo-color-light-primary, var(--oo-color-primary));
+      border-color: var(--oo-color-light-primary, var(--oo-color-primary));
+    }
+
+    @include hover-focus() {
+      color: var(--oo-color-light-contrast-primary);
+      background-color: var(--oo-color-light-lighten-primary-40);
+      box-shadow: 0px 0px 0px 2px
+        var(--oo-color-light-primary, var(--oo-color-primary));
+    }
+  }
+
+  &.--on-bg-dark,
+  .--bg-dark & {
+    color: var(--oo-color-dark-contrast-primary);
+    background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+    border-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+
+    @include visited-active() {
+      color: var(--oo-color-dark-contrast-primary);
+      background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+      border-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+    }
+
+    @include hover-focus() {
+      color: var(--oo-color-dark-contrast-primary);
+      background-color: var(--oo-color-dark-lighten-primary-40);
+      box-shadow: 0px 0px 0px 2px
+        var(--oo-color-dark-primary, var(--oo-color-primary));
+    }
+  }
+
+  &.--on-bg-primary,
+  .--bg-primary & {
+    color: var(--oo-color-primary-contrast-primary);
+    background-color: var(--oo-color-primary-primary, var(--oo-color-primary));
+    border-color: var(--oo-color-primary-primary, var(--oo-color-primary));
+
+    @include visited-active() {
+      color: var(--oo-color-primary-contrast-primary);
+      background-color: var(
+        --oo-color-primary-primary,
+        var(--oo-color-primary)
+      );
+      border-color: var(--oo-color-primary-primary, var(--oo-color-primary));
+    }
+
+    @include hover-focus() {
+      color: var(--oo-color-primary-contrast-primary);
+      background-color: var(--oo-color-primary-lighten-primary-40);
+      box-shadow: 0px 0px 0px 2px
+        var(--oo-color-primary-primary, var(--oo-color-primary));
+    }
+  }
+
+  &.--on-bg-secondary,
+  .--bg-secondary & {
+    color: var(--oo-color-secondary-contrast-primary);
+    background-color: var(
+      --oo-color-secondary-primary,
+      var(--oo-color-primary)
+    );
+    border-color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+
+    @include visited-active() {
+      color: var(--oo-color-secondary-contrast-primary);
+      background-color: var(
+        --oo-color-secondary-primary,
+        var(--oo-color-primary)
+      );
+      border-color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+    }
+
+    @include hover-focus() {
+      color: var(--oo-color-secondary-contrast-primary);
+      background-color: var(--oo-color-secondary-lighten-primary-40);
+      box-shadow: 0px 0px 0px 2px
+        var(--oo-color-secondary-primary, var(--oo-color-primary));
+    }
+  }
+
+  &.--on-bg-footer,
+  .--bg-footer & {
+    color: var(--oo-color-footer-contrast-primary);
+    background-color: var(--oo-color-footer-primary, var(--oo-color-primary));
+    border-color: var(--oo-color-footer-primary, var(--oo-color-primary));
+
+    @include visited-active() {
+      color: var(--oo-color-footer-contrast-primary);
+      background-color: var(--oo-color-footer-primary, var(--oo-color-primary));
+      border-color: var(--oo-color-footer-primary, var(--oo-color-primary));
+    }
+
+    @include hover-focus() {
+      color: var(--oo-color-footer-contrast-primary);
+      background-color: var(--oo-color-footer-lighten-primary-40);
+      box-shadow: 0px 0px 0px 2px
+        var(--oo-color-footer-primary, var(--oo-color-primary));
+    }
+  }
+
+  &.--on-bg-transparent,
+  .--bg-transparent & {
+    color: var(--oo-color-contrast-primary);
+    background-color: var(--oo-color-primary);
+    border-color: var(--oo-color-primary);
+
+    @include visited-active() {
+      color: var(--oo-color-contrast-primary);
+      background-color: var(--oo-color-primary);
+      border-color: var(--oo-color-primary);
+    }
+
+    @include hover-focus() {
+      color: var(--oo-color-contrast-primary);
+      background-color: var(--oo-color-lighten-primary-40);
+      box-shadow: 0px 0px 0px 2px var(--oo-color-primary);
+    }
+  }
+
+  &.--ghost {
+    color: var(--oo-color-primary);
+    background-color: transparent;
+    border-color: var(--oo-color-primary);
+
+    @include visited-active() {
+      color: var(--oo-color-primary);
+      background-color: transparent;
+      border-color: var(--oo-color-primary);
+    }
+
+    @include hover-focus() {
+      color: var(--oo-color-lighten-primary-40);
+      background-color: transparent;
+      border-color: var(--oo-color-lighten-primary-40);
+      box-shadow: 0px 0px 0px 2px var(--oo-color-lighten-primary-40);
+    }
+
+    &.--on-bg-light,
+    .--bg-light & {
+      color: var(--oo-color-light-primary, var(--oo-color-primary));
+      background-color: transparent;
+      border-color: var(--oo-color-light-primary, var(--oo-color-primary));
+
+      @include visited-active() {
+        color: var(--oo-color-light-primary, var(--oo-color-primary));
+        background-color: transparent;
+        border-color: var(--oo-color-light-primary, var(--oo-color-primary));
+      }
+
+      @include hover-focus() {
+        color: var(--oo-color-light-lighten-primary-40);
+        background-color: transparent;
+        border-color: var(--oo-color-light-lighten-primary-40);
+        box-shadow: 0px 0px 0px 2px var(--oo-color-light-lighten-primary-40);
+      }
+    }
+
+    &.--on-bg-dark,
+    .--bg-dark & {
+      color: var(--oo-color-dark-primary, var(--oo-color-primary));
+      background-color: transparent;
+      border-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+
+      @include visited-active() {
+        color: var(--oo-color-dark-primary, var(--oo-color-primary));
+        background-color: transparent;
+        border-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+      }
+
+      @include hover-focus() {
+        color: var(--oo-color-dark-lighten-primary-40);
+        background-color: transparent;
+        border-color: var(--oo-color-dark-lighten-primary-40);
+        box-shadow: 0px 0px 0px 2px var(--oo-color-dark-lighten-primary-40);
+      }
+    }
+
+    &.--on-bg-primary,
+    .--bg-primary & {
+      color: var(--oo-color-primary-primary, var(--oo-color-primary));
+      background-color: transparent;
+      border-color: var(--oo-color-primary-primary, var(--oo-color-primary));
+
+      @include visited-active() {
+        color: var(--oo-color-primary-primary, var(--oo-color-primary));
+        background-color: transparent;
+        border-color: var(--oo-color-primary-primary, var(--oo-color-primary));
+      }
+
+      @include hover-focus() {
+        color: var(--oo-color-primary-lighten-primary-40);
+        background-color: transparent;
+        border-color: var(--oo-color-primary-lighten-primary-40);
+        box-shadow: 0px 0px 0px 2px var(--oo-color-primary-lighten-primary-40);
+      }
+    }
+
+    &.--on-bg-secondary,
+    .--bg-secondary & {
+      color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+      background-color: transparent;
+      border-color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+
+      @include visited-active() {
+        color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+        background-color: transparent;
+        border-color: var(
+          --oo-color-secondary-primary,
+          var(--oo-color-primary)
+        );
+      }
+
+      @include hover-focus() {
+        color: var(--oo-color-secondary-lighten-primary-40);
+        background-color: transparent;
+        border-color: var(--oo-color-secondary-lighten-primary-40);
+        box-shadow: 0px 0px 0px 2px var(--oo-color-secondary-lighten-primary-40);
+      }
+    }
+
+    &.--on-bg-footer,
+    .--bg-footer & {
+      color: var(--oo-color-footer-primary, var(--oo-color-primary));
+      background-color: transparent;
+      border-color: var(--oo-color-footer-primary, var(--oo-color-primary));
+
+      @include visited-active() {
+        color: var(--oo-color-footer-primary, var(--oo-color-primary));
+        background-color: transparent;
+        border-color: var(--oo-color-footer-primary, var(--oo-color-primary));
+      }
+
+      @include hover-focus() {
+        color: var(--oo-color-footer-lighten-primary-40);
+        background-color: transparent;
+        border-color: var(--oo-color-footer-lighten-primary-40);
+        box-shadow: 0px 0px 0px 2px var(--oo-color-footer-lighten-primary-40);
+      }
+    }
+
+    &.--on-bg-transparent,
+    .--bg-transparent & {
+      color: var(--oo-color-primary);
+      background-color: transparent;
+      border-color: var(--oo-color-primary);
+
+      @include visited-active() {
+        color: var(--oo-color-primary);
+        background-color: transparent;
+        border-color: var(--oo-color-primary);
+      }
+
+      @include hover-focus() {
+        color: var(--oo-color-lighten-primary-40);
+        background-color: transparent;
+        border-color: var(--oo-color-lighten-primary-40);
+        box-shadow: 0px 0px 0px 2px var(--oo-color-lighten-primary-40);
+      }
+    }
+  }
+
+  &.--small {
+    font-size: 1rem;
+    min-width: 1rem;
+  }
+
+  &.--full-width {
+    width: 100%;
+  }
+
+  &.--on-lightbox {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0.25rem;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &.--read-more {
+    &:before {
+      content: attr(data-open-text);
+    }
+    &:after {
+      content: attr(data-close-text);
+      display: none;
+    }
+    &.--is-open {
+      &:before {
+        display: none;
+      }
+      &:after {
+        display: inline-block;
+      }
+    }
+  }
+
+  &.--show-more {
+    display: inline-block;
+    margin-top: 1rem;
+  }
+}

@@ -1,0 +1,63 @@
+/*------------------------------------*\
+  #HEADINGS
+\*------------------------------------*/
+
+/**
+ * Simple default styles for headings 1 through 6.
+ */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-family-headline;
+  font-weight: $font-weight-headline;
+  color: var(--oo-color-headline, --oo-color-text);
+  hyphens: auto;
+  @include media-breakpoint-up(sm) {
+    hyphens: manual;
+  }
+}
+
+h1 {
+  @include font-size($mobile-h1-font-size, $mobile-h1-line-height);
+  @include media-breakpoint-up(xl) {
+    @include font-size($desktop-h1-font-size, $desktop-h1-line-height);
+  }
+}
+
+h2 {
+  @include font-size($mobile-h2-font-size, $mobile-h2-line-height);
+  @include media-breakpoint-up(xl) {
+    @include font-size($desktop-h2-font-size, $desktop-h2-line-height);
+  }
+}
+
+h3 {
+  @include font-size($mobile-h3-font-size, $mobile-h3-line-height);
+  @include media-breakpoint-up(xl) {
+    @include font-size($desktop-h3-font-size, $desktop-h3-line-height);
+  }
+}
+
+h4 {
+  @include font-size($mobile-h4-font-size, $mobile-h4-line-height);
+  @include media-breakpoint-up(xl) {
+    @include font-size($desktop-h4-font-size, $desktop-h4-line-height);
+  }
+}
+
+h5 {
+  @include font-size($mobile-h5-font-size, $mobile-h5-line-height);
+  @include media-breakpoint-up(xl) {
+    @include font-size($desktop-h5-font-size, $desktop-h5-line-height);
+  }
+}
+
+h6 {
+  @include font-size($mobile-h6-font-size, $mobile-h6-line-height);
+  @include media-breakpoint-up(xl) {
+    @include font-size($desktop-h6-font-size, $desktop-h6-line-height);
+  }
+}

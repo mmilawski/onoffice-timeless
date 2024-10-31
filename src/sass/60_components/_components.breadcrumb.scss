@@ -1,0 +1,24 @@
+.c-breadcrumb {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+
+  content-visibility: auto;
+  contain-intrinsic-size: 30px 0;
+
+  &__container {
+    ul {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    li {
+      a {
+        font-family: var(--oo-font-text-bold);
+        font-weight: var(--oo-font-text-bold-weight);
+      }
+    }
+  }
+}

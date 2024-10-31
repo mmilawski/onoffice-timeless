@@ -1,0 +1,106 @@
+.c-table {
+  $c-table: &;
+
+  width: 100%;
+  max-width: 100%;
+
+  &.--is-scrollable {
+    @include media-breakpoint-up(xl) {
+      overflow-x: scroll;
+    }
+  }
+
+  &__head {
+    display: none;
+    @include media-breakpoint-up(xl) {
+      display: table-header-group;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    @include media-breakpoint-up(md) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include media-breakpoint-up(xl) {
+      display: table-row-group;
+    }
+  }
+
+  &__row {
+    &.--is-head {
+      background: var(--oo-color-bg);
+    }
+
+    &.--is-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      background: var(--oo-color-bg);
+      border-bottom: 2px solid var(--oo-color-primary);
+      padding: 1rem;
+      @include media-breakpoint-up(xl) {
+        display: table-row;
+        background-color: transparent;
+        border-bottom: 2px solid var(--oo-color-mix-bg-text-20);
+        padding: 0;
+      }
+    }
+  }
+
+  &__data {
+    display: flex;
+    gap: 1rem;
+    min-width: 7.5rem;
+
+    @include media-breakpoint-up(xl) {
+      display: table-cell;
+    }
+
+    .--is-head & {
+      font-family: $font-family-text-bold;
+      font-weight: $font-weight-text-bold;
+      @include font-size(16px, 1.25rem);
+      text-align: left;
+      border-bottom: 2px solid var(--oo-color-primary);
+      padding: 0.5rem 1rem;
+
+      @include media-breakpoint-up(xl) {
+        @include font-size(18px, 1.5rem);
+      }
+    }
+
+    .--is-body & {
+      padding: 0;
+      @include media-breakpoint-up(xl) {
+        padding: 0.5rem 1rem;
+      }
+
+      &:before {
+        content: attr(data-label);
+        font-family: $font-family-text-bold;
+        font-weight: $font-weight-text-bold;
+        min-width: 40%;
+        width: 40%;
+        hyphens: auto;
+
+        @include media-breakpoint-up(xl) {
+          content: none;
+        }
+      }
+    }
+
+    &.--empty {
+      display: none;
+
+      @include media-breakpoint-up(xl) {
+        display: table-cell;
+      }
+    }
+  }
+}

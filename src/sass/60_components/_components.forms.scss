@@ -1,0 +1,33 @@
+.c-forms {
+  $c-forms: &;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    @include media-breakpoint-up(xl) {
+      gap: 2rem;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    @include media-breakpoint-up(xl) {
+      gap: 2rem;
+    }
+  }
+
+  &__headline {
+  }
+
+  &__text {
+  }
+
+  &__wrapper {
+  }
+
+  &__form {
+  }
+}

@@ -1,0 +1,28 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "oo/contact",
+    "title": "Adress- & Kontaktdaten",
+    "description": "Zeigt die Adress- & Kontaktdaten aus Ihren Firmendaten und Standorten/Büros an.",
+    "category": "oo-design",
+    "icon": {
+        "background": "#3f9de4",
+        "foreground": "#ffffff",
+        "src": "location"
+    },
+    "textdomain": "oo_theme",
+    "acf": {
+        "renderTemplate": "contact-render.php"
+    },
+    "editorStyle": "",
+    "style": "",
+    "supports": {
+        "html": false,
+        "align": false,
+        "anchor": false,
+        "reusable": false,
+        "lock": false,
+        "customClassName": false,
+        "renaming": false
+    }
+}

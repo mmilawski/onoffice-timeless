@@ -1,0 +1,103 @@
+.o-main {
+  min-height: calc(#{$mobile-header-height} + #{$mobile-section-padding-top});
+  @include media-breakpoint-up(xl) {
+    min-height: calc(
+      #{$mobile-header-height} + #{$desktop-section-padding-top}
+    );
+  }
+  @include media-breakpoint-up(xxl) {
+    min-height: calc(
+      #{$desktop-header-height} + #{$desktop-section-padding-top}
+    );
+  }
+
+  @include media-breakpoint-up(xxxl) {
+    padding-top: 0;
+  }
+
+  /* Do not show the outline on the skip link target. */
+  &[tabindex='-1']:focus {
+    outline: 0;
+  }
+
+  &.--header-fixed {
+  }
+
+  // First section gets more padding-top because of the transparent header
+  &
+    > *:not(.c-banner):not(.c-property-details):not(
+      .c-news-details
+    ):first-child {
+    padding-top: calc(
+      #{$mobile-header-height} + #{$mobile-section-padding-top}
+    );
+    @include media-breakpoint-up(xl) {
+      padding-top: calc(
+        #{$mobile-header-height} + #{$desktop-section-padding-top}
+      );
+    }
+    @include media-breakpoint-up(xxl) {
+      padding-top: calc(
+        #{$desktop-header-height} + #{$desktop-section-padding-top}
+      );
+    }
+  }
+
+  .--is-header-style-white &,
+  .--is-header-style-white + & {
+    // First section gets more padding-top because of the transparent header
+    &
+      > *:not(.c-banner):not(.c-property-details):not(
+        .c-news-details
+      ):first-child {
+      @include media-breakpoint-up(xl) {
+        padding-top: #{$desktop-section-padding-top};
+      }
+      @include media-breakpoint-up(xxl) {
+        padding-top: #{$desktop-section-padding-top};
+      }
+    }
+  }
+
+  // First banner gets more padding-top because of the transparent header
+  & > *:first-child {
+    .c-banner__slide {
+      @include media-breakpoint-up(xl) {
+        padding-top: calc(
+          #{$mobile-header-height} + #{$desktop-section-padding-top}
+        );
+      }
+      @include media-breakpoint-up(xxl) {
+        min-height: 80vh;
+        padding-top: calc(
+          #{$desktop-header-height} + #{$desktop-section-padding-top}
+        );
+      }
+
+      .--is-header-style-white & {
+        @include media-breakpoint-up(xxl) {
+          padding-block: 4rem 13rem;
+          min-height: 75vh;
+        }
+      }
+    }
+  }
+
+  // Error Message on detailpage
+  & > div:not([class]) {
+    width: 100%;
+    padding-right: $container-padding-x;
+    padding-left: $container-padding-x;
+    padding-bottom: $mobile-section-padding-bottom;
+    @include media-breakpoint-up(xl) {
+      padding-bottom: $desktop-section-padding-bottom;
+    }
+    margin-right: auto;
+    margin-left: auto;
+    @each $breakpoint, $container-max-width in $container-max-widths {
+      @include mq($from: $breakpoint) {
+        max-width: $container-max-width;
+      }
+    }
+  }
+}

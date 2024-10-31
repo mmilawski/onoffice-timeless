@@ -1,0 +1,442 @@
+// replace substring with another string
+// credits: https://css-tricks.com/snippets/sass/str-replace-function/
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace +
+      str-replace(
+        str-slice($string, $index + str-length($search)),
+        $search,
+        $replace
+      );
+  }
+  @return $string;
+}
+
+// lighten color
+//    lighten the color by a value between 0 and 1
+//    $value 0.25 is color 25% lighter
+@function lighten-color($color, $value, $fallback: null) {
+  $color: str-replace($color, 'var(');
+  $color: str-replace($color, ')');
+  @if ($fallback) {
+    $fallback: str-replace($fallback, 'var(');
+    $fallback: str-replace($fallback, ')');
+  }
+  $r: if(
+    $fallback,
+    var(#{$color + '-r'}, var(#{$fallback + '-r'})),
+    var(#{$color + '-r'})
+  );
+  $g: if(
+    $fallback,
+    var(#{$color + '-g'}, var(#{$fallback + '-g'})),
+    var(#{$color + '-g'})
+  );
+  $b: if(
+    $fallback,
+    var(#{$color + '-b'}, var(#{$fallback + '-b'})),
+    var(#{$color + '-b'})
+  );
+
+  $calc-r: calc(#{$r} + (#{$value} * (255 - #{$r})));
+  $calc-g: calc(#{$g} + (#{$value} * (255 - #{$g})));
+  $calc-b: calc(#{$b} + (#{$value} * (255 - #{$b})));
+  @return rgb($calc-r, $calc-g, $calc-b);
+}
+
+// darken color
+//    darken the color by a value between 0 and 1
+//    $value 0.25 is color 25% darker
+@function darken-color($color, $value, $fallback: null) {
+  $color: str-replace($color, 'var(');
+  $color: str-replace($color, ')');
+  @if ($fallback) {
+    $fallback: str-replace($fallback, 'var(');
+    $fallback: str-replace($fallback, ')');
+  }
+  $r: if(
+    $fallback,
+    var(#{$color + '-r'}, var(#{$fallback + '-r'})),
+    var(#{$color + '-r'})
+  );
+  $g: if(
+    $fallback,
+    var(#{$color + '-g'}, var(#{$fallback + '-g'})),
+    var(#{$color + '-g'})
+  );
+  $b: if(
+    $fallback,
+    var(#{$color + '-b'}, var(#{$fallback + '-b'})),
+    var(#{$color + '-b'})
+  );
+
+  $calc-r: calc(#{$r} - (#{$value} * #{$r}));
+  $calc-g: calc(#{$g} - (#{$value} * #{$g}));
+  $calc-b: calc(#{$b} - (#{$value} * #{$b}));
+  @return rgb($calc-r, $calc-g, $calc-b);
+}
+
+// mix colors
+//    mix color into base color by a value between 0 and 1
+//    $value 0.25 is 25% of $color2 into $color1
+@function mix-colors(
+  $color1,
+  $color2,
+  $value,
+  $fallback1: null,
+  $fallback2: null
+) {
+  $color1: str-replace($color1, 'var(');
+  $color1: str-replace($color1, ')');
+  @if ($fallback1) {
+    $fallback1: str-replace($fallback1, 'var(');
+    $fallback1: str-replace($fallback1, ')');
+  }
+  $r1: if(
+    $fallback1,
+    var(#{$color1 + '-r'}, var(#{$fallback1 + '-r'})),
+    var(#{$color1 + '-r'})
+  );
+  $g1: if(
+    $fallback1,
+    var(#{$color1 + '-g'}, var(#{$fallback1 + '-g'})),
+    var(#{$color1 + '-g'})
+  );
+  $b1: if(
+    $fallback1,
+    var(#{$color1 + '-b'}, var(#{$fallback1 + '-b'})),
+    var(#{$color1 + '-b'})
+  );
+  $color2: str-replace($color2, 'var(');
+  $color2: str-replace($color2, ')');
+  @if ($fallback2) {
+    $fallback2: str-replace($fallback2, 'var(');
+    $fallback2: str-replace($fallback2, ')');
+  }
+  $r2: if(
+    $fallback2,
+    var(#{$color2 + '-r'}, var(#{$fallback2 + '-r'})),
+    var(#{$color2 + '-r'})
+  );
+  $g2: if(
+    $fallback2,
+    var(#{$color2 + '-g'}, var(#{$fallback2 + '-g'})),
+    var(#{$color2 + '-g'})
+  );
+  $b2: if(
+    $fallback2,
+    var(#{$color2 + '-b'}, var(#{$fallback2 + '-b'})),
+    var(#{$color2 + '-b'})
+  );
+
+  $calc-r: calc((#{$r1} * (1 - #{$value})) + (#{$r2} * #{$value}));
+  $calc-g: calc((#{$g1} * (1 - #{$value})) + (#{$g2} * #{$value}));
+  $calc-b: calc((#{$b1} * (1 - #{$value})) + (#{$b2} * #{$value}));
+  @return rgb($calc-r, $calc-g, $calc-b);
+}
+
+// desaturate color
+//    desaturate the color by a value between 0 and 1
+//    $value 0.25 is color 25% desaturated
+@function desaturate-color($color, $value, $fallback: null) {
+  $color: str-replace($color, 'var(');
+  $color: str-replace($color, ')');
+  @if ($fallback) {
+    $fallback: str-replace($fallback, 'var(');
+    $fallback: str-replace($fallback, ')');
+  }
+  $r: if(
+    $fallback,
+    var(#{$color + '-r'}, var(#{$fallback + '-r'})),
+    var(#{$color + '-r'})
+  );
+  $g: if(
+    $fallback,
+    var(#{$color + '-g'}, var(#{$fallback + '-g'})),
+    var(#{$color + '-g'})
+  );
+  $b: if(
+    $fallback,
+    var(#{$color + '-b'}, var(#{$fallback + '-b'})),
+    var(#{$color + '-b'})
+  );
+
+  // $grey: (#{$r} + #{$g} + #{$b}) / 3;
+  // $calc: calc($grey + ($r - $grey) * (1 - $value));
+  $calc-r: calc(
+    ((#{$r} + #{$g} + #{$b}) / 3) + (#{$r} - ((#{$r} + #{$g} + #{$b}) / 3)) *
+      (1 - #{$value})
+  );
+  $calc-g: calc(
+    ((#{$r} + #{$g} + #{$b}) / 3) + (#{$g} - ((#{$r} + #{$g} + #{$b}) / 3)) *
+      (1 - #{$value})
+  );
+  $calc-b: calc(
+    ((#{$r} + #{$g} + #{$b}) / 3) + (#{$b} - ((#{$r} + #{$g} + #{$b}) / 3)) *
+      (1 - #{$value})
+  );
+  @return rgb($calc-r, $calc-g, $calc-b);
+}
+
+// saturate color
+//    saturate the color by a value between 0 and 1
+//    $value 0.25 is color 25% saturated
+@function saturate-color($color, $value, $fallback: null) {
+  $color: str-replace($color, 'var(');
+  $color: str-replace($color, ')');
+  @if ($fallback) {
+    $fallback: str-replace($fallback, 'var(');
+    $fallback: str-replace($fallback, ')');
+  }
+  $r: if(
+    $fallback,
+    var(#{$color + '-r'}, var(#{$fallback + '-r'})),
+    var(#{$color + '-r'})
+  );
+  $g: if(
+    $fallback,
+    var(#{$color + '-g'}, var(#{$fallback + '-g'})),
+    var(#{$color + '-g'})
+  );
+  $b: if(
+    $fallback,
+    var(#{$color + '-b'}, var(#{$fallback + '-b'})),
+    var(#{$color + '-b'})
+  );
+
+  // $grey: (#{$r} + #{$g} + #{$b}) / 3;
+  // $calc: calc($grey + ($r - $grey) * (1 - $value));
+  $calc-r: calc(
+    ((#{$r} + #{$g} + #{$b}) / 3) + (#{$r} - ((#{$r} + #{$g} + #{$b}) / 3)) *
+      (1 + #{$value})
+  );
+  $calc-g: calc(
+    ((#{$r} + #{$g} + #{$b}) / 3) + (#{$g} - ((#{$r} + #{$g} + #{$b}) / 3)) *
+      (1 + #{$value})
+  );
+  $calc-b: calc(
+    ((#{$r} + #{$g} + #{$b}) / 3) + (#{$b} - ((#{$r} + #{$g} + #{$b}) / 3)) *
+      (1 + #{$value})
+  );
+  @return rgb($calc-r, $calc-g, $calc-b);
+}
+
+// transparent
+//    change opacity/aplha of the color by opacity between 0 and 1
+//    $opacity 0.25 is color 25% transparent
+@function transparent-color($color, $opacity, $fallback: null) {
+  $color: str-replace($color, 'var(');
+  $color: str-replace($color, ')');
+  @if ($fallback) {
+    $fallback: str-replace($fallback, 'var(');
+    $fallback: str-replace($fallback, ')');
+  }
+  $r: if(
+    $fallback,
+    var(#{$color + '-r'}, var(#{$fallback + '-r'})),
+    var(#{$color + '-r'})
+  );
+  $g: if(
+    $fallback,
+    var(#{$color + '-g'}, var(#{$fallback + '-g'})),
+    var(#{$color + '-g'})
+  );
+  $b: if(
+    $fallback,
+    var(#{$color + '-b'}, var(#{$fallback + '-b'})),
+    var(#{$color + '-b'})
+  );
+
+  @return rgba($r, $g, $b, $opacity);
+}
+
+// complementary
+//    complementary color of base color
+//    complementary of blue is orange or complementary of black is white
+@function complementary-color($color, $fallback: null) {
+  $color: str-replace($color, 'var(');
+  $color: str-replace($color, ')');
+  @if ($fallback) {
+    $fallback: str-replace($fallback, 'var(');
+    $fallback: str-replace($fallback, ')');
+  }
+  $r: if(
+    $fallback,
+    var(#{$color + '-r'}, var(#{$fallback + '-r'})),
+    var(#{$color + '-r'})
+  );
+  $g: if(
+    $fallback,
+    var(#{$color + '-g'}, var(#{$fallback + '-g'})),
+    var(#{$color + '-g'})
+  );
+  $b: if(
+    $fallback,
+    var(#{$color + '-b'}, var(#{$fallback + '-b'})),
+    var(#{$color + '-b'})
+  );
+
+  $calc-r: calc(255 - #{$r});
+  $calc-g: calc(255 - #{$g});
+  $calc-b: calc(255 - #{$b});
+  @return rgb($calc-r, $calc-g, $calc-b);
+}
+
+// contrast (black-or-white)
+//    best contrast (black or white) on base color
+@function contrast-color($color, $fallback: null) {
+  $color: str-replace($color, 'var(');
+  $color: str-replace($color, ')');
+  @if ($fallback) {
+    $fallback: str-replace($fallback, 'var(');
+    $fallback: str-replace($fallback, ')');
+  }
+  $r: if(
+    $fallback,
+    var(#{$color + '-r'}, var(#{$fallback + '-r'})),
+    var(#{$color + '-r'})
+  );
+  $g: if(
+    $fallback,
+    var(#{$color + '-g'}, var(#{$fallback + '-g'})),
+    var(#{$color + '-g'})
+  );
+  $b: if(
+    $fallback,
+    var(#{$color + '-b'}, var(#{$fallback + '-b'})),
+    var(#{$color + '-b'})
+  );
+
+  $calc: calc(
+    ((((#{$r} * 299) + (#{$g} * 587) + (#{$b} * 114)) / 1000) - 128) * -1000
+  );
+  @return rgb($calc, $calc, $calc);
+}
+
+// opposite contrast (black-or-white)
+//    worst contrast (black or white) on base color
+@function opposite-contrast-color($color, $fallback: null) {
+  $color: str-replace($color, 'var(');
+  $color: str-replace($color, ')');
+  @if ($fallback) {
+    $fallback: str-replace($fallback, 'var(');
+    $fallback: str-replace($fallback, ')');
+  }
+  $r: if(
+    $fallback,
+    var(#{$color + '-r'}, var(#{$fallback + '-r'})),
+    var(#{$color + '-r'})
+  );
+  $g: if(
+    $fallback,
+    var(#{$color + '-g'}, var(#{$fallback + '-g'})),
+    var(#{$color + '-g'})
+  );
+  $b: if(
+    $fallback,
+    var(#{$color + '-b'}, var(#{$fallback + '-b'})),
+    var(#{$color + '-b'})
+  );
+
+  $complementary-r: calc(255 - #{$r});
+  $complementary-g: calc(255 - #{$g});
+  $complementary-b: calc(255 - #{$b});
+  $calc-contrast: calc(
+    (
+        (
+            (
+                (#{$complementary-r} * 299) + (#{$complementary-g} * 587) +
+                  (#{$complementary-b} * 114)
+              ) / 1000
+          ) - 128
+      ) * -1000
+  );
+  @return rgb($calc-contrast, $calc-contrast, $calc-contrast);
+}
+
+// mix color with contrast (black-or-white)
+//    mix best contrast color (black or white) into base color by a value between 0 and 1
+//    $value 0.25 is 25% of black or white into $color
+@function mix-color-with-contrast($color, $value, $fallback: null) {
+  $color: str-replace($color, 'var(');
+  $color: str-replace($color, ')');
+  @if ($fallback) {
+    $fallback: str-replace($fallback, 'var(');
+    $fallback: str-replace($fallback, ')');
+  }
+  $r: if(
+    $fallback,
+    var(#{$color + '-r'}, var(#{$fallback + '-r'})),
+    var(#{$color + '-r'})
+  );
+  $g: if(
+    $fallback,
+    var(#{$color + '-g'}, var(#{$fallback + '-g'})),
+    var(#{$color + '-g'})
+  );
+  $b: if(
+    $fallback,
+    var(#{$color + '-b'}, var(#{$fallback + '-b'})),
+    var(#{$color + '-b'})
+  );
+
+  $calc-contrast: calc(
+    ((((#{$r} * 299) + (#{$g} * 587) + (#{$b} * 114)) / 1000) - 128) * -1000
+  );
+  $contrast: calc(min(max(#{$calc-contrast}, 0), 255));
+
+  $calc-r: calc((#{$r} * (1 - #{$value})) + (#{$contrast} * #{$value}));
+  $calc-g: calc((#{$g} * (1 - #{$value})) + (#{$contrast} * #{$value}));
+  $calc-b: calc((#{$b} * (1 - #{$value})) + (#{$contrast} * #{$value}));
+  @return rgb($calc-r, $calc-g, $calc-b);
+}
+
+// mix color with opposite contrast (black-or-white)
+//    mix worst contrast color (black or white) into base color by a value between 0 and 1
+//    $value 0.25 is 25% of black or white into $color
+@function mix-color-with-opposite-contrast($color, $value, $fallback: null) {
+  $color: str-replace($color, 'var(');
+  $color: str-replace($color, ')');
+  @if ($fallback) {
+    $fallback: str-replace($fallback, 'var(');
+    $fallback: str-replace($fallback, ')');
+  }
+  $r: if(
+    $fallback,
+    var(#{$color + '-r'}, var(#{$fallback + '-r'})),
+    var(#{$color + '-r'})
+  );
+  $g: if(
+    $fallback,
+    var(#{$color + '-g'}, var(#{$fallback + '-g'})),
+    var(#{$color + '-g'})
+  );
+  $b: if(
+    $fallback,
+    var(#{$color + '-b'}, var(#{$fallback + '-b'})),
+    var(#{$color + '-b'})
+  );
+
+  $complementary-r: calc(255 - #{$r});
+  $complementary-g: calc(255 - #{$g});
+  $complementary-b: calc(255 - #{$b});
+  $calc-contrast: calc(
+    (
+        (
+            (
+                (#{$complementary-r} * 299) + (#{$complementary-g} * 587) +
+                  (#{$complementary-b} * 114)
+              ) / 1000
+          ) - 128
+      ) * -1000
+  );
+  $contrast: calc(min(max(#{$calc-contrast}, 0), 255));
+
+  $calc-r: calc((#{$r} * (1 - #{$value})) + (#{$contrast} * #{$value}));
+  $calc-g: calc((#{$g} * (1 - #{$value})) + (#{$contrast} * #{$value}));
+  $calc-b: calc((#{$b} * (1 - #{$value})) + (#{$contrast} * #{$value}));
+  @return rgb($calc-r, $calc-g, $calc-b);
+}
+
+@import '../10_settings/settings.colors';

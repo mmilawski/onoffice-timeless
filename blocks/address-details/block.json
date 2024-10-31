@@ -1,0 +1,29 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "oo/address-details",
+    "title": "Adress-Detailansicht",
+    "category": "oo-address",
+    "icon": {
+        "background": "#3f9de4",
+        "foreground": "#ffffff",
+        "src": "admin-home"
+    },
+    "description": "Zeigt die Detailansicht einer Adresse an.",
+    "textdomain": "oo_theme",
+    "editorStyle": "",
+    "style": "",
+    "acf": {
+    "mode": "edit",
+        "renderTemplate": "address-details-render.php"
+    },
+    "supports": {
+        "html": false,
+        "align": false,
+        "anchor": false,
+        "reusable": false,
+        "lock": false,
+        "customClassName": false,
+        "renaming": false
+    }
+}

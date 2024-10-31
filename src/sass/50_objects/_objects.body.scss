@@ -1,0 +1,16 @@
+.o-body {
+  &.--main-nav-open {
+    overflow: hidden;
+  }
+  &.--search-open {
+    overflow: hidden;
+  }
+  &.--modal-open {
+    overflow: hidden;
+  }
+
+  // overwrite Usercentrics overflow hidden class when active overlay
+  &.overflowHidden {
+    overflow: auto !important;
+  }
+}

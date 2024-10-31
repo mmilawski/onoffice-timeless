@@ -1,0 +1,23 @@
+.c-module-text {
+  $c-module-text: &;
+
+  &__headline {
+  }
+
+  &__text {
+    @include media-breakpoint-up(xxl) {
+      display: inline;
+    }
+  }
+
+  &__buttons {
+  }
+
+  &__button {
+  }
+
+  &.--is-header {
+  }
+  &.--is-footer {
+  }
+}

@@ -1,0 +1,103 @@
+.c-seals {
+  $c-seals: &;
+
+  &__headline {
+    display: block;
+  }
+
+  &__slider {
+  }
+
+  &__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__link {
+    width: 100%;
+  }
+
+  &__picture {
+  }
+
+  &__image {
+    object-fit: contain;
+  }
+
+  &__widget {
+    width: 100%;
+    max-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__iframe {
+    .--is-immowelt & {
+      scale: 75%;
+
+      @include media-breakpoint-up(sm) {
+        scale: inherit;
+      }
+
+      @include media-breakpoint-up(md) {
+        scale: 75%;
+      }
+
+      @include media-breakpoint-up(xxxl) {
+        scale: 64%;
+      }
+    }
+
+    .--is-immoscout24 & {
+      scale: 80%;
+
+      @include media-breakpoint-up(sm) {
+        scale: inherit;
+      }
+
+      @include media-breakpoint-up(md) {
+        scale: 80%;
+      }
+
+      @include media-breakpoint-up(xxxl) {
+        scale: 70%;
+      }
+    }
+  }
+
+  &.--is-masonry {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    #{$c-seals}__item {
+      width: calc(50% - (0.5rem / 2));
+      aspect-ratio: 1 / 1;
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      border: 1px solid var(--oo-color-footer-mix-bg-text-10);
+
+      @include media-breakpoint-up(xxxl) {
+        width: calc(33% - ((0.5rem * 2) / 3));
+      }
+    }
+
+    #{$c-seals}__picture {
+      height: auto;
+    }
+  }
+
+  &.--is-slider {
+    #{$c-seals}__link {
+      height: 100%;
+      width: 100%;
+    }
+
+    #{$c-seals}__item {
+      height: 140px;
+      max-width: 140px;
+    }
+  }
+}

@@ -1,0 +1,55 @@
+.c-footer-nav {
+  $c-footer-nav: &;
+
+  @include media-breakpoint-up(xl) {
+    display: flex;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+
+    &::after {
+      content: '';
+      background-color: var(--oo-color-mix-bg-text-20);
+      width: 2px;
+      height: $small-font-size;
+      display: block;
+      margin-right: 0.75rem;
+    }
+
+    &:last-child {
+      &::after {
+        content: none;
+      }
+    }
+  }
+
+  &__link {
+    margin-right: 0.75rem;
+    color: var(--oo-color-text);
+
+    @include visited-active() {
+      color: var(--oo-color-text);
+    }
+
+    @include hover-focus() {
+      color: var(--oo-color-primary);
+    }
+
+    &.--is-active,
+    &.--is-ancestor {
+      color: var(--oo-color-primary);
+    }
+  }
+
+  &__sub-menu {
+    display: none;
+  }
+}

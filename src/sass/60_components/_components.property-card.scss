@@ -1,0 +1,155 @@
+.c-property-card {
+  $c-property-card: &;
+
+  display: grid;
+  grid-template-rows: min-content;
+  border: 2px solid var(--oo-color-bg);
+
+  &__inner {
+    position: relative;
+    background-color: var(--oo-color-mix-bg-text-20);
+    border-bottom: 2px solid var(--oo-color-primary);
+  }
+
+  &__link {
+    @include hover-focus() {
+      #{$c-property-card}__overlay {
+        height: 100%;
+        z-index: 1;
+      }
+      #{$c-property-card}__button {
+        color: var(--oo-color-contrast-primary);
+        background-color: var(--oo-color-primary);
+        border: 2px solid var(--oo-color-primary);
+      }
+    }
+  }
+
+  &__picture {
+    overflow: hidden;
+    aspect-ratio: 3 / 2;
+  }
+
+  &__image {
+  }
+
+  &__status {
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    color: var(--oo-color-property-status-contrast-bg);
+    background-color: var(--oo-color-property-status-bg);
+    border: 2px solid var(--oo-color-bg);
+    font-family: $font-family-button;
+    font-weight: $font-weight-button;
+    display: flex;
+    padding: 0.5rem 0.75rem;
+  }
+
+  &__favorite {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    color: var(--oo-color-contrast-primary);
+    background-color: var(--oo-color-primary);
+    border: 2px solid var(--oo-color-bg);
+    font-family: $font-family-button;
+    font-weight: $font-weight-button;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    min-height: calc(
+      $mobile-global-line-height + (0.5rem * 2)
+    ); // line-height + padding * 2
+    min-width: calc(
+      $mobile-global-line-height + (0.5rem * 2)
+    ); // line-height + padding * 2
+    cursor: pointer;
+    @include media-breakpoint-up(xl) {
+      min-height: calc(
+        $desktop-global-line-height + (0.5rem * 2)
+      ); // line-height + padding * 2
+      min-width: calc(
+        $desktop-global-line-height + (0.5rem * 2)
+      ); // line-height + padding * 2
+    }
+
+    &.--on-detail-page {
+      position: static;
+      margin-top: -1rem;
+      margin-right: -1rem;
+
+      @include media-breakpoint-up(xl) {
+        margin-top: -2rem;
+        margin-right: -2rem;
+      }
+    }
+  }
+
+  &__favorite-icon {
+    max-width: 1.5rem;
+    height: 1rem;
+    transition: fill 0.25s ease-in-out;
+  }
+
+  &__overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 2.75rem; // button height
+    position: absolute;
+    bottom: 0;
+    background-color: var(--oo-color-transparent-bg-90);
+    transition: height 0.25s ease-in-out;
+    @include media-breakpoint-up(xl) {
+      height: 3rem; // button height
+    }
+  }
+
+  &__button {
+    font-family: $font-family-button;
+    font-weight: $font-weight-button;
+    text-align: center;
+    margin: 0;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    color: var(--oo-color-primary);
+    background-color: transparent;
+    border: 2px solid transparent;
+  }
+
+  &__content {
+    display: grid;
+    grid-auto-rows: auto 1fr;
+    grid-template-areas: 'title' 'features';
+    gap: 1rem;
+    background-color: var(--oo-color-bg);
+    padding: 1rem;
+    border-top: 0;
+  }
+
+  &__title {
+    grid-area: 'title';
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    hyphens: manual;
+    @include media-breakpoint-up(xl) {
+      font-size: 1.375rem;
+      line-height: 1.75rem;
+      min-height: 3.5rem; // line-height x 2
+    }
+  }
+
+  &__features {
+    grid-area: 'features';
+  }
+}

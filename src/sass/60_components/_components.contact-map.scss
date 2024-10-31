@@ -1,0 +1,31 @@
+.c-contact-map {
+  $c-contact-map: &;
+
+  &__container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    @include media-breakpoint-up(xl) {
+      gap: 2rem;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    @include media-breakpoint-up(xl) {
+      gap: 2rem;
+    }
+  }
+
+  &__headline {
+  }
+
+  &__text {
+  }
+
+  &__map {
+  }
+}

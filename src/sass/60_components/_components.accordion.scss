@@ -1,0 +1,36 @@
+.c-accordion {
+  $accordion: &;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    @include media-breakpoint-up(lg) {
+      gap: 2rem;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    @include media-breakpoint-up(lg) {
+      gap: 2rem;
+    }
+  }
+
+  &__accordions {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    @include media-breakpoint-up(xl) {
+      gap: 3rem;
+    }
+  }
+
+  &__headline {
+  }
+
+  &__text {
+  }
+}

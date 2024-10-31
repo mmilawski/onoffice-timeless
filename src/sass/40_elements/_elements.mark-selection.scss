@@ -1,0 +1,39 @@
+mark {
+  background: var(--oo-color-primary);
+  color: var(--oo-color-contrast-primary);
+}
+
+::selection,
+::-moz-selection {
+  background: var(--oo-color-primary);
+  color: var(--oo-color-contrast-primary);
+
+  .--bg-light & {
+    background: var(--oo-color-light-primary, var(--oo-color-primary));
+    color: var(--oo-color-light-contrast-primary);
+  }
+  .--bg-dark & {
+    background: var(--oo-color-dark-primary, var(--oo-color-primary));
+    color: var(--oo-color-dark-contrast-primary);
+  }
+  .--bg-primary & {
+    background: var(--oo-color-primary-primary, var(--oo-color-primary));
+    color: var(--oo-color-primary-contrast-primary);
+  }
+  .--bg-secondary & {
+    background: var(--oo-color-secondary-primary, var(--oo-color-primary));
+    color: var(--oo-color-secondary-contrast-primary);
+  }
+  .--bg-header & {
+    background: var(--oo-color-header-primary, var(--oo-color-primary));
+    color: var(--oo-color-header-contrast-primary);
+  }
+  .--bg-footer & {
+    background: var(--oo-color-footer-primary, var(--oo-color-primary));
+    color: var(--oo-color-footer-contrast-primary);
+  }
+  .--bg-transparent & {
+    background: var(--oo-color-primary);
+    color: var(--oo-color-contrast-primary);
+  }
+}

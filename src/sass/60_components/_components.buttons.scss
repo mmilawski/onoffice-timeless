@@ -1,0 +1,9 @@
+.c-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  &.--is-column {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,28 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "oo/accordion",
+    "title": "Akkordeon",
+    "category": "oo-design",
+    "icon": {
+        "background": "#3f9de4",
+        "foreground": "#ffffff",
+        "src": "list-view"
+    },
+    "description": "Akkordeon-Block, bestehend aus der Überschrift, und dem Inhalt, der ein- und ausgeklappt werden kann.",
+    "textdomain": "oo_theme",
+    "acf": {
+        "renderTemplate": "accordion-render.php"
+    },
+    "editorStyle": "",
+    "style": "",
+    "supports": {
+        "html": false,
+        "align": false,
+        "anchor": false,
+        "reusable": false,
+        "lock": false,
+        "customClassName": false,
+        "renaming": false
+    }
+}

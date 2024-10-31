@@ -1,0 +1,42 @@
+// Row
+//
+// Rows contain and clear the floats of your columns.
+
+@if $enable-grid-classes {
+  .o-row {
+    @include make-row();
+    &.--reverse {
+      flex-direction: row-reverse;
+    }
+    &.--position-left {
+      justify-content: flex-start;
+    }
+    &.--position-center {
+      justify-content: center;
+    }
+    &.--position-right {
+      justify-content: flex-end;
+    }
+  }
+
+  // Remove the negative margin from default .row, then the horizontal padding
+  // from all immediate children columns (to prevent runaway style inheritance).
+  .u-no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+
+    > .o-col,
+    > [class*='col-'] {
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+}
+
+// Columns
+//
+// Common styles for small and large grid columns
+
+@if $enable-grid-classes {
+  @include make-grid-columns();
+}

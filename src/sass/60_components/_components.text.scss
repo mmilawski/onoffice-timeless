@@ -1,0 +1,68 @@
+.c-text {
+  $c-text: &;
+
+  &.--text-align-left {
+  }
+  &.--text-align-center {
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    @include media-breakpoint-up(lg) {
+      gap: 2rem;
+    }
+  }
+
+  &__row {
+    .--text-align-left & {
+    }
+    .--text-align-center & {
+      justify-content: center;
+      text-align: center;
+    }
+  }
+
+  &__columns {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    @include media-breakpoint-up(lg) {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+    .--text-align-left & {
+    }
+    .--text-align-center & {
+      justify-content: center;
+      text-align: center;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 1.5rem 0;
+    @include media-breakpoint-up(lg) {
+      gap: 2rem 0;
+    }
+  }
+
+  &__headline {
+  }
+
+  &__text {
+  }
+
+  &__buttons {
+    .--text-align-left & {
+    }
+    .--text-align-center & {
+      justify-content: center;
+      text-align: center;
+    }
+  }
+}

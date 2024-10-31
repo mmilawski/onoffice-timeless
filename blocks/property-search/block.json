@@ -1,0 +1,29 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "oo/property-search",
+    "title": "Immobilien-Suche",
+    "category": "oo-property",
+    "icon": {
+        "background": "#3f9de4",
+        "foreground": "#ffffff",
+        "src": "search"
+    },
+    "description": "Immobilien-Suche für Ihre Immobilien-Liste",
+    "textdomain": "oo_theme",
+    "editorStyle": "",
+    "style": "",
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "property-search-render.php"
+    },
+    "supports": {
+        "html": false,
+        "align": false,
+        "anchor": false,
+        "reusable": false,
+        "lock": false,
+        "customClassName": false,
+        "renaming": false
+    }
+}

@@ -1,0 +1,140 @@
+// fonts
+// font family
+$font-family-text: var(--oo-font-text, sans-serif);
+$font-family-text-bold: var(--oo-font-text-bold, var(--oo-font-text));
+$font-family-headline: var(--oo-font-headline, var(--oo-font-text));
+$font-family-navigation: var(--oo-font-navigation, var(--oo-font-text));
+$font-family-button: var(--oo-font-button, var(--oo-font-text));
+
+// font weight
+$font-weight-text: var(--oo-font-text-weight, 400);
+$font-weight-text-bold: var(
+  --oo-font-text-bold-weight,
+  var(--oo-font-text-weight)
+);
+$font-weight-headline: var(
+  --oo-font-headline-weight,
+  var(--oo-font-text-weight)
+);
+$font-weight-navigation: var(
+  --oo-font-navigation-weight,
+  var(--oo-font-text-weight)
+);
+$font-weight-button: var(--oo-font-button-weight, var(--oo-font-text-weight));
+
+// font sizes
+$global-line-height: 24px;
+
+$small-font-size: 12px;
+$small-line-height: 22px;
+
+$desktop-global-font-size: 16px;
+$desktop-global-line-height: 28px;
+$mobile-global-font-size: 14px;
+$mobile-global-line-height: 24px;
+
+$mobile-h1-font-size: 30px;
+$mobile-h1-line-height: 2rem;
+$mobile-h2-font-size: 24px;
+$mobile-h2-line-height: 2rem;
+$mobile-h3-font-size: 20px;
+$mobile-h3-line-height: 1.5rem;
+$mobile-h4-font-size: 18px;
+$mobile-h4-line-height: 1.5rem;
+$mobile-h5-font-size: 16px;
+$mobile-h5-line-height: 1.5rem;
+$mobile-h6-font-size: 14px;
+$mobile-h6-line-height: 1.5rem;
+
+$desktop-h1-font-size: 48px;
+$desktop-h1-line-height: 3rem;
+$desktop-h2-font-size: 32px;
+$desktop-h2-line-height: 2.5rem;
+$desktop-h3-font-size: 24px;
+$desktop-h3-line-height: 2rem;
+$desktop-h4-font-size: 20px;
+$desktop-h4-line-height: 1.75rem;
+$desktop-h5-font-size: 18px;
+$desktop-h5-line-height: 1.75rem;
+$desktop-h6-font-size: 16px;
+$desktop-h6-line-height: 1.75rem;
+
+// header height
+$mobile-header-height: var(--header-height, 6.5rem);
+$desktop-header-height: var(--header-height, 9rem);
+
+// logo sizes
+$logo-width-sm: 6.25rem;
+$logo-height-sm: 2.5rem;
+$logo-width-md: 11.25rem;
+$logo-height-md: 3.75rem;
+$logo-width-lg: 16.25rem;
+$logo-height-lg: 5rem;
+$logo-width-xl: 21.25rem;
+$logo-height-xl: 6.25rem;
+
+// icon sizes
+$mobile-icon-wrapper-size: 2.25rem;
+$desktop-icon-wrapper-size: 2.5rem;
+$mobile-icon-size: 0.875rem;
+$mobile-icon-size-small: 0.625rem;
+$desktop-icon-size: 1rem;
+$desktop-icon-size-small: 0.75rem;
+
+// section padding
+$desktop-section-padding-top: 7.5rem;
+$desktop-section-padding-bottom: 7.5rem;
+$mobile-section-padding-top: 2.5rem;
+$mobile-section-padding-bottom: 2.5rem;
+
+// separator (polygon)
+$desktop-clip-path-height: $desktop-section-padding-top;
+$mobile-clip-path-height: $mobile-section-padding-top;
+
+$desktop-clip-path-bottom: polygon(
+  0 0,
+  100% 0,
+  100% calc(100% - $desktop-clip-path-height),
+  50% 100%,
+  0 calc(100% - $desktop-clip-path-height)
+);
+$mobile-clip-path-bottom: polygon(
+  0 0,
+  100% 0,
+  100% calc(100% - $mobile-clip-path-height),
+  50% 100%,
+  0 calc(100% - $mobile-clip-path-height)
+);
+$mobile-clip-path-top: polygon(
+  50% calc(0% + $mobile-clip-path-height),
+  100% 0%,
+  100% 100%,
+  0 100%,
+  0 0
+);
+$desktop-clip-path-top: polygon(
+  50% calc(0% + $desktop-clip-path-height),
+  100% 0%,
+  100% 100%,
+  0 100%,
+  0 0
+);
+
+$desktop-clip-path-reverse: polygon(
+  0 0,
+  50% calc(0% + $desktop-clip-path-height),
+  100% 0,
+  100% 100%,
+  0 100%
+);
+$mobile-clip-path-reverse: polygon(
+  0 0,
+  50% calc(0% + $mobile-clip-path-height),
+  100% 0,
+  100% 100%,
+  0 100%
+);
+
+[hidden] {
+  display: none;
+}

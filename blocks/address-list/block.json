@@ -1,0 +1,29 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "oo/address-list",
+    "title": "Adress-Liste",
+    "category": "oo-address",
+    "icon": {
+        "background": "#3f9de4",
+        "foreground": "#ffffff",
+        "src": "id"
+    },
+    "description": "Listet Ihre Adressen aus onOffice enterprise auf.",
+    "textdomain": "oo_theme",
+    "editorStyle": "",
+    "style": "",
+    "acf": {
+    "mode": "edit",
+        "renderTemplate": "address-list-render.php"
+    },
+    "supports": {
+        "html": false,
+        "align": false,
+        "anchor": false,
+        "reusable": false,
+        "lock": false,
+        "customClassName": false,
+        "renaming": false
+    }
+}

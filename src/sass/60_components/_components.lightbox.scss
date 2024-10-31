@@ -1,0 +1,143 @@
+.c-lightbox {
+  $c-lightbox: &;
+
+  // added to reduce using of !important for overwrite
+  #{$c-lightbox} {
+    &__overlay {
+      background: var(--oo-color-transparent-text-60);
+    }
+    &__container {
+    }
+    &__slider {
+    }
+    &__slide {
+      width: auto;
+    }
+    &__wrapper {
+      width: auto;
+    }
+    &__content {
+      padding: 1rem 0;
+      max-width: 100%;
+      max-height: 100dvh;
+      gap: 0.5rem 0;
+      width: auto;
+    }
+    &__media {
+      min-width: 0;
+      min-height: 0;
+      align-items: stretch;
+      position: relative;
+
+      img {
+        width: 100%;
+        height: auto;
+        margin: 0;
+      }
+    }
+    &__description-wrapper {
+      color: var(--oo-color-bg);
+      background: none !important;
+      margin: 0;
+      padding: 0 1rem;
+      position: unset;
+    }
+    &__description-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    &__title {
+      hyphens: auto;
+      word-break: break-word;
+      color: inherit !important;
+    }
+    &__description {
+      hyphens: auto;
+      word-break: break-word;
+    }
+
+    &__navigation {
+    }
+    &__icon-wrapper {
+      position: absolute;
+      width: $mobile-icon-wrapper-size;
+      height: $mobile-icon-wrapper-size;
+      background-color: var(--oo-color-primary);
+      color: var(--oo-color-contrast-primary);
+      border: 2px solid var(--oo-color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.25rem;
+      cursor: pointer;
+      transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out,
+        visibility 0.25s ease-in-out, color 0.25s ease-in-out,
+        background-color 0.25s ease-in-out, border-color 0.25s ease-in-out,
+        box-shadow 0.25s ease-in-out;
+
+      @include media-breakpoint-up(xl) {
+        width: $desktop-icon-wrapper-size;
+        height: $desktop-icon-wrapper-size;
+      }
+
+      @include visited-active() {
+        color: var(--oo-color-contrast-primary);
+        background-color: var(--oo-color-primary);
+        border-color: var(--oo-color-primary);
+      }
+
+      @include hover-focus() {
+        color: var(--oo-color-contrast-primary);
+        background-color: var(--oo-color-lighten-primary-40);
+        box-shadow: 0px 0px 0px 2px var(--oo-color-primary);
+      }
+
+      &.--arrow {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      &.--prev {
+        left: 1rem;
+        @include media-breakpoint-up(xl) {
+          left: 2rem;
+        }
+      }
+      &.--next {
+        right: 1rem;
+        @include media-breakpoint-up(xl) {
+          right: 2rem;
+        }
+      }
+      &.--close {
+        top: 0;
+        right: 0;
+      }
+      &.disabled {
+        opacity: 0.1;
+        color: var(--oo-color-contrast-text);
+        background-color: var(--oo-color-text);
+        border-color: var(--oo-color-text);
+
+        @include hover-focus() {
+          box-shadow: none;
+        }
+      }
+
+      #{$c-lightbox}__icon {
+        height: $mobile-icon-size;
+        width: $mobile-icon-size;
+
+        @include media-breakpoint-up(xl) {
+          height: $desktop-icon-size;
+          width: $desktop-icon-size;
+        }
+
+        path {
+          fill: none;
+        }
+      }
+    }
+  }
+}

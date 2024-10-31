@@ -1,0 +1,8 @@
+.c-module-seals {
+  $c-module-seals: &;
+
+  &.--is-header {
+  }
+  &.--is-footer {
+  }
+}

@@ -1,0 +1,28 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "oo/media-text",
+    "title": "Text mit Media (Bild oder Video)",
+    "category": "oo-text",
+    "icon": {
+        "background": "#3f9de4",
+        "foreground": "#ffffff",
+        "src": "media-document"
+    },
+    "description": "Auf großen Bildschirmen werden Bild und Text nebeneinander dargestellt.",
+    "textdomain": "oo_theme",
+    "editorStyle": "",
+    "style": "",
+    "acf": {
+        "renderTemplate": "media-text-render.php"
+    },
+    "supports": {
+        "html": false,
+        "align": false,
+        "anchor": false,
+        "reusable": false,
+        "lock": false,
+        "customClassName": false,
+        "renaming": false
+    }
+}

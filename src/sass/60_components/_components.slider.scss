@@ -1,0 +1,890 @@
+.c-slider {
+  $c-slider: &;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  &__track {
+  }
+
+  &__slide {
+  }
+
+  &__pagination {
+    bottom: 0;
+    padding: 0 1rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    height: fit-content;
+
+    @include media-breakpoint-up(xl) {
+      height: auto;
+    }
+
+    li {
+      line-height: inherit;
+      display: flex;
+    }
+  }
+
+  &__page {
+    border: 0;
+    border-radius: 0;
+    display: inline-block;
+    height: 1.25rem;
+    width: 1.25rem;
+    margin: 0;
+    opacity: 1;
+    padding: 0;
+    position: relative;
+    will-change: background-color;
+    transition: background-color 0.25s ease-in-out;
+
+    @include plain-visited() {
+      background-color: var(--oo-color-bg);
+      opacity: 1;
+    }
+
+    @include hover-focus-active() {
+      background-color: var(--oo-color-primary);
+      opacity: 1;
+    }
+
+    &.is-active {
+      background: var(--oo-color-primary);
+      transform: none;
+    }
+  }
+
+  &__navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__progress {
+    background: var(--oo-color-transparent-text-10);
+  }
+
+  &__progress-bar {
+    background: var(--oo-color-primary);
+    height: 2px;
+    transition: width 400ms ease; // same slider as speed and easing
+    width: 0;
+  }
+
+  &__arrows {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__arrow {
+    position: relative;
+    inset: 0;
+    transform: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--oo-color-contrast-primary);
+    background-color: var(--oo-color-primary);
+    border: 2px solid var(--oo-color-primary);
+    width: $mobile-icon-wrapper-size;
+    height: $mobile-icon-wrapper-size;
+    padding: 0.25rem;
+    border-radius: 0;
+    opacity: 1;
+    cursor: pointer;
+    transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
+      border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out,
+      opacity 0.25s ease-in-out;
+
+    @include media-breakpoint-up(xl) {
+      width: $desktop-icon-wrapper-size;
+      height: $desktop-icon-wrapper-size;
+    }
+
+    @include visited-active() {
+      color: var(--oo-color-contrast-primary);
+      background-color: var(--oo-color-primary);
+      border-color: var(--oo-color-primary);
+    }
+
+    @include hover-focus() {
+      color: var(--oo-color-contrast-primary);
+      background-color: var(--oo-color-lighten-primary-40);
+      border-color: var(--oo-color-primary);
+      box-shadow: 0px 0px 0px 2px var(--oo-color-primary);
+    }
+
+    &:disabled {
+      opacity: 0.1;
+      color: var(--oo-color-contrast-text);
+      background-color: var(--oo-color-text);
+      border-color: var(--oo-color-text);
+
+      @include hover-focus() {
+        box-shadow: none;
+      }
+    }
+    &:not(:disabled) {
+      opacity: 1;
+      @include hover-focus() {
+        opacity: 1;
+      }
+    }
+
+    #{$c-slider}__icon {
+      width: $mobile-icon-size;
+      height: $mobile-icon-size;
+      @include media-breakpoint-up(xl) {
+        width: $desktop-icon-size;
+        height: $desktop-icon-size;
+      }
+    }
+
+    &--ltr {
+    }
+    &--prev {
+      svg {
+        transform: none;
+      }
+    }
+    &--next {
+    }
+  }
+
+  &.--loop {
+    #{$c-slider}__track {
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        width: 15rem;
+        height: 100%;
+        background: var(--oo-color-bg);
+        z-index: 1;
+      }
+      &:before {
+        left: 0;
+        background: linear-gradient(
+          90deg,
+          var(--oo-color-transparent-bg-100) 0%,
+          var(--oo-color-transparent-bg-0) 100%
+        );
+      }
+      &:after {
+        right: 0;
+        background: linear-gradient(
+          -90deg,
+          var(--oo-color-transparent-bg-100) 0%,
+          var(--oo-color-transparent-bg-0) 100%
+        );
+      }
+    }
+
+    #{$c-slider}__arrows {
+      border-top: 2px solid var(--oo-color-primary);
+      padding-top: 0.5rem;
+    }
+  }
+
+  &.--auto-height {
+    #{$c-slider}__slide {
+      &:not(.is-active):not(:first-child) {
+        max-height: 0;
+        @include media-breakpoint-up(xl) {
+          max-height: inherit;
+        }
+      }
+    }
+  }
+
+  &.--is-properties-slider {
+  }
+
+  &.--is-link-boxes-slider {
+  }
+
+  &.--is-news-slider {
+  }
+
+  &.--is-team-slider {
+  }
+
+  &.--is-reviews-slider {
+  }
+
+  &.--is-seals-slider {
+  }
+  &.--is-google-review {
+    #{$c-slider}__slide {
+      width: 100%;
+    }
+  }
+  &.--is-banner-slider {
+    #{$c-slider}__navigation {
+      position: absolute;
+      top: calc(
+        70vh - #{$mobile-clip-path-height} - #{$mobile-icon-wrapper-size} -
+          0.5rem
+      ); // mobile banner picture height - clip-path height - arrow size - bottom spacing
+      left: $container-padding-x;
+      width: calc(100% - #{$grid-gutter-width});
+      @include media-breakpoint-up(xl) {
+        top: calc((100% - #{$desktop-section-padding-bottom}) / 2);
+      }
+
+      .o-main > *:first-child & {
+        @include media-breakpoint-up(xl) {
+          top: calc(
+            (
+                (
+                    100% -
+                      (
+                        #{$desktop-section-padding-top} + #{$mobile-header-height} +
+                          #{$desktop-section-padding-bottom} + #{$desktop-clip-path-height}
+                      )
+                  ) / 2
+              ) + #{$desktop-section-padding-top} + #{$mobile-header-height}
+          );
+        }
+        @include media-breakpoint-up(xxl) {
+          top: calc(
+            (
+                (
+                    100% -
+                      (
+                        #{$desktop-section-padding-top} + #{$desktop-header-height} +
+                          #{$desktop-section-padding-bottom} + #{$desktop-clip-path-height}
+                      )
+                  ) / 2
+              ) + #{$desktop-section-padding-top} + #{$mobile-header-height}
+          );
+        }
+      }
+    }
+    #{$c-slider}__pagination {
+      position: absolute;
+      top: calc(
+        70vh - #{$mobile-clip-path-height} - #{$mobile-icon-wrapper-size} -
+          0.5rem
+      ); // mobile banner picture height - clip-path height - arrow size - bottom spacing
+      width: calc(
+        100% - ((#{$grid-gutter-width} + #{$mobile-icon-wrapper-size}) * 2)
+      );
+      padding: 0;
+      width: calc(
+        100% - ((#{$grid-gutter-width} + #{$mobile-icon-wrapper-size}) * 2)
+      );
+      margin: 0 auto;
+      @include media-breakpoint-up(xl) {
+        top: auto;
+        bottom: $desktop-clip-path-height;
+        padding: 0 1rem;
+        width: 100%;
+      }
+    }
+    #{$c-slider}__arrow {
+      @include media-breakpoint-up(xl) {
+        position: absolute;
+        transform: translateY(-50%);
+        &--next {
+          inset: unset;
+          right: 0;
+        }
+      }
+    }
+  }
+
+  &.--is-gallery-slider {
+    // destroyed splide override
+    &.is-initialized:not(.is-active) {
+      #{$c-slider}__list {
+        display: flex;
+        flex-direction: row;
+        gap: 2rem;
+      }
+    }
+    &:not(.is-active) {
+      #{$c-slider}__navigation,
+      #{$c-slider}__progress,
+      #{$c-slider}__arrows {
+        display: none;
+      }
+    }
+    // block editor fallback
+    &:not(.is-initialized) {
+      #{$c-slider}__list {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    // disable shadows if not enough slides
+    #{$c-slider}__track {
+      &:not([class*='--draggable']) {
+        &::before,
+        &::after {
+          content: unset;
+        }
+      }
+    }
+  }
+
+  // when slider has not enough slides
+  &:not(.is-overflow) {
+    #{$c-slider}__navigation,
+    #{$c-slider}__progress,
+    #{$c-slider}__arrows {
+      display: none;
+    }
+  }
+
+  // when slider is not initialized and not active
+  &:not(.is-initialized):not(.is-active) {
+    visibility: visible;
+
+    #{$c-slider}__navigation,
+    #{$c-slider}__progress,
+    #{$c-slider}__arrows {
+      display: none;
+    }
+
+    &.--auto-height {
+      #{$c-slider}__slide {
+        max-height: inherit;
+      }
+    }
+
+    &.--loop {
+      #{$c-slider}__track {
+        &:before,
+        &:after {
+          content: none;
+        }
+      }
+    }
+
+    &.--is-properties-slider {
+      #{$c-slider}__list {
+        display: grid;
+        gap: 2rem;
+
+        @include media-breakpoint-up(lg) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include media-breakpoint-up(xxl) {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+    }
+
+    &.--is-link-boxes-slider {
+      #{$c-slider}__list {
+        display: grid;
+        gap: 2rem;
+
+        @include media-breakpoint-up(lg) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    }
+
+    &.--properties-similar {
+      #{$c-slider}__list {
+        display: grid;
+        gap: 2rem;
+      }
+    }
+
+    &.--is-team-slider {
+      #{$c-slider}__list {
+        display: grid;
+        gap: 3rem 0;
+        @include media-breakpoint-up(md) {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 5rem 2rem;
+        }
+        @include media-breakpoint-up(xl) {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+    }
+
+    &.--is-reviews-slider {
+    }
+
+    &.--is-news-slider {
+      #{$c-slider}__list {
+        display: grid;
+        gap: 2rem;
+        @include media-breakpoint-up(lg) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    }
+
+    &.--is-seals-slider {
+      #{$c-slider}__list {
+        display: grid;
+        gap: 0.5rem;
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    &.--is-banner-slider {
+      #{$c-slider}__list {
+        display: flex;
+        height: 100%;
+        overflow: hidden;
+      }
+      #{$c-slider}__slide {
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  &.--on-bg-light {
+    #{$c-slider}__track {
+      &:before,
+      &:after {
+        background: var(--oo-color-light-bg, var(--oo-color-bg));
+      }
+      &:before {
+        background: linear-gradient(
+          90deg,
+          var(--oo-color-light-transparent-bg-100) 0%,
+          var(--oo-color-light-transparent-bg-0) 100%
+        );
+      }
+      &:after {
+        background: linear-gradient(
+          -90deg,
+          var(--oo-color-light-transparent-bg-100) 0%,
+          var(--oo-color-light-transparent-bg-0) 100%
+        );
+      }
+    }
+
+    #{$c-slider}__page {
+      @include plain-visited() {
+        background-color: var(--oo-color-light-bg, var(--oo-color-bg));
+      }
+
+      @include hover-focus-active() {
+        background-color: var(
+          --oo-color-light-primary,
+          var(--oo-color-primary)
+        );
+      }
+
+      &.is-active {
+        background: var(--oo-color-light-primary, var(--oo-color-primary));
+      }
+    }
+
+    #{$c-slider}__progress {
+      background-color: var(--oo-color-light-transparent-text-10);
+    }
+
+    #{$c-slider}__progress-bar {
+      background-color: var(--oo-color-light-primary, var(--oo-color-primary));
+    }
+
+    #{$c-slider}__arrows {
+      border-color: var(--oo-color-light-primary, var(--oo-color-primary));
+    }
+
+    #{$c-slider}__arrow {
+      color: var(--oo-color-light-contrast-primary);
+      background-color: var(--oo-color-light-primary, var(--oo-color-primary));
+      border-color: var(--oo-color-light-primary, var(--oo-color-primary));
+
+      @include visited-active() {
+        color: var(--oo-color-light-contrast-primary);
+        background-color: var(
+          --oo-color-light-primary,
+          var(--oo-color-primary)
+        );
+        border-color: var(--oo-color-light-primary, var(--oo-color-primary));
+      }
+
+      @include hover-focus() {
+        color: var(--oo-color-light-contrast-primary);
+        background-color: var(--oo-color-light-lighten-primary-40);
+        border-color: var(--oo-color-light-primary, var(--oo-color-primary));
+        box-shadow: 0px 0px 0px 2px
+          var(--oo-color-light-primary, var(--oo-color-primary));
+      }
+
+      &:disabled {
+        color: var(--oo-color-light-contrast-text);
+        background-color: var(--oo-color-light-text, var(--oo-color-text));
+        border-color: var(--oo-color-light-text, var(--oo-color-text));
+
+        @include hover-focus() {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+
+  &.--on-bg-dark {
+    #{$c-slider}__track {
+      &:before,
+      &:after {
+        background: var(--oo-color-dark-bg, var(--oo-color-bg));
+      }
+      &:before {
+        background: linear-gradient(
+          90deg,
+          var(--oo-color-dark-transparent-bg-100) 0%,
+          var(--oo-color-dark-transparent-bg-0) 100%
+        );
+      }
+      &:after {
+        background: linear-gradient(
+          -90deg,
+          var(--oo-color-dark-transparent-bg-100) 0%,
+          var(--oo-color-dark-transparent-bg-0) 100%
+        );
+      }
+    }
+
+    #{$c-slider}__page {
+      @include plain-visited() {
+        background-color: var(--oo-color-dark-bg, var(--oo-color-bg));
+      }
+
+      @include hover-focus-active() {
+        background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+      }
+
+      &.is-active {
+        background: var(--oo-color-dark-primary, var(--oo-color-primary));
+      }
+    }
+
+    #{$c-slider}__progress {
+      background-color: var(--oo-color-dark-transparent-text-10);
+    }
+
+    #{$c-slider}__progress-bar {
+      background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+    }
+
+    #{$c-slider}__arrows {
+      border-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+    }
+
+    #{$c-slider}__arrow {
+      color: var(--oo-color-dark-contrast-primary);
+      background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+      border-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+
+      @include visited-active() {
+        color: var(--oo-color-dark-contrast-primary);
+        background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+        border-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+      }
+
+      @include hover-focus() {
+        color: var(--oo-color-dark-contrast-primary);
+        background-color: var(--oo-color-dark-lighten-primary-40);
+        border-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+        box-shadow: 0px 0px 0px 2px
+          var(--oo-color-dark-primary, var(--oo-color-primary));
+      }
+
+      &:disabled {
+        color: var(--oo-color-dark-contrast-text);
+        background-color: var(--oo-color-dark-text, var(--oo-color-text));
+        border-color: var(--oo-color-dark-text, var(--oo-color-text));
+
+        @include hover-focus() {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+
+  &.--on-bg-primary {
+    #{$c-slider}__track {
+      &:before,
+      &:after {
+        background: var(--oo-color-primary-bg, var(--oo-color-bg));
+      }
+      &:before {
+        background: linear-gradient(
+          90deg,
+          var(--oo-color-primary-transparent-bg-100) 0%,
+          var(--oo-color-primary-transparent-bg-0) 100%
+        );
+      }
+      &:after {
+        background: linear-gradient(
+          -90deg,
+          var(--oo-color-primary-transparent-bg-100) 0%,
+          var(--oo-color-primary-transparent-bg-0) 100%
+        );
+      }
+    }
+
+    #{$c-slider}__page {
+      @include plain-visited() {
+        background-color: var(--oo-color-primary-bg, var(--oo-color-bg));
+      }
+
+      @include hover-focus-active() {
+        background-color: var(
+          --oo-color-primary-primary,
+          var(--oo-color-primary)
+        );
+      }
+
+      &.is-active {
+        background: var(--oo-color-primary-primary, var(--oo-color-primary));
+      }
+    }
+
+    #{$c-slider}__progress {
+      background-color: var(--oo-color-primary-transparent-text-10);
+    }
+
+    #{$c-slider}__progress-bar {
+      background-color: var(
+        --oo-color-primary-primary,
+        var(--oo-color-primary)
+      );
+    }
+
+    #{$c-slider}__arrows {
+      border-color: var(--oo-color-primary-primary, var(--oo-color-primary));
+    }
+
+    #{$c-slider}__arrow {
+      color: var(--oo-color-primary-contrast-primary);
+      background-color: var(
+        --oo-color-primary-primary,
+        var(--oo-color-primary)
+      );
+      border-color: var(--oo-color-primary-primary, var(--oo-color-primary));
+
+      @include visited-active() {
+        color: var(--oo-color-primary-contrast-primary);
+        background-color: var(
+          --oo-color-primary-primary,
+          var(--oo-color-primary)
+        );
+        border-color: var(--oo-color-primary-primary, var(--oo-color-primary));
+      }
+
+      @include hover-focus() {
+        color: var(--oo-color-primary-contrast-primary);
+        background-color: var(--oo-color-primary-lighten-primary-40);
+        border-color: var(--oo-color-primary-primary, var(--oo-color-primary));
+        box-shadow: 0px 0px 0px 2px
+          var(--oo-color-primary-primary, var(--oo-color-primary));
+      }
+
+      &:disabled {
+        color: var(--oo-color-primary-contrast-text);
+        background-color: var(--oo-color-primary-text, var(--oo-color-text));
+        border-color: var(--oo-color-primary-text, var(--oo-color-text));
+
+        @include hover-focus() {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+
+  &.--on-bg-secondary {
+    #{$c-slider}__track {
+      &:before,
+      &:after {
+        background: var(--oo-color-secondary-bg, var(--oo-color-bg));
+      }
+      &:before {
+        background: linear-gradient(
+          90deg,
+          var(--oo-color-secondary-transparent-bg-100) 0%,
+          var(--oo-color-secondary-transparent-bg-0) 100%
+        );
+      }
+      &:after {
+        background: linear-gradient(
+          -90deg,
+          var(--oo-color-secondary-transparent-bg-100) 0%,
+          var(--oo-color-secondary-transparent-bg-0) 100%
+        );
+      }
+    }
+
+    #{$c-slider}__page {
+      @include plain-visited() {
+        background-color: var(--oo-color-secondary-bg, var(--oo-color-bg));
+      }
+
+      @include hover-focus-active() {
+        background-color: var(
+          --oo-color-secondary-primary,
+          var(--oo-color-primary)
+        );
+      }
+
+      &.is-active {
+        background: var(--oo-color-secondary-primary, var(--oo-color-primary));
+      }
+    }
+
+    #{$c-slider}__progress {
+      background-color: var(--oo-color-secondary-transparent-text-10);
+    }
+
+    #{$c-slider}__progress-bar {
+      background-color: var(
+        --oo-color-secondary-primary,
+        var(--oo-color-primary)
+      );
+    }
+
+    #{$c-slider}__arrows {
+      border-color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+    }
+
+    #{$c-slider}__arrow {
+      color: var(--oo-color-secondary-contrast-primary);
+      background-color: var(
+        --oo-color-secondary-primary,
+        var(--oo-color-primary)
+      );
+      border-color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+
+      @include visited-active() {
+        color: var(--oo-color-secondary-contrast-primary);
+        background-color: var(
+          --oo-color-secondary-primary,
+          var(--oo-color-primary)
+        );
+        border-color: var(
+          --oo-color-secondary-primary,
+          var(--oo-color-primary)
+        );
+      }
+
+      @include hover-focus() {
+        color: var(--oo-color-secondary-contrast-primary);
+        background-color: var(--oo-color-secondary-lighten-primary-40);
+        border-color: var(
+          --oo-color-secondary-primary,
+          var(--oo-color-primary)
+        );
+        box-shadow: 0px 0px 0px 2px
+          var(--oo-color-secondary-primary, var(--oo-color-primary));
+      }
+
+      &:disabled {
+        color: var(--oo-color-secondary-contrast-text);
+        background-color: var(--oo-color-secondary-text, var(--oo-color-text));
+        border-color: var(--oo-color-secondary-text, var(--oo-color-text));
+
+        @include hover-focus() {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+
+  &.--on-bg-footer {
+    gap: 1rem;
+
+    #{$c-slider}__track {
+      &:before,
+      &:after {
+        width: 2rem;
+        background: var(--oo-color-footer-bg, var(--oo-color-bg));
+      }
+      &:before {
+        background: linear-gradient(
+          90deg,
+          var(--oo-color-footer-transparent-bg-100) 0%,
+          var(--oo-color-footer-transparent-bg-0) 100%
+        );
+      }
+      &:after {
+        background: linear-gradient(
+          -90deg,
+          var(--oo-color-footer-transparent-bg-100) 0%,
+          var(--oo-color-footer-transparent-bg-0) 100%
+        );
+      }
+    }
+
+    #{$c-slider}__page {
+      @include plain-visited() {
+        background-color: var(--oo-color-footer-bg, var(--oo-color-bg));
+      }
+
+      @include hover-focus-active() {
+        background-color: var(
+          --oo-color-footer-primary,
+          var(--oo-color-primary)
+        );
+      }
+
+      &.is-active {
+        background: var(--oo-color-footer-primary, var(--oo-color-primary));
+      }
+    }
+
+    #{$c-slider}__progress {
+      background-color: var(--oo-color-footer-transparent-text-10);
+    }
+
+    #{$c-slider}__progress-bar {
+      background-color: var(--oo-color-footer-primary, var(--oo-color-primary));
+    }
+
+    #{$c-slider}__arrows {
+      border-color: var(--oo-color-footer-primary, var(--oo-color-primary));
+    }
+
+    #{$c-slider}__arrow {
+      color: var(--oo-color-footer-contrast-primary);
+      background-color: var(--oo-color-footer-primary, var(--oo-color-primary));
+      border-color: var(--oo-color-footer-primary, var(--oo-color-primary));
+
+      @include visited-active() {
+        color: var(--oo-color-footer-contrast-primary);
+        background-color: var(
+          --oo-color-footer-primary,
+          var(--oo-color-primary)
+        );
+        border-color: var(--oo-color-footer-primary, var(--oo-color-primary));
+      }
+
+      @include hover-focus() {
+        color: var(--oo-color-footer-contrast-primary);
+        background-color: var(--oo-color-footer-lighten-primary-40);
+        border-color: var(--oo-color-footer-primary, var(--oo-color-primary));
+        box-shadow: 0px 0px 0px 2px
+          var(--oo-color-footer-primary, var(--oo-color-primary));
+      }
+
+      &:disabled {
+        color: var(--oo-color-footer-contrast-text);
+        background-color: var(--oo-color-footer-text, var(--oo-color-text));
+        border-color: var(--oo-color-footer-text, var(--oo-color-text));
+
+        @include hover-focus() {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+}

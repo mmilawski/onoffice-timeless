@@ -1,0 +1,103 @@
+.c-link-boxes {
+  $c-link-boxes: &;
+
+  position: relative;
+
+  &__background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+  }
+  &__picture {
+    position: sticky;
+    width: 100%;
+    height: 100dvh;
+    overflow: hidden;
+    inset: 0;
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: var(--oo-color-transparent-bg-90);
+    }
+  }
+
+  &__image {
+  }
+
+  &__container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    @include media-breakpoint-up(xl) {
+      gap: 2rem;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    @include media-breakpoint-up(xl) {
+      gap: 2rem;
+    }
+  }
+
+  &__boxes {
+    display: grid;
+    gap: 2rem;
+    @include media-breakpoint-up(lg) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__text {
+  }
+
+  &__buttons {
+    gap: 2rem;
+    justify-content: center;
+  }
+
+  &.--has-bg-image {
+  }
+
+  &.--bg-light {
+    #{$c-link-boxes}__picture {
+      &::after {
+        background-color: var(--oo-color-light-transparent-bg-80);
+      }
+    }
+  }
+
+  &.--bg-dark {
+    #{$c-link-boxes}__picture {
+      &::after {
+        background-color: var(--oo-color-dark-transparent-bg-80);
+      }
+    }
+  }
+
+  &.--bg-primary {
+    #{$c-link-boxes}__picture {
+      &::after {
+        background-color: var(--oo-color-primary-transparent-bg-80);
+      }
+    }
+  }
+
+  &.--bg-secondary {
+    #{$c-link-boxes}__picture {
+      &::after {
+        background-color: var(--oo-color-secondary-transparent-bg-80);
+      }
+    }
+  }
+}

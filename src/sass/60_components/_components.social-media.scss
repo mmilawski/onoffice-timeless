@@ -1,0 +1,164 @@
+.c-social-media {
+  $c-social-media: &;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--oo-social-media-gap, 1rem);
+
+  &__item {
+  }
+
+  &__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--oo-social-media-color, var(--oo-color-primary));
+
+    @include visited-active() {
+      color: var(--oo-social-media-color, var(--oo-color-primary));
+    }
+
+    @include hover-focus() {
+      color: var(
+        --oo-social-media-color,
+        var(--oo-color-mix-primary-contrast-20)
+      );
+    }
+  }
+
+  &__icon,
+  svg {
+    display: block;
+    width: var(--oo-social-media-size, 2rem);
+    height: var(--oo-social-media-size, 2rem);
+  }
+
+  &.--is-footer {
+    --oo-social-media-size: 2rem;
+    --oo-social-media-gap: 1rem;
+
+    #{$c-social-media}__link {
+      --oo-social-media-color: var(
+        --oo-color-footer-primary,
+        var(--oo-color-primary)
+      );
+      @include visited-active() {
+        --oo-social-media-color: var(
+          --oo-color-footer-primary,
+          var(--oo-color-primary)
+        );
+      }
+      @include hover-focus() {
+        --oo-social-media-color: var(--oo-color-footer-mix-primary-contrast-20);
+      }
+    }
+  }
+
+  &.--is-header {
+    --oo-social-media-size: 1rem;
+    --oo-social-media-gap: 0.5rem;
+
+    display: inline-flex;
+    @include media-breakpoint-up(xxl) {
+      position: relative;
+      top: 0.25rem;
+    }
+
+    #{$c-social-media}__link {
+      --oo-social-media-color: var(--oo-color-header-contrast-primary);
+      @include visited-active() {
+        --oo-social-media-color: var(--oo-color-header-contrast-primary);
+      }
+      @include hover-focus() {
+        --oo-social-media-color: var(--oo-color-header-contrast-primary);
+      }
+
+      @include media-breakpoint-up(xxl) {
+        --oo-social-media-color: var(
+          --oo-color-header-primary,
+          var(--oo-color-primary)
+        );
+        @include visited-active() {
+          --oo-social-media-color: var(
+            --oo-color-header-primary,
+            var(--oo-color-primary)
+          );
+        }
+        @include hover-focus() {
+          --oo-social-media-color: var(
+            --oo-color-header-mix-primary-contrast-20
+          );
+        }
+      }
+    }
+  }
+
+  &.--is-content {
+    --oo-social-media-size: 1.5rem;
+    --oo-social-media-gap: 0.5rem;
+
+    display: inline-flex;
+  }
+
+  &.--is-share {
+    --oo-social-media-size: 2.5rem;
+    --oo-social-media-gap: 2rem;
+    justify-content: center;
+
+    .--link {
+      #{$c-social-media}__link {
+        position: relative;
+
+        svg {
+          transition: opacity 0.3s ease;
+        }
+
+        .copy-icon {
+        }
+
+        .copy-icon-success {
+          display: none;
+        }
+
+        &::before {
+          content: attr(data-tooltip);
+          position: absolute;
+          bottom: 95%;
+          right: 0;
+          background-color: var(
+            --oo-social-media-color,
+            var(--oo-color-primary)
+          );
+          color: var(--oo-color-text);
+          padding: 0.25rem;
+          border-radius: 0.25rem;
+          font-size: 1rem;
+          white-space: nowrap;
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        &:hover::before,
+        &:focus::before,
+        &[data-tooltip-visible='true']::before {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border-width: 0;
+        }
+      }
+    }
+  }
+}

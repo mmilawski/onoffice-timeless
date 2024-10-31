@@ -1,0 +1,9 @@
+.c-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: var(--oo-color-primary-mix-primary-contrast-20);
+
+  .--is-footer & {
+    aspect-ratio: 1 / 1;
+  }
+}

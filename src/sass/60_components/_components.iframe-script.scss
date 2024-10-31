@@ -1,0 +1,93 @@
+.c-iframe-script {
+  $c-iframe-script: &;
+
+  &__headline {
+    margin-bottom: 1.5rem;
+    @include media-breakpoint-up(xl) {
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__text {
+    margin-bottom: 1.5rem;
+    @include media-breakpoint-up(xl) {
+      margin-bottom: 2rem;
+    }
+  }
+
+  &__iframe {
+    width: 100%;
+    border: none;
+    aspect-ratio: 16 / 9;
+    height: auto;
+
+    &.--is-ogulo {
+    }
+
+    &.--is-onoffice {
+    }
+
+    &.--is-calendly {
+    }
+
+    &.--is-timum {
+    }
+
+    &.--is-matterport {
+    }
+
+    &.--is-sprengnetter {
+      aspect-ratio: auto;
+    }
+
+    &.--is-iwa {
+      aspect-ratio: auto;
+    }
+
+    &.--is-imag {
+      aspect-ratio: auto;
+    }
+
+    &.--is-energieausweisformulare {
+      aspect-ratio: auto;
+      min-height: 1500px;
+      @include media-breakpoint-up(sm) {
+        min-height: 1300px;
+      }
+      @include media-breakpoint-up(md) {
+        min-height: 1200px;
+      }
+      @include media-breakpoint-up(lg) {
+        min-height: 950px;
+      }
+    }
+
+    &.--is-bottimmo {
+    }
+
+    &.--is-heyflow {
+    }
+
+    &.--is-immosparrow {
+      aspect-ratio: auto;
+    }
+
+    &.--is-vcita {
+    }
+
+    &.--is-maklaro {
+      aspect-ratio: auto;
+    }
+
+    &.--is-prohyp {
+      height: 100dvh;
+    }
+
+    &.--is-pricehubble {
+      iframe#fisher-widget {
+        width: 100%;
+        border: none;
+      }
+    }
+  }
+}

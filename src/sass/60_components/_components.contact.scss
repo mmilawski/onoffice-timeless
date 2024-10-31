@@ -1,0 +1,45 @@
+.c-contact {
+  $c-contact: &;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    @include media-breakpoint-up(md) {
+      gap: 5rem;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    @include media-breakpoint-up(xl) {
+      gap: 2rem;
+    }
+  }
+
+  &__headline {
+  }
+
+  &__text {
+  }
+
+  &__addresses {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: 1fr;
+    gap: 3rem 0;
+
+    @include media-breakpoint-up(md) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 5rem 2rem;
+    }
+    @include media-breakpoint-up(xl) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @include media-breakpoint-up(xxxl) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "oo/banner",
+    "title": "Banner (Slider)",
+    "category": "oo-text",
+    "icon": {
+        "background": "#3f9de4",
+        "foreground": "#ffffff",
+        "src": "slides"
+    },
+    "description": "Slider um Bilder oder Videos mit Text oder einer Immobiliensuche darzustellen.",
+    "textdomain": "oo_theme",
+    "editorStyle": "",
+    "style": "",
+    "acf": {
+        "renderTemplate": "banner-render.php"
+    },
+    "supports": {
+        "html": false,
+        "align": false,
+        "anchor": false,
+        "reusable": false,
+        "lock": false,
+        "customClassName": false,
+        "renaming": false
+    }
+}

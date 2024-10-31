@@ -1,0 +1,23 @@
+.c-module-image {
+  $c-module-image: &;
+
+  &__headline {
+  }
+
+  &__link {
+  }
+
+  &__picture {
+  }
+
+  &__image {
+  }
+
+  &.--is-header {
+  }
+  .--is-footer & {
+    &__placeholder {
+      aspect-ratio: 16 / 9;
+    }
+  }
+}

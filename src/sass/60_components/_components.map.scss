@@ -1,0 +1,115 @@
+.c-map {
+  $c-map: &;
+
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 1;
+  max-height: 60vh;
+
+  &.--is-colored {
+  }
+  &.--is-black-white {
+    // open street map
+    .leaflet-tile {
+      filter: grayscale(100%) contrast(110%);
+    }
+  }
+
+  // google map
+  .gm-style {
+    // marker
+    div {
+      color: var(--oo-color-primary);
+    }
+    // info window
+    .gm-style-iw {
+      background-color: var(--oo-color-bg);
+      color: var(--oo-color-text);
+      padding: 0.75rem !important;
+    }
+    .gm-style-iw-tc {
+      &:after {
+        background-color: var(--oo-color-bg);
+      }
+    }
+    .gm-style-iw-d {
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
+      scrollbar-color: var(--oo-color-text) var(--oo-color-bg) !important;
+    }
+    .gm-ui-hover-effect {
+      opacity: 1 !important;
+      > span {
+        background: var(--oo-color-text);
+      }
+    }
+  }
+
+  // open street map
+  // info window
+  .leaflet-popup-content-wrapper,
+  .leaflet-popup-tip {
+    background-color: var(--oo-color-bg);
+  }
+  a.leaflet-popup-close-button {
+    color: var(--oo-color-text);
+    @include visited-active() {
+      color: var(--oo-color-text);
+    }
+
+    @include hover-focus() {
+      color: var(--oo-color-text);
+    }
+  }
+  .leaflet-popup-content p {
+    margin: 0;
+  }
+
+  &__marker {
+    display: none;
+  }
+
+  &__info {
+    color: var(--oo-color-text) !important;
+    max-width: 20rem;
+    padding: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__headline {
+    max-height: calc(#{$mobile-h3-line-height} * 3);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+
+    @include media-breakpoint-up(xl) {
+      max-height: calc(#{$desktop-h3-line-height} * 3);
+    }
+  }
+
+  &__text {
+  }
+
+  &__button-wrapper {
+    .c-property-details & {
+      display: none;
+    }
+  }
+
+  &__link-wrapper {
+  }
+
+  &__link {
+    color: var(
+      --oo-color-primary
+    ) !important; // important for leaflet overwrite
+  }
+
+  &__button {
+  }
+}

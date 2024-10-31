@@ -1,0 +1,49 @@
+.o-container,
+.o-container-fluid {
+  @include make-container();
+}
+
+@each $breakpoint, $container-max-width in $container-max-widths {
+  .o-container--#{$breakpoint} {
+    @extend .o-container-fluid;
+  }
+}
+
+// Container widths
+//
+// Set the container width, and override it for fixed navbars in media queries.
+
+// Responsive containers that are 100% wide until a breakpoint
+@each $breakpoint, $container-max-width in $container-max-widths {
+  .o-container--#{$breakpoint} {
+    @extend .o-container-fluid;
+  }
+
+  @include mq($from: $breakpoint) {
+    %responsive-container-#{$breakpoint} {
+      max-width: $container-max-width;
+    }
+
+    // Extend each breakpoint which is smaller or equal to the current breakpoint
+    $extend-breakpoint: true;
+
+    @each $name, $width in $mq-breakpoints {
+      @if ($extend-breakpoint) {
+        @if ($name == 'xs') {
+          .o-container {
+            @extend %responsive-container-#{$breakpoint};
+          }
+        } @else {
+          .o-container--#{$name} {
+            @extend %responsive-container-#{$breakpoint};
+          }
+        }
+
+        // Once the current breakpoint is reached, stop extending
+        @if ($breakpoint == $name) {
+          $extend-breakpoint: false;
+        }
+      }
+    }
+  }
+}

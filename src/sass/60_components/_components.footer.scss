@@ -1,0 +1,113 @@
+.c-footer {
+  $c-footer: &;
+
+  &__top {
+    position: relative;
+    background-color: var(--oo-color-footer-bg, var(--oo-color-bg));
+    color: var(--oo-color-footer-text, var(--oo-color-text));
+    box-shadow: 0 2px 12px var(--oo-color-transparent-text-20);
+    padding: 2.5rem 0;
+
+    &-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem 0;
+    }
+
+    &-row {
+      gap: 2.5rem 0;
+    }
+
+    &-column {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem 0;
+      &.--is-empty {
+        display: none;
+        @include media-breakpoint-up(xl) {
+          display: flex;
+        }
+      }
+      &.--left {
+      }
+      &.--middle {
+      }
+      &.--right {
+      }
+    }
+  }
+
+  &__bottom {
+    background-color: var(--oo-color-bg);
+    padding: 1rem 0;
+
+    @include media-breakpoint-up(xl) {
+      gap: 0;
+    }
+
+    * {
+      font-size: $small-font-size;
+      line-height: $small-line-height;
+    }
+
+    &-row {
+      align-items: center;
+      gap: 1.5rem 0;
+
+      @include media-breakpoint-up(lg) {
+        gap: 0;
+      }
+    }
+
+    &-column {
+      &.--left {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+
+        @include media-breakpoint-up(xl) {
+          flex-direction: row;
+          gap: 0.25rem;
+        }
+      }
+    }
+
+    &-copyright {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+
+      &::after {
+        @include media-breakpoint-up(xl) {
+          content: '';
+          display: block;
+          background-color: var(--oo-color-mix-bg-text-20);
+          width: 2px;
+          height: $small-font-size;
+          margin-inline: 0.5rem;
+        }
+      }
+    }
+
+    .onoffice-logo {
+      display: flex;
+      align-items: center;
+      color: var(--oo-color-mix-bg-text-50);
+      max-width: 150px;
+
+      @include media-breakpoint-up(lg) {
+        margin-left: auto;
+      }
+
+      svg {
+        height: 50px;
+      }
+    }
+  }
+
+  // iFrames Overlap
+  .--is-iframe-service-immobilienwertanalyse & {
+    padding-bottom: 4rem;
+  }
+}

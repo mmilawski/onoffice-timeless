@@ -1,0 +1,212 @@
+.c-main-nav {
+  $c-main-nav: &;
+
+  font-family: $font-family-navigation;
+  font-weight: $font-weight-navigation;
+  overflow: hidden;
+  @include media-breakpoint-up(xxl) {
+    overflow: inherit;
+  }
+
+  &__button {
+    background-color: var(--oo-color-header-primary, var(--oo-color-primary));
+    color: var(--oo-color-header-contrast-primary);
+    border: 2px solid var(--oo-color-header-primary, var(--oo-color-primary));
+    padding: 0.25rem;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    cursor: pointer;
+    transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
+      border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+
+    @include media-breakpoint-up(xxl) {
+      display: none;
+    }
+
+    @include visited-active() {
+      color: var(--oo-color-header-primary, var(--oo-color-primary));
+      background-color: var(--oo-color-header-contrast-primary);
+      border-color: var(--oo-color-header-primary, var(--oo-color-primary));
+    }
+
+    @include hover-focus() {
+      color: var(--oo-color-header-contrast-primary);
+      background-color: var(--oo-color-header-lighten-primary-40);
+      border-color: var(--oo-color-header-primary, var(--oo-color-primary));
+      box-shadow: 0px 0px 0px 2px
+        var(--oo-color-header-primary, var(--oo-color-primary));
+    }
+  }
+
+  &__button-icon {
+    width: 1.75rem;
+    height: auto;
+
+    &.--open {
+    }
+    &.--close {
+      width: 1.5rem;
+      display: none;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    @include media-breakpoint-up(xxl) {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0;
+    }
+  }
+
+  &__item {
+    @include media-breakpoint-up(xxl) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    &.--is-top-level {
+      @include media-breakpoint-up(xxl) {
+        border: 0;
+        flex-basis: content;
+        max-width: 25%;
+        position: relative;
+
+        &:after,
+        &:before {
+          content: '';
+          background-color: var(--oo-color-header-mix-bg-text-20);
+          height: $global-line-height;
+          width: 2px;
+        }
+
+        &:after {
+        }
+
+        &:before {
+          margin-left: -2px;
+        }
+      }
+    }
+
+    &.--is-active {
+    }
+
+    &.--has-children {
+      position: relative;
+
+      @include hover-focus() {
+        @include media-breakpoint-up(xxl) {
+          > #{$c-main-nav}__sub-menu {
+            visibility: visible;
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    &.--is-ancestor {
+    }
+  }
+
+  &__link {
+    hyphens: auto;
+    padding: 0.25rem 0;
+    width: 100%;
+    color: var(--oo-color-header-text, var(--oo-color-text));
+    display: block;
+
+    @include visited-active() {
+      color: var(--oo-color-header-text, var(--oo-color-text));
+    }
+    @include hover-focus() {
+      color: var(--oo-color-header-primary, var(--oo-color-primary));
+    }
+
+    @include media-breakpoint-up(xxl) {
+      padding: 0.5rem;
+    }
+
+    &.--is-top-level {
+      @include media-breakpoint-up(xxl) {
+        padding: 0.5rem 2.5rem;
+      }
+    }
+
+    &.--is-active {
+      color: var(--oo-color-header-primary, var(--oo-color-primary));
+    }
+
+    &.--is-ancestor {
+      color: var(--oo-color-header-primary, var(--oo-color-primary));
+    }
+  }
+
+  &__sub-menu {
+    font-family: $font-family-text;
+    font-weight: $font-weight-text;
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 0 1rem;
+
+    @include media-breakpoint-up(xxl) {
+      z-index: 100;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateX(-50%);
+      min-width: 200px;
+      width: 100%;
+      background-color: var(--oo-color-header-transparent-bg-90);
+      padding: 0;
+      transition: visibility 0.25s ease-in-out, opacity 0.25s ease-in-out;
+    }
+
+    #{$c-main-nav}__item {
+    }
+
+    #{$c-main-nav}__link {
+      @include media-breakpoint-up(xxl) {
+        color: var(--oo-color-header-primary, var(--oo-color-primary));
+        background-color: transparent;
+
+        @include visited-active() {
+          color: var(--oo-color-header-primary, var(--oo-color-primary));
+          background-color: transparent;
+        }
+        @include hover-focus() {
+          color: var(--oo-color-header-contrast-primary);
+          background-color: var(
+            --oo-color-header-primary,
+            var(--oo-color-primary)
+          );
+        }
+      }
+      &.--is-active {
+        @include media-breakpoint-up(xxl) {
+          color: var(--oo-color-header-contrast-primary);
+          background-color: var(
+            --oo-color-header-primary,
+            var(--oo-color-primary)
+          );
+        }
+      }
+    }
+  }
+
+  &.--is-open {
+  }
+}

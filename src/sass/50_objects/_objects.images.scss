@@ -1,0 +1,26 @@
+.o-picture {
+  display: block;
+  height: 100%;
+  width: 100%;
+  line-height: 0;
+}
+
+.o-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+
+  &.--face {
+    object-position: center 25%;
+  }
+  &.--center {
+    object-position: center center;
+  }
+  &.--north {
+    object-position: top center;
+  }
+  &.--south {
+    object-position: bottom center;
+  }
+}

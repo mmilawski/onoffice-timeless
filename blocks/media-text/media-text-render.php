@@ -1,0 +1,259 @@
+<?php
+// Content
+$type = get_field('type') ?? 'image';
+$image = get_field('image') ?? [];
+$icon = get_field('icon') ?? [];
+$thumbnail = get_field('video_thumbnail') ?? [];
+$video = get_field('video') ?? null;
+$headline = get_field('headline') ?? [];
+$text = get_field('text') ?? [];
+$buttons = get_field('buttons') ?? [];
+
+// Settings
+$settings = get_field('settings') ?? [];
+$position_media_text = $settings['position_media_text'] ?? 'left';
+$bg_color = $settings['bg_color'] ?? 'bg-transparent';
+
+// Video
+if (!empty($video)) {
+    // find iframe src.
+    preg_match('/src="(.+?)"/', $video, $matches);
+    $src = $matches[1];
+
+    // Add extra parameters to src and replace HTML
+    $params = [
+        'controls' => 1,
+        'hd' => 1,
+        'autohide' => 1,
+        'rel' => 0,
+    ];
+    $new_src = add_query_arg($params, $src);
+    $iframe = str_replace($src, $new_src, $video);
+
+    // Class of video type based on the URL for Usercentrics
+    if (str_contains($new_src, 'vimeo')) {
+        $video_class = '--is-vimeo';
+    } elseif (str_contains($new_src, 'youtu')) {
+        $video_class = '--is-youtube';
+    } else {
+        $video_class = '';
+    }
+
+    // Add extra attributes to iframe HTML
+    $attributes = 'loading="lazy" class="c-media-text__iframe"';
+    $iframe = str_replace(' frameborder="0"', '', $iframe);
+    $iframe_with_attributes = str_replace(
+        '></iframe>',
+        ' ' . $attributes . '></iframe>',
+        $iframe,
+    );
+    $iframe_without_source = str_replace(
+        ' src="',
+        ' data-src="',
+        $iframe_with_attributes,
+    );
+}
+
+// Media width
+$media_width_xs = '544';
+$media_width_sm = '512';
+$media_width_md = '694';
+$media_width_lg = '448';
+$media_width_xl = '352';
+$media_width_xxl = '416';
+$media_width_xxxl = '460';
+?>
+
+<section <?php oo_block_id(
+    $block,
+); ?> class="c-media-text --media-<?php echo $position_media_text; ?> --is-<?php echo $type; ?> o-section --<?php echo $bg_color; ?>">
+    <div class="c-media-text__container o-container">
+        <div class="c-media-text__row o-row <?php echo $position_media_text ==
+        'right'
+            ? '--reverse'
+            : ''; ?>">
+
+            <?php if (!empty($image) && $type == 'image') { ?>
+                <?php oo_get_template('components', '', 'component-image', [
+                    'image' => $image,
+                    'picture_class' =>
+                        'c-media-text__picture o-picture o-col-12 o-col-lg-6 o-col-xl-4',
+                    'image_class' => 'c-media-text__image o-image',
+                    'dimensions' => [
+                        '575' => [
+                            'w' => $media_width_xs,
+                            'h' => round(($media_width_xs * 3) / 4),
+                        ],
+                        '1600' => [
+                            'w' => $media_width_xxxl,
+                            'h' => round(($media_width_xxxl * 3) / 4),
+                        ],
+                        '1400' => [
+                            'w' => $media_width_xxl,
+                            'h' => round(($media_width_xxl * 3) / 4),
+                        ],
+                        '1200' => [
+                            'w' => $media_width_xl,
+                            'h' => round(($media_width_xl * 3) / 4),
+                        ],
+                        '992' => [
+                            'w' => $media_width_lg,
+                            'h' => round(($media_width_lg * 3) / 4),
+                        ],
+                        '768' => [
+                            'w' => $media_width_md,
+                            'h' => round(($media_width_md * 3) / 4),
+                        ],
+                        '576' => [
+                            'w' => $media_width_sm,
+                            'h' => round(($media_width_sm * 3) / 4),
+                        ],
+                    ],
+                ]); ?>
+            <?php } elseif (empty($image) && $type == 'image') {
+                echo '<div class="c-media-text__placeholder c-placeholder o-col-12 o-col-lg-6 o-col-xl-4"></div>';
+            } ?>
+
+            <?php if (!empty($icon) && $type == 'icon') { ?>
+                <?php oo_get_template('components', '', 'component-image', [
+                    'image' => $icon,
+                    'picture_class' =>
+                        'c-media-text__picture o-col-12 o-col-lg-6 o-col-xl-4',
+                    'image_class' => 'c-media-text__image',
+                    'additional_cloudimg_params' => '&func=bound&org_if_sml=1',
+                    'dimensions' => [
+                        '575' => [
+                            'w' => $media_width_xs,
+                            'h' => $media_width_xs,
+                        ],
+                        '1600' => [
+                            'w' => $media_width_xxxl,
+                            'h' => $media_width_xxxl,
+                        ],
+                        '1400' => [
+                            'w' => $media_width_xxl,
+                            'h' => $media_width_xxl,
+                        ],
+                        '1200' => [
+                            'w' => $media_width_xl,
+                            'h' => $media_width_xl,
+                        ],
+                        '992' => [
+                            'w' => $media_width_lg,
+                            'h' => $media_width_lg,
+                        ],
+                        '768' => [
+                            'w' => $media_width_md,
+                            'h' => $media_width_md,
+                        ],
+                        '576' => [
+                            'w' => $media_width_sm,
+                            'h' => $media_width_sm,
+                        ],
+                    ],
+                ]); ?>
+            <?php } elseif (empty($icon) && $type == 'icon') {
+                echo '<div class="c-media-text__placeholder c-placeholder o-col-12 o-col-lg-6 o-col-xl-4"></div>';
+            } ?>
+
+            <?php if (!empty($video) && $type == 'video') { ?>
+                <div class="c-media-text__video o-col-12 o-col-lg-6 o-col-xl-4">
+                    <?php if (!empty($thumbnail)) { ?>
+                        <div class="c-media-text__thumbnail-wrapper <?php echo $video_class; ?>">
+                            <?php oo_get_template(
+                                'components',
+                                '',
+                                'component-image',
+                                [
+                                    'image' => $thumbnail,
+                                    'picture_class' =>
+                                        'c-media-text__thumbnail-picture o-picture',
+                                    'image_class' =>
+                                        'c-media-text__thumbnail-image o-image',
+                                    'dimensions' => [
+                                        '575' => [
+                                            'w' => $media_width_xs,
+                                            'h' => round(
+                                                ($media_width_xs * 9) / 16,
+                                            ),
+                                        ],
+                                        '1600' => [
+                                            'w' => $media_width_xxxl,
+                                            'h' => round(
+                                                ($media_width_xxxl * 9) / 16,
+                                            ),
+                                        ],
+                                        '1400' => [
+                                            'w' => $media_width_xxl,
+                                            'h' => round(
+                                                ($media_width_xxl * 9) / 16,
+                                            ),
+                                        ],
+                                        '1200' => [
+                                            'w' => $media_width_xl,
+                                            'h' => round(
+                                                ($media_width_xl * 9) / 16,
+                                            ),
+                                        ],
+                                        '992' => [
+                                            'w' => $media_width_lg,
+                                            'h' => round(
+                                                ($media_width_lg * 9) / 16,
+                                            ),
+                                        ],
+                                        '768' => [
+                                            'w' => $media_width_md,
+                                            'h' => round(
+                                                ($media_width_md * 9) / 16,
+                                            ),
+                                        ],
+                                        '576' => [
+                                            'w' => $media_width_sm,
+                                            'h' => round(
+                                                ($media_width_sm * 9) / 16,
+                                            ),
+                                        ],
+                                    ],
+                                ],
+                            ); ?>
+
+                            <button class="c-media-text__play c-button --on-<?php echo $bg_color; ?>">
+                                <?php esc_html_e(
+                                    'Video ansehen',
+                                    'oo_theme',
+                                ); ?>
+                            </button>
+                        </div>
+                    <?php echo $iframe_without_source;} else { ?>
+											<div class="c-media-text__video-wrapper --has-no-thumbnail <?php echo $video_class; ?>">
+												<?php echo $iframe_with_attributes; ?>
+											</div>
+										<?php } ?>
+                </div>
+            <?php } ?>
+
+            <div class="c-media-text__content o-col-12 o-col-lg-6 o-col-xl-8">
+                <?php if (!empty($headline['text'])) { ?>
+									<?php oo_get_template('components', '', 'component-headline', [
+             'headline' => $headline,
+             'additional_headline_class' => 'c-media-text__headline',
+         ]); ?>
+                <?php } ?>
+
+                <?php if (!empty($text['wysiwyg'])) { ?>
+                    <div class="c-media-text__text o-text --is-wysiwyg">
+                        <?php echo $text['wysiwyg']; ?>
+                    </div>
+                <?php } ?>
+        
+                <?php if (!empty($buttons['buttons'][0]['link'])) { ?>
+										<?php oo_get_template('components', '', 'component-buttons', [
+              'buttons' => $buttons['buttons'],
+              'additional_button_class' => $bg_color ? '--on-' . $bg_color : '',
+              'additional_container_class' => 'c-media-text__buttons',
+          ]); ?>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+</section>

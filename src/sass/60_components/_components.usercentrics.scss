@@ -1,0 +1,60 @@
+.uc-embedding {
+  $uc-embedding: &;
+
+  &-container {
+    width: 100% !important;
+    background-color: var(--oo-color-mix-bg-text-10) !important;
+    min-height: 450px !important;
+
+    #{$uc-embedding}-wrapper {
+      border-radius: 0 !important;
+      font-family: var(--oo-font-text, sans-serif) !important;
+      background-color: var(--oo-color-bg) !important;
+      gap: 0.5rem;
+
+      h3 {
+        font-family: $font-family-headline !important;
+        font-weight: $font-weight-headline !important;
+        color: var(--oo-color-headline, --oo-color-text) !important;
+      }
+
+      .description-text,
+      span {
+        color: var(--oo-color-text) !important;
+      }
+    }
+
+    #{$uc-embedding}-buttons {
+      #{$uc-embedding}-accept,
+      #{$uc-embedding}-more-info {
+        transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
+          border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out !important;
+        border-radius: 0 !important;
+        border: 2px solid var(--oo-color-primary);
+      }
+
+      #{$uc-embedding}-more-info {
+        color: var(--oo-color-primary) !important;
+        background-color: transparent !important;
+        border-color: var(--oo-color-primary) !important;
+
+        @include hover-focus() {
+          color: var(--oo-color-lighten-primary-40) !important;
+          background-color: transparent !important;
+          border-color: var(--oo-color-lighten-primary-40) !important;
+          box-shadow: 0px 0px 0px 2px var(--oo-color-lighten-primary-40) !important;
+        }
+      }
+
+      #{$uc-embedding}-accept {
+        background-color: var(--oo-color-primary) !important;
+
+        @include hover-focus() {
+          color: var(--oo-color-contrast-primary) !important;
+          background-color: var(--oo-color-lighten-primary-40) !important;
+          box-shadow: 0px 0px 0px 2px var(--oo-color-primary) !important;
+        }
+      }
+    }
+  }
+}

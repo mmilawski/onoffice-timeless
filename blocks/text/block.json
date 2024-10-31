@@ -1,0 +1,28 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "oo/text",
+    "title": "Text",
+    "category": "oo-text",
+    "icon": {
+        "background": "#3f9de4",
+        "foreground": "#ffffff",
+        "src": "media-text"
+    },
+    "description": "Text Block, ohne Bild",
+    "textdomain": "oo_theme",
+    "acf": {
+        "renderTemplate": "text-render.php"
+    },
+    "editorStyle": "",
+    "style": "",
+    "supports": {
+        "html": false,
+        "align": false,
+        "anchor": false,
+        "reusable": false,
+        "lock": false,
+        "customClassName": false,
+        "renaming": false
+    }
+}

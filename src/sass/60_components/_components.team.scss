@@ -1,0 +1,48 @@
+.c-team {
+  $c-team: &;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    @include media-breakpoint-up(md) {
+      gap: 5rem;
+    }
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    @include media-breakpoint-up(xl) {
+      gap: 2rem;
+    }
+  }
+
+  &__headline {
+  }
+
+  &__text {
+  }
+
+  &__members {
+    display: grid;
+    @include make-columns(1, 3rem, 0);
+
+    @include media-breakpoint-up(md) {
+      @include make-columns(2, 5rem, 2rem);
+    }
+    @include media-breakpoint-up(xl) {
+      @include make-columns(3, 5rem, 2rem);
+    }
+  }
+
+  &__slider {
+  }
+
+  &__buttons {
+    &.--position-center {
+      justify-content: center;
+    }
+  }
+}

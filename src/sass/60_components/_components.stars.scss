@@ -1,0 +1,128 @@
+.c-stars {
+  $c-stars: &;
+
+  display: flex;
+  gap: 0.5rem;
+
+  &__star {
+    width: 2rem;
+    height: 2rem;
+    @include media-breakpoint-up(lg) {
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    &.--filled {
+      color: var(--oo-color-primary);
+    }
+
+    &.--empty {
+      color: var(--oo-color-mix-bg-text-20);
+    }
+  }
+
+  &.--small {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    #{$c-stars}__star {
+      width: 1rem;
+      height: 1rem;
+      @include media-breakpoint-up(lg) {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+  }
+
+  &.--light-empty-stars {
+    #{$c-stars}__star {
+      &.--empty {
+        color: var(--oo-color-mix-bg-text-30);
+      }
+    }
+  }
+
+  .--half {
+    position: relative;
+    #{$c-stars}__star {
+      position: absolute;
+      inset: 0;
+      &.--filled {
+        width: 50%;
+        overflow: hidden;
+        z-index: 1;
+        svg {
+          width: auto;
+        }
+      }
+    }
+  }
+
+  .--bg-light & {
+    .--filled {
+      color: var(--oo-color-light-primary, var(--oo-color-primary));
+    }
+    .--empty {
+      color: var(
+        --oo-color-light-mix-bg-text-20,
+        var(--oo-color-mix-bg-text-20)
+      );
+    }
+  }
+  .--bg-dark & {
+    .--filled {
+      color: var(--oo-color-dark-primary, var(--oo-color-primary));
+    }
+    .--empty {
+      color: var(
+        --oo-color-dark-mix-bg-text-20,
+        var(--oo-color-mix-bg-text-20)
+      );
+    }
+  }
+
+  .--bg-primary & {
+    .--filled {
+      color: var(--oo-color-primary-primary, var(--oo-color-primary));
+    }
+    .--empty {
+      color: var(
+        --oo-color-primary-mix-bg-text-20,
+        var(--oo-color-mix-bg-text-20)
+      );
+    }
+  }
+
+  .--bg-secondary & {
+    .--filled {
+      color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+    }
+    .--empty {
+      color: var(
+        --oo-color-secondary-mix-bg-text-20,
+        var(--oo-color-mix-bg-text-20)
+      );
+    }
+  }
+
+  .--bg-transparent & {
+    .--filled {
+      color: var(--oo-color-primary);
+    }
+    .--empty {
+      color: var(--oo-color-mix-bg-text-20);
+    }
+  }
+
+  &.--small {
+    #{$c-stars}__star {
+      height: 1.5rem;
+      width: 1.5rem;
+    }
+  }
+}

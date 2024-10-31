@@ -1,0 +1,31 @@
+// global rem size
+$global-rem-size: 16px;
+
+// flex settings
+$container-padding-x: 1rem;
+$grid-columns: 12;
+$grid-gutter-width: 2rem;
+
+$enable-grid-classes: true;
+
+// breakpoints
+$mq-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+  xxxl: 1600px,
+);
+$grid-breakpoints: $mq-breakpoints;
+
+// container widths
+$container-max-widths: (
+  sm: 544px,
+  md: 726px,
+  lg: 960px,
+  xl: 1152px,
+  xxl: 1344px,
+  xxxl: 1476px,
+);

@@ -1,0 +1,28 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "oo/forms",
+    "title": "Formulare",
+    "description": "Zeigt Ihre Formulare in der gewünschten Darstellung an.",
+    "category": "oo-forms",
+    "icon": {
+        "background": "#3f9de4",
+        "foreground": "#ffffff",
+        "src": "forms"
+    },
+    "textdomain": "oo_theme",
+    "acf": {
+        "renderTemplate": "forms-render.php"
+    },
+    "editorStyle": "",
+    "style": "",
+    "supports": {
+        "html": false,
+        "align": false,
+        "anchor": false,
+        "reusable": false,
+        "lock": false,
+        "customClassName": false,
+        "renaming": false
+    }
+}

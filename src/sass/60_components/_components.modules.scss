@@ -1,0 +1,30 @@
+.c-modules {
+  $c-modules: &;
+
+  &__item {
+    .--is-header & {
+      display: flex;
+      gap: 1.5rem;
+
+      @include media-breakpoint-up(xxl) {
+        display: inline;
+        margin-right: 1.5rem;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+
+    .--is-footer & {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  }
+
+  &.--is-header {
+  }
+
+  &.--is-footer {
+  }
+}

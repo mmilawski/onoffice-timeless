@@ -1,0 +1,9 @@
+@mixin make-columns($cols, $row-gap, $col-gap) {
+  @if $cols == 1 {
+    grid-template-columns: 100%;
+  } @else {
+    $width: calc((100% / #{$cols}) - (#{$col-gap} * (#{$cols} - 1) / #{$cols}));
+    grid-template-columns: repeat(#{$cols}, #{$width});
+  }
+  gap: #{$row-gap} #{$col-gap};
+}

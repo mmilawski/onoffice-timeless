@@ -1,0 +1,43 @@
+@use 'sass:math';
+
+// Generate a font-size and baseline-compatible line-height.
+@mixin font-size($font-size, $line-height: auto) {
+  font-size: math.div($font-size, $global-rem-size) * 1rem;
+
+  @if $line-height == auto {
+    line-height: math.ceil(math.div($font-size, $global-line-height)) *
+      math.div($global-line-height, $font-size);
+  } @else {
+    @if (
+      type-of($line-height) ==
+        number or
+        $line-height ==
+        inherit or
+        $line-height ==
+        normal
+    ) {
+      line-height: $line-height;
+    } @else if ($line-height != none and $line-height != false) {
+      @warn "D’oh! ‘#{$line-height}’ is not a valid value for `line-height`.";
+    }
+  }
+}
+
+// Map keywords onto our numbered weights for convenience.
+@mixin font-weight($weight) {
+  @if ($weight == normal) {
+    font-weight: 400;
+  } @else if ($weight == light) {
+    font-weight: 300;
+  } @else if ($weight == medium) {
+    font-weight: 500;
+  } @else if ($weight == semibold) {
+    font-weight: 600;
+  } @else if ($weight == bold) {
+    font-weight: 700;
+  } @else if ($weight == black) {
+    font-weight: 900;
+  } @else {
+    @warn "#{$weight} is not a valid font-weight.";
+  }
+}

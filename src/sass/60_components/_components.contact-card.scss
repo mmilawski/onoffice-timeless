@@ -1,0 +1,38 @@
+.c-contact-card {
+  $c-contact-card: &;
+
+  display: grid;
+  grid: subgrid / subgrid;
+  grid-row: span 3;
+  gap: 1rem;
+
+  @include media-breakpoint-up(md) {
+    gap: 1.5rem;
+  }
+
+  &__data {
+    &.--is-address {
+    }
+    &.--is-contact {
+    }
+  }
+
+  &__list {
+    display: flex;
+    gap: 0 0.5rem;
+
+    &.--is-opening-hours {
+      display: grid;
+      grid-template-columns: auto 1fr;
+    }
+  }
+
+  &__label {
+    flex-shrink: 0;
+  }
+
+  &__value {
+    hyphens: auto;
+    word-break: break-word;
+  }
+}

@@ -1,0 +1,25 @@
+$quote-font-size: 2.5rem;
+
+blockquote {
+  quotes: '„' '“' '‚' '‘';
+
+  &::before,
+  &::after {
+    font-size: $quote-font-size;
+    color: var(--oo-color-primary);
+  }
+
+  &::before {
+    content: open-quote;
+  }
+
+  &::after {
+    content: close-quote;
+    position: absolute;
+  }
+
+  p {
+    display: inline;
+    padding: 8px;
+  }
+}

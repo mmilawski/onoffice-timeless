@@ -1,0 +1,115 @@
+/*
+	Main Parent Styling SCSS Bundle
+	Notice: reset.css is seperated and not included in this file. 
+*/
+
+@import '10_settings/settings.config';
+// @import '10_settings/settings.colors'; // imported in '20_tools/tools.colors'
+@import '10_settings/settings.general';
+
+@import '20_tools/3rd/mq';
+@import '20_tools/tools.rem';
+@import '20_tools/tools.link-pseudo';
+@import '20_tools/tools.typography';
+@import '20_tools/tools.container';
+@import '20_tools/tools.columns';
+@import '20_tools/tools.colors';
+@import '20_tools/tools.breakpoints';
+@import '20_tools/tools.grid';
+@import '20_tools/tools.grid-framework';
+
+@import '30_generic/generic.box-sizing';
+
+@import '40_elements/elements.page';
+@import '40_elements/elements.headings';
+@import '40_elements/elements.links';
+@import '40_elements/elements.button';
+@import '40_elements/elements.small';
+@import '40_elements/elements.paragraph';
+@import '40_elements/elements.blockquote';
+@import '40_elements/elements.sub-sup';
+@import '40_elements/elements.em-i';
+@import '40_elements/elements.strong-b';
+@import '40_elements/elements.mark-selection.scss';
+@import '40_elements/elements.cite';
+@import '40_elements/elements.lists';
+@import '40_elements/elements.table';
+
+@import '50_objects/objects.body';
+@import '50_objects/objects.main';
+@import '50_objects/objects.container';
+@import '50_objects/objects.columns';
+@import '50_objects/objects.form-elements';
+@import '50_objects/objects.logo';
+@import '50_objects/objects.sections';
+@import '50_objects/objects.headings';
+@import '50_objects/objects.text';
+@import '50_objects/objects.images';
+@import '50_objects/objects.list';
+
+@import '60_components/components.header';
+@import '60_components/components.footer';
+@import '60_components/components.main-nav';
+@import '60_components/components.footer-nav';
+@import '60_components/components.link';
+@import '60_components/components.button';
+@import '60_components/components.buttons';
+@import '60_components/components.button-group';
+@import '60_components/components.forms';
+@import '60_components/components.form';
+@import '60_components/components.info-messages';
+@import '60_components/components.banner';
+@import '60_components/components.media';
+@import '60_components/components.media-text';
+@import '60_components/components.text';
+@import '60_components/components.team';
+@import '60_components/components.team-card';
+@import '60_components/components.pagination';
+@import '60_components/components.popup';
+@import '60_components/components.slider';
+@import '60_components/components.address-details';
+@import '60_components/components.address-list';
+@import '60_components/components.property-search';
+@import '60_components/components.property-list';
+@import '60_components/components.property-card';
+@import '60_components/components.property-features';
+@import '60_components/components.property-details';
+@import '60_components/components.placeholder.scss';
+@import '60_components/components.contact-person';
+@import '60_components/components.address-search';
+@import '60_components/components.news';
+@import '60_components/components.news-card';
+@import '60_components/components.news-details';
+@import '60_components/components.contact-map';
+@import '60_components/components.contact';
+@import '60_components/components.contact-card';
+@import '60_components/components.map';
+@import '60_components/components.accordion-card';
+@import '60_components/components.accordion';
+@import '60_components/components.lightbox';
+@import '60_components/components.table';
+@import '60_components/components.link-boxes-card';
+@import '60_components/components.link-boxes';
+@import '60_components/components.iframe-script';
+@import '60_components/components.reviews';
+@import '60_components/components.review-card';
+@import '60_components/components.review-google-card';
+@import '60_components/components.stars';
+@import '60_components/components.back-to-top';
+@import '60_components/components.social-media';
+@import '60_components/components.seals';
+@import '60_components/components.gallery';
+@import '60_components/components.modules';
+@import '60_components/components.module-image';
+@import '60_components/components.module-form';
+@import '60_components/components.module-seals';
+@import '60_components/components.module-social-media';
+@import '60_components/components.module-language-switcher';
+@import '60_components/components.module-contact';
+@import '60_components/components.module-links';
+@import '60_components/components.module-text';
+@import '60_components/components.usercentrics';
+@import '60_components/components.breadcrumb';
+
+@import '70_utilities/utilities.screen-reader';
+@import '70_utilities/utilities.wordpress';

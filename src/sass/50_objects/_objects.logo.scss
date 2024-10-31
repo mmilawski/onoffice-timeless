@@ -1,0 +1,57 @@
+.o-logo {
+  $o-logo: &;
+
+  &__link {
+    display: block;
+    max-width: var(--oo-logo-width, 100%);
+    max-height: var(--oo-logo-height, 100%);
+    line-height: 0;
+    border: 0;
+  }
+
+  &__image {
+    width: 100%;
+    object-position: left;
+    @include media-breakpoint-up(xl) {
+      width: auto;
+      object-position: center center;
+    }
+    height: auto;
+    object-fit: contain;
+    max-width: var(--oo-logo-width, 100%);
+    max-height: var(--oo-logo-height, 100%);
+  }
+
+  &.--small * {
+    --oo-logo-width: #{$logo-width-sm};
+    --oo-logo-height: #{$logo-height-sm};
+  }
+
+  &.--medium * {
+    --oo-logo-width: #{$logo-width-md};
+    --oo-logo-height: #{$logo-height-md};
+  }
+
+  &.--large * {
+    --oo-logo-width: #{$logo-width-lg};
+    --oo-logo-height: #{$logo-height-lg};
+  }
+
+  &.--extra-large * {
+    --oo-logo-width: #{$logo-width-xl};
+    --oo-logo-height: #{$logo-height-xl};
+  }
+
+  &.--white {
+    background: #fff;
+    padding: 0.25rem;
+
+    @include media-breakpoint-up(xxl) {
+      padding: 0.5rem;
+    }
+  }
+
+  &.--no-image {
+    padding: 0;
+  }
+}

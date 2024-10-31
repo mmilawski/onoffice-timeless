@@ -1,0 +1,57 @@
+.c-reviews {
+  $c-reviews: &;
+
+  &__container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    @include media-breakpoint-up(xl) {
+      gap: 2rem;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+
+    &.--is-google-reviews {
+      justify-content: center;
+      text-align: left;
+    }
+
+    @include media-breakpoint-up(xl) {
+      gap: 2rem;
+    }
+  }
+
+  &__headline {
+  }
+
+  &__text {
+  }
+
+  &__reviews {
+    display: grid;
+    gap: 2rem;
+    @include media-breakpoint-up(lg) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__pagination {
+  }
+
+  &__buttons {
+    gap: 2rem;
+    justify-content: center;
+  }
+  &__col {
+    .--is-google-reviews & {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem 0;
+    }
+  }
+}

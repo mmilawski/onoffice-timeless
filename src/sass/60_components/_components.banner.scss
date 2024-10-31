@@ -1,0 +1,263 @@
+.c-banner {
+  $c-banner: &;
+
+  position: relative;
+  background-color: var(--oo-color-mix-bg-text-10);
+
+  &__slide {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    padding: 0;
+    padding-bottom: calc(
+      $mobile-section-padding-bottom + $mobile-clip-path-height
+    );
+
+    @include media-breakpoint-up(xl) {
+      min-height: 70vh;
+      justify-content: center;
+      padding-top: $desktop-section-padding-top;
+      padding-bottom: calc(
+        $desktop-section-padding-bottom + $desktop-clip-path-height
+      );
+    }
+
+    &.--content-none {
+      padding-bottom: 0;
+      @include media-breakpoint-up(xl) {
+        padding-bottom: calc(
+          $desktop-section-padding-bottom + $desktop-clip-path-height
+        );
+      }
+    }
+    &.--content-property-search {
+    }
+    &.--content-text {
+    }
+  }
+
+  &__background {
+    max-width: 100%;
+    width: 100vw;
+    height: 70vh;
+    clip-path: $mobile-clip-path-bottom;
+    background-color: var(--oo-color-mix-bg-text-20);
+
+    @include media-breakpoint-up(xl) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      min-height: none;
+      clip-path: none;
+    }
+  }
+
+  &__picture {
+  }
+
+  &__image {
+  }
+
+  &__video-wrapper {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--video-width, 124.4444vh); // width = 70vh / (9 / 16) = 124.4444
+    height: var(--video-height, 70vh);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+
+    @include media-breakpoint-up(xl) {
+      --video-ratio-height: 100%;
+      --video-ratio-width: 100vw;
+      --video-height: var(--video-ratio-height);
+      --video-width: var(--video-ratio-width);
+    }
+  }
+
+  &__container {
+    padding-top: calc($mobile-section-padding-top + $mobile-clip-path-height);
+    margin-top: -$mobile-clip-path-height;
+    @include media-breakpoint-up(xl) {
+      padding-top: 0;
+      margin-top: 0;
+    }
+  }
+
+  &__row {
+    margin: 0;
+    @include media-breakpoint-up(xl) {
+      margin-left: -1rem;
+      margin-right: -1rem;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem 0;
+    padding: 0;
+
+    @include media-breakpoint-up(xl) {
+      clip-path: none;
+      margin: 0 1rem;
+      padding: 2rem;
+      background-color: var(--oo-color-transparent-bg-90);
+    }
+
+    &.--content-none {
+    }
+    &.--content-property-search {
+      padding: 1rem 1rem 1.5rem;
+      background-color: var(--oo-color-bg);
+      border-bottom: 2px solid var(--oo-color-primary);
+      @include media-breakpoint-up(xl) {
+        padding: 2rem;
+        background-color: var(--oo-color-transparent-bg-90);
+        border: 0;
+      }
+    }
+    &.--content-text & {
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem 0;
+  }
+
+  &__headline {
+  }
+
+  &__text {
+  }
+
+  &__buttons {
+  }
+
+  &__button {
+    display: flex;
+  }
+
+  &.--bg-light {
+    color: var(--oo-color-light-text, var(--oo-color-text));
+    background-color: var(--oo-color-light-mix-bg-text-10);
+    #{$c-banner}__background {
+      background-color: var(--oo-color-light-mix-bg-text-20);
+    }
+    #{$c-banner}__content {
+      @include media-breakpoint-up(xl) {
+        background-color: var(--oo-color-light-transparent-bg-80);
+      }
+      &.--content-property-search {
+        border-color: var(--oo-color-light-primary, var(--oo-color-primary));
+        background-color: var(--oo-color-light-bg, var(--oo-color-bg));
+        @include media-breakpoint-up(xl) {
+          background-color: var(--oo-color-light-transparent-bg-80);
+        }
+      }
+    }
+  }
+  &.--bg-dark {
+    color: var(--oo-color-dark-text, var(--oo-color-text));
+    background-color: var(--oo-color-dark-mix-bg-text-10);
+    #{$c-banner}__background {
+      background-color: var(--oo-color-dark-mix-bg-text-20);
+    }
+    #{$c-banner}__content {
+      @include media-breakpoint-up(xl) {
+        background-color: var(--oo-color-dark-transparent-bg-80);
+      }
+      &.--content-property-search {
+        border-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+        background-color: var(--oo-color-dark-bg, var(--oo-color-bg));
+        @include media-breakpoint-up(xl) {
+          background-color: var(--oo-color-dark-transparent-bg-80);
+        }
+      }
+    }
+  }
+  &.--bg-primary {
+    color: var(--oo-color-primary-text, var(--oo-color-text));
+    background-color: var(--oo-color-primary-mix-bg-text-10);
+    #{$c-banner}__background {
+      background-color: var(--oo-color-primary-mix-bg-text-20);
+    }
+    #{$c-banner}__content {
+      @include media-breakpoint-up(xl) {
+        background-color: var(--oo-color-primary-transparent-bg-80);
+      }
+      &.--content-property-search {
+        border-color: var(--oo-color-primary-primary, var(--oo-color-primary));
+        background-color: var(--oo-color-primary-bg, var(--oo-color-bg));
+        @include media-breakpoint-up(xl) {
+          background-color: var(--oo-color-primary-transparent-bg-80);
+        }
+      }
+    }
+  }
+  &.--bg-secondary {
+    color: var(--oo-color-secondary-text, var(--oo-color-text));
+    background-color: var(--oo-color-secondary-mix-bg-text-10);
+    #{$c-banner}__background {
+      background-color: var(--oo-color-secondary-mix-bg-text-20);
+    }
+    #{$c-banner}__content {
+      @include media-breakpoint-up(xl) {
+        background-color: var(--oo-color-secondary-transparent-bg-80);
+      }
+      &.--content-property-search {
+        border-color: var(
+          --oo-color-secondary-primary,
+          var(--oo-color-primary)
+        );
+        background-color: var(--oo-color-secondary-bg, var(--oo-color-bg));
+        @include media-breakpoint-up(xl) {
+          background-color: var(--oo-color-secondary-transparent-bg-80);
+        }
+      }
+    }
+  }
+
+  & + *:not(&) {
+    padding-top: calc($mobile-section-padding-top + $mobile-clip-path-height);
+    margin-top: -$mobile-clip-path-height;
+    clip-path: $mobile-clip-path-reverse;
+    @include media-breakpoint-up(xl) {
+      padding-top: calc(
+        $desktop-section-padding-top + $desktop-clip-path-height
+      );
+      margin-top: -$desktop-clip-path-height;
+      clip-path: $desktop-clip-path-reverse;
+    }
+  }
+
+  & + & {
+    margin-top: -$mobile-clip-path-height;
+    clip-path: $mobile-clip-path-top;
+    @include media-breakpoint-up(xl) {
+      margin-top: -$desktop-clip-path-height;
+      clip-path: $desktop-clip-path-top;
+    }
+
+    #{$c-banner}__slide {
+      @include media-breakpoint-up(xl) {
+        padding-top: calc(
+          $desktop-section-padding-top + $desktop-clip-path-height
+        );
+      }
+    }
+  }
+}

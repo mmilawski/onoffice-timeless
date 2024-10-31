@@ -1,0 +1,47 @@
+.c-property-features {
+  $c-property-features: &;
+
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+  align-content: flex-start;
+  gap: 1rem;
+
+  &__criteria {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto 1fr;
+    gap: 0.125rem;
+
+    &.--single {
+      display: none;
+    }
+  }
+
+  &__label {
+    color: var(--oo-color-primary);
+    font-family: $font-family-text;
+    font-weight: $font-weight-text;
+    @include font-size(14px, 1.125rem);
+    @include media-breakpoint-up(xl) {
+      @include font-size(16px, 1.25rem);
+    }
+  }
+
+  &__value {
+    color: var(--oo-color-text);
+    font-family: $font-family-text-bold;
+    font-weight: $font-weight-text-bold;
+    @include font-size(16px, 1.25rem);
+    @include media-breakpoint-up(xl) {
+      @include font-size(18px, 1.5rem);
+    }
+  }
+
+  &.--on-detail-page {
+    @include media-breakpoint-up(xl) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}

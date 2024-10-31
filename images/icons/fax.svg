@@ -1,0 +1,9 @@
+<svg height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+    <rect x="0.5" y="4.5" width="4" height="11" rx="1.5" ry="1.5" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/>
+    <path d="m4.5,6.5h9.5c.83,0,1.5.67,1.5,1.5v6c0,.83-.67,1.5-1.5,1.5H6c-.83,0-1.5-.67-1.5-1.5v-7.5h0Z" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/>
+    <path d="m14.5,5v-2.02c0-.4-.16-.78-.44-1.06l-.98-.98c-.28-.28-.66-.44-1.06-.44h-6.02c-.83,0-1.5.67-1.5,1.5v4.5" fill="none" stroke="currentColor" stroke-width="1" vector-effect="non-scaling-stroke"/>
+    <circle cx="8.5" cy="9.5" r=".75" fill="currentColor"/>
+    <circle cx="11.5" cy="9.5" r=".75" fill="currentColor"/>
+    <circle cx="8.5" cy="12.5" r=".75" fill="currentColor"/>
+    <circle cx="11.5" cy="12.5" r=".75" fill="currentColor"/>
+</svg>

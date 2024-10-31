@@ -1,0 +1,42 @@
+.c-google-review-card {
+  $c-google-review-card: &;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  &__contents {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 1rem;
+
+    &.--shorten {
+      overflow: hidden;
+      max-height: calc($mobile-global-line-height * 15);
+      transition: max-height 0.25s ease-in-out;
+
+      @include media-breakpoint-up(xl) {
+        max-height: calc($desktop-global-line-height * 10);
+      }
+
+      &.--is-open {
+        max-height: 100rem;
+      }
+    }
+  }
+
+  &__more {
+    margin: 0.5rem auto;
+  }
+
+  &__date {
+  }
+
+  &__stars {
+  }
+
+  &.--on-slider {
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,33 @@
+.c-module-links {
+  $c-module-links: &;
+
+  &__headline {
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__item {
+  }
+
+  &__link {
+    .--is-header & {
+      @include media-breakpoint-up(xxl) {
+        display: inline;
+        margin-right: 1.5rem;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  &.--is-header {
+  }
+  &.--is-footer {
+  }
+}

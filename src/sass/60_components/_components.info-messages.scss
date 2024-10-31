@@ -1,0 +1,28 @@
+.c-info-messages {
+  $info-messages: &;
+
+  font-family: $font-family-text-bold;
+  font-weight: $font-weight-text-bold;
+  padding: 1rem;
+  color: var(--oo-color-text);
+  background-color: var(--oo-color-mix-bg-text-20);
+  border: 2px solid var(--oo-color-text);
+
+  &.--is-success {
+    color: var(--oo-color-success);
+    background-color: var(--oo-color-transparent-success-20);
+    border-color: var(--oo-color-success);
+  }
+
+  &.--is-warning {
+    color: var(--oo-color-warning);
+    background-color: var(--oo-color-transparent-warning-20);
+    border-color: var(--oo-color-warning);
+  }
+
+  &.--is-error {
+    color: var(--oo-color-error);
+    background-color: var(--oo-color-transparent-error-20);
+    border-color: var(--oo-color-error);
+  }
+}

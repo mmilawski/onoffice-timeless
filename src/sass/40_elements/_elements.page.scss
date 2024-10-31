@@ -1,0 +1,36 @@
+/*------------------------------------*\
+  #PAGE
+\*------------------------------------*/
+
+/**
+ * Page-level styling (e.g. HTML and BODY elements).
+ */
+html,
+body {
+  height: 100%;
+  font-size: $global-rem-size;
+  line-height: $global-line-height;
+  font-family: $font-family-text;
+  font-weight: $font-weight-text;
+  background-color: var(--oo-color-bg);
+  color: var(--oo-color-text);
+
+  &.--is-header-style-white {
+    height: auto;
+  }
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+header,
+main,
+footer {
+  font-size: $mobile-global-font-size;
+  line-height: $mobile-global-line-height;
+  @include media-breakpoint-up(xl) {
+    font-size: $desktop-global-font-size;
+    line-height: $desktop-global-line-height;
+  }
+}

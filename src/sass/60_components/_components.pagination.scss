@@ -1,0 +1,220 @@
+.c-pagination {
+  $c-pagination: &;
+
+  &__list {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    @include media-breakpoint-up(xl) {
+      gap: 0.5rem;
+    }
+  }
+
+  &__item {
+    font-family: $font-family-button;
+    font-weight: $font-weight-button;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--oo-color-text);
+    background: var(--oo-color-bg);
+    border: 2px solid var(--oo-color-bg);
+    width: $mobile-icon-wrapper-size;
+    height: $mobile-icon-wrapper-size;
+    padding: 0.25rem;
+    cursor: pointer;
+    transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
+      border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+
+    @include media-breakpoint-up(xl) {
+      width: $desktop-icon-wrapper-size;
+      height: $desktop-icon-wrapper-size;
+    }
+
+    @include visited-active() {
+      color: var(--oo-color-text);
+      background: var(--oo-color-bg);
+      border: 2px solid var(--oo-color-bg);
+    }
+
+    @include hover-focus() {
+      color: var(--oo-color-contrast-primary);
+      background-color: var(--oo-color-lighten-primary-40);
+      border-color: var(--oo-color-primary);
+      box-shadow: 0px 0px 0px 2px var(--oo-color-primary);
+    }
+
+    &.--has-icon {
+    }
+
+    &.--first,
+    &.--last,
+    &.--prev,
+    &.--next {
+    }
+
+    &.--is-current {
+      color: var(--oo-color-contrast-primary);
+      background: var(--oo-color-primary);
+      border-color: var(--oo-color-primary);
+
+      @include hover-focus() {
+        box-shadow: none;
+      }
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: $mobile-icon-size;
+      height: $mobile-icon-size;
+      @include media-breakpoint-up(xl) {
+        width: $desktop-icon-size;
+        height: $desktop-icon-size;
+      }
+    }
+  }
+
+  &.--on-bg-light {
+    #{$c-pagination}__link {
+      // color: var(--oo-color-light-text, var(--oo-color-text));
+      // background: var(--oo-color-light-bg, var(--oo-color-bg));
+      // border: 2px solid var(--oo-color-light-bg, var(--oo-color-bg));
+
+      @include visited-active() {
+        // color: var(--oo-color-light-text, var(--oo-color-text));
+        // background: var(--oo-color-light-bg, var(--oo-color-bg));
+        // border: 2px solid var(--oo-color-light-bg, var(--oo-color-bg));
+      }
+
+      @include hover-focus() {
+        color: var(--oo-color-light-contrast-primary);
+        background-color: var(--oo-color-light-lighten-primary-40);
+        border-color: var(--oo-color-light-primary, var(--oo-color-primary));
+        box-shadow: 0px 0px 0px 2px
+          var(--oo-color-light-primary, var(--oo-color-primary));
+      }
+
+      &.--is-current {
+        color: var(--oo-color-light-contrast-primary);
+        background: var(--oo-color-light-primary, var(--oo-color-primary));
+        border-color: var(--oo-color-light-primary, var(--oo-color-primary));
+
+        @include hover-focus() {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+
+  &.--on-bg-dark {
+    #{$c-pagination}__link {
+      color: var(--oo-color-dark-text, var(--oo-color-text));
+      background: var(--oo-color-dark-bg, var(--oo-color-bg));
+      border: 2px solid var(--oo-color-dark-bg, var(--oo-color-bg));
+
+      @include visited-active() {
+        color: var(--oo-color-dark-text, var(--oo-color-text));
+        background: var(--oo-color-dark-bg, var(--oo-color-bg));
+        border: 2px solid var(--oo-color-dark-bg, var(--oo-color-bg));
+      }
+
+      @include hover-focus() {
+        color: var(--oo-color-dark-contrast-primary);
+        background-color: var(--oo-color-dark-lighten-primary-40);
+        border-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+        box-shadow: 0px 0px 0px 2px
+          var(--oo-color-dark-primary, var(--oo-color-primary));
+      }
+
+      &.--is-current {
+        color: var(--oo-color-dark-contrast-primary);
+        background: var(--oo-color-dark-primary, var(--oo-color-primary));
+        border-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+
+        @include hover-focus() {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+
+  &.--on-bg-primary {
+    #{$c-pagination}__link {
+      color: var(--oo-color-primary-text, var(--oo-color-text));
+      background: var(--oo-color-primary-bg, var(--oo-color-bg));
+      border: 2px solid var(--oo-color-primary-bg, var(--oo-color-bg));
+
+      @include visited-active() {
+        color: var(--oo-color-primary-text, var(--oo-color-text));
+        background: var(--oo-color-primary-bg, var(--oo-color-bg));
+        border: 2px solid var(--oo-color-primary-bg, var(--oo-color-bg));
+      }
+
+      @include hover-focus() {
+        color: var(--oo-color-primary-contrast-primary);
+        background-color: var(--oo-color-primary-lighten-primary-40);
+        border-color: var(--oo-color-primary-primary, var(--oo-color-primary));
+        box-shadow: 0px 0px 0px 2px
+          var(--oo-color-primary-primary, var(--oo-color-primary));
+      }
+
+      &.--is-current {
+        color: var(--oo-color-primary-contrast-primary);
+        background: var(--oo-color-primary-primary, var(--oo-color-primary));
+        border-color: var(--oo-color-primary-primary, var(--oo-color-primary));
+
+        @include hover-focus() {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+
+  &.--on-bg-secondary {
+    #{$c-pagination}__link {
+      color: var(--oo-color-secondary-text, var(--oo-color-text));
+      background: var(--oo-color-secondary-bg, var(--oo-color-bg));
+      border: 2px solid var(--oo-color-secondary-bg, var(--oo-color-bg));
+
+      @include visited-active() {
+        color: var(--oo-color-secondary-text, var(--oo-color-text));
+        background: var(--oo-color-secondary-bg, var(--oo-color-bg));
+        border: 2px solid var(--oo-color-secondary-bg, var(--oo-color-bg));
+      }
+
+      @include hover-focus() {
+        color: var(--oo-color-secondary-contrast-primary);
+        background-color: var(--oo-color-secondary-lighten-primary-40);
+        border-color: var(
+          --oo-color-secondary-primary,
+          var(--oo-color-primary)
+        );
+        box-shadow: 0px 0px 0px 2px
+          var(--oo-color-secondary-primary, var(--oo-color-primary));
+      }
+
+      &.--is-current {
+        color: var(--oo-color-secondary-contrast-primary);
+        background: var(--oo-color-secondary-primary, var(--oo-color-primary));
+        border-color: var(
+          --oo-color-secondary-primary,
+          var(--oo-color-primary)
+        );
+
+        @include hover-focus() {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+}
