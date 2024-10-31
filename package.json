@@ -1,0 +1,49 @@
+{
+	"name": "onoffice-ingo",
+	"description": "Package for WP-Websites Classic Ingo.",
+	"version": "1.1.0",
+	"browserslist": "last 5 versions",
+	"engines": {
+		"node": ">= 18.13.0"
+	},
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "grunt dev",
+		"dev": "grunt dev",
+		"setup": "grunt",
+		"format": "prettier --write \"**/*.{js,scss,php}\"",
+		"build": "grunt && npm run format && prettier --check \"**/*.{js,scss,php}\" && echo \"Build wurde erfolgreich erstellt.\"",
+		"release": "npm run format && npm run build && grunt compress && echo \"Build & ZIP wurden erfolgreich erstellt und stehen zum Release bereit.\"",
+		"deploy": "npm run format && npm run build && grunt clean"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ingoKrOffice/ClassicIngo.git"
+	},
+	"author": "onOffice-web",
+	"bugs": {
+		"url": "https://github.com/ingoKrOffice/ClassicIngo/issues"
+	},
+	"dependencies": {
+		"dotenv": "^16.3.1",
+		"gem": "^2.4.3",
+		"grunt": "^1.6.1",
+		"grunt-cli": "^1.4.3",
+		"ruby": "^0.6.1"
+	},
+	"devDependencies": {
+		"@prettier/plugin-php": "^0.19.3",
+		"autoprefixer": "^9.8.6",
+		"browserslist": "^4.22.1",
+		"grunt-autoprefixer": "^3.0.0",
+		"grunt-browser-sync": "^2.2.0",
+		"grunt-contrib-clean": "^2.0.1",
+		"grunt-contrib-compress": "^2.0.0",
+		"grunt-contrib-uglify": "~4.0.1",
+		"grunt-contrib-watch": "^1.1.0",
+		"grunt-dart-sass": "^2.0.1",
+		"grunt-postcss": "^0.9.0",
+		"prettier": "^2.8.4",
+		"sass": "^1.69.5"
+	}
+}
