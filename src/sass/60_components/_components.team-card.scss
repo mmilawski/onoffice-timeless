@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-	border-radius: $button-border-radius;
+  border-radius: $button-border-radius;
   scroll-margin-top: calc(
     #{$mobile-header-height} + #{$mobile-section-padding-top}
   );

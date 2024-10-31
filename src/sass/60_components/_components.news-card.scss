@@ -6,7 +6,7 @@
   border: 2px solid var(--oo-color-bg);
   display: flex;
   flex-direction: column;
-	border-radius: $button-border-radius;
+  border-radius: $button-border-radius;
 
   &__wrapper {
     position: relative;
@@ -20,7 +20,7 @@
 
   &__date {
     position: absolute;
-		border-radius: $button-border-radius;
+    border-radius: $button-border-radius;
     top: 4px;
     right: 4px;
     color: var(--oo-color-contrast-primary);
