@@ -6,6 +6,7 @@
   border: 2px solid var(--oo-color-bg);
   display: flex;
   flex-direction: column;
+	border-radius: $button-border-radius;
 
   &__wrapper {
     position: relative;
@@ -19,11 +20,11 @@
 
   &__date {
     position: absolute;
-    top: -2px;
-    left: -2px;
+		border-radius: $button-border-radius;
+    top: 4px;
+    right: 4px;
     color: var(--oo-color-contrast-primary);
     background-color: var(--oo-color-primary);
-    border: 2px solid var(--oo-color-bg);
     font-family: $font-family-button;
     font-weight: $font-weight-button;
     display: flex;
@@ -31,6 +32,7 @@
   }
 
   &__picture {
+    border-radius: $button-border-radius $button-border-radius 0 0;
   }
 
   &__image {

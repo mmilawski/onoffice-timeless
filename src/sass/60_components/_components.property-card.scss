@@ -51,8 +51,9 @@
 
   &__favorite {
     position: absolute;
-    top: -2px;
-    right: -2px;
+		border-radius: $button-border-radius;
+    top: 4px;
+    right: 4px;
     color: var(--oo-color-contrast-primary);
     background-color: var(--oo-color-primary);
     border: 2px solid var(--oo-color-bg);
