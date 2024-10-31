@@ -1,0 +1,11 @@
+node_modules
+.vscode
+/js
+!dist/**/*.css
+/build
+build
+.env
+onoffice-modern.zip
+.idea
+package-lock.json
+package.json
