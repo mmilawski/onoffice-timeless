@@ -92,6 +92,11 @@
   }
 
   &__list {
+    display: grid;
+    gap: 2rem;
+    @include media-breakpoint-up(lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
   &__inner {

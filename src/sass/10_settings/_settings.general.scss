@@ -135,6 +135,12 @@ $mobile-clip-path-reverse: polygon(
   0 100%
 );
 
+// button styles
+$button-border-radius: 10px;
+
+// form styles
+$input-border-radius: 10px;
+
 [hidden] {
   display: none;
 }

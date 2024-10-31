@@ -5,7 +5,7 @@ $form-padding-right: 0.5rem; // Padding
 $form-select-size: 14px; // Size of the select arrow
 $form-control-size: 20px; // Size of the checkbox and radio button (1)
 $form-border: 0;
-$form-radius: 0; // Input border radius
+$form-radius: 10px; // Input border radius
 $form-duration: 0.25s; // Transition duration
 $form-timing: ease-in-out; // Transition timing
 $form-svg-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11.41 7.12'%3E%5C %3Cpath d='m.71.71l5,5L10.71.71' fill='none' stroke='currentColor' stroke-width='2'/%3E%5C %3C/svg%3E");
