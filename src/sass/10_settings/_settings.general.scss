@@ -91,49 +91,13 @@ $mobile-section-padding-bottom: 2.5rem;
 $desktop-clip-path-height: $desktop-section-padding-top;
 $mobile-clip-path-height: $mobile-section-padding-top;
 
-$desktop-clip-path-bottom: polygon(
-  0 0,
-  100% 0,
-  100% calc(100% - $desktop-clip-path-height),
-  50% 100%,
-  0 calc(100% - $desktop-clip-path-height)
-);
-$mobile-clip-path-bottom: polygon(
-  0 0,
-  100% 0,
-  100% calc(100% - $mobile-clip-path-height),
-  50% 100%,
-  0 calc(100% - $mobile-clip-path-height)
-);
-$mobile-clip-path-top: polygon(
-  50% calc(0% + $mobile-clip-path-height),
-  100% 0%,
-  100% 100%,
-  0 100%,
-  0 0
-);
-$desktop-clip-path-top: polygon(
-  50% calc(0% + $desktop-clip-path-height),
-  100% 0%,
-  100% 100%,
-  0 100%,
-  0 0
-);
+$desktop-clip-path-bottom: unset;
+$mobile-clip-path-bottom: unset;
+$mobile-clip-path-top: unset;
+$desktop-clip-path-top: unset;
 
-$desktop-clip-path-reverse: polygon(
-  0 0,
-  50% calc(0% + $desktop-clip-path-height),
-  100% 0,
-  100% 100%,
-  0 100%
-);
-$mobile-clip-path-reverse: polygon(
-  0 0,
-  50% calc(0% + $mobile-clip-path-height),
-  100% 0,
-  100% 100%,
-  0 100%
-);
+$desktop-clip-path-reverse: unset;
+$mobile-clip-path-reverse: unset;
 
 // button styles
 $button-border-radius: 10px;
