@@ -27,7 +27,7 @@
   &__fieldset {
     padding: 1rem 1rem 1.5rem;
     background-color: var(--oo-color-bg);
-    border-bottom: 2px solid var(--oo-color-primary);
+    // border-bottom: 2px solid var(--oo-color-primary);
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     gap: 1.5rem;
@@ -49,14 +49,14 @@
 
   &__legend {
     color: var(--oo-color-contrast-primary);
-    background-color: var(--oo-color-primary);
+    // background-color: var(--oo-color-primary);
     border: 2px solid var(--oo-color-bg);
     font-family: $font-family-button;
     font-weight: $font-weight-button;
     display: inline-block;
     padding: 0.5rem 0.75rem;
     margin: -0.75rem auto 0 -0.75rem;
-    border-radius: 10px;
+    border-radius: $input-border-radius;
   }
 
   &__required {
@@ -224,7 +224,7 @@
     }
     #{$c-form}__legend {
       color: var(--oo-color-light-contrast-primary);
-      background-color: var(--oo-color-light-primary, var(--oo-color-primary));
+      // background-color: var(--oo-color-light-primary, var(--oo-color-primary));
     }
     &.--on-banner {
       #{$c-form}__fieldset {
@@ -243,7 +243,7 @@
     }
     #{$c-form}__legend {
       color: var(--oo-color-dark-contrast-primary);
-      background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+      // background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
     }
     &.--on-banner {
       #{$c-form}__fieldset {
@@ -262,10 +262,10 @@
     }
     #{$c-form}__legend {
       color: var(--oo-color-primary-contrast-primary);
-      background-color: var(
-        --oo-color-primary-primary,
-        var(--oo-color-primary)
-      );
+      // background-color: var(
+      //   --oo-color-primary-primary,
+      //   var(--oo-color-primary)
+      // );
     }
     &.--on-banner {
       #{$c-form}__fieldset {
@@ -284,10 +284,10 @@
     }
     #{$c-form}__legend {
       color: var(--oo-color-secondary-contrast-primary);
-      background-color: var(
-        --oo-color-secondary-primary,
-        var(--oo-color-primary)
-      );
+      // background-color: var(
+      //   --oo-color-secondary-primary,
+      //   var(--oo-color-primary)
+      // );
     }
     &.--on-banner {
       #{$c-form}__fieldset {
@@ -321,7 +321,7 @@
     #{$c-form}__legend {
       margin: 0;
       color: var(--oo-color-footer-contrast-primary);
-      background-color: var(--oo-color-footer-primary, var(--oo-color-primary));
+      // background-color: var(--oo-color-footer-primary, var(--oo-color-primary));
       border-color: var(--oo-color-footer-bg, var(--oo-color-bg));
     }
     #{$c-form}__required {
@@ -335,7 +335,7 @@
     }
     #{$c-form}__legend {
       color: var(--oo-color-contrast-primary);
-      background-color: var(--oo-color-primary);
+      // background-color: var(--oo-color-primary);
     }
     &.--on-banner {
       #{$c-form}__fieldset {

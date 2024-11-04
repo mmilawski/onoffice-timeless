@@ -53,9 +53,6 @@ $networks =
         ? $button_title
         : esc_html__('Immobilie teilen', 'oo_theme'); ?>
     </span>
-     <span class="c-button__icon">
-        <?php oo_get_icon('arrow-right', 'svg'); ?>
-    </span>
 </a>
 
 

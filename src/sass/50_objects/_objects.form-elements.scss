@@ -4,8 +4,8 @@ $form-padding-top: 0.375rem; // Padding
 $form-padding-right: 0.5rem; // Padding
 $form-select-size: 14px; // Size of the select arrow
 $form-control-size: 20px; // Size of the checkbox and radio button (1)
-$form-border: 0;
-$form-radius: 10px; // Input border radius
+$form-border: 1px solid #cecece;
+$form-radius: 6px; // Input border radius
 $form-duration: 0.25s; // Transition duration
 $form-timing: ease-in-out; // Transition timing
 $form-svg-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11.41 7.12'%3E%5C %3Cpath d='m.71.71l5,5L10.71.71' fill='none' stroke='currentColor' stroke-width='2'/%3E%5C %3C/svg%3E");
@@ -18,28 +18,29 @@ $form-placeholder: var(--oo-color-mix-bg-text-30);
 $form-primary: var(--oo-color-primary);
 $form-primary-contrast: var(--oo-color-contrast-primary);
 $form-primary-hover: var(--oo-color-mix-primary-contrast-20);
-$form-shadow: 2px 2px 0 var(--oo-color-transparent-text-10);
-$form-shadow-active: 2px 2px 0 var(--oo-color-transparent-text-20);
+$form-shadow: 0px;
+$form-shadow-active: 0px;
+// $form-shadow: 2px 2px 0 var(--oo-color-transparent-text-10);
+// $form-shadow-active: 2px 2px 0 var(--oo-color-transparent-text-20);
 
 // BG Variations
 $form-light-primary: var(--oo-color-light-primary, var(--oo-color-primary));
 $form-light-primary-contrast: var(--oo-color-light-contrast-primary);
 $form-light-primary-hover: var(--oo-color-light-mix-primary-contrast-20);
-$form-light-shadow: 2px 2px 0 var(--oo-color-light-transparent-text-10);
-$form-light-shadow-focus: 2px 2px 0 var(--oo-color-light-transparent-text-20);
+$form-light-shadow: 0px;
+$form-light-shadow-focus: 0px;
 
 $form-dark-primary: var(--oo-color-dark-primary, var(--oo-color-primary));
 $form-dark-primary-contrast: var(--oo-color-dark-contrast-primary);
 $form-dark-primary-hover: var(--oo-color-dark-mix-primary-contrast-20);
-$form-dark-shadow: 2px 2px 0 var(--oo-color-dark-transparent-text-10);
-$form-dark-shadow-focus: 2px 2px 0 var(--oo-color-dark-transparent-text-20);
+$form-dark-shadow: 0px;
+$form-dark-shadow-focus: 0px;
 
 $form-primary-primary: var(--oo-color-primary-primary, var(--oo-color-primary));
 $form-primary-primary-contrast: var(--oo-color-primary-contrast-primary);
 $form-primary-primary-hover: var(--oo-color-primary-mix-primary-contrast-20);
-$form-primary-shadow: 2px 2px 0 var(--oo-color-primary-transparent-text-10);
-$form-primary-shadow-focus: 2px 2px 0
-  var(--oo-color-primary-transparent-text-20);
+$form-primary-shadow: 0px;
+$form-primary-shadow-focus: 0px;
 
 $form-secondary-primary: var(
   --oo-color-secondary-primary,
@@ -50,8 +51,7 @@ $form-secondary-primary-hover: var(
   --oo-color-secondary-mix-primary-contrast-20
 );
 $form-secondary-shadow: 2px 2px 0 var(--oo-color-secondary-transparent-text-10);
-$form-secondary-shadow-focus: 2px 2px 0
-  var(--oo-color-secondary-transparent-text-20);
+$form-secondary-shadow-focus: 0px;
 
 $form-footer-color: var(--oo-color-footer-text, var(--oo-color-text));
 $form-footer-primary: var(--oo-color-footer-primary, var(--oo-color-primary));
@@ -395,7 +395,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
         padding: 0;
         margin: 0 0.5rem 0 0;
         background: none;
-        border: 0;
+        border: $form-border;
         cursor: default;
         display: inline-block;
         overflow: hidden;
@@ -414,7 +414,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
           font-family: $font-family-text-bold;
           font-weight: $font-weight-text-bold;
           color: $form-primary;
-          border: 0;
+          border: $form-border;
           border-radius: 0;
           position: static;
 
@@ -467,7 +467,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
   line-height: inherit;
   color: $form-color;
   background: $form-bg;
-  border: 0;
+  border: $form-border;
   border-radius: $form-radius;
   box-shadow: $form-shadow;
   transition: box-shadow $form-duration $form-timing;
@@ -666,6 +666,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
     }
 
     &::before {
+			border: $form-border;
       flex-shrink: 0;
       margin-right: 0.75rem;
       background: $form-bg;
@@ -697,6 +698,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
   }
 
   &__input[type='checkbox'] + &__label::after {
+		border: $form-border;
     mask: $form-svg-checkbox;
     mask-repeat: no-repeat;
     mask-size: $form-select-size;

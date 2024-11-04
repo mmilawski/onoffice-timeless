@@ -63,19 +63,9 @@
     }
   }
 
-  &__banner {
+  &__content {
     position: relative;
     width: 100%;
-
-    @include media-breakpoint-up(xl) {
-      height: 100dvh;
-    }
-
-    .--is-header-style-white & {
-      @include media-breakpoint-up(xxl) {
-        height: 88dvh;
-      }
-    }
 
     &-wrapper {
       @include media-breakpoint-up(xl) {
@@ -138,8 +128,6 @@
       padding: 1rem;
 
       background-color: var(--oo-color-bg);
-      box-shadow: 0 2px 12px var(--oo-color-transparent-text-20);
-      border-bottom: 0px;
 
       @include media-breakpoint-up(xl) {
         max-width: 66.6667%;
@@ -186,17 +174,11 @@
     color: var(--oo-color-property-status-contrast-bg);
     background-color: var(--oo-color-property-status-bg);
     border: 0px;
+		border-radius: $button-border-radius;
     font-family: $font-family-button;
     font-weight: $font-weight-button;
     display: flex;
-    margin-top: -1rem; // minus banner-content padding
-    margin-left: -1rem; // minus banner-content padding
     padding: 0.5rem 0.75rem;
-
-    @include media-breakpoint-up(xl) {
-      margin-top: -2rem; // minus banner-content padding
-      margin-left: -2rem; // minus banner-content padding
-    }
 
     &.--is-popup {
       margin: 0;
@@ -267,7 +249,6 @@
       width: auto;
       max-width: 100%;
       overflow: hidden;
-      border-bottom: 2px solid var(--oo-color-primary);
     }
 
     &-image {

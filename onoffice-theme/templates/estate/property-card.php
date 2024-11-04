@@ -302,9 +302,14 @@ while ($current_property = $pEstatesClone->estateIterator()):
                               echo esc_html($value);
                           } ?>
                           <?php
-                          $dont_echo_label = ['objektart', 'objekttyp', 'vermarktungsart', 'immoNr'];
-                          if(!in_array($field,$dont_echo_label)) {
-                            esc_html_e($pEstates->getFieldLabel($field));
+                          $dont_echo_label = [
+                              'objektart',
+                              'objekttyp',
+                              'vermarktungsart',
+                              'immoNr',
+                          ];
+                          if (!in_array($field, $dont_echo_label)) {
+                              esc_html_e($pEstates->getFieldLabel($field));
                           }
                           ?>
 

@@ -79,6 +79,7 @@
   &__thumbnail-image {
     width: 100%;
     height: auto;
+		border-radius: $button-border-radius;
     aspect-ratio: 16 / 9;
   }
 
