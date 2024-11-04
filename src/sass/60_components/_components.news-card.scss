@@ -12,10 +12,13 @@
     position: relative;
     display: flex;
     background-color: var(--oo-color-transparent-text-20);
-    border-bottom: 2px solid var(--oo-color-primary);
+    border-bottom: 2px;
     width: 100%;
     height: auto;
     aspect-ratio: 4 / 3;
+    & .c-placeholder {
+      border-radius: $button-border-radius;
+    }
   }
 
   &__date {

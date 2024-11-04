@@ -41,6 +41,8 @@
     width: 100%;
     height: auto;
     aspect-ratio: 4 / 3;
+    border-radius: $button-border-radius;
+
     .--is-full-width & {
       max-height: 70vh;
     }
@@ -48,6 +50,7 @@
 
   &__placeholder {
     aspect-ratio: 16 / 9;
+    border-radius: $button-border-radius;
     max-height: 70vh;
   }
 

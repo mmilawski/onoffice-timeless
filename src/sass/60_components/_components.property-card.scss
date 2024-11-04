@@ -9,7 +9,7 @@
   &__inner {
     position: relative;
     background-color: var(--oo-color-mix-bg-text-20);
-    border-bottom: 2px solid var(--oo-color-primary);
+    border-bottom: 0px;
     border-radius: $button-border-radius $button-border-radius 0 0;
   }
 
@@ -30,19 +30,20 @@
   &__picture {
     overflow: hidden;
     aspect-ratio: 3 / 2;
-    border-radius: $button-border-radius $button-border-radius 0 0;
   }
 
   &__image {
+    border-radius: $button-border-radius;
   }
 
   &__status {
     position: absolute;
-    top: -2px;
-    left: -2px;
+    top: 4px;
+    left: 4px;
+    border-radius: $button-border-radius;
     color: var(--oo-color-property-status-contrast-bg);
     background-color: var(--oo-color-property-status-bg);
-    border: 2px solid var(--oo-color-bg);
+    border: 0px;
     font-family: $font-family-button;
     font-weight: $font-weight-button;
     display: flex;
@@ -56,7 +57,7 @@
     right: 4px;
     color: var(--oo-color-contrast-primary);
     background-color: var(--oo-color-primary);
-    border: 2px solid var(--oo-color-bg);
+    border: 0px;
     font-family: $font-family-button;
     font-weight: $font-weight-button;
     display: flex;
@@ -122,12 +123,14 @@
     color: var(--oo-color-primary);
     background-color: transparent;
     border: 2px solid transparent;
+    width: 100%;
   }
 
   &__content {
     display: grid;
     grid-auto-rows: auto 1fr;
     grid-template-areas: 'title' 'features';
+    grid-template-rows: min-content;
     gap: 1rem;
     background-color: var(--oo-color-bg);
     padding: 1rem;
@@ -135,12 +138,14 @@
   }
 
   &__title {
+		max-height: 5.5rem;
     grid-area: 'title';
     font-size: 1.125rem;
     line-height: 1.5rem;
     margin: 0;
     overflow: hidden;
     text-overflow: ellipsis;
+    max-height: fit-content;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;

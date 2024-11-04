@@ -23,13 +23,14 @@
 
   &__picture {
     background-color: var(--oo-color-mix-bg-text-10);
-    border-bottom: 2px solid var(--oo-color-primary);
+    border-bottom: 0px;
     height: auto;
     aspect-ratio: 3 / 4;
     border-radius: $button-border-radius $button-border-radius 0 0;
   }
 
   &__image {
+    border-radius: $button-border-radius;
   }
 
   &__content {

@@ -31,7 +31,7 @@
 
   &__page {
     border: 0;
-    border-radius: 0;
+    border-radius: $button-border-radius;
     display: inline-block;
     height: 1.25rem;
     width: 1.25rem;
@@ -81,6 +81,7 @@
   }
 
   &__arrow {
+    border-radius: $button-border-radius;
     position: relative;
     inset: 0;
     transform: none;
@@ -93,7 +94,6 @@
     width: $mobile-icon-wrapper-size;
     height: $mobile-icon-wrapper-size;
     padding: 0.25rem;
-    border-radius: 0;
     opacity: 1;
     cursor: pointer;
     transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
@@ -471,6 +471,7 @@
     }
 
     #{$c-slider}__page {
+      border-radius: $button-border-radius;
       @include plain-visited() {
         background-color: var(--oo-color-light-bg, var(--oo-color-bg));
       }

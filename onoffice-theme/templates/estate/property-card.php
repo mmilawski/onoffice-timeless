@@ -281,7 +281,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
                 </h3>
             <?php } ?>
             <?php if ($is_fields) { ?>
-                <div class="c-property-card__features c-property-features">
+                <div class="c-property-card__features">
                     <?php foreach ($current_property as $field => $value) {
                         if (
                             (is_numeric($value) && 0 == $value) ||
@@ -295,23 +295,20 @@ while ($current_property = $pEstatesClone->estateIterator()):
                         ) {
                             continue;
                         } ?>
-                        <dl class="c-property-features__criteria">
-                            <dt class="c-property-features__label">
-                                <?php
-                                esc_html_e($pEstates->getFieldLabel($field));
-                                if (!$is_slider) {
-                                    echo ':';
-                                }
-                                ?>
-                            </dt>
-                            <dd class="c-property-features__value">
-                                <?php if (is_array($value)) {
-                                    esc_html_e(implode(', ', $value));
-                                } else {
-                                    echo esc_html($value);
-                                } ?>
-                            </dd>
-                        </dl>
+                        <span class="c-property-features c-flag">
+                          <?php if (is_array($value)) {
+                              esc_html_e(implode(', ', $value));
+                          } else {
+                              echo esc_html($value);
+                          } ?>
+                          <?php
+                          $dont_echo_label = ['objektart', 'objekttyp', 'vermarktungsart', 'immoNr'];
+                          if(!in_array($field,$dont_echo_label)) {
+                            esc_html_e($pEstates->getFieldLabel($field));
+                          }
+                          ?>
+
+                        </span>
                     <?php
                     } ?>
                 </div>
@@ -345,29 +342,27 @@ while ($current_property = $pEstatesClone->estateIterator()):
                             continue;
                         }
                         ?>
-                        <dl class="c-property-card__price">
-                            <dt class="c-property-card__price-label">
-                                <?php
-                                esc_html_e(
-                                    $pEstates->getFieldLabel($price_field),
-                                );
-                                if (!$is_slider) {
-                                    echo ':';
-                                }
-                                ?>
-                            </dt>
-                            <dd class="c-property-card__price-value">
-                                <?php if (is_array($price_value)) {
-                                    esc_html_e(implode(', ', $price_value));
-                                } else {
-                                    echo esc_html($price_value);
-                                } ?>
-                            </dd>
-                        </dl>
+                        <div class="c-property-card__price">
+                            <h4>
+                              <?php
+                              esc_html_e(
+                                  $pEstates->getFieldLabel($price_field),
+                              );
+                              if (!$is_slider) {
+                                  echo ':';
+                              }
+                              ?>
+                              <?php if (is_array($price_value)) {
+                                  esc_html_e(implode(', ', $price_value));
+                              } else {
+                                  echo esc_html($price_value);
+                              } ?>
+                            </h4>
+                        </div>
                     <?php
                     } ?>
                 <?php } ?>
-                
+
                 <?php if (!($is_reference && $is_restricted_view)) { ?>
                     <?php
                     $button = [
@@ -381,7 +376,6 @@ while ($current_property = $pEstatesClone->estateIterator()):
 
                     oo_get_template('components', '', 'component-buttons', [
                         'buttons' => $button,
-                        'icon_first' => 'arrow-right',
                         'additional_button_class' =>
                             'c-property-card__button --on-bg-transparent',
                         'additional_container_class' =>

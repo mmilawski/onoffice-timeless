@@ -5,6 +5,7 @@
   height: auto;
   aspect-ratio: 2 / 1;
   max-height: 60vh;
+  border-radius: $button-border-radius;
 
   &.--is-colored {
   }

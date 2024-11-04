@@ -116,6 +116,7 @@
 
       &.--is-placeholder {
         background-color: var(--oo-color-mix-bg-text-20);
+        border-radius: $button-border-radius;
       }
 
       .--is-header-style-white & {
@@ -138,7 +139,7 @@
 
       background-color: var(--oo-color-bg);
       box-shadow: 0 2px 12px var(--oo-color-transparent-text-20);
-      border-bottom: 2px solid var(--oo-color-primary);
+      border-bottom: 0px;
 
       @include media-breakpoint-up(xl) {
         max-width: 66.6667%;
@@ -184,7 +185,7 @@
   &__status {
     color: var(--oo-color-property-status-contrast-bg);
     background-color: var(--oo-color-property-status-bg);
-    border: 2px solid var(--oo-color-bg);
+    border: 0px;
     font-family: $font-family-button;
     font-weight: $font-weight-button;
     display: flex;
@@ -272,6 +273,7 @@
     &-image {
       width: auto;
       max-width: unset;
+      border-radius: $button-border-radius;
     }
 
     &-link {
