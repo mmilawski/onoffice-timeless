@@ -4,7 +4,7 @@
     height: auto;
     aspect-ratio: 3 / 2;
     background-color: var(--oo-color-mix-bg-text-20);
-		border-radius: $button-border-radius;
+    border-radius: $button-border-radius;
     margin-bottom: 1rem;
 
     @include media-breakpoint-up(xl) {

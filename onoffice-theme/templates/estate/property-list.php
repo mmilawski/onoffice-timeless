@@ -65,17 +65,17 @@ $anchor = isset($headline['text']) ? clean_id($headline['text']) : '';
 						<label class="o-label" for="onofficeSortListSelector">
 							<?php echo $generateSortDropDown(); ?>
 							<span class="o-label__text"><?php esc_html_e(
-																						'Sortiert nach:',
-																						'oo_theme',
-																					); ?></span>
+           'Sortiert nach:',
+           'oo_theme',
+       ); ?></span>
 						</label>
 					</div>
 				<?php } ?>
 				<p class="c-property-list__count">
 					<?php echo sprintf(
-						esc_html__('%d gefundene Immobilien', 'oo_theme'),
-						$pEstates->getEstateOverallCount(),
-					); ?>
+         esc_html__('%d gefundene Immobilien', 'oo_theme'),
+         $pEstates->getEstateOverallCount(),
+     ); ?>
 				</p>
 			</div>
 
@@ -84,13 +84,15 @@ $anchor = isset($headline['text']) ? clean_id($headline['text']) : '';
 			</div>
 
 			<?php oo_get_template('components', '', 'component-pagination', [
-				'type' => 'property',
-				'class' => 'c-property-list__pagination --on-' . $bg_color,
-				'anchor' => $anchor,
-			]); ?>
+       'type' => 'property',
+       'class' => 'c-property-list__pagination --on-' . $bg_color,
+       'anchor' => $anchor,
+   ]); ?>
 		</div>
 	<?php } else { ?>
-		<div class="c-property-list__slider --on-<?php echo $settings['bg_color']; ?> c-slider --is-properties-slider splide" data-splide='{
+		<div class="c-property-list__slider --on-<?php echo $settings[
+      'bg_color'
+  ]; ?> c-slider --is-properties-slider splide" data-splide='{
    "perPage":1,
    "perMove":1,
    "gap":32,
@@ -121,18 +123,18 @@ $anchor = isset($headline['text']) ? clean_id($headline['text']) : '';
 				<div class="c-slider__arrows splide__arrows">
 					<button class="c-slider__arrow c-slider__arrow--prev splide__arrow splide__arrow--prev">
 						<span class="u-screen-reader-only"><?php esc_html_e(
-																									'Vorheriges',
-																									'oo_theme',
-																								); ?></span>
+          'Vorheriges',
+          'oo_theme',
+      ); ?></span>
 						<svg class="c-slider__icon splide__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10.12 17.41">
 							<path d="m9.41.71L1.41,8.71l8,8" vector-effect="non-scaling-stroke" fill="none" stroke="currentColor" stroke-width="2" />
 						</svg>
 					</button>
 					<button class="c-slider__arrow c-slider__arrow--next splide__arrow splide__arrow--next">
 						<span class="u-screen-reader-only"><?php esc_html_e(
-																									'Nächstes',
-																									'oo_theme',
-																								); ?></span>
+          'Nächstes',
+          'oo_theme',
+      ); ?></span>
 						<svg class="c-slider__icon splide__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10.12 17.41">
 							<path d="m.71,16.71l8-8L.71.71" vector-effect="non-scaling-stroke" fill="none" stroke="currentColor" stroke-width="2" />
 						</svg>
@@ -144,11 +146,11 @@ $anchor = isset($headline['text']) ? clean_id($headline['text']) : '';
 <?php } else { ?>
 	<p class="c-property-list__count --no-estates">
 		<?php esc_html_e(
-			'Gefundene Immobilien:',
-			'oo_theme',
-		); ?> <span class="c-property-list__number"><?php echo sprintf(
-																									'%d',
-																									$pEstates->getEstateOverallCount(),
-																								); ?></span>
+      'Gefundene Immobilien:',
+      'oo_theme',
+  ); ?> <span class="c-property-list__number"><?php echo sprintf(
+     '%d',
+     $pEstates->getEstateOverallCount(),
+ ); ?></span>
 	</p>
 <?php } ?>

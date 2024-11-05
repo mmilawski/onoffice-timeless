@@ -36,7 +36,9 @@ if ($pForm->needsReCaptcha() && $key !== '') {
     ?>
   <script>
     function onSubmit() {
-      var element = document.getElementById(<?php echo json_encode($formId); ?>);
+      var element = document.getElementById(<?php echo json_encode(
+          $formId,
+      ); ?>);
       element.submit();
     }
   </script>
@@ -45,11 +47,13 @@ if ($pForm->needsReCaptcha() && $key !== '') {
     data-sitekey="<?php echo esc_attr($key); ?>"
     data-callback="onSubmit"
     data-size="invisible"></div>
-  <button class="c-form__button c-button --has-icon <?php if (!empty($bg_color)) {
-     echo '--on-' . $bg_color;
- } else {
-     echo '--on-bg-footer';
- } ?>"><span class="c-button__text"><?php echo esc_html(
+  <button class="c-form__button c-button --has-icon <?php if (
+      !empty($bg_color)
+  ) {
+      echo '--on-' . $bg_color;
+  } else {
+      echo '--on-bg-footer';
+  } ?>"><span class="c-button__text"><?php echo esc_html(
     $pForm->getGenericSetting('submitButtonLabel'),
 ); ?></span></button>
   <script type="text/javascript">
@@ -84,11 +88,13 @@ if ($pForm->needsReCaptcha() && $key !== '') {
 <?php
 } else {
      ?>
-  <button class="c-form__button c-button --has-icon <?php if (!empty($bg_color)) {
-     echo '--on-' . $bg_color;
- } else {
-     echo '--on-bg-footer';
- } ?>"><span class="c-button__text"><?php echo esc_html(
+  <button class="c-form__button c-button --has-icon <?php if (
+      !empty($bg_color)
+  ) {
+      echo '--on-' . $bg_color;
+  } else {
+      echo '--on-bg-footer';
+  } ?>"><span class="c-button__text"><?php echo esc_html(
     $pForm->getGenericSetting('submitButtonLabel'),
 ); ?></span></button>
 <?php

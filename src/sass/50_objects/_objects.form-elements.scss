@@ -666,7 +666,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
     }
 
     &::before {
-			border: $form-border;
+      border: $form-border;
       flex-shrink: 0;
       margin-right: 0.75rem;
       background: $form-bg;
@@ -698,7 +698,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
   }
 
   &__input[type='checkbox'] + &__label::after {
-		border: $form-border;
+    border: $form-border;
     mask: $form-svg-checkbox;
     mask-repeat: no-repeat;
     mask-size: $form-select-size;
