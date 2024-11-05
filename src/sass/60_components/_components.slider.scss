@@ -31,7 +31,7 @@
 
   &__page {
     border: 0;
-    border-radius: $button-border-radius;
+    border-radius: $component-border-radius;
     display: inline-block;
     height: 1.25rem;
     width: 1.25rem;
@@ -81,7 +81,7 @@
   }
 
   &__arrow {
-    border-radius: $button-border-radius;
+    border-radius: $component-border-radius;
     position: relative;
     inset: 0;
     transform: none;
@@ -471,7 +471,7 @@
     }
 
     #{$c-slider}__page {
-      border-radius: $button-border-radius;
+      border-radius: $component-border-radius;
       @include plain-visited() {
         background-color: var(--oo-color-light-bg, var(--oo-color-bg));
       }

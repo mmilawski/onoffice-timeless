@@ -6,7 +6,7 @@
   color: var(--oo-color-text);
   background-color: var(--oo-color-bg);
   border: 2px solid var(--oo-color-bg);
-  border-radius: $button-border-radius;
+  border-radius: $component-border-radius;
 
   &__wrapper {
     display: flex;
@@ -29,7 +29,7 @@
   &__image {
     width: 100%;
     object-fit: cover;
-    border-radius: $button-border-radius;
+    border-radius: $component-border-radius;
     .--has-icon & {
       object-fit: contain;
     }

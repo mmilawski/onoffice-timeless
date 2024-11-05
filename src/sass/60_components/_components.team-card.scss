@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  border-radius: $button-border-radius;
+  border-radius: $component-border-radius;
   scroll-margin-top: calc(
     #{$mobile-header-height} + #{$mobile-section-padding-top}
   );
@@ -26,11 +26,11 @@
     border-bottom: 0px;
     height: auto;
     aspect-ratio: 3 / 4;
-    border-radius: $button-border-radius $button-border-radius 0 0;
+    border-radius: $component-border-radius $component-border-radius 0 0;
   }
 
   &__image {
-    border-radius: $button-border-radius;
+    border-radius: $component-border-radius;
   }
 
   &__content {
