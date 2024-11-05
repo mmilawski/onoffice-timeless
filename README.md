@@ -1,6 +1,6 @@
 # onOffice WP-Websites | Modern Marvel
 
-[![Release a final new version](https://github.com/onOffice-Web-Org/onoffice-modern/actions/workflows/final-release.yml/badge.svg)](https://github.com/onOffice-Web-Org/onoffice-modern/actions/workflows/final-release.yml)
+[![Release a final new version](https://github.com/onOffice-Web-Org/onoffice-classic/actions/workflows/final-release.yml/badge.svg)](https://github.com/onOffice-Web-Org/onoffice-classic/actions/workflows/final-release.yml)
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.svg)](https://gruntjs.com/)
 
 
