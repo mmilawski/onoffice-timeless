@@ -14,7 +14,7 @@
   border: 2px solid var(--oo-color-primary);
   transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
     border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
-  border-radius: $button-border-radius;
+  border-radius: $component-border-radius;
 
   @include visited-active() {
     color: var(--oo-color-contrast-primary);
@@ -351,14 +351,14 @@
   }
 
   &.--is-primary {
-    border-radius: $button-border-radius;
+    border-radius: $component-border-radius;
   }
 
   &.--is-secondary {
-    border-radius: $button-border-radius;
+    border-radius: $component-border-radius;
   }
 
   &.--is-tertiary {
-    border-radius: $button-border-radius;
+    border-radius: $component-border-radius;
   }
 }

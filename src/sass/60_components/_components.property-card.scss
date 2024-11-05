@@ -4,13 +4,13 @@
   display: grid;
   grid-template-rows: min-content;
   border: 2px solid var(--oo-color-bg);
-  border-radius: $button-border-radius;
+  border-radius: $component-border-radius;
 
   &__inner {
     position: relative;
     background-color: var(--oo-color-mix-bg-text-20);
     border-bottom: 0px;
-    border-radius: $button-border-radius $button-border-radius 0 0;
+    border-radius: $component-border-radius $component-border-radius 0 0;
   }
 
   &__link {
@@ -33,14 +33,14 @@
   }
 
   &__image {
-    border-radius: $button-border-radius;
+    border-radius: $component-border-radius;
   }
 
   &__status {
     position: absolute;
     top: 4px;
     left: 4px;
-    border-radius: $button-border-radius;
+    border-radius: $component-border-radius;
     color: var(--oo-color-property-status-contrast-bg);
     background-color: var(--oo-color-property-status-bg);
     border: 0px;
@@ -52,7 +52,7 @@
 
   &__favorite {
     position: absolute;
-    border-radius: $button-border-radius;
+    border-radius: $component-border-radius;
     top: 4px;
     right: 4px;
     color: var(--oo-color-contrast-primary);

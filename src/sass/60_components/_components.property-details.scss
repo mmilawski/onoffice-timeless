@@ -106,7 +106,7 @@
 
       &.--is-placeholder {
         background-color: var(--oo-color-mix-bg-text-20);
-        border-radius: $button-border-radius;
+        border-radius: $component-border-radius;
       }
 
       .--is-header-style-white & {
@@ -174,7 +174,7 @@
     color: var(--oo-color-property-status-contrast-bg);
     background-color: var(--oo-color-property-status-bg);
     border: 0px;
-    border-radius: $button-border-radius;
+    border-radius: $component-border-radius;
     font-family: $font-family-button;
     font-weight: $font-weight-button;
     display: flex;
@@ -254,7 +254,7 @@
     &-image {
       width: auto;
       max-width: unset;
-      border-radius: $button-border-radius;
+      border-radius: $component-border-radius;
     }
 
     &-link {
