@@ -1,0 +1,53 @@
+name: WP-Websites | Deploying to Stage
+on:
+  # We do not deploy on pull_request, because opening a PR should not deploy anything to staging.
+  # The push will be triggered, once the PR is merged.
+  push:
+    branches:
+      - master
+  
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+concurrency: staging
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v4.1.1
+
+      - name: Set SSH Key for Github Repos
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.OO_ACTION_PRIVATE_KEY }}
+
+      - run: |
+          git submodule sync --recursive
+          git -c protocol.version=2 submodule update --init --force --depth=1 --recursive
+          
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run deploy
+
+      - name: Set SSH Key for Raidboxes Server
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+
+      - name: Deploy on Server
+        run: rsync -e 'ssh -o StrictHostKeyChecking=no' -rlczh --delete-after ./ b13zphemyrdbxio@b13zphe.ssh.myrdbx.io:~/www/wp-content/themes/onoffice-classic

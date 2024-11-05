@@ -1,0 +1,63 @@
+name: WP-Websites | Release final version
+on:
+  release:
+    types: [released]
+  
+  workflow_dispatch:
+
+concurrency: staging
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v4.1.1
+
+      - name: Set SSH Key for Github Repos
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.OO_ACTION_PRIVATE_KEY }}
+            
+      - run: |
+          git submodule sync --recursive
+          git -c protocol.version=2 submodule update --init --force --depth=1 --recursive
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Create Release 
+        run: npm run release
+
+      - name: Deployment final release json Updater File
+        id: create-json
+        uses: jsdaniell/create-json@v1.2.2
+        with:
+          name: "updater.json"
+          json: '{"version":"${{github.ref_name}}", "details_url":"https://onoffice-wp-updates.de", "download_url": "https://onoffice-wp-updates.de/releases/themes/${{ github.event.repository.name }}/${{ github.event.repository.name }}.zip"}'
+      
+      - name: Upload release build
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ github.event.repository.name }} Release Bundle ${{github.ref_name}}
+          path: |
+            ${{ github.event.repository.name }}.zip
+            updater.json
+          retention-days: 90
+
+      - name: Set SSH Key for Raidboxes Server
+        uses: webfactory/ssh-agent@v0.8.0
+        with:
+          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+
+      - name: Upload Files to Release Server
+        run: rsync -e 'ssh -o StrictHostKeyChecking=no' ${{ github.event.repository.name }}.zip updater.json b13zphemyrdbxio@b13zphe.ssh.myrdbx.io:~/www/releases/themes/${{ github.event.repository.name }}
