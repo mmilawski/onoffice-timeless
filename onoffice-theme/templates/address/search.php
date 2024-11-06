@@ -33,7 +33,6 @@ $slider = get_field('slider') ?? [];
 // Settings
 $settings = get_field('settings') ?? [];
 $bg_color = $settings['bg_color'] ?? 'bg-transparent';
-
 if (get_field('address_search_result')) {
     $result = get_field('address_search_result') ?? null;
 } elseif (get_field('sites', 'option')['address_search_result']) {
@@ -48,9 +47,7 @@ if (get_field('address_search_result')) {
 } ?> method="get" class="c-form --is-search-form <?php if (!empty($slider)) {
      echo '--on-banner';
  } ?> <?php if (!empty($bg_color)) {
-     echo ' --on-' . $bg_color;
- } else {
-     echo '--on-bg-footer';
+     echo '--' . $bg_color;
  } ?>" data-estate-search-name="<?php echo esc_attr($getListName()); ?>">
     <fieldset class="c-form__fieldset">
         <?php
@@ -63,70 +60,75 @@ if (get_field('address_search_result')) {
                     <div class="c-form__field-wrapper">
                 <?php }
                 renderFieldEstateSearch($inputName, $properties);
-                if ($number == $fields_counter - 1) { ?>
+                if ($number == $fields_counter - 1) {
+                    if (method_exists($pAddressList,'getHasGeoFilter') && $pAddressList->getHasGeoFilter()) {
+                        echo '<script>window.geoFilter = ' .
+                            json_encode($pAddressList->getGeoFilter()) .
+                            '</script>';
+                        renderFieldEstateSearch('geo_search', [
+                            'type' => 'select',
+                            'label' => esc_attr__('PLZ/Ort', 'oo_theme'),
+                            'value' => $_GET['geo_search'] ?? '',
+                        ]);
+                        renderFieldEstateSearch('geo_search_text', [
+                            'type' => 'hidden',
+                            'value' => $_GET['geo_search_text'] ?? '',
+                        ]);
+                    } ?>
                         <div class="c-form__button-wrapper">
-                            <button class="c-form__button c-button --has-icon <?php if (
+                            <button class="c-form__button c-button <?php if (
                                 !empty($bg_color)
                             ) {
                                 echo '--on-' . $bg_color;
                             } ?>">
-                                <span class="c-button__text"><?php echo esc_attr__(
-                                    'Suchen',
-                                    'oo_theme',
-                                ); ?></span>
-                                <span class="c-button__icon --arrow-right"><?php oo_get_icon(
-                                    'arrow-right',
-                                ); ?></span>
-                            </button>
+                                <?php echo esc_attr__('Suchen', 'oo_theme'); ?>
+                        </button>
                         </div>
                     </div>
-
-                    <div class="c-form__more c-read-more">
-                        <div class="c-read-more__wrapper --more">
-                            <span class="c-read-more__icon c-button --only-icon">
-                                <span class="c-button__icon --plus"><?php oo_get_icon(
-                                    'plus',
-                                ); ?></span>
-                            </span>  
-                            <span class="c-read-more__text"><?php echo esc_html(
-                                'Mehr anzeigen',
-                                'oo_theme',
-                            ); ?></span>
-                        </div>
-                        <div class="c-read-more__wrapper --less">
-                            <span class="c-read-more__icon c-button --only-icon">
-                                <span class="c-button__icon --plus"><?php oo_get_icon(
-                                    'minus',
-                                ); ?></span>
-                            </span>  
-                            <span class="c-read-more__text"><?php echo esc_html(
-                                'Weniger anzeigen',
-                                'oo_theme',
-                            ); ?></span>
-                        </div>
-				    </div>
-                <?php }
+                    <span class="c-form__more c-button --ghost --read-more" data-open-text="<?php echo esc_html(
+                        'Mehr anzeigen',
+                        'oo_theme',
+                    ); ?>" data-close-text="<?php echo esc_html(
+    'Weniger anzeigen',
+    'oo_theme',
+); ?>">
+              <span class="u-screen-reader-only"><?php echo esc_html(
+                  'Mehr anzeigen',
+                  'oo_theme',
+              ); ?></span>
+            </span>
+                <?php
+                }
                 ?>
             <?php
             } else {
                 renderFieldEstateSearch($inputName, $properties); ?>
-                <?php if ($number == $fields_counter - 1) { ?>
+                <?php if ($number == $fields_counter - 1) {
+                    if (method_exists($pAddressList,'getHasGeoFilter') && $pAddressList->getHasGeoFilter()) {
+                        echo '<script>window.geoFilter = ' .
+                            json_encode($pAddressList->getGeoFilter()) .
+                            '</script>';
+                        renderFieldEstateSearch('geo_search', [
+                            'type' => 'select',
+                            'label' => esc_attr__('PLZ/Ort', 'oo_theme'),
+                            'value' => $_GET['geo_search'] ?? '',
+                        ]);
+                        renderFieldEstateSearch('geo_search_text', [
+                            'type' => 'hidden',
+                            'value' => $_GET['geo_search_text'] ?? '',
+                        ]);
+                    } ?>
                     <div class="c-form__button-wrapper">
-                        <button class="c-form__button c-button --has-icon <?php if (
+                        <button class="c-form__button c-button <?php if (
                             !empty($bg_color)
                         ) {
                             echo '--on-' . $bg_color;
                         } ?>">
-                            <span class="c-button__text"><?php echo esc_attr__(
-                                'Suchen',
-                                'oo_theme',
-                            ); ?></span>
-                            <span class="c-button__icon --arrow-right"><?php oo_get_icon(
-                                'arrow-right',
-                            ); ?></span>
+                            <?php echo esc_attr__('Suchen', 'oo_theme'); ?>
                         </button>
                     </div>
-                <?php }
+                <?php
+                }
             }
             $number++;
         }
