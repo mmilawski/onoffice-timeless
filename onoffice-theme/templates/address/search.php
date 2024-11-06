@@ -61,7 +61,10 @@ if (get_field('address_search_result')) {
                 <?php }
                 renderFieldEstateSearch($inputName, $properties);
                 if ($number == $fields_counter - 1) {
-                    if (method_exists($pAddressList,'getHasGeoFilter') && $pAddressList->getHasGeoFilter()) {
+                    if (
+                        method_exists($pAddressList, 'getHasGeoFilter') &&
+                        $pAddressList->getHasGeoFilter()
+                    ) {
                         echo '<script>window.geoFilter = ' .
                             json_encode($pAddressList->getGeoFilter()) .
                             '</script>';
@@ -104,7 +107,10 @@ if (get_field('address_search_result')) {
             } else {
                 renderFieldEstateSearch($inputName, $properties); ?>
                 <?php if ($number == $fields_counter - 1) {
-                    if (method_exists($pAddressList,'getHasGeoFilter') && $pAddressList->getHasGeoFilter()) {
+                    if (
+                        method_exists($pAddressList, 'getHasGeoFilter') &&
+                        $pAddressList->getHasGeoFilter()
+                    ) {
                         echo '<script>window.geoFilter = ' .
                             json_encode($pAddressList->getGeoFilter()) .
                             '</script>';
