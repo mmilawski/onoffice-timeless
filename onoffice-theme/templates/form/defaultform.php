@@ -23,18 +23,21 @@ include get_template_directory() . '/onoffice-theme/templates/fields.php';
 
 // ACF
 // Settings
-$settings = get_field('settings') ?? [];
-$bg_color = $settings['bg_color'] ?? 'bg-footer';
+$settings = get_field('settings') ?? null;
 ?>
 
 <form method="post" action="#onoffice-form" id="onoffice-form" class="c-form --is-contact-form <?php if (
-    !empty($bg_color)
+    !empty($settings['bg_color'])
 ) {
-    echo '--on-' . $bg_color;
+    echo '--bg-transparent --on-' . $settings['bg_color'];
 } else {
-    echo '--on-bg-footer';
+    echo '--bg-footer';
 } ?>">
-
+    <?php if (!empty($pForm->getEstateContextLabel())) {
+        echo '<h2 class="c-form__property-context o-headline">';
+        echo $pForm->getEstateContextLabel();
+        echo '</h2>';
+    } ?>
     <input type="hidden" name="oo_formid" value="<?php echo $pForm->getFormId(); ?>">
     <input type="hidden" name="oo_formno" value="<?php echo $pForm->getFormNo(); ?>">
 
@@ -58,13 +61,19 @@ foreach ($pForm->getInputFields() as $input => $table) {
 }
 ?>
 
-    <div class="c-form__fieldset">
+<?php if (isset($estateId)) {
+    /** @var \onOffice\WPlugin\Form $pForm */
+    echo '<p class="c-form__context">' .
+        $pForm->getEstateContextLabel() .
+        '</p>';
+} ?>
+
+    <fieldset class="c-form__fieldset">
         <div class="c-form__header">
-            <?php if (!empty($pForm->getEstateContextLabel())) {
-                echo '<h2 class="c-form__property-context o-headline">';
-                echo $pForm->getEstateContextLabel();
-                echo '</h2>';
-            } ?>
+            <p class="c-form__legend"><?php echo esc_html__(
+                'Ihre Kontaktdaten',
+                'oo_theme',
+            ); ?></p>
             <p class="c-form__required"><?php echo esc_html__(
                 '* Pflichtfelder',
                 'oo_theme',
@@ -77,5 +86,5 @@ foreach ($pForm->getInputFields() as $input => $table) {
             <?php include get_template_directory() .
                 '/onoffice-theme/templates/form/formsubmit.php'; ?>
         </div>
-    </div>
+    </fieldset>
 </form>

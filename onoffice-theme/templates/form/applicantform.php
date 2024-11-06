@@ -22,16 +22,15 @@ include get_template_directory() . '/onoffice-theme/templates/fields.php';
 
 // ACF
 // Settings
-$settings = get_field('settings') ?? [];
-$bg_color = $settings['bg_color'] ?? 'bg-footer';
+$settings = get_field('settings') ?? null;
 ?>
 
 <form method="post" action="#onoffice-form" id="onoffice-form" class="c-form --is-interest-form <?php if (
-    !empty($bg_color)
+    !empty($settings['bg_color'])
 ) {
-    echo '--on-' . $bg_color;
+    echo '--bg-transparent --on-' . $settings['bg_color'];
 } else {
-    echo '--on-bg-footer';
+    echo '--bg-footer';
 } ?>">
 
     <input type="hidden" name="oo_formid" value="<?php echo $pForm->getFormId(); ?>">
@@ -85,45 +84,49 @@ foreach ($pForm->getInputFields() as $input => $table) {
 }
 ?>
 
-    <?php if (is_array($hiddenValues)) {
-        echo implode($hiddenValues);
-    } ?>
+<?php if (isset($estateId)) {
+    /** @var \onOffice\WPlugin\Form $pForm */
+    echo '<p class="c-form__context">' .
+        $pForm->getEstateContextLabel() .
+        '</p>';
+} ?>
 
-    <?php if (is_array($addressValues)) { ?>
-        <fieldset class="c-form__fieldset">
-            <div class="c-form__header">
-                <p class="c-form__legend o-headline --h3"><?php echo esc_html__(
-                    'Ihre Kontaktdaten',
-                    'oo_theme',
-                ); ?></p>
-                <p class="c-form__required"><?php echo esc_html__(
-                    '* Pflichtfelder',
-                    'oo_theme',
-                ); ?></p>
-            </div>
-            <?php echo implode($addressValues); ?>
-        </fieldset>
-    <?php } ?>
+    <fieldset class="c-form__fieldset">
+        <div class="c-form__header">
+            <p class="c-form__legend"><?php echo esc_html__(
+                'Ihre Kontaktdaten',
+                'oo_theme',
+            ); ?></p>
+            <p class="c-form__required"><?php echo esc_html__(
+                '* Pflichtfelder',
+                'oo_theme',
+            ); ?></p>
+        </div>
+        <?php if (is_array($addressValues)) {
+            echo implode($addressValues);
+        } ?>
+    </fieldset>
 
-    <?php if (is_array($searchcriteriaValues) || is_array($otherValues)) { ?>
-        <fieldset class="c-form__fieldset">
-            <div class="c-form__header">
-                <p class="c-form__legend o-headline --h3"><?php echo esc_html__(
-                    'Ihre Suchkriterien',
-                    'oo_theme',
-                ); ?></p>
-            </div>
-            <?php if (is_array($searchcriteriaValues)) {
-                echo implode($searchcriteriaValues);
-            } ?>
-            <?php if (is_array($otherValues)) {
-                echo implode($otherValues);
-            } ?>
-            <div class="c-form__button-wrapper">
-                <?php include get_template_directory() .
-                    '/onoffice-theme/templates/form/formsubmit.php'; ?>
-            </div>
-        </fieldset>
-    <?php } ?>
+    <fieldset class="c-form__fieldset">
+        <div class="c-form__header">
+            <p class="c-form__legend"><?php echo esc_html__(
+                'Ihre Suchkriterien',
+                'oo_theme',
+            ); ?></p>
+        </div>
+        <?php if (is_array($searchcriteriaValues)) {
+            echo implode($searchcriteriaValues);
+        } ?>
+        <?php if (is_array($otherValues)) {
+            echo implode($otherValues);
+        } ?>
+        <?php if (is_array($hiddenValues)) {
+            echo implode($hiddenValues);
+        } ?>
+        <div class="c-form__button-wrapper">
+            <?php include get_template_directory() .
+                '/onoffice-theme/templates/form/formsubmit.php'; ?>
+        </div>
+    </fieldset>
 
 </form>

@@ -21,8 +21,8 @@
 
 // ACF
 // Settings
-$settings = get_field('settings') ?? [];
-$bg_color = $settings['bg_color'] ?? 'bg-footer';
+global $post;
+$settings = get_field('settings', $post->ID) ?? null;
 
 $key = get_option('onoffice-settings-captcha-sitekey', '');
 
@@ -34,68 +34,65 @@ if ($pForm->needsReCaptcha() && $key !== '') {
 
     $formId = $pForm->getGenericSetting('formId');
     ?>
-  <script>
-    function onSubmit() {
-      var element = document.getElementById(<?php echo json_encode(
-          $formId,
-      ); ?>);
-      element.submit();
-    }
-  </script>
+	<script>
+		function onSubmit() {
+			var element = document.getElementById(<?php echo json_encode($formId); ?>);
+			element.submit();
+		}
+	</script>
 
-  <div id='recaptcha' class="g-recaptcha"
-    data-sitekey="<?php echo esc_attr($key); ?>"
-    data-callback="onSubmit"
-    data-size="invisible"></div>
-  <button class="c-form__button c-button --has-icon <?php if (
-      !empty($bg_color)
-  ) {
-      echo '--on-' . $bg_color;
-  } else {
-      echo '--on-bg-footer';
-  } ?>"><span class="c-button__text"><?php echo esc_html(
+	<div id='recaptcha' class="g-recaptcha"
+		data-sitekey="<?php echo esc_attr($key); ?>"
+		data-callback="onSubmit"
+		data-size="invisible"></div>
+	<button class="c-form__button c-button <?php if (
+     !empty($settings['bg_color'])
+ ) {
+     echo '--on-' . $settings['bg_color'];
+ } else {
+     echo '--on-bg-footer';
+ } ?>"><?php echo esc_html(
     $pForm->getGenericSetting('submitButtonLabel'),
-); ?></span></button>
-  <script type="text/javascript">
-    var reCAPTCHALoaded = false;
-    function loadReCAPTCHA() {
-      if (!reCAPTCHALoaded) {
-        var element = document.createElement("script");
-        element.src = "https://www.google.com/recaptcha/api.js";
-        document.body.appendChild(element);
-        reCAPTCHALoaded = true;
-      } 
-    }
-    window.addEventListener("load", function(){
-      var inputs = document.getElementsByClassName("o-input");
-      var selects = document.getElementsByClassName("o-select");
-      for (var i = 0; i < inputs.length; i++) {
-        inputs[i].addEventListener("focus",loadReCAPTCHA);
-      }
-      for (var i = 0; i < selects.length; i++) {
-        selects[i].addEventListener("change",loadReCAPTCHA);
-      }
-    });
-  </script>
-  <script>
-  (function() {
-    var formId = <?php echo json_encode($formId); ?>;
-    var formElement = document.getElementById(formId);
-    var submitButtonElement = formElement.getElementsByClassName('c-form__button')[0];
-    onOffice.captchaControl(formElement, submitButtonElement);
-  })();
-  </script>
+); ?></button>
+	<script type="text/javascript">
+		var reCAPTCHALoaded = false;
+		function loadReCAPTCHA() {
+			if (!reCAPTCHALoaded) {         
+				var element = document.createElement("script");
+				element.src = "https://www.google.com/recaptcha/api.js";
+				document.body.appendChild(element);         
+				reCAPTCHALoaded = true;
+			} 
+		}
+		window.addEventListener("load", function(){
+			var inputs = document.getElementsByClassName("o-input");
+			var selects = document.getElementsByClassName("o-select");
+			for (var i = 0; i < inputs.length; i++) {
+				inputs[i].addEventListener("focus",loadReCAPTCHA);
+			}
+			for (var i = 0; i < selects.length; i++) {
+				selects[i].addEventListener("change",loadReCAPTCHA);
+			}
+		});
+	</script>
+	<script>
+	(function() {
+		var formId = <?php echo json_encode($formId); ?>;
+		var formElement = document.getElementById(formId);
+		var submitButtonElement = formElement.getElementsByClassName('c-form__button')[0];
+
+		onOffice.captchaControl(formElement, submitButtonElement);
+	})();
+	</script>
 <?php
 } else {
      ?>
-  <button class="c-form__button c-button --has-icon <?php if (
-      !empty($bg_color)
-  ) {
-      echo '--on-' . $bg_color;
-  } else {
-      echo '--on-bg-footer';
-  } ?>"><span class="c-button__text"><?php echo esc_html(
+	<button class="c-form__button c-button <?php if (
+     !empty($settings['bg_color'])
+ ) {
+     echo '--on-' . $settings['bg_color'];
+ } ?>"><?php echo esc_html(
     $pForm->getGenericSetting('submitButtonLabel'),
-); ?></span></button>
+); ?></button>
 <?php
 }

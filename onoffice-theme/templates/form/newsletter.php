@@ -23,16 +23,18 @@ include get_template_directory() . '/onoffice-theme/templates/fields.php';
 
 // ACF
 // Settings
-$settings = get_field('settings') ?? [];
-$bg_color = $settings['bg_color'] ?? 'bg-footer';
+global $post;
+$settings = get_field('settings', $post->ID) ?? null;
 ?>
 
 <form method="post" action="#onoffice-form" id="onoffice-form" class="c-form --is-newsletter-form <?php if (
-    !empty($bg_color)
+    !empty($settings['bg_color'])
 ) {
-    echo '--on-' . $bg_color;
+    echo !$is_popup
+        ? '--bg-transparent '
+        : '--is--popup ' . '--on-' . $settings['bg_color'];
 } else {
-    echo '--on-bg-footer';
+    echo '--bg-footer';
 } ?>">
 
     <input type="hidden" name="oo_formid" value="<?php echo $pForm->getFormId(); ?>">
@@ -65,17 +67,19 @@ foreach ($pForm->getInputFields() as $input => $table) {
         '</p>';
 } ?>
 
-    <div class="c-form__fieldset">
+    <fieldset class="c-form__fieldset">
         <div class="c-form__header">
             <p class="c-form__required"><?php echo esc_html__(
                 '* Pflichtfelder',
                 'oo_theme',
             ); ?></p>
         </div>
-        <?php echo implode($addressValues); ?>
+        <?php if (is_array($addressValues)) {
+            echo implode($addressValues);
+        } ?>
         <div class="c-form__button-wrapper">
             <?php include get_template_directory() .
                 '/onoffice-theme/templates/form/formsubmit.php'; ?>
         </div>
-    </div>
+    </fieldset>
 </form>

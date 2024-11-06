@@ -40,6 +40,9 @@ if (!function_exists('printRegion')) {
 if (!function_exists('printCountry')) {
     function printCountry($values, $selectedValue)
     {
+        echo '<option value="">' .
+            esc_html__('Bitte wählen ...', 'oo_theme') .
+            '</option>';
         foreach ($values as $key => $name) {
             $selected = null;
             if ($key == $selectedValue) {
@@ -93,22 +96,35 @@ if (!function_exists('renderFieldEstateSearch')) {
         } elseif ($fieldName == 'radius') {
             $inputType = 'type="number" step="1"';
             $inputClass = 'o-input --radius';
+        } elseif ($typeCurrentInput === 'hidden') {
+            $inputType = 'type="hidden"';
         } else {
             $inputType = 'type="text"';
             $inputClass = 'o-input';
         }
 
         // placeholder
-        if (in_array($typeCurrentInput, $typesMultiselect)) {
+        if (str_contains($fieldName, 'miete')) {
+            $placeholder = esc_html__('z.B. "950"', 'oo_theme');
+        } elseif (str_contains($fieldName, 'preis')) {
+            $placeholder = esc_html__('z.B. "500.000"', 'oo_theme');
+        } elseif (str_contains($fieldName, 'flaeche')) {
+            $placeholder = esc_html__('z.B. "80"', 'oo_theme');
+        } elseif (str_contains($fieldName, 'zimmer')) {
+            $placeholder = esc_html__('z.B. "4"', 'oo_theme');
+        } elseif ($fieldName == 'radius') {
+            $placeholder = esc_html__('z.B. "10"', 'oo_theme');
+        } elseif (in_array($typeCurrentInput, $typesMultiselect)) {
             $placeholder = esc_html__('Bitte wählen ...', 'oo_theme');
         } elseif (in_array($typeCurrentInput, $typesBoolean)) {
             $placeholder = esc_html__('Bitte wählen ...', 'oo_theme');
         } else {
-            $placeholder = $fieldLabel;
+            $placeholder = esc_html__('z.B. "..."', 'oo_theme');
         }
 
         if ($fieldName === 'regionaler_zusatz') {
             $output .= '<label class="o-label --is-multiple-select">';
+            $output .= $fieldLabel;
             $output .= renderRegionalAddition(
                 $fieldName,
                 $selectedValue ?? [],
@@ -117,7 +133,6 @@ if (!function_exists('renderFieldEstateSearch')) {
                 $properties['label'],
                 $properties['permittedvalues'] ?? null,
             );
-            $output .= '<span class="o-label__text">' . $fieldLabel . '</span>';
             $output .= '</label>';
         } elseif (
             $fieldName === 'ort' &&
@@ -125,20 +140,18 @@ if (!function_exists('renderFieldEstateSearch')) {
             function_exists('renderCityField')
         ) {
             $output .= '<label class="o-label --is-multiple-select">';
+            $output .= $fieldLabel;
             $output .= renderCityField($fieldName, $properties);
-            $output .= '<span class="o-label__text">' . $fieldLabel . '</span>';
             $output .= '</label>';
         } elseif ($fieldName === 'message') {
             $output .= '<label class="o-label --is-textarea">';
+            $output .= $fieldLabel;
             $output .=
                 '<textarea class="o-textarea" name="' .
                 esc_html($fieldName) .
-                '" placeholder="' .
-                $placeholder .
-                '" rows="5">' .
+                '">' .
                 $selectedValue .
                 '</textarea>';
-            $output .= '<span class="o-label__text">' . $fieldLabel . '</span>';
             $output .= '</label>';
         } elseif (in_array($typeCurrentInput, $typesMultiselect)) {
             $htmlOptions = '';
@@ -158,6 +171,7 @@ if (!function_exists('renderFieldEstateSearch')) {
                     '</option>';
             }
             $output .= '<label class="o-label --is-multiple-select">';
+            $output .= $fieldLabel;
             $output .=
                 '<select class="o-select --multiple" name="' .
                 esc_html($fieldName) .
@@ -166,10 +180,10 @@ if (!function_exists('renderFieldEstateSearch')) {
                 '">';
             $output .= $htmlOptions;
             $output .= '</select>';
-            $output .= '<span class="o-label__text">' . $fieldLabel . '</span>';
             $output .= '</label>';
         } elseif (in_array($typeCurrentInput, $typesBoolean)) {
             $output .= '<label class="o-label --is-single-select">';
+            $output .= $fieldLabel;
             $output .=
                 '<select class="o-select --single" name="' .
                 esc_html($fieldName) .
@@ -195,7 +209,6 @@ if (!function_exists('renderFieldEstateSearch')) {
                 esc_html__('Nein', 'oo_theme') .
                 '</option>';
             $output .= '</select>';
-            $output .= '<span class="o-label__text">' . $fieldLabel . '</span>';
             $output .= '</label>';
         } elseif (
             in_array($typeCurrentInput, $typesFloat) ||
@@ -206,6 +219,7 @@ if (!function_exists('renderFieldEstateSearch')) {
                 str_contains($fieldName, 'preis') ||
                 str_contains($fieldName, 'miete')
             ) {
+                $output .= $fieldLabel . ' ' . esc_html__('bis', 'oo_theme');
                 $output .=
                     '<input class="' .
                     $inputClass .
@@ -213,22 +227,13 @@ if (!function_exists('renderFieldEstateSearch')) {
                     $inputType .
                     ' name="' .
                     esc_attr($fieldName) .
-                    '__bis" placeholder="' .
-                    $fieldLabel .
-                    ' ' .
-                    esc_html__('bis', 'oo_theme') .
-                    '" value="' .
+                    '__bis" value="' .
                     esc_attr(
                         isset($selectedValue[1]) ? $selectedValue[1] : '',
                     ) .
                     '">';
-                $output .=
-                    '<span class="o-label__text">' .
-                    $fieldLabel .
-                    ' ' .
-                    esc_html__('bis', 'oo_theme') .
-                    '</span>';
             } else {
+                $output .= $fieldLabel . ' ' . esc_html__('ab', 'oo_theme');
                 $output .=
                     '<input class="' .
                     $inputClass .
@@ -236,29 +241,31 @@ if (!function_exists('renderFieldEstateSearch')) {
                     $inputType .
                     ' name="' .
                     esc_attr($fieldName) .
-                    '__von" placeholder="' .
-                    $fieldLabel .
-                    ' ' .
-                    esc_html__('ab', 'oo_theme') .
-                    '" value="' .
+                    '__von" value="' .
                     esc_attr(
                         isset($selectedValue[0]) ? $selectedValue[0] : '',
                     ) .
                     '">';
-                $output .=
-                    '<span class="o-label__text">' .
-                    $fieldLabel .
-                    ' ' .
-                    esc_html__('ab', 'oo_theme') .
-                    '</span>';
             }
             $output .= '</label>';
+        } elseif ($typeCurrentInput === 'hidden') {
+            $output .=
+                '<input class="' .
+                $inputClass .
+                '" ' .
+                $inputType .
+                ' name="' .
+                esc_attr($fieldName) .
+                '" value="' .
+                esc_attr($selectedValue) .
+                '" >';
         } else {
             $lengthAttr =
                 !is_null($properties['length']) && $fieldName != 'radius'
                     ? 'maxlength="' . esc_attr($properties['length']) . '"'
                     : '';
             $output .= '<label class="o-label --is-input">';
+            $output .= $fieldLabel;
             $output .=
                 '<input class="' .
                 $inputClass .
@@ -273,7 +280,6 @@ if (!function_exists('renderFieldEstateSearch')) {
                 '" ' .
                 $lengthAttr .
                 '>';
-            $output .= '<span class="o-label__text">' . $fieldLabel . '</span>';
             $output .= '</label>';
         }
         echo $output;
@@ -289,7 +295,6 @@ if (!function_exists('renderFormField')) {
     ): string {
         $output = '';
         $typeCurrentInput = $pForm->getFieldType($fieldName);
-
         if (method_exists($pForm, 'isHiddenField')) {
             $isHiddenField = $pForm->isHiddenField($fieldName);
         } else {
@@ -330,54 +335,12 @@ if (!function_exists('renderFormField')) {
                 onOffice\WPlugin\Types\FieldTypes::FIELD_TYPE_INTEGER;
         }
 
-        // field types
-        $typesMultiselect = [FieldTypes::FIELD_TYPE_MULTISELECT];
-        $typesSingleselect = [FieldTypes::FIELD_TYPE_SINGLESELECT];
-        $typesFloat = [
-            FieldTypes::FIELD_TYPE_FLOAT,
-            FieldTypes::FIELD_TYPE_INTEGER,
-        ];
-        $typesDate = [
-            FieldTypes::FIELD_TYPE_DATETIME,
-            FieldTypes::FIELD_TYPE_DATE,
-        ];
-        $typesBoolean = [FieldTypes::FIELD_TYPE_BOOLEAN];
-
-        // type and class
-        if (in_array($typeCurrentInput, $typesFloat)) {
-            $inputType = 'type="number" step="1"';
-            $inputClass = 'o-input --number';
-        } elseif (in_array($typeCurrentInput, $typesDate)) {
-            $inputType = 'type="date"';
-            $inputClass = 'o-input --date';
-        } elseif ($fieldName == 'radius') {
-            $inputType = 'type="number" step="1"';
-            $inputClass = 'o-input --radius';
-        } elseif ($fieldName == 'Email') {
-            $inputType =
-                'type="email" pattern="([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4})$"';
-            $inputClass = 'o-input --email';
-        } else {
-            $inputType = 'type="text"';
-            $inputClass = 'o-input';
-        }
-
-        // placeholder
-        if (in_array($typeCurrentInput, $typesMultiselect)) {
-            $placeholder = esc_html__('Bitte wählen ...', 'oo_theme');
-        } elseif (in_array($typeCurrentInput, $typesSingleselect)) {
-            $placeholder = esc_html__('Bitte wählen ...', 'oo_theme');
-        } elseif (in_array($typeCurrentInput, $typesBoolean)) {
-            $placeholder = esc_html__('Bitte wählen ...', 'oo_theme');
-        } else {
-            $placeholder = $fieldLabel;
-        }
-
         if ($fieldName === 'regionaler_zusatz') {
             if (!is_array($selectedValue)) {
                 $selectedValue = [];
             }
             $output .= '<label class="o-label --is-multiple-select">';
+            $output .= $fieldLabel . $addition;
             $output .= renderRegionalAddition(
                 $fieldName,
                 $selectedValue,
@@ -386,41 +349,38 @@ if (!function_exists('renderFormField')) {
                 $fieldLabel,
                 $permittedValues ?? null,
             );
-            $output .=
-                '<span class="o-label__text">' .
-                $fieldLabel .
-                $addition .
-                '</span>';
             $output .= '</label>';
         } elseif ($fieldName === 'message') {
             $output .= '<label class="o-label --is-textarea">';
+            $output .= $fieldLabel . $addition;
             $output .=
                 '<textarea class="o-textarea" name="' .
                 esc_html($fieldName) .
                 '"' .
                 $requiredAttribute .
-                ' placeholder="' .
-                $placeholder .
-                '" rows="5">' .
+                '>' .
                 $selectedValue .
                 '</textarea>';
-            $output .=
-                '<span class="o-label__text">' .
-                $fieldLabel .
-                $addition .
-                '</span>';
             $output .= '</label>';
-        } elseif (in_array($typeCurrentInput, $typesSingleselect)) {
+        } elseif (
+            \onOffice\WPlugin\Types\FieldTypes::FIELD_TYPE_SINGLESELECT ==
+            $typeCurrentInput
+        ) {
             $output .= '<label class="o-label --is-single-select">';
+            $output .= $fieldLabel . $addition;
             $output .=
                 '<select class="o-select --single" name="' .
                 esc_html($fieldName) .
                 '" size="1" ' .
                 $requiredAttribute .
                 ' data-placeholder="' .
-                $placeholder .
+                esc_html__('Bitte wählen ...', 'oo_theme') .
                 '">';
-            $output .= '<option value="">' . $placeholder . '</option>';
+            /* translators: %s will be replaced with the translated field name. */
+            $output .=
+                '<option value="">' .
+                esc_html__('Bitte wählen ...', 'oo_theme') .
+                '</option>';
             foreach ($permittedValues as $key => $value) {
                 if (is_array($selectedValue)) {
                     $isSelected = in_array($key, $selectedValue, true);
@@ -437,13 +397,11 @@ if (!function_exists('renderFormField')) {
                     '</option>';
             }
             $output .= '</select>';
-            $output .=
-                '<span class="o-label__text">' .
-                $fieldLabel .
-                $addition .
-                '</span>';
             $output .= '</label>';
-        } elseif (in_array($typeCurrentInput, $typesMultiselect)) {
+        } elseif (
+            \onOffice\WPlugin\Types\FieldTypes::FIELD_TYPE_MULTISELECT ===
+            $typeCurrentInput
+        ) {
             $htmlOptions = '';
             foreach ($permittedValues as $key => $value) {
                 if (is_array($selectedValue)) {
@@ -461,23 +419,22 @@ if (!function_exists('renderFormField')) {
                     '</option>';
             }
             $output .= '<label class="o-label --is-multiple-select">';
+            $output .= $fieldLabel . $addition;
             $output .=
                 '<select class="o-select --multiple" name="' .
                 esc_html($fieldName) .
                 '[]" multiple="multiple" ' .
                 $requiredAttribute .
                 ' data-placeholder="' .
-                $placeholder .
+                esc_html__('Bitte wählen ...', 'oo_theme') .
                 '">';
             $output .= $htmlOptions;
             $output .= '</select>';
-            $output .=
-                '<span class="o-label__text">' .
-                $fieldLabel .
-                $addition .
-                '</span>';
             $output .= '</label>';
-        } elseif (in_array($typeCurrentInput, $typesBoolean)) {
+        } elseif (
+            \onOffice\WPlugin\Types\FieldTypes::FIELD_TYPE_BOOLEAN ===
+            $typeCurrentInput
+        ) {
             $output .= '<label class="o-label o-control --is-boolean">';
             $output .=
                 '<input class="o-control__input" type="checkbox" id="' .
@@ -498,7 +455,30 @@ if (!function_exists('renderFormField')) {
             $output .= '</span>';
             $output .= '</label>';
         } else {
+            $inputType = 'type="text"';
+            $inputClass = 'o-input';
             $value = esc_attr($pForm->getFieldValue($fieldName, true));
+            if (
+                $typeCurrentInput ===
+                    onOffice\WPlugin\Types\FieldTypes::FIELD_TYPE_FLOAT ||
+                $typeCurrentInput ===
+                    'urn:onoffice-de-ns:smart:2.5:dbAccess:dataType:float'
+            ) {
+                $inputType = 'type="number" step="1"';
+                $inputClass = 'o-input --number';
+            } elseif (
+                $typeCurrentInput ===
+                    onOffice\WPlugin\Types\FieldTypes::FIELD_TYPE_INTEGER ||
+                $typeCurrentInput ===
+                    'urn:onoffice-de-ns:smart:2.5:dbAccess:dataType:decimal'
+            ) {
+                $inputType = 'type="number" step="1"';
+                $inputClass = 'o-input --number';
+            } elseif ($fieldName == 'Email') {
+                $inputType =
+                    'type="email" pattern="([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4})$"';
+                $inputClass = 'o-input --email';
+            }
 
             if (
                 $isRangeValue &&
@@ -510,111 +490,47 @@ if (!function_exists('renderFormField')) {
                         $pForm->getSearchcriteriaRangeInfosForField($fieldName),
                     )) > 0
             ) {
-                wp_enqueue_style('oo-nouislider-style');
-                wp_enqueue_script('oo-nouislider-script');
-                $rangeMax = 500;
-                $rangeStep = 1;
-                $kind = '';
-                $type = 'number';
-                if (str_contains($fieldName, 'kaufpreis')) {
-                    $rangeMax = 10000000;
-                    $rangeStep = 100;
-                    $kind = 'price';
-                    $type = 'text';
-                } elseif (str_contains($fieldName, 'kaltmiete')) {
-                    $rangeMax = 10000;
-                    $rangeStep = 50;
-                    $kind = 'price';
-                    $type = 'text';
-                } elseif (str_contains($fieldName, 'anzahl_zimmer')) {
-                    $rangeMax = 10;
-                    $rangeStep = 0.5;
-                    $kind = 'rooms';
-                    $type = 'text';
-                } elseif (str_contains($fieldName, 'wohnflaeche')) {
-                    $kind = 'surface';
-                } elseif (str_contains($fieldName, 'grundstuecksflaeche')) {
-                    $kind = 'surface';
-                }
-                $rangeMin = $rangeStep;
-                if (str_contains($fieldName, 'kaufpreis')) {
+                if (str_contains($fieldName, 'preis')) {
                     $placeholderAddition = ' (in EUR)';
-                } elseif (str_contains($fieldName, 'kaltmiete')) {
+                } elseif (str_contains($fieldName, 'miete')) {
                     $placeholderAddition = ' (in EUR)';
-                } elseif (str_contains($fieldName, 'anzahl_zimmer')) {
-                    $placeholderAddition = '';
-                } elseif (str_contains($fieldName, 'wohnflaeche')) {
-                    $placeholderAddition = ' (in m²)';
-                } elseif (str_contains($fieldName, 'grundstuecksflaeche')) {
+                } elseif (str_contains($fieldName, 'zimmer')) {
+                    $placeholderAddition = ' ...';
+                } elseif (str_contains($fieldName, 'flaeche')) {
                     $placeholderAddition = ' (in m²)';
                 } else {
                     $placeholderAddition = '';
                 }
                 $output .= '<label class="o-label --is-range">';
-                $output .=
-                    '<div class="o-fieldset --is-range --is-fieldset' .
-                    ucwords($fieldName) .
-                    ' ' .
-                    esc_attr($kind) .
-                    '">';
-
-                $output .=
-                    '<div id="o-range--' .
-                    esc_attr($fieldName) .
-                    '" class="o-range o-range--' .
-                    esc_attr($fieldName) .
-                    '"></div>' .
-                    '<div data-refid="o-range--' .
-                    esc_attr($fieldName) .
-                    '" class="o-range__fixed-tooltips">' .
-                    '<div class="o-range__fixed-tooltip-from"></div>' .
-                    '<div class="o-range__fixed-tooltip-to"></div>' .
-                    '</div>';
+                $output .= $fieldLabel . $addition;
+                $output .= '<div class="o-fieldset">';
                 foreach (
                     $pForm->getSearchcriteriaRangeInfosForField($fieldName)
                     as $key => $rangeDescription
                 ) {
                     $value = esc_attr($pForm->getFieldValue($key, true));
                     $inputClass = 'o-input --number';
-                    if (substr($key, -3) == 'von') {
-                        $keyname = 'from';
-                        $value = isset($_GET[$key])
-                            ? str_replace(['.', ','], ['', '.'], $_GET[$key])
-                            : $rangeMin;
-                    } else {
-                        $keyname = 'up';
-                        $value = isset($_GET[$key])
-                            ? str_replace(['.', ','], ['', '.'], $_GET[$key])
-                            : $rangeMax;
-                    }
                     $output .=
-                        '<input id="' .
+                        '<input  class="' .
+                        $inputClass .
+                        '" ' .
+                        $inputType .
+                        ' name="' .
                         esc_attr($key) .
-                        '" class="o-input o-input--' .
-                        $keyname .
-                        '" name="' .
-                        esc_attr($key) .
-                        '" type="hidden" value="' .
+                        '" value="' .
                         $value .
-                        '" min="' .
-                        $rangeMin .
-                        '" max="' .
-                        $rangeMax .
-                        '" step="' .
-                        $rangeStep .
+                        '" placeholder="' .
+                        esc_attr($rangeDescription) .
+                        $placeholderAddition .
                         '" ' .
                         $requiredAttribute .
                         '>';
                 }
                 $output .= '</div>';
-                $output .=
-                    '<span class="o-label__text">' .
-                    $fieldLabel .
-                    $addition .
-                    '</span>';
                 $output .= '</label>';
             } else {
                 $output .= '<label class="o-label --is-input">';
+                $output .= $fieldLabel . $addition;
                 $output .=
                     '<input  class="' .
                     $inputClass .
@@ -626,16 +542,9 @@ if (!function_exists('renderFormField')) {
                     esc_attr($fieldName) .
                     '" value="' .
                     $value .
-                    '" placeholder="' .
-                    $placeholder .
                     '" ' .
                     $requiredAttribute .
                     '>';
-                $output .=
-                    '<span class="o-label__text">' .
-                    $fieldLabel .
-                    $addition .
-                    '</span>';
                 $output .= '</label>';
             }
         }
@@ -656,7 +565,6 @@ if (!function_exists('renderRegionalAddition')) {
         $name = esc_attr($fieldName) . ($multiple ? '[]' : '');
         $multipleAttr = $multiple ? 'multiple' : 'size="1"';
         $requiredAttribute = $isRequired ? 'required ' : '';
-        $placeholder = esc_html__('Bitte wählen ...', 'oo_theme');
         $output .=
             '<select class="o-select --multiple --is-styled" name="' .
             $name .
@@ -664,7 +572,7 @@ if (!function_exists('renderRegionalAddition')) {
             $multipleAttr .
             $requiredAttribute .
             ' data-placeholder="' .
-            $placeholder .
+            esc_html__('Bitte wählen ...', 'oo_theme') .
             '">';
         $pRegionController = new RegionController();
 
@@ -676,6 +584,9 @@ if (!function_exists('renderRegionalAddition')) {
             $regions = $pRegionController->getRegions();
         }
         ob_start();
+        echo '<option value="">' .
+            esc_html__('Bitte wählen ...', 'oo_theme') .
+            '</option>';
         foreach ($regions as $pRegion) {
             /* @var $pRegion Region */
             printRegion($pRegion, $selectedValue ?? []);
@@ -687,13 +598,20 @@ if (!function_exists('renderRegionalAddition')) {
 }
 
 if (!function_exists('renderCityField')) {
-    function renderCityField(string $fieldName, array $properties): string
-    {
+    function renderCityField(
+        string $fieldName,
+        array $properties,
+        string $requiredAttribute = '',
+    ): string {
         $permittedValues = $properties['permittedvalues'] ?? [];
         $htmlSelect =
             '<select class="o-select --multiple" name="' .
             esc_attr($fieldName) .
-            '[]" multiple="multiple">';
+            '[]" multiple="multiple" ' .
+            $requiredAttribute .
+            ' data-placeholder="' .
+            esc_html__('Bitte wählen ...', 'oo_theme') .
+            '">';
 
         if (is_array($permittedValues)) {
             foreach ($permittedValues as $value) {
@@ -714,7 +632,6 @@ if (!function_exists('renderCityField')) {
                     '</option>';
             }
         }
-
         $htmlSelect .= '</select>';
 
         return $htmlSelect;
