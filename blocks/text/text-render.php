@@ -9,19 +9,15 @@ $align_text = $settings['align_text'] ?? 'left';
 $bg_color = $settings['bg_color'] ?? 'bg-transparent';
 $headline_class = 'c-text__headline o-col-12 o-col-xl-10';
 
-if (
-    !empty($texts[0]['text']['wysiwyg'])
-) {
-
+if (!empty($texts[0]['text']['wysiwyg'])) {
     $text_count = is_array($texts) ? count($texts) : 1;
     $text_class =
         'c-text__content o-col-12 o-col-xl-' .
         ($text_count === 1 ? '10' : ($text_count === 3 ? '4' : '5'));
     $headline_class =
-    'c-text__headline o-col-12 o-col-xl-' .
+        'c-text__headline o-col-12 o-col-xl-' .
         ($text_count === 3 ? '12' : '10');
 }
-
 ?>
 
 <section <?php oo_block_id(
@@ -33,8 +29,7 @@ if (
             <div class="c-text__row o-row">
 								<?php oo_get_template('components', '', 'component-headline', [
             'headline' => $headline,
-            'additional_headline_class' =>
-                    $headline_class,
+            'additional_headline_class' => $headline_class,
         ]); ?> 
             </div>
         <?php } ?>
@@ -42,8 +37,7 @@ if (
         <?php if (
             !empty($texts[0]['text']['wysiwyg']) ||
             !empty($texts[0]['buttons']['buttons'][0]['link'])
-        ) {
-            ?>
+        ) { ?>
             <div class="c-text__columns o-row">
                 <?php if (is_array($texts)) {
                     foreach ($texts as $text_column):
@@ -84,7 +78,6 @@ if (
                 <?php
                 } ?>
             </div>
-        <?php
-        } ?>
+        <?php } ?>
     </div>
 </section>
