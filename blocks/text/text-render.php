@@ -19,7 +19,7 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
 								<?php oo_get_template('components', '', 'component-headline', [
             'headline' => $headline,
             'additional_headline_class' =>
-                'c-text__headline o-col-12 o-col-xl-8',
+                'c-text__headline o-col-12 o-col-xl-10',
         ]); ?> 
             </div>
         <?php } ?>
@@ -32,7 +32,7 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
             $text_count = is_array($texts) ? count($texts) : 1;
             $text_class =
                 'c-text__content o-col-12 o-col-xl-' .
-                ($text_count === 1 ? '8' : ($text_count === 2 ? '6' : '4'));
+                ($text_count === 1 ? '10' : ($text_count === 3 ? '4' : '5'));
             ?>
             <div class="c-text__columns o-row">
                 <?php if (is_array($texts)) {
