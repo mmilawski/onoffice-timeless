@@ -27,29 +27,40 @@
       display: none;
     }
 
-    @include visited-active() {
-      color: var(--oo-color-header-primary, var(--oo-color-primary));
-      background-color: var(--oo-color-header-contrast-primary);
-      border-color: var(--oo-color-header-primary, var(--oo-color-primary));
-    }
-
-    @include hover-focus() {
+    @include plain-visited() {
       color: var(--oo-color-header-contrast-primary);
-      background-color: var(--oo-color-header-lighten-primary-40);
-      border-color: var(--oo-color-header-primary, var(--oo-color-primary));
-      box-shadow: 0px 0px 0px 2px
-        var(--oo-color-header-primary, var(--oo-color-primary));
+      background-color: var(--oo-color-header-primary, var(--oo-color-primary));
+      border: 2px solid var(--oo-color-header-primary, var(--oo-color-primary));
+    }
+  
+    @include hover() {
+      color: var(--oo-color-header-contrast-primary);
+      background-color: var(--oo-color-header-contrast-primary-80);
+      border-color: var(--oo-color-header-contrast-primary-80);
+    }
+  
+    @include active() {
+      color: var(--oo-color-header-contrast-primary);
+      background-color: var(--oo-color-header-contrast-primary-60);
+    }
+  
+    @include focus() {
+      outline: 2px solid var(--oo-color-header-primary, var(--oo-color-primary));
+      outline-offset: 2px;
+    }
+  
+    @include disabled() {
+      background-color: var(--oo-color-header-contrast-primary-40);
     }
   }
 
   &__button-icon {
-    width: 1.75rem;
+    width: 2.5rem;
     height: auto;
 
     &.--open {
     }
     &.--close {
-      width: 1.5rem;
       display: none;
     }
   }

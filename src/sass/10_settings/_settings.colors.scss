@@ -373,6 +373,21 @@
     var(--oo-color-header-primary),
     var(--oo-color-primary)
   );
+  #{--oo-color-header-contrast-primary-80}: transparent-color(
+    var(--oo-color-header-primary),
+    0.8,
+    var(--oo-color-primary)
+  );
+  #{--oo-color-header-contrast-primary-60}: transparent-color(
+    var(--oo-color-header-primary),
+    0.6,
+    var(--oo-color-primary)
+  );
+  #{--oo-color-header-contrast-primary-40}: transparent-color(
+    var(--oo-color-header-primary),
+    0.4,
+    var(--oo-color-primary)
+  );
   #{--oo-color-header-mix-primary-contrast-20}: mix-color-with-contrast(
     var(--oo-color-header-primary),
     0.2,
