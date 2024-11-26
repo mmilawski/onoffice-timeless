@@ -31,7 +31,7 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     gap: 1.5rem;
-    border-radius: $input-border-radius;
+    border-radius: $form-radius;
     @include media-breakpoint-up(xl) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 2rem;
@@ -56,7 +56,7 @@
     display: inline-block;
     padding: 0.5rem 0.75rem;
     margin: -0.75rem auto 0 -0.75rem;
-    border-radius: $input-border-radius;
+    border-radius: $form-radius;
   }
 
   &__required {
