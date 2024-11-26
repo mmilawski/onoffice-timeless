@@ -4,7 +4,7 @@
   position: relative;
   font-family: $font-family-button;
   font-weight: $font-weight-button;
-  @include font-size($mobile-global-font-size, $mobile-global-line-height);
+  @include font-size($button-font-size, $global-line-height);
   text-align: center;
   margin: 0;
   padding: 0.5rem 2rem;
@@ -13,6 +13,7 @@
     outline-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
   cursor: pointer;
   border-radius: $component-border-radius;
+  max-width: 300px;
 
   @include plain-visited() {
     color: var(--oo-color-contrast-primary);
@@ -38,10 +39,6 @@
 
   @include disabled() {
     background-color: var(--oo-color-transparent-primary-40);
-  }
-
-  @include media-breakpoint-up(xl) {
-    @include font-size($desktop-global-font-size, $desktop-global-line-height);
   }
 
   &.--on-bg-light,
