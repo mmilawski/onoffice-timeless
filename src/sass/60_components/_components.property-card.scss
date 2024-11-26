@@ -40,7 +40,7 @@
     position: absolute;
     top: 4px;
     left: 4px;
-    border-radius: $component-border-radius;
+    border-radius: $component-border-radius-small;
     color: var(--oo-color-property-status-contrast-bg);
     background-color: var(--oo-color-property-status-bg);
     border: 0px;
@@ -52,7 +52,7 @@
 
   &__favorite {
     position: absolute;
-    border-radius: $component-border-radius;
+    border-radius: $component-border-radius-small;
     top: 4px;
     right: 4px;
     color: var(--oo-color-contrast-primary);
