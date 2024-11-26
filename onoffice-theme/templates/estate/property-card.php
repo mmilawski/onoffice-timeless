@@ -241,7 +241,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
                                 ?>
                             </span>
                             <span class="c-button__icon --favorite"><?php oo_get_icon(
-                                'heart',
+                                'star',
                             ); ?></span>
                         </span>
                     <?php } ?>
