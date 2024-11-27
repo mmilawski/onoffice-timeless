@@ -17,8 +17,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: $desktop-icon-wrapper-size;
+    height: $desktop-icon-wrapper-size;
     cursor: pointer;
     transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
       border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
@@ -55,8 +55,7 @@
   }
 
   &__button-icon {
-    width: 2.5rem;
-    height: auto;
+    height: 1.5rem;
 
     &.--open {
     }
