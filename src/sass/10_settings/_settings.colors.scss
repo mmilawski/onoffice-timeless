@@ -45,11 +45,17 @@
   #{--oo-color-transparent-primary-60}: transparent-color(var(--oo-color-primary), 0.6);
   #{--oo-color-transparent-primary-40}: transparent-color(var(--oo-color-primary), 0.4);
   #{--oo-color-lighten-primary-40}: lighten-color(var(--oo-color-primary), 0.4);
+  #{--oo-color-lighten-primary-90}: lighten-color(var(--oo-color-primary), 0.9);
   #{--oo-color-contrast-primary}: contrast-color(var(--oo-color-primary));
   #{--oo-color-contrast-text}: contrast-color(var(--oo-color-text));
   #{--oo-color-mix-primary-contrast-20}: mix-color-with-contrast(
     var(--oo-color-primary),
     0.2
+  );
+  #{--oo-color-mix-bg-text-5}: mix-colors(
+    var(--oo-color-bg),
+    var(--oo-color-text),
+    0.05
   );
   #{--oo-color-mix-bg-text-10}: mix-colors(
     var(--oo-color-bg),

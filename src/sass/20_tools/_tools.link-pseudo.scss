@@ -13,6 +13,12 @@
   }
 }
 
+@mixin focus-within {
+  &:focus-within {
+    @content;
+  }
+}
+
 @mixin disabled {
   &:disabled {
     @content;
