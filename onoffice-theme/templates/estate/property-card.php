@@ -382,7 +382,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
                     oo_get_template('components', '', 'component-buttons', [
                         'buttons' => $button,
                         'additional_button_class' =>
-                            'c-property-card__button --on-bg-transparent',
+                            'c-property-card__button --full-width --on-bg-transparent',
                         'additional_container_class' =>
                             'c-property-card__buttons',
                     ]);

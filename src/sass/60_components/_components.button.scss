@@ -450,6 +450,7 @@
 
   &.--full-width {
     width: 100%;
+    max-width: unset;
   }
 
   &.--on-lightbox {
