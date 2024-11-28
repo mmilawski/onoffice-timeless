@@ -88,9 +88,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--oo-color-contrast-primary);
-    background-color: var(--oo-color-primary);
-    border: 2px solid var(--oo-color-primary);
     width: $mobile-icon-wrapper-size;
     height: $mobile-icon-wrapper-size;
     padding: 0.25rem;
@@ -105,29 +102,33 @@
       height: $desktop-icon-wrapper-size;
     }
 
-    @include visited-active() {
+    @include plain-visited() {
       color: var(--oo-color-contrast-primary);
       background-color: var(--oo-color-primary);
-      border-color: var(--oo-color-primary);
+      border: 2px solid var(--oo-color-primary);
     }
-
-    @include hover-focus() {
+  
+    @include hover() {
       color: var(--oo-color-contrast-primary);
-      background-color: var(--oo-color-lighten-primary-40);
-      border-color: var(--oo-color-primary);
-      box-shadow: 0px 0px 0px 2px var(--oo-color-primary);
+      background-color: var(--oo-color-transparent-primary-80);
+      border-color: var(--oo-color-transparent-primary-80);
+    }
+  
+    @include active() {
+      color: var(--oo-color-contrast-primary);
+      background-color: var(--oo-color-transparent-primary-60);
+    }
+  
+    @include focus() {
+      outline: 2px solid var(--oo-color-primary);
+      outline-offset: 2px;
+    }
+  
+    @include disabled() {
+      background-color: var(--oo-color-transparent-primary-40);
+      border-color: transparent;
     }
 
-    &:disabled {
-      opacity: 0.1;
-      color: var(--oo-color-contrast-text);
-      background-color: var(--oo-color-text);
-      border-color: var(--oo-color-text);
-
-      @include hover-focus() {
-        box-shadow: none;
-      }
-    }
     &:not(:disabled) {
       opacity: 1;
       @include hover-focus() {
@@ -136,12 +137,8 @@
     }
 
     #{$c-slider}__icon {
-      width: $mobile-icon-size;
-      height: $mobile-icon-size;
-      @include media-breakpoint-up(xl) {
-        width: $desktop-icon-size;
-        height: $desktop-icon-size;
-      }
+      width: 1.25rem;
+      height: 1.25rem;
     }
 
     &--ltr {
@@ -501,35 +498,31 @@
     }
 
     #{$c-slider}__arrow {
-      color: var(--oo-color-light-contrast-primary);
-      background-color: var(--oo-color-light-primary, var(--oo-color-primary));
-      border-color: var(--oo-color-light-primary, var(--oo-color-primary));
-
-      @include visited-active() {
+      @include plain-visited() {
         color: var(--oo-color-light-contrast-primary);
-        background-color: var(
-          --oo-color-light-primary,
-          var(--oo-color-primary)
-        );
+        background-color: var(--oo-color-light-primary, var(--oo-color-primary));
         border-color: var(--oo-color-light-primary, var(--oo-color-primary));
       }
 
-      @include hover-focus() {
-        color: var(--oo-color-light-contrast-primary);
-        background-color: var(--oo-color-light-lighten-primary-40);
-        border-color: var(--oo-color-light-primary, var(--oo-color-primary));
-        box-shadow: 0px 0px 0px 2px
-          var(--oo-color-light-primary, var(--oo-color-primary));
+      @include hover() {
+        color: var(--oo-color-light-contrast-primary, var(--oo-color-primary));
+        background-color: var(--oo-color-light-transparent-primary-80);
+        border-color: var(--oo-color-light-transparent-primary-80);
+      }
+    
+      @include active() {
+        color: var(--oo-color-light-contrast-primary, var(--oo-color-primary));
+        background-color: var(--oo-color-light-transparent-primary-60);
       }
 
-      &:disabled {
-        color: var(--oo-color-light-contrast-text);
-        background-color: var(--oo-color-light-text, var(--oo-color-text));
-        border-color: var(--oo-color-light-text, var(--oo-color-text));
-
-        @include hover-focus() {
-          box-shadow: none;
-        }
+      @include focus() {
+        outline: 2px solid var(--oo-color-light-primary, var(--oo-color-primary));
+        outline-offset: 2px;
+      }
+    
+      @include disabled() {
+        background-color: var(--oo-color-light-transparent-primary-40);
+        border-color: transparent;
       }
     }
   }
@@ -583,32 +576,31 @@
     }
 
     #{$c-slider}__arrow {
-      color: var(--oo-color-dark-contrast-primary);
-      background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
-      border-color: var(--oo-color-dark-primary, var(--oo-color-primary));
-
-      @include visited-active() {
+      @include plain-visited() {
         color: var(--oo-color-dark-contrast-primary);
         background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
         border-color: var(--oo-color-dark-primary, var(--oo-color-primary));
       }
 
-      @include hover-focus() {
-        color: var(--oo-color-dark-contrast-primary);
-        background-color: var(--oo-color-dark-lighten-primary-40);
-        border-color: var(--oo-color-dark-primary, var(--oo-color-primary));
-        box-shadow: 0px 0px 0px 2px
-          var(--oo-color-dark-primary, var(--oo-color-primary));
+      @include hover() {
+        color: var(--oo-color-dark-contrast-primary, var(--oo-color-primary));
+        background-color: var(--oo-color-dark-transparent-primary-80);
+        border-color: var(--oo-color-dark-transparent-primary-80);
       }
-
-      &:disabled {
-        color: var(--oo-color-dark-contrast-text);
-        background-color: var(--oo-color-dark-text, var(--oo-color-text));
-        border-color: var(--oo-color-dark-text, var(--oo-color-text));
-
-        @include hover-focus() {
-          box-shadow: none;
-        }
+    
+      @include active() {
+        color: var(--oo-color-dark-contrast-primary, var(--oo-color-primary));
+        background-color: var(--oo-color-dark-transparent-primary-60);
+      }
+    
+      @include focus() {
+        outline: 2px solid var(--oo-color-dark-primary, var(--oo-color-primary));
+        outline-offset: 2px;
+      }
+    
+      @include disabled() {
+        background-color: var(--oo-color-dark-transparent-primary-40);
+        border-color: transparent;
       }
     }
   }
@@ -668,38 +660,31 @@
     }
 
     #{$c-slider}__arrow {
-      color: var(--oo-color-primary-contrast-primary);
-      background-color: var(
-        --oo-color-primary-primary,
-        var(--oo-color-primary)
-      );
-      border-color: var(--oo-color-primary-primary, var(--oo-color-primary));
-
-      @include visited-active() {
+      @include plain-visited() {
         color: var(--oo-color-primary-contrast-primary);
-        background-color: var(
-          --oo-color-primary-primary,
-          var(--oo-color-primary)
-        );
+        background-color: var(--oo-color-primary-primary, var(--oo-color-primary));
         border-color: var(--oo-color-primary-primary, var(--oo-color-primary));
       }
 
-      @include hover-focus() {
-        color: var(--oo-color-primary-contrast-primary);
-        background-color: var(--oo-color-primary-lighten-primary-40);
-        border-color: var(--oo-color-primary-primary, var(--oo-color-primary));
-        box-shadow: 0px 0px 0px 2px
-          var(--oo-color-primary-primary, var(--oo-color-primary));
+      @include hover() {
+        color: var(--oo-color-primary-contrast-primary, var(--oo-color-primary));
+        background-color: var(--oo-color-primary-transparent-primary-80);
+        border-color: var(--oo-color-primary-transparent-primary-80);
       }
-
-      &:disabled {
-        color: var(--oo-color-primary-contrast-text);
-        background-color: var(--oo-color-primary-text, var(--oo-color-text));
-        border-color: var(--oo-color-primary-text, var(--oo-color-text));
-
-        @include hover-focus() {
-          box-shadow: none;
-        }
+    
+      @include active() {
+        color: var(--oo-color-primary-contrast-primary, var(--oo-color-primary));
+        background-color: var(--oo-color-primary-transparent-primary-60);
+      }
+    
+      @include focus() {
+        outline: 2px solid var(--oo-color-primary-primary, var(--oo-color-primary));
+        outline-offset: 2px;
+      }
+    
+      @include disabled() {
+        background-color: var(--oo-color-primary-transparent-primary-40);
+        border-color: transparent;
       }
     }
   }
@@ -759,44 +744,31 @@
     }
 
     #{$c-slider}__arrow {
-      color: var(--oo-color-secondary-contrast-primary);
-      background-color: var(
-        --oo-color-secondary-primary,
-        var(--oo-color-primary)
-      );
-      border-color: var(--oo-color-secondary-primary, var(--oo-color-primary));
-
-      @include visited-active() {
+      @include plain-visited() {
         color: var(--oo-color-secondary-contrast-primary);
-        background-color: var(
-          --oo-color-secondary-primary,
-          var(--oo-color-primary)
-        );
-        border-color: var(
-          --oo-color-secondary-primary,
-          var(--oo-color-primary)
-        );
+        background-color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+        border-color: var(--oo-color-secondary-primary, var(--oo-color-primary));
       }
 
-      @include hover-focus() {
-        color: var(--oo-color-secondary-contrast-primary);
-        background-color: var(--oo-color-secondary-lighten-primary-40);
-        border-color: var(
-          --oo-color-secondary-primary,
-          var(--oo-color-primary)
-        );
-        box-shadow: 0px 0px 0px 2px
-          var(--oo-color-secondary-primary, var(--oo-color-primary));
+      @include hover() {
+        color: var(--oo-color-secondary-contrast-primary, var(--oo-color-primary));
+        background-color: var(--oo-color-secondary-transparent-primary-80);
+        border-color: var(--oo-color-secondary-transparent-primary-80);
       }
-
-      &:disabled {
-        color: var(--oo-color-secondary-contrast-text);
-        background-color: var(--oo-color-secondary-text, var(--oo-color-text));
-        border-color: var(--oo-color-secondary-text, var(--oo-color-text));
-
-        @include hover-focus() {
-          box-shadow: none;
-        }
+    
+      @include active() {
+        color: var(--oo-color-secondary-contrast-primary, var(--oo-color-primary));
+        background-color: var(--oo-color-secondary-transparent-primary-60);
+      }
+    
+      @include focus() {
+        outline: 2px solid var(--oo-color-secondary-primary, var(--oo-color-primary));
+        outline-offset: 2px;
+      }
+    
+      @include disabled() {
+        background-color: var(--oo-color-secondary-transparent-primary-40);
+        border-color: transparent;
       }
     }
   }
@@ -856,35 +828,31 @@
     }
 
     #{$c-slider}__arrow {
-      color: var(--oo-color-footer-contrast-primary);
-      background-color: var(--oo-color-footer-primary, var(--oo-color-primary));
-      border-color: var(--oo-color-footer-primary, var(--oo-color-primary));
-
-      @include visited-active() {
+      @include plain-visited() {
         color: var(--oo-color-footer-contrast-primary);
-        background-color: var(
-          --oo-color-footer-primary,
-          var(--oo-color-primary)
-        );
+        background-color: var(--oo-color-footer-primary, var(--oo-color-primary));
         border-color: var(--oo-color-footer-primary, var(--oo-color-primary));
       }
-
-      @include hover-focus() {
+  
+      @include active() {
         color: var(--oo-color-footer-contrast-primary);
-        background-color: var(--oo-color-footer-lighten-primary-40);
-        border-color: var(--oo-color-footer-primary, var(--oo-color-primary));
-        box-shadow: 0px 0px 0px 2px
-          var(--oo-color-footer-primary, var(--oo-color-primary));
+        background-color: var(--oo-color-footer-transparent-primary-60, var(--oo-color-primary));
+        border-color: var(--oo-color-footer-transparent-primary-60, var(--oo-color-primary));
       }
-
-      &:disabled {
-        color: var(--oo-color-footer-contrast-text);
-        background-color: var(--oo-color-footer-text, var(--oo-color-text));
-        border-color: var(--oo-color-footer-text, var(--oo-color-text));
-
-        @include hover-focus() {
-          box-shadow: none;
-        }
+  
+      @include hover() {
+        color: var(--oo-color-footer-contrast-primary);
+        background-color: var(--oo-color-footer-transparent-primary-80);
+      }
+  
+      @include focus() {
+        outline: 2px solid var(--oo-color-footer-primary);
+        outline-offset: 2px;
+      }
+  
+      @include disabled() {
+        background-color: var(--oo-color-footer-transparent-primary-40);
+        border-color: transparent;
       }
     }
   }

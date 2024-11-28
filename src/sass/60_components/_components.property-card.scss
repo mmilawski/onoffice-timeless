@@ -40,7 +40,7 @@
     position: absolute;
     top: 4px;
     left: 4px;
-    border-radius: $component-border-radius;
+    border-radius: $component-border-radius-small;
     color: var(--oo-color-property-status-contrast-bg);
     background-color: var(--oo-color-property-status-bg);
     border: 0px;
@@ -52,7 +52,7 @@
 
   &__favorite {
     position: absolute;
-    border-radius: $component-border-radius;
+    border-radius: $component-border-radius-small;
     top: 4px;
     right: 4px;
     color: var(--oo-color-contrast-primary);
@@ -64,21 +64,13 @@
     align-items: center;
     justify-content: center;
     padding: 0.5rem;
-    min-height: calc(
-      $mobile-global-line-height + (0.5rem * 2)
-    ); // line-height + padding * 2
-    min-width: calc(
-      $mobile-global-line-height + (0.5rem * 2)
-    ); // line-height + padding * 2
-    cursor: pointer;
+    width: $mobile-icon-wrapper-size;
+    height: $mobile-icon-wrapper-size;
     @include media-breakpoint-up(xl) {
-      min-height: calc(
-        $desktop-global-line-height + (0.5rem * 2)
-      ); // line-height + padding * 2
-      min-width: calc(
-        $desktop-global-line-height + (0.5rem * 2)
-      ); // line-height + padding * 2
+      width: $desktop-icon-wrapper-size;
+      height: $desktop-icon-wrapper-size;
     }
+    cursor: pointer;
 
     &.--on-detail-page {
       position: static;
@@ -89,6 +81,10 @@
         margin-top: -2rem;
         margin-right: -2rem;
       }
+    }
+
+    .--favorite {
+      height: 1.5rem;
     }
   }
 
@@ -124,6 +120,7 @@
     background-color: transparent;
     border: 2px solid transparent;
     width: 100%;
+    border-radius: $component-border-radius-small;
   }
 
   &__content {

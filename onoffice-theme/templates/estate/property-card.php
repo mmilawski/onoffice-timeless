@@ -102,7 +102,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
      echo '--on-slider c-slider__slide splide__slide';
  } ?>">
         <div class="c-property-card__inner">
-            <?php if (!($is_reference && $is_restricted_view)) { ?>
+            <?php if (!$is_reference && !$is_restricted_view) { ?>
                 <a href="<?php echo esc_url(
                     $property_url,
                 ); ?>" class="c-property-card__link">
@@ -200,7 +200,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
                 }
                 ?>
             
-                <?php if (!($is_reference && $is_restricted_view)) { ?>
+                <?php if (!$is_reference && !$is_restricted_view) { ?>
                 </a>
             <?php } ?>
             
@@ -241,7 +241,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
                                 ?>
                             </span>
                             <span class="c-button__icon --favorite"><?php oo_get_icon(
-                                'heart',
+                                'star',
                             ); ?></span>
                         </span>
                     <?php } ?>
@@ -368,7 +368,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
                     } ?>
                 <?php } ?>
 
-                <?php if (!($is_reference && $is_restricted_view)) { ?>
+                <?php if (!$is_reference && !$is_restricted_view) { ?>
                     <?php
                     $button = [
                         [
@@ -382,7 +382,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
                     oo_get_template('components', '', 'component-buttons', [
                         'buttons' => $button,
                         'additional_button_class' =>
-                            'c-property-card__button --on-bg-transparent',
+                            'c-property-card__button --full-width --on-bg-transparent',
                         'additional_container_class' =>
                             'c-property-card__buttons',
                     ]);

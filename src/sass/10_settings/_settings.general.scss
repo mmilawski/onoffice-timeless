@@ -86,7 +86,7 @@ $icon-size-arrows-square: 1rem;
 
 // icon sizes
 $mobile-icon-wrapper-size: 2.25rem;
-$desktop-icon-wrapper-size: 2.5rem;
+$desktop-icon-wrapper-size: 2.375rem;
 $mobile-icon-size: 0.875rem;
 $mobile-icon-size-small: 0.625rem;
 $desktop-icon-size: 1rem;
@@ -110,9 +110,12 @@ $desktop-clip-path-top: unset;
 $desktop-clip-path-reverse: unset;
 $mobile-clip-path-reverse: unset;
 
+// border radius
+$component-border-radius-small: 4px;
+$component-border-radius: 8px;
+
 // button styles
-$component-border-radius: 6px;
-$input-border-radius: 6px;
+$button-font-size: 18px;
 
 [hidden] {
   display: none;
