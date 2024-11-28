@@ -82,16 +82,30 @@
         height: $desktop-icon-wrapper-size;
       }
 
-      @include visited-active() {
+      @include plain-visited() {
         color: var(--oo-color-contrast-primary);
         background-color: var(--oo-color-primary);
-        border-color: var(--oo-color-primary);
+        border: 2px solid var(--oo-color-primary);
       }
-
-      @include hover-focus() {
+    
+      @include hover() {
         color: var(--oo-color-contrast-primary);
-        background-color: var(--oo-color-lighten-primary-40);
-        box-shadow: 0px 0px 0px 2px var(--oo-color-primary);
+        background-color: var(--oo-color-transparent-primary-80);
+        border-color: var(--oo-color-transparent-primary-80);
+      }
+    
+      @include active() {
+        color: var(--oo-color-contrast-primary);
+        background-color: var(--oo-color-transparent-primary-60);
+      }
+    
+      @include focus() {
+        outline: 2px solid var(--oo-color-primary);
+        outline-offset: 2px;
+      }
+    
+      @include disabled() {
+        background-color: var(--oo-color-transparent-primary-40);
       }
 
       &.--arrow {
