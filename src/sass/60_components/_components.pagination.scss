@@ -39,26 +39,26 @@
       color: var(--oo-color-primary);
       background-color: transparent;
     }
-  
+
     @include hover() {
       color: var(--oo-color-contrast-primary);
       background-color: var(--oo-color-transparent-primary-80);
     }
-  
+
     @include active() {
       color: var(--oo-color-contrast-primary);
       background-color: var(--oo-color-transparent-primary-60);
     }
-  
+
     @include focus() {
       outline: 2px solid var(--oo-color-primary);
       outline-offset: 2px;
     }
-  
+
     @include disabled() {
       background-color: var(--oo-color-transparent-primary-40);
     }
-    
+
     &.--has-icon {
     }
 
@@ -88,27 +88,26 @@
 
   &.--on-bg-light {
     #{$c-pagination}__link {
-
       @include plain-visited() {
-        color:  var(--oo-color-light-primary);
+        color: var(--oo-color-light-primary);
         background-color: transparent;
       }
-    
+
       @include hover() {
-        color:  var(--oo-color-light-contrast-primary);
+        color: var(--oo-color-light-contrast-primary);
         background-color: var(--oo-color-light-transparent-primary-80);
       }
-    
+
       @include active() {
         color: var(--oo-color-light-contrast-primary);
         background-color: var(--oo-color-light-transparent-primary-60);
       }
-    
+
       @include focus() {
         outline: 2px solid var(--oo-color-light-primary);
         outline-offset: 2px;
       }
-    
+
       @include disabled() {
         background-color: var(--oo-color-light-transparent-primary-40);
       }
@@ -123,27 +122,26 @@
 
   &.--on-bg-dark {
     #{$c-pagination}__link {
-
       @include plain-visited() {
-        color:  var(--oo-color-dark-primary);
+        color: var(--oo-color-dark-primary);
         background-color: transparent;
       }
-    
+
       @include hover() {
-        color:  var(--oo-color-dark-contrast-primary);
+        color: var(--oo-color-dark-contrast-primary);
         background-color: var(--oo-color-dark-transparent-primary-80);
       }
-    
+
       @include active() {
         color: var(--oo-color-dark-contrast-primary);
         background-color: var(--oo-color-dark-transparent-primary-60);
       }
-    
+
       @include focus() {
         outline: 2px solid var(--oo-color-dark-primary);
         outline-offset: 2px;
       }
-    
+
       @include disabled() {
         background-color: var(--oo-color-dark-transparent-primary-40);
       }
@@ -153,33 +151,31 @@
         background: var(--oo-color-dark-primary, var(--oo-color-primary));
         border-color: var(--oo-color-dark-primary, var(--oo-color-primary));
       }
-
     }
   }
 
   &.--on-bg-primary {
     #{$c-pagination}__link {
-
       @include plain-visited() {
-        color:  var(--oo-color-primary-primary);
+        color: var(--oo-color-primary-primary);
         background-color: transparent;
       }
-    
+
       @include hover() {
-        color:  var(--oo-color-primary-contrast-primary);
+        color: var(--oo-color-primary-contrast-primary);
         background-color: var(--oo-color-primary-transparent-primary-80);
       }
-    
+
       @include active() {
         color: var(--oo-color-primary-contrast-primary);
         background-color: var(--oo-color-primary-transparent-primary-60);
       }
-    
+
       @include focus() {
         outline: 2px solid var(--oo-color-primary-primary);
         outline-offset: 2px;
       }
-    
+
       @include disabled() {
         background-color: var(--oo-color-primary-transparent-primary-40);
       }
@@ -194,27 +190,26 @@
 
   &.--on-bg-secondary {
     #{$c-pagination}__link {
-
       @include plain-visited() {
-        color:  var(--oo-color-secondary-primary);
+        color: var(--oo-color-secondary-primary);
         background-color: transparent;
       }
-    
+
       @include hover() {
-        color:  var(--oo-color-secondary-contrast-primary);
+        color: var(--oo-color-secondary-contrast-primary);
         background-color: var(--oo-color-secondary-transparent-primary-80);
       }
-    
+
       @include active() {
         color: var(--oo-color-secondary-contrast-primary);
         background-color: var(--oo-color-secondary-transparent-primary-60);
       }
-    
+
       @include focus() {
         outline: 2px solid var(--oo-color-secondary-primary);
         outline-offset: 2px;
       }
-    
+
       @include disabled() {
         background-color: var(--oo-color-secondary-transparent-primary-40);
       }
@@ -222,7 +217,10 @@
       &.--is-current {
         color: var(--oo-color-secondary-contrast-primary);
         background: var(--oo-color-secondary-primary, var(--oo-color-primary));
-        border-color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+        border-color: var(
+          --oo-color-secondary-primary,
+          var(--oo-color-primary)
+        );
       }
     }
   }
