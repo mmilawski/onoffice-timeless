@@ -217,11 +217,8 @@ $media_width_xxxl = '460';
                                 ],
                             ); ?>
 
-                            <button class="c-media-text__play c-button --on-<?php echo $bg_color; ?>">
-                                <?php esc_html_e(
-                                    'Video ansehen',
-                                    'oo_theme',
-                                ); ?>
+                            <button class="c-media-text__play c-button --on-<?php echo $bg_color; ?> --on-video-player">
+                                <?php oo_get_icon('play'); ?>
                             </button>
                         </div>
                     <?php echo $iframe_without_source;} else { ?>

@@ -507,6 +507,16 @@
     }
   }
 
+  &.--on-video-player {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    outline: none;
+
+    @include focus() {
+      outline: none;
+    }
+  }
+
   &.--read-more {
     &:before {
       content: attr(data-open-text);
