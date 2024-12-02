@@ -508,12 +508,13 @@
   }
 
   &.--on-video-player {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: transparent;
+    color: var(--oo-color-contrast-primary, var(--oo-color-primary));
     border: none;
-    outline: none;
 
-    @include focus() {
+    @include hover-focus() {
       outline: none;
+      background-color: transparent;
     }
   }
 
