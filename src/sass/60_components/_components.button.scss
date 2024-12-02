@@ -513,8 +513,14 @@
     border: none;
 
     @include hover-focus() {
-      outline: none;
       background-color: transparent;
+      outline: none;
+    }
+
+    &.--on-bg-dark {
+      @include hover-focus() {
+        color: inherit;
+      }
     }
   }
 
