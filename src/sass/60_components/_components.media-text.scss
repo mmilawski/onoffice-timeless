@@ -55,7 +55,7 @@
       width: auto;
       height: auto;
       max-width: 100%;
-      aspect-ratio: none;
+      aspect-ratio: auto;
     }
   }
 
@@ -83,6 +83,22 @@
     @include hover-focus-active {
       &:after {
         background-color: var(--oo-color-transparent-bg-25);
+
+        .--bg-light & {
+          background-color: var(--oo-color-light-transparent-bg-25);
+        }
+
+        .--bg-dark & {
+          background-color: var(--oo-color-dark-transparent-bg-25);
+        }
+
+        .--bg-primary & {
+          background-color: var(--oo-color-primary-transparent-bg-25);
+        }
+
+        .--bg-secondary & {
+          background-color: var(--oo-color-secondary-transparent-bg-25);
+        }
       }
       #{$c-media-text}__thumbnail-image {
         transform: scale(1.05);

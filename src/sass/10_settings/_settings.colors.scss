@@ -104,6 +104,11 @@
     0,
     var(--oo-color-bg)
   );
+  #{--oo-color-light-transparent-bg-25}: transparent-color(
+    var(--oo-color-light-bg),
+    0.25,
+    var(--oo-color-bg)
+  );
   #{--oo-color-light-transparent-bg-80}: transparent-color(
     var(--oo-color-light-bg),
     0.8,
@@ -183,6 +188,11 @@
   #{--oo-color-dark-transparent-bg-0}: transparent-color(
     var(--oo-color-dark-bg),
     0,
+    var(--oo-color-bg)
+  );
+  #{--oo-color-dark-transparent-bg-25}: transparent-color(
+    var(--oo-color-dark-bg),
+    0.25,
     var(--oo-color-bg)
   );
   #{--oo-color-dark-transparent-bg-80}: transparent-color(
@@ -266,6 +276,11 @@
     0,
     var(--oo-color-bg)
   );
+  #{--oo-color-primary-transparent-bg-25}: transparent-color(
+    var(--oo-color-primary-bg),
+    0.25,
+    var(--oo-color-bg)
+  );
   #{--oo-color-primary-transparent-bg-80}: transparent-color(
     var(--oo-color-primary-bg),
     0.8,
@@ -345,6 +360,11 @@
   #{--oo-color-secondary-transparent-bg-0}: transparent-color(
     var(--oo-color-secondary-bg),
     0,
+    var(--oo-color-bg)
+  );
+  #{--oo-color-secondary-transparent-bg-25}: transparent-color(
+    var(--oo-color-secondary-bg),
+    0.25,
     var(--oo-color-bg)
   );
   #{--oo-color-secondary-transparent-bg-80}: transparent-color(
