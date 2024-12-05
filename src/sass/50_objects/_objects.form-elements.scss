@@ -682,7 +682,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
       display: block;
       width: $form-control-size;
       height: $form-control-size;
-      border-radius: $component-border-radius-small;
+      border-radius: $border-radius-small;
     }
 
     &::before {
