@@ -85,6 +85,16 @@
 
     .--favorite {
       height: 1.5rem;
+
+      svg {
+        fill: none;
+      }
+
+      &.--filled {
+        svg {
+          fill: currentColor;
+        }
+      }
     }
   }
 
