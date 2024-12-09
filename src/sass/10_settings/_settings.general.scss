@@ -8,18 +8,12 @@ $font-family-button: var(--oo-font-button, var(--oo-font-text));
 
 // font weight
 $font-weight-text: var(--oo-font-text-weight, 400);
-$font-weight-text-bold: var(
-  --oo-font-text-bold-weight,
-  var(--oo-font-text-weight)
-);
-$font-weight-headline: var(
-  --oo-font-headline-weight,
-  var(--oo-font-text-weight)
-);
-$font-weight-navigation: var(
-  --oo-font-navigation-weight,
-  var(--oo-font-text-weight)
-);
+$font-weight-text-bold: var(--oo-font-text-bold-weight,
+    var(--oo-font-text-weight));
+$font-weight-headline: var(--oo-font-headline-weight,
+    var(--oo-font-text-weight));
+$font-weight-navigation: var(--oo-font-navigation-weight,
+    var(--oo-font-text-weight));
 $font-weight-button: var(--oo-font-button-weight, var(--oo-font-text-weight));
 
 // font sizes
@@ -115,7 +109,7 @@ $border-radius-small: 0.25rem;
 $border-radius: 0.5rem;
 
 // button styles
-$button-font-size: 1.125rem;
+$button-font-size: 18px;
 
 [hidden] {
   display: none;
