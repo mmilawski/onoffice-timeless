@@ -763,7 +763,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
   }
 
   &__input[type='checkbox']:checked + &__label::after {
-    background: #fff;
+    background-color: var(--oo-color-contrast-primary);
   }
 
   .--is--popup & {
