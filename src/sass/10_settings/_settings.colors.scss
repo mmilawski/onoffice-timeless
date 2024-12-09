@@ -41,17 +41,17 @@
   #{--oo-color-transparent-bg-80}: transparent-color(var(--oo-color-bg), 0.8);
   #{--oo-color-transparent-bg-90}: transparent-color(var(--oo-color-bg), 0.9);
   #{--oo-color-transparent-bg-100}: transparent-color(var(--oo-color-bg), 1);
-  #{--oo-color-transparent-primary-80}: transparent-color(
+  #{--oo-color-transparent-primary-40}: transparent-color(
     var(--oo-color-primary),
-    0.8
+    0.4
   );
   #{--oo-color-transparent-primary-60}: transparent-color(
     var(--oo-color-primary),
     0.6
   );
-  #{--oo-color-transparent-primary-40}: transparent-color(
+  #{--oo-color-transparent-primary-80}: transparent-color(
     var(--oo-color-primary),
-    0.4
+    0.8
   );
   #{--oo-color-lighten-primary-40}: lighten-color(var(--oo-color-primary), 0.4);
   #{--oo-color-lighten-primary-90}: lighten-color(var(--oo-color-primary), 0.9);
