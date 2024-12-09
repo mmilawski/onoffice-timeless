@@ -1,4 +1,4 @@
-$form-min-width: 180px;
+$form-min-width: 11.25rem;
 $form-height: 2.375rem;
 $form-margin: 0; // Margin
 $form-padding: 0.625rem 0.75rem; // Padding
@@ -44,10 +44,14 @@ $form-primary-primary-hover: var(--oo-color-primary-mix-primary-contrast-20);
 $form-primary-shadow: 0px;
 $form-primary-shadow-focus: 0px;
 
-$form-secondary-primary: var(--oo-color-secondary-primary,
-    var(--oo-color-primary));
+$form-secondary-primary: var(
+  --oo-color-secondary-primary,
+  var(--oo-color-primary)
+);
 $form-secondary-primary-contrast: var(--oo-color-secondary-contrast-primary);
-$form-secondary-primary-hover: var(--oo-color-secondary-mix-primary-contrast-20);
+$form-secondary-primary-hover: var(
+  --oo-color-secondary-mix-primary-contrast-20
+);
 $form-secondary-shadow: 2px 2px 0 var(--oo-color-secondary-transparent-text-10);
 $form-secondary-shadow-focus: 0px;
 
@@ -128,15 +132,20 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
     }
   }
 
-  .--bg-light & {}
+  .--bg-light & {
+  }
 
-  .--bg-dark & {}
+  .--bg-dark & {
+  }
 
-  .--bg-primary & {}
+  .--bg-primary & {
+  }
 
-  .--bg-secondary & {}
+  .--bg-secondary & {
+  }
 
-  .--bg-footer & {}
+  .--bg-footer & {
+  }
 }
 
 /* Select */
@@ -149,7 +158,9 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
   height: $form-height;
   margin: $form-margin;
   padding: $form-padding;
-  padding-right: calc(#{$form-padding-right} + calc(#{$form-padding-right} / 2) + #{$form-select-size});
+  padding-right: calc(
+    #{$form-padding-right} + calc(#{$form-padding-right} / 2) + #{$form-select-size}
+  );
   outline: none;
   resize: vertical;
   font-family: inherit;
@@ -182,15 +193,20 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
     height: $form-height;
   }
 
-  .--bg-light & {}
+  .--bg-light & {
+  }
 
-  .--bg-dark & {}
+  .--bg-dark & {
+  }
 
-  .--bg-primary & {}
+  .--bg-primary & {
+  }
 
-  .--bg-secondary & {}
+  .--bg-secondary & {
+  }
 
-  .--bg-footer & {}
+  .--bg-footer & {
+  }
 }
 
 #onofficeSortListSelector {
@@ -217,7 +233,8 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
     border: $form-border;
     border-radius: $form-radius;
 
-    &__options {}
+    &__options {
+    }
 
     &__option {
       padding: $form-padding;
@@ -342,7 +359,9 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
 
     // Single -------------------------------------------------------------- //
     &--single {
-      padding-right: calc(#{$form-padding-right} + calc(#{$form-padding-right} / 2) + #{$form-select-size});
+      padding-right: calc(
+        #{$form-padding-right} + calc(#{$form-padding-right} / 2) + #{$form-select-size}
+      );
 
       #{$selection}__rendered {
         color: inherit;
@@ -367,7 +386,9 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
       }
 
       #{$selection}__arrow {
-        width: calc(#{$form-padding-right} + calc(#{$form-padding-right} / 2) + #{$form-select-size});
+        width: calc(
+          #{$form-padding-right} + calc(#{$form-padding-right} / 2) + #{$form-select-size}
+        );
         height: 100%;
         position: absolute;
         top: 0;
@@ -455,15 +476,20 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
     }
   }
 
-  .--bg-light & {}
+  .--bg-light & {
+  }
 
-  .--bg-dark & {}
+  .--bg-dark & {
+  }
 
-  .--bg-primary & {}
+  .--bg-primary & {
+  }
 
-  .--bg-secondary & {}
+  .--bg-secondary & {
+  }
 
-  .--bg-footer & {}
+  .--bg-footer & {
+  }
 }
 
 /* Textarea */
@@ -501,15 +527,20 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
     opacity: 1; // Reset opacity for Firefox
   }
 
-  .--bg-light & {}
+  .--bg-light & {
+  }
 
-  .--bg-dark & {}
+  .--bg-dark & {
+  }
 
-  .--bg-primary & {}
+  .--bg-primary & {
+  }
 
-  .--bg-secondary & {}
+  .--bg-secondary & {
+  }
 
-  .--bg-footer & {}
+  .--bg-footer & {
+  }
 }
 
 /* Label */
@@ -700,18 +731,18 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
     }
   }
 
-  &__input[type='radio']+&__label::before {
+  &__input[type='radio'] + &__label::before {
     border-radius: 100%;
   }
 
-  &__input[type='radio']+&__label::after {
+  &__input[type='radio'] + &__label::after {
     mask: $form-svg-radio;
     mask-repeat: no-repeat;
     mask-size: $form-select-size;
     mask-position: center;
   }
 
-  &__input[type='checkbox']+&__label::after {
+  &__input[type='checkbox'] + &__label::after {
     border: $form-border;
     mask: $form-svg-checkbox;
     mask-repeat: no-repeat;
@@ -719,19 +750,19 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
     mask-position: center;
   }
 
-  &__input:focus+&__label::before {
+  &__input:focus + &__label::before {
     box-shadow: $form-shadow-active;
   }
 
-  &__input:checked+&__label::before {
+  &__input:checked + &__label::before {
     background-color: $form-primary;
   }
 
-  &__input:checked+&__label::after {
+  &__input:checked + &__label::after {
     transform: scale(1);
   }
 
-  &__input[type='checkbox']:checked+&__label::after {
+  &__input[type='checkbox']:checked + &__label::after {
     background: #fff;
   }
 
@@ -793,15 +824,20 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
     }
   }
 
-  .--bg-light & {}
+  .--bg-light & {
+  }
 
-  .--bg-dark & {}
+  .--bg-dark & {
+  }
 
-  .--bg-primary & {}
+  .--bg-primary & {
+  }
 
-  .--bg-secondary & {}
+  .--bg-secondary & {
+  }
 
-  .--bg-footer & {}
+  .--bg-footer & {
+  }
 }
 
 /* Fieldset */
@@ -823,4 +859,5 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
   }
 }
 
-.o-legend {}
+.o-legend {
+}
