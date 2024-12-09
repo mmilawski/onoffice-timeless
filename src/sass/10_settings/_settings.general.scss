@@ -111,11 +111,11 @@ $desktop-clip-path-reverse: unset;
 $mobile-clip-path-reverse: unset;
 
 // border radius
-$border-radius-small: 4px;
-$border-radius: 8px;
+$border-radius-small: 0.25rem;
+$border-radius: 0.5rem;
 
 // button styles
-$button-font-size: 18px;
+$button-font-size: 1.125rem;
 
 [hidden] {
   display: none;
