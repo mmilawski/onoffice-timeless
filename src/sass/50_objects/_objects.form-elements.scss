@@ -85,6 +85,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
 
   @include focus() {
     outline: 2px solid $form-primary;
+    border-color: transparent;
   }
 
   &::placeholder {
@@ -175,6 +176,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
 
   @include focus() {
     outline: 2px solid $form-primary;
+    border-color: transparent;
   }
 
   option[value=''] {
@@ -343,6 +345,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
 
     @include focus() {
       outline: 2px solid $form-primary;
+      border-color: transparent;
     }
 
     @include focus-within() {
@@ -520,6 +523,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
 
   @include focus() {
     outline: 2px solid $form-primary;
+    border-color: transparent;
   }
 
   &::placeholder {
