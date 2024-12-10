@@ -1,8 +1,12 @@
-button {
-  font-family: $font-family-button;
-  font-weight: $font-weight-button;
-  font-size: $mobile-global-font-size;
-  line-height: $mobile-global-line-height;
-  outline: none;
-  border-radius: $border-radius;
+// Exlude wp admin area
+body:not(.wp-admin) {
+  // Exclude Gutenberg editor buttons specifically
+  button:not(.components-button) {
+    font-family: $font-family-button;
+    font-weight: $font-weight-button;
+    font-size: $mobile-global-font-size;
+    line-height: $mobile-global-line-height;
+    outline: none;
+    border-radius: $border-radius;
+  }
 }
