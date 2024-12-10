@@ -33,8 +33,7 @@
   }
 
   @include focus() {
-    outline: 2px solid var(--oo-color-primary);
-    outline-offset: 2px;
+    @include focus-outline-w-offset(var(--oo-color-primary));
   }
 
   @include disabled() {
@@ -67,8 +66,7 @@
     }
 
     @include focus() {
-      outline: 2px solid var(--oo-color-light-primary);
-      outline-offset: 2px;
+      @include focus-outline-w-offset(var(--oo-color-light-primary));
     }
 
     @include disabled() {
@@ -102,8 +100,7 @@
     }
 
     @include focus() {
-      outline: 2px solid var(--oo-color-dark-primary);
-      outline-offset: 2px;
+      @include focus-outline-w-offset(var(--oo-color-dark-primary));
     }
 
     @include disabled() {
@@ -140,8 +137,7 @@
     }
 
     @include focus() {
-      outline: 2px solid var(--oo-color-primary-primary);
-      outline-offset: 2px;
+      @include focus-outline-w-offset(var(--oo-color-primary-primary));
     }
 
     @include disabled() {
@@ -178,8 +174,7 @@
     }
 
     @include focus() {
-      outline: 2px solid var(--oo-color-secondary-primary);
-      outline-offset: 2px;
+      @include focus-outline-w-offset(var(--oo-color-secondary-primary));
     }
 
     @include disabled() {
@@ -213,8 +208,7 @@
     }
 
     @include focus() {
-      outline: 2px solid var(--oo-color-footer-primary);
-      outline-offset: 2px;
+      @include focus-outline-w-offset(var(--oo-color-footer-primary));
     }
 
     @include disabled() {
@@ -242,8 +236,7 @@
     }
 
     @include focus() {
-      outline: 2px solid var(--oo-color-primary);
-      outline-offset: 2px;
+      @include focus-outline-w-offset(var(--oo-color-primary));
     }
 
     @include disabled() {
@@ -265,8 +258,7 @@
     }
 
     @include focus() {
-      outline: 2px solid var(--oo-color-primary);
-      outline-offset: 2px;
+      @include focus-outline-w-offset(var(--oo-color-primary));
     }
 
     @include active() {
@@ -296,9 +288,7 @@
       }
 
       @include focus() {
-        outline: 2px solid
-          var(--oo-color-light-primary, var(--oo-color-primary));
-        outline-offset: 2px;
+        @include focus-outline-w-offset(var(--oo-color-light-primary, var(--oo-color-primary)));
       }
 
       @include active() {
@@ -329,8 +319,7 @@
       }
 
       @include focus() {
-        outline: 2px solid var(--oo-color-dark-primary, var(--oo-color-primary));
-        outline-offset: 2px;
+        @include focus-outline-w-offset(var(--oo-color-dark-primary, var(--oo-color-primary)));
       }
 
       @include active() {
@@ -361,9 +350,7 @@
       }
 
       @include focus() {
-        outline: 2px solid
-          var(--oo-color-primary-primary, var(--oo-color-primary));
-        outline-offset: 2px;
+        @include focus-outline-w-offset(var(--oo-color-primary-primary, var(--oo-color-primary)));
       }
 
       @include active() {
@@ -397,9 +384,7 @@
       }
 
       @include focus() {
-        outline: 2px solid
-          var(--oo-color-secondary-primary, var(--oo-color-primary));
-        outline-offset: 2px;
+        @include focus-outline-w-offset(var(--oo-color-secondary-primary, var(--oo-color-primary)));
       }
 
       @include active() {
@@ -430,9 +415,7 @@
       }
 
       @include focus() {
-        outline: 2px solid
-          var(--oo-color-footer-primary, var(--oo-color-primary));
-        outline-offset: 2px;
+        @include focus-outline-w-offset(var(--oo-color-footer-primary, var(--oo-color-primary)));
       }
 
       @include active() {
@@ -463,8 +446,7 @@
       }
 
       @include focus() {
-        outline: 2px solid var(--oo-color-primary);
-        outline-offset: 2px;
+        @include focus-outline-w-offset(var(--oo-color-primary));
       }
 
       @include active() {
