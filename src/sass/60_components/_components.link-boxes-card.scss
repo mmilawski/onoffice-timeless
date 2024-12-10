@@ -6,7 +6,7 @@
   color: var(--oo-color-text);
   background-color: var(--oo-color-bg);
   border: 2px solid var(--oo-color-bg);
-  border-radius: $component-border-radius;
+  border-radius: $border-radius;
 
   &__wrapper {
     display: flex;
@@ -29,7 +29,7 @@
   &__image {
     width: 100%;
     object-fit: cover;
-    border-radius: $component-border-radius;
+    border-radius: $border-radius;
     .--has-icon & {
       object-fit: contain;
     }
@@ -43,7 +43,7 @@
 
   &__content {
     width: 100%;
-    padding: 1.25rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -59,6 +59,6 @@
   }
 
   &__button {
-    width: fit-content;
+    border-radius: $border-radius-small;
   }
 }

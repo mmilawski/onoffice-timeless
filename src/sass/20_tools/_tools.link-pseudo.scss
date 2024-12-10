@@ -7,6 +7,30 @@
   }
 }
 
+@mixin focus {
+  &:focus {
+    @content;
+  }
+}
+
+@mixin focus-within {
+  &:focus-within {
+    @content;
+  }
+}
+
+@mixin disabled {
+  &:disabled {
+    @content;
+  }
+}
+
+@mixin active {
+  &:active {
+    @content;
+  }
+}
+
 @mixin hover-focus {
   &:hover,
   &:focus {
