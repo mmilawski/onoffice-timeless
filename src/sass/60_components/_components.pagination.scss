@@ -30,7 +30,8 @@
     outline: 2px solid transparent;
     outline-offset: 2px;
     transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
-      border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out, outline-color 0.25 ease-in-out;
+      border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out,
+      outline-color 0.25 ease-in-out;
 
     @include media-breakpoint-up(xl) {
       width: $desktop-icon-wrapper-size;

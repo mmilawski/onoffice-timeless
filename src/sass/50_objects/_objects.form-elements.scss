@@ -6,7 +6,7 @@ $form-padding-top: 0.375rem; // Padding
 $form-padding-right: 0.5rem; // Padding
 $form-select-size: 20px; // Size of the select arrow
 $form-control-size: 20px; // Size of the checkbox and radio button (1)
-$form-border: 1px solid var(--oo-color-mix-bg-text-50);
+$form-border: 1px solid var(--oo-color-mix-bg-contrast-50);
 $form-radius: 8px; // Input border radius
 $form-duration: 0.25s; // Transition duration
 $form-timing: ease-in-out; // Transition timing
@@ -15,8 +15,8 @@ $form-svg-radio: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 $form-svg-checkbox: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
 $form-color: var(--oo-color-text);
 $form-color-bg: var(--oo-color-mix-bg-text-10);
-$form-bg: var(--oo-color-mix-bg-text-10);
-$form-placeholder: var(--oo-color-mix-bg-text-30);
+$form-bg: var(--oo-color-mix-bg-contrast-20);
+$form-placeholder: var(--oo-color-mix-bg-contrast-50);
 $form-primary: var(--oo-color-primary);
 $form-primary-contrast: var(--oo-color-contrast-primary);
 $form-primary-hover: var(--oo-color-mix-primary-contrast-20);
@@ -31,18 +31,30 @@ $form-light-primary-contrast: var(--oo-color-light-contrast-primary);
 $form-light-primary-hover: var(--oo-color-light-mix-primary-contrast-20);
 $form-light-shadow: 0px;
 $form-light-shadow-focus: 0px;
+$form-light-bg: var(--oo-color-light-mix-bg-contrast-20);
+$form-light-border: var(--oo-color-light-mix-bg-contrast-50);
+$form-light-placeholder: var(--oo-color-light-mix-bg-contrast-50);
+$form-light-color: var(--oo-color-light-text, var(--oo-color-text));
 
 $form-dark-primary: var(--oo-color-dark-primary, var(--oo-color-primary));
 $form-dark-primary-contrast: var(--oo-color-dark-contrast-primary);
 $form-dark-primary-hover: var(--oo-color-dark-mix-primary-contrast-20);
 $form-dark-shadow: 0px;
 $form-dark-shadow-focus: 0px;
+$form-dark-bg: var(--oo-color-dark-mix-bg-contrast-20);
+$form-dark-border: var(--oo-color-dark-mix-bg-contrast-50);
+$form-dark-placeholder: var(--oo-color-dark-mix-bg-contrast-50);
+$form-dark-color: var(--oo-color-dark-text, var(--oo-color-text));
 
 $form-primary-primary: var(--oo-color-primary-primary, var(--oo-color-primary));
 $form-primary-primary-contrast: var(--oo-color-primary-contrast-primary);
 $form-primary-primary-hover: var(--oo-color-primary-mix-primary-contrast-20);
 $form-primary-shadow: 0px;
 $form-primary-shadow-focus: 0px;
+$form-primary-bg: var(--oo-color-primary-mix-bg-contrast-20);
+$form-primary-border: var(--oo-color-primary-mix-bg-contrast-50);
+$form-primary-placeholder: var(--oo-color-primary-mix-bg-contrast-50);
+$form-primary-color: var(--oo-color-primary-text, var(--oo-color-text));
 
 $form-secondary-primary: var(
   --oo-color-secondary-primary,
@@ -54,6 +66,10 @@ $form-secondary-primary-hover: var(
 );
 $form-secondary-shadow: 2px 2px 0 var(--oo-color-secondary-transparent-text-10);
 $form-secondary-shadow-focus: 0px;
+$form-secondary-bg: var(--oo-color-secondary-mix-bg-contrast-20);
+$form-secondary-border: var(--oo-color-secondary-mix-bg-contrast-50);
+$form-secondary-placeholder: var(--oo-color-secondary-mix-bg-contrast-50);
+$form-secondary-color: var(--oo-color-secondary-text, var(--oo-color-text));
 
 $form-footer-color: var(--oo-color-footer-text, var(--oo-color-text));
 $form-footer-primary: var(--oo-color-footer-primary, var(--oo-color-primary));
@@ -134,15 +150,47 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
   }
 
   .--bg-light & {
+    background-color: $form-light-bg;
+    border-color: $form-light-border;
+    color: $form-light-color;
+    outline-color: $form-light-primary;
+
+    &::placeholder {
+      color: $form-light-placeholder;
+    }
   }
 
   .--bg-dark & {
+    background-color: $form-dark-bg;
+    border-color: $form-dark-border;
+    color: $form-dark-color;
+    outline-color: $form-dark-primary;
+
+    &::placeholder {
+      color: $form-dark-placeholder;
+    }
   }
 
   .--bg-primary & {
+    background-color: $form-primary-bg;
+    border-color: $form-primary-border;
+    color: $form-primary-color;
+    outline-color: $form-primary-primary;
+
+    &::placeholder {
+      color: $form-primary-placeholder;
+    }
   }
 
   .--bg-secondary & {
+    background-color: $form-secondary-bg;
+    border-color: $form-secondary-border;
+    color: $form-secondary-color;
+    outline-color: $form-secondary-primary;
+
+    &::placeholder {
+      color: $form-secondary-placeholder;
+    }
   }
 
   .--bg-footer & {
@@ -225,14 +273,13 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
   .select2-dropdown {
     color: $form-color;
     background: $form-bg;
-    border: $form-border;
+    border: none;
     border-radius: $form-radius;
     box-shadow: $form-shadow-active;
     margin: 0;
   }
 
   .select2-results {
-    border: $form-border;
     border-radius: $form-radius;
 
     &__options {
@@ -250,6 +297,10 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
         content: '●';
         color: $form-primary;
         line-height: $global-line-height;
+
+        @include focus() {
+          color: $form-primary-hover;
+        }
       }
 
       &[aria-selected='true'],
@@ -297,6 +348,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
 
       @include active() {
         background-color: var(--oo-color-lighten-primary-90); // 10% of primary
+        color: var(--oo-color-text);
       }
     }
   }
@@ -343,12 +395,44 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
     display: flex;
     align-items: center;
 
+    .--bg-light & {
+      background: $form-light-bg;
+      border: $form-light-border;
+
+      @include focus-within() {
+        outline: 2px solid $form-light-primary;
+      }
+    }
+
+    .--on-bg-dark & {
+      background: $form-dark-bg;
+
+      @include focus-within() {
+        outline: 2px solid $form-dark-primary;
+      }
+    }
+
+    .--bg-primary & {
+      background: $form-primary-bg;
+      @include focus-within() {
+        outline: 2px solid $form-primary-primary;
+      }
+    }
+
+    .--bg-secondary & {
+      background: $form-secondary-bg;
+      @include focus-within() {
+        outline: 2px solid $form-secondary-primary;
+      }
+    }
+
     @include focus() {
       outline: 2px solid $form-primary;
-      border-color: transparent;
     }
 
     @include focus-within() {
+      outline: 2px solid $form-primary;
+
       #{$selection}__arrow {
         b {
           background: $form-primary;
@@ -760,6 +844,9 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
 
   &__input:checked + &__label::before {
     background-color: $form-primary;
+    outline: 1px solid $form-primary;
+    outline-offset: 1px;
+    border-color: $form-primary;
   }
 
   &__input:checked + &__label::after {

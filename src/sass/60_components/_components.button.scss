@@ -16,7 +16,6 @@
   max-width: 300px;
   outline: 2px solid transparent;
   outline-offset: 2px;
-  
 
   @include plain-visited() {
     color: var(--oo-color-contrast-primary);
@@ -140,7 +139,7 @@
     }
 
     @include focus() {
-      outline-color: var(--oo-color-primary-primary)
+      outline-color: var(--oo-color-primary-primary);
     }
 
     @include disabled() {
@@ -387,7 +386,10 @@
       }
 
       @include focus() {
-        outline-color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+        outline-color: var(
+          --oo-color-secondary-primary,
+          var(--oo-color-primary)
+        );
       }
 
       @include active() {
