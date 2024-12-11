@@ -31,7 +31,7 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     gap: 1.5rem;
-    border-radius: $input-border-radius;
+    border-radius: $form-radius;
     @include media-breakpoint-up(xl) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 2rem;
@@ -48,15 +48,15 @@
   }
 
   &__legend {
-    color: var(--oo-color-contrast-primary);
-    // background-color: var(--oo-color-primary);
-    border: 2px solid var(--oo-color-bg);
-    font-family: $font-family-button;
-    font-weight: $font-weight-button;
+    color: var(--oo-color-primary);
+    font-size: $desktop-h3-font-size;
+    line-height: $desktop-h3-line-height;
+    font-family: $font-family-headline;
+    font-weight: $font-weight-headline;
     display: inline-block;
     padding: 0.5rem 0.75rem;
     margin: -0.75rem auto 0 -0.75rem;
-    border-radius: $input-border-radius;
+    border-radius: $form-radius;
   }
 
   &__required {
@@ -334,8 +334,7 @@
       border-color: var(--oo-color-bg);
     }
     #{$c-form}__legend {
-      color: var(--oo-color-contrast-primary);
-      // background-color: var(--oo-color-primary);
+      color: var(--oo-color-primary);
     }
     &.--on-banner {
       #{$c-form}__fieldset {

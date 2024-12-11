@@ -165,7 +165,7 @@ $is_slider = filter_var($slider['slider'], FILTER_VALIDATE_BOOLEAN);
                     $button_text = $link['title']
                         ? $link['title']
                         : esc_html__('Mehr erfahren', 'oo_theme');
-                    echo '<a class="c-link-boxes-card__button c-button --on-bg-transparent" ' .
+                    echo '<a class="c-link-boxes-card__button c-button --full-width --on-bg-transparent" ' .
                         oo_set_link_attr($link) .
                         '>';
                     echo $button_text;

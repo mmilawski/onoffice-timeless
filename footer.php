@@ -21,9 +21,7 @@ $company_name = $company['name'] ?? (get_bloginfo('name') ?? null);
             'Zurück zum Anfang',
             'oo_theme',
         ); ?></span>
-        <span class="c-button__icon --arrow-up">
-            <?php oo_get_icon('arrow-up'); ?>
-        </span>
+        <?php oo_get_icon('arrow-up'); ?>
     </button>
 
     <?php if (is_array($footer_content_rows)) { ?>
