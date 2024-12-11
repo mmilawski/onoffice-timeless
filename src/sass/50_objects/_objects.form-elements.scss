@@ -319,6 +319,12 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
         &:before {
           color: $form-primary-contrast;
         }
+
+        @include active() {
+          &:before {
+            color: $form-primary;
+          }
+        }
       }
 
       &.level-0 {
@@ -348,7 +354,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
 
       @include active() {
         background-color: var(--oo-color-lighten-primary-90); // 10% of primary
-        color: var(--oo-color-text);
+        color: var(--oo-color-primary);
       }
     }
   }
