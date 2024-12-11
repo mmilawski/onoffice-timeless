@@ -21,8 +21,10 @@
 
   &__row {
     display: flex;
+    justify-content: center;
     align-items: flex-start;
     gap: 1.5rem;
+
     @include media-breakpoint-up(lg) {
       gap: 2rem;
     }

@@ -288,7 +288,9 @@
       }
 
       @include focus() {
-        @include focus-outline-w-offset(var(--oo-color-light-primary, var(--oo-color-primary)));
+        @include focus-outline-w-offset(
+          var(--oo-color-light-primary, var(--oo-color-primary))
+        );
       }
 
       @include active() {
@@ -319,7 +321,9 @@
       }
 
       @include focus() {
-        @include focus-outline-w-offset(var(--oo-color-dark-primary, var(--oo-color-primary)));
+        @include focus-outline-w-offset(
+          var(--oo-color-dark-primary, var(--oo-color-primary))
+        );
       }
 
       @include active() {
@@ -350,7 +354,9 @@
       }
 
       @include focus() {
-        @include focus-outline-w-offset(var(--oo-color-primary-primary, var(--oo-color-primary)));
+        @include focus-outline-w-offset(
+          var(--oo-color-primary-primary, var(--oo-color-primary))
+        );
       }
 
       @include active() {
@@ -384,7 +390,9 @@
       }
 
       @include focus() {
-        @include focus-outline-w-offset(var(--oo-color-secondary-primary, var(--oo-color-primary)));
+        @include focus-outline-w-offset(
+          var(--oo-color-secondary-primary, var(--oo-color-primary))
+        );
       }
 
       @include active() {
@@ -415,7 +423,9 @@
       }
 
       @include focus() {
-        @include focus-outline-w-offset(var(--oo-color-footer-primary, var(--oo-color-primary)));
+        @include focus-outline-w-offset(
+          var(--oo-color-footer-primary, var(--oo-color-primary))
+        );
       }
 
       @include active() {

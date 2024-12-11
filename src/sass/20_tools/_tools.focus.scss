@@ -7,8 +7,11 @@
 }
 
 // Sets the offset distance of the outline
-@mixin focus-outline-w-offset($color: var(--oo-color-footer-primary),
-$width: 2px, $offset: 2px) {
+@mixin focus-outline-w-offset(
+  $color: var(--oo-color-footer-primary),
+  $width: 2px,
+  $offset: 2px
+) {
   outline: $width solid $color;
   outline-offset: $offset;
 }

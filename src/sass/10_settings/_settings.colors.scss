@@ -292,7 +292,6 @@
     var(--oo-color-primary)
   );
 
-
   #{--oo-color-primary-lighten-primary-40}: lighten-color(
     var(--oo-color-primary-primary),
     0.4,
@@ -374,7 +373,6 @@
     0.8,
     var(--oo-color-primary)
   );
-
 
   #{--oo-color-secondary-lighten-primary-40}: lighten-color(
     var(--oo-color-secondary-primary),

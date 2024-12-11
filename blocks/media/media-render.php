@@ -99,6 +99,22 @@ if ($width_container == 'content-width') {
                     </div>
                 <?php } ?>
 
+                <?php if (!empty($buttons['buttons'][0]['link'])) { ?>
+                    <?php oo_get_template(
+                        'components',
+                        '',
+                        'component-buttons',
+                        [
+                            'buttons' => $buttons['buttons'],
+                            'additional_button_class' => $bg_color
+                                ? '--on-' . $bg_color
+                                : '',
+                            'additional_container_class' =>
+                                'c-media__buttons o-col-12 o-col-xl-8',
+                        ],
+                    ); ?>
+                <?php } ?>
+
                 <?php
                 if (!empty($image) && $type == 'image') { ?>
                     <?php oo_get_template('components', '', 'component-image', [
@@ -223,22 +239,6 @@ if ($width_container == 'content-width') {
                     </div>
                 <?php }
                 ?>
-
-                <?php if (!empty($buttons['buttons'][0]['link'])) { ?>
-                    <?php oo_get_template(
-                        'components',
-                        '',
-                        'component-buttons',
-                        [
-                            'buttons' => $buttons['buttons'],
-                            'additional_button_class' => $bg_color
-                                ? '--on-' . $bg_color
-                                : '',
-                            'additional_container_class' =>
-                                'c-media__buttons o-col-12 o-col-xl-8',
-                        ],
-                    ); ?>
-                <?php } ?>
             </div>
         </div>
     </section>
@@ -264,6 +264,27 @@ if ($width_container == 'content-width') {
                 <?php if (!empty($text['wysiwyg'])) { ?>
                     <div class="c-media__text o-text --is-wysiwyg o-col-12 o-col-xl-8">
                         <?php echo $text['wysiwyg']; ?>
+                    </div>
+                <?php } ?>
+
+                <?php if (!empty($buttons['buttons'][0]['link'])) { ?>
+                    <div class="c-media__container o-container">
+                        <div class="c-media__row o-row">
+                    
+                            <?php oo_get_template(
+                                'components',
+                                '',
+                                'component-buttons',
+                                [
+                                    'buttons' => $buttons['buttons'],
+                                    'additional_button_class' => $bg_color
+                                        ? '--on-' . $bg_color
+                                        : '',
+                                    'additional_container_class' =>
+                                        'c-media__buttons o-col-12 o-col-xl-8',
+                                ],
+                            ); ?>
+                        </div>
                     </div>
                 <?php } ?>
             </div>
@@ -389,25 +410,5 @@ if ($width_container == 'content-width') {
                 </div>
             <?php } ?>
         </div>
-        <?php if (!empty($buttons['buttons'][0]['link'])) { ?>
-            <div class="c-media__container o-container">
-                <div class="c-media__row o-row">
-               
-                    <?php oo_get_template(
-                        'components',
-                        '',
-                        'component-buttons',
-                        [
-                            'buttons' => $buttons['buttons'],
-                            'additional_button_class' => $bg_color
-                                ? '--on-' . $bg_color
-                                : '',
-                            'additional_container_class' =>
-                                'c-media__buttons o-col-12 o-col-xl-8',
-                        ],
-                    ); ?>
-                </div>
-            </div>
-        <?php } ?>
     </section>
 <?php } ?>
