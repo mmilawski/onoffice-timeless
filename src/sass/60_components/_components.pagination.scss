@@ -27,8 +27,10 @@
     height: $mobile-icon-wrapper-size;
     padding: 0.25rem;
     cursor: pointer;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
     transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
-      border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+      border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out, outline-color 0.25 ease-in-out;
 
     @include media-breakpoint-up(xl) {
       width: $desktop-icon-wrapper-size;
@@ -41,8 +43,8 @@
     }
 
     @include hover() {
-      color: var(--oo-color-contrast-primary);
-      background-color: var(--oo-color-transparent-primary-80);
+      color: var(--oo-color-primary);
+      background-color: var(--oo-color-mix-bg-contrast-20);
     }
 
     @include active() {
@@ -51,8 +53,7 @@
     }
 
     @include focus() {
-      outline: 2px solid var(--oo-color-primary);
-      outline-offset: 2px;
+      outline-color: var(--oo-color-primary);
     }
 
     @include disabled() {
@@ -94,8 +95,8 @@
       }
 
       @include hover() {
-        color: var(--oo-color-light-contrast-primary);
-        background-color: var(--oo-color-light-transparent-primary-80);
+        color: var(--oo-color-light-primary);
+        background-color: var(--oo-color-light-mix-bg-contrast-20);
       }
 
       @include active() {
@@ -128,8 +129,8 @@
       }
 
       @include hover() {
-        color: var(--oo-color-dark-contrast-primary);
-        background-color: var(--oo-color-dark-transparent-primary-80);
+        color: var(--oo-color-dark-primary);
+        background-color: var(--oo-color-dark-mix-bg-contrast-20);
       }
 
       @include active() {
@@ -162,8 +163,8 @@
       }
 
       @include hover() {
-        color: var(--oo-color-primary-contrast-primary);
-        background-color: var(--oo-color-primary-transparent-primary-80);
+        color: var(--oo-color-primary-primary);
+        background-color: var(--oo-color-primary-mix-bg-contrast-20);
       }
 
       @include active() {
@@ -196,8 +197,8 @@
       }
 
       @include hover() {
-        color: var(--oo-color-secondary-contrast-primary);
-        background-color: var(--oo-color-secondary-transparent-primary-80);
+        color: var(--oo-color-secondary-primary);
+        background-color: var(--oo-color-secondary-mix-bg-contrast-20);
       }
 
       @include active() {
