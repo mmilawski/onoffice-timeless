@@ -495,9 +495,11 @@
   }
 
   &.--on-video-player {
-    background-color: transparent;
     color: var(--oo-color-contrast-primary, var(--oo-color-primary));
+    background-color: transparent;
     border: none;
+    max-width: 100%;
+    padding: 0;
 
     @include hover-focus() {
       background-color: transparent;
