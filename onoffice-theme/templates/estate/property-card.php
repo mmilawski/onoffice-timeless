@@ -102,7 +102,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
      echo '--on-slider c-slider__slide splide__slide';
  } ?>">
         <div class="c-property-card__inner">
-            <?php if (!$is_reference && !$is_restricted_view) { ?>
+            <?php if (!$is_reference || !$is_restricted_view) { ?>
                 <a href="<?php echo esc_url(
                     $property_url,
                 ); ?>" class="c-property-card__link">
