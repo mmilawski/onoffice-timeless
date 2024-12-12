@@ -48,11 +48,11 @@
   }
 
   &__legend {
-    color: var(--oo-color-contrast-primary);
-    // background-color: var(--oo-color-primary);
-    border: 2px solid var(--oo-color-bg);
-    font-family: $font-family-button;
-    font-weight: $font-weight-button;
+    color: var(--oo-color-primary);
+    font-size: $desktop-h3-font-size;
+    line-height: $desktop-h3-line-height;
+    font-family: $font-family-headline;
+    font-weight: $font-weight-headline;
     display: inline-block;
     padding: 0.5rem 0.75rem;
     margin: -0.75rem auto 0 -0.75rem;
@@ -334,8 +334,7 @@
       border-color: var(--oo-color-bg);
     }
     #{$c-form}__legend {
-      color: var(--oo-color-contrast-primary);
-      // background-color: var(--oo-color-primary);
+      color: var(--oo-color-primary);
     }
     &.--on-banner {
       #{$c-form}__fieldset {

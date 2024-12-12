@@ -1,25 +1,26 @@
-$form-min-width: 180px;
+$form-min-width: 11.25rem;
+$form-height: 2.375rem;
 $form-margin: 0; // Margin
 $form-padding: 0.625rem 0.75rem; // Padding
 $form-padding-top: 0.375rem; // Padding
 $form-padding-right: 0.5rem; // Padding
 $form-select-size: 20px; // Size of the select arrow
 $form-control-size: 20px; // Size of the checkbox and radio button (1)
-$form-border: none;
+$form-border: 1px solid var(--oo-color-mix-bg-contrast-50);
 $form-radius: 8px; // Input border radius
 $form-duration: 0.25s; // Transition duration
 $form-timing: ease-in-out; // Transition timing
-$form-svg-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-chevron-down'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+$form-svg-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
 $form-svg-radio: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='currentColor' d='M256%2C464c114.9%2C0%2C208-93.1%2C208-208c0-114.9-93.1-208-208-208C141.1%2C48%2C48%2C141.1%2C48%2C256C48%2C370.9%2C141.1%2C464%2C256%2C464z'/%3E%3C/svg%3E");
-$form-svg-checkbox: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-check'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+$form-svg-checkbox: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
 $form-color: var(--oo-color-text);
 $form-color-bg: var(--oo-color-mix-bg-text-10);
-$form-bg: var(--oo-color-mix-bg-text-5);
-$form-placeholder: var(--oo-color-mix-bg-text-30);
+$form-bg: var(--oo-color-mix-bg-contrast-20);
+$form-placeholder: var(--oo-color-mix-bg-contrast-50);
 $form-primary: var(--oo-color-primary);
 $form-primary-contrast: var(--oo-color-contrast-primary);
 $form-primary-hover: var(--oo-color-mix-primary-contrast-20);
-$form-shadow: 0px;
+$form-shadow: none;
 $form-shadow-active: 0px;
 // $form-shadow: 2px 2px 0 var(--oo-color-transparent-text-10);
 // $form-shadow-active: 2px 2px 0 var(--oo-color-transparent-text-20);
@@ -30,18 +31,30 @@ $form-light-primary-contrast: var(--oo-color-light-contrast-primary);
 $form-light-primary-hover: var(--oo-color-light-mix-primary-contrast-20);
 $form-light-shadow: 0px;
 $form-light-shadow-focus: 0px;
+$form-light-bg: var(--oo-color-light-mix-bg-contrast-20);
+$form-light-border: var(--oo-color-light-mix-bg-contrast-50);
+$form-light-placeholder: var(--oo-color-light-mix-bg-contrast-50);
+$form-light-color: var(--oo-color-light-text, var(--oo-color-text));
 
 $form-dark-primary: var(--oo-color-dark-primary, var(--oo-color-primary));
 $form-dark-primary-contrast: var(--oo-color-dark-contrast-primary);
 $form-dark-primary-hover: var(--oo-color-dark-mix-primary-contrast-20);
 $form-dark-shadow: 0px;
 $form-dark-shadow-focus: 0px;
+$form-dark-bg: var(--oo-color-dark-mix-bg-contrast-20);
+$form-dark-border: var(--oo-color-dark-mix-bg-contrast-50);
+$form-dark-placeholder: var(--oo-color-dark-mix-bg-contrast-50);
+$form-dark-color: var(--oo-color-dark-text, var(--oo-color-text));
 
 $form-primary-primary: var(--oo-color-primary-primary, var(--oo-color-primary));
 $form-primary-primary-contrast: var(--oo-color-primary-contrast-primary);
 $form-primary-primary-hover: var(--oo-color-primary-mix-primary-contrast-20);
 $form-primary-shadow: 0px;
 $form-primary-shadow-focus: 0px;
+$form-primary-bg: var(--oo-color-primary-mix-bg-contrast-20);
+$form-primary-border: var(--oo-color-primary-mix-bg-contrast-50);
+$form-primary-placeholder: var(--oo-color-primary-mix-bg-contrast-50);
+$form-primary-color: var(--oo-color-primary-text, var(--oo-color-text));
 
 $form-secondary-primary: var(
   --oo-color-secondary-primary,
@@ -53,6 +66,10 @@ $form-secondary-primary-hover: var(
 );
 $form-secondary-shadow: 2px 2px 0 var(--oo-color-secondary-transparent-text-10);
 $form-secondary-shadow-focus: 0px;
+$form-secondary-bg: var(--oo-color-secondary-mix-bg-contrast-20);
+$form-secondary-border: var(--oo-color-secondary-mix-bg-contrast-50);
+$form-secondary-placeholder: var(--oo-color-secondary-mix-bg-contrast-50);
+$form-secondary-color: var(--oo-color-secondary-text, var(--oo-color-text));
 
 $form-footer-color: var(--oo-color-footer-text, var(--oo-color-text));
 $form-footer-primary: var(--oo-color-footer-primary, var(--oo-color-primary));
@@ -66,6 +83,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
   box-sizing: border-box;
   min-width: $form-min-width;
   width: 100%;
+  height: $form-height;
   margin: $form-margin;
   padding: $form-padding;
   outline: none;
@@ -83,6 +101,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
 
   @include focus() {
     outline: 2px solid $form-primary;
+    border-color: transparent;
   }
 
   &::placeholder {
@@ -131,13 +150,49 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
   }
 
   .--bg-light & {
+    background-color: $form-light-bg;
+    border-color: $form-light-border;
+    color: $form-light-color;
+    outline-color: $form-light-primary;
+
+    &::placeholder {
+      color: $form-light-placeholder;
+    }
   }
+
   .--bg-dark & {
+    background-color: $form-dark-bg;
+    border-color: $form-dark-border;
+    color: $form-dark-color;
+    outline-color: $form-dark-primary;
+
+    &::placeholder {
+      color: $form-dark-placeholder;
+    }
   }
+
   .--bg-primary & {
+    background-color: $form-primary-bg;
+    border-color: $form-primary-border;
+    color: $form-primary-color;
+    outline-color: $form-primary-primary;
+
+    &::placeholder {
+      color: $form-primary-placeholder;
+    }
   }
+
   .--bg-secondary & {
+    background-color: $form-secondary-bg;
+    border-color: $form-secondary-border;
+    color: $form-secondary-color;
+    outline-color: $form-secondary-primary;
+
+    &::placeholder {
+      color: $form-secondary-placeholder;
+    }
   }
+
   .--bg-footer & {
   }
 }
@@ -149,6 +204,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
   box-sizing: border-box;
   min-width: $form-min-width;
   width: 100%;
+  height: $form-height;
   margin: $form-margin;
   padding: $form-padding;
   padding-right: calc(
@@ -168,6 +224,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
 
   @include focus() {
     outline: 2px solid $form-primary;
+    border-color: transparent;
   }
 
   option[value=''] {
@@ -179,32 +236,36 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
     background-size: $form-select-size;
     background-repeat: no-repeat;
     background-position: calc(100% - #{$form-padding-right}) center;
+    height: $form-height;
   }
 
   &.--multiple {
-    max-height: calc(#{$form-padding-top} + #{$mobile-global-line-height});
-    @include media-breakpoint-up(xl) {
-      max-height: calc(#{$form-padding-top} + #{$desktop-global-line-height});
-    }
+    height: $form-height;
   }
 
   .--bg-light & {
   }
+
   .--bg-dark & {
   }
+
   .--bg-primary & {
   }
+
   .--bg-secondary & {
   }
+
   .--bg-footer & {
   }
 }
+
 #onofficeSortListSelector {
   width: auto;
 }
 
 /* Select2 */
 .select2 {
+  min-width: $form-min-width;
   width: 100% !important;
 }
 
@@ -212,42 +273,57 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
   .select2-dropdown {
     color: $form-color;
     background: $form-bg;
-    border: $form-border;
+    border: none;
     border-radius: $form-radius;
     box-shadow: $form-shadow-active;
     margin: 0;
   }
 
   .select2-results {
-    border: $form-border;
     border-radius: $form-radius;
+
     &__options {
     }
+
     &__option {
       padding: $form-padding;
       hyphens: auto;
       display: grid;
       grid-template-columns: 0.5rem 1fr;
       gap: 0.5rem;
+      padding: 0.75rem;
 
       &:before {
         content: '●';
         color: $form-primary;
         line-height: $global-line-height;
+
+        @include focus() {
+          color: $form-primary-hover;
+        }
       }
 
       &[aria-selected='true'],
       &--selected {
         background-color: $form-color-bg;
+
         &:before {
           color: $form-primary;
         }
       }
+
       &--highlighted[aria-selected] {
         background-color: $form-primary;
         color: $form-primary-contrast;
+
         &:before {
           color: $form-primary-contrast;
+        }
+
+        @include active() {
+          &:before {
+            color: $form-primary;
+          }
         }
       }
 
@@ -255,30 +331,37 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
         font-family: $font-family-text-bold;
         font-weight: $font-weight-text-bold;
       }
+
       &.level-1 {
         padding-left: 2rem;
       }
+
       &.level-2 {
         padding-left: 4rem;
       }
+
       &.level-3 {
         padding-left: 8rem;
       }
+
       &.level-4 {
         padding-left: 10rem;
       }
+
       &.level-5 {
         padding-left: 12rem;
       }
 
       @include active() {
         background-color: var(--oo-color-lighten-primary-90); // 10% of primary
+        color: var(--oo-color-primary);
       }
     }
   }
 
   .select2-search {
     $search: '.select2-search';
+
     &--inline {
       #{$search}__field {
         margin: 0;
@@ -313,16 +396,49 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
     border: $form-border;
     border-radius: $form-radius !important;
     box-shadow: $form-shadow;
-    height: calc($mobile-global-line-height + ($form-padding-top * 2));
+    height: $form-height;
     padding: $form-padding;
     display: flex;
     align-items: center;
+
+    .--bg-light & {
+      background: $form-light-bg;
+      border: $form-light-border;
+
+      @include focus-within() {
+        outline: 2px solid $form-light-primary;
+      }
+    }
+
+    .--on-bg-dark & {
+      background: $form-dark-bg;
+
+      @include focus-within() {
+        outline: 2px solid $form-dark-primary;
+      }
+    }
+
+    .--bg-primary & {
+      background: $form-primary-bg;
+      @include focus-within() {
+        outline: 2px solid $form-primary-primary;
+      }
+    }
+
+    .--bg-secondary & {
+      background: $form-secondary-bg;
+      @include focus-within() {
+        outline: 2px solid $form-secondary-primary;
+      }
+    }
 
     @include focus() {
       outline: 2px solid $form-primary;
     }
 
     @include focus-within() {
+      outline: 2px solid $form-primary;
+
       #{$selection}__arrow {
         b {
           background: $form-primary;
@@ -331,7 +447,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
     }
 
     @include media-breakpoint-up(xl) {
-      height: calc($desktop-global-line-height + ($form-padding-top * 2));
+      height: $form-height;
     }
 
     // Single -------------------------------------------------------------- //
@@ -349,19 +465,16 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
         float: none;
         margin: 0;
         margin-right: 0.25rem;
-        padding: 0.125rem;
-        height: auto;
-        line-height: $form-select-size;
         font-family: $font-family-text-bold;
-        font-weight: $font-weight-text-bold;
+        font-weight: $font-weight-text;
         color: $form-primary;
-        border: 0;
-        border-radius: 0;
         position: static;
+        border: none;
+        font-size: 1.5rem;
+        border-radius: $border-radius-small;
 
-        @include hover-focus() {
-          background-color: $form-primary;
-          color: $form-primary-contrast;
+        span {
+          display: flex;
         }
       }
 
@@ -410,11 +523,10 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
       }
 
       #{$selection}__choice {
-        border-radius: $form-radius;
+        border: none;
         padding: 0;
         margin: 0 0.5rem 0 0;
         background: none;
-        border: $form-border;
         cursor: default;
         display: inline-block;
         overflow: hidden;
@@ -428,18 +540,16 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
         &__remove {
           margin: 0;
           margin-right: 0.25rem;
-          padding: 0.125rem;
-          line-height: $form-select-size;
           font-family: $font-family-text-bold;
-          font-weight: $font-weight-text-bold;
+          font-weight: $font-weight-text;
           color: $form-primary;
-          border: $form-border;
-          border-radius: 0;
           position: static;
+          border: none;
+          font-size: 1.5rem;
+          border-radius: $border-radius-small;
 
-          @include hover-focus() {
-            background-color: $form-primary;
-            color: $form-primary-contrast;
+          span {
+            display: flex;
           }
         }
       }
@@ -461,12 +571,16 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
 
   .--bg-light & {
   }
+
   .--bg-dark & {
   }
+
   .--bg-primary & {
   }
+
   .--bg-secondary & {
   }
+
   .--bg-footer & {
   }
 }
@@ -499,6 +613,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
 
   @include focus() {
     outline: 2px solid $form-primary;
+    border-color: transparent;
   }
 
   &::placeholder {
@@ -508,12 +623,16 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
 
   .--bg-light & {
   }
+
   .--bg-dark & {
   }
+
   .--bg-primary & {
   }
+
   .--bg-secondary & {
   }
+
   .--bg-footer & {
   }
 }
@@ -682,7 +801,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
       display: block;
       width: $form-control-size;
       height: $form-control-size;
-      border-radius: $component-border-radius-small;
+      border-radius: $border-radius-small;
     }
 
     &::before {
@@ -731,6 +850,9 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
 
   &__input:checked + &__label::before {
     background-color: $form-primary;
+    outline: 1px solid $form-primary;
+    outline-offset: 1px;
+    border-color: $form-primary;
   }
 
   &__input:checked + &__label::after {
@@ -738,7 +860,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
   }
 
   &__input[type='checkbox']:checked + &__label::after {
-    background: #fff;
+    background-color: var(--oo-color-contrast-primary);
   }
 
   .--is--popup & {
@@ -801,12 +923,16 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
 
   .--bg-light & {
   }
+
   .--bg-dark & {
   }
+
   .--bg-primary & {
   }
+
   .--bg-secondary & {
   }
+
   .--bg-footer & {
   }
 }

@@ -12,8 +12,10 @@
     color 0.25s ease-in-out, background-color 0.25s ease-in-out,
     outline-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
   cursor: pointer;
-  border-radius: $component-border-radius;
+  border-radius: $border-radius;
   max-width: 300px;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 
   @include plain-visited() {
     color: var(--oo-color-contrast-primary);
@@ -33,8 +35,7 @@
   }
 
   @include focus() {
-    outline: 2px solid var(--oo-color-primary);
-    outline-offset: 2px;
+    outline-color: var(--oo-color-primary);
   }
 
   @include disabled() {
@@ -67,8 +68,7 @@
     }
 
     @include focus() {
-      outline: 2px solid var(--oo-color-light-primary);
-      outline-offset: 2px;
+      outline-color: var(--oo-color-light-primary);
     }
 
     @include disabled() {
@@ -102,8 +102,7 @@
     }
 
     @include focus() {
-      outline: 2px solid var(--oo-color-dark-primary);
-      outline-offset: 2px;
+      outline-color: var(--oo-color-dark-primary);
     }
 
     @include disabled() {
@@ -140,8 +139,7 @@
     }
 
     @include focus() {
-      outline: 2px solid var(--oo-color-primary-primary);
-      outline-offset: 2px;
+      outline-color: var(--oo-color-primary-primary);
     }
 
     @include disabled() {
@@ -178,8 +176,7 @@
     }
 
     @include focus() {
-      outline: 2px solid var(--oo-color-secondary-primary);
-      outline-offset: 2px;
+      outline-color: var(--oo-color-secondary-primary);
     }
 
     @include disabled() {
@@ -213,8 +210,7 @@
     }
 
     @include focus() {
-      outline: 2px solid var(--oo-color-footer-primary);
-      outline-offset: 2px;
+      outline-color: var(--oo-color-footer-primary);
     }
 
     @include disabled() {
@@ -242,8 +238,7 @@
     }
 
     @include focus() {
-      outline: 2px solid var(--oo-color-primary);
-      outline-offset: 2px;
+      outline-color: var(--oo-color-primary);
     }
 
     @include disabled() {
@@ -265,8 +260,7 @@
     }
 
     @include focus() {
-      outline: 2px solid var(--oo-color-primary);
-      outline-offset: 2px;
+      outline-color: var(--oo-color-primary);
     }
 
     @include active() {
@@ -296,9 +290,7 @@
       }
 
       @include focus() {
-        outline: 2px solid
-          var(--oo-color-light-primary, var(--oo-color-primary));
-        outline-offset: 2px;
+        outline-color: var(--oo-color-light-primary, var(--oo-color-primary));
       }
 
       @include active() {
@@ -329,8 +321,7 @@
       }
 
       @include focus() {
-        outline: 2px solid var(--oo-color-dark-primary, var(--oo-color-primary));
-        outline-offset: 2px;
+        outline-color: var(--oo-color-dark-primary, var(--oo-color-primary));
       }
 
       @include active() {
@@ -361,9 +352,7 @@
       }
 
       @include focus() {
-        outline: 2px solid
-          var(--oo-color-primary-primary, var(--oo-color-primary));
-        outline-offset: 2px;
+        outline-color: var(--oo-color-primary-primary, var(--oo-color-primary));
       }
 
       @include active() {
@@ -397,9 +386,10 @@
       }
 
       @include focus() {
-        outline: 2px solid
-          var(--oo-color-secondary-primary, var(--oo-color-primary));
-        outline-offset: 2px;
+        outline-color: var(
+          --oo-color-secondary-primary,
+          var(--oo-color-primary)
+        );
       }
 
       @include active() {
@@ -430,9 +420,7 @@
       }
 
       @include focus() {
-        outline: 2px solid
-          var(--oo-color-footer-primary, var(--oo-color-primary));
-        outline-offset: 2px;
+        outline-color: var(--oo-color-footer-primary, var(--oo-color-primary));
       }
 
       @include active() {
@@ -463,8 +451,7 @@
       }
 
       @include focus() {
-        outline: 2px solid var(--oo-color-primary);
-        outline-offset: 2px;
+        outline-color: var(--oo-color-primary);
       }
 
       @include active() {
@@ -548,14 +535,14 @@
   }
 
   &.--is-primary {
-    border-radius: $component-border-radius;
+    border-radius: $border-radius;
   }
 
   &.--is-secondary {
-    border-radius: $component-border-radius;
+    border-radius: $border-radius;
   }
 
   &.--is-tertiary {
-    border-radius: $component-border-radius;
+    border-radius: $border-radius;
   }
 }

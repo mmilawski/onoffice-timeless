@@ -33,6 +33,7 @@
         width: 100%;
         height: auto;
         margin: 0;
+        border-radius: $border-radius;
       }
     }
     &__description-wrapper {
@@ -72,6 +73,7 @@
       justify-content: center;
       padding: 0.25rem;
       cursor: pointer;
+      border-radius: $border-radius;
       transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out,
         visibility 0.25s ease-in-out, color 0.25s ease-in-out,
         background-color 0.25s ease-in-out, border-color 0.25s ease-in-out,
@@ -125,8 +127,8 @@
         }
       }
       &.--close {
-        top: 0;
-        right: 0;
+        top: 8px;
+        right: 8px;
       }
       &.disabled {
         opacity: 0.1;

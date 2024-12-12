@@ -1,11 +1,11 @@
 .c-property-features {
   $c-property-features: &;
 
-  border-radius: $component-border-radius;
+  border-radius: $border-radius;
   color: var(--oo-color-property-status-contrast-bg);
   background-color: var(--oo-color-property-status-bg);
   border: 0px;
-  padding: 0.2rem 0.2rem;
+  padding: 0.15rem 0.5rem;
   margin: 2px;
   white-space: nowrap;
   display: inline-block;
