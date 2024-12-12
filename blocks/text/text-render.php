@@ -60,10 +60,6 @@ if (!empty($texts[0]['text']['wysiwyg'])) {
                                     [
                                         'buttons' => $buttons['buttons'],
                                         'additional_button_class' =>
-                                            ($text_count === 3
-                                                ? '--full-width'
-                                                : '') .
-                                            ' ' .
                                             ($bg_color
                                                 ? '--on-' . $bg_color
                                                 : ''),
