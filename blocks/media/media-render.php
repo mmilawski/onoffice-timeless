@@ -225,7 +225,7 @@ if ($width_container == 'content-width') {
                                     ],
                                 ); ?>
                                 <button 
-                                    class="c-media__play c-button --on-<?php echo $bg_color; ?> --on-video-player" 
+                                    class="c-media__play c-player --on-<?php echo $bg_color; ?>" 
                                     title="<?php esc_html_e(
                                         'Video ansehen',
                                         'oo_theme',
@@ -400,7 +400,7 @@ if ($width_container == 'content-width') {
                             ); ?>
 
                             <button 
-                                class="c-media__play c-button --on-<?php echo $bg_color; ?> --on-video-player" 
+                                class="c-media__play c-player --on-<?php echo $bg_color; ?>" 
                                 title="<?php esc_html_e(
                                     'Video ansehen',
                                     'oo_theme',
@@ -409,10 +409,10 @@ if ($width_container == 'content-width') {
                             </button>
                         </div>
                     <?php echo $iframe_without_source;} else { ?>
-										<div class="c-media__video-wrapper --has-no-thumbnail <?php echo $video_class; ?>">
-												<?php echo $iframe_with_attributes; ?>
-											</div>
-									<?php } ?>
+                        <div class="c-media__video-wrapper --has-no-thumbnail <?php echo $video_class; ?>">
+                            <?php echo $iframe_with_attributes; ?>
+                        </div>
+                    <?php } ?>
                 </div>
             <?php } ?>
         </div>
