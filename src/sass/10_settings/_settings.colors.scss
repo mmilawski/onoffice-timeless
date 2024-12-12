@@ -17,6 +17,7 @@
     var(--oo-color-success),
     0.2
   );
+
   #{--oo-color-transparent-warning-20}: transparent-color(
     var(--oo-color-warning),
     0.2
@@ -42,6 +43,14 @@
   #{--oo-color-transparent-bg-80}: transparent-color(var(--oo-color-bg), 0.8);
   #{--oo-color-transparent-bg-90}: transparent-color(var(--oo-color-bg), 0.9);
   #{--oo-color-transparent-bg-100}: transparent-color(var(--oo-color-bg), 1);
+  #{--oo-color-mix-bg-contrast-20}: mix-color-with-contrast(
+    var(--oo-color-bg),
+    0.2
+  );
+  #{--oo-color-mix-bg-contrast-50}: mix-color-with-contrast(
+    var(--oo-color-bg),
+    0.5
+  );
   #{--oo-color-transparent-primary-40}: transparent-color(
     var(--oo-color-primary),
     0.4
@@ -147,6 +156,16 @@
     0.2,
     var(--oo-color-primary)
   );
+  #{--oo-color-light-mix-bg-contrast-20}: mix-color-with-contrast(
+    var(--oo-color-light-bg),
+    0.2,
+    var(--oo-color-bg)
+  );
+  #{--oo-color-light-mix-bg-contrast-50}: mix-color-with-contrast(
+    var(--oo-color-light-bg),
+    0.5,
+    var(--oo-color-bg)
+  );
   #{--oo-color-light-mix-bg-text-10}: mix-colors(
     var(--oo-color-light-bg),
     var(--oo-color-light-text),
@@ -193,6 +212,16 @@
   #{--oo-color-dark-transparent-bg-100}: transparent-color(
     var(--oo-color-dark-bg),
     1,
+    var(--oo-color-bg)
+  );
+  #{--oo-color-dark-mix-bg-contrast-20}: mix-color-with-contrast(
+    var(--oo-color-dark-bg),
+    0.2,
+    var(--oo-color-bg)
+  );
+  #{--oo-color-dark-mix-bg-contrast-50}: mix-color-with-contrast(
+    var(--oo-color-dark-bg),
+    0.5,
     var(--oo-color-bg)
   );
   #{--oo-color-dark-transparent-primary-40}: transparent-color(
@@ -277,6 +306,16 @@
     1,
     var(--oo-color-bg)
   );
+  #{--oo-color-primary-mix-bg-contrast-20}: mix-color-with-contrast(
+    var(--oo-color-primary-bg),
+    0.2,
+    var(--oo-color-bg)
+  );
+  #{--oo-color-primary-mix-bg-contrast-50}: mix-color-with-contrast(
+    var(--oo-color-primary-bg),
+    0.5,
+    var(--oo-color-bg)
+  );
   #{--oo-color-primary-transparent-primary-40}: transparent-color(
     var(--oo-color-primary-primary),
     0.4,
@@ -357,6 +396,16 @@
   #{--oo-color-secondary-transparent-bg-100}: transparent-color(
     var(--oo-color-secondary-bg),
     1,
+    var(--oo-color-bg)
+  );
+  #{--oo-color-secondary-mix-bg-contrast-20}: mix-color-with-contrast(
+    var(--oo-color-secondary-bg),
+    0.2,
+    var(--oo-color-bg)
+  );
+  #{--oo-color-secondary-mix-bg-contrast-50}: mix-color-with-contrast(
+    var(--oo-color-secondary-bg),
+    0.5,
     var(--oo-color-bg)
   );
   #{--oo-color-secondary-transparent-primary-40}: transparent-color(

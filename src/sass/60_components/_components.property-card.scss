@@ -3,7 +3,7 @@
 
   display: grid;
   grid-template-rows: min-content;
-  border: 2px solid var(--oo-color-bg);
+  border: 1px solid var(--oo-color-bg);
   border-radius: $border-radius;
 
   &__inner {
