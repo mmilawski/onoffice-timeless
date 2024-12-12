@@ -217,7 +217,7 @@ $media_width_xxxl = '460';
                             ); ?>
 
                             <button 
-                                class="c-media-text__play c-button --on-<?php echo $bg_color; ?> --on-video-player"
+                                class="c-media-text__play c-player --on-<?php echo $bg_color; ?> "
                                 title="<?php esc_html_e(
                                     'Video ansehen',
                                     'oo_theme',
