@@ -59,10 +59,9 @@ if (!empty($texts[0]['text']['wysiwyg'])) {
                                     'component-buttons',
                                     [
                                         'buttons' => $buttons['buttons'],
-                                        'additional_button_class' =>
-                                            ($bg_color
-                                                ? '--on-' . $bg_color
-                                                : ''),
+                                        'additional_button_class' => $bg_color
+                                            ? '--on-' . $bg_color
+                                            : '',
                                         'additional_container_class' =>
                                             'c-text__buttons',
                                     ],
