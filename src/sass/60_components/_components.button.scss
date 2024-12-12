@@ -493,24 +493,7 @@
       height: 100%;
     }
   }
-
-  &.--on-video-player {
-    background-color: transparent;
-    color: var(--oo-color-contrast-primary, var(--oo-color-primary));
-    border: none;
-
-    @include hover-focus() {
-      background-color: transparent;
-      outline: none;
-    }
-
-    &.--on-bg-dark {
-      @include hover-focus() {
-        color: inherit;
-      }
-    }
-  }
-
+  
   &.--read-more {
     &:before {
       content: attr(data-open-text);
