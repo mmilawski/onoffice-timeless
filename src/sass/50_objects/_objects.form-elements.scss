@@ -549,6 +549,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
           border: none;
           font-size: 1.5rem;
           border-radius: $border-radius-small;
+          vertical-align: middle;
 
           span {
             display: flex;
