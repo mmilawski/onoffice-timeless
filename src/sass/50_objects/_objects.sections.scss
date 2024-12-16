@@ -59,31 +59,7 @@
     }
   }
 
-  &.--with-separator {
-    padding-bottom: calc(
-      $mobile-section-padding-bottom + $mobile-clip-path-height
-    );
-    @include media-breakpoint-up(xl) {
-      padding-bottom: calc(
-        $desktop-section-padding-bottom + $desktop-clip-path-height
-      );
-    }
-  }
-
-  &.--with-separator + & {
-    padding-top: calc($mobile-section-padding-top + $mobile-clip-path-height);
-    margin-top: -$mobile-clip-path-height;
-    clip-path: $mobile-clip-path-reverse;
-    @include media-breakpoint-up(xl) {
-      padding-top: calc(
-        $desktop-section-padding-top + $desktop-clip-path-height
-      );
-      margin-top: -$desktop-clip-path-height;
-      clip-path: $desktop-clip-path-reverse;
-    }
-  }
-
-  // remove padding and clip-path if sections with the same color are underneath each other
+  // remove padding if sections with the same color are underneath each other
   &.--bg-transparent:not(.--bg-transparent-mixed):not(.--has-bg-image)
     + &.--bg-transparent:not(.--bg-transparent-mixed):not(.--has-bg-image),
   &.--bg-transparent-mixed + &.--bg-transparent-mixed,
@@ -100,6 +76,5 @@
     + &.--bg-secondary:not(.--bg-secondary-mixed):not(.--has-bg-image),
   &.--bg-secondary-mixed + &.--bg-secondary-mixed {
     padding-top: 0;
-    clip-path: none;
   }
 }

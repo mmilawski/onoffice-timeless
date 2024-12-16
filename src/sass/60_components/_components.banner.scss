@@ -11,25 +11,19 @@
     justify-content: flex-start;
     width: 100%;
     padding: 0;
-    padding-bottom: calc(
-      $mobile-section-padding-bottom + $mobile-clip-path-height
-    );
+    padding-bottom: $mobile-section-padding-bottom;
 
     @include media-breakpoint-up(xl) {
       min-height: 70vh;
       justify-content: center;
       padding-top: $desktop-section-padding-top;
-      padding-bottom: calc(
-        $desktop-section-padding-bottom + $desktop-clip-path-height
-      );
+      padding-bottom: $desktop-section-padding-bottom;
     }
 
     &.--content-none {
       padding-bottom: 0;
       @include media-breakpoint-up(xl) {
-        padding-bottom: calc(
-          $desktop-section-padding-bottom + $desktop-clip-path-height
-        );
+        padding-bottom: $desktop-section-padding-bottom;
       }
     }
     &.--content-property-search {
@@ -42,7 +36,6 @@
     max-width: 100%;
     width: 100vw;
     height: 70vh;
-    clip-path: $mobile-clip-path-bottom;
     background-color: var(--oo-color-mix-bg-text-20);
 
     @include media-breakpoint-up(xl) {
@@ -52,7 +45,6 @@
       width: 100%;
       height: 100%;
       min-height: none;
-      clip-path: none;
     }
   }
 
@@ -87,8 +79,7 @@
   }
 
   &__container {
-    padding-top: calc($mobile-section-padding-top + $mobile-clip-path-height);
-    margin-top: -$mobile-clip-path-height;
+    padding-top: $mobile-section-padding-top;
     @include media-breakpoint-up(xl) {
       padding-top: 0;
       margin-top: 0;
@@ -111,7 +102,6 @@
     border-radius: $border-radius;
 
     @include media-breakpoint-up(xl) {
-      clip-path: none;
       margin: 0 1rem;
       padding: 2rem;
       background-color: var(--oo-color-transparent-bg-90);
@@ -233,31 +223,16 @@
   }
 
   & + *:not(&) {
-    padding-top: calc($mobile-section-padding-top + $mobile-clip-path-height);
-    margin-top: -$mobile-clip-path-height;
-    clip-path: $mobile-clip-path-reverse;
+    padding-top: $mobile-section-padding-top;
     @include media-breakpoint-up(xl) {
-      padding-top: calc(
-        $desktop-section-padding-top + $desktop-clip-path-height
-      );
-      margin-top: -$desktop-clip-path-height;
-      clip-path: $desktop-clip-path-reverse;
+      padding-top: $desktop-section-padding-top;
     }
   }
 
   & + & {
-    margin-top: -$mobile-clip-path-height;
-    clip-path: $mobile-clip-path-top;
-    @include media-breakpoint-up(xl) {
-      margin-top: -$desktop-clip-path-height;
-      clip-path: $desktop-clip-path-top;
-    }
-
     #{$c-banner}__slide {
       @include media-breakpoint-up(xl) {
-        padding-top: calc(
-          $desktop-section-padding-top + $desktop-clip-path-height
-        );
+        padding-top: $desktop-section-padding-top;
       }
     }
   }
