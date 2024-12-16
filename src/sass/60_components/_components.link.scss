@@ -17,13 +17,8 @@
 
   &__icon,
   svg {
-    width: $mobile-icon-size-small;
-    height: $mobile-icon-size-small;
-
-    @include media-breakpoint-up(xl) {
-      width: $desktop-icon-size-small;
-      height: $desktop-icon-size-small;
-    }
+    width: $icon-size;
+    height: $icon-size;
   }
 
   &.--chevron-right,

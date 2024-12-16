@@ -63,8 +63,8 @@
     }
     &__icon-wrapper {
       position: absolute;
-      width: $mobile-icon-wrapper-size;
-      height: $mobile-icon-wrapper-size;
+      width: $icon-wrapper-size;
+      height: $icon-wrapper-size;
       background-color: var(--oo-color-primary);
       color: var(--oo-color-contrast-primary);
       border: 2px solid var(--oo-color-primary);
@@ -78,11 +78,6 @@
         visibility 0.25s ease-in-out, color 0.25s ease-in-out,
         background-color 0.25s ease-in-out, border-color 0.25s ease-in-out,
         box-shadow 0.25s ease-in-out;
-
-      @include media-breakpoint-up(xl) {
-        width: $desktop-icon-wrapper-size;
-        height: $desktop-icon-wrapper-size;
-      }
 
       @include plain-visited() {
         color: var(--oo-color-contrast-primary);
@@ -142,13 +137,8 @@
       }
 
       #{$c-lightbox}__icon {
-        height: $mobile-icon-size;
-        width: $mobile-icon-size;
-
-        @include media-breakpoint-up(xl) {
-          height: $desktop-icon-size;
-          width: $desktop-icon-size;
-        }
+        height: $icon-size;
+        width: $icon-size;
 
         path {
           fill: none;

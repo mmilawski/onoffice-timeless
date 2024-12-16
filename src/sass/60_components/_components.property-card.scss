@@ -64,12 +64,8 @@
     align-items: center;
     justify-content: center;
     padding: 0.5rem;
-    width: $mobile-icon-wrapper-size;
-    height: $mobile-icon-wrapper-size;
-    @include media-breakpoint-up(xl) {
-      width: $desktop-icon-wrapper-size;
-      height: $desktop-icon-wrapper-size;
-    }
+    width: $icon-wrapper-size;
+    height: $icon-wrapper-size;
     cursor: pointer;
 
     &.--on-detail-page {

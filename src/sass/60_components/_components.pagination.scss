@@ -23,8 +23,8 @@
     align-items: center;
     justify-content: center;
     border-radius: $border-radius;
-    width: $mobile-icon-wrapper-size;
-    height: $mobile-icon-wrapper-size;
+    width: $icon-wrapper-size;
+    height: $icon-wrapper-size;
     padding: 0.25rem;
     cursor: pointer;
     outline: 2px solid transparent;
@@ -32,11 +32,6 @@
     transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
       border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out,
       outline-color 0.25 ease-in-out;
-
-    @include media-breakpoint-up(xl) {
-      width: $desktop-icon-wrapper-size;
-      height: $desktop-icon-wrapper-size;
-    }
 
     @include plain-visited() {
       color: var(--oo-color-primary);

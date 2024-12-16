@@ -1,8 +1,8 @@
 .c-back-to-top {
   $c-back-to-top: &;
 
-  width: $mobile-icon-wrapper-size;
-  height: $mobile-icon-wrapper-size;
+  width: $icon-wrapper-size;
+  height: $icon-wrapper-size;
   background-color: var(--oo-color-primary);
   color: var(--oo-color-contrast-primary);
   border: 2px solid var(--oo-color-primary);
@@ -27,8 +27,6 @@
   @include media-breakpoint-up(xl) {
     right: 2rem;
     bottom: 2rem;
-    width: $desktop-icon-wrapper-size;
-    height: $desktop-icon-wrapper-size;
   }
 
   @include plain-visited() {
