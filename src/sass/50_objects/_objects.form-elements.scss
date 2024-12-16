@@ -421,6 +421,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
 
     .--bg-primary & {
       background: $form-primary-bg;
+      border-color: $form-primary-border;
       @include focus-within() {
         outline: 2px solid $form-primary-primary;
       }
