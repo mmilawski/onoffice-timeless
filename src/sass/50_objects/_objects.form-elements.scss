@@ -199,7 +199,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
 
 /* Select */
 .o-select,
-#onofficeSortListSelector {
+.onofficeSortListSelector {
   appearance: none;
   box-sizing: border-box;
   min-width: $form-min-width;
@@ -259,7 +259,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
   }
 }
 
-#onofficeSortListSelector {
+.onofficeSortListSelector {
   width: auto;
 }
 
