@@ -23,24 +23,27 @@ if (!empty(get_field('property_search_result'))) {
  ]; ?> --with-separator">
     <div class="c-property-search__container o-container">
         <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
-            <div class="c-property-search__content o-row">
+            <div class="c-property-search__content o-row --position-center">
                 <?php if (!empty($headline['text'])) {
                     oo_get_template('components', '', 'component-headline', [
                         'headline' => $headline,
                         'additional_headline_class' =>
-                            'c-property-search__headline o-col-12 o-col-xl-8',
+                            'c-property-search__headline o-col-12 o-col-lg-10 o-col-xl-8',
                     ]);
                 } ?>
                 <?php if (!empty($text['wysiwyg'])) { ?>
-                    <div class="c-property-search__text o-text --is-wysiwyg o-col-12 o-col-xl-8">
+                    <div class="c-property-search__text o-text --is-wysiwyg o-col-12 o-col-lg-10 o-col-xl-8">
                         <?php echo $text['wysiwyg']; ?>
                     </div>
                 <?php } ?>
             </div>
         <?php } ?>
-
-        <?php if (!empty($shortcode)) {
-            echo do_shortcode($shortcode);
-        } ?>
+        <div class="c-property-search__content o-row --position-center">
+            <div class="c-property-search__shortcode o-col-12 o-col-lg-10 o-col-xl-8">
+                <?php if (!empty($shortcode)) {
+                    echo do_shortcode($shortcode);
+                } ?>
+            </div>
+        </div>
     </div>
 </section>
