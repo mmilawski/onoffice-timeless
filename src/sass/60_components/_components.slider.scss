@@ -224,7 +224,9 @@
   &.--is-banner-slider {
     #{$c-slider}__navigation {
       position: absolute;
-      top: calc(70vh - #{$mobile-icon-wrapper-size} - 0.5rem); // mobile banner picture height - arrow size - bottom spacing
+      top: calc(
+        70vh - #{$mobile-icon-wrapper-size} - 0.5rem
+      ); // mobile banner picture height - arrow size - bottom spacing
       left: $container-padding-x;
       width: calc(100% - #{$grid-gutter-width});
       @include media-breakpoint-up(xl) {
@@ -237,7 +239,10 @@
             (
                 (
                     100% -
-                      (#{$desktop-section-padding-top} + #{$mobile-header-height} + #{$desktop-section-padding-bottom})
+                      (
+                        #{$desktop-section-padding-top} + #{$mobile-header-height} +
+                          #{$desktop-section-padding-bottom}
+                      )
                   ) / 2
               ) + #{$desktop-section-padding-top} + #{$mobile-header-height}
           );
@@ -247,7 +252,10 @@
             (
                 (
                     100% -
-                      (#{$desktop-section-padding-top} + #{$desktop-header-height} + #{$desktop-section-padding-bottom})
+                      (
+                        #{$desktop-section-padding-top} + #{$desktop-header-height} +
+                          #{$desktop-section-padding-bottom}
+                      )
                   ) / 2
               ) + #{$desktop-section-padding-top} + #{$mobile-header-height}
           );
@@ -256,7 +264,9 @@
     }
     #{$c-slider}__pagination {
       position: absolute;
-      top: calc(70vh - #{$mobile-icon-wrapper-size} - 0.5rem); // mobile banner picture height - arrow size - bottom spacing
+      top: calc(
+        70vh - #{$mobile-icon-wrapper-size} - 0.5rem
+      ); // mobile banner picture height - arrow size - bottom spacing
       width: calc(
         100% - ((#{$grid-gutter-width} + #{$mobile-icon-wrapper-size}) * 2)
       );
