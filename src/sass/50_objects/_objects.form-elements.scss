@@ -573,15 +573,88 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
   }
 
   .--bg-light & {
+    .select2-selection {
+      color: $form-light-color;
+      &__placeholder {
+        color: $form-light-placeholder;
+      }
+      &__arrow {
+        b {
+          background: $form-light-color;
+        }
+      }
+    }
+    .select2-search__field {
+      &::placeholder {
+        color: $form-light-placeholder;
+      }
+    }
   }
 
   .--bg-dark & {
+    .select2-selection {
+      color: $form-dark-color;
+      &__choice__remove {
+        color: $form-dark-color;
+      }
+      &__placeholder {
+        color: $form-dark-placeholder;
+      }
+      &__arrow {
+        b {
+          background: $form-dark-color;
+        }
+      }
+    }
+    .select2-search__field {
+      &::placeholder {
+        color: $form-dark-placeholder;
+      }
+    }
   }
 
   .--bg-primary & {
+    .select2-selection {
+      color: $form-primary-color;
+      &__choice__remove {
+        color: $form-primary-color;
+      }
+      &__placeholder {
+        color: $form-primary-placeholder;
+      }
+      &__arrow {
+        b {
+          background: $form-primary-color;
+        }
+      }
+    }
+    .select2-search__field {
+      &::placeholder {
+        color: $form-primary-placeholder;
+      }
+    }
   }
 
   .--bg-secondary & {
+    .select2-selection {
+      color: $form-secondary-color;
+      &__choice__remove {
+        color: $form-secondary-color;
+      }
+      &__placeholder {
+        color: $form-secondary-placeholder;
+      }
+      &__arrow {
+        b {
+          background: $form-secondary-color;
+        }
+      }
+    }
+    .select2-search__field {
+      &::placeholder {
+        color: $form-secondary-placeholder;
+      }
+    }
   }
 
   .--bg-footer & {
