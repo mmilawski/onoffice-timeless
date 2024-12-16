@@ -383,6 +383,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
 
       &::placeholder {
         color: $form-placeholder;
+        font-weight: $font-weight-text;
         opacity: 1; // Reset opacity for Firefox
       }
     }
