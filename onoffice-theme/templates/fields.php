@@ -41,7 +41,7 @@ if (!function_exists('printCountry')) {
     function printCountry($values, $selectedValue)
     {
         echo '<option value="">' .
-            esc_html__('Bitte wählen ...', 'oo_theme') .
+            esc_html__('Bitte wählen', 'oo_theme') .
             '</option>';
         foreach ($values as $key => $name) {
             $selected = null;
@@ -115,9 +115,9 @@ if (!function_exists('renderFieldEstateSearch')) {
         } elseif ($fieldName == 'radius') {
             $placeholder = esc_html__('z.B. "10"', 'oo_theme');
         } elseif (in_array($typeCurrentInput, $typesMultiselect)) {
-            $placeholder = esc_html__('Bitte wählen ...', 'oo_theme');
+            $placeholder = esc_html__('Bitte wählen', 'oo_theme');
         } elseif (in_array($typeCurrentInput, $typesBoolean)) {
-            $placeholder = esc_html__('Bitte wählen ...', 'oo_theme');
+            $placeholder = esc_html__('Bitte wählen', 'oo_theme');
         } else {
             $placeholder = esc_html__('z.B. "..."', 'oo_theme');
         }
@@ -374,12 +374,12 @@ if (!function_exists('renderFormField')) {
                 '" size="1" ' .
                 $requiredAttribute .
                 ' data-placeholder="' .
-                esc_html__('Bitte wählen ...', 'oo_theme') .
+                esc_html__('Bitte wählen', 'oo_theme') .
                 '">';
             /* translators: %s will be replaced with the translated field name. */
             $output .=
                 '<option value="">' .
-                esc_html__('Bitte wählen ...', 'oo_theme') .
+                esc_html__('Bitte wählen', 'oo_theme') .
                 '</option>';
             foreach ($permittedValues as $key => $value) {
                 if (is_array($selectedValue)) {
@@ -426,7 +426,7 @@ if (!function_exists('renderFormField')) {
                 '[]" multiple="multiple" ' .
                 $requiredAttribute .
                 ' data-placeholder="' .
-                esc_html__('Bitte wählen ...', 'oo_theme') .
+                esc_html__('Bitte wählen', 'oo_theme') .
                 '">';
             $output .= $htmlOptions;
             $output .= '</select>';
@@ -572,7 +572,7 @@ if (!function_exists('renderRegionalAddition')) {
             $multipleAttr .
             $requiredAttribute .
             ' data-placeholder="' .
-            esc_html__('Bitte wählen ...', 'oo_theme') .
+            esc_html__('Bitte wählen', 'oo_theme') .
             '">';
         $pRegionController = new RegionController();
 
@@ -585,7 +585,7 @@ if (!function_exists('renderRegionalAddition')) {
         }
         ob_start();
         echo '<option value="">' .
-            esc_html__('Bitte wählen ...', 'oo_theme') .
+            esc_html__('Bitte wählen', 'oo_theme') .
             '</option>';
         foreach ($regions as $pRegion) {
             /* @var $pRegion Region */
@@ -610,7 +610,7 @@ if (!function_exists('renderCityField')) {
             '[]" multiple="multiple" ' .
             $requiredAttribute .
             ' data-placeholder="' .
-            esc_html__('Bitte wählen ...', 'oo_theme') .
+            esc_html__('Bitte wählen', 'oo_theme') .
             '">';
 
         if (is_array($permittedValues)) {
