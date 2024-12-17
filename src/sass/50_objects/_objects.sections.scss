@@ -18,63 +18,36 @@
   }
 
   &.--bg-transparent {
-    &-mixed {
-      background-color: var(--oo-color-mix-bg-text-10);
-    }
   }
 
   &.--bg-light {
     color: var(--oo-color-light-text, var(--oo-color-text));
     background-color: var(--oo-color-light-bg, var(--oo-color-bg));
-
-    &-mixed {
-      background-color: var(--oo-color-light-mix-bg-text-10);
-    }
   }
 
   &.--bg-dark {
     color: var(--oo-color-dark-text, var(--oo-color-text));
     background-color: var(--oo-color-dark-bg, var(--oo-color-bg));
-
-    &-mixed {
-      background-color: var(--oo-color-dark-mix-bg-text-10);
-    }
   }
 
   &.--bg-primary {
     color: var(--oo-color-primary-text, var(--oo-color-text));
     background-color: var(--oo-color-primary-bg, var(--oo-color-bg));
-
-    &-mixed {
-      background-color: var(--oo-color-primary-mix-bg-text-10);
-    }
   }
 
   &.--bg-secondary {
     color: var(--oo-color-secondary-text, var(--oo-color-text));
     background-color: var(--oo-color-secondary-bg, var(--oo-color-bg));
-
-    &-mixed {
-      background-color: var(--oo-color-secondary-mix-bg-text-10);
-    }
   }
 
   // remove padding if sections with the same color are underneath each other
-  &.--bg-transparent:not(.--bg-transparent-mixed):not(.--has-bg-image)
-    + &.--bg-transparent:not(.--bg-transparent-mixed):not(.--has-bg-image),
-  &.--bg-transparent-mixed + &.--bg-transparent-mixed,
-  &.--bg-light:not(.--bg-light-mixed):not(.--has-bg-image)
-    + &.--bg-light:not(.--bg-light-mixed):not(.--has-bg-image),
-  &.--bg-light-mixed + &.--bg-light-mixed,
-  &.--bg-dark:not(.--bg-dark-mixed):not(.--has-bg-image)
-    + &.--bg-dark:not(.--bg-dark-mixed):not(.--has-bg-image),
-  &.--bg-dark-mixed + &.--bg-dark-mixed,
-  &.--bg-primary:not(.--bg-primary-mixed):not(.--has-bg-image)
-    + &.--bg-primary:not(.--bg-primary-mixed):not(.--has-bg-image),
-  &.--bg-primary-mixed + &.--bg-primary-mixed,
-  &.--bg-secondary:not(.--bg-secondary-mixed):not(.--has-bg-image)
-    + &.--bg-secondary:not(.--bg-secondary-mixed):not(.--has-bg-image),
-  &.--bg-secondary-mixed + &.--bg-secondary-mixed {
+  &.--bg-transparent:not(.--has-bg-image)
+    + &.--bg-transparent:not(.--has-bg-image),
+  &.--bg-light:not(.--has-bg-image) + &.--bg-light:not(.--has-bg-image),
+  &.--bg-dark:not(.--has-bg-image) + &.--bg-dark:not(.--has-bg-image),
+  &.--bg-primary:not(.--has-bg-image) + &.--bg-primary:not(.--has-bg-image),
+  &.--bg-secondary:not(.--has-bg-image)
+    + &.--bg-secondary:not(.--has-bg-image) {
     padding-top: 0;
   }
 }
