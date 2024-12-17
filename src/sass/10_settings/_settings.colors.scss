@@ -1,31 +1,21 @@
 :root {
-  --oo-color-success: #38a169;
-  --oo-color-success-r: 56;
-  --oo-color-success-g: 161;
-  --oo-color-success-b: 105;
-  --oo-color-warning: #d69e2e;
-  --oo-color-warning-r: 214;
-  --oo-color-warning-g: 158;
-  --oo-color-warning-b: 46;
-  --oo-color-error: #b22b2e;
-  --oo-color-error-r: 178;
-  --oo-color-error-g: 43;
-  --oo-color-error-b: 46;
+  --oo-color-success: #c3e3d1;
+  --oo-color-success-r: 195;
+  --oo-color-success-g: 227;
+  --oo-color-success-b: 290;
+  --oo-color-warning: #f3e2c0;
+  --oo-color-warning-r: 243;
+  --oo-color-warning-g: 226;
+  --oo-color-warning-b: 192;
+  --oo-color-error: #efb1b2;
+  --oo-color-error-r: 239;
+  --oo-color-error-g: 177;
+  --oo-color-error-b: 178;
 
   // global
-  #{--oo-color-transparent-success-20}: transparent-color(
-    var(--oo-color-success),
-    0.2
-  );
-
-  #{--oo-color-transparent-warning-20}: transparent-color(
-    var(--oo-color-warning),
-    0.2
-  );
-  #{--oo-color-transparent-error-20}: transparent-color(
-    var(--oo-color-error),
-    0.2
-  );
+  #{--oo-color-contrast-success}: contrast-color(var(--oo-color-success));
+  #{--oo-color-contrast-warning}: contrast-color(var(--oo-color-warning));
+  #{--oo-color-contrast-error}: contrast-color(var(--oo-color-error));
   #{--oo-color-transparent-text-10}: transparent-color(
     var(--oo-color-text),
     0.1
