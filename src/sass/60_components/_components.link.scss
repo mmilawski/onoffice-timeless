@@ -2,49 +2,26 @@
   $c-link: &;
 
   color: var(--oo-color-primary);
-  border-bottom: 1px solid transparent;
-  transition: color 0.25s ease-in-out, border-color 0.25s ease-in-out;
+  text-decoration: underline transparent;
+  transition: color 0.25s ease-in-out, text-decoration 0.25s ease-in-out;
 
-  @include visited-active() {
-    color: var(--oo-color-primary);
-    border-color: transparent;
+  @include visited() {
+    text-decoration-color: transparent;
   }
 
-  @include hover-focus() {
-    color: var(--oo-color-mix-primary-contrast-20);
-    border-color: currentColor;
-  }
-
-  &__icon,
-  svg {
-    width: $icon-size;
-    height: $icon-size;
-  }
-
-  &.--chevron-right,
-  &.--chevron-left {
-    #{$c-link}__icon,
-    svg {
-      width: auto;
-    }
-  }
-
-  &.--has-icon {
-    width: max-content;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
+  @include hover-focus-active() {
+    text-decoration-color: currentColor;
   }
 
   &.--underlined {
-    border-color: currentColor;
+    text-decoration: underline currentColor;
 
-    @include visited-active() {
-      border-color: currentColor;
+    @include visited() {
+      text-decoration-color: currentColor;
     }
 
-    @include hover-focus() {
-      border-color: transparent;
+    @include hover-focus-active() {
+      text-decoration-color: transparent;
     }
   }
 
