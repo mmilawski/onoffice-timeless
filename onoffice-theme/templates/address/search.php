@@ -88,18 +88,16 @@ if (get_field('address_search_result')) {
                         </button>
                         </div>
                     </div>
-                    <span class="c-form__more c-button --ghost --read-more" data-open-text="<?php echo esc_html(
-                        'Mehr anzeigen',
-                        'oo_theme',
-                    ); ?>" data-close-text="<?php echo esc_html(
-    'Weniger anzeigen',
-    'oo_theme',
-); ?>">
-              <span class="u-screen-reader-only"><?php echo esc_html(
-                  'Mehr anzeigen',
-                  'oo_theme',
-              ); ?></span>
-            </span>
+                    <div class="c-form__more c-read-more">
+                        <button class="c-read-more__text --more"><?php echo esc_html(
+                            'Mehr anzeigen',
+                            'oo_theme',
+                        ); ?></button> 
+                        <button class="c-read-more__text --less"><?php echo esc_html(
+                            'Weniger anzeigen',
+                            'oo_theme',
+                        ); ?></button>
+                    </div>
                 <?php
                 }
                 ?>

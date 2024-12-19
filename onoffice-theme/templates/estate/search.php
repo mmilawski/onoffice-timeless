@@ -79,29 +79,15 @@ if (get_field('property_search_result')) {
                     </div>
 
                     <div class="c-form__more c-read-more">
-                        <div class="c-read-more__wrapper --more">
-                            <span class="c-read-more__icon c-button --only-icon">
-                                <span class="c-button__icon --plus"><?php oo_get_icon(
-                                    'plus',
-                                ); ?></span>
-                            </span>  
-                            <span class="c-read-more__text"><?php echo esc_html(
-                                'Mehr anzeigen',
-                                'oo_theme',
-                            ); ?></span>
-                        </div>
-                        <div class="c-read-more__wrapper --less">
-                            <span class="c-read-more__icon c-button --only-icon">
-                                <span class="c-button__icon --plus"><?php oo_get_icon(
-                                    'minus',
-                                ); ?></span>
-                            </span>  
-                            <span class="c-read-more__text"><?php echo esc_html(
-                                'Weniger anzeigen',
-                                'oo_theme',
-                            ); ?></span>
-                        </div>
-				    </div>
+                        <button class="c-read-more__text --more"><?php echo esc_html(
+                            'Mehr anzeigen',
+                            'oo_theme',
+                        ); ?></button> 
+                        <button class="c-read-more__text --less"><?php echo esc_html(
+                            'Weniger anzeigen',
+                            'oo_theme',
+                        ); ?></button>
+                    </div>
                 <?php }
                 ?>
             <?php

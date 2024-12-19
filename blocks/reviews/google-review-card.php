@@ -93,18 +93,16 @@ if (
         <?php endif; ?>
 
         <?php if ($is_long_text && $is_slider) { ?>
-            <button class="c-google-review-card__more c-button --ghost --read-more --is-google-review" data-open-text="<?php echo esc_html(
-                'Mehr anzeigen',
-                'oo_theme',
-            ); ?>" data-close-text="<?php echo esc_html(
-    'Weniger anzeigen',
-    'oo_theme',
-); ?>">
-        <span class="u-screen-reader-only"><?php echo esc_html(
-            'Mehr anzeigen',
-            'oo_theme',
-        ); ?></span>
-            </button>
+            <div class="c-google-review-card__more c-read-more">
+                <button class="c-read-more__text --more"><?php echo esc_html(
+                    'Mehr anzeigen',
+                    'oo_theme',
+                ); ?></button> 
+                <button class="c-read-more__text --less"><?php echo esc_html(
+                    'Weniger anzeigen',
+                    'oo_theme',
+                ); ?></button>
+            </div>
         <?php } ?>
         <?php if (!empty($author) && !empty($date)) { ?>
             <div class="c-google-review-card__author">

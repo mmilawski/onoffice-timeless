@@ -1,0 +1,51 @@
+.c-read-more {
+  $c-read-more: &;
+
+  &__text {
+    display: inline-block;
+    width: 100%;
+    @include font-size($desktop-global-font-size, $global-line-height);
+    text-align: center;
+    margin: 0;
+    padding: 0.625rem 2rem;
+    color: var(--oo-color-primary);
+    background: transparent;
+    border: 2px solid transparent;
+    text-decoration: underline currentColor;
+    transition: text-decoration 0.25s ease-in-out;
+    cursor: pointer;
+
+    @include hover-focus-active() {
+      text-decoration-color: transparent;
+    }
+
+    .--bg-light & {
+      color: var(--oo-color-light-primary, var(--oo-color-primary));
+    }
+    .--bg-dark & {
+      color: var(--oo-color-dark-primary, var(--oo-color-primary));
+    }
+    .--bg-primary & {
+      color: var(--oo-color-primary-primary, var(--oo-color-primary));
+    }
+    .--bg-secondary & {
+      color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+    }
+    .--bg-transparent & {
+      color: var(--oo-color-primary);
+    }
+  }
+
+  &.--more {
+    display: flex;
+    .--is-open & {
+      display: block;
+    }
+  }
+  &.--less {
+    display: none;
+    .--is-open & {
+      display: block;
+    }
+  }
+}
