@@ -55,6 +55,10 @@
     border-color: var(--oo-color-mix-primary-contrast-60);
   }
 
+  &__text {
+  }
+
+  &__icon,
   svg {
     height: $icon-size;
     width: $icon-size;
