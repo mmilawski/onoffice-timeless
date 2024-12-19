@@ -1,0 +1,57 @@
+.c-icon-button {
+  $c-icon-button: &;
+
+  width: $icon-wrapper-size;
+  height: $icon-wrapper-size;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  border-radius: $border-radius;
+  border: 2px solid transparent;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
+    border-color 0.25s ease-in-out, outline-color 0.25s ease-in-out;
+  cursor: pointer;
+
+  @include plain-visited() {
+    color: var(--oo-color-contrast-primary);
+    background-color: var(--oo-color-primary);
+    border-color: var(--oo-color-primary);
+  }
+
+  @include hover() {
+    background-color: var(--oo-color-mix-primary-contrast-20);
+    border-color: var(--oo-color-mix-primary-contrast-20);
+  }
+
+  @include focus() {
+    outline-color: var(--oo-color-primary);
+  }
+
+  @include active() {
+    background-color: var(--oo-color-mix-primary-contrast-40);
+    border-color: var(--oo-color-mix-primary-contrast-40);
+  }
+
+  @include disabled() {
+    background-color: var(--oo-color-mix-primary-contrast-60);
+    border-color: var(--oo-color-mix-primary-contrast-60);
+  }
+
+  &__text {
+  }
+
+  &__icon,
+  svg {
+    height: $icon-size;
+    width: $icon-size;
+  }
+
+  &.--small-corners {
+    border-radius: $border-radius-small;
+  }
+}

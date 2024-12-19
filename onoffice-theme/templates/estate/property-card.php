@@ -219,8 +219,8 @@ while ($current_property = $pEstatesClone->estateIterator()):
                         Favorites::isFavorizationEnabled() &&
                         !$is_reference
                     ) { ?>
-                        <span class="c-property-card__favorite c-button --only-icon --square" data-onoffice-property-id="<?php echo $property_id; ?>">
-                            <span class="u-screen-reader-only">
+                        <span class="c-property-card__favorite c-icon-button --small-corners" data-onoffice-property-id="<?php echo $property_id; ?>">
+                            <span class="c-icon-button__text u-screen-reader-only">
                                 <?php
                                 $favorite_label = Favorites::getFavorizationLabel();
                                 if ($favorite_label == 'Watchlist') {
@@ -240,7 +240,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
                                 }
                                 ?>
                             </span>
-                            <span class="c-button__icon --favorite"><?php oo_get_icon(
+                            <span class="c-icon-button__icon --favorite"><?php oo_get_icon(
                                 'star',
                             ); ?></span>
                         </span>
