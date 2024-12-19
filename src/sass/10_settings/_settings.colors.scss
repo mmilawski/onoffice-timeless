@@ -60,9 +60,9 @@
     var(--oo-color-text),
     0.6
   );
-  #{--oo-color-mix-bg-contrast-20}: mix-color-with-contrast(
+  #{--oo-color-mix-bg-contrast-15}: mix-color-with-contrast(
     var(--oo-color-bg),
-    0.2
+    0.15
   );
   #{--oo-color-mix-bg-contrast-50}: mix-color-with-contrast(
     var(--oo-color-bg),
@@ -175,9 +175,9 @@
     0.6,
     var(--oo-color-text)
   );
-  #{--oo-color-light-mix-bg-contrast-20}: mix-color-with-contrast(
+  #{--oo-color-light-mix-bg-contrast-15}: mix-color-with-contrast(
     var(--oo-color-light-bg),
-    0.2,
+    0.15,
     var(--oo-color-bg)
   );
   #{--oo-color-light-mix-bg-contrast-50}: mix-color-with-contrast(
@@ -292,9 +292,9 @@
     0.6,
     var(--oo-color-text)
   );
-  #{--oo-color-dark-mix-bg-contrast-20}: mix-color-with-contrast(
+  #{--oo-color-dark-mix-bg-contrast-15}: mix-color-with-contrast(
     var(--oo-color-dark-bg),
-    0.2,
+    0.15,
     var(--oo-color-bg)
   );
   #{--oo-color-dark-mix-bg-contrast-50}: mix-color-with-contrast(
@@ -409,9 +409,9 @@
     0.6,
     var(--oo-color-text)
   );
-  #{--oo-color-primary-mix-bg-contrast-20}: mix-color-with-contrast(
+  #{--oo-color-primary-mix-bg-contrast-15}: mix-color-with-contrast(
     var(--oo-color-primary-bg),
-    0.2,
+    0.15,
     var(--oo-color-bg)
   );
   #{--oo-color-primary-mix-bg-contrast-50}: mix-color-with-contrast(
@@ -526,9 +526,9 @@
     0.6,
     var(--oo-color-text)
   );
-  #{--oo-color-secondary-mix-bg-contrast-20}: mix-color-with-contrast(
+  #{--oo-color-secondary-mix-bg-contrast-15}: mix-color-with-contrast(
     var(--oo-color-secondary-bg),
-    0.2,
+    0.15,
     var(--oo-color-bg)
   );
   #{--oo-color-secondary-mix-bg-contrast-50}: mix-color-with-contrast(
@@ -700,9 +700,9 @@
     0.6,
     var(--oo-color-text)
   );
-  #{--oo-color-footer-mix-bg-contrast-20}: mix-color-with-contrast(
+  #{--oo-color-footer-mix-bg-contrast-15}: mix-color-with-contrast(
     var(--oo-color-footer-bg),
-    0.2,
+    0.15,
     var(--oo-color-bg)
   );
   #{--oo-color-footer-mix-bg-contrast-50}: mix-color-with-contrast(
