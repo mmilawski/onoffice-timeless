@@ -31,7 +31,7 @@ $form-light-primary-contrast: var(--oo-color-light-contrast-primary);
 $form-light-primary-hover: var(--oo-color-light-mix-primary-contrast-20);
 $form-light-shadow: 0px;
 $form-light-shadow-focus: 0px;
-$form-light-bg: var(--oo-color-light);
+$form-light-bg: var(--oo-color-light-bg);
 $form-light-border: var(--oo-color-light-mix-bg-contrast-50);
 $form-light-placeholder: var(--oo-color-light-mix-bg-contrast-50);
 $form-light-color: var(--oo-color-light-text, var(--oo-color-text));
@@ -41,7 +41,7 @@ $form-dark-primary-contrast: var(--oo-color-dark-contrast-primary);
 $form-dark-primary-hover: var(--oo-color-dark-mix-primary-contrast-20);
 $form-dark-shadow: 0px;
 $form-dark-shadow-focus: 0px;
-$form-dark-bg: var(--oo-color-dark);
+$form-dark-bg: var(--oo-color-dark-bg);
 $form-dark-border: var(--oo-color-dark-mix-bg-contrast-50);
 $form-dark-placeholder: var(--oo-color-dark-mix-bg-contrast-50);
 $form-dark-color: var(--oo-color-dark-text, var(--oo-color-text));
@@ -51,7 +51,7 @@ $form-primary-primary-contrast: var(--oo-color-primary-contrast-primary);
 $form-primary-primary-hover: var(--oo-color-primary-mix-primary-contrast-20);
 $form-primary-shadow: 0px;
 $form-primary-shadow-focus: 0px;
-$form-primary-bg: var(--oo-color-primary);
+$form-primary-bg: var(--oo-color-primary-bg);
 $form-primary-border: var(--oo-color-primary-mix-bg-contrast-50);
 $form-primary-placeholder: var(--oo-color-primary-mix-bg-contrast-50);
 $form-primary-color: var(--oo-color-primary-text, var(--oo-color-text));
@@ -66,7 +66,7 @@ $form-secondary-primary-hover: var(
 );
 $form-secondary-shadow: 2px 2px 0 var(--oo-color-secondary-transparent-text-10);
 $form-secondary-shadow-focus: 0px;
-$form-secondary-bg: var(--oo-color-secondary);
+$form-secondary-bg: var(--oo-color-secondary-bg);
 $form-secondary-border: var(--oo-color-secondary-mix-bg-contrast-50);
 $form-secondary-placeholder: var(--oo-color-secondary-mix-bg-contrast-50);
 $form-secondary-color: var(--oo-color-secondary-text, var(--oo-color-text));
@@ -404,7 +404,7 @@ $form-footer-primary-hover: var(--oo-color-footer-mix-primary-contrast-20);
 
     .--bg-light & {
       background: $form-light-bg;
-      border: $form-light-border;
+      border-color: $form-light-border;
 
       @include focus-within() {
         outline: 2px solid $form-light-primary;
