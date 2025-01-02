@@ -75,14 +75,11 @@
         border-radius: 50%;
         position: absolute;
         left: -1.5rem;
-        top: calc(($mobile-global-line-height / 2) - (0.5rem / 2));
+        top: calc(($global-line-height / 2) - (0.5rem / 2));
         width: 0.5rem;
         height: 0.5rem;
         color: var(--oo-color-primary);
         background: currentColor;
-        @include media-breakpoint-up(xl) {
-          top: calc(($desktop-global-line-height / 2) - (0.5rem / 2));
-        }
       }
 
       ul {

@@ -5,10 +5,10 @@
   position: relative;
   font-family: $font-family-button;
   font-weight: $font-weight-button;
-  @include font-size($desktop-global-font-size, $global-line-height);
+  @include font-size($global-font-size, $global-line-height);
   text-align: center;
   margin: 0;
-  padding: 0.625rem 2rem;
+  padding: 0.5rem 2rem;
   border-radius: $border-radius;
   border: 2px solid transparent;
   outline: 2px solid transparent;
