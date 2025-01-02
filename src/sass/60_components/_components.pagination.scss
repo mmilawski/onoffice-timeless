@@ -40,7 +40,7 @@
     }
 
     @include hover() {
-      background-color: var(--oo-color-mix-bg-contrast-15);
+      background-color: var(--oo-color-mix-bg-contrast-10);
     }
 
     @include focus() {
@@ -48,7 +48,7 @@
     }
 
     @include active() {
-      background-color: var(--oo-color-mix-bg-contrast-15);
+      background-color: var(--oo-color-mix-bg-contrast-10);
     }
 
     &.--has-icon {
@@ -80,7 +80,7 @@
       }
 
       @include hover() {
-        background-color: var(--oo-color-light-mix-bg-contrast-15);
+        background-color: var(--oo-color-light-mix-bg-contrast-10);
       }
 
       @include focus() {
@@ -88,7 +88,7 @@
       }
 
       @include active() {
-        background-color: var(--oo-color-light-mix-bg-contrast-15);
+        background-color: var(--oo-color-light-mix-bg-contrast-10);
       }
 
       &.--is-current {
@@ -108,7 +108,7 @@
       }
 
       @include hover() {
-        background-color: var(--oo-color-dark-mix-bg-contrast-15);
+        background-color: var(--oo-color-dark-mix-bg-contrast-10);
       }
 
       @include focus() {
@@ -116,7 +116,7 @@
       }
 
       @include active() {
-        background-color: var(--oo-color-dark-mix-bg-contrast-15);
+        background-color: var(--oo-color-dark-mix-bg-contrast-10);
       }
 
       &.--is-current {
@@ -133,7 +133,7 @@
       }
 
       @include hover() {
-        background-color: var(--oo-color-primary-mix-bg-contrast-15);
+        background-color: var(--oo-color-primary-mix-bg-contrast-10);
       }
 
       @include focus() {
@@ -141,7 +141,7 @@
       }
 
       @include active() {
-        background-color: var(--oo-color-primary-mix-bg-contrast-15);
+        background-color: var(--oo-color-primary-mix-bg-contrast-10);
       }
 
       &.--is-current {
@@ -161,7 +161,7 @@
       }
 
       @include hover() {
-        background-color: var(--oo-color-secondary-mix-bg-contrast-15);
+        background-color: var(--oo-color-secondary-mix-bg-contrast-10);
       }
 
       @include focus() {
@@ -172,7 +172,7 @@
       }
 
       @include active() {
-        background-color: var(--oo-color-secondary-mix-bg-contrast-15);
+        background-color: var(--oo-color-secondary-mix-bg-contrast-10);
       }
 
       &.--is-current {

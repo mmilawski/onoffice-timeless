@@ -32,6 +32,10 @@
   #{--oo-color-transparent-bg-80}: transparent-color(var(--oo-color-bg), 0.8);
   #{--oo-color-transparent-bg-90}: transparent-color(var(--oo-color-bg), 0.9);
   #{--oo-color-transparent-bg-100}: transparent-color(var(--oo-color-bg), 1);
+  #{--oo-color-transparent-primary-10}: transparent-color(
+    var(--oo-color-primary),
+    0.1
+  );
   #{--oo-color-transparent-primary-40}: transparent-color(
     var(--oo-color-primary),
     0.4
@@ -60,9 +64,9 @@
     var(--oo-color-text),
     0.6
   );
-  #{--oo-color-mix-bg-contrast-15}: mix-color-with-contrast(
+  #{--oo-color-mix-bg-contrast-10}: mix-color-with-contrast(
     var(--oo-color-bg),
-    0.15
+    0.1
   );
   #{--oo-color-mix-bg-contrast-50}: mix-color-with-contrast(
     var(--oo-color-bg),
@@ -132,6 +136,11 @@
     1,
     var(--oo-color-bg)
   );
+  #{--oo-color-light-transparent-primary-10}: transparent-color(
+    var(--oo-color-light-primary),
+    0.1,
+    var(--oo-color-primary)
+  );
   #{--oo-color-light-transparent-primary-40}: transparent-color(
     var(--oo-color-light-primary),
     0.4,
@@ -175,9 +184,9 @@
     0.6,
     var(--oo-color-text)
   );
-  #{--oo-color-light-mix-bg-contrast-15}: mix-color-with-contrast(
+  #{--oo-color-light-mix-bg-contrast-10}: mix-color-with-contrast(
     var(--oo-color-light-bg),
-    0.15,
+    0.1,
     var(--oo-color-bg)
   );
   #{--oo-color-light-mix-bg-contrast-50}: mix-color-with-contrast(
@@ -248,6 +257,11 @@
     1,
     var(--oo-color-bg)
   );
+  #{--oo-color-dark-transparent-primary-10}: transparent-color(
+    var(--oo-color-dark-primary),
+    0.1,
+    var(--oo-color-primary)
+  );
   #{--oo-color-dark-transparent-primary-40}: transparent-color(
     var(--oo-color-dark-primary),
     0.4,
@@ -292,9 +306,9 @@
     0.6,
     var(--oo-color-text)
   );
-  #{--oo-color-dark-mix-bg-contrast-15}: mix-color-with-contrast(
+  #{--oo-color-dark-mix-bg-contrast-10}: mix-color-with-contrast(
     var(--oo-color-dark-bg),
-    0.15,
+    0.1,
     var(--oo-color-bg)
   );
   #{--oo-color-dark-mix-bg-contrast-50}: mix-color-with-contrast(
@@ -365,6 +379,11 @@
     1,
     var(--oo-color-bg)
   );
+  #{--oo-color-primary-transparent-primary-10}: transparent-color(
+    var(--oo-color-primary-primary),
+    0.1,
+    var(--oo-color-primary)
+  );
   #{--oo-color-primary-transparent-primary-40}: transparent-color(
     var(--oo-color-primary-primary),
     0.4,
@@ -409,9 +428,9 @@
     0.6,
     var(--oo-color-text)
   );
-  #{--oo-color-primary-mix-bg-contrast-15}: mix-color-with-contrast(
+  #{--oo-color-primary-mix-bg-contrast-10}: mix-color-with-contrast(
     var(--oo-color-primary-bg),
-    0.15,
+    0.1,
     var(--oo-color-bg)
   );
   #{--oo-color-primary-mix-bg-contrast-50}: mix-color-with-contrast(
@@ -482,6 +501,11 @@
     1,
     var(--oo-color-bg)
   );
+  #{--oo-color-secondary-transparent-primary-10}: transparent-color(
+    var(--oo-color-secondary-primary),
+    0.1,
+    var(--oo-color-primary)
+  );
   #{--oo-color-secondary-transparent-primary-40}: transparent-color(
     var(--oo-color-secondary-primary),
     0.4,
@@ -526,9 +550,9 @@
     0.6,
     var(--oo-color-text)
   );
-  #{--oo-color-secondary-mix-bg-contrast-15}: mix-color-with-contrast(
+  #{--oo-color-secondary-mix-bg-contrast-10}: mix-color-with-contrast(
     var(--oo-color-secondary-bg),
-    0.15,
+    0.1,
     var(--oo-color-bg)
   );
   #{--oo-color-secondary-mix-bg-contrast-50}: mix-color-with-contrast(
@@ -657,6 +681,11 @@
     1,
     var(--oo-color-bg)
   );
+  #{--oo-color-footer-transparent-primary-10}: transparent-color(
+    var(--oo-color-footer-primary),
+    0.1,
+    var(--oo-color-primary)
+  );
   #{--oo-color-footer-transparent-primary-40}: transparent-color(
     var(--oo-color-footer-primary),
     0.4,
@@ -700,9 +729,9 @@
     0.6,
     var(--oo-color-text)
   );
-  #{--oo-color-footer-mix-bg-contrast-15}: mix-color-with-contrast(
+  #{--oo-color-footer-mix-bg-contrast-10}: mix-color-with-contrast(
     var(--oo-color-footer-bg),
-    0.15,
+    0.1,
     var(--oo-color-bg)
   );
   #{--oo-color-footer-mix-bg-contrast-50}: mix-color-with-contrast(
