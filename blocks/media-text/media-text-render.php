@@ -72,7 +72,6 @@ $media_width_xxxl = '460';
         'right'
             ? '--reverse'
             : ''; ?>">
-
             <?php if (!empty($image) && $type == 'image') { ?>
                 <?php oo_get_template('components', '', 'component-image', [
                     'image' => $image,
@@ -217,27 +216,36 @@ $media_width_xxxl = '460';
                                 ],
                             ); ?>
 
-                            <button class="c-media-text__play c-button --on-<?php echo $bg_color; ?>">
-                                <?php esc_html_e(
+                            <button 
+                                class="c-media-text__play c-player --on-<?php echo $bg_color; ?> "
+                                title="<?php esc_html_e(
                                     'Video ansehen',
                                     'oo_theme',
-                                ); ?>
+                                ); ?>"
+                            >
+                                <?php oo_get_icon('play'); ?>
                             </button>
                         </div>
                     <?php echo $iframe_without_source;} else { ?>
-											<div class="c-media-text__video-wrapper --has-no-thumbnail <?php echo $video_class; ?>">
-												<?php echo $iframe_with_attributes; ?>
-											</div>
-										<?php } ?>
+                        <div class="c-media-text__video-wrapper --has-no-thumbnail <?php echo $video_class; ?>">
+                            <?php echo $iframe_with_attributes; ?>
+                        </div>
+                    <?php } ?>
                 </div>
             <?php } ?>
 
             <div class="c-media-text__content o-col-12 o-col-lg-6 o-col-xl-8">
                 <?php if (!empty($headline['text'])) { ?>
-									<?php oo_get_template('components', '', 'component-headline', [
-             'headline' => $headline,
-             'additional_headline_class' => 'c-media-text__headline',
-         ]); ?>
+                    <?php oo_get_template(
+                        'components',
+                        '',
+                        'component-headline',
+                        [
+                            'headline' => $headline,
+                            'additional_headline_class' =>
+                                'c-media-text__headline',
+                        ],
+                    ); ?>
                 <?php } ?>
 
                 <?php if (!empty($text['wysiwyg'])) { ?>
@@ -247,11 +255,19 @@ $media_width_xxxl = '460';
                 <?php } ?>
         
                 <?php if (!empty($buttons['buttons'][0]['link'])) { ?>
-										<?php oo_get_template('components', '', 'component-buttons', [
-              'buttons' => $buttons['buttons'],
-              'additional_button_class' => $bg_color ? '--on-' . $bg_color : '',
-              'additional_container_class' => 'c-media-text__buttons',
-          ]); ?>
+                    <?php oo_get_template(
+                        'components',
+                        '',
+                        'component-buttons',
+                        [
+                            'buttons' => $buttons['buttons'],
+                            'additional_button_class' => $bg_color
+                                ? '--on-' . $bg_color
+                                : '',
+                            'additional_container_class' =>
+                                'c-media-text__buttons',
+                        ],
+                    ); ?>
                 <?php } ?>
             </div>
         </div>
