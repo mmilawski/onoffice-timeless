@@ -118,9 +118,6 @@ if (get_field('property_search_result')) {
                                 'Suchen',
                                 'oo_theme',
                             ); ?></span>
-                            <span class="c-button__icon --arrow-right"><?php oo_get_icon(
-                                'arrow-right',
-                            ); ?></span>
                         </button>
                     </div>
                 <?php }
