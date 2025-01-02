@@ -52,7 +52,6 @@ if (function_exists('oo_setup_parent_theme')) {
                 'oo-sort-list-script',
                 'oo-wnumb-script',
                 'oo-nouislider-script',
-                'oo-captchacontrol-script',
             ],
         ],
     ];
