@@ -27,7 +27,10 @@ jQuery(document).ready(function() {
   if ($('select').length) {
     $('select').each(function() {
       var select = $(this);
-      var parent = select.closest('.o-main');
+      var parent = select.closest('.o-section');
+      if (!parent.length) {
+        parent = select.closest('form');
+      }
       var options = select.find('option');
       if (options.length === 1) {
           var firstOption = options[0];
@@ -81,7 +84,6 @@ jQuery(document).ready(function() {
     });
   }
 
-
   // Select2
   $('input[name="geo_search"]').select2({
     minimumInputLength: 4,
@@ -127,6 +129,19 @@ jQuery(document).ready(function() {
     if($('input[name="geo_search"]').parent().find('.select2-selection__rendered').length) {
       $('input[name="geo_search"]').parent().find('.select2-selection__rendered')[0].innerHTML = $('input[name="geo_search_text"]')[0].value;
     }
+  }
+
+  // Textarea auto expand
+  const textareas = document.querySelectorAll('.o-textarea');
+
+  if( textareas.length > 0 ) {
+    textareas.forEach(textarea => {
+      textarea.addEventListener('input', () => {
+        textarea.style.height = 'auto';
+        const borderOffset = textarea.offsetHeight - textarea.clientHeight;
+        textarea.style.height = `${textarea.scrollHeight + borderOffset}px`;
+      });
+    });
   }
 
   // Read more

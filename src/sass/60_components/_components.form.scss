@@ -25,13 +25,9 @@
   }
 
   &__fieldset {
-    padding: 1rem 1rem 1.5rem;
-    background-color: var(--oo-color-bg);
-    // border-bottom: 2px solid var(--oo-color-primary);
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     gap: 1.5rem;
-    border-radius: $form-radius;
     @include media-breakpoint-up(xl) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 2rem;
@@ -116,16 +112,12 @@
   }
   &.--is-search-form {
     #{$c-form}__fieldset {
-      background-color: unset;
-      padding: 0;
-      border: 0;
       @include media-breakpoint-up(md) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
       @include media-breakpoint-up(xl) {
         padding: 0;
         grid-template-columns: repeat(4, minmax(0, 1fr));
-        border-bottom: 0;
       }
     }
     #{$c-form}__button-wrapper {
@@ -198,9 +190,6 @@
 
   &.--is--popup {
     #{$c-form}__fieldset {
-      padding: 0;
-      background-color: transparent;
-      border: none;
       gap: 1.5rem;
     }
 
@@ -219,92 +208,19 @@
   }
 
   .--bg-light & {
-    #{$c-form}__fieldset {
-      border-color: var(--oo-color-light-primary, var(--oo-color-bg));
-    }
-    #{$c-form}__legend {
-      color: var(--oo-color-light-contrast-primary);
-      // background-color: var(--oo-color-light-primary, var(--oo-color-primary));
-    }
-    &.--on-banner {
-      #{$c-form}__fieldset {
-        background-color: unset;
-      }
-    }
-    &.--is--popup {
-      #{$c-form}__fieldset {
-        color: var(--oo-color-light-text);
-      }
-    }
   }
+
   .--bg-dark & {
-    #{$c-form}__fieldset {
-      border-color: var(--oo-color-dark-primary, var(--oo-color-bg));
-    }
-    #{$c-form}__legend {
-      color: var(--oo-color-dark-contrast-primary);
-      // background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
-    }
-    &.--on-banner {
-      #{$c-form}__fieldset {
-        background-color: unset;
-      }
-    }
-    &.--is--popup {
-      #{$c-form}__fieldset {
-        color: var(--oo-color-dark-text);
-      }
-    }
   }
+
   .--bg-primary & {
-    #{$c-form}__fieldset {
-      border-color: var(--oo-color-primary-primary, var(--oo-color-bg));
-    }
-    #{$c-form}__legend {
-      color: var(--oo-color-primary-contrast-primary);
-      // background-color: var(
-      //   --oo-color-primary-primary,
-      //   var(--oo-color-primary)
-      // );
-    }
-    &.--on-banner {
-      #{$c-form}__fieldset {
-        background-color: unset;
-      }
-    }
-    &.--is--popup {
-      #{$c-form}__fieldset {
-        color: var(--oo-color-primary-text);
-      }
-    }
   }
+
   .--bg-secondary & {
-    #{$c-form}__fieldset {
-      border-color: var(--oo-color-secondary-primary, var(--oo-color-bg));
-    }
-    #{$c-form}__legend {
-      color: var(--oo-color-secondary-contrast-primary);
-      // background-color: var(
-      //   --oo-color-secondary-primary,
-      //   var(--oo-color-primary)
-      // );
-    }
-    &.--on-banner {
-      #{$c-form}__fieldset {
-        background-color: unset;
-      }
-    }
-    &.--is--popup {
-      #{$c-form}__fieldset {
-        color: var(--oo-color-secondary-text);
-      }
-    }
   }
+
   .--bg-footer & {
     #{$c-form}__fieldset {
-      padding: 0;
-      background: none;
-      border: 0;
       grid-template-columns: minmax(0, 1fr);
       gap: 1rem;
 
@@ -318,28 +234,11 @@
       align-items: flex-start;
       gap: 0.5rem;
     }
-    #{$c-form}__legend {
-      margin: 0;
-      color: var(--oo-color-footer-contrast-primary);
-      // background-color: var(--oo-color-footer-primary, var(--oo-color-primary));
-      border-color: var(--oo-color-footer-bg, var(--oo-color-bg));
-    }
     #{$c-form}__required {
       align-self: flex-end;
     }
   }
+
   &.--bg-transparent {
-    color: var(--oo-color-text);
-    #{$c-form}__fieldset {
-      border-color: var(--oo-color-bg);
-    }
-    #{$c-form}__legend {
-      color: var(--oo-color-primary);
-    }
-    &.--on-banner {
-      #{$c-form}__fieldset {
-        background-color: unset;
-      }
-    }
   }
 }
