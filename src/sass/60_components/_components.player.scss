@@ -44,9 +44,9 @@
       filter: drop-shadow(
         var(--oo-play-icon-shadow-size)
           rgba(
-            var(--oo-color-light-bg-r),
-            var(--oo-color-light-bg-g),
-            var(--oo-color-light-bg-b),
+            var(--oo-color-light-bg-r, var(--oo-color-bg-r)),
+            var(--oo-color-light-bg-g, var(--oo-color-bg-g)),
+            var(--oo-color-light-bg-b, var(--oo-color-bg-b)),
             var(--oo-play-icon-shadow-opacity)
           )
       );
@@ -67,9 +67,9 @@
       filter: drop-shadow(
         var(--oo-play-icon-shadow-size)
           rgba(
-            var(--oo-color-dark-bg-r),
-            var(--oo-color-dark-bg-g),
-            var(--oo-color-dark-bg-b),
+            var(--oo-color-dark-bg-r, var(--oo-color-bg-r)),
+            var(--oo-color-dark-bg-g, var(--oo-color-bg-g)),
+            var(--oo-color-dark-bg-b, var(--oo-color-bg-b)),
             var(--oo-play-icon-shadow-opacity)
           )
       );
@@ -90,9 +90,9 @@
       filter: drop-shadow(
         var(--oo-play-icon-shadow-size)
           rgba(
-            var(--oo-color-primary-bg-r),
-            var(--oo-color-primary-bg-g),
-            var(--oo-color-primary-bg-b),
+            var(--oo-color-primary-bg-r, var(--oo-color-bg-r)),
+            var(--oo-color-primary-bg-g, var(--oo-color-bg-g)),
+            var(--oo-color-primary-bg-b, var(--oo-color-bg-b)),
             var(--oo-play-icon-shadow-opacity)
           )
       );
@@ -113,9 +113,9 @@
       filter: drop-shadow(
         var(--oo-play-icon-shadow-size)
           rgba(
-            var(--oo-color-secondary-bg-r),
-            var(--oo-color-secondary-bg-g),
-            var(--oo-color-secondary-bg-b),
+            var(--oo-color-secondary-bg-r, var(--oo-color-bg-r)),
+            var(--oo-color-secondary-bg-g, var(--oo-color-bg-g)),
+            var(--oo-color-secondary-bg-b, var(--oo-color-bg-b)),
             var(--oo-play-icon-shadow-opacity)
           )
       );
