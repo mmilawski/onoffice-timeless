@@ -32,7 +32,7 @@ $slider = get_field('slider') ?? [];
 
 // Settings
 $settings = get_field('settings') ?? [];
-$bg_color = $settings['bg_color'] ?? 'bg-transparent';
+$bg_color = $settings['bg_color'] ?? 'bg-footer';
 
 if (get_field('property_search_result')) {
     $result = get_field('property_search_result') ?? null;
@@ -45,12 +45,12 @@ if (get_field('property_search_result')) {
 
 <form <?php if (!empty($result)) {
     echo 'action="' . get_permalink($result) . '"';
-} ?> method="get" class="c-form --is-search-form <?php if (!empty($slider)) {
-     echo '--on-banner';
+} ?> method="get" class="c-form <?php if (!empty($slider)) {
+     echo '--is-banner-search-form  --small-corners';
+ } else {
+     echo '--is-search-form ';
  } ?> <?php if (!empty($bg_color)) {
      echo ' --on-' . $bg_color;
- } else {
-     echo '--on-bg-footer';
  } ?>" data-estate-search-name="<?php echo esc_attr($getListName()); ?>">
     <fieldset class="c-form__fieldset">
         <?php

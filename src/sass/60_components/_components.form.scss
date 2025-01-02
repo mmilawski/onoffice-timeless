@@ -141,13 +141,18 @@
     }
   }
 
-  &.--on-banner {
+  &.--is-banner-search-form {
     #{$c-form}__fieldset {
       scroll-margin-top: calc(
         #{$mobile-header-height} + #{$mobile-section-padding-top}
       );
       scroll-snap-align: start;
+      @include media-breakpoint-up(md) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
       @include media-breakpoint-up(xl) {
+        padding: 0;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         scroll-margin-top: calc(
           #{$mobile-header-height} + #{$desktop-section-padding-top}
         );
@@ -184,6 +189,25 @@
 
       &.--is-open {
         max-height: 100rem;
+      }
+    }
+    #{$c-form}__button-wrapper {
+      grid-column: auto;
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+    }
+    #{$c-form}__button {
+      flex-grow: 1;
+    }
+    .--is-range {
+      @include media-breakpoint-up(xl) {
+        grid-column: auto;
+      }
+    }
+    .--is-boolean {
+      @include media-breakpoint-up(xl) {
+        grid-column: auto;
       }
     }
   }
