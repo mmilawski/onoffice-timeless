@@ -13,10 +13,10 @@ if (!empty($texts[0]['text']['wysiwyg'])) {
     $text_count = is_array($texts) ? count($texts) : 1;
     $text_class =
         'c-text__content o-col-12 o-col-xl-' .
-        ($text_count === 1 ? '10' : ($text_count === 3 ? '4' : '5'));
+        ($text_count === 1 ? '8' : '4');
     $headline_class =
         'c-text__headline o-col-12 o-col-xl-' .
-        ($text_count === 3 ? '12' : '10');
+        ($text_count === 3 ? '12' : '8');
 }
 ?>
 
