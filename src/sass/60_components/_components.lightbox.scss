@@ -4,7 +4,7 @@
   // added to reduce using of !important for overwrite
   #{$c-lightbox} {
     &__overlay {
-      background: var(--oo-color-transparent-text-60);
+      background: var(--oo-color-transparent-text-80);
     }
     &__container {
     }
@@ -65,44 +65,47 @@
       position: absolute;
       width: $icon-wrapper-size;
       height: $icon-wrapper-size;
-      background-color: var(--oo-color-primary);
-      color: var(--oo-color-contrast-primary);
-      border: 2px solid var(--oo-color-primary);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0.25rem;
-      cursor: pointer;
+      text-align: center;
+      margin: 0;
+      padding: 0;
       border-radius: $border-radius;
-      transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out,
-        visibility 0.25s ease-in-out, color 0.25s ease-in-out,
-        background-color 0.25s ease-in-out, border-color 0.25s ease-in-out,
-        box-shadow 0.25s ease-in-out;
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      opacity: 1;
+      cursor: pointer;
+      transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
+        outline-color 0.25s ease-in-out;
 
       @include plain-visited() {
         color: var(--oo-color-contrast-primary);
         background-color: var(--oo-color-primary);
-        border: 2px solid var(--oo-color-primary);
       }
 
       @include hover() {
-        color: var(--oo-color-contrast-primary);
-        background-color: var(--oo-color-transparent-primary-80);
-        border-color: var(--oo-color-transparent-primary-80);
-      }
-
-      @include active() {
-        color: var(--oo-color-contrast-primary);
-        background-color: var(--oo-color-transparent-primary-60);
+        background-color: var(--oo-color-mix-primary-contrast-20);
       }
 
       @include focus() {
-        outline: 2px solid var(--oo-color-primary);
-        outline-offset: 2px;
+        outline-color: var(--oo-color-primary);
+      }
+
+      @include active() {
+        background-color: var(--oo-color-mix-primary-contrast-40);
       }
 
       @include disabled() {
-        background-color: var(--oo-color-transparent-primary-40);
+        background-color: var(--oo-color-primary);
+        opacity: 0.4;
+        cursor: default;
+      }
+
+      &.disabled {
+        background-color: var(--oo-color-primary);
+        opacity: 0.4;
+        cursor: default;
       }
 
       &.--arrow {
@@ -122,28 +125,16 @@
         }
       }
       &.--close {
-        top: 8px;
-        right: 8px;
+        top: 0.5rem;
+        right: 0.5rem;
       }
-      &.disabled {
-        opacity: 0.1;
-        color: var(--oo-color-contrast-text);
-        background-color: var(--oo-color-text);
-        border-color: var(--oo-color-text);
+    }
 
-        @include hover-focus() {
-          box-shadow: none;
-        }
-      }
-
-      #{$c-lightbox}__icon {
-        height: $icon-size;
-        width: $icon-size;
-
-        path {
-          fill: none;
-        }
-      }
+    &__icon {
+      height: $icon-size;
+      width: $icon-size;
+      fill: none;
+      transform: none;
     }
   }
 }

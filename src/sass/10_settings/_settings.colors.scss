@@ -24,10 +24,6 @@
     var(--oo-color-shadow),
     0.15
   );
-  #{--oo-color-transparent-shadow-80}: transparent-color(
-    var(--oo-color-shadow),
-    0.8
-  );
   #{--oo-color-transparent-text-10}: transparent-color(
     var(--oo-color-text),
     0.1
@@ -35,6 +31,10 @@
   #{--oo-color-transparent-text-20}: transparent-color(
     var(--oo-color-text),
     0.2
+  );
+  #{--oo-color-transparent-text-80}: transparent-color(
+    var(--oo-color-text),
+    0.8
   );
   #{--oo-color-transparent-bg-80}: transparent-color(var(--oo-color-bg), 0.8);
   #{--oo-color-transparent-bg-90}: transparent-color(var(--oo-color-bg), 0.9);
