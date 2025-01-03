@@ -6,7 +6,7 @@
     width: 100%;
     text-align: center;
     margin: 0;
-    padding: 0.625rem 2rem;
+    padding: 0.5rem 2rem;
     color: var(--oo-color-primary);
     background: transparent;
     border: 2px solid transparent;
@@ -37,18 +37,18 @@
     .--bg-transparent & {
       color: var(--oo-color-primary);
     }
-  }
 
-  &.--more {
-    display: flex;
-    .--is-open & {
+    &.--more {
       display: block;
+      .--is-open & {
+        display: none;
+      }
     }
-  }
-  &.--less {
-    display: none;
-    .--is-open & {
-      display: block;
+    &.--less {
+      display: none;
+      .--is-open & {
+        display: block;
+      }
     }
   }
 }
