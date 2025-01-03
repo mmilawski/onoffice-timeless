@@ -29,10 +29,11 @@ if (!is_array($visible) || count($visible) === 0) {
 // ACF
 // Content
 $slider = get_field('slider') ?? [];
+$is_banner = !empty($slider) ? true : false;
 
 // Settings
 $settings = get_field('settings') ?? [];
-$bg_color = $settings['bg_color'] ?? 'bg-footer';
+$bg_color = $settings['bg_color'] ?? 'bg-transparent';
 
 if (get_field('property_search_result')) {
     $result = get_field('property_search_result') ?? null;
@@ -45,7 +46,7 @@ if (get_field('property_search_result')) {
 
 <form <?php if (!empty($result)) {
     echo 'action="' . get_permalink($result) . '"';
-} ?> method="get" class="c-form <?php if (!empty($slider)) {
+} ?> method="get" class="c-form <?php if ($is_banner) {
      echo '--is-banner-search-form  --small-corners';
  } else {
      echo '--is-search-form ';
@@ -64,51 +65,43 @@ if (get_field('property_search_result')) {
                 <?php }
                 renderFieldEstateSearch($inputName, $properties);
                 if ($number == $fields_counter - 1) { ?>
-                        <div class="c-form__button-wrapper">
-                            <button class="c-form__button c-button --has-icon <?php if (
-                                !empty($bg_color)
-                            ) {
-                                echo '--on-' . $bg_color;
-                            } ?>">
-                                <span class="c-button__text"><?php echo esc_attr__(
-                                    'Suchen',
-                                    'oo_theme',
-                                ); ?></span>
-                            </button>
-                        </div>
                     </div>
 
                     <div class="c-form__more c-read-more">
-                        <button class="c-read-more__text --more"><?php echo esc_html(
+                        <span class="c-read-more__text --more"><?php echo esc_html(
                             'Mehr anzeigen',
                             'oo_theme',
-                        ); ?></button> 
-                        <button class="c-read-more__text --less"><?php echo esc_html(
+                        ); ?></span> 
+                        <span class="c-read-more__text --less"><?php echo esc_html(
                             'Weniger anzeigen',
                             'oo_theme',
-                        ); ?></button>
+                        ); ?></span>
                     </div>
+
+                    <button class="c-form__button c-button <?php if (
+                        $is_banner
+                    ) {
+                        echo '--small-corners';
+                    } ?> <?php if (!empty($bg_color)) {
+     echo '--on-' . $bg_color;
+ } ?>">
+                        <?php echo esc_attr__('Suchen', 'oo_theme'); ?>
+                    </button>
                 <?php }
                 ?>
             <?php
             } else {
                 renderFieldEstateSearch($inputName, $properties); ?>
                 <?php if ($number == $fields_counter - 1) { ?>
-                    <div class="c-form__button-wrapper">
-                        <button class="c-form__button c-button --has-icon <?php if (
-                            !empty($bg_color)
-                        ) {
-                            echo '--on-' . $bg_color;
-                        } ?>">
-                            <span class="c-button__text"><?php echo esc_attr__(
-                                'Suchen',
-                                'oo_theme',
-                            ); ?></span>
-                            <span class="c-button__icon --arrow-right"><?php oo_get_icon(
-                                'arrow-right',
-                            ); ?></span>
-                        </button>
-                    </div>
+                    <button class="c-form__button c-button <?php if (
+                        $is_banner
+                    ) {
+                        echo '--small-corners';
+                    } ?> <?php if (!empty($bg_color)) {
+     echo '--on-' . $bg_color;
+ } ?>">
+                        <?php echo esc_attr__('Suchen', 'oo_theme'); ?>
+                    </button>
                 <?php }
             }
             $number++;

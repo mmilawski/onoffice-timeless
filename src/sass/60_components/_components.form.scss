@@ -27,10 +27,10 @@
   &__fieldset {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 1.5rem;
+    gap: 1rem 2rem;
+    align-items: flex-end;
     @include media-breakpoint-up(xl) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 2rem;
     }
   }
 
@@ -116,7 +116,6 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
       @include media-breakpoint-up(xl) {
-        padding: 0;
         grid-template-columns: repeat(4, minmax(0, 1fr));
       }
     }
@@ -142,6 +141,7 @@
   }
 
   &.--is-banner-search-form {
+    width: 100%;
     #{$c-form}__fieldset {
       scroll-margin-top: calc(
         #{$mobile-header-height} + #{$mobile-section-padding-top}
@@ -151,12 +151,10 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
       @include media-breakpoint-up(xl) {
-        padding: 0;
         grid-template-columns: repeat(4, minmax(0, 1fr));
         scroll-margin-top: calc(
           #{$mobile-header-height} + #{$desktop-section-padding-top}
         );
-        gap: 1rem 2rem;
       }
       @include media-breakpoint-up(xxl) {
         scroll-margin-top: calc(
@@ -166,8 +164,8 @@
     }
     #{$c-form}__more {
       display: block;
-      margin-top: -1.5rem;
-      transition: margin 0.25s ease-in-out;
+      margin-top: -1rem;
+      transition: margin-top 0.25s ease-in-out;
       @include media-breakpoint-up(md) {
         display: none;
         margin-top: 0;
