@@ -36,9 +36,7 @@ $slide_speed = intval(get_field('slide_speed')) ?? 1000;
     "type":"<?php echo $autoslide ? 'loop' : 'slide'; ?>",
     "pagination":true,
     "updateOnMove":true,
-    "classes":{
-        "page":"c-slider__page splide__pagination__page"
-    },
+    "classes":{"page":"c-slider__page splide__pagination__page"},
     "autoplay": <?php echo $autoslide ? 'true' : 'false'; ?>,
     "pauseOnHover": <?php echo $pause_on_hover ? 'true' : 'false'; ?>,
     "interval": <?php echo json_encode($slide_interval) * 1000; ?>,
@@ -292,22 +290,26 @@ $slide_speed = intval(get_field('slide_speed')) ?? 1000;
                 } ?>
 <?php if ($slide_count > 1) { ?>
             </div>
-            <ul class="c-slider__pagination splide__pagination"></ul>
             <div class="c-slider__navigation splide__navigation">
+                <ul class="c-slider__pagination splide__pagination"></ul>
                 <div class="c-slider__arrows splide__arrows">
                     <button class="c-slider__arrow c-slider__arrow--prev splide__arrow splide__arrow--prev">
                         <span class="u-screen-reader-only"><?php esc_html_e(
                             'Vorheriges',
                             'oo_theme',
                         ); ?></span>
-                        <svg class="c-slider__icon splide__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10.12 17.41"><path d="m9.41.71L1.41,8.71l8,8" vector-effect="non-scaling-stroke" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                        <span class="c-slider__arrow-icon --chevron-left"><?php oo_get_icon(
+                            'chevron-left',
+                        ); ?></span>
                     </button>
                     <button class="c-slider__arrow c-slider__arrow--next splide__arrow splide__arrow--next">
                         <span class="u-screen-reader-only"><?php esc_html_e(
                             'Nächstes',
                             'oo_theme',
                         ); ?></span>
-                        <svg class="c-slider__icon splide__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10.12 17.41"><path d="m.71,16.71l8-8L.71.71" vector-effect="non-scaling-stroke" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                        <span class="c-slider__arrow-icon --chevron-right"><?php oo_get_icon(
+                            'chevron-right',
+                        ); ?></span>
                     </button>
                 </div>
             </div>
