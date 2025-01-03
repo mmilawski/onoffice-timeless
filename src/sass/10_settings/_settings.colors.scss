@@ -24,6 +24,10 @@
     var(--oo-color-shadow),
     0.15
   );
+  #{--oo-color-transparent-shadow-80}: transparent-color(
+    var(--oo-color-shadow),
+    0.8
+  );
   #{--oo-color-transparent-text-10}: transparent-color(
     var(--oo-color-text),
     0.1
@@ -32,29 +36,11 @@
     var(--oo-color-text),
     0.2
   );
-  #{--oo-color-transparent-text-60}: transparent-color(
-    var(--oo-color-text),
-    0.6
-  );
-  #{--oo-color-transparent-bg-0}: transparent-color(var(--oo-color-bg), 0);
   #{--oo-color-transparent-bg-80}: transparent-color(var(--oo-color-bg), 0.8);
   #{--oo-color-transparent-bg-90}: transparent-color(var(--oo-color-bg), 0.9);
-  #{--oo-color-transparent-bg-100}: transparent-color(var(--oo-color-bg), 1);
   #{--oo-color-transparent-primary-10}: transparent-color(
     var(--oo-color-primary),
     0.1
-  );
-  #{--oo-color-transparent-primary-40}: transparent-color(
-    var(--oo-color-primary),
-    0.4
-  );
-  #{--oo-color-transparent-primary-60}: transparent-color(
-    var(--oo-color-primary),
-    0.6
-  );
-  #{--oo-color-transparent-primary-80}: transparent-color(
-    var(--oo-color-primary),
-    0.8
   );
   #{--oo-color-lighten-primary-40}: lighten-color(var(--oo-color-primary), 0.4);
   #{--oo-color-lighten-primary-90}: lighten-color(var(--oo-color-primary), 0.9);
@@ -92,11 +78,6 @@
     var(--oo-color-primary),
     0.6
   );
-  #{--oo-color-mix-bg-text-5}: mix-colors(
-    var(--oo-color-bg),
-    var(--oo-color-text),
-    0.05
-  );
   #{--oo-color-mix-bg-text-10}: mix-colors(
     var(--oo-color-bg),
     var(--oo-color-text),
@@ -129,11 +110,6 @@
     0.2,
     var(--oo-color-text)
   );
-  #{--oo-color-light-transparent-bg-0}: transparent-color(
-    var(--oo-color-light-bg),
-    0,
-    var(--oo-color-bg)
-  );
   #{--oo-color-light-transparent-bg-80}: transparent-color(
     var(--oo-color-light-bg),
     0.8,
@@ -144,29 +120,9 @@
     0.9,
     var(--oo-color-bg)
   );
-  #{--oo-color-light-transparent-bg-100}: transparent-color(
-    var(--oo-color-light-bg),
-    1,
-    var(--oo-color-bg)
-  );
   #{--oo-color-light-transparent-primary-10}: transparent-color(
     var(--oo-color-light-primary),
     0.1,
-    var(--oo-color-primary)
-  );
-  #{--oo-color-light-transparent-primary-40}: transparent-color(
-    var(--oo-color-light-primary),
-    0.4,
-    var(--oo-color-primary)
-  );
-  #{--oo-color-light-transparent-primary-60}: transparent-color(
-    var(--oo-color-light-primary),
-    0.6,
-    var(--oo-color-primary)
-  );
-  #{--oo-color-light-transparent-primary-80}: transparent-color(
-    var(--oo-color-light-primary),
-    0.8,
     var(--oo-color-primary)
   );
   #{--oo-color-light-lighten-primary-40}: lighten-color(
@@ -255,11 +211,6 @@
     0.2,
     var(--oo-color-text)
   );
-  #{--oo-color-dark-transparent-bg-0}: transparent-color(
-    var(--oo-color-dark-bg),
-    0,
-    var(--oo-color-bg)
-  );
   #{--oo-color-dark-transparent-bg-80}: transparent-color(
     var(--oo-color-dark-bg),
     0.8,
@@ -270,32 +221,11 @@
     0.9,
     var(--oo-color-bg)
   );
-  #{--oo-color-dark-transparent-bg-100}: transparent-color(
-    var(--oo-color-dark-bg),
-    1,
-    var(--oo-color-bg)
-  );
   #{--oo-color-dark-transparent-primary-10}: transparent-color(
     var(--oo-color-dark-primary),
     0.1,
     var(--oo-color-primary)
   );
-  #{--oo-color-dark-transparent-primary-40}: transparent-color(
-    var(--oo-color-dark-primary),
-    0.4,
-    var(--oo-color-primary)
-  );
-  #{--oo-color-dark-transparent-primary-60}: transparent-color(
-    var(--oo-color-dark-primary),
-    0.6,
-    var(--oo-color-primary)
-  );
-  #{--oo-color-dark-transparent-primary-80}: transparent-color(
-    var(--oo-color-dark-primary),
-    0.8,
-    var(--oo-color-primary)
-  );
-
   #{--oo-color-dark-lighten-primary-40}: lighten-color(
     var(--oo-color-dark-primary),
     0.4,
@@ -382,11 +312,6 @@
     0.2,
     var(--oo-color-text)
   );
-  #{--oo-color-primary-transparent-bg-0}: transparent-color(
-    var(--oo-color-primary-bg),
-    0,
-    var(--oo-color-bg)
-  );
   #{--oo-color-primary-transparent-bg-80}: transparent-color(
     var(--oo-color-primary-bg),
     0.8,
@@ -397,32 +322,11 @@
     0.9,
     var(--oo-color-bg)
   );
-  #{--oo-color-primary-transparent-bg-100}: transparent-color(
-    var(--oo-color-primary-bg),
-    1,
-    var(--oo-color-bg)
-  );
   #{--oo-color-primary-transparent-primary-10}: transparent-color(
     var(--oo-color-primary-primary),
     0.1,
     var(--oo-color-primary)
   );
-  #{--oo-color-primary-transparent-primary-40}: transparent-color(
-    var(--oo-color-primary-primary),
-    0.4,
-    var(--oo-color-primary)
-  );
-  #{--oo-color-primary-transparent-primary-60}: transparent-color(
-    var(--oo-color-primary-primary),
-    0.6,
-    var(--oo-color-primary)
-  );
-  #{--oo-color-primary-transparent-primary-80}: transparent-color(
-    var(--oo-color-primary-primary),
-    0.8,
-    var(--oo-color-primary)
-  );
-
   #{--oo-color-primary-lighten-primary-40}: lighten-color(
     var(--oo-color-primary-primary),
     0.4,
@@ -509,11 +413,6 @@
     0.2,
     var(--oo-color-text)
   );
-  #{--oo-color-secondary-transparent-bg-0}: transparent-color(
-    var(--oo-color-secondary-bg),
-    0,
-    var(--oo-color-bg)
-  );
   #{--oo-color-secondary-transparent-bg-80}: transparent-color(
     var(--oo-color-secondary-bg),
     0.8,
@@ -524,32 +423,11 @@
     0.9,
     var(--oo-color-bg)
   );
-  #{--oo-color-secondary-transparent-bg-100}: transparent-color(
-    var(--oo-color-secondary-bg),
-    1,
-    var(--oo-color-bg)
-  );
   #{--oo-color-secondary-transparent-primary-10}: transparent-color(
     var(--oo-color-secondary-primary),
     0.1,
     var(--oo-color-primary)
   );
-  #{--oo-color-secondary-transparent-primary-40}: transparent-color(
-    var(--oo-color-secondary-primary),
-    0.4,
-    var(--oo-color-primary)
-  );
-  #{--oo-color-secondary-transparent-primary-60}: transparent-color(
-    var(--oo-color-secondary-primary),
-    0.6,
-    var(--oo-color-primary)
-  );
-  #{--oo-color-secondary-transparent-primary-80}: transparent-color(
-    var(--oo-color-secondary-primary),
-    0.8,
-    var(--oo-color-primary)
-  );
-
   #{--oo-color-secondary-lighten-primary-40}: lighten-color(
     var(--oo-color-secondary-primary),
     0.4,
@@ -699,34 +577,9 @@
     0.2,
     var(--oo-color-text)
   );
-  #{--oo-color-footer-transparent-bg-0}: transparent-color(
-    var(--oo-color-footer-bg),
-    0,
-    var(--oo-color-bg)
-  );
-  #{--oo-color-footer-transparent-bg-100}: transparent-color(
-    var(--oo-color-footer-bg),
-    1,
-    var(--oo-color-bg)
-  );
   #{--oo-color-footer-transparent-primary-10}: transparent-color(
     var(--oo-color-footer-primary),
     0.1,
-    var(--oo-color-primary)
-  );
-  #{--oo-color-footer-transparent-primary-40}: transparent-color(
-    var(--oo-color-footer-primary),
-    0.4,
-    var(--oo-color-primary)
-  );
-  #{--oo-color-footer-transparent-primary-60}: transparent-color(
-    var(--oo-color-footer-primary),
-    0.6,
-    var(--oo-color-primary)
-  );
-  #{--oo-color-footer-transparent-primary-80}: transparent-color(
-    var(--oo-color-footer-primary),
-    0.8,
     var(--oo-color-primary)
   );
   #{--oo-color-footer-lighten-primary-40}: lighten-color(
