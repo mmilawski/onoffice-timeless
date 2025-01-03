@@ -32,6 +32,16 @@
     @include media-breakpoint-up(xl) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+    // add more margin to button if there is no read-more
+    &:not(:has(.c-read-more)) {
+      #{$c-form}__button {
+        margin-top: 1rem;
+        @include media-breakpoint-up(xl) {
+          margin-top: 0;
+        }
+      }
+    }
   }
 
   &__header {

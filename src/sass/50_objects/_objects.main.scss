@@ -62,22 +62,16 @@
   // First banner gets more padding-top because of the transparent header
   & > *:first-child {
     .c-banner__slide {
-      @include media-breakpoint-up(xl) {
-        padding-top: calc(
-          #{$mobile-header-height} + #{$desktop-section-padding-top}
-        );
-      }
-      @include media-breakpoint-up(xxl) {
-        min-height: 80vh;
-        padding-top: calc(
-          #{$desktop-header-height} + #{$desktop-section-padding-top}
-        );
-      }
-
-      .--is-header-style-white & {
+      .--is-header-style-transparent & {
+        @include media-breakpoint-up(lg) {
+          padding-top: calc(
+            #{$mobile-header-height} + #{$desktop-section-padding-top}
+          );
+        }
         @include media-breakpoint-up(xxl) {
-          padding-block: 4rem 13rem;
-          min-height: 75vh;
+          padding-top: calc(
+            #{$desktop-header-height} + #{$desktop-section-padding-top}
+          );
         }
       }
     }

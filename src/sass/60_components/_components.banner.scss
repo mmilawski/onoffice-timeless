@@ -2,7 +2,7 @@
   $c-banner: &;
 
   position: relative;
-  background-color: var(--oo-color-mix-bg-text-10);
+  background-color: var(--oo-color-bg);
 
   &__slide {
     position: relative;
@@ -10,21 +10,15 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 100%;
-    padding: 0;
-    padding-bottom: $mobile-section-padding-bottom;
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-up(lg) {
       min-height: 70vh;
       justify-content: center;
-      padding-top: $desktop-section-padding-top;
-      padding-bottom: $desktop-section-padding-bottom;
+      padding-block: $desktop-section-padding-top
+        $desktop-section-padding-bottom;
     }
 
     &.--content-none {
-      padding-bottom: 0;
-      @include media-breakpoint-up(xl) {
-        padding-bottom: $desktop-section-padding-bottom;
-      }
     }
     &.--content-property-search {
     }
@@ -33,18 +27,18 @@
   }
 
   &__background {
-    max-width: 100%;
-    width: 100vw;
-    height: 70vh;
-    background-color: var(--oo-color-mix-bg-text-20);
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    background-color: var(--oo-color-transparent-primary-10);
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-up(lg) {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      min-height: none;
+      aspect-ratio: unset;
     }
   }
 
@@ -65,12 +59,12 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: var(--video-width, 124.4444vh); // width = 70vh / (9 / 16) = 124.4444
-    height: var(--video-height, 70vh);
+    width: var(--video-width, 133.33vw); // width = 75vw / (9 / 16) = 133.33
+    height: var(--video-height, 75vw);
     transform: translate(-50%, -50%);
     pointer-events: none;
 
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-up(lg) {
       --video-ratio-height: 100%;
       --video-ratio-width: 100vw;
       --video-height: var(--video-ratio-height);
@@ -79,45 +73,37 @@
   }
 
   &__container {
-    padding-top: $mobile-section-padding-top;
-    @include media-breakpoint-up(xl) {
-      padding-top: 0;
+    padding-block: $mobile-section-padding-top $mobile-section-padding-bottom;
+    @include media-breakpoint-up(lg) {
+      padding-block: 0;
       margin-top: 0;
     }
   }
 
   &__row {
     margin: 0;
-    @include media-breakpoint-up(xl) {
-      margin-left: -1rem;
-      margin-right: -1rem;
-    }
   }
 
   &__content {
     display: flex;
     flex-direction: column;
-    gap: 2rem 0;
-    padding: 0;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1.5rem 0;
+    padding: 1rem;
+    background-color: var(--oo-color-transparent-bg-90);
     border-radius: $border-radius;
+    box-shadow: 0 0 5px var(--oo-color-transparent-shadow-15);
 
-    @include media-breakpoint-up(xl) {
-      margin: 0 1rem;
+    @include media-breakpoint-up(lg) {
+      gap: 2rem 0;
       padding: 2rem;
-      background-color: var(--oo-color-transparent-bg-90);
     }
 
     &.--content-none {
     }
     &.--content-property-search {
-      padding: 1rem 1rem 1.5rem;
-      background-color: var(--oo-color-bg);
-      border-bottom: 2px solid var(--oo-color-primary);
-      @include media-breakpoint-up(xl) {
-        padding: 2rem;
-        background-color: var(--oo-color-transparent-bg-90);
-        border: 0;
-      }
     }
     &.--content-text & {
     }
@@ -136,6 +122,13 @@
   }
 
   &__buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    @include media-breakpoint-up(lg) {
+      flex-direction: row;
+      justify-content: center;
+    }
   }
 
   &__button {
@@ -143,82 +136,27 @@
   }
 
   &.--bg-light {
-    color: var(--oo-color-light-text, var(--oo-color-text));
-    background-color: var(--oo-color-light-mix-bg-text-10);
-    #{$c-banner}__background {
-      background-color: var(--oo-color-light-mix-bg-text-20);
-    }
     #{$c-banner}__content {
-      @include media-breakpoint-up(xl) {
-        background-color: var(--oo-color-light-transparent-bg-80);
-      }
-      &.--content-property-search {
-        border-color: var(--oo-color-light-primary, var(--oo-color-primary));
-        background-color: var(--oo-color-light-bg, var(--oo-color-bg));
-        @include media-breakpoint-up(xl) {
-          background-color: var(--oo-color-light-transparent-bg-80);
-        }
-      }
+      background-color: var(--oo-color-light-transparent-bg-90);
+      color: var(--oo-color-light-text, var(--oo-color-text));
     }
   }
   &.--bg-dark {
-    color: var(--oo-color-dark-text, var(--oo-color-text));
-    background-color: var(--oo-color-dark-mix-bg-text-10);
-    #{$c-banner}__background {
-      background-color: var(--oo-color-dark-mix-bg-text-20);
-    }
     #{$c-banner}__content {
-      @include media-breakpoint-up(xl) {
-        background-color: var(--oo-color-dark-transparent-bg-80);
-      }
-      &.--content-property-search {
-        border-color: var(--oo-color-dark-primary, var(--oo-color-primary));
-        background-color: var(--oo-color-dark-bg, var(--oo-color-bg));
-        @include media-breakpoint-up(xl) {
-          background-color: var(--oo-color-dark-transparent-bg-80);
-        }
-      }
+      background-color: var(--oo-color-dark-transparent-bg-90);
+      color: var(--oo-color-dark-text, var(--oo-color-text));
     }
   }
   &.--bg-primary {
-    color: var(--oo-color-primary-text, var(--oo-color-text));
-    background-color: var(--oo-color-primary-mix-bg-text-10);
-    #{$c-banner}__background {
-      background-color: var(--oo-color-primary-mix-bg-text-20);
-    }
     #{$c-banner}__content {
-      @include media-breakpoint-up(xl) {
-        background-color: var(--oo-color-primary-transparent-bg-80);
-      }
-      &.--content-property-search {
-        border-color: var(--oo-color-primary-primary, var(--oo-color-primary));
-        background-color: var(--oo-color-primary-bg, var(--oo-color-bg));
-        @include media-breakpoint-up(xl) {
-          background-color: var(--oo-color-primary-transparent-bg-80);
-        }
-      }
+      background-color: var(--oo-color-primary-transparent-bg-90);
+      color: var(--oo-color-primary-text, var(--oo-color-text));
     }
   }
   &.--bg-secondary {
-    color: var(--oo-color-secondary-text, var(--oo-color-text));
-    background-color: var(--oo-color-secondary-mix-bg-text-10);
-    #{$c-banner}__background {
-      background-color: var(--oo-color-secondary-mix-bg-text-20);
-    }
     #{$c-banner}__content {
-      @include media-breakpoint-up(xl) {
-        background-color: var(--oo-color-secondary-transparent-bg-80);
-      }
-      &.--content-property-search {
-        border-color: var(
-          --oo-color-secondary-primary,
-          var(--oo-color-primary)
-        );
-        background-color: var(--oo-color-secondary-bg, var(--oo-color-bg));
-        @include media-breakpoint-up(xl) {
-          background-color: var(--oo-color-secondary-transparent-bg-80);
-        }
-      }
+      background-color: var(--oo-color-secondary-transparent-bg-90);
+      color: var(--oo-color-secondary-text, var(--oo-color-text));
     }
   }
 

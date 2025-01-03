@@ -5,7 +5,8 @@ $slide_count = is_array($slider) ? count($slider) : 0;
 $first_slide = true;
 
 // Settings
-$settings = get_field('settings') ?? null;
+$settings = get_field('settings') ?? [];
+$bg_color = $settings['bg_color'] ?? 'bg-transparent';
 
 $autoslide = filter_var(
     get_field('autoslide') ?? false,
@@ -19,16 +20,11 @@ $pause_on_hover = filter_var(
 $slide_speed = intval(get_field('slide_speed')) ?? 1000;
 ?>
 
-<div <?php oo_block_id($block); ?> class="c-banner --<?php echo $settings[
-     'bg_color'
- ]; ?> --<?php echo $settings['bg_color']; ?>-mixed">
+<div <?php oo_block_id($block); ?> class="c-banner --<?php echo $bg_color; ?>">
 
 <?php if ($slide_count > 1) { ?>
-    <div class="c-banner__slider --on-<?php echo $settings[
-        'bg_color'
-    ]; ?> c-slider splide --auto-height --is-banner-slider" data-splide='{
+    <div class="c-banner__slider c-slider splide --auto-height --is-banner-slider" data-splide='{
     "perPage":1,
-    "perMove":1,
     "pagination":false,
     "arrows":true,
     "snap":true,
@@ -155,7 +151,10 @@ $slide_speed = intval(get_field('slide_speed')) ?? 1000;
                                         'dimensions' => [
                                             '575' => [
                                                 'w' => $background_width_xs,
-                                                'h' => $background_width_xs,
+                                                'h' => round(
+                                                    ($background_width_xs * 3) /
+                                                        4,
+                                                ),
                                             ],
                                             '1600' => [
                                                 'w' => $background_width_xxxl,
@@ -182,15 +181,24 @@ $slide_speed = intval(get_field('slide_speed')) ?? 1000;
                                             ],
                                             '992' => [
                                                 'w' => $background_width_lg,
-                                                'h' => $background_width_lg,
+                                                'h' => round(
+                                                    ($background_width_lg * 9) /
+                                                        16,
+                                                ),
                                             ],
                                             '768' => [
                                                 'w' => $background_width_md,
-                                                'h' => $background_width_md,
+                                                'h' => round(
+                                                    ($background_width_md * 3) /
+                                                        4,
+                                                ),
                                             ],
                                             '576' => [
                                                 'w' => $background_width_sm,
-                                                'h' => $background_width_sm,
+                                                'h' => round(
+                                                    ($background_width_sm * 3) /
+                                                        4,
+                                                ),
                                             ],
                                         ],
                                     ],
@@ -212,7 +220,7 @@ $slide_speed = intval(get_field('slide_speed')) ?? 1000;
                                 <div class="c-banner__row o-row --position-<?php echo $slide_settings[
                                     'position_content'
                                 ]; ?>">
-                                    <div class="c-banner__content --content-<?php echo $type; ?> o-col-12 o-col-xl-8">
+                                    <div class="c-banner__content --content-<?php echo $type; ?> o-col-12 o-col-lg-10 o-col-xl-8">
                                         <?php if (!empty($headline['text'])) {
                                             $headline_size =
                                                 $headline['size'] == 'span'
@@ -256,14 +264,9 @@ $slide_speed = intval(get_field('slide_speed')) ?? 1000;
                                                     [
                                                         'buttons' =>
                                                             $buttons['buttons'],
-                                                        'additional_button_class' => $settings[
-                                                            'bg_color'
-                                                        ]
-                                                            ? '--on-' .
-                                                                $settings[
-                                                                    'bg_color'
-                                                                ]
-                                                            : '',
+                                                        'additional_button_class' =>
+                                                            '--small-corners --on-' .
+                                                            $bg_color,
                                                         'additional_container_class' =>
                                                             'c-banner__buttons',
                                                     ],
