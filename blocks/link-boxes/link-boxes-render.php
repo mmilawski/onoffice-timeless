@@ -104,7 +104,7 @@ $background_width_xxxl = '1920';
                             <div class="c-slider__progress-bar splide__progress-bar"></div>
                         </div>
                         <div class="c-slider__arrows splide__arrows">
-                            <button class="c-slider__arrow c-slider__arrow--prev splide__arrow splide__arrow--prev">
+                            <button class="c-slider__arrow splide__arrow c-slider__arrow--prev splide__arrow--prev">
                                 <span class="u-screen-reader-only"><?php esc_html_e(
                                     'Vorheriges',
                                     'oo_theme',
