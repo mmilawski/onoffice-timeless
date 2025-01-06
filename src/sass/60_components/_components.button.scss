@@ -14,7 +14,8 @@
   outline: 2px solid transparent;
   outline-offset: 2px;
   transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
-    border-color 0.25s ease-in-out, outline-color 0.25s ease-in-out;
+    border-color 0.25s ease-in-out, outline-color 0.25s ease-in-out,
+    opacity 0.25s ease-in-out;
   cursor: pointer;
 
   @include plain-visited() {
@@ -38,8 +39,11 @@
   }
 
   @include disabled() {
-    background-color: var(--oo-color-mix-primary-contrast-60);
-    border-color: var(--oo-color-mix-primary-contrast-60);
+    background-color: var(--oo-color-primary);
+    border-color: var(--oo-color-primary);
+    opacity: 0.4;
+    outline-color: transparent;
+    cursor: default;
   }
 
   &.--on-bg-light,
@@ -65,8 +69,9 @@
     }
 
     @include disabled() {
-      background-color: var(--oo-color-light-mix-primary-contrast-60);
-      border-color: var(--oo-color-light-mix-primary-contrast-60);
+      background-color: var(--oo-color-light-primary);
+      border-color: var(--oo-color-light-primary);
+      outline-color: transparent;
     }
   }
 
@@ -93,8 +98,9 @@
     }
 
     @include disabled() {
-      background-color: var(--oo-color-dark-mix-primary-contrast-60);
-      border-color: var(--oo-color-dark-mix-primary-contrast-60);
+      background-color: var(--oo-color-dark-primary);
+      border-color: var(--oo-color-dark-primary);
+      outline-color: transparent;
     }
   }
 
@@ -124,8 +130,9 @@
     }
 
     @include disabled() {
-      background-color: var(--oo-color-primary-mix-primary-contrast-60);
-      border-color: var(--oo-color-primary-mix-primary-contrast-60);
+      background-color: var(--oo-color-primary-primary);
+      border-color: var(--oo-color-primary-primary);
+      outline-color: transparent;
     }
   }
 
@@ -155,8 +162,9 @@
     }
 
     @include disabled() {
-      background-color: var(--oo-color-secondary-mix-primary-contrast-60);
-      border-color: var(--oo-color-secondary-mix-primary-contrast-60);
+      background-color: var(--oo-color-secondary-primary);
+      border-color: var(--oo-color-secondary-primary);
+      outline-color: transparent;
     }
   }
 
@@ -183,8 +191,9 @@
     }
 
     @include disabled() {
-      background-color: var(--oo-color-footer-mix-primary-contrast-60);
-      border-color: var(--oo-color-footer-mix-primary-contrast-60);
+      background-color: var(--oo-color-footer-primary);
+      border-color: var(--oo-color-footer-primary);
+      outline-color: transparent;
     }
   }
 
@@ -211,8 +220,9 @@
     }
 
     @include disabled() {
-      background-color: var(--oo-color-mix-primary-contrast-60);
-      border-color: var(--oo-color-mix-primary-contrast-60);
+      background-color: var(--oo-color-primary);
+      border-color: var(--oo-color-primary);
+      outline-color: transparent;
     }
   }
 
@@ -240,9 +250,12 @@
     }
 
     @include disabled() {
-      color: var(--oo-color-mix-text-contrast-60);
+      color: var(--oo-color-text);
       background-color: transparent;
-      border-color: var(--oo-color-mix-text-contrast-60);
+      border-color: var(--oo-color-text);
+      opacity: 0.4;
+      outline-color: transparent;
+      cursor: default;
     }
 
     &.--on-bg-light,
@@ -270,9 +283,10 @@
       }
 
       @include disabled() {
-        color: var(--oo-color-light-mix-text-contrast-60);
+        color: var(--oo-color-light-text);
         background-color: transparent;
-        border-color: var(--oo-color-light-mix-text-contrast-60);
+        border-color: var(--oo-color-light-text);
+        outline-color: transparent;
       }
     }
 
@@ -301,9 +315,10 @@
       }
 
       @include disabled() {
-        color: var(--oo-color-dark-mix-text-contrast-60);
+        color: var(--oo-color-dark-text);
         background-color: transparent;
-        border-color: var(--oo-color-dark-mix-text-contrast-60);
+        border-color: var(--oo-color-dark-text);
+        outline-color: transparent;
       }
     }
 
@@ -332,9 +347,10 @@
       }
 
       @include disabled() {
-        color: var(--oo-color-primary-mix-text-contrast-60);
+        color: var(--oo-color-primary-text);
         background-color: transparent;
-        border-color: var(--oo-color-primary-mix-text-contrast-60);
+        border-color: var(--oo-color-primary-text);
+        outline-color: transparent;
       }
     }
 
@@ -366,9 +382,10 @@
       }
 
       @include disabled() {
-        color: var(--oo-color-secondary-mix-text-contrast-60);
+        color: var(--oo-color-secondary-text);
         background-color: transparent;
-        border-color: var(--oo-color-secondary-mix-text-contrast-60);
+        border-color: var(--oo-color-secondary-text);
+        outline-color: transparent;
       }
     }
 
@@ -397,9 +414,10 @@
       }
 
       @include disabled() {
-        color: var(--oo-color-footer-mix-text-contrast-60);
+        color: var(--oo-color-footer-text);
         background-color: transparent;
-        border-color: var(--oo-color-footer-mix-text-contrast-60);
+        border-color: var(--oo-color-footer-text);
+        outline-color: transparent;
       }
     }
 
@@ -428,9 +446,10 @@
       }
 
       @include disabled() {
-        color: var(--oo-color-mix-text-contrast-60);
+        color: var(--oo-color-text);
         background-color: transparent;
-        border-color: var(--oo-color-mix-text-contrast-60);
+        border-color: var(--oo-color-text);
+        outline-color: transparent;
       }
     }
   }

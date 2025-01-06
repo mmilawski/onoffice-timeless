@@ -101,12 +101,13 @@
     margin: 0;
     padding: 0;
     border-radius: $border-radius;
+    border: 0;
     outline: 2px solid transparent;
     outline-offset: 2px;
     opacity: 1;
     cursor: pointer;
     transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
-      outline-color 0.25s ease-in-out;
+      outline-color 0.25s ease-in-out, opacity 0.25s ease-in-out;
 
     @include plain-visited() {
       color: var(--oo-color-contrast-primary);
@@ -128,6 +129,7 @@
     @include disabled() {
       background-color: var(--oo-color-primary);
       opacity: 0.4;
+      outline-color: transparent;
       cursor: default;
     }
 
@@ -384,6 +386,7 @@
       }
       @include disabled() {
         background-color: var(--oo-color-light-primary);
+        outline-color: transparent;
       }
     }
   }
@@ -431,6 +434,7 @@
       }
       @include disabled() {
         background-color: var(--oo-color-dark-primary);
+        outline-color: transparent;
       }
     }
   }
@@ -478,6 +482,7 @@
       }
       @include disabled() {
         background-color: var(--oo-color-primary-primary);
+        outline-color: transparent;
       }
     }
   }
@@ -525,6 +530,7 @@
       }
       @include disabled() {
         background-color: var(--oo-color-secondary-primary);
+        outline-color: transparent;
       }
     }
   }
@@ -572,6 +578,7 @@
       }
       @include disabled() {
         background-color: var(--oo-color-footer-primary);
+        outline-color: transparent;
       }
     }
   }
@@ -619,6 +626,7 @@
       }
       @include disabled() {
         background-color: var(--oo-color-primary);
+        outline-color: transparent;
       }
     }
   }
