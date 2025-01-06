@@ -24,7 +24,7 @@ include get_template_directory() . '/onoffice-theme/templates/fields.php';
 // ACF
 // Settings
 global $post;
-$settings = get_field('settings') ?? [];
+$settings = get_field('settings', $post->ID) ?? [];
 $bg_color = $settings['bg_color'] ?? 'bg-footer';
 ?>
 
