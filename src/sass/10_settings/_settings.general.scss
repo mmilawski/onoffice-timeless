@@ -23,15 +23,11 @@ $font-weight-navigation: var(
 $font-weight-button: var(--oo-font-button-weight, var(--oo-font-text-weight));
 
 // font sizes
-$global-line-height: 24px;
+$global-font-size: 16px;
+$global-line-height: 28px;
 
 $small-font-size: 12px;
 $small-line-height: 22px;
-
-$desktop-global-font-size: 16px;
-$desktop-global-line-height: 28px;
-$mobile-global-font-size: 14px;
-$mobile-global-line-height: 24px;
 
 $mobile-h1-font-size: 30px;
 $mobile-h1-line-height: 2rem;
@@ -74,23 +70,10 @@ $logo-width-xl: 21.25rem;
 $logo-height-xl: 6.25rem;
 
 // icon sizes
-$icon-wrapper-size: 1.25rem;
-$icon-wrapper-size-large: 2rem;
-$icon-wrapper-size-small: 1rem;
-$icon-size: 1rem;
-$icon-size-large: 0.75rem;
-$icon-size-small: 0.5rem;
-$icon-size-arrows: 0.75rem;
-$icon-size-arrows-large: 1rem;
-$icon-size-arrows-square: 1rem;
-
-// icon sizes
-$mobile-icon-wrapper-size: 2.25rem;
-$desktop-icon-wrapper-size: 2.375rem;
-$mobile-icon-size: 0.875rem;
-$mobile-icon-size-small: 0.625rem;
-$desktop-icon-size: 1rem;
-$desktop-icon-size-small: 0.75rem;
+$icon-wrapper-size: 2.375rem;
+$icon-size-small: 1rem;
+$icon-size: 1.25rem;
+$icon-size-large: 1.5rem;
 
 // section padding
 $desktop-section-padding-top: 7.5rem;
@@ -98,24 +81,9 @@ $desktop-section-padding-bottom: 7.5rem;
 $mobile-section-padding-top: 2.5rem;
 $mobile-section-padding-bottom: 2.5rem;
 
-// separator (polygon)
-$desktop-clip-path-height: $desktop-section-padding-top;
-$mobile-clip-path-height: $mobile-section-padding-top;
-
-$desktop-clip-path-bottom: unset;
-$mobile-clip-path-bottom: unset;
-$mobile-clip-path-top: unset;
-$desktop-clip-path-top: unset;
-
-$desktop-clip-path-reverse: unset;
-$mobile-clip-path-reverse: unset;
-
 // border radius
 $border-radius-small: 0.25rem;
 $border-radius: 0.5rem;
-
-// button styles
-$button-font-size: 18px;
 
 [hidden] {
   display: none;

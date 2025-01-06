@@ -1,11 +1,8 @@
 .c-back-to-top {
   $c-back-to-top: &;
 
-  width: $mobile-icon-wrapper-size;
-  height: $mobile-icon-wrapper-size;
-  background-color: var(--oo-color-primary);
-  color: var(--oo-color-contrast-primary);
-  border: 2px solid var(--oo-color-primary);
+  width: $icon-wrapper-size;
+  height: $icon-wrapper-size;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,44 +14,54 @@
   right: 1rem;
   bottom: 1rem;
   z-index: 99;
+  text-align: center;
+  margin: 0;
   padding: 0;
+  border-radius: $border-radius;
+  border: 2px solid transparent;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
+    border-color 0.25s ease-in-out, outline-color 0.25s ease-in-out;
   cursor: pointer;
-  transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out,
-    visibility 0.25s ease-in-out, color 0.25s ease-in-out,
-    background-color 0.25s ease-in-out, border-color 0.25s ease-in-out,
-    box-shadow 0.25s ease-in-out;
 
   @include media-breakpoint-up(xl) {
     right: 2rem;
     bottom: 2rem;
-    width: $desktop-icon-wrapper-size;
-    height: $desktop-icon-wrapper-size;
   }
 
   @include plain-visited() {
     color: var(--oo-color-contrast-primary);
     background-color: var(--oo-color-primary);
-    border: 2px solid var(--oo-color-primary);
+    border-color: var(--oo-color-primary);
   }
 
   @include hover() {
-    color: var(--oo-color-contrast-primary);
-    background-color: var(--oo-color-transparent-primary-80);
-    border-color: var(--oo-color-transparent-primary-80);
-  }
-
-  @include active() {
-    color: var(--oo-color-contrast-primary);
-    background-color: var(--oo-color-transparent-primary-60);
+    background-color: var(--oo-color-mix-primary-contrast-20);
+    border-color: var(--oo-color-mix-primary-contrast-20);
   }
 
   @include focus() {
-    outline: 2px solid var(--oo-color-primary);
-    outline-offset: 2px;
+    outline-color: var(--oo-color-primary);
+  }
+
+  @include active() {
+    background-color: var(--oo-color-mix-primary-contrast-40);
+    border-color: var(--oo-color-mix-primary-contrast-40);
   }
 
   @include disabled() {
-    background-color: var(--oo-color-transparent-primary-40);
+    background-color: var(--oo-color-mix-primary-contrast-60);
+    border-color: var(--oo-color-mix-primary-contrast-60);
+  }
+
+  &__text {
+  }
+
+  &__icon,
+  svg {
+    height: $icon-size;
+    width: $icon-size;
   }
 
   &.--visible {

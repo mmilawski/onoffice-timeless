@@ -73,10 +73,10 @@
     &.--shorten {
       position: relative;
       overflow: hidden;
-      max-height: calc($mobile-global-line-height * 10);
+      max-height: calc($global-line-height * 10);
       transition: max-height 0.25s ease-in-out;
       @include media-breakpoint-up(xl) {
-        max-height: calc($desktop-global-line-height * 10);
+        max-height: calc($global-line-height * 10);
       }
       &.--is-open {
         max-height: 100rem;

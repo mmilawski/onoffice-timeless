@@ -102,14 +102,18 @@ $team_query = new WP_Query($query_args);
                                     'Vorheriges',
                                     'oo_theme',
                                 ); ?></span>
-                                <svg class="c-slider__icon splide__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10.12 17.41"><path d="m9.41.71L1.41,8.71l8,8" vector-effect="non-scaling-stroke" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                                <span class="c-slider__arrow-icon --chevron-left"><?php oo_get_icon(
+                                    'chevron-left',
+                                ); ?></span>
                             </button>
                             <button class="c-slider__arrow c-slider__arrow--next splide__arrow splide__arrow--next">
                                 <span class="u-screen-reader-only"><?php esc_html_e(
                                     'Nächstes',
                                     'oo_theme',
                                 ); ?></span>
-                                <svg class="c-slider__icon splide__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10.12 17.41"><path d="m.71,16.71l8-8L.71.71" vector-effect="non-scaling-stroke" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                                <span class="c-slider__arrow-icon --chevron-right"><?php oo_get_icon(
+                                    'chevron-right',
+                                ); ?></span>
                             </button>
                         </div>
                     </div>

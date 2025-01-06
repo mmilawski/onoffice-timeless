@@ -29,6 +29,7 @@ if (!is_array($visible) || count($visible) === 0) {
 // ACF
 // Content
 $slider = get_field('slider') ?? [];
+$is_banner = !empty($slider) ? true : false;
 
 // Settings
 $settings = get_field('settings') ?? [];
@@ -45,12 +46,12 @@ if (get_field('property_search_result')) {
 
 <form <?php if (!empty($result)) {
     echo 'action="' . get_permalink($result) . '"';
-} ?> method="get" class="c-form --is-search-form <?php if (!empty($slider)) {
-     echo '--on-banner';
+} ?> method="get" class="c-form <?php if ($is_banner) {
+     echo '--is-banner-search-form  --small-corners';
+ } else {
+     echo '--is-search-form ';
  } ?> <?php if (!empty($bg_color)) {
      echo ' --on-' . $bg_color;
- } else {
-     echo '--on-bg-footer';
  } ?>" data-estate-search-name="<?php echo esc_attr($getListName()); ?>">
     <fieldset class="c-form__fieldset">
         <?php
@@ -64,62 +65,43 @@ if (get_field('property_search_result')) {
                 <?php }
                 renderFieldEstateSearch($inputName, $properties);
                 if ($number == $fields_counter - 1) { ?>
-                        <div class="c-form__button-wrapper">
-                            <button class="c-form__button c-button --has-icon <?php if (
-                                !empty($bg_color)
-                            ) {
-                                echo '--on-' . $bg_color;
-                            } ?>">
-                                <span class="c-button__text"><?php echo esc_attr__(
-                                    'Suchen',
-                                    'oo_theme',
-                                ); ?></span>
-                            </button>
-                        </div>
                     </div>
 
                     <div class="c-form__more c-read-more">
-                        <div class="c-read-more__wrapper --more">
-                            <span class="c-read-more__icon c-button --only-icon">
-                                <span class="c-button__icon --plus"><?php oo_get_icon(
-                                    'plus',
-                                ); ?></span>
-                            </span>  
-                            <span class="c-read-more__text"><?php echo esc_html(
-                                'Mehr anzeigen',
-                                'oo_theme',
-                            ); ?></span>
-                        </div>
-                        <div class="c-read-more__wrapper --less">
-                            <span class="c-read-more__icon c-button --only-icon">
-                                <span class="c-button__icon --plus"><?php oo_get_icon(
-                                    'minus',
-                                ); ?></span>
-                            </span>  
-                            <span class="c-read-more__text"><?php echo esc_html(
-                                'Weniger anzeigen',
-                                'oo_theme',
-                            ); ?></span>
-                        </div>
-				    </div>
+                        <span class="c-read-more__text --more"><?php echo esc_html(
+                            'Mehr anzeigen',
+                            'oo_theme',
+                        ); ?></span> 
+                        <span class="c-read-more__text --less"><?php echo esc_html(
+                            'Weniger anzeigen',
+                            'oo_theme',
+                        ); ?></span>
+                    </div>
+
+                    <button class="c-form__button c-button <?php if (
+                        $is_banner
+                    ) {
+                        echo '--small-corners';
+                    } ?> <?php if (!empty($bg_color)) {
+     echo '--on-' . $bg_color;
+ } ?>">
+                        <?php echo esc_attr__('Suchen', 'oo_theme'); ?>
+                    </button>
                 <?php }
                 ?>
             <?php
             } else {
                 renderFieldEstateSearch($inputName, $properties); ?>
                 <?php if ($number == $fields_counter - 1) { ?>
-                    <div class="c-form__button-wrapper">
-                        <button class="c-form__button c-button --has-icon <?php if (
-                            !empty($bg_color)
-                        ) {
-                            echo '--on-' . $bg_color;
-                        } ?>">
-                            <span class="c-button__text"><?php echo esc_attr__(
-                                'Suchen',
-                                'oo_theme',
-                            ); ?></span>
-                        </button>
-                    </div>
+                    <button class="c-form__button c-button <?php if (
+                        $is_banner
+                    ) {
+                        echo '--small-corners';
+                    } ?> <?php if (!empty($bg_color)) {
+     echo '--on-' . $bg_color;
+ } ?>">
+                        <?php echo esc_attr__('Suchen', 'oo_theme'); ?>
+                    </button>
                 <?php }
             }
             $number++;
