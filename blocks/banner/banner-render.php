@@ -296,8 +296,8 @@ $slide_speed = intval(get_field('slide_speed')) ?? 1000;
             <div class="c-slider__navigation splide__navigation">
                 <ul class="c-slider__pagination splide__pagination"></ul>
                 <div class="c-slider__arrows splide__arrows">
-                    <button class="c-slider__arrow c-slider__arrow--prev splide__arrow splide__arrow--prev">
-                        <span class="u-screen-reader-only"><?php esc_html_e(
+                    <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
+                        <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
                             'Vorheriges',
                             'oo_theme',
                         ); ?></span>
@@ -305,8 +305,8 @@ $slide_speed = intval(get_field('slide_speed')) ?? 1000;
                             'chevron-left',
                         ); ?></span>
                     </button>
-                    <button class="c-slider__arrow c-slider__arrow--next splide__arrow splide__arrow--next">
-                        <span class="u-screen-reader-only"><?php esc_html_e(
+                    <button class="c-slider__arrow --next splide__arrow splide__arrow--next">
+                        <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
                             'Nächstes',
                             'oo_theme',
                         ); ?></span>

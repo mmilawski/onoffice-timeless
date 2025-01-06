@@ -131,20 +131,26 @@
       cursor: default;
     }
 
-    &-icon,
+    &.--prev {
+      left: 0;
+    }
+
+    &.--next {
+      right: 0;
+    }
+  }
+
+  &__arrow-text {
+  }
+
+  &__arrow-icon {
+    height: $icon-size;
+    width: $icon-size;
     svg {
       height: $icon-size;
       width: $icon-size;
       fill: none;
       transform: none;
-    }
-
-    &--prev {
-      left: 0;
-    }
-
-    &--next {
-      right: 0;
     }
   }
 
@@ -215,10 +221,10 @@
       top: 50%;
       transform: translateY(-50%);
 
-      &--next {
+      &.--next {
         right: 1rem;
       }
-      &--prev {
+      &.--prev {
         left: 1rem;
       }
     }
