@@ -29,7 +29,7 @@ if (!is_array($visible) || count($visible) === 0) {
 // ACF
 // Content
 $slider = get_field('slider') ?? [];
-$is_banner = !empty($slider) ? true : false;
+$is_banner = !empty($slider);
 
 // Settings
 $settings = get_field('settings') ?? [];
