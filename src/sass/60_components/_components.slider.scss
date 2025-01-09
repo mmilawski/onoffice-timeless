@@ -112,10 +112,12 @@
     @include plain-visited() {
       color: var(--oo-color-contrast-primary);
       background-color: var(--oo-color-primary);
+      opacity: 1;
     }
 
     @include hover() {
       background-color: var(--oo-color-mix-primary-contrast-20);
+      opacity: 1;
     }
 
     @include focus() {
