@@ -12,12 +12,12 @@ $autoslide = filter_var(
     get_field('autoslide') ?? false,
     FILTER_VALIDATE_BOOLEAN,
 );
-$slide_interval = intval(get_field('slide_interval')) ?? 5;
+$slide_interval = intval(get_field('slide_interval') ?? 5);
 $pause_on_hover = filter_var(
     get_field('pause_on_hover') ?? false,
     FILTER_VALIDATE_BOOLEAN,
 );
-$slide_speed = intval(get_field('slide_speed')) ?? 1000;
+$slide_speed = intval(get_field('slide_speed') ?? 1000);
 ?>
 
 <div <?php oo_block_id($block); ?> class="c-banner --<?php echo $bg_color; ?>">

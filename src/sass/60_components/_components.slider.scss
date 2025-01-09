@@ -163,7 +163,7 @@
 
   &.--auto-height {
     #{$c-slider}__slide {
-      &:not(.is-active):not(:first-child) {
+      &:not(.is-active) {
         max-height: 0;
         @include media-breakpoint-up(xl) {
           max-height: inherit;
