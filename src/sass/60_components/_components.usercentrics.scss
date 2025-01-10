@@ -56,5 +56,11 @@
         }
       }
     }
+
+    .c-banner & {
+      height: 100%;
+      max-height: inherit;
+      z-index: 1;
+    }
   }
 }

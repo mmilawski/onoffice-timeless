@@ -277,18 +277,16 @@ $is_long_description = $description_word_count > 75 ? true : false;
             <?php echo $description['wysiwyg']; ?>
         </div>
         <?php if ($is_long_description) { ?>
-            <button class="c-team-card__more c-button --ghost --read-more" data-open-text="<?php echo esc_html(
-                'Mehr anzeigen',
-                'oo_theme',
-            ); ?>" data-close-text="<?php echo esc_html(
-    'Weniger anzeigen',
-    'oo_theme',
-); ?>">
-				<span class="u-screen-reader-only"><?php echo esc_html(
-        'Mehr anzeigen',
-        'oo_theme',
-    ); ?></span>
-            </button>
+            <div class="c-team-card__more c-read-more">
+                <button class="c-read-more__text --more"><?php echo esc_html(
+                    'Mehr anzeigen',
+                    'oo_theme',
+                ); ?></button> 
+                <button class="c-read-more__text --less"><?php echo esc_html(
+                    'Weniger anzeigen',
+                    'oo_theme',
+                ); ?></button>
+            </div>
         <?php } ?>
     <?php } ?>
 </article>

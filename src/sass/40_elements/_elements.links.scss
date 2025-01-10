@@ -1,18 +1,6 @@
-$color-link: var(--oo-color-primary) !default;
-
 a {
-  color: $color-link;
+  color: var(--oo-color-primary);
   text-decoration: none;
   border: 0;
-  transition: text-decoration 0.25s ease-in-out, border-color 0.25s ease-in-out,
-    color 0.25s ease-in-out, background-color 0.25s ease-in-out;
   outline: 0;
-
-  @include visited-active() {
-    color: $color-link;
-  }
-
-  @include hover-focus() {
-    color: var(--oo-color-mix-primary-contrast-20);
-  }
 }

@@ -27,10 +27,6 @@ html {
 header,
 main,
 footer {
-  font-size: $mobile-global-font-size;
-  line-height: $mobile-global-line-height;
-  @include media-breakpoint-up(xl) {
-    font-size: $desktop-global-font-size;
-    line-height: $desktop-global-line-height;
-  }
+  font-size: $global-font-size;
+  line-height: $global-line-height;
 }

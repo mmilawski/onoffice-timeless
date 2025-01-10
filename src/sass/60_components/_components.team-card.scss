@@ -5,19 +5,17 @@
   flex-direction: column;
   gap: 1.5rem;
   border-radius: $border-radius;
-  scroll-margin-top: calc(
-    #{$mobile-header-height} + #{$mobile-section-padding-top}
-  );
+  scroll-margin-top: calc($mobile-header-height + $mobile-section-padding-top);
   scroll-snap-align: start;
   @include media-breakpoint-up(xl) {
     gap: 2rem;
     scroll-margin-top: calc(
-      #{$mobile-header-height} + #{$desktop-section-padding-top}
+      $mobile-header-height + $desktop-section-padding-top
     );
   }
   @include media-breakpoint-up(xxl) {
     scroll-margin-top: calc(
-      #{$desktop-header-height} + #{$desktop-section-padding-top}
+      $desktop-header-height + $desktop-section-padding-top
     );
   }
 
@@ -73,10 +71,10 @@
     &.--shorten {
       position: relative;
       overflow: hidden;
-      max-height: calc($mobile-global-line-height * 10);
+      max-height: calc($global-line-height * 10);
       transition: max-height 0.25s ease-in-out;
       @include media-breakpoint-up(xl) {
-        max-height: calc($desktop-global-line-height * 10);
+        max-height: calc($global-line-height * 10);
       }
       &.--is-open {
         max-height: 100rem;

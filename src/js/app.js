@@ -27,7 +27,10 @@ jQuery(document).ready(function() {
   if ($('select').length) {
     $('select').each(function() {
       var select = $(this);
-      var parent = select.closest('.o-main');
+      var parent = select.closest('form');
+      if (!parent.length) {
+        parent = select.closest('.o-section');
+      }
       var options = select.find('option');
       if (options.length === 1) {
           var firstOption = options[0];
@@ -81,7 +84,6 @@ jQuery(document).ready(function() {
     });
   }
 
-
   // Select2
   $('input[name="geo_search"]').select2({
     minimumInputLength: 4,
@@ -129,8 +131,21 @@ jQuery(document).ready(function() {
     }
   }
 
+  // Textarea auto expand
+  const textareas = document.querySelectorAll('.o-textarea');
+
+  if( textareas.length > 0 ) {
+    textareas.forEach(textarea => {
+      textarea.addEventListener('input', () => {
+        textarea.style.height = 'auto';
+        const borderOffset = textarea.offsetHeight - textarea.clientHeight;
+        textarea.style.height = `${textarea.scrollHeight + borderOffset}px`;
+      });
+    });
+  }
+
   // Read more
-  const buttonMore = document.querySelectorAll('.--read-more');
+  const buttonMore = document.querySelectorAll('.c-read-more');
 
   if( buttonMore.length > 0 ) {
     buttonMore.forEach(button => {
@@ -215,10 +230,10 @@ jQuery(document).ready(function() {
       <div class="gcontainer c-lightbox__container">
         <div id="glightbox-slider" class="gslider c-lightbox__slider"></div>
         <button class="gprev gbtn c-lightbox__icon-wrapper --arrow --prev" tabindex="0" aria-label="Next">
-          <svg class="c-lightbox__icon --arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10.12 17.41"><path d="m9.41.71L1.41,8.71l8,8" vector-effect="non-scaling-stroke" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <svg class="c-lightbox__icon --arrow" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
         </button>
         <button class="gnext gbtn c-lightbox__icon-wrapper --arrow --next" tabindex="1" aria-label="Previous">
-          <svg class="c-lightbox__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10.12 17.41"><path d="m.71,16.71l8-8L.71.71" vector-effect="non-scaling-stroke" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          <svg class="c-lightbox__icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
         </button>
       </div>
     </div>`;
@@ -229,7 +244,7 @@ jQuery(document).ready(function() {
         <div class="ginner-container c-lightbox__content">
           <div class="gslide-media c-lightbox__media">
             <button class="gclose gbtn c-lightbox__icon-wrapper --close" tabindex="2" aria-label="Close">
-              <svg class="c-lightbox__icon" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14"><path d="M1,13L13,1 M1,1l12,12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"></path></svg>
+              <svg class="c-lightbox__icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
             </button>
           </div>
           <div class="gslide-description c-lightbox__description-wrapper">

@@ -40,30 +40,20 @@
   }
 
   &__icon-wrapper {
-    width: $mobile-icon-wrapper-size;
-    height: $mobile-icon-wrapper-size;
+    width: $icon-wrapper-size;
+    height: $icon-wrapper-size;
     background-color: var(--oo-color-primary);
     border-radius: $border-radius;
     color: var(--oo-color-contrast-primary);
     display: flex;
     align-items: center;
     justify-content: center;
-
-    @include media-breakpoint-up(xl) {
-      width: $desktop-icon-wrapper-size;
-      height: $desktop-icon-wrapper-size;
-    }
   }
 
   &__icon {
-    width: $mobile-icon-size;
-    height: $mobile-icon-size;
+    width: $icon-size;
+    height: $icon-size;
     transition: transform 0.25s ease-in-out;
-
-    @include media-breakpoint-up(xl) {
-      width: $mobile-icon-size;
-      height: $desktop-icon-size;
-    }
 
     .--is-closed & {
     }

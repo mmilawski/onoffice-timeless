@@ -5,12 +5,10 @@
     max-width: 100%;
     width: 100vw;
     height: 70vh;
-    clip-path: $mobile-clip-path-bottom;
     background-color: var(--oo-color-mix-bg-text-20);
 
     @include media-breakpoint-up(xl) {
       min-height: 70vh;
-      clip-path: $desktop-clip-path-bottom;
     }
     @include media-breakpoint-up(xxl) {
       min-height: 80vh;
@@ -24,18 +22,12 @@
   }
 
   &__info {
-    padding-top: calc(
-      #{$mobile-header-height} + #{$mobile-section-padding-top}
-    );
+    padding-top: calc($mobile-header-height + $mobile-section-padding-top);
     @include media-breakpoint-up(xl) {
-      padding-top: calc(
-        #{$mobile-header-height} + #{$desktop-section-padding-top}
-      );
+      padding-top: calc($mobile-header-height + $desktop-section-padding-top);
     }
     @include media-breakpoint-up(xxl) {
-      padding-top: calc(
-        #{$desktop-header-height} + #{$desktop-section-padding-top}
-      );
+      padding-top: calc($desktop-header-height + $desktop-section-padding-top);
     }
   }
 
@@ -69,28 +61,16 @@
   }
 
   &__banner + &__info {
-    padding-top: calc($mobile-section-padding-top + $mobile-clip-path-height);
-    margin-top: -$mobile-clip-path-height;
-    clip-path: $mobile-clip-path-reverse;
+    padding-top: $mobile-section-padding-top;
     @include media-breakpoint-up(xl) {
-      padding-top: calc(
-        $desktop-section-padding-top + $desktop-clip-path-height
-      );
-      margin-top: -$desktop-clip-path-height;
-      clip-path: $desktop-clip-path-reverse;
+      padding-top: $desktop-section-padding-top;
     }
   }
 
   & + * {
-    padding-top: calc($mobile-section-padding-top + $mobile-clip-path-height);
-    margin-top: -$mobile-clip-path-height;
-    clip-path: $mobile-clip-path-reverse;
+    padding-top: $mobile-section-padding-top;
     @include media-breakpoint-up(xl) {
-      padding-top: calc(
-        $desktop-section-padding-top + $desktop-clip-path-height
-      );
-      margin-top: -$desktop-clip-path-height;
-      clip-path: $desktop-clip-path-reverse;
+      padding-top: $desktop-section-padding-top;
     }
   }
 }

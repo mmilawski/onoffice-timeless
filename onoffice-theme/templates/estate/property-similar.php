@@ -30,7 +30,7 @@ $dontEcho = [
                 </div>
             </div>
             <div class="c-slider__arrows splide__arrows">
-                <button class="c-slider__arrow --prev c-button --only-icon --square splide__arrow splide__arrow--prev">
+                <button class="c-slider__arrow c-slider__arrow--prev c-button --only-icon --square splide__arrow splide__arrow--prev">
                     <span class="u-screen-reader-only"><?php esc_html_e(
                         'Vorheriges',
                         'oo_theme',
@@ -39,7 +39,7 @@ $dontEcho = [
                         'chevron-left',
                     ); ?></span>
                 </button>
-                <button class="c-slider__arrow --next c-button --only-icon --square splide__arrow splide__arrow--next">
+                <button class="c-slider__arrow c-slider__arrow--next c-button --only-icon --square splide__arrow splide__arrow--next">
                     <span class="u-screen-reader-only"><?php esc_html_e(
                         'Nächstes',
                         'oo_theme',

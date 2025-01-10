@@ -48,41 +48,51 @@
   }
 
   a {
-    color: var(--oo-color-primary);
-    text-decoration: underline;
-
-    @include visited-active() {
+    @include plain-visited() {
       color: var(--oo-color-primary);
-      text-decoration-color: var(--oo-color-primary);
+      text-decoration: underline currentColor;
+      transition: text-decoration 0.25s ease-in-out;
     }
 
-    @include hover-focus() {
-      text-decoration: underline transparent;
+    @include hover-focus-active() {
+      text-decoration-color: transparent;
     }
   }
 
   ul {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    padding-left: 1.25rem;
+    gap: 0.5rem;
+    padding-left: 1.5rem;
 
     li {
       list-style-type: none;
       position: relative;
 
-      &::before {
+      &:before {
         content: '';
         display: inline-block;
         border-radius: 50%;
         position: absolute;
-        left: -1.25rem;
-        top: calc(($mobile-global-line-height / 2) - (0.5rem / 2));
+        left: -1.5rem;
+        top: calc(($global-line-height / 2) - (0.5rem / 2));
         width: 0.5rem;
         height: 0.5rem;
-        background: var(--oo-color-primary);
-        @include media-breakpoint-up(xl) {
-          top: calc(($desktop-global-line-height / 2) - (0.5rem / 2));
+        color: var(--oo-color-primary);
+        background: currentColor;
+      }
+
+      ul {
+        margin-top: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      li {
+        &:before {
+          border: 2px solid currentColor;
+          background: transparent;
         }
       }
     }
@@ -90,85 +100,43 @@
 
   ol {
     list-style-type: none;
-    counter-reset: primary;
+    counter-reset: numbers;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    padding-left: 2rem;
+    gap: 0.5rem;
+    padding-left: 1.5rem;
 
     li {
       position: relative;
-      counter-increment: primary;
+      counter-increment: numbers;
 
-      &::before {
-        content: counters(primary, '.') ' ';
+      &:before {
+        content: counters(numbers, '.') ' ';
         display: inline-flex;
-        justify-content: center;
+        justify-content: flex-end;
         align-items: center;
         position: absolute;
         color: var(--oo-color-primary);
         font-family: $font-family-text-bold;
-        @include font-weight(bold);
+        font-weight: $font-weight-text-bold;
         left: -1.5rem;
-        top: calc(($mobile-global-line-height / 2) - (1.125rem / 2));
-        min-width: 1.125rem;
-        height: 1.125rem;
-        @include media-breakpoint-up(xl) {
-          top: calc(($desktop-global-line-height / 2) - (1.125rem / 2));
-        }
       }
 
       ol {
-        counter-reset: secondary;
+        margin-top: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      li {
+        &:before {
+          left: -2rem;
+        }
 
         li {
-          counter-increment: secondary;
-
-          &::before {
-            content: counters(primary, '.') '.' counters(secondary, '.') ' ';
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            position: absolute;
-            color: var(--oo-color-primary);
-            font-family: $font-family-text-bold;
-            @include font-weight(bold);
-            left: -2rem;
-            top: calc(($mobile-global-line-height / 2) - (1.125rem / 2));
-            padding: 0 0.25rem;
-            min-width: 1.125rem;
-            height: 1.125rem;
-            @include media-breakpoint-up(xl) {
-              top: calc(($desktop-global-line-height / 2) - (1.125rem / 2));
-            }
-          }
-
-          ol {
-            counter-reset: tertiary;
-
-            li {
-              counter-increment: tertiary;
-
-              &::before {
-                content: counters(primary, '.') '.' counters(secondary, '.') '.'
-                  counters(tertiary, '.') ' ';
-                display: inline-flex;
-                justify-content: center;
-                align-items: center;
-                position: absolute;
-                color: var(--oo-color-primary);
-                font-family: $font-family-text-bold;
-                @include font-weight(bold);
-                left: -3rem;
-                top: calc(($mobile-global-line-height / 2) - (1.125rem / 2));
-                padding: 0 0.25rem;
-                min-width: 1.125rem;
-                height: 1.125rem;
-                @include media-breakpoint-up(xl) {
-                  top: calc(($desktop-global-line-height / 2) - (1.125rem / 2));
-                }
-              }
-            }
+          &:before {
+            left: -3rem;
           }
         }
       }
@@ -177,9 +145,38 @@
 
   /* Positions */
   .--text-align-center & {
-    :is(ul, ol) li {
-      justify-content: center;
-      text-align: center;
+    :is(ul, ol) {
+      padding-left: 0;
+      li {
+        &:before {
+          position: relative;
+          margin-right: 1rem;
+          left: unset;
+          top: unset;
+        }
+      }
+    }
+
+    ul {
+      li {
+        &:before {
+          @include media-breakpoint-up(xl) {
+            top: -0.125rem;
+          }
+        }
+      }
+    }
+
+    blockquote {
+      padding-left: 0;
+      &:before {
+        position: relative;
+        display: inline-block;
+        margin-right: 0.5rem;
+        margin-top: 0;
+        left: unset;
+        top: 0.5rem;
+      }
     }
   }
 
@@ -194,43 +191,14 @@
     }
 
     a {
-      color: var(--oo-color-light-primary, var(--oo-color-primary));
-      text-decoration: underline;
-
-      @include visited-active() {
-        color: var(--oo-color-light-primary, var(--oo-color-primary));
-        text-decoration-color: var(
-          --oo-color-light-primary,
-          var(--oo-color-primary)
-        );
-      }
-
-      @include hover-focus() {
-        text-decoration: underline transparent;
-        color: var(--oo-color-light-mix-primary-contrast-20);
-      }
+      color: var(--oo-color-light-primary);
     }
 
-    ul {
+    :is(ul, ol) {
       li {
-        &::before {
-          background-color: var(
-            --oo-color-light-primary,
-            var(--oo-color-primary)
-          );
-        }
-      }
-    }
-
-    ol {
-      li {
-        &::before,
+        &:before,
         &::marker {
-          color: var(--oo-color-light-contrast-primary);
-          background-color: var(
-            --oo-color-light-primary,
-            var(--oo-color-primary)
-          );
+          color: var(--oo-color-light-primary);
         }
       }
     }
@@ -241,9 +209,11 @@
     }
 
     blockquote {
-      &::before,
-      &::after {
-        color: var(--oo-color-light-primary, var(--oo-color-primary));
+      &:before {
+        background-color: var(
+          --oo-color-light-primary,
+          var(--oo-color-primary)
+        );
       }
     }
   }
@@ -258,43 +228,14 @@
     }
 
     a {
-      color: var(--oo-color-dark-primary, var(--oo-color-primary));
-      text-decoration: underline;
-
-      @include visited-active() {
-        color: var(--oo-color-dark-primary, var(--oo-color-primary));
-        text-decoration-color: var(
-          --oo-color-dark-primary,
-          var(--oo-color-primary)
-        );
-      }
-
-      @include hover-focus() {
-        text-decoration: underline transparent;
-        color: var(--oo-color-dark-mix-primary-contrast-20);
-      }
+      color: var(--oo-color-dark-primary);
     }
 
-    ul {
+    :is(ul, ol) {
       li {
-        &::before {
-          background-color: var(
-            --oo-color-dark-primary,
-            var(--oo-color-primary)
-          );
-        }
-      }
-    }
-
-    ol {
-      li {
-        &::before,
+        &:before,
         &::marker {
-          color: var(--oo-color-dark-contrast-primary);
-          background-color: var(
-            --oo-color-dark-primary,
-            var(--oo-color-primary)
-          );
+          color: var(--oo-color-dark-primary);
         }
       }
     }
@@ -305,9 +246,8 @@
     }
 
     blockquote {
-      &::before,
-      &::after {
-        color: var(--oo-color-dark-primary, var(--oo-color-primary));
+      &:before {
+        background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
       }
     }
   }
@@ -322,43 +262,14 @@
     }
 
     a {
-      color: var(--oo-color-primary-primary, var(--oo-color-primary));
-      text-decoration: underline;
-
-      @include visited-active() {
-        color: var(--oo-color-primary-primary, var(--oo-color-primary));
-        text-decoration-color: var(
-          --oo-color-primary-primary,
-          var(--oo-color-primary)
-        );
-      }
-
-      @include hover-focus() {
-        text-decoration: underline transparent;
-        color: var(--oo-color-primary-mix-primary-contrast-20);
-      }
+      color: var(--oo-color-primary-primary);
     }
 
-    ul {
+    :is(ul, ol) {
       li {
-        &::before {
-          background-color: var(
-            --oo-color-primary-primary,
-            var(--oo-color-primary)
-          );
-        }
-      }
-    }
-
-    ol {
-      li {
-        &::before,
+        &:before,
         &::marker {
-          color: var(--oo-color-primary-contrast-primary);
-          background-color: var(
-            --oo-color-primary-primary,
-            var(--oo-color-primary)
-          );
+          color: var(--oo-color-primary-primary);
         }
       }
     }
@@ -372,9 +283,11 @@
     }
 
     blockquote {
-      &::before,
-      &::after {
-        color: var(--oo-color-primary-primary, var(--oo-color-primary));
+      &:before {
+        background-color: var(
+          --oo-color-primary-primary,
+          var(--oo-color-primary)
+        );
       }
     }
   }
@@ -389,43 +302,14 @@
     }
 
     a {
-      color: var(--oo-color-secondary-primary, var(--oo-color-primary));
-      text-decoration: underline;
-
-      @include visited-active() {
-        color: var(--oo-color-secondary-primary, var(--oo-color-primary));
-        text-decoration-color: var(
-          --oo-color-secondary-primary,
-          var(--oo-color-primary)
-        );
-      }
-
-      @include hover-focus() {
-        text-decoration: underline transparent;
-        color: var(--oo-color-secondary-mix-primary-contrast-20);
-      }
+      color: var(--oo-color-secondary-primary);
     }
 
-    ul {
+    :is(ul, ol) {
       li {
-        &::before {
-          background-color: var(
-            --oo-color-secondary-primary,
-            var(--oo-color-primary)
-          );
-        }
-      }
-    }
-
-    ol {
-      li {
-        &::before,
+        &:before,
         &::marker {
-          color: var(--oo-color-secondary-contrast-primary);
-          background-color: var(
-            --oo-color-secondary-primary,
-            var(--oo-color-primary)
-          );
+          color: var(--oo-color-secondary-primary);
         }
       }
     }
@@ -439,9 +323,11 @@
     }
 
     blockquote {
-      &::before,
-      &::after {
-        color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+      &:before {
+        background-color: var(
+          --oo-color-secondary-primary,
+          var(--oo-color-primary)
+        );
       }
     }
   }
@@ -457,44 +343,13 @@
 
     a {
       color: var(--oo-color-header-text, var(--oo-color-text));
-      border-color: var(--oo-color-header-text, var(--oo-color-text));
-
-      @include media-breakpoint-up(xxl) {
-        color: var(--oo-color-header-primary, var(--oo-color-primary));
-        border-color: var(--oo-color-header-primary, var(--oo-color-primary));
-      }
-
-      @include visited-active() {
-        color: var(--oo-color-header-primary, var(--oo-color-primary));
-        border-color: var(--oo-color-header-primary, var(--oo-color-primary));
-      }
-
-      @include hover-focus() {
-        border-color: transparent;
-        color: var(--oo-color-header-mix-primary-contrast-20);
-      }
     }
 
-    ul {
+    :is(ul, ol) {
       li {
-        &::before {
-          background-color: var(
-            --oo-color-header-primary,
-            var(--oo-color-primary)
-          );
-        }
-      }
-    }
-
-    ol {
-      li {
-        &::before,
+        &:before,
         &::marker {
-          color: var(--oo-color-header-contrast-primary);
-          background-color: var(
-            --oo-color-header-primary,
-            var(--oo-color-primary)
-          );
+          color: var(--oo-color-header-primary);
         }
       }
     }
@@ -505,9 +360,11 @@
     }
 
     blockquote {
-      &::before,
-      &::after {
-        color: var(--oo-color-header-primary, var(--oo-color-primary));
+      &:before {
+        background-color: var(
+          --oo-color-header-primary,
+          var(--oo-color-primary)
+        );
       }
     }
   }
@@ -523,39 +380,13 @@
 
     a {
       color: var(--oo-color-footer-primary, var(--oo-color-primary));
-      border-color: var(--oo-color-footer-primary, var(--oo-color-primary));
-
-      @include visited-active() {
-        color: var(--oo-color-footer-primary, var(--oo-color-primary));
-        border-color: var(--oo-color-footer-primary, var(--oo-color-primary));
-      }
-
-      @include hover-focus() {
-        border-color: transparent;
-        color: var(--oo-color-footer-mix-primary-contrast-20);
-      }
     }
 
-    ul {
+    :is(ul, ol) {
       li {
-        &::before {
-          background-color: var(
-            --oo-color-footer-primary,
-            var(--oo-color-primary)
-          );
-        }
-      }
-    }
-
-    ol {
-      li {
-        &::before,
+        &:before,
         &::marker {
-          color: var(--oo-color-footer-contrast-primary);
-          background-color: var(
-            --oo-color-footer-primary,
-            var(--oo-color-primary)
-          );
+          color: var(--oo-color-footer-primary);
         }
       }
     }
@@ -566,9 +397,11 @@
     }
 
     blockquote {
-      &::before,
-      &::after {
-        color: var(--oo-color-footer-primary, var(--oo-color-primary));
+      &:before {
+        background-color: var(
+          --oo-color-footer-primary,
+          var(--oo-color-primary)
+        );
       }
     }
   }
@@ -584,29 +417,11 @@
 
     a {
       color: var(--oo-color-primary);
-      text-decoration: underline;
-
-      @include visited-active() {
-        color: var(--oo-color-primary);
-        text-decoration-color: var(--oo-color-primary);
-      }
-
-      @include hover-focus() {
-        text-decoration: underline transparent;
-      }
     }
 
-    ul {
+    :is(ul, ol) {
       li {
-        &::before {
-          background-color: var(--oo-color-primary);
-        }
-      }
-    }
-
-    ol {
-      li {
-        &::before,
+        &:before,
         &::marker {
           color: var(--oo-color-primary);
         }
@@ -619,9 +434,8 @@
     }
 
     blockquote {
-      &::before,
-      &::after {
-        color: var(--oo-color-primary);
+      &:before {
+        background-color: var(--oo-color-primary);
       }
     }
   }
