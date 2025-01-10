@@ -17,8 +17,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: $desktop-icon-wrapper-size;
-    height: $desktop-icon-wrapper-size;
+    width: $icon-wrapper-size;
+    height: $icon-wrapper-size;
     cursor: pointer;
     transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
       border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;

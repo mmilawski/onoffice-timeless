@@ -72,14 +72,12 @@
         width: inherit;
 
         position: relative;
-        padding-top: calc(
-          #{$mobile-header-height} + #{$desktop-section-padding-top}
-        );
+        padding-top: calc($mobile-header-height + $desktop-section-padding-top);
         z-index: 500;
       }
       @include media-breakpoint-up(xxl) {
         padding-top: calc(
-          #{$desktop-header-height} + #{$desktop-section-padding-top}
+          $desktop-header-height + $desktop-section-padding-top
         );
       }
 

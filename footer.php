@@ -16,12 +16,14 @@ $company_name = $company['name'] ?? (get_bloginfo('name') ?? null);
 ?>
 
 <footer class="c-footer">
-    <button class="c-back-to-top c-button --only-icon --large --on-bg-footer">
-        <span class="u-screen-reader-only"><?php echo __(
+    <button class="c-back-to-top">
+        <span class="c-back-to-top__text u-screen-reader-only"><?php echo __(
             'Zurück zum Anfang',
             'oo_theme',
         ); ?></span>
-        <?php oo_get_icon('arrow-up'); ?>
+        <span class="c-back-to-top__icon --chevron-up"><?php oo_get_icon(
+            'chevron-up',
+        ); ?></span>
     </button>
 
     <?php if (is_array($footer_content_rows)) { ?>

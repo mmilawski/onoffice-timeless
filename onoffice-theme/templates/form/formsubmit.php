@@ -28,12 +28,7 @@ $key = get_option('onoffice-settings-captcha-sitekey', '');
 
 /** @var \onOffice\WPlugin\Form $pForm */
 if ($pForm->needsReCaptcha() && $key !== '') {
-
-    // Recaptcha validation script
-    wp_enqueue_script('oo-captchacontrol-script');
-
-    $formId = $pForm->getGenericSetting('formId');
-    ?>
+    $formId = $pForm->getGenericSetting('formId'); ?>
 	<script>
 		function onSubmit() {
 			var element = document.getElementById(<?php echo json_encode($formId); ?>);
