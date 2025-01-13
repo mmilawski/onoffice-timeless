@@ -7,6 +7,16 @@ $texts = get_field('texts') ?? [];
 $settings = get_field('settings') ?? [];
 $align_text = $settings['align_text'] ?? 'left';
 $bg_color = $settings['bg_color'] ?? 'bg-transparent';
+$headline_class = 'c-text__headline o-col-12 o-col-xl-10';
+
+if (!empty($texts[0]['text']['wysiwyg'])) {
+    $text_count = is_array($texts) ? count($texts) : 1;
+    $text_class =
+        'c-text__content o-col-12 o-col-xl-' . ($text_count === 1 ? '8' : '4');
+    $headline_class =
+        'c-text__headline o-col-12 o-col-xl-' .
+        ($text_count === 3 ? '12' : '8');
+}
 ?>
 
 <section <?php oo_block_id(
@@ -18,8 +28,7 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
             <div class="c-text__row o-row">
 								<?php oo_get_template('components', '', 'component-headline', [
             'headline' => $headline,
-            'additional_headline_class' =>
-                'c-text__headline o-col-12 o-col-xl-8',
+            'additional_headline_class' => $headline_class,
         ]); ?> 
             </div>
         <?php } ?>
@@ -27,13 +36,7 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
         <?php if (
             !empty($texts[0]['text']['wysiwyg']) ||
             !empty($texts[0]['buttons']['buttons'][0]['link'])
-        ) {
-
-            $text_count = is_array($texts) ? count($texts) : 1;
-            $text_class =
-                'c-text__content o-col-12 o-col-xl-' .
-                ($text_count === 1 ? '8' : ($text_count === 2 ? '6' : '4'));
-            ?>
+        ) { ?>
             <div class="c-text__columns o-row">
                 <?php if (is_array($texts)) {
                     foreach ($texts as $text_column):
@@ -55,14 +58,9 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
                                     'component-buttons',
                                     [
                                         'buttons' => $buttons['buttons'],
-                                        'additional_button_class' =>
-                                            ($text_count === 3
-                                                ? '--full-width'
-                                                : '') .
-                                            ' ' .
-                                            ($bg_color
-                                                ? '--on-' . $bg_color
-                                                : ''),
+                                        'additional_button_class' => $bg_color
+                                            ? '--on-' . $bg_color
+                                            : '',
                                         'additional_container_class' =>
                                             'c-text__buttons',
                                     ],
@@ -74,7 +72,6 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
                 <?php
                 } ?>
             </div>
-        <?php
-        } ?>
+        <?php } ?>
     </div>
 </section>
