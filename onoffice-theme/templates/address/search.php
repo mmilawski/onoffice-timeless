@@ -29,10 +29,12 @@ if (!is_array($visible) || count($visible) === 0) {
 // ACF
 // Content
 $slider = get_field('slider') ?? [];
+$is_banner = !empty($slider);
 
 // Settings
 $settings = get_field('settings') ?? [];
 $bg_color = $settings['bg_color'] ?? 'bg-transparent';
+
 if (get_field('address_search_result')) {
     $result = get_field('address_search_result') ?? null;
 } elseif (get_field('sites', 'option')['address_search_result']) {
@@ -44,10 +46,12 @@ if (get_field('address_search_result')) {
 
 <form <?php if (!empty($result)) {
     echo 'action="' . get_permalink($result) . '"';
-} ?> method="get" class="c-form --is-search-form <?php if (!empty($slider)) {
-     echo '--on-banner';
+} ?> method="get" class="c-form <?php if ($is_banner) {
+     echo '--is-banner-search-form  --small-corners';
+ } else {
+     echo '--is-search-form ';
  } ?> <?php if (!empty($bg_color)) {
-     echo '--' . $bg_color;
+     echo '--on-' . $bg_color;
  } ?>" data-estate-search-name="<?php echo esc_attr($getListName()); ?>">
     <fieldset class="c-form__fieldset">
         <?php
@@ -78,28 +82,28 @@ if (get_field('address_search_result')) {
                             'value' => $_GET['geo_search_text'] ?? '',
                         ]);
                     } ?>
-                        <div class="c-form__button-wrapper">
-                            <button class="c-form__button c-button <?php if (
-                                !empty($bg_color)
-                            ) {
-                                echo '--on-' . $bg_color;
-                            } ?>">
-                                <?php echo esc_attr__('Suchen', 'oo_theme'); ?>
-                        </button>
-                        </div>
                     </div>
-                    <span class="c-form__more c-button --ghost --read-more" data-open-text="<?php echo esc_html(
-                        'Mehr anzeigen',
-                        'oo_theme',
-                    ); ?>" data-close-text="<?php echo esc_html(
-    'Weniger anzeigen',
-    'oo_theme',
-); ?>">
-              <span class="u-screen-reader-only"><?php echo esc_html(
-                  'Mehr anzeigen',
-                  'oo_theme',
-              ); ?></span>
-            </span>
+
+                    <div class="c-form__more c-read-more">
+                        <span class="c-read-more__text --more"><?php echo esc_html(
+                            'Mehr anzeigen',
+                            'oo_theme',
+                        ); ?></span> 
+                        <span class="c-read-more__text --less"><?php echo esc_html(
+                            'Weniger anzeigen',
+                            'oo_theme',
+                        ); ?></span>
+                    </div>
+
+                    <button class="c-form__button c-button <?php if (
+                        $is_banner
+                    ) {
+                        echo '--small-corners';
+                    } ?> <?php if (!empty($bg_color)) {
+     echo '--on-' . $bg_color;
+ } ?>">
+                        <?php echo esc_attr__('Suchen', 'oo_theme'); ?>
+                    </button>
                 <?php
                 }
                 ?>
@@ -124,15 +128,15 @@ if (get_field('address_search_result')) {
                             'value' => $_GET['geo_search_text'] ?? '',
                         ]);
                     } ?>
-                    <div class="c-form__button-wrapper">
-                        <button class="c-form__button c-button <?php if (
-                            !empty($bg_color)
-                        ) {
-                            echo '--on-' . $bg_color;
-                        } ?>">
-                            <?php echo esc_attr__('Suchen', 'oo_theme'); ?>
-                        </button>
-                    </div>
+                    <button class="c-form__button c-button <?php if (
+                        $is_banner
+                    ) {
+                        echo '--small-corners';
+                    } ?> <?php if (!empty($bg_color)) {
+     echo '--on-' . $bg_color;
+ } ?>">
+                        <?php echo esc_attr__('Suchen', 'oo_theme'); ?>
+                    </button>
                 <?php
                 }
             }

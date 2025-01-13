@@ -80,7 +80,7 @@
   }
 
   &__headline {
-    max-height: calc(#{$mobile-h3-line-height} * 3);
+    max-height: calc($mobile-h3-line-height * 3);
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -89,7 +89,7 @@
     -webkit-box-orient: vertical;
 
     @include media-breakpoint-up(xl) {
-      max-height: calc(#{$desktop-h3-line-height} * 3);
+      max-height: calc($desktop-h3-line-height * 3);
     }
   }
 

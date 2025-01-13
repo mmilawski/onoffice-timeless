@@ -23,15 +23,14 @@ include get_template_directory() . '/onoffice-theme/templates/fields.php';
 
 // ACF
 // Settings
-$settings = get_field('settings') ?? null;
+$settings = get_field('settings') ?? [];
+$bg_color = $settings['bg_color'] ?? 'bg-footer';
 ?>
 
 <form method="post" action="#onoffice-form" id="onoffice-form" class="c-form --is-owner-form <?php if (
-    !empty($settings['bg_color'])
+    !empty($bg_color)
 ) {
-    echo '--bg-transparent --on-' . $settings['bg_color'];
-} else {
-    echo '--bg-footer';
+    echo '--on-' . $bg_color;
 } ?>">
 
     <input type="hidden" name="oo_formid" value="<?php echo $pForm->getFormId(); ?>">
