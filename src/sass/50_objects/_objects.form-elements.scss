@@ -486,6 +486,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       &::placeholder {
         color: $form-placeholder;
+        font-weight: $font-weight-text;
         opacity: 1; // Reset opacity for Firefox
       }
     }
@@ -501,6 +502,56 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     padding-right: calc(($form-padding-right * 2) + $form-select-size);
     display: flex;
     align-items: center;
+
+    .--bg-light & {
+      background: $form-light-bg;
+      border-color: $form-light-border-color;
+
+      @include focus-within() {
+        outline: 2px solid $form-light-primary;
+      }
+    }
+
+    .--on-bg-dark & {
+      background: $form-dark-bg;
+
+      @include focus-within() {
+        outline: 2px solid $form-dark-primary;
+      }
+    }
+
+    .--bg-primary & {
+      background: $form-primary-bg;
+      border-color: $form-primary-border-color;
+      @include focus-within() {
+        outline: 2px solid $form-primary-primary;
+      }
+    }
+
+    .--bg-secondary & {
+      background: $form-secondary-bg;
+      @include focus-within() {
+        outline: 2px solid $form-secondary-primary;
+      }
+    }
+
+    @include focus() {
+      outline: 2px solid $form-primary;
+    }
+
+    @include focus-within() {
+      outline: 2px solid $form-primary;
+
+      #{$selection}__arrow {
+        b {
+          background: $form-primary;
+        }
+      }
+    }
+
+    @include media-breakpoint-up(xl) {
+      height: $form-height;
+    }
     outline: $form-outline;
     transition: outline-color $form-duration $form-timing,
       border-color $form-duration $form-timing;
