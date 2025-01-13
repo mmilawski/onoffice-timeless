@@ -101,20 +101,23 @@
     margin: 0;
     padding: 0;
     border-radius: $border-radius;
+    border: 0;
     outline: 2px solid transparent;
     outline-offset: 2px;
     opacity: 1;
     cursor: pointer;
     transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
-      outline-color 0.25s ease-in-out;
+      outline-color 0.25s ease-in-out, opacity 0.25s ease-in-out;
 
     @include plain-visited() {
       color: var(--oo-color-contrast-primary);
       background-color: var(--oo-color-primary);
+      opacity: 1;
     }
 
     @include hover() {
       background-color: var(--oo-color-mix-primary-contrast-20);
+      opacity: 1;
     }
 
     @include focus() {
@@ -128,23 +131,30 @@
     @include disabled() {
       background-color: var(--oo-color-primary);
       opacity: 0.4;
+      outline-color: transparent;
       cursor: default;
     }
 
-    &-icon,
+    &.--prev {
+      left: 0;
+    }
+
+    &.--next {
+      right: 0;
+    }
+  }
+
+  &__arrow-text {
+  }
+
+  &__arrow-icon {
+    height: $icon-size;
+    width: $icon-size;
     svg {
       height: $icon-size;
       width: $icon-size;
       fill: none;
       transform: none;
-    }
-
-    &--prev {
-      left: 0;
-    }
-
-    &--next {
-      right: 0;
     }
   }
 
@@ -153,7 +163,7 @@
 
   &.--auto-height {
     #{$c-slider}__slide {
-      &:not(.is-active):not(:first-child) {
+      &:not(.is-active) {
         max-height: 0;
         @include media-breakpoint-up(xl) {
           max-height: inherit;
@@ -215,10 +225,10 @@
       top: 50%;
       transform: translateY(-50%);
 
-      &--next {
+      &.--next {
         right: 1rem;
       }
-      &--prev {
+      &.--prev {
         left: 1rem;
       }
     }
@@ -378,6 +388,7 @@
       }
       @include disabled() {
         background-color: var(--oo-color-light-primary);
+        outline-color: transparent;
       }
     }
   }
@@ -425,6 +436,7 @@
       }
       @include disabled() {
         background-color: var(--oo-color-dark-primary);
+        outline-color: transparent;
       }
     }
   }
@@ -472,6 +484,7 @@
       }
       @include disabled() {
         background-color: var(--oo-color-primary-primary);
+        outline-color: transparent;
       }
     }
   }
@@ -519,6 +532,7 @@
       }
       @include disabled() {
         background-color: var(--oo-color-secondary-primary);
+        outline-color: transparent;
       }
     }
   }
@@ -566,6 +580,7 @@
       }
       @include disabled() {
         background-color: var(--oo-color-footer-primary);
+        outline-color: transparent;
       }
     }
   }
@@ -613,6 +628,7 @@
       }
       @include disabled() {
         background-color: var(--oo-color-primary);
+        outline-color: transparent;
       }
     }
   }

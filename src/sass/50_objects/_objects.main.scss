@@ -1,14 +1,10 @@
 .o-main {
-  min-height: calc(#{$mobile-header-height} + #{$mobile-section-padding-top});
+  min-height: calc($mobile-header-height + $mobile-section-padding-top);
   @include media-breakpoint-up(xl) {
-    min-height: calc(
-      #{$mobile-header-height} + #{$desktop-section-padding-top}
-    );
+    min-height: calc($mobile-header-height + $desktop-section-padding-top);
   }
   @include media-breakpoint-up(xxl) {
-    min-height: calc(
-      #{$desktop-header-height} + #{$desktop-section-padding-top}
-    );
+    min-height: calc($desktop-header-height + $desktop-section-padding-top);
   }
 
   @include media-breakpoint-up(xxxl) {
@@ -28,18 +24,12 @@
     > *:not(.c-banner):not(.c-property-details):not(
       .c-news-details
     ):first-child {
-    padding-top: calc(
-      #{$mobile-header-height} + #{$mobile-section-padding-top}
-    );
+    padding-top: calc($mobile-header-height + $mobile-section-padding-top);
     @include media-breakpoint-up(xl) {
-      padding-top: calc(
-        #{$mobile-header-height} + #{$desktop-section-padding-top}
-      );
+      padding-top: calc($mobile-header-height + $desktop-section-padding-top);
     }
     @include media-breakpoint-up(xxl) {
-      padding-top: calc(
-        #{$desktop-header-height} + #{$desktop-section-padding-top}
-      );
+      padding-top: calc($desktop-header-height + $desktop-section-padding-top);
     }
   }
 
@@ -51,10 +41,10 @@
         .c-news-details
       ):first-child {
       @include media-breakpoint-up(xl) {
-        padding-top: #{$desktop-section-padding-top};
+        padding-top: $desktop-section-padding-top;
       }
       @include media-breakpoint-up(xxl) {
-        padding-top: #{$desktop-section-padding-top};
+        padding-top: $desktop-section-padding-top;
       }
     }
   }
@@ -65,12 +55,12 @@
       .--is-header-style-transparent & {
         @include media-breakpoint-up(lg) {
           padding-top: calc(
-            #{$mobile-header-height} + #{$desktop-section-padding-top}
+            $mobile-header-height + $desktop-section-padding-top
           );
         }
         @include media-breakpoint-up(xxl) {
           padding-top: calc(
-            #{$desktop-header-height} + #{$desktop-section-padding-top}
+            $desktop-header-height + $desktop-section-padding-top
           );
         }
       }

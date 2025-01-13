@@ -22,18 +22,12 @@
   }
 
   &__info {
-    padding-top: calc(
-      #{$mobile-header-height} + #{$mobile-section-padding-top}
-    );
+    padding-top: calc($mobile-header-height + $mobile-section-padding-top);
     @include media-breakpoint-up(xl) {
-      padding-top: calc(
-        #{$mobile-header-height} + #{$desktop-section-padding-top}
-      );
+      padding-top: calc($mobile-header-height + $desktop-section-padding-top);
     }
     @include media-breakpoint-up(xxl) {
-      padding-top: calc(
-        #{$desktop-header-height} + #{$desktop-section-padding-top}
-      );
+      padding-top: calc($desktop-header-height + $desktop-section-padding-top);
     }
   }
 

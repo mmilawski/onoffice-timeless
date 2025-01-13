@@ -12,12 +12,12 @@ $autoslide = filter_var(
     get_field('autoslide') ?? false,
     FILTER_VALIDATE_BOOLEAN,
 );
-$slide_interval = intval(get_field('slide_interval')) ?? 5;
+$slide_interval = intval(get_field('slide_interval') ?? 5);
 $pause_on_hover = filter_var(
     get_field('pause_on_hover') ?? false,
     FILTER_VALIDATE_BOOLEAN,
 );
-$slide_speed = intval(get_field('slide_speed')) ?? 1000;
+$slide_speed = intval(get_field('slide_speed') ?? 1000);
 ?>
 
 <div <?php oo_block_id($block); ?> class="c-banner --<?php echo $bg_color; ?>">
@@ -296,8 +296,8 @@ $slide_speed = intval(get_field('slide_speed')) ?? 1000;
             <div class="c-slider__navigation splide__navigation">
                 <ul class="c-slider__pagination splide__pagination"></ul>
                 <div class="c-slider__arrows splide__arrows">
-                    <button class="c-slider__arrow c-slider__arrow--prev splide__arrow splide__arrow--prev">
-                        <span class="u-screen-reader-only"><?php esc_html_e(
+                    <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
+                        <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
                             'Vorheriges',
                             'oo_theme',
                         ); ?></span>
@@ -305,8 +305,8 @@ $slide_speed = intval(get_field('slide_speed')) ?? 1000;
                             'chevron-left',
                         ); ?></span>
                     </button>
-                    <button class="c-slider__arrow c-slider__arrow--next splide__arrow splide__arrow--next">
-                        <span class="u-screen-reader-only"><?php esc_html_e(
+                    <button class="c-slider__arrow --next splide__arrow splide__arrow--next">
+                        <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
                             'Nächstes',
                             'oo_theme',
                         ); ?></span>

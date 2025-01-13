@@ -2,21 +2,19 @@
   $c-form: &;
 
   position: relative;
-  scroll-margin-top: calc(
-    #{$mobile-header-height} + #{$mobile-section-padding-top}
-  );
+  scroll-margin-top: calc($mobile-header-height + $mobile-section-padding-top);
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   @include media-breakpoint-up(xl) {
     scroll-margin-top: calc(
-      #{$mobile-header-height} + #{$desktop-section-padding-top}
+      $mobile-header-height + $desktop-section-padding-top
     );
   }
   @include media-breakpoint-up(xxl) {
     scroll-margin-top: calc(
-      #{$desktop-header-height} + #{$desktop-section-padding-top}
+      $desktop-header-height + $desktop-section-padding-top
     );
     gap: 2rem;
   }
@@ -154,7 +152,7 @@
     width: 100%;
     #{$c-form}__fieldset {
       scroll-margin-top: calc(
-        #{$mobile-header-height} + #{$mobile-section-padding-top}
+        $mobile-header-height + $mobile-section-padding-top
       );
       scroll-snap-align: start;
       @include media-breakpoint-up(md) {
@@ -163,12 +161,12 @@
       @include media-breakpoint-up(xl) {
         grid-template-columns: repeat(4, minmax(0, 1fr));
         scroll-margin-top: calc(
-          #{$mobile-header-height} + #{$desktop-section-padding-top}
+          $mobile-header-height + $desktop-section-padding-top
         );
       }
       @include media-breakpoint-up(xxl) {
         scroll-margin-top: calc(
-          #{$desktop-header-height} + #{$desktop-section-padding-top}
+          $desktop-header-height + $desktop-section-padding-top
         );
       }
     }

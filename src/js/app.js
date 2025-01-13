@@ -27,9 +27,9 @@ jQuery(document).ready(function() {
   if ($('select').length) {
     $('select').each(function() {
       var select = $(this);
-      var parent = select.closest('.o-section');
+      var parent = select.closest('form');
       if (!parent.length) {
-        parent = select.closest('form');
+        parent = select.closest('.o-section');
       }
       var options = select.find('option');
       if (options.length === 1) {

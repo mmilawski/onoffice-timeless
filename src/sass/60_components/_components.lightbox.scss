@@ -71,13 +71,14 @@
       text-align: center;
       margin: 0;
       padding: 0;
+      border: 0;
       border-radius: $border-radius;
       outline: 2px solid transparent;
       outline-offset: 2px;
       opacity: 1;
       cursor: pointer;
       transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
-        outline-color 0.25s ease-in-out;
+        outline-color 0.25s ease-in-out, opacity 0.25s ease-in-out;
 
       @include plain-visited() {
         color: var(--oo-color-contrast-primary);
@@ -99,12 +100,14 @@
       @include disabled() {
         background-color: var(--oo-color-primary);
         opacity: 0.4;
+        outline-color: transparent;
         cursor: default;
       }
 
       &.disabled {
         background-color: var(--oo-color-primary);
         opacity: 0.4;
+        outline-color: transparent;
         cursor: default;
       }
 

@@ -10,10 +10,11 @@
   margin: 0;
   padding: 0;
   border-radius: $border-radius;
+  border: 0;
   outline: 2px solid transparent;
   outline-offset: 2px;
   transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
-    outline-color 0.25s ease-in-out;
+    outline-color 0.25s ease-in-out, opacity 0.25s ease-in-out;
   cursor: pointer;
 
   @include plain-visited() {
@@ -34,7 +35,10 @@
   }
 
   @include disabled() {
-    background-color: var(--oo-color-mix-primary-contrast-60);
+    background-color: var(--oo-color-primary);
+    opacity: 0.4;
+    outline-color: transparent;
+    cursor: default;
   }
 
   &__text {
@@ -66,7 +70,8 @@
     }
 
     @include disabled() {
-      background-color: var(--oo-color-light-mix-primary-contrast-60);
+      background-color: var(--oo-color-light-primary);
+      outline-color: transparent;
     }
   }
 
@@ -90,7 +95,8 @@
     }
 
     @include disabled() {
-      background-color: var(--oo-color-dark-mix-primary-contrast-60);
+      background-color: var(--oo-color-dark-primary);
+      outline-color: transparent;
     }
   }
 
@@ -117,7 +123,8 @@
     }
 
     @include disabled() {
-      background-color: var(--oo-color-primary-mix-primary-contrast-60);
+      background-color: var(--oo-color-primary-primary);
+      outline-color: transparent;
     }
   }
 
@@ -144,7 +151,8 @@
     }
 
     @include disabled() {
-      background-color: var(--oo-color-secondary-mix-primary-contrast-60);
+      background-color: var(--oo-color-secondary-primary);
+      outline-color: transparent;
     }
   }
 
@@ -168,7 +176,8 @@
     }
 
     @include disabled() {
-      background-color: var(--oo-color-header-mix-primary-contrast-60);
+      background-color: var(--oo-color-header-primary);
+      outline-color: transparent;
     }
   }
 
@@ -192,7 +201,8 @@
     }
 
     @include disabled() {
-      background-color: var(--oo-color-footer-mix-primary-contrast-60);
+      background-color: var(--oo-color-footer-primary);
+      outline-color: transparent;
     }
   }
 
@@ -216,7 +226,8 @@
     }
 
     @include disabled() {
-      background-color: var(--oo-color-mix-primary-contrast-60);
+      background-color: var(--oo-color-primary);
+      outline-color: transparent;
     }
   }
 

@@ -23,8 +23,9 @@ $form-svg-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/sv
 $form-svg-checkbox: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
 $form-color: var(--oo-color-text);
 $form-bg: var(--oo-color-bg);
-$form-dropdown: var(--oo-color-mix-bg-contrast-10);
-$form-selected: var(--oo-color-transparent-primary-10);
+$form-shadow: 0 0 5px var(--oo-color-transparent-shadow-20);
+$form-dropdown: var(--oo-color-bg);
+$form-selected: var(--oo-color-transparent-primary-20);
 $form-placeholder: var(--oo-color-mix-bg-contrast-50);
 $form-primary: var(--oo-color-primary);
 $form-primary-contrast: var(--oo-color-contrast-primary);
@@ -34,8 +35,8 @@ $form-light-color: var(--oo-color-light-text, var(--oo-color-text));
 $form-light-bg: var(--oo-color-light-bg, var(--oo-color-bg));
 $form-light-border-color: var(--oo-color-light-mix-bg-contrast-50);
 $form-light-focus: var(--oo-color-light-primary, var(--oo-color-primary));
-$form-light-dropdown: var(--oo-color-light-mix-bg-contrast-10);
-$form-light-selected: var(--oo-color-light-transparent-primary-10);
+$form-light-dropdown: var(--oo-color-light-bg);
+$form-light-selected: var(--oo-color-light-transparent-primary-20);
 $form-light-placeholder: var(--oo-color-light-mix-bg-contrast-50);
 $form-light-primary: var(--oo-color-light-primary, var(--oo-color-primary));
 $form-light-primary-contrast: var(--oo-color-light-contrast-primary);
@@ -44,8 +45,8 @@ $form-dark-color: var(--oo-color-dark-text, var(--oo-color-text));
 $form-dark-bg: var(--oo-color-dark-bg, var(--oo-color-bg));
 $form-dark-border-color: var(--oo-color-dark-mix-bg-contrast-50);
 $form-dark-focus: var(--oo-color-dark-primary, var(--oo-color-primary));
-$form-dark-dropdown: var(--oo-color-dark-mix-bg-contrast-10);
-$form-dark-selected: var(--oo-color-dark-transparent-primary-10);
+$form-dark-dropdown: var(--oo-color-dark-bg);
+$form-dark-selected: var(--oo-color-dark-transparent-primary-20);
 $form-dark-placeholder: var(--oo-color-dark-mix-bg-contrast-50);
 $form-dark-primary: var(--oo-color-dark-primary, var(--oo-color-primary));
 $form-dark-primary-contrast: var(--oo-color-dark-contrast-primary);
@@ -54,8 +55,8 @@ $form-primary-color: var(--oo-color-primary-text, var(--oo-color-text));
 $form-primary-bg: var(--oo-color-primary-bg, var(--oo-color-bg));
 $form-primary-border-color: var(--oo-color-primary-mix-bg-contrast-50);
 $form-primary-focus: var(--oo-color-primary-primary, var(--oo-color-primary));
-$form-primary-dropdown: var(--oo-color-primary-mix-bg-contrast-10);
-$form-primary-selected: var(--oo-color-primary-transparent-primary-10);
+$form-primary-dropdown: var(--oo-color-primary-bg);
+$form-primary-selected: var(--oo-color-primary-transparent-primary-20);
 $form-primary-placeholder: var(--oo-color-primary-mix-bg-contrast-50);
 $form-primary-primary: var(--oo-color-primary-primary, var(--oo-color-primary));
 $form-primary-primary-contrast: var(--oo-color-primary-contrast-primary);
@@ -67,8 +68,8 @@ $form-secondary-focus: var(
   --oo-color-secondary-primary,
   var(--oo-color-primary)
 );
-$form-secondary-dropdown: var(--oo-color-secondary-mix-bg-contrast-10);
-$form-secondary-selected: var(--oo-color-secondary-transparent-primary-10);
+$form-secondary-dropdown: var(--oo-color-secondary-bg);
+$form-secondary-selected: var(--oo-color-secondary-transparent-primary-20);
 $form-secondary-placeholder: var(--oo-color-secondary-mix-bg-contrast-50);
 $form-secondary-primary: var(
   --oo-color-secondary-primary,
@@ -80,8 +81,8 @@ $form-footer-color: var(--oo-color-footer-text, var(--oo-color-text));
 $form-footer-bg: var(--oo-color-footer-bg, var(--oo-color-bg));
 $form-footer-border-color: var(--oo-color-footer-mix-bg-contrast-50);
 $form-footer-focus: var(--oo-color-footer-primary, var(--oo-color-primary));
-$form-footer-dropdown: var(--oo-color-footer-mix-bg-contrast-10);
-$form-footer-selected: var(--oo-color-footer-transparent-primary-10);
+$form-footer-dropdown: var(--oo-color-footer-bg);
+$form-footer-selected: var(--oo-color-footer-transparent-primary-20);
 $form-footer-placeholder: var(--oo-color-footer-mix-bg-contrast-50);
 $form-footer-primary: var(--oo-color-footer-primary, var(--oo-color-primary));
 $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
@@ -245,10 +246,8 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     background-image: $form-svg-arrow;
     background-size: $form-select-size;
     background-repeat: no-repeat;
-    background-position: calc(100% - #{$form-padding-right}) center;
-    padding-right: calc(
-      calc(#{$form-padding-right} * 2) + #{$form-select-size}
-    );
+    background-position: calc(100% - $form-padding-right) center;
+    padding-right: calc(($form-padding-right * 2) + $form-select-size);
   }
 
   &.--multiple {
@@ -388,6 +387,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   .select2-dropdown {
     color: $form-color;
     background: $form-dropdown;
+    box-shadow: $form-shadow;
     border: 0;
     border-radius: $form-radius;
     overflow: hidden;
@@ -421,7 +421,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
         width: 0.5rem;
         height: 0.5rem;
         border-radius: 50%;
-        margin-top: calc((#{$global-line-height} / 2) - 0.25rem);
+        margin-top: calc(($global-line-height / 2) - 0.25rem);
       }
 
       &[aria-selected='true'],
@@ -499,9 +499,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border: $form-border $form-border-color;
     border-radius: $form-radius !important;
     padding: $form-padding;
-    padding-right: calc(
-      calc(#{$form-padding-right} * 2) + #{$form-select-size}
-    );
+    padding-right: calc(($form-padding-right * 2) + $form-select-size);
     display: flex;
     align-items: center;
 
@@ -603,11 +601,11 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       }
 
       #{$selection}__arrow {
-        width: #{$form-select-size};
+        width: $form-select-size;
         height: 100%;
         position: absolute;
         top: 0;
-        right: #{$form-padding-right};
+        right: $form-padding-right;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1321,7 +1319,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   width: 100%;
   margin: $form-margin;
   padding: $form-padding;
-  min-height: calc((#{$global-line-height} * 5) + (#{$form-padding-top} * 2));
+  min-height: calc(($global-line-height * 5) + ($form-padding-top * 2));
   max-height: 60vh;
   resize: vertical;
   font-family: inherit;

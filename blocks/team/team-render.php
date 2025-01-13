@@ -97,8 +97,8 @@ $team_query = new WP_Query($query_args);
                             <div class="c-slider__progress-bar splide__progress-bar"></div>
                         </div>
                         <div class="c-slider__arrows splide__arrows">
-                            <button class="c-slider__arrow c-slider__arrow--prev splide__arrow splide__arrow--prev">
-                                <span class="u-screen-reader-only"><?php esc_html_e(
+                            <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
+                                <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
                                     'Vorheriges',
                                     'oo_theme',
                                 ); ?></span>
@@ -106,8 +106,8 @@ $team_query = new WP_Query($query_args);
                                     'chevron-left',
                                 ); ?></span>
                             </button>
-                            <button class="c-slider__arrow c-slider__arrow--next splide__arrow splide__arrow--next">
-                                <span class="u-screen-reader-only"><?php esc_html_e(
+                            <button class="c-slider__arrow --next splide__arrow splide__arrow--next">
+                                <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
                                     'Nächstes',
                                     'oo_theme',
                                 ); ?></span>
