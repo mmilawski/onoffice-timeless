@@ -4,16 +4,12 @@
   position: fixed;
   inset: 0;
   z-index: 50001;
-
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
   opacity: 0;
   visibility: hidden;
-
-  will-change: opacity, visibility;
   transition: opacity 0.35s ease-in-out, visibility 0.35s ease-in-out;
 
   &.--is-open {
@@ -25,7 +21,7 @@
     position: fixed;
     inset: 0;
     cursor: pointer;
-    background: var(--oo-color-transparent-text-60);
+    background: var(--oo-color-transparent-text-80);
   }
 
   &__wrapper {
