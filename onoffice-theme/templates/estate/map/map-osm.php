@@ -82,7 +82,6 @@ return function (EstateList $pEstatesClone) {
     // Styling
     $colors = get_field('colors', 'option') ?? null;
     $primary_color = $colors['global']['primary'] ?? 'currentColor';
-    $map_color = 'colored';
     ?>
 
     <?php
@@ -92,16 +91,16 @@ return function (EstateList $pEstatesClone) {
     ?>
 
     <div class="c-map --is-open-street-map" data-max-zoom="12" data-marker-color="<?php echo $primary_color; ?>" style="width: 100%;">
-        <?php foreach ($estateData as $map) {
+        <?php foreach ($estateData as $estate) {
 
-            $position = $map['position'] ?? [];
+            $position = $estate['position'] ?? [];
             $lat = $position['lat'] ?? null;
             $lng = $position['lng'] ?? null;
-            $title = $map['title'] ?? null;
-            $zip = $map['zip'] ?? null;
-            $city = $map['city'] ?? null;
-            $country = $map['country'] ?? null;
-            $link = $map['link'] ?? null;
+            $title = $estate['title'] ?? null;
+            $zip = $estate['zip'] ?? null;
+            $city = $estate['city'] ?? null;
+            $country = $estate['country'] ?? null;
+            $link = $estate['link'] ?? null;
 
             if (empty($lat) || empty($lng)) {
                 continue;

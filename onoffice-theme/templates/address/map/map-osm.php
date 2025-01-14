@@ -43,12 +43,6 @@ return function (AddressList $pAddressClone) {
             'lng' => (float) $escapedValues['laengengrad'],
         ];
 
-        $title = AddressList::createAddressTitle(
-            $escapedValues['Vorname'],
-            $escapedValues['Name'],
-            $escapedValues['Zusatz1'],
-        );
-
         if (0.0 !== $position['lng'] && 0.0 !== $position['lat']) {
             $addressData[] = [
                 'position' => $position,
@@ -69,7 +63,6 @@ return function (AddressList $pAddressClone) {
     // Styling
     $colors = get_field('colors', 'option') ?? null;
     $primary_color = $colors['global']['primary'] ?? 'currentColor';
-    $map_color = 'colored';
 
     wp_enqueue_style('oo-leaflet-style');
     wp_enqueue_script('oo-leaflet-script');
@@ -77,14 +70,14 @@ return function (AddressList $pAddressClone) {
     ?>
 
     <div class="c-map --is-open-street-map" data-max-zoom="12" data-marker-color="<?php echo $primary_color; ?>" style="width: 100%;">
-        <?php foreach ($addressData as $map) {
+        <?php foreach ($addressData as $address) {
 
-            $position = $map['position'] ?? [];
+            $position = $address['position'] ?? [];
             $lat = $position['lat'] ?? null;
             $lng = $position['lng'] ?? null;
-            $title = $map['title'] ?? null;
-            $company = $map['company'] ?? null;
-            $link = $map['link'] ?? null;
+            $title = $address['title'] ?? null;
+            $company = $address['company'] ?? null;
+            $link = $address['link'] ?? null;
 
             if (empty($lat) || empty($lng)) {
                 continue;
