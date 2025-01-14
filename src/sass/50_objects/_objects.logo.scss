@@ -23,23 +23,23 @@
   }
 
   &.--small * {
-    --oo-logo-width: #{$logo-width-sm};
-    --oo-logo-height: #{$logo-height-sm};
+    --oo-logo-width: $logo-width-sm;
+    --oo-logo-height: $logo-height-sm;
   }
 
   &.--medium * {
-    --oo-logo-width: #{$logo-width-md};
-    --oo-logo-height: #{$logo-height-md};
+    --oo-logo-width: $logo-width-md;
+    --oo-logo-height: $logo-height-md;
   }
 
   &.--large * {
-    --oo-logo-width: #{$logo-width-lg};
-    --oo-logo-height: #{$logo-height-lg};
+    --oo-logo-width: $logo-width-lg;
+    --oo-logo-height: $logo-height-lg;
   }
 
   &.--extra-large * {
-    --oo-logo-width: #{$logo-width-xl};
-    --oo-logo-height: #{$logo-height-xl};
+    --oo-logo-width: $logo-width-xl;
+    --oo-logo-height: $logo-height-xl;
   }
 
   &.--white {

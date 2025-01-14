@@ -1,29 +1,31 @@
 :root {
-  --oo-color-success: #38a169;
-  --oo-color-success-r: 56;
-  --oo-color-success-g: 161;
-  --oo-color-success-b: 105;
-  --oo-color-warning: #d69e2e;
-  --oo-color-warning-r: 214;
-  --oo-color-warning-g: 158;
-  --oo-color-warning-b: 46;
-  --oo-color-error: #b22b2e;
-  --oo-color-error-r: 178;
-  --oo-color-error-g: 43;
-  --oo-color-error-b: 46;
+  --oo-color-success: #c3e3d1;
+  --oo-color-success-r: 195;
+  --oo-color-success-g: 227;
+  --oo-color-success-b: 290;
+  --oo-color-warning: #f3e2c0;
+  --oo-color-warning-r: 243;
+  --oo-color-warning-g: 226;
+  --oo-color-warning-b: 192;
+  --oo-color-error: #efb1b2;
+  --oo-color-error-r: 239;
+  --oo-color-error-g: 177;
+  --oo-color-error-b: 178;
+  --oo-color-shadow: #000000;
+  --oo-color-shadow-r: 0;
+  --oo-color-shadow-g: 0;
+  --oo-color-shadow-b: 0;
 
   // global
-  #{--oo-color-transparent-success-20}: transparent-color(
-    var(--oo-color-success),
-    0.2
+  #{--oo-color-contrast-success}: contrast-color(var(--oo-color-success));
+  #{--oo-color-contrast-warning}: contrast-color(var(--oo-color-warning));
+  #{--oo-color-contrast-error}: contrast-color(var(--oo-color-error));
+  #{--oo-color-transparent-shadow-15}: transparent-color(
+    var(--oo-color-shadow),
+    0.15
   );
-
-  #{--oo-color-transparent-warning-20}: transparent-color(
-    var(--oo-color-warning),
-    0.2
-  );
-  #{--oo-color-transparent-error-20}: transparent-color(
-    var(--oo-color-error),
+  #{--oo-color-transparent-shadow-20}: transparent-color(
+    var(--oo-color-shadow),
     0.2
   );
   #{--oo-color-transparent-text-10}: transparent-color(
@@ -34,46 +36,52 @@
     var(--oo-color-text),
     0.2
   );
-  #{--oo-color-transparent-text-60}: transparent-color(
+  #{--oo-color-transparent-text-80}: transparent-color(
     var(--oo-color-text),
-    0.6
+    0.8
   );
-  #{--oo-color-transparent-bg-0}: transparent-color(var(--oo-color-bg), 0);
+  #{--oo-color-transparent-bg-25}: transparent-color(var(--oo-color-bg), 0.25);
   #{--oo-color-transparent-bg-80}: transparent-color(var(--oo-color-bg), 0.8);
   #{--oo-color-transparent-bg-90}: transparent-color(var(--oo-color-bg), 0.9);
-  #{--oo-color-transparent-bg-100}: transparent-color(var(--oo-color-bg), 1);
-  #{--oo-color-mix-bg-contrast-20}: mix-color-with-contrast(
-    var(--oo-color-bg),
+  #{--oo-color-transparent-primary-10}: transparent-color(
+    var(--oo-color-primary),
+    0.1
+  );
+  #{--oo-color-transparent-primary-20}: transparent-color(
+    var(--oo-color-primary),
     0.2
-  );
-  #{--oo-color-mix-bg-contrast-50}: mix-color-with-contrast(
-    var(--oo-color-bg),
-    0.5
-  );
-  #{--oo-color-transparent-primary-40}: transparent-color(
-    var(--oo-color-primary),
-    0.4
-  );
-  #{--oo-color-transparent-primary-60}: transparent-color(
-    var(--oo-color-primary),
-    0.6
-  );
-  #{--oo-color-transparent-primary-80}: transparent-color(
-    var(--oo-color-primary),
-    0.8
   );
   #{--oo-color-lighten-primary-40}: lighten-color(var(--oo-color-primary), 0.4);
   #{--oo-color-lighten-primary-90}: lighten-color(var(--oo-color-primary), 0.9);
   #{--oo-color-contrast-primary}: contrast-color(var(--oo-color-primary));
   #{--oo-color-contrast-text}: contrast-color(var(--oo-color-text));
+  #{--oo-color-mix-text-contrast-20}: mix-color-with-contrast(
+    var(--oo-color-text),
+    0.2
+  );
+  #{--oo-color-mix-text-contrast-40}: mix-color-with-contrast(
+    var(--oo-color-text),
+    0.4
+  );
+  #{--oo-color-mix-text-contrast-60}: mix-color-with-contrast(
+    var(--oo-color-text),
+    0.6
+  );
+  #{--oo-color-mix-bg-contrast-10}: mix-color-with-contrast(
+    var(--oo-color-bg),
+    0.1
+  );
+  #{--oo-color-mix-bg-contrast-50}: mix-color-with-contrast(
+    var(--oo-color-bg),
+    0.5
+  );
   #{--oo-color-mix-primary-contrast-20}: mix-color-with-contrast(
     var(--oo-color-primary),
     0.2
   );
-  #{--oo-color-mix-bg-text-5}: mix-colors(
-    var(--oo-color-bg),
-    var(--oo-color-text),
-    0.05
+  #{--oo-color-mix-primary-contrast-40}: mix-color-with-contrast(
+    var(--oo-color-primary),
+    0.4
   );
   #{--oo-color-mix-bg-text-10}: mix-colors(
     var(--oo-color-bg),
@@ -107,9 +115,9 @@
     0.2,
     var(--oo-color-text)
   );
-  #{--oo-color-light-transparent-bg-0}: transparent-color(
+  #{--oo-color-light-transparent-bg-25}: transparent-color(
     var(--oo-color-light-bg),
-    0,
+    0.25,
     var(--oo-color-bg)
   );
   #{--oo-color-light-transparent-bg-80}: transparent-color(
@@ -117,24 +125,14 @@
     0.8,
     var(--oo-color-bg)
   );
-  #{--oo-color-light-transparent-bg-100}: transparent-color(
+  #{--oo-color-light-transparent-bg-90}: transparent-color(
     var(--oo-color-light-bg),
-    1,
+    0.9,
     var(--oo-color-bg)
   );
-  #{--oo-color-light-transparent-primary-40}: transparent-color(
+  #{--oo-color-light-transparent-primary-20}: transparent-color(
     var(--oo-color-light-primary),
-    0.4,
-    var(--oo-color-primary)
-  );
-  #{--oo-color-light-transparent-primary-60}: transparent-color(
-    var(--oo-color-light-primary),
-    0.6,
-    var(--oo-color-primary)
-  );
-  #{--oo-color-light-transparent-primary-80}: transparent-color(
-    var(--oo-color-light-primary),
-    0.8,
+    0.2,
     var(--oo-color-primary)
   );
   #{--oo-color-light-lighten-primary-40}: lighten-color(
@@ -150,20 +148,40 @@
     var(--oo-color-light-text),
     var(--oo-color-text)
   );
-  #{--oo-color-light-mix-primary-contrast-20}: mix-color-with-contrast(
-    var(--oo-color-light-primary),
+  #{--oo-color-light-mix-text-contrast-20}: mix-color-with-contrast(
+    var(--oo-color-light-text),
     0.2,
-    var(--oo-color-primary)
+    var(--oo-color-text)
   );
-  #{--oo-color-light-mix-bg-contrast-20}: mix-color-with-contrast(
+  #{--oo-color-light-mix-text-contrast-40}: mix-color-with-contrast(
+    var(--oo-color-light-text),
+    0.4,
+    var(--oo-color-text)
+  );
+  #{--oo-color-light-mix-text-contrast-60}: mix-color-with-contrast(
+    var(--oo-color-light-text),
+    0.6,
+    var(--oo-color-text)
+  );
+  #{--oo-color-light-mix-bg-contrast-10}: mix-color-with-contrast(
     var(--oo-color-light-bg),
-    0.2,
+    0.1,
     var(--oo-color-bg)
   );
   #{--oo-color-light-mix-bg-contrast-50}: mix-color-with-contrast(
     var(--oo-color-light-bg),
     0.5,
     var(--oo-color-bg)
+  );
+  #{--oo-color-light-mix-primary-contrast-20}: mix-color-with-contrast(
+    var(--oo-color-light-primary),
+    0.2,
+    var(--oo-color-primary)
+  );
+  #{--oo-color-light-mix-primary-contrast-40}: mix-color-with-contrast(
+    var(--oo-color-light-primary),
+    0.4,
+    var(--oo-color-primary)
   );
   #{--oo-color-light-mix-bg-text-10}: mix-colors(
     var(--oo-color-light-bg),
@@ -198,9 +216,9 @@
     0.2,
     var(--oo-color-text)
   );
-  #{--oo-color-dark-transparent-bg-0}: transparent-color(
+  #{--oo-color-dark-transparent-bg-25}: transparent-color(
     var(--oo-color-dark-bg),
-    0,
+    0.25,
     var(--oo-color-bg)
   );
   #{--oo-color-dark-transparent-bg-80}: transparent-color(
@@ -208,37 +226,16 @@
     0.8,
     var(--oo-color-bg)
   );
-  #{--oo-color-dark-transparent-bg-100}: transparent-color(
+  #{--oo-color-dark-transparent-bg-90}: transparent-color(
     var(--oo-color-dark-bg),
-    1,
+    0.9,
     var(--oo-color-bg)
   );
-  #{--oo-color-dark-mix-bg-contrast-20}: mix-color-with-contrast(
-    var(--oo-color-dark-bg),
+  #{--oo-color-dark-transparent-primary-20}: transparent-color(
+    var(--oo-color-dark-primary),
     0.2,
-    var(--oo-color-bg)
-  );
-  #{--oo-color-dark-mix-bg-contrast-50}: mix-color-with-contrast(
-    var(--oo-color-dark-bg),
-    0.5,
-    var(--oo-color-bg)
-  );
-  #{--oo-color-dark-transparent-primary-40}: transparent-color(
-    var(--oo-color-dark-primary),
-    0.4,
     var(--oo-color-primary)
   );
-  #{--oo-color-dark-transparent-primary-60}: transparent-color(
-    var(--oo-color-dark-primary),
-    0.6,
-    var(--oo-color-primary)
-  );
-  #{--oo-color-dark-transparent-primary-80}: transparent-color(
-    var(--oo-color-dark-primary),
-    0.8,
-    var(--oo-color-primary)
-  );
-
   #{--oo-color-dark-lighten-primary-40}: lighten-color(
     var(--oo-color-dark-primary),
     0.4,
@@ -252,9 +249,39 @@
     var(--oo-color-dark-text),
     var(--oo-color-text)
   );
+  #{--oo-color-dark-mix-text-contrast-20}: mix-color-with-contrast(
+    var(--oo-color-dark-text),
+    0.2,
+    var(--oo-color-text)
+  );
+  #{--oo-color-dark-mix-text-contrast-40}: mix-color-with-contrast(
+    var(--oo-color-dark-text),
+    0.4,
+    var(--oo-color-text)
+  );
+  #{--oo-color-dark-mix-text-contrast-60}: mix-color-with-contrast(
+    var(--oo-color-dark-text),
+    0.6,
+    var(--oo-color-text)
+  );
+  #{--oo-color-dark-mix-bg-contrast-10}: mix-color-with-contrast(
+    var(--oo-color-dark-bg),
+    0.1,
+    var(--oo-color-bg)
+  );
+  #{--oo-color-dark-mix-bg-contrast-50}: mix-color-with-contrast(
+    var(--oo-color-dark-bg),
+    0.5,
+    var(--oo-color-bg)
+  );
   #{--oo-color-dark-mix-primary-contrast-20}: mix-color-with-contrast(
     var(--oo-color-dark-primary),
     0.2,
+    var(--oo-color-primary)
+  );
+  #{--oo-color-dark-mix-primary-contrast-40}: mix-color-with-contrast(
+    var(--oo-color-dark-primary),
+    0.4,
     var(--oo-color-primary)
   );
   #{--oo-color-dark-mix-bg-text-10}: mix-colors(
@@ -290,9 +317,9 @@
     0.2,
     var(--oo-color-text)
   );
-  #{--oo-color-primary-transparent-bg-0}: transparent-color(
+  #{--oo-color-primary-transparent-bg-25}: transparent-color(
     var(--oo-color-primary-bg),
-    0,
+    0.25,
     var(--oo-color-bg)
   );
   #{--oo-color-primary-transparent-bg-80}: transparent-color(
@@ -300,37 +327,16 @@
     0.8,
     var(--oo-color-bg)
   );
-  #{--oo-color-primary-transparent-bg-100}: transparent-color(
+  #{--oo-color-primary-transparent-bg-90}: transparent-color(
     var(--oo-color-primary-bg),
-    1,
+    0.9,
     var(--oo-color-bg)
   );
-  #{--oo-color-primary-mix-bg-contrast-20}: mix-color-with-contrast(
-    var(--oo-color-primary-bg),
+  #{--oo-color-primary-transparent-primary-20}: transparent-color(
+    var(--oo-color-primary-primary),
     0.2,
-    var(--oo-color-bg)
-  );
-  #{--oo-color-primary-mix-bg-contrast-50}: mix-color-with-contrast(
-    var(--oo-color-primary-bg),
-    0.5,
-    var(--oo-color-bg)
-  );
-  #{--oo-color-primary-transparent-primary-40}: transparent-color(
-    var(--oo-color-primary-primary),
-    0.4,
     var(--oo-color-primary)
   );
-  #{--oo-color-primary-transparent-primary-60}: transparent-color(
-    var(--oo-color-primary-primary),
-    0.6,
-    var(--oo-color-primary)
-  );
-  #{--oo-color-primary-transparent-primary-80}: transparent-color(
-    var(--oo-color-primary-primary),
-    0.8,
-    var(--oo-color-primary)
-  );
-
   #{--oo-color-primary-lighten-primary-40}: lighten-color(
     var(--oo-color-primary-primary),
     0.4,
@@ -344,9 +350,39 @@
     var(--oo-color-primary-text),
     var(--oo-color-text)
   );
+  #{--oo-color-primary-mix-text-contrast-20}: mix-color-with-contrast(
+    var(--oo-color-primary-text),
+    0.2,
+    var(--oo-color-text)
+  );
+  #{--oo-color-primary-mix-text-contrast-40}: mix-color-with-contrast(
+    var(--oo-color-primary-text),
+    0.4,
+    var(--oo-color-text)
+  );
+  #{--oo-color-primary-mix-text-contrast-60}: mix-color-with-contrast(
+    var(--oo-color-primary-text),
+    0.6,
+    var(--oo-color-text)
+  );
+  #{--oo-color-primary-mix-bg-contrast-10}: mix-color-with-contrast(
+    var(--oo-color-primary-bg),
+    0.1,
+    var(--oo-color-bg)
+  );
+  #{--oo-color-primary-mix-bg-contrast-50}: mix-color-with-contrast(
+    var(--oo-color-primary-bg),
+    0.5,
+    var(--oo-color-bg)
+  );
   #{--oo-color-primary-mix-primary-contrast-20}: mix-color-with-contrast(
     var(--oo-color-primary-primary),
     0.2,
+    var(--oo-color-primary)
+  );
+  #{--oo-color-primary-mix-primary-contrast-40}: mix-color-with-contrast(
+    var(--oo-color-primary-primary),
+    0.4,
     var(--oo-color-primary)
   );
   #{--oo-color-primary-mix-bg-text-10}: mix-colors(
@@ -382,9 +418,9 @@
     0.2,
     var(--oo-color-text)
   );
-  #{--oo-color-secondary-transparent-bg-0}: transparent-color(
+  #{--oo-color-secondary-transparent-bg-25}: transparent-color(
     var(--oo-color-secondary-bg),
-    0,
+    0.25,
     var(--oo-color-bg)
   );
   #{--oo-color-secondary-transparent-bg-80}: transparent-color(
@@ -392,37 +428,16 @@
     0.8,
     var(--oo-color-bg)
   );
-  #{--oo-color-secondary-transparent-bg-100}: transparent-color(
+  #{--oo-color-secondary-transparent-bg-90}: transparent-color(
     var(--oo-color-secondary-bg),
-    1,
+    0.9,
     var(--oo-color-bg)
   );
-  #{--oo-color-secondary-mix-bg-contrast-20}: mix-color-with-contrast(
-    var(--oo-color-secondary-bg),
+  #{--oo-color-secondary-transparent-primary-20}: transparent-color(
+    var(--oo-color-secondary-primary),
     0.2,
-    var(--oo-color-bg)
-  );
-  #{--oo-color-secondary-mix-bg-contrast-50}: mix-color-with-contrast(
-    var(--oo-color-secondary-bg),
-    0.5,
-    var(--oo-color-bg)
-  );
-  #{--oo-color-secondary-transparent-primary-40}: transparent-color(
-    var(--oo-color-secondary-primary),
-    0.4,
     var(--oo-color-primary)
   );
-  #{--oo-color-secondary-transparent-primary-60}: transparent-color(
-    var(--oo-color-secondary-primary),
-    0.6,
-    var(--oo-color-primary)
-  );
-  #{--oo-color-secondary-transparent-primary-80}: transparent-color(
-    var(--oo-color-secondary-primary),
-    0.8,
-    var(--oo-color-primary)
-  );
-
   #{--oo-color-secondary-lighten-primary-40}: lighten-color(
     var(--oo-color-secondary-primary),
     0.4,
@@ -436,9 +451,39 @@
     var(--oo-color-secondary-text),
     var(--oo-color-text)
   );
+  #{--oo-color-secondary-mix-text-contrast-20}: mix-color-with-contrast(
+    var(--oo-color-secondary-text),
+    0.2,
+    var(--oo-color-text)
+  );
+  #{--oo-color-secondary-mix-text-contrast-40}: mix-color-with-contrast(
+    var(--oo-color-secondary-text),
+    0.4,
+    var(--oo-color-text)
+  );
+  #{--oo-color-secondary-mix-text-contrast-60}: mix-color-with-contrast(
+    var(--oo-color-secondary-text),
+    0.6,
+    var(--oo-color-text)
+  );
+  #{--oo-color-secondary-mix-bg-contrast-10}: mix-color-with-contrast(
+    var(--oo-color-secondary-bg),
+    0.1,
+    var(--oo-color-bg)
+  );
+  #{--oo-color-secondary-mix-bg-contrast-50}: mix-color-with-contrast(
+    var(--oo-color-secondary-bg),
+    0.5,
+    var(--oo-color-bg)
+  );
   #{--oo-color-secondary-mix-primary-contrast-20}: mix-color-with-contrast(
     var(--oo-color-secondary-primary),
     0.2,
+    var(--oo-color-primary)
+  );
+  #{--oo-color-secondary-mix-primary-contrast-40}: mix-color-with-contrast(
+    var(--oo-color-secondary-primary),
+    0.4,
     var(--oo-color-primary)
   );
   #{--oo-color-secondary-mix-bg-text-10}: mix-colors(
@@ -508,6 +553,11 @@
     0.2,
     var(--oo-color-primary)
   );
+  #{--oo-color-header-mix-primary-contrast-40}: mix-color-with-contrast(
+    var(--oo-color-header-primary),
+    0.4,
+    var(--oo-color-primary)
+  );
   #{--oo-color-header-mix-bg-text-20}: mix-colors(
     var(--oo-color-header-bg),
     var(--oo-color-header-text),
@@ -527,29 +577,9 @@
     0.2,
     var(--oo-color-text)
   );
-  #{--oo-color-footer-transparent-bg-0}: transparent-color(
-    var(--oo-color-footer-bg),
-    0,
-    var(--oo-color-bg)
-  );
-  #{--oo-color-footer-transparent-bg-100}: transparent-color(
-    var(--oo-color-footer-bg),
-    1,
-    var(--oo-color-bg)
-  );
-  #{--oo-color-footer-transparent-primary-40}: transparent-color(
+  #{--oo-color-footer-transparent-primary-20}: transparent-color(
     var(--oo-color-footer-primary),
-    0.4,
-    var(--oo-color-primary)
-  );
-  #{--oo-color-footer-transparent-primary-60}: transparent-color(
-    var(--oo-color-footer-primary),
-    0.6,
-    var(--oo-color-primary)
-  );
-  #{--oo-color-footer-transparent-primary-80}: transparent-color(
-    var(--oo-color-footer-primary),
-    0.8,
+    0.2,
     var(--oo-color-primary)
   );
   #{--oo-color-footer-lighten-primary-40}: lighten-color(
@@ -565,9 +595,39 @@
     var(--oo-color-footer-text),
     var(--oo-color-text)
   );
+  #{--oo-color-footer-mix-text-contrast-20}: mix-color-with-contrast(
+    var(--oo-color-footer-text),
+    0.2,
+    var(--oo-color-text)
+  );
+  #{--oo-color-footer-mix-text-contrast-40}: mix-color-with-contrast(
+    var(--oo-color-footer-text),
+    0.4,
+    var(--oo-color-text)
+  );
+  #{--oo-color-footer-mix-text-contrast-60}: mix-color-with-contrast(
+    var(--oo-color-footer-text),
+    0.6,
+    var(--oo-color-text)
+  );
+  #{--oo-color-footer-mix-bg-contrast-10}: mix-color-with-contrast(
+    var(--oo-color-footer-bg),
+    0.1,
+    var(--oo-color-bg)
+  );
+  #{--oo-color-footer-mix-bg-contrast-50}: mix-color-with-contrast(
+    var(--oo-color-footer-bg),
+    0.5,
+    var(--oo-color-bg)
+  );
   #{--oo-color-footer-mix-primary-contrast-20}: mix-color-with-contrast(
     var(--oo-color-footer-primary),
     0.2,
+    var(--oo-color-primary)
+  );
+  #{--oo-color-footer-mix-primary-contrast-40}: mix-color-with-contrast(
+    var(--oo-color-footer-primary),
+    0.4,
     var(--oo-color-primary)
   );
   #{--oo-color-footer-mix-bg-text-10}: mix-colors(

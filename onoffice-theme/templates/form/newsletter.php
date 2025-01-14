@@ -24,17 +24,14 @@ include get_template_directory() . '/onoffice-theme/templates/fields.php';
 // ACF
 // Settings
 global $post;
-$settings = get_field('settings', $post->ID) ?? null;
+$settings = get_field('settings', $post->ID) ?? [];
+$bg_color = $settings['bg_color'] ?? 'bg-footer';
 ?>
 
 <form method="post" action="#onoffice-form" id="onoffice-form" class="c-form --is-newsletter-form <?php if (
-    !empty($settings['bg_color'])
+    !empty($bg_color)
 ) {
-    echo !$is_popup
-        ? '--bg-transparent '
-        : '--is--popup ' . '--on-' . $settings['bg_color'];
-} else {
-    echo '--bg-footer';
+    echo '--on-' . $bg_color;
 } ?>">
 
     <input type="hidden" name="oo_formid" value="<?php echo $pForm->getFormId(); ?>">

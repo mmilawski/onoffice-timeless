@@ -1,45 +1,49 @@
 .c-button {
   $c-button: &;
+
   display: inline-block;
   position: relative;
   font-family: $font-family-button;
   font-weight: $font-weight-button;
-  @include font-size($button-font-size, $global-line-height);
+  @include font-size($global-font-size, $global-line-height);
   text-align: center;
   margin: 0;
   padding: 0.5rem 2rem;
-  transition: outline 0.25s ease-in-out, outline-offset 0.25s ease-in-out,
-    color 0.25s ease-in-out, background-color 0.25s ease-in-out,
-    outline-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
-  cursor: pointer;
   border-radius: $border-radius;
-  max-width: 300px;
+  border: 2px solid transparent;
   outline: 2px solid transparent;
   outline-offset: 2px;
+  transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
+    border-color 0.25s ease-in-out, outline-color 0.25s ease-in-out,
+    opacity 0.25s ease-in-out;
+  cursor: pointer;
 
   @include plain-visited() {
     color: var(--oo-color-contrast-primary);
     background-color: var(--oo-color-primary);
-    border: 2px solid var(--oo-color-primary);
+    border-color: var(--oo-color-primary);
   }
 
   @include hover() {
-    color: var(--oo-color-contrast-primary);
-    background-color: var(--oo-color-transparent-primary-80);
-    border-color: var(--oo-color-transparent-primary-80);
-  }
-
-  @include active() {
-    color: var(--oo-color-contrast-primary);
-    background-color: var(--oo-color-transparent-primary-60);
+    background-color: var(--oo-color-mix-primary-contrast-20);
+    border-color: var(--oo-color-mix-primary-contrast-20);
   }
 
   @include focus() {
     outline-color: var(--oo-color-primary);
   }
 
+  @include active() {
+    background-color: var(--oo-color-mix-primary-contrast-40);
+    border-color: var(--oo-color-mix-primary-contrast-40);
+  }
+
   @include disabled() {
-    background-color: var(--oo-color-transparent-primary-40);
+    background-color: var(--oo-color-primary);
+    border-color: var(--oo-color-primary);
+    opacity: 0.4;
+    outline-color: transparent;
+    cursor: default;
   }
 
   &.--on-bg-light,
@@ -50,29 +54,24 @@
       border-color: var(--oo-color-light-primary, var(--oo-color-primary));
     }
 
-    @include active() {
-      color: var(--oo-color-light-contrast-primary);
-      background-color: var(
-        --oo-color-light-transparent-primary-60,
-        var(--oo-color-primary)
-      );
-      border-color: var(
-        --oo-color-light-transparent-primary-60,
-        var(--oo-color-primary)
-      );
-    }
-
     @include hover() {
-      color: var(--oo-color-light-contrast-primary);
-      background-color: var(--oo-color-light-transparent-primary-80);
+      background-color: var(--oo-color-light-mix-primary-contrast-20);
+      border-color: var(--oo-color-light-mix-primary-contrast-20);
     }
 
     @include focus() {
-      outline-color: var(--oo-color-light-primary);
+      outline-color: var(--oo-color-light-primary, var(--oo-color-primary));
+    }
+
+    @include active() {
+      background-color: var(--oo-color-light-mix-primary-contrast-40);
+      border-color: var(--oo-color-light-mix-primary-contrast-40);
     }
 
     @include disabled() {
-      background-color: var(--oo-color-light-transparent-primary-40);
+      background-color: var(--oo-color-light-primary);
+      border-color: var(--oo-color-light-primary);
+      outline-color: transparent;
     }
   }
 
@@ -84,29 +83,24 @@
       border-color: var(--oo-color-dark-primary, var(--oo-color-primary));
     }
 
-    @include active() {
-      color: var(--oo-color-dark-contrast-primary);
-      background-color: var(
-        --oo-color-dark-transparent-primary-60,
-        var(--oo-color-primary)
-      );
-      border-color: var(
-        --oo-color-dark-transparent-primary-60,
-        var(--oo-color-primary)
-      );
-    }
-
     @include hover() {
-      color: var(--oo-color-dark-contrast-primary);
-      background-color: var(--oo-color-dark-transparent-primary-80);
+      background-color: var(--oo-color-dark-mix-primary-contrast-20);
+      border-color: var(--oo-color-dark-mix-primary-contrast-20);
     }
 
     @include focus() {
-      outline-color: var(--oo-color-dark-primary);
+      outline-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+    }
+
+    @include active() {
+      background-color: var(--oo-color-dark-mix-primary-contrast-40);
+      border-color: var(--oo-color-dark-mix-primary-contrast-40);
     }
 
     @include disabled() {
-      background-color: var(--oo-color-dark-transparent-primary-40);
+      background-color: var(--oo-color-dark-primary);
+      border-color: var(--oo-color-dark-primary);
+      outline-color: transparent;
     }
   }
 
@@ -121,29 +115,24 @@
       border-color: var(--oo-color-primary-primary, var(--oo-color-primary));
     }
 
-    @include active() {
-      color: var(--oo-color-primary-contrast-primary);
-      background-color: var(
-        --oo-color-primary-transparent-primary-60,
-        var(--oo-color-primary)
-      );
-      border-color: var(
-        --oo-color-primary-transparent-primary-60,
-        var(--oo-color-primary)
-      );
-    }
-
     @include hover() {
-      color: var(--oo-color-primary-contrast-primary);
-      background-color: var(--oo-color-primary-transparent-primary-80);
+      background-color: var(--oo-color-primary-mix-primary-contrast-20);
+      border-color: var(--oo-color-primary-mix-primary-contrast-20);
     }
 
     @include focus() {
-      outline-color: var(--oo-color-primary-primary);
+      outline-color: var(--oo-color-primary-primary, var(--oo-color-primary));
+    }
+
+    @include active() {
+      background-color: var(--oo-color-primary-mix-primary-contrast-40);
+      border-color: var(--oo-color-primary-mix-primary-contrast-40);
     }
 
     @include disabled() {
-      background-color: var(--oo-color-primary-transparent-primary-40);
+      background-color: var(--oo-color-primary-primary);
+      border-color: var(--oo-color-primary-primary);
+      outline-color: transparent;
     }
   }
 
@@ -158,29 +147,24 @@
       border-color: var(--oo-color-secondary-primary, var(--oo-color-primary));
     }
 
-    @include active() {
-      color: var(--oo-color-secondary-contrast-primary);
-      background-color: var(
-        --oo-color-secondary-transparent-primary-60,
-        var(--oo-color-primary)
-      );
-      border-color: var(
-        --oo-color-secondary-transparent-primary-60,
-        var(--oo-color-primary)
-      );
-    }
-
     @include hover() {
-      color: var(--oo-color-secondary-contrast-primary);
-      background-color: var(--oo-color-secondary-transparent-primary-80);
+      background-color: var(--oo-color-secondary-mix-primary-contrast-20);
+      border-color: var(--oo-color-secondary-mix-primary-contrast-20);
     }
 
     @include focus() {
-      outline-color: var(--oo-color-secondary-primary);
+      outline-color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+    }
+
+    @include active() {
+      background-color: var(--oo-color-secondary-mix-primary-contrast-40);
+      border-color: var(--oo-color-secondary-mix-primary-contrast-40);
     }
 
     @include disabled() {
-      background-color: var(--oo-color-secondary-transparent-primary-40);
+      background-color: var(--oo-color-secondary-primary);
+      border-color: var(--oo-color-secondary-primary);
+      outline-color: transparent;
     }
   }
 
@@ -192,29 +176,24 @@
       border-color: var(--oo-color-footer-primary, var(--oo-color-primary));
     }
 
-    @include active() {
-      color: var(--oo-color-footer-contrast-primary);
-      background-color: var(
-        --oo-color-footer-transparent-primary-60,
-        var(--oo-color-primary)
-      );
-      border-color: var(
-        --oo-color-footer-transparent-primary-60,
-        var(--oo-color-primary)
-      );
-    }
-
     @include hover() {
-      color: var(--oo-color-footer-contrast-primary);
-      background-color: var(--oo-color-footer-transparent-primary-80);
+      background-color: var(--oo-color-footer-mix-primary-contrast-20);
+      border-color: var(--oo-color-footer-mix-primary-contrast-20);
     }
 
     @include focus() {
-      outline-color: var(--oo-color-footer-primary);
+      outline-color: var(--oo-color-footer-primary, var(--oo-color-primary));
+    }
+
+    @include active() {
+      background-color: var(--oo-color-footer-mix-primary-contrast-40);
+      border-color: var(--oo-color-footer-mix-primary-contrast-40);
     }
 
     @include disabled() {
-      background-color: var(--oo-color-footer-transparent-primary-40);
+      background-color: var(--oo-color-footer-primary);
+      border-color: var(--oo-color-footer-primary);
+      outline-color: transparent;
     }
   }
 
@@ -227,36 +206,37 @@
     }
 
     @include hover() {
-      color: var(--oo-color-contrast-primary);
-      background-color: var(--oo-color-transparent-primary-80);
-      border-color: var(--oo-color-transparent-primary-80);
-    }
-
-    @include active() {
-      color: var(--oo-color-contrast-primary);
-      background-color: var(--oo-color-transparent-primary-60);
+      background-color: var(--oo-color-mix-primary-contrast-20);
+      border-color: var(--oo-color-mix-primary-contrast-20);
     }
 
     @include focus() {
       outline-color: var(--oo-color-primary);
     }
 
+    @include active() {
+      background-color: var(--oo-color-mix-primary-contrast-40);
+      border-color: var(--oo-color-mix-primary-contrast-40);
+    }
+
     @include disabled() {
-      background-color: var(--oo-color-transparent-primary-40);
+      background-color: var(--oo-color-primary);
+      border-color: var(--oo-color-primary);
+      outline-color: transparent;
     }
   }
 
   &.--ghost {
     @include plain-visited() {
-      color: var(--oo-color-primary);
+      color: var(--oo-color-text);
       background-color: transparent;
-      border-color: var(--oo-color-primary);
+      border-color: var(--oo-color-text);
     }
 
     @include hover() {
-      color: var(--oo-color-transparent-primary-80);
+      color: var(--oo-color-mix-text-contrast-20);
       background-color: transparent;
-      border-color: var(--oo-color-transparent-primary-80);
+      border-color: var(--oo-color-mix-text-contrast-20);
     }
 
     @include focus() {
@@ -264,29 +244,32 @@
     }
 
     @include active() {
-      color: var(--oo-color-transparent-primary-60);
+      color: var(--oo-color-mix-text-contrast-40);
       background-color: transparent;
-      border-color: var(--oo-color-transparent-primary-60);
+      border-color: var(--oo-color-mix-text-contrast-40);
     }
 
     @include disabled() {
-      color: var(--oo-color-transparent-primary-40);
+      color: var(--oo-color-text);
       background-color: transparent;
-      border-color: var(--oo-color-transparent-primary-40);
+      border-color: var(--oo-color-text);
+      opacity: 0.4;
+      outline-color: transparent;
+      cursor: default;
     }
 
     &.--on-bg-light,
     .--bg-light & {
       @include plain-visited() {
-        color: var(--oo-color-light-primary, var(--oo-color-primary));
+        color: var(--oo-color-light-text, var(--oo-color-text));
         background-color: transparent;
-        border-color: var(--oo-color-light-primary, var(--oo-color-primary));
+        border-color: var(--oo-color-light-text, var(--oo-color-text));
       }
 
       @include hover() {
-        color: var(--oo-color-light-transparent-primary-80);
+        color: var(--oo-color-light-mix-text-contrast-20);
         background-color: transparent;
-        border-color: var(--oo-color-light-transparent-primary-80);
+        border-color: var(--oo-color-light-mix-text-contrast-20);
       }
 
       @include focus() {
@@ -294,30 +277,31 @@
       }
 
       @include active() {
-        color: var(--oo-color-light-transparent-primary-60);
+        color: var(--oo-color-light-mix-text-contrast-40);
         background-color: transparent;
-        border-color: var(--oo-color-light-transparent-primary-60);
+        border-color: var(--oo-color-light-mix-text-contrast-40);
       }
 
       @include disabled() {
-        color: var(--oo-color-light-transparent-primary-40);
+        color: var(--oo-color-light-text);
         background-color: transparent;
-        border-color: var(--oo-color-light-transparent-primary-40);
+        border-color: var(--oo-color-light-text);
+        outline-color: transparent;
       }
     }
 
     &.--on-bg-dark,
     .--bg-dark & {
       @include plain-visited() {
-        color: var(--oo-color-dark-primary, var(--oo-color-primary));
+        color: var(--oo-color-dark-text, var(--oo-color-text));
         background-color: transparent;
-        border-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+        border-color: var(--oo-color-dark-text, var(--oo-color-text));
       }
 
       @include hover() {
-        color: var(--oo-color-dark-transparent-primary-80);
+        color: var(--oo-color-dark-mix-text-contrast-20);
         background-color: transparent;
-        border-color: var(--oo-color-dark-transparent-primary-80);
+        border-color: var(--oo-color-dark-mix-text-contrast-20);
       }
 
       @include focus() {
@@ -325,30 +309,31 @@
       }
 
       @include active() {
-        color: var(--oo-color-dark-transparent-primary-60);
+        color: var(--oo-color-dark-mix-text-contrast-40);
         background-color: transparent;
-        border-color: var(--oo-color-dark-transparent-primary-60);
+        border-color: var(--oo-color-dark-mix-text-contrast-40);
       }
 
       @include disabled() {
-        color: var(--oo-color-dark-transparent-primary-40);
+        color: var(--oo-color-dark-text);
         background-color: transparent;
-        border-color: var(--oo-color-dark-transparent-primary-40);
+        border-color: var(--oo-color-dark-text);
+        outline-color: transparent;
       }
     }
 
     &.--on-bg-primary,
     .--bg-primary & {
       @include plain-visited() {
-        color: var(--oo-color-primary-primary, var(--oo-color-primary));
+        color: var(--oo-color-primary-text, var(--oo-color-text));
         background-color: transparent;
-        border-color: var(--oo-color-primary-primary, var(--oo-color-primary));
+        border-color: var(--oo-color-primary-text, var(--oo-color-text));
       }
 
       @include hover() {
-        color: var(--oo-color-primary-transparent-primary-80);
+        color: var(--oo-color-primary-mix-text-contrast-20);
         background-color: transparent;
-        border-color: var(--oo-color-primary-transparent-primary-80);
+        border-color: var(--oo-color-primary-mix-text-contrast-20);
       }
 
       @include focus() {
@@ -356,33 +341,31 @@
       }
 
       @include active() {
-        color: var(--oo-color-primary-transparent-primary-60);
+        color: var(--oo-color-primary-mix-text-contrast-40);
         background-color: transparent;
-        border-color: var(--oo-color-primary-transparent-primary-60);
+        border-color: var(--oo-color-primary-mix-text-contrast-40);
       }
 
       @include disabled() {
-        color: var(--oo-color-primary-transparent-primary-40);
+        color: var(--oo-color-primary-text);
         background-color: transparent;
-        border-color: var(--oo-color-primary-transparent-primary-40);
+        border-color: var(--oo-color-primary-text);
+        outline-color: transparent;
       }
     }
 
     &.--on-bg-secondary,
     .--bg-secondary & {
       @include plain-visited() {
-        color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+        color: var(--oo-color-secondary-text, var(--oo-color-text));
         background-color: transparent;
-        border-color: var(
-          --oo-color-secondary-primary,
-          var(--oo-color-primary)
-        );
+        border-color: var(--oo-color-secondary-text, var(--oo-color-text));
       }
 
       @include hover() {
-        color: var(--oo-color-secondary-transparent-primary-80);
+        color: var(--oo-color-secondary-mix-text-contrast-20);
         background-color: transparent;
-        border-color: var(--oo-color-secondary-transparent-primary-80);
+        border-color: var(--oo-color-secondary-mix-text-contrast-20);
       }
 
       @include focus() {
@@ -393,30 +376,31 @@
       }
 
       @include active() {
-        color: var(--oo-color-secondary-transparent-primary-60);
+        color: var(--oo-color-secondary-mix-text-contrast-40);
         background-color: transparent;
-        border-color: var(--oo-color-secondary-transparent-primary-60);
+        border-color: var(--oo-color-secondary-mix-text-contrast-40);
       }
 
       @include disabled() {
-        color: var(--oo-color-secondary-transparent-primary-40);
+        color: var(--oo-color-secondary-text);
         background-color: transparent;
-        border-color: var(--oo-color-secondary-transparent-primary-40);
+        border-color: var(--oo-color-secondary-text);
+        outline-color: transparent;
       }
     }
 
     &.--on-bg-footer,
     .--bg-footer & {
       @include plain-visited() {
-        color: var(--oo-color-footer-primary, var(--oo-color-primary));
+        color: var(--oo-color-footer-text, var(--oo-color-text));
         background-color: transparent;
-        border-color: var(--oo-color-footer-primary, var(--oo-color-primary));
+        border-color: var(--oo-color-footer-text, var(--oo-color-text));
       }
 
       @include hover() {
-        color: var(--oo-color-footer-transparent-primary-80);
+        color: var(--oo-color-footer-mix-text-contrast-20);
         background-color: transparent;
-        border-color: var(--oo-color-footer-transparent-primary-80);
+        border-color: var(--oo-color-footer-mix-text-contrast-20);
       }
 
       @include focus() {
@@ -424,30 +408,31 @@
       }
 
       @include active() {
-        color: var(--oo-color-footer-transparent-primary-60);
+        color: var(--oo-color-footer-mix-text-contrast-40);
         background-color: transparent;
-        border-color: var(--oo-color-footer-transparent-primary-60);
+        border-color: var(--oo-color-footer-mix-text-contrast-40);
       }
 
       @include disabled() {
-        color: var(--oo-color-footer-transparent-primary-40);
+        color: var(--oo-color-footer-text);
         background-color: transparent;
-        border-color: var(--oo-color-footer-transparent-primary-40);
+        border-color: var(--oo-color-footer-text);
+        outline-color: transparent;
       }
     }
 
     &.--on-bg-transparent,
     .--bg-transparent & {
       @include plain-visited() {
-        color: var(--oo-color-primary);
+        color: var(--oo-color-text);
         background-color: transparent;
-        border-color: var(--oo-color-primary);
+        border-color: var(--oo-color-text);
       }
 
       @include hover() {
-        color: var(--oo-color-transparent-primary-80);
+        color: var(--oo-color-mix-text-contrast-20);
         background-color: transparent;
-        border-color: var(--oo-color-transparent-primary-80);
+        border-color: var(--oo-color-mix-text-contrast-20);
       }
 
       @include focus() {
@@ -455,77 +440,25 @@
       }
 
       @include active() {
-        color: var(--oo-color-transparent-primary-60);
+        color: var(--oo-color-mix-text-contrast-40);
         background-color: transparent;
-        border-color: var(--oo-color-transparent-primary-60);
+        border-color: var(--oo-color-mix-text-contrast-40);
       }
 
       @include disabled() {
-        color: var(--oo-color-transparent-primary-40);
+        color: var(--oo-color-text);
         background-color: transparent;
-        border-color: var(--oo-color-transparent-primary-40);
+        border-color: var(--oo-color-text);
+        outline-color: transparent;
       }
     }
   }
 
-  &.--small {
-    font-size: 1rem;
-    min-width: 1rem;
+  &.--small-corners {
+    border-radius: $border-radius-small;
   }
 
   &.--full-width {
     width: 100%;
-    max-width: unset;
-  }
-
-  &.--on-lightbox {
-    width: 100%;
-    height: 100%;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    padding: 0.25rem;
-
-    svg {
-      width: 100%;
-      height: 100%;
-    }
-  }
-
-  &.--read-more {
-    &:before {
-      content: attr(data-open-text);
-    }
-    &:after {
-      content: attr(data-close-text);
-      display: none;
-    }
-    &.--is-open {
-      &:before {
-        display: none;
-      }
-      &:after {
-        display: inline-block;
-      }
-    }
-  }
-
-  &.--show-more {
-    display: inline-block;
-    margin-top: 1rem;
-  }
-
-  &.--is-primary {
-    border-radius: $border-radius;
-  }
-
-  &.--is-secondary {
-    border-radius: $border-radius;
-  }
-
-  &.--is-tertiary {
-    border-radius: $border-radius;
   }
 }
