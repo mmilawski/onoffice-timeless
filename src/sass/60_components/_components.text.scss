@@ -16,6 +16,7 @@
   }
 
   &__row {
+    justify-content: center;
     .--text-align-left & {
     }
     .--text-align-center & {
@@ -31,6 +32,7 @@
     @include media-breakpoint-up(lg) {
       flex-direction: row;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 0;
     }
     .--text-align-left & {

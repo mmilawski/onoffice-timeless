@@ -118,6 +118,10 @@ $pricehubble_gatrackingid = get_field('pricehubble_gatrackingid')
     ? esc_attr(get_field('pricehubble_gatrackingid'))
     : null;
 
+$eTracker_domain = get_field('etracker_domain')
+    ? esc_attr(get_field('etracker_domain'))
+    : null;
+
 // Settings
 $settings = get_field('settings') ?? null;
 
@@ -142,6 +146,7 @@ $iframe_class = match ($type) {
     'baufi_lead' => '--is-baufi-lead',
     'immowelt' => '--is-immowelt',
     'pricehubble' => '--is-pricehubble',
+    'eTracker' => '--is-eTracker',
     default => '',
 };
 
@@ -610,6 +615,31 @@ if (isset($type)) {
                                 FisherWidget.grantConsent();
                             } 
                         </script>
+                <?php endif; ?>
+
+                <?php if (
+                    isset($type) &&
+                    $type === 'eTracker' &&
+                    isset($eTracker_domain)
+                ): ?>
+
+                    <div class="c-iframe-script__iframe <?php echo $iframe_class; ?>">
+                        <b>etracker</b><br>
+                        <br>
+                        Der Anbieter dieser Website nutzt Dienste der etracker GmbH aus Hamburg, Deutschland (<a href="https://www.etracker.com">www.etracker.com</a>) zur Analyse von Nutzungsdaten. Wir verwenden standardmäßig keine Cookies für die Web-Analyse. Soweit wir Analyse- und Optimierungs-Cookies einsetzen, holen wir Ihre explizite Einwilligung gesondert im Vorfeld ein. Ist das der Fall und Sie stimmen zu, werden Cookies eingesetzt, die eine statistische Reichweiten-Analyse dieser Website, eine Erfolgsmessung unserer Online-Marketing-Maßnahmen sowie Testverfahren ermöglichen, um z.B. unterschiedliche Versionen unseres Online-Angebotes oder seiner Bestandteile zu testen und zu optimieren. Cookies sind kleine Textdateien, die vom Internet Browser auf dem Endgerät des Nutzers gespeichert werden. etracker Cookies enthalten keine Informationen, die eine Identifikation eines Nutzers ermöglichen.<br>
+                        <br>
+                        Die mit etracker erzeugten Daten werden im Auftrag des Anbieters dieser Website von etracker ausschließlich in Deutschland verarbeitet und gespeichert und unterliegen damit den strengen deutschen und europäischen Datenschutzgesetzen und -standards. etracker wurde diesbezüglich unabhängig geprüft, zertifiziert und mit dem Datenschutz-Gütesiegel <a href="https://etracker.com/eprivacy">ePrivacyseal</a> ausgezeichnet.<br>
+                        <br>
+                        Die Datenverarbeitung erfolgt auf Basis der gesetzlichen Bestimmungen des Art. 6 Abs. 1 lit. f (berechtigtes Interesse) der Datenschutzgrundverordnung (DSGVO). Unser Anliegen im Sinne der DSGVO (berechtigtes Interesse) ist die Optimierung unseres Online-Angebotes und unseres Webauftritts. Da uns die Privatsphäre unserer Besucher wichtig ist, werden die Daten, die möglicherweise einen Bezug zu einer einzelnen Person zulassen, wie die IP-Adresse, Anmelde- oder Gerätekennungen, frühestmöglich anonymisiert oder pseudonymisiert. Eine andere Verwendung, Zusammenführung mit anderen Daten oder eine Weitergabe an Dritte erfolgt nicht.<br>
+                        <br>
+                        Sie können der vorbeschriebenen Datenverarbeitung jederzeit durch Klick auf den Schieberegler widersprechen. Der Widerspruch hat keine nachteiligen Folgen. Wird kein Schieberegler angezeigt, ist die Datenerfassung bereits durch andere Blockier-Maßnahmen unterbunden.<br>
+                        <br>
+                        <a href="#" data-tld="<?php echo esc_attr(
+                            $eTracker_domain,
+                        ); ?>" id="et-opt-out"></a> <br>
+                        <br>
+                        Weitere Informationen zum Datenschutz bei etracker finden Sie <a href="https://www.etracker.com/datenschutz/">hier</a>.
+                    </div>
                 <?php endif; ?>
 
             </div>
