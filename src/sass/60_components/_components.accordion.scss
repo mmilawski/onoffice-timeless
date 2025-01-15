@@ -4,9 +4,9 @@
   &__container {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2rem;
     @include media-breakpoint-up(lg) {
-      gap: 2rem;
+      gap: 5rem;
     }
   }
 
@@ -22,9 +22,9 @@
   &__accordions {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
     @include media-breakpoint-up(xl) {
-      gap: 3rem;
+      gap: 2rem;
     }
   }
 
