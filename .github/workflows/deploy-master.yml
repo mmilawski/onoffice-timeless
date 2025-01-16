@@ -27,7 +27,7 @@ jobs:
       - name: Set SSH Key for Github Repos
         uses: webfactory/ssh-agent@v0.8.0
         with:
-          ssh-private-key: ${{ secrets.OO_ACTION_PRIVATE_KEY2 }}
+          ssh-private-key: ${{ secrets.OO_ACTION_PRIVATE_KEY }}
 
       - run: |
           git submodule sync --recursive
@@ -47,7 +47,7 @@ jobs:
       - name: Set SSH Key for Raidboxes Server
         uses: webfactory/ssh-agent@v0.8.0
         with:
-          ssh-private-key: ${{ secrets.DEPLOY_KEY }}
+          ssh-private-key: ${{ secrets.DEPLOY_KEY2 }}
 
       - name: Deploy on Server
         run: rsync -e 'ssh -o StrictHostKeyChecking=no' -rlczh --delete-after ./ b33507otmyrdbxio@b33507ot.ssh.myrdbx.io:~/www/wp-content/themes/onoffice-classic
