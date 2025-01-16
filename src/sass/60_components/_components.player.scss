@@ -21,8 +21,7 @@
 
     svg {
       filter: drop-shadow(
-        var(--oo-play-icon-shadow-size) var(--oo-play-icon-shadow-size)
-          var(--oo-color-transparent-shadow-50)
+        var(--oo-play-icon-shadow-size) var(--oo-color-transparent-shadow-50)
       );
     }
 
@@ -36,8 +35,7 @@
 
     svg {
       filter: drop-shadow(
-        var(--oo-play-icon-shadow-size) var(--oo-play-icon-shadow-size)
-          var(--oo-color-transparent-shadow-50)
+        var(--oo-play-icon-shadow-size) var(--oo-color-transparent-shadow-50)
       );
     }
 
@@ -54,8 +52,7 @@
 
     svg {
       filter: drop-shadow(
-        var(--oo-play-icon-shadow-size) var(--oo-play-icon-shadow-size)
-          var(--oo-color-transparent-shadow-50)
+        var(--oo-play-icon-shadow-size) var(--oo-color-transparent-shadow-50)
       );
     }
 
@@ -72,8 +69,7 @@
 
     svg {
       filter: drop-shadow(
-        var(--oo-play-icon-shadow-size) var(--oo-play-icon-shadow-size)
-          var(--oo-color-transparent-shadow-50)
+        var(--oo-play-icon-shadow-size) var(--oo-color-transparent-shadow-50)
       );
     }
 
@@ -89,7 +85,9 @@
     color: var(--oo-color-secondary-primary, var(--oo-color-primary));
 
     svg {
-      filter: drop-shadow(var(--oo-play-icon-shadow-size));
+      filter: drop-shadow(
+        var(--oo-play-icon-shadow-size) var(--oo-color-transparent-shadow-50)
+      );
     }
 
     @include hover() {
