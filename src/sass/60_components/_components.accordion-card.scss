@@ -10,7 +10,7 @@
 
   &__title {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto $icon-wrapper-size;
     gap: 1rem;
     cursor: pointer;
     border-top: 1px solid var(--oo-color-primary);
