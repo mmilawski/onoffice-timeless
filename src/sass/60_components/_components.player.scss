@@ -10,20 +10,13 @@
   cursor: pointer;
   transition: background-color 0.25s ease-in-out, transform 0.25s ease-in-out;
 
-  --oo-play-icon-shadow-size: 2px 2px 10px;
-
   svg {
     height: 2.5rem;
+    filter: drop-shadow(2px 2px 10px var(--oo-color-transparent-shadow-50));
   }
 
   &.--on-bg-transparent {
     color: var(--oo-color-primary);
-
-    svg {
-      filter: drop-shadow(
-        var(--oo-play-icon-shadow-size) var(--oo-color-transparent-shadow-50)
-      );
-    }
 
     @include hover() {
       background-color: var(--oo-color-transparent-bg-25);
@@ -32,12 +25,6 @@
 
   &.--on-bg-light {
     color: var(--oo-color-light-primary, var(--oo-color-primary));
-
-    svg {
-      filter: drop-shadow(
-        var(--oo-play-icon-shadow-size) var(--oo-color-transparent-shadow-50)
-      );
-    }
 
     @include hover() {
       background-color: var(
@@ -50,12 +37,6 @@
   &.--on-bg-dark {
     color: var(--oo-color-dark-primary, var(--oo-color-primary));
 
-    svg {
-      filter: drop-shadow(
-        var(--oo-play-icon-shadow-size) var(--oo-color-transparent-shadow-50)
-      );
-    }
-
     @include hover() {
       background-color: var(
         --oo-color-dark-transparent-bg-25,
@@ -67,12 +48,6 @@
   &.--on-bg-primary {
     color: var(--oo-color-primary-primary, var(--oo-color-primary));
 
-    svg {
-      filter: drop-shadow(
-        var(--oo-play-icon-shadow-size) var(--oo-color-transparent-shadow-50)
-      );
-    }
-
     @include hover() {
       background-color: var(
         --oo-color-primary-transparent-bg-25,
@@ -83,12 +58,6 @@
 
   &.--on-bg-secondary {
     color: var(--oo-color-secondary-primary, var(--oo-color-primary));
-
-    svg {
-      filter: drop-shadow(
-        var(--oo-play-icon-shadow-size) var(--oo-color-transparent-shadow-50)
-      );
-    }
 
     @include hover() {
       background-color: var(
