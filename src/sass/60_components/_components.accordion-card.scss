@@ -13,7 +13,7 @@
     grid-template-columns: auto $icon-wrapper-size;
     gap: 1rem;
     cursor: pointer;
-    border-top: 1px solid var(--oo-color-primary);
+    border-top: 1px solid var(--oo-color-mix-bg-text-50);
     padding-top: 1rem;
 
     @include visited-active() {
@@ -88,8 +88,8 @@
         }
       }
     }
-    #{$c-accordion-card}__headline {
-      border-color: var(--oo-color-light-primary, var(--oo-color-primary));
+    #{$c-accordion-card}__title {
+      border-color: var(--oo-color-light-mix-bg-text-50);
     }
     #{$c-accordion-card}__icon-wrapper {
       background-color: var(--oo-color-light-primary, var(--oo-color-primary));
@@ -109,8 +109,8 @@
         }
       }
     }
-    #{$c-accordion-card}__headline {
-      border-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+    #{$c-accordion-card}__title {
+      border-color: var(--oo-color-dark-mix-bg-text-50);
     }
     #{$c-accordion-card}__icon-wrapper {
       background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
@@ -130,8 +130,8 @@
         }
       }
     }
-    #{$c-accordion-card}__headline {
-      border-color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+    #{$c-accordion-card}__title {
+      border-color: var(--oo-color-secondary-mix-bg-text-50);
     }
     #{$c-accordion-card}__icon-wrapper {
       background-color: var(
@@ -154,8 +154,8 @@
         }
       }
     }
-    #{$c-accordion-card}__headline {
-      border-color: var(--oo-color-primary-primary, var(--oo-color-primary));
+    #{$c-accordion-card}__title {
+      border-color: var(--oo-color-primary-mix-bg-text-50);
     }
     #{$c-accordion-card}__icon-wrapper {
       background-color: var(
