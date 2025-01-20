@@ -124,35 +124,28 @@ if ($width_container == 'content-width') {
                         'image_class' =>
                             'c-media__image o-image --' . $image_crop,
                         'additional_cloudimg_params' =>
-                            '&func=crop&gravity=' . $image_crop,
+                            '&gravity=' . $image_crop,
                         'dimensions' => [
                             '575' => [
-                                'w' => $media_width_xs,
-                                'h' => round(($media_width_xs * 3) / 4),
+                                'w' => $media_width_xs
                             ],
                             '1600' => [
-                                'w' => $media_width_xxxl,
-                                'h' => round(($media_width_xxxl * 3) / 4),
+                                'w' => $media_width_xxxl
                             ],
                             '1400' => [
-                                'w' => $media_width_xxl,
-                                'h' => round(($media_width_xxl * 3) / 4),
+                                'w' => $media_width_xxl
                             ],
                             '1200' => [
-                                'w' => $media_width_xl,
-                                'h' => round(($media_width_xl * 3) / 4),
+                                'w' => $media_width_xl
                             ],
                             '992' => [
-                                'w' => $media_width_lg,
-                                'h' => round(($media_width_lg * 3) / 4),
+                                'w' => $media_width_lg
                             ],
                             '768' => [
-                                'w' => $media_width_md,
-                                'h' => round(($media_width_md * 3) / 4),
+                                'w' => $media_width_md
                             ],
                             '576' => [
-                                'w' => $media_width_sm,
-                                'h' => round(($media_width_sm * 3) / 4),
+                                'w' => $media_width_sm
                             ],
                         ],
                     ]); ?>
