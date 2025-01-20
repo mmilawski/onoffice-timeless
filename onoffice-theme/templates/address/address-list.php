@@ -2,7 +2,7 @@
 
 /**
  *
- *    Copyright (C) 2018  onOffice GmbH
+ *    Copyright (C) 2018-2024 onOffice GmbH
  *
  *    This program is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
@@ -19,6 +19,8 @@
  *
  */
 
+require 'map/map.php';
+
 use onOffice\WPlugin\AddressList;
 use onOffice\WPlugin\Types\FieldTypes;
 
@@ -32,6 +34,7 @@ use onOffice\WPlugin\Types\FieldTypes;
 $settings = get_field('settings') ?? [];
 $bg_color = $settings['bg_color'] ?? 'bg-transparent';
 $headline = get_field('headline') ?? null;
+
 // Section ID for pagination anchor
 $anchor = $headline['text'] ? clean_id($headline['text']) : '';
 
