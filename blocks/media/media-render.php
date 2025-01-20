@@ -127,25 +127,25 @@ if ($width_container == 'content-width') {
                             '&gravity=' . $image_crop,
                         'dimensions' => [
                             '575' => [
-                                'w' => $media_width_xs
+                                'w' => $media_width_xs,
                             ],
                             '1600' => [
-                                'w' => $media_width_xxxl
+                                'w' => $media_width_xxxl,
                             ],
                             '1400' => [
-                                'w' => $media_width_xxl
+                                'w' => $media_width_xxl,
                             ],
                             '1200' => [
-                                'w' => $media_width_xl
+                                'w' => $media_width_xl,
                             ],
                             '992' => [
-                                'w' => $media_width_lg
+                                'w' => $media_width_lg,
                             ],
                             '768' => [
-                                'w' => $media_width_md
+                                'w' => $media_width_md,
                             ],
                             '576' => [
-                                'w' => $media_width_sm
+                                'w' => $media_width_sm,
                             ],
                         ],
                     ]); ?>
