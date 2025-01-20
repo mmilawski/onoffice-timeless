@@ -60,9 +60,9 @@ if ($width_container == 'content-width') {
     $media_width_sm = '512';
     $media_width_md = '694';
     $media_width_lg = '928';
-    $media_width_xl = '1120';
-    $media_width_xxl = '1312';
-    $media_width_xxxl = '1444';
+    $media_width_xl = '736';
+    $media_width_xxl = '864';
+    $media_width_xxxl = '952';
 } elseif ($width_container == 'full-width') {
     $media_width_xs = '576';
     $media_width_sm = '768';

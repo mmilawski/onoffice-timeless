@@ -42,7 +42,6 @@
   &__image {
     width: 100%;
     height: auto;
-    aspect-ratio: 4 / 3;
     border-radius: $border-radius;
 
     .--is-full-width & {
