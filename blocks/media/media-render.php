@@ -60,9 +60,9 @@ if ($width_container == 'content-width') {
     $media_width_sm = '512';
     $media_width_md = '694';
     $media_width_lg = '928';
-    $media_width_xl = '1120';
-    $media_width_xxl = '1312';
-    $media_width_xxxl = '1444';
+    $media_width_xl = '736';
+    $media_width_xxl = '864';
+    $media_width_xxxl = '952';
 } elseif ($width_container == 'full-width') {
     $media_width_xs = '576';
     $media_width_sm = '768';
@@ -99,6 +99,22 @@ if ($width_container == 'content-width') {
                     </div>
                 <?php } ?>
 
+                <?php if (!empty($buttons['buttons'][0]['link'])) { ?>
+                    <?php oo_get_template(
+                        'components',
+                        '',
+                        'component-buttons',
+                        [
+                            'buttons' => $buttons['buttons'],
+                            'additional_button_class' => $bg_color
+                                ? '--on-' . $bg_color
+                                : '',
+                            'additional_container_class' =>
+                                'c-media__buttons o-col-12 o-col-xl-8',
+                        ],
+                    ); ?>
+                <?php } ?>
+
                 <?php
                 if (!empty($image) && $type == 'image') { ?>
                     <?php oo_get_template('components', '', 'component-image', [
@@ -108,35 +124,28 @@ if ($width_container == 'content-width') {
                         'image_class' =>
                             'c-media__image o-image --' . $image_crop,
                         'additional_cloudimg_params' =>
-                            '&func=crop&gravity=' . $image_crop,
+                            '&gravity=' . $image_crop,
                         'dimensions' => [
                             '575' => [
                                 'w' => $media_width_xs,
-                                'h' => round(($media_width_xs * 3) / 4),
                             ],
                             '1600' => [
                                 'w' => $media_width_xxxl,
-                                'h' => round(($media_width_xxxl * 3) / 4),
                             ],
                             '1400' => [
                                 'w' => $media_width_xxl,
-                                'h' => round(($media_width_xxl * 3) / 4),
                             ],
                             '1200' => [
                                 'w' => $media_width_xl,
-                                'h' => round(($media_width_xl * 3) / 4),
                             ],
                             '992' => [
                                 'w' => $media_width_lg,
-                                'h' => round(($media_width_lg * 3) / 4),
                             ],
                             '768' => [
                                 'w' => $media_width_md,
-                                'h' => round(($media_width_md * 3) / 4),
                             ],
                             '576' => [
                                 'w' => $media_width_sm,
-                                'h' => round(($media_width_sm * 3) / 4),
                             ],
                         ],
                     ]); ?>
@@ -208,37 +217,24 @@ if ($width_container == 'content-width') {
                                         ],
                                     ],
                                 ); ?>
-                                <button class="c-media__play c-button --on-<?php echo $bg_color; ?>"><?php esc_html_e(
-    'Video ansehen',
-    'oo_theme',
-); ?>
+                                <button 
+                                    class="c-media__play c-player --on-<?php echo $bg_color; ?>" 
+                                    title="<?php esc_html_e(
+                                        'Video ansehen',
+                                        'oo_theme',
+                                    ); ?>">
+                                    <?php oo_get_icon('play'); ?>
                                 </button>
                             </div>
                         <?php endif; ?>
                         <?php if (empty($thumbnail)) { ?>
-													<div class="c-media__video-wrapper --has-no-thumbnail <?php echo $video_class; ?>">
-														<?php echo $iframe_with_attributes; ?>
-													</div>
-												<?php } else {echo $iframe_without_source;} ?>
+                            <div class="c-media__video-wrapper --has-no-thumbnail <?php echo $video_class; ?>">
+                                <?php echo $iframe_with_attributes; ?>
+                            </div>
+                        <?php } else {echo $iframe_without_source;} ?>
                     </div>
                 <?php }
                 ?>
-
-                <?php if (!empty($buttons['buttons'][0]['link'])) { ?>
-                    <?php oo_get_template(
-                        'components',
-                        '',
-                        'component-buttons',
-                        [
-                            'buttons' => $buttons['buttons'],
-                            'additional_button_class' => $bg_color
-                                ? '--on-' . $bg_color
-                                : '',
-                            'additional_container_class' =>
-                                'c-media__buttons o-col-12 o-col-xl-8',
-                        ],
-                    ); ?>
-                <?php } ?>
             </div>
         </div>
     </section>
@@ -264,6 +260,27 @@ if ($width_container == 'content-width') {
                 <?php if (!empty($text['wysiwyg'])) { ?>
                     <div class="c-media__text o-text --is-wysiwyg o-col-12 o-col-xl-8">
                         <?php echo $text['wysiwyg']; ?>
+                    </div>
+                <?php } ?>
+
+                <?php if (!empty($buttons['buttons'][0]['link'])) { ?>
+                    <div class="c-media__container o-container">
+                        <div class="c-media__row o-row">
+                    
+                            <?php oo_get_template(
+                                'components',
+                                '',
+                                'component-buttons',
+                                [
+                                    'buttons' => $buttons['buttons'],
+                                    'additional_button_class' => $bg_color
+                                        ? '--on-' . $bg_color
+                                        : '',
+                                    'additional_container_class' =>
+                                        'c-media__buttons o-col-12 o-col-xl-8',
+                                ],
+                            ); ?>
+                        </div>
                     </div>
                 <?php } ?>
             </div>
@@ -375,39 +392,22 @@ if ($width_container == 'content-width') {
                                 ],
                             ); ?>
 
-                            <button class="c-media__play c-button --on-<?php echo $bg_color; ?>"><?php esc_html_e(
-    'Video ansehen',
-    'oo_theme',
-); ?>
+                            <button 
+                                class="c-media__play c-player --on-<?php echo $bg_color; ?>" 
+                                title="<?php esc_html_e(
+                                    'Video ansehen',
+                                    'oo_theme',
+                                ); ?>">
+                                <?php oo_get_icon('play'); ?>
                             </button>
                         </div>
                     <?php echo $iframe_without_source;} else { ?>
-										<div class="c-media__video-wrapper --has-no-thumbnail <?php echo $video_class; ?>">
-												<?php echo $iframe_with_attributes; ?>
-											</div>
-									<?php } ?>
+                        <div class="c-media__video-wrapper --has-no-thumbnail <?php echo $video_class; ?>">
+                            <?php echo $iframe_with_attributes; ?>
+                        </div>
+                    <?php } ?>
                 </div>
             <?php } ?>
         </div>
-        <?php if (!empty($buttons['buttons'][0]['link'])) { ?>
-            <div class="c-media__container o-container">
-                <div class="c-media__row o-row">
-               
-                    <?php oo_get_template(
-                        'components',
-                        '',
-                        'component-buttons',
-                        [
-                            'buttons' => $buttons['buttons'],
-                            'additional_button_class' => $bg_color
-                                ? '--on-' . $bg_color
-                                : '',
-                            'additional_container_class' =>
-                                'c-media__buttons o-col-12 o-col-xl-8',
-                        ],
-                    ); ?>
-                </div>
-            </div>
-        <?php } ?>
     </section>
 <?php } ?>

@@ -21,8 +21,10 @@
 
   &__row {
     display: flex;
+    justify-content: center;
     align-items: flex-start;
     gap: 1.5rem;
+
     @include media-breakpoint-up(lg) {
       gap: 2rem;
     }
@@ -40,7 +42,7 @@
   &__image {
     width: 100%;
     height: auto;
-    aspect-ratio: 4 / 3;
+    max-height: 60vh;
     border-radius: $border-radius;
 
     .--is-full-width & {
@@ -59,7 +61,18 @@
 
   &__thumbnail-wrapper {
     position: relative;
+    overflow: hidden;
     cursor: pointer;
+
+    .--is-content-width & {
+      border-radius: $border-radius;
+    }
+
+    @include hover-focus-active {
+      #{$c-media}__thumbnail-image {
+        transform: scale(1.05);
+      }
+    }
   }
 
   &__thumbnail-picture {
@@ -69,6 +82,8 @@
     width: 100%;
     height: auto;
     aspect-ratio: 16 / 9;
+    transition: transform 0.25s ease-in-out;
+
     .--is-full-width & {
       max-height: 70vh;
     }
@@ -76,9 +91,7 @@
 
   &__play {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    inset: 0;
     z-index: 1;
   }
 
