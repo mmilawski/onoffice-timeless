@@ -2,12 +2,14 @@
   $c-contact-map: &;
 
   &__container {
+  }
+
+  &__row {
     position: relative;
     display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    gap: 2.5rem;
     @include media-breakpoint-up(xl) {
-      gap: 2rem;
+      gap: 5rem;
     }
   }
 

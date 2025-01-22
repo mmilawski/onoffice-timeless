@@ -91,164 +91,200 @@ if (empty($addresses)) {
     $block,
 ); ?> class="c-contact-map o-section --<?php echo $bg_color; ?>">
     <div class="c-contact-map__container o-container">
-        <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
-            <div class="c-contact-map__content o-row">
-                <?php if (!empty($headline['text'])) { ?>
-          <?php oo_get_template('components', '', 'component-headline', [
-              'headline' => $headline,
-              'additional_headline_class' =>
-                  'c-contact-map__headline o-col-12 o-col-xl-8',
-          ]); ?>
-                <?php } ?>
-
-                <?php if (!empty($text['wysiwyg'])) { ?>
-                    <div class="c-contact-map__text o-text --is-wysiwyg o-col-12 o-col-xl-8">
-                        <?php echo $text['wysiwyg']; ?>
-                    </div>
-                <?php } ?>
-            </div>
-        <?php } ?>
-        <?php  ?>
-        <?php if ($is_google_map) { ?>
-            <?php
-            wp_enqueue_script('oo-google-map-script');
-            wp_enqueue_script('oo-init-google-map-script');
-            ?>
-        <?php } ?>
-        <?php if ($is_open_street_map) { ?>
-            <?php
-            wp_enqueue_style('oo-leaflet-style');
-            wp_enqueue_script('oo-leaflet-script');
-            wp_enqueue_script('oo-init-open-street-map-script');
-            ?>
-        <?php } ?>
-            <div class="c-contact-map__map c-map --is-<?php echo $map_type; ?> --is-<?php echo $map_color; ?>" data-map-color="<?php echo $map_color; ?>" data-marker-color="<?php echo $primary_color; ?>" style="width: 100%;">
-                <?php foreach ($addresses as $address) {
-
-                    $map = $address['maps'] ?? [];
-                    if (
-                        $map_type == 'open-street-map' &&
-                        !empty($address['street']) &&
-                        !empty($address['zip'])
-                    ) {
-                        $q =
-                            str_replace(
-                                ' ',
-                                '+',
-                                urlencode($address['street']),
-                            ) .
-                            '+' .
-                            str_replace(' ', '+', urlencode($address['zip']));
-                        $map['street_name'] = $address['street'];
-                        $url =
-                            'https://nominatim.openstreetmap.org/search?q=' .
-                            $q .
-                            '&format=json&polygon=1&addressdetails=1';
-                        $options = [
-                            'http' => [
-                                'method' => 'GET',
-                                'header' =>
-                                    "Accept-language: de\r\nUser-Agent: Mozilla/5.0 \r\n",
+        <div class="c-contact-map__row o-row --position-center">
+            <?php if (
+                !empty($headline['text']) ||
+                !empty($text['wysiwyg'])
+            ) { ?>
+                <div class="c-contact-map__content o-col-12 o-col-lg-10 o-col-xl-8">
+                    <?php if (!empty($headline['text'])) { ?>
+                        <?php oo_get_template(
+                            'components',
+                            '',
+                            'component-headline',
+                            [
+                                'headline' => $headline,
+                                'additional_headline_class' =>
+                                    'c-contact-map__headline',
                             ],
-                        ];
-                        $context = stream_context_create($options);
-                        $response = file_get_contents($url, false, $context);
-                        if ($response === false) {
-                            error_log(
-                                'OpenStreetMap-Request failed: ' . $response,
-                            );
-                            return;
-                        }
-                        $data = json_decode($response);
-                        if (
-                            empty($data[0]) ||
-                            !isset($data[0]->lat) ||
-                            !isset($data[0]->lon)
-                        ) {
-                            error_log(
-                                'OpenStreetMap-Request no Coordinates found',
-                            );
-                            return;
-                        }
-                        $map['lat'] = $data[0]->lat;
-                        $map['lng'] = $data[0]->lon;
-                        $map['place_id'] = $data[0]->place_id;
-                    }
-                    $map_lat = $map['lat'] ?? null;
-                    $map_lng = $map['lng'] ?? null;
-                    $map_name = $map['name'] ?? null;
-                    $map_street_number = $map['street_number'] ?? null;
-                    $map_street_name = $map['street_name'] ?? null;
-                    $map_street =
-                        $map_street_name .
-                            ($map_street_number
-                                ? ' ' . $map_street_number
-                                : '') ??
-                        null;
-                    $map_city = $map['city'] ?? null;
-                    $map_country = $map['country'] ?? null;
+                        ); ?>
+                    <?php } ?>
 
-                    $place_id = $map['place_id'] ?? null;
-                    $name = $address['name']
-                        ? $address['name']
-                        : $map_name ?? null;
-                    $street = $address['street']
-                        ? $address['street']
-                        : $map_street ?? null;
-                    $zip = $address['zip']
-                        ? $address['zip']
-                        : $map_city ?? null;
-                    $country = $address['country']['native']
-                        ? $address['country']['native']
-                        : $map_country ?? null;
-
-                    if (empty($map)) {
-                        continue;
-                    }
-                    ?>
-                    <div class="c-map__marker" data-lat="<?php echo esc_attr(
-                        $map_lat,
-                    ); ?>" data-lng="<?php echo esc_attr($map_lng); ?>">
-                        <div class="c-map__info --bg-transparent">
-                            <?php
-                            if (!empty($name)) {
-                                echo '<h3 class="c-map__headline o-headline --h3">' .
-                                    $name .
-                                    '</h3>';
-                            }
-                            if (
-                                !empty($street) ||
-                                !empty($zip) ||
-                                !empty($country)
-                            ) {
-                                echo '<p class="c-map__text">';
-                                if (!empty($street)) {
-                                    echo $street . '<br>';
-                                }
-                                if (!empty($zip)) {
-                                    echo $zip . '<br>';
-                                }
-                                if (!empty($country)) {
-                                    echo $country;
-                                }
-                                echo '</p>';
-                            }
-                            if (!empty($place_id)) {
-                                echo '<p class="c-map__link-wrapper">';
-                                echo '<a class="c-map__link c-link --has-icon --chevron-right --on-bg-transparent" href="https://www.google.com/maps/place/?q=place_id:' .
-                                    $place_id .
-                                    '" target="_blank" rel="noopener noreferrer">';
-                                echo esc_html('Zur Routenplanung', 'oo_theme');
-                                echo oo_get_icon('chevron-right');
-                                echo '</a>';
-                                echo '</p>';
-                            }
-                            ?>
+                    <?php if (!empty($text['wysiwyg'])) { ?>
+                        <div class="c-contact-map__text o-text --is-wysiwyg">
+                            <?php echo $text['wysiwyg']; ?>
                         </div>
-                    </div>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+
+            <?php if ($is_google_map) { ?>
                 <?php
-                } ?>
+                wp_enqueue_script('oo-google-map-script');
+                wp_enqueue_script('oo-init-google-map-script');
+                ?>
+            <?php } ?>
+            <?php if ($is_open_street_map) { ?>
+                <?php
+                wp_enqueue_style('oo-leaflet-style');
+                wp_enqueue_script('oo-leaflet-script');
+                wp_enqueue_script('oo-init-open-street-map-script');
+                ?>
+            <?php } ?>
+            <div class="c-contact-map__map-wrapper o-col-12 o-col-lg-10 o-col-xl-8">
+                <div class="c-contact-map__map c-map --is-<?php echo $map_type; ?> --is-<?php echo $map_color; ?>" data-map-color="<?php echo $map_color; ?>" data-marker-color="<?php echo $primary_color; ?>" style="width: 100%;">
+                    <?php foreach ($addresses as $address) {
+
+                        $map = $address['maps'] ?? [];
+                        if (
+                            $map_type == 'open-street-map' &&
+                            !empty($address['street']) &&
+                            !empty($address['zip'])
+                        ) {
+                            $q = $address['street'] . ' ' . $address['zip'];
+                            $map['street_name'] = $address['street'];
+                            $url =
+                                'https://nominatim.openstreetmap.org/search?q=' .
+                                urlencode($q) .
+                                '&format=json&polygon=1&addressdetails=1';
+                            $options = [
+                                'http' => [
+                                    'method' => 'GET',
+                                    'header' =>
+                                        "Accept-language: de\r\nUser-Agent: Mozilla/5.0 \r\n",
+                                ],
+                            ];
+                            $context = stream_context_create($options);
+                            $response = file_get_contents(
+                                $url,
+                                false,
+                                $context,
+                            );
+                            if ($response === false) {
+                                error_log(
+                                    'OpenStreetMap-Request failed: ' .
+                                        $response,
+                                );
+                                continue;
+                            }
+                            if ($response === [] || $response === '[]') {
+                                error_log(
+                                    'OpenStreetMap-Request no Coordinates found',
+                                );
+                                continue;
+                            }
+                            $data = json_decode($response);
+                            if (
+                                empty($data[0]) ||
+                                !isset($data[0]->lat) ||
+                                !isset($data[0]->lon)
+                            ) {
+                                error_log(
+                                    'OpenStreetMap-Request no Coordinates found',
+                                );
+                                continue;
+                            }
+                            $map['lat'] = $data[0]->lat;
+                            $map['lng'] = $data[0]->lon;
+                            $map['place_id'] = $data[0]->place_id;
+                        }
+                        $map_lat = $map['lat'] ?? null;
+                        $map_lng = $map['lng'] ?? null;
+                        $map_name = $map['name'] ?? null;
+                        $map_street_number = $map['street_number'] ?? null;
+                        $map_street_name = $map['street_name'] ?? null;
+                        $map_street =
+                            $map_street_name .
+                                ($map_street_number
+                                    ? ' ' . $map_street_number
+                                    : '') ??
+                            null;
+                        $map_city = $map['city'] ?? null;
+                        $map_country = $map['country'] ?? null;
+
+                        $place_id = $map['place_id'] ?? null;
+                        $name = $address['name']
+                            ? $address['name']
+                            : $map_name ?? null;
+                        $street = $address['street']
+                            ? $address['street']
+                            : $map_street ?? null;
+                        $zip = $address['zip']
+                            ? $address['zip']
+                            : $map_city ?? null;
+                        $country = $address['country']['native']
+                            ? $address['country']['native']
+                            : $map_country ?? null;
+
+                        if (empty($map) || empty($map_lat) || empty($map_lng)) {
+                            continue;
+                        }
+                        ?>
+
+                        <div class="c-map__marker" data-lat="<?php echo esc_attr(
+                            $map_lat,
+                        ); ?>" data-lng="<?php echo esc_attr($map_lng); ?>">
+                            <div class="c-map__info --bg-transparent">
+                                <?php
+                                if (!empty($name)) {
+                                    echo '<h3 class="c-map__headline o-headline --h3">' .
+                                        $name .
+                                        '</h3>';
+                                }
+                                if (
+                                    !empty($street) ||
+                                    !empty($zip) ||
+                                    !empty($country)
+                                ) {
+                                    echo '<p class="c-map__text">';
+                                    if (!empty($street)) {
+                                        echo $street . '<br>';
+                                    }
+                                    if (!empty($zip)) {
+                                        echo $zip . '<br>';
+                                    }
+                                    if (!empty($country)) {
+                                        echo $country;
+                                    }
+                                    echo '</p>';
+                                }
+                                if (
+                                    !empty($place_id) ||
+                                    $street ||
+                                    $zip ||
+                                    $country
+                                ) {
+                                    $full_address = urlencode(
+                                        $street . ', ' . $zip . ', ' . $country,
+                                    );
+                                    $link = [
+                                        'title' => esc_html__(
+                                            'Zur Routenplanung',
+                                            'oo_theme',
+                                        ),
+                                        'url' =>
+                                            'https://www.google.com/maps/dir/?api=1&destination=' .
+                                            $full_address,
+                                        'target' => '_blank',
+                                    ];
+                                    echo '<p class="c-map__link-wrapper">';
+                                    echo '<a class="c-map__link c-link --underlined --text-color --on-bg-transparent" ' .
+                                        oo_set_link_attr($link) .
+                                        '>' .
+                                        esc_html__(
+                                            'Zur Routenplanung',
+                                            'oo_theme',
+                                        ) .
+                                        '</a>';
+                                    echo '</p>';
+                                }
+                                ?>
+                            </div>
+                        </div>
+                    <?php
+                    } ?>
+                </div>
             </div>
-        <?php  ?>
+        </div>
     </div>
 </section>
