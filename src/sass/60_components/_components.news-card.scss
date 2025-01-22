@@ -3,7 +3,7 @@
 
   color: var(--oo-color-text);
   background-color: var(--oo-color-bg);
-  border: 2px solid var(--oo-color-bg);
+  border: 1px solid var(--oo-color-mix-bg-contrast-50);
   display: flex;
   flex-direction: column;
   border-radius: $border-radius;
@@ -16,6 +16,7 @@
     width: 100%;
     height: auto;
     aspect-ratio: 4 / 3;
+    border-radius: $border-radius;
     & .c-placeholder {
       border-radius: $border-radius;
     }
@@ -23,29 +24,28 @@
 
   &__date {
     position: absolute;
-    border-radius: $border-radius;
-    top: 4px;
-    right: 4px;
+    border-radius: $border-radius-small;
+    top: 0.5rem;
+    left: 0.5rem;
     color: var(--oo-color-contrast-primary);
     background-color: var(--oo-color-primary);
     font-family: $font-family-button;
-    font-weight: $font-weight-button;
     display: flex;
     padding: 0.5rem 0.75rem;
   }
 
   &__picture {
-    border-radius: $border-radius $border-radius 0 0;
   }
 
   &__image {
     width: 100%;
     object-fit: cover;
+    border-radius: $border-radius;
   }
 
   &__content {
     width: 100%;
-    padding: 1.25rem;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

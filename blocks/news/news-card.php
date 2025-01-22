@@ -149,7 +149,7 @@ $excerpt_word_count = str_word_count(strip_tags($excerpt)) ?? null;
 			<?php } ?>
 
 			<?php if (!empty($link)) {
-       echo '<a class="c-news-card__button c-button --on-bg-transparent" href="' .
+       echo '<a class="c-news-card__button c-button --full-width --on-bg-transparent" href="' .
            $link .
            '">';
        echo esc_html__('Mehr erfahren', 'oo_theme');

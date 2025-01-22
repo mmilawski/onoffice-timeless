@@ -19,15 +19,16 @@
   }
 
   &__image {
+    border-radius: $border-radius;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
   }
 
   &__info {
     padding-top: calc($mobile-header-height + $mobile-section-padding-top);
     @include media-breakpoint-up(xl) {
       padding-top: calc($mobile-header-height + $desktop-section-padding-top);
-    }
-    @include media-breakpoint-up(xxl) {
-      padding-top: calc($desktop-header-height + $desktop-section-padding-top);
     }
   }
 
@@ -47,9 +48,8 @@
   &__date {
     color: var(--oo-color-contrast-primary);
     background-color: var(--oo-color-primary);
-    border: 2px solid var(--oo-color-bg);
+    border-radius: $border-radius-small;
     font-family: $font-family-button;
-    font-weight: $font-weight-button;
     padding: 0.5rem 0.75rem;
     width: fit-content;
   }
@@ -71,6 +71,16 @@
     padding-top: $mobile-section-padding-top;
     @include media-breakpoint-up(xl) {
       padding-top: $desktop-section-padding-top;
+    }
+  }
+
+  &__row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1.5rem;
+    @include media-breakpoint-up(lg) {
+      gap: 0;
     }
   }
 }
