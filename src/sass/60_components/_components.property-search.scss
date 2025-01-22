@@ -2,10 +2,7 @@
   &__container {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    @include media-breakpoint-up(xl) {
-      gap: 2rem;
-    }
+    gap: 2rem;
   }
 
   &__content {

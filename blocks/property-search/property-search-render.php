@@ -18,9 +18,7 @@ if (!empty(get_field('property_search_result'))) {
 
 <section <?php oo_block_id(
     $block,
-); ?> class="c-property-search o-section --<?php echo $settings[
-     'bg_color'
- ]; ?> --with-separator">
+); ?> class="c-property-search o-section --<?php echo $bg_color; ?>">
     <div class="c-property-search__container o-container">
         <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
             <div class="c-property-search__content o-row --position-center">
