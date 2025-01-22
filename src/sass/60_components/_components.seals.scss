@@ -9,9 +9,14 @@
   }
 
   &__item {
+    width: calc(50% - 0.5rem);
+
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+
+    padding: 0.5rem;
+    aspect-ratio: 1 / 1;
   }
 
   &__link {
@@ -67,34 +72,7 @@
     }
   }
 
-  &.--is-masonry {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-
-    #{$c-seals}__item {
-      width: calc(50% - (0.5rem / 2));
-      aspect-ratio: 1 / 1;
-      padding: 0.5rem;
-      margin-bottom: 0.5rem;
-      border: 1px solid var(--oo-color-footer-mix-bg-text-10);
-
-      @include media-breakpoint-up(xxxl) {
-        width: calc(33% - ((0.5rem * 2) / 3));
-      }
-    }
-
-    #{$c-seals}__picture {
-      height: auto;
-    }
-  }
-
   &.--is-slider {
-    #{$c-seals}__link {
-      height: 100%;
-      width: 100%;
-    }
-
     #{$c-seals}__item {
       height: 140px;
       max-width: 140px;

@@ -30,18 +30,14 @@ if (empty($seals)) {
 
 if ($is_slider) { ?>
     <div class="c-seals --is-slider">
-        <div class="c-seals__slider c-slider --loop --is-seals-slider --on-bg-<?php echo $location; ?> splide" 
+        <div class="c-seals__slider c-slider --is-seals-slider --on-bg-<?php echo $location; ?> splide" 
             data-splide='{
-            "gap": 0,
-            "perMove": 1,
-            "perView": 3,
-            "pagination":true,
-            "snap":true,
-            "autoWidth": true,
-            "lazyLoad":"nearby",
-            "type":"loop",
-            "focus":"center",
-            "updateOnMove": true
+                "gap": 32,
+                "perMove": 1,
+                "perPage": 3,
+                "pagination": false,
+                "snap":true,
+                "lazyLoad":"nearby"
         }'>
             <div class="c-slider__track splide__track">
                 <div class="c-seals__list c-slider__list splide__list">
@@ -58,34 +54,91 @@ if ($is_slider) { ?>
                     } ?>
                 </div>
             </div>
-            <div class="c-slider__arrows splide__arrows">
-                <button class="c-slider__arrow --prev c-button --only-icon --square splide__arrow splide__arrow--prev">
-                    <span class="u-screen-reader-only">
-                        <?php esc_html_e('Vorheriges', 'oo_theme'); ?>
-                    </span>
-                    <span class="c-button__icon --chevron-left"><?php oo_get_icon(
-                        'chevron-left',
-                    ); ?></span>
-                </button>
-                <button class="c-slider__arrow --next c-button --only-icon --square splide__arrow splide__arrow--next">
-                    <span class="u-screen-reader-only">
-                        <?php esc_html_e('Nächstes', 'oo_theme'); ?>
-                    </span>
-                    <span class="c-button__icon --chevron-right"><?php oo_get_icon(
-                        'chevron-right',
-                    ); ?></span>
-                </button>
+            <div class="c-slider__navigation splide__navigation">
+                        <div class="c-slider__progress splide__progress">
+                            <div class="c-slider__progress-bar splide__progress-bar"></div>
+                        </div>
+                <div class="c-slider__arrows splide__arrows">
+                <button class="c-slider__arrow c-slider__arrow--prev splide__arrow splide__arrow--prev">
+                                <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
+                                    'Vorheriges',
+                                    'oo_theme',
+                                ); ?></span>
+<span class="c-slider__arrow-icon --chevron-left"><?php oo_get_icon(
+    'chevron-left',
+); ?></span>                    </button>
+                                <button class="c-slider__arrow c-slider__arrow--next splide__arrow splide__arrow--next">
+                                <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
+                                    'Nächstes',
+                                    'oo_theme',
+                                ); ?></span>
+<span class="c-slider__arrow-icon --chevron-right"><?php oo_get_icon(
+    'chevron-right',
+); ?></span>                            </button>
+                </div>
             </div>
-            <ul class="c-slider__pagination splide__pagination"></ul>
         </div>
     </div>
 <?php } else { ?>
 
-    <div class="c-seals --is-grid">
-        <?php foreach ($seals as $seal) {
-            echo '<div class="c-seals__item --is-' . $seal['type'] . '">';
-            oo_set_seal_content($seal, 'c-seals', $is_slider);
-            echo '</div>';
-        } ?>
-    </div>
+<div class="c-seals --is-grid">
+    <?php foreach ($seals as $seal) {
+        echo '<div class="c-seals__item --is-' . $seal['type'] . '">';
+
+        if ($seal['type'] === 'image') {
+            $image = $seal['image']['image'] ?? [];
+            $link = $seal['image']['link'] ?? [];
+
+            if (!empty($link)) {
+                echo '<a class="c-seals__link" ' .
+                    oo_set_link_attr($link) .
+                    '>';
+            }
+
+            oo_get_template('components', '', 'component-image', [
+                'image' => $image,
+                'picture_class' => 'c-seals__picture o-picture',
+                'image_class' => 'c-seals__image o-image',
+                'additional_cloudimg_params' => '&func=bound&gravity=center',
+                'dimensions' => [
+                    '575' => [
+                        'w' => $image_width_xs,
+                        'h' => $image_height_xs,
+                    ],
+                    '1600' => [
+                        'w' => $image_width_xxxl,
+                        'h' => $image_height_xxxl,
+                    ],
+                    '1400' => [
+                        'w' => $image_width_xxl,
+                        'h' => $image_height_xxl,
+                    ],
+                    '1200' => [
+                        'w' => $image_width_xl,
+                        'h' => $image_height_xl,
+                    ],
+                    '992' => [
+                        'w' => $image_width_lg,
+                        'h' => $image_height_lg,
+                    ],
+                    '768' => [
+                        'w' => $image_width_md,
+                        'h' => $image_height_md,
+                    ],
+                    '576' => [
+                        'w' => $image_width_sm,
+                        'h' => $image_height_sm,
+                    ],
+                ],
+            ]);
+
+            if (!empty($link)) {
+                echo '</a>';
+            }
+        } else {
+            oo_set_seal_content($seal, 'c-seals', is_slider: $is_slider);
+        }
+        echo '</div>';
+    } ?>
+</div>
 <?php } ?>

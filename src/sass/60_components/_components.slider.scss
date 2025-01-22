@@ -188,6 +188,14 @@
   }
 
   &.--is-seals-slider {
+    #{$c-slider}__arrow {
+      &--next {
+        right: 0;
+      }
+      &--prev {
+        left: 0;
+      }
+    }
   }
 
   &.--is-google-review {
@@ -328,8 +336,15 @@
     &.--is-seals-slider {
       #{$c-slider}__list {
         display: grid;
-        gap: 0.5rem;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        @include media-breakpoint-up(md) {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2rem;
+        }
+        @include media-breakpoint-up(xxl) {
+          grid-template-columns: repeat(3, 1fr);
+        }
       }
     }
 

@@ -28,6 +28,10 @@
     var(--oo-color-shadow),
     0.2
   );
+  #{--oo-color-transparent-shadow-15}: transparent-color(
+    var(--oo-color-shadow),
+    0.15
+  );
   #{--oo-color-transparent-shadow-50}: transparent-color(
     var(--oo-color-shadow),
     0.5
@@ -680,6 +684,12 @@
   // property status
   #{--oo-color-property-status-contrast-bg}: contrast-color(
     var(--oo-color-property-status-bg),
+    var(--oo-color-bg)
+  );
+
+  #{--oo-color-footer-mix-bg-contrast-10}: mix-color-with-contrast(
+    var(--oo-color-footer-bg),
+    0.1,
     var(--oo-color-bg)
   );
 }

@@ -11,6 +11,10 @@
   }
 
   &__image {
+    width: 100%;
+    @include media-breakpoint-up(xl) {
+      width: 80%;
+    }
   }
 
   &.--is-header {

@@ -57,10 +57,9 @@ $company_name = $company['name'] ?? (get_bloginfo('name') ?? null);
                 <div class="c-footer__bottom-column --left o-col-12 o-col-lg-8 o-col-xl-10">
                     <p class="c-footer__bottom-copyright">
                         <span class="c-footer__bottom-text --year">
-                            &copy; <?php echo date('Y'); ?>
-                        </span>
-                        <span class="c-footer__bottom-text --name">
-                            <?php echo $company_name; ?>
+                            &copy; <?php echo date(
+                                'Y',
+                            ); ?> <?php echo $company_name; ?>
                         </span>
                     </p>
                     <nav class="c-footer-nav">

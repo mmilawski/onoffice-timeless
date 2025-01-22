@@ -96,83 +96,84 @@ if ($is_address || $is_name) {
 
 // Contact Info
 if ($is_contact_numbers) {
-    echo '<div class="c-module-contact__buttons c-buttons --is-column">';
-
+    echo '<div class="c-module-contact__data --is-contact">';
     if (!empty($phone)) {
         $phone_number =
             ($phone_country_code
                 ? esc_html($phone_country_code) . '&nbsp;'
-                : '') . esc_html($phone); ?>
+                : '') . esc_html($phone);
+        echo '<dl class="c-module-contact__list">';
+        echo '<dt class="c-module-contact__label">' .
+            __('Tel.:', 'oo_theme') .
+            '</dt>';
+        echo '<dd class="c-module-contact__value"><a class="c-link --text-color --on-bg-' .
+            $location .
+            '" href="tel:' .
+            oo_clean_link_number($phone_number) .
+            '">' .
+            $phone_number .
+            '
+            </a></dd>';
+        echo '</dl>';
+    }
 
-				<a class="c-module-contact__button c-button --ghost --has-icon --on-bg-<?php echo $location; ?>" href="tel:<?php echo oo_clean_link_number(
-    $phone_number,
-); ?>">
-					<span class="c-button__text">
-						<?php echo $phone_number; ?>
-					</span>
-					<span class="c-button__icon --phone">
-						<?php oo_get_icon('phone'); ?>
-					</span>					
-		    </a> 
-<?php
+    if (!empty($fax)) {
+        $fax_number =
+            ($fax_country_code ? esc_html($fax_country_code) . '&nbsp;' : '') .
+            esc_html($fax);
+        echo '<dl class="c-module-contact__list">';
+        echo '<dt class="c-module-contact__label">' .
+            __('Fax:', 'oo_theme') .
+            '</dt>';
+        echo '<dd class="c-module-contact__value"><a class="c-link --text-color --on-bg-' .
+            $location .
+            '" href="tel:' .
+            oo_clean_link_number($fax_number) .
+            '">' .
+            $fax_number .
+            '
+            </a></dd>';
+        echo '</dl>';
     }
 
     if (!empty($mobile)) {
         $mobile_number =
             ($mobile_country_code
                 ? esc_html($mobile_country_code) . '&nbsp;'
-                : '') . esc_html($mobile); ?>
-
-				<a class="c-module-contact__button c-button --ghost --has-icon --on-bg-<?php echo $location; ?>" href="tel:<?php echo oo_clean_link_number(
-    $mobile_number,
-); ?>">
-					<span class="c-button__text">
-						<?php echo $mobile_number; ?>
-					</span>
-					<span class="c-button__icon --mobile">
-						<?php oo_get_icon('mobile'); ?>
-					</span>					
-				</a> 
-
-				<?php
-    }
-
-    if (!empty($fax)) {
-        $fax_number =
-            ($fax_country_code ? esc_html($fax_country_code) . '&nbsp;' : '') .
-            esc_html($fax); ?>
-
-			<a class="c-module-contact__button c-button --ghost --has-icon --on-bg-<?php echo $location; ?>" href="tel:<?php echo oo_clean_link_number(
-    $fax_number,
-); ?>">
-				<span class="c-button__text">
-					<?php echo $fax_number; ?>
-				</span>
-				<span class="c-button__icon --fax">
-					<?php oo_get_icon('fax'); ?>
-				</span>					
-			</a> 
-
-		<?php
+                : '') . esc_html($mobile);
+        echo '<dl class="c-module-contact__list">';
+        echo '<dt class="c-module-contact__label">' .
+            __('Mobile:', 'oo_theme') .
+            '</dt>';
+        echo '<dd class="c-module-contact__value"><a class="c-link --text-color --on-bg-' .
+            $location .
+            '" href="tel:' .
+            oo_clean_link_number($mobile_number) .
+            '">' .
+            $mobile_number .
+            '
+            </a></dd>';
+        echo '</dl>';
     }
 
     if (!empty($email)) {
-
         $email_utf8 = oo_clean_acf_email_utf8($email);
         $email_ascii = oo_clean_acf_email_ascii($email);
         $email_antispam = oo_antispambot(esc_html($email_utf8));
         $mailto_link = antispambot(esc_html($email_ascii));
-        ?>
 
-				<a class="c-module-contact__button c-button --ghost --has-icon --on-bg-<?php echo $location; ?>" href="mailto:<?php echo $mailto_link; ?>">
-					<span class="c-button__text">
-						<?php echo $email_antispam; ?>
-					</span>
-					<span class="c-button__icon --email">
-						<?php oo_get_icon('email'); ?>
-					</span>					
-				</a> 
-				<?php
+        echo '<dl class="c-module-contact__list">';
+        echo '<dt class="c-module-contact__label">' .
+            __('E-Mail:', 'oo_theme') .
+            '</dt>';
+        echo '<dd class="c-module-contact__value"><a class="c-link --text-color --on-bg-' .
+            $location .
+            '" href="mailto:' .
+            $mailto_link .
+            '">' .
+            $email_antispam .
+            '</a></dd>';
+        echo '</dl>';
     }
     echo '</div>';
 }
@@ -190,5 +191,4 @@ if ($is_opening_hours && is_array($opening_hours)) {
     }
     echo '</dl>';
 }
-
 echo '</div>';

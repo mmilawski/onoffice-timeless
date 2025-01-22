@@ -30,12 +30,25 @@ if (!empty($text)):
 endif;
 
 if (!empty($buttons[0]['link'])):
-    oo_get_template('components', '', 'component-buttons', [
-        'buttons' => $buttons,
-        'icon_first' => 'arrow-right',
-        'icon_second' => 'arrow-right',
-        'additional_button_class' =>
-            'c-module-text__button --on-bg-' . $location,
-        'additional_container_class' => 'c-module-text__buttons --is-column',
-    ]);
+    echo '<ul class="c-module-links__list">';
+    foreach ($buttons as $button) {
+        $link_item = $button['link'] ?? [];
+
+        if (!empty($button['link'])):
+            echo '<li class="c-module-links__item">';
+            echo '<a class="c-module-links__link c-link --underlined --on-bg-' .
+                $location .
+                '" ' .
+                oo_set_link_attr($link_item) .
+                '>';
+            if (!empty($link_item['title'])) {
+                echo $link_item['title'];
+            } else {
+                _e('Mehr erfahren', 'oo_theme');
+            }
+            echo '</a>';
+            echo '</li>';
+        endif;
+    }
+    echo '</ul>';
 endif;
