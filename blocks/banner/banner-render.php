@@ -8,13 +8,14 @@ $first_slide = true;
 $settings = get_field('settings') ?? [];
 $bg_color = $settings['bg_color'] ?? 'bg-transparent';
 
+// Slider settings
 $autoslide = filter_var(
     get_field('autoslide') ?? false,
     FILTER_VALIDATE_BOOLEAN,
 );
-$slide_interval = intval(get_field('slide_interval') ?? 5);
+$slide_interval = intval(get_field('slide_interval') ?? 5) * 1000;
 $pause_on_hover = filter_var(
-    get_field('pause_on_hover') ?? false,
+    get_field('pause_on_hover') ?? true,
     FILTER_VALIDATE_BOOLEAN,
 );
 $slide_speed = intval(get_field('slide_speed') ?? 1000);
@@ -35,7 +36,7 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
     "classes":{"page":"c-slider__page splide__pagination__page"},
     "autoplay": <?php echo $autoslide ? 'true' : 'false'; ?>,
     "pauseOnHover": <?php echo $pause_on_hover ? 'true' : 'false'; ?>,
-    "interval": <?php echo json_encode($slide_interval) * 1000; ?>,
+    "interval": <?php echo json_encode($slide_interval); ?>,
     "speed": <?php echo json_encode($slide_speed); ?>
     }'>
         <div class="c-slider__track splide__track">
