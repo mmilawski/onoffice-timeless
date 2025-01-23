@@ -84,7 +84,8 @@
     }
 
     &.--is-pricehubble {
-      iframe#fisher-widget {
+      iframe#fisher-widget,
+      iframe#fisher-widget-v2 {
         width: 100%;
         border: none;
       }

@@ -330,7 +330,7 @@ if (isset($type)) {
                         <div data-key="<?php echo isset($iwa_data_key)
                             ? esc_attr($iwa_data_key)
                             : ''; ?>" id="iwa-widget">&nbsp;</div>
-                        <script type="text/javascript" src="https://www.immobilienwertanalyse.de/iwalead/plugin.js" data-usercentrics="Immobilienwertanalyse"></script>
+                        <script type="text/plain" src="https://www.immobilienwertanalyse.de/iwalead/plugin.js" data-usercentrics="Immobilienwertanalyse"></script>
                     </div>
                 <?php endif; ?>
 
@@ -524,11 +524,9 @@ if (isset($type)) {
                             $iframe_name,
                         ); ?>">
                     </script>
-                    <script 
-                        type="text/plain"
-                        data-usercentrics="<?php echo esc_attr(
-                            $iframe_name,
-                        ); ?>">
+                    <script type="text/plain" data-usercentrics="<?php echo esc_attr(
+                        $iframe_name,
+                    ); ?>">
 
                         var apiKey = '<?php echo esc_attr(
                             $pricehubble_api_key,
@@ -584,11 +582,9 @@ if (isset($type)) {
                                 $iframe_name,
                             ); ?>">
                         </script>
-                        <script
-                            type="text/plain"
-                            data-usercentrics="<?php echo esc_attr(
-                                $iframe_name,
-                            ); ?>">
+                        <script type="text/plain" data-usercentrics="<?php echo esc_attr(
+                            $iframe_name,
+                        ); ?>">
 
                             var apiKey = '<?php echo esc_attr(
                                 $pricehubble_api_key,
