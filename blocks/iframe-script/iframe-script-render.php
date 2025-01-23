@@ -118,7 +118,7 @@ $pricehubble_gatrackingid = get_field('pricehubble_gatrackingid')
     ? esc_attr(get_field('pricehubble_gatrackingid'))
     : null;
 
-$eTracker_domain = get_field('etracker_domain')
+$etracker_domain = get_field('etracker_domain')
     ? esc_attr(get_field('etracker_domain'))
     : null;
 
@@ -145,6 +145,7 @@ $iframe_class = match ($type) {
     'prohyp' => '--is-prohyp',
     'baufi_lead' => '--is-baufi-lead',
     'immowelt' => '--is-immowelt',
+    'areabutler' => '--is-areabutler',
     'pricehubble' => '--is-pricehubble',
     'eTracker' => '--is-eTracker',
     default => '',
@@ -170,6 +171,7 @@ $iframe_name = match ($type) {
     'prohyp' => 'prohyp',
     'baufi_lead' => 'baufi_lead',
     'immowelt' => 'immowelt',
+    'areabutler' => 'areabutler',
     'pricehubble' => 'PriceHubble',
     default => '',
 };
@@ -190,7 +192,6 @@ if (isset($type)) {
 
     <div class="c-iframe-script__container o-container">
         <div class="c-iframe-script__row o-row">
-
             <?php if (!empty($headline['text'])) { ?>
                 <?php oo_get_template('components', '', 'component-headline', [
                     'headline' => $headline,
@@ -221,6 +222,40 @@ if (isset($type)) {
                 ];
 
                 if (in_array($type, $urlTypes) && isset($url)): ?>
+
+                    <?php
+                    $iframe_field =
+                        get_field('third_parties', 'option')[
+                            'iframe_parameter'
+                        ] ?? null;
+                    if (
+                        !empty($iframe_field) &&
+                        !empty($_GET) &&
+                        filter_var(
+                            $iframe_field['pass_parameter'],
+                            FILTER_VALIDATE_BOOLEAN,
+                        ) &&
+                        is_array($iframe_field['parameter_list']) &&
+                        is_array($_GET)
+                    ) {
+                        $param_filter = array_column(
+                            $iframe_field['parameter_list'],
+                            'parameter',
+                        );
+
+                        $parameter = $_GET;
+
+                        $query_string = '?';
+                        foreach ($parameter as $key => $value) {
+                            if (in_array($key, $param_filter)) {
+                                $query_string .=
+                                    $key . '=' . urlencode($value) . '&';
+                            }
+                        }
+                        $url .= substr($query_string, 0, -1);
+                    }
+                    ?>
+
                     <iframe
                         class="c-iframe-script__iframe <?php echo esc_attr(
                             $iframe_class,
@@ -612,32 +647,53 @@ if (isset($type)) {
                             } 
                         </script>
                 <?php endif; ?>
-
+                
                 <?php if (
                     isset($type) &&
                     $type === 'eTracker' &&
-                    isset($eTracker_domain)
+                    isset($etracker_domain)
                 ): ?>
-
-                    <div class="c-iframe-script__iframe <?php echo $iframe_class; ?>">
-                        <b>etracker</b><br>
-                        <br>
-                        Der Anbieter dieser Website nutzt Dienste der etracker GmbH aus Hamburg, Deutschland (<a href="https://www.etracker.com">www.etracker.com</a>) zur Analyse von Nutzungsdaten. Wir verwenden standardmäßig keine Cookies für die Web-Analyse. Soweit wir Analyse- und Optimierungs-Cookies einsetzen, holen wir Ihre explizite Einwilligung gesondert im Vorfeld ein. Ist das der Fall und Sie stimmen zu, werden Cookies eingesetzt, die eine statistische Reichweiten-Analyse dieser Website, eine Erfolgsmessung unserer Online-Marketing-Maßnahmen sowie Testverfahren ermöglichen, um z.B. unterschiedliche Versionen unseres Online-Angebotes oder seiner Bestandteile zu testen und zu optimieren. Cookies sind kleine Textdateien, die vom Internet Browser auf dem Endgerät des Nutzers gespeichert werden. etracker Cookies enthalten keine Informationen, die eine Identifikation eines Nutzers ermöglichen.<br>
-                        <br>
-                        Die mit etracker erzeugten Daten werden im Auftrag des Anbieters dieser Website von etracker ausschließlich in Deutschland verarbeitet und gespeichert und unterliegen damit den strengen deutschen und europäischen Datenschutzgesetzen und -standards. etracker wurde diesbezüglich unabhängig geprüft, zertifiziert und mit dem Datenschutz-Gütesiegel <a href="https://etracker.com/eprivacy">ePrivacyseal</a> ausgezeichnet.<br>
-                        <br>
-                        Die Datenverarbeitung erfolgt auf Basis der gesetzlichen Bestimmungen des Art. 6 Abs. 1 lit. f (berechtigtes Interesse) der Datenschutzgrundverordnung (DSGVO). Unser Anliegen im Sinne der DSGVO (berechtigtes Interesse) ist die Optimierung unseres Online-Angebotes und unseres Webauftritts. Da uns die Privatsphäre unserer Besucher wichtig ist, werden die Daten, die möglicherweise einen Bezug zu einer einzelnen Person zulassen, wie die IP-Adresse, Anmelde- oder Gerätekennungen, frühestmöglich anonymisiert oder pseudonymisiert. Eine andere Verwendung, Zusammenführung mit anderen Daten oder eine Weitergabe an Dritte erfolgt nicht.<br>
-                        <br>
-                        Sie können der vorbeschriebenen Datenverarbeitung jederzeit durch Klick auf den Schieberegler widersprechen. Der Widerspruch hat keine nachteiligen Folgen. Wird kein Schieberegler angezeigt, ist die Datenerfassung bereits durch andere Blockier-Maßnahmen unterbunden.<br>
-                        <br>
+                    <div class="c-iframe-script__iframe o-col-12 o-col-xl-8 <?php echo esc_attr(
+                        $iframe_class,
+                    ); ?> o-text --is-wysiwyg">
+                        <span class="o-headline --h5 --span">
+                            <?php _e('etracker', 'oo_theme'); ?>
+                        </span>
+                        <p>
+                            <?php _e(
+                                'Der Anbieter dieser Website nutzt Dienste der etracker GmbH aus Hamburg, Deutschland (<a href="https://www.etracker.com">www.etracker.com</a>) zur Analyse von Nutzungsdaten. Wir verwenden standardmäßig keine Cookies für die Web-Analyse. Soweit wir Analyse- und Optimierungs-Cookies einsetzen, holen wir Ihre explizite Einwilligung gesondert im Vorfeld ein. Ist das der Fall und Sie stimmen zu, werden Cookies eingesetzt, die eine statistische Reichweiten-Analyse dieser Website, eine Erfolgsmessung unserer Online-Marketing-Maßnahmen sowie Testverfahren ermöglichen, um z.B. unterschiedliche Versionen unseres Online-Angebotes oder seiner Bestandteile zu testen und zu optimieren. Cookies sind kleine Textdateien, die vom Internet Browser auf dem Endgerät des Nutzers gespeichert werden. etracker Cookies enthalten keine Informationen, die eine Identifikation eines Nutzers ermöglichen.',
+                                'oo_theme',
+                            ); ?>
+                        </p>
+                        <p>
+                            <?php _e(
+                                'Die mit etracker erzeugten Daten werden im Auftrag des Anbieters dieser Website von etracker ausschließlich in Deutschland verarbeitet und gespeichert und unterliegen damit den strengen deutschen und europäischen Datenschutzgesetzen und -standards. etracker wurde diesbezüglich unabhängig geprüft, zertifiziert und mit dem Datenschutz-Gütesiegel <a href="https://etracker.com/eprivacy">ePrivacyseal</a> ausgezeichnet.',
+                                'oo_theme',
+                            ); ?>
+                        </p>
+                        <p>
+                            <?php _e(
+                                'Die Datenverarbeitung erfolgt auf Basis der gesetzlichen Bestimmungen des Art. 6 Abs. 1 lit. f (berechtigtes Interesse) der Datenschutzgrundverordnung (DSGVO). Unser Anliegen im Sinne der DSGVO (berechtigtes Interesse) ist die Optimierung unseres Online-Angebotes und unseres Webauftritts. Da uns die Privatsphäre unserer Besucher wichtig ist, werden die Daten, die möglicherweise einen Bezug zu einer einzelnen Person zulassen, wie die IP-Adresse, Anmelde- oder Gerätekennungen, frühestmöglich anonymisiert oder pseudonymisiert. Eine andere Verwendung, Zusammenführung mit anderen Daten oder eine Weitergabe an Dritte erfolgt nicht.',
+                                'oo_theme',
+                            ); ?>
+                        </p>
+                        <p>
+                            <?php _e(
+                                'Sie können der vorbeschriebenen Datenverarbeitung jederzeit durch Klick auf den Schieberegler widersprechen. Der Widerspruch hat keine nachteiligen Folgen. Wird kein Schieberegler angezeigt, ist die Datenerfassung bereits durch andere Blockier-Maßnahmen unterbunden.',
+                                'oo_theme',
+                            ); ?>
+                        </p>
                         <a href="#" data-tld="<?php echo esc_attr(
-                            $eTracker_domain,
-                        ); ?>" id="et-opt-out"></a> <br>
-                        <br>
-                        Weitere Informationen zum Datenschutz bei etracker finden Sie <a href="https://www.etracker.com/datenschutz/">hier</a>.
+                            $etracker_domain,
+                        ); ?>" id="et-opt-out"></a>
+                        <p>
+                            <?php _e(
+                                'Weitere Informationen zum Datenschutz bei etracker finden Sie <a href="https://www.etracker.com/datenschutz/">hier</a>.',
+                                'oo_theme',
+                            ); ?>
+                        </p>
                     </div>
                 <?php endif; ?>
-
             </div>
         </div>
     </div>
