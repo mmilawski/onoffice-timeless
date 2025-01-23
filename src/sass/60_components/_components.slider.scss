@@ -142,6 +142,13 @@
     &.--next {
       right: 0;
     }
+
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+      transform: none;
+      fill: transparent;
+    }
   }
 
   &__arrow-text {
@@ -185,6 +192,9 @@
   }
 
   &.--is-reviews-slider {
+    #{$c-slider}__arrow {
+      top: 0;
+    }
   }
 
   &.--is-seals-slider {
@@ -321,6 +331,18 @@
     }
 
     &.--is-reviews-slider {
+      #{$c-slider}__list {
+        display: grid;
+        gap: 2rem;
+
+        @include media-breakpoint-up(md) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include media-breakpoint-up(xl) {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
     }
 
     &.--is-news-slider {

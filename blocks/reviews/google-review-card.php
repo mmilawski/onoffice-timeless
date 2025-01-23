@@ -38,9 +38,49 @@ if (
       $date_time = new DateTime($publish_time);
       $date = $date_time->format('d.m.Y');
       ?>
-      <article class="c-google-review-card <?php if ($is_slider) {
+      <article class="c-google-review-card --bg-transparent <?php if (
+          $is_slider
+      ) {
           echo '--on-slider c-slider__slide splide__slide';
       } ?> <?php echo '--is-' . $type . '-reviews'; ?>">
+          <?php if (!empty($author) && !empty($date)) { ?>
+            <div class="c-google-review-card__author">
+                <div class="c-google-review-card__date">
+                  <?php echo htmlspecialchars($date); ?>
+                </div>
+                <div class="c-google-review-card__name o-headline --h3">
+                  <p><?php echo htmlspecialchars($author); ?></p>
+                </div>
+            </div>
+          <?php } ?>
+          <div class="c-google-review-card__contents <?php echo $is_long_text
+              ? '--shorten'
+              : ''; ?>">
+          <?php if (!empty($text)) { ?>
+            <div class="c-google-review-card__text o-text">
+                <p>
+                    <?php echo htmlspecialchars($text); ?>
+                </p>
+            </div>
+          <?php } ?>
+          </div>
+          
+          <?php if ($is_long_text && $is_slider) { ?>
+            <a href="#" class="c-google-review-card__more c-link --read-more" data-open-text="<?php esc_html_e(
+                'Mehr anzeigen',
+                'oo_theme',
+            ); ?>" data-close-text="<?php esc_html_e(
+    'Weniger anzeigen',
+    'oo_theme',
+); ?>"
+            >
+              <span class="u-screen-reader-only"><?php esc_html_e(
+                  'Mehr anzeigen',
+                  'oo_theme',
+              ); ?></span>
+            </a>
+        <?php } ?>
+
           <?php if ($rating) { ?>
               <div class="c-google-review-card__stars c-stars">
                   <?php
@@ -73,53 +113,7 @@ if (
                   }
                   ?>
               </div>
-          <?php } ?>
-
-        <?php if ($is_slider): ?>
-          <div class="c-google-review-card__contents <?php echo $is_long_text
-              ? '--shorten'
-              : ''; ?>">
-        <?php endif; ?>
-
-          <?php if (!empty($text)) { ?>
-            <div class="c-google-review-card__text o-text">
-                <p>
-                    <?php echo htmlspecialchars($text); ?>
-                </p>
-            </div>
-          <?php } ?>
-        <?php if ($is_slider): ?>
-          </div>
-        <?php endif; ?>
-
-        <?php if ($is_long_text && $is_slider) { ?>
-            <div class="c-google-review-card__more c-read-more">
-                <button class="c-read-more__text --more"><?php echo esc_html(
-                    'Mehr anzeigen',
-                    'oo_theme',
-                ); ?></button> 
-                <button class="c-read-more__text --less"><?php echo esc_html(
-                    'Weniger anzeigen',
-                    'oo_theme',
-                ); ?></button>
-            </div>
-        <?php } ?>
-        <?php if (!empty($author) && !empty($date)) { ?>
-            <div class="c-google-review-card__author">
-              <?php if (!empty($author)) { ?>
-                <div class="c-google-review-card__name o-headline --h4">
-                  <p><?php echo htmlspecialchars($author); ?></p>
-                </div>
-              <?php } ?>
-
-              <?php if (!empty($date)) { ?>
-                <div class="c-google-review-card__date o-text">
-                  <p><?php echo htmlspecialchars($date); ?></p>
-                </div>
-              <?php } ?>
-            </div>
-          <?php } ?>
-
+          <?php } ?> 
       </article>
   <?php
   }}

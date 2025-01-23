@@ -3,17 +3,23 @@
 
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 2rem;
+  color: var(--oo-color-text);
+  background-color: var(--oo-color-bg);
+  border: 1px solid var(--oo-color-mix-bg-text-50);
+  border-radius: $border-radius;
+  padding: 1rem;
+  overflow: hidden;
 
   &__contents {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    gap: 1rem;
+    gap: 2rem;
 
     &.--shorten {
       overflow: hidden;
-      max-height: calc($global-line-height * 15);
+      max-height: calc($small-line-height * 15);
       transition: max-height 0.25s ease-in-out;
 
       @include media-breakpoint-up(xl) {
@@ -27,16 +33,26 @@
   }
 
   &__more {
-    margin: 0.5rem auto;
+    text-decoration: underline;
   }
 
   &__date {
+    display: inline-block;
+    padding: 0.5rem 0.75rem;
+    border-radius: $border-radius-small;
+    background-color: var(--oo-color-primary);
+    color: var(--oo-color-contrast-primary);
+    font-family: var(--oo-font-button, var(--oo-font-text));
+    font-weight: var(--oo-font-button-weight, var(--oo-font-text-weight));
+  }
+
+  &__author {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
   }
 
   &__stars {
-  }
-
-  &.--on-slider {
-    margin-bottom: 0;
   }
 }

@@ -5,24 +5,23 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    @include media-breakpoint-up(xl) {
-      gap: 2rem;
-    }
+    gap: 2rem;
   }
 
   &__content {
     display: flex;
     flex-direction: row;
-    gap: 1.5rem;
+    justify-content: center;
+    gap: 2rem;
+    padding-block: 0 0.5rem;
+
+    @include media-breakpoint-up(xl) {
+      padding-block: 0 3rem;
+    }
 
     &.--is-google-reviews {
       justify-content: center;
       text-align: left;
-    }
-
-    @include media-breakpoint-up(xl) {
-      gap: 2rem;
     }
   }
 
@@ -34,9 +33,32 @@
 
   &__reviews {
     display: grid;
-    gap: 2rem;
-    @include media-breakpoint-up(lg) {
+    grid-gap: 2rem;
+    grid-template-rows: 1fr;
+
+    @include media-breakpoint-up(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include media-breakpoint-up(xl) {
       grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__col {
+    .--is-google-reviews & {
+      &.--is-grid {
+        display: grid;
+        gap: 2rem;
+
+        @include media-breakpoint-up(md) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include media-breakpoint-up(xl) {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
     }
   }
 
@@ -44,7 +66,6 @@
   }
 
   &__buttons {
-    gap: 2rem;
     justify-content: center;
   }
   &__col {

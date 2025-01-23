@@ -19,20 +19,24 @@ $settings = get_field('settings') ?? [];
 $bg_color = $settings['bg_color'] ?? 'bg-transparent';
 $slider = get_field('slider') ?? [];
 $is_slider = filter_var($slider['slider'] ?? null, FILTER_VALIDATE_BOOLEAN);
+$is_image = empty($image) ? ' --has-no-image' : '';
 
 // Image height
-$image_width_xs = '539';
-$image_width_sm = '508';
-$image_width_md = '690';
-$image_width_lg = '444';
-$image_width_xl = '540';
-$image_width_xxl = '636';
-$image_width_xxxl = '702';
+$image_width_xs = '505';
+$image_width_sm = '510';
+$image_width_md = '329';
+$image_width_lg = '446';
+$image_width_xl = '350';
+$image_width_xxl = '414';
+$image_width_xxxl = '458';
 ?>
 
-<article class="c-review-card --bg-transparent <?php if ($is_slider) {
+<article class="c-review-card --bg-transparent <?php
+if ($is_slider) {
     echo '--on-slider c-slider__slide splide__slide';
-} ?>">
+}
+echo $is_image;
+?>">
     <div class="c-review-card__wrapper <?php echo $show_images !== 'images'
         ? '--hide-images'
         : ''; ?>">

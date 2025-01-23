@@ -143,9 +143,8 @@ jQuery(document).ready(function() {
       });
     });
   }
-
   // Read more
-  const buttonMore = document.querySelectorAll('.c-read-more');
+  const buttonMore = document.querySelectorAll('.--read-more');
 
   if( buttonMore.length > 0 ) {
     buttonMore.forEach(button => {
@@ -153,7 +152,9 @@ jQuery(document).ready(function() {
       const moreContainer = button.previousElementSibling;
       const parentContainer = button.parentNode;
 
-      button.addEventListener('click', () => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+
         if (!moreContainer.classList.contains(openClass)) {
           moreContainer.classList.add(openClass);
           button.classList.add(openClass);
