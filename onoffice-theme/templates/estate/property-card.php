@@ -56,6 +56,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
     $is_location_fields = false;
     $is_price_fields = false;
     $is_fields = false;
+
     foreach ($current_property as $field => $value) {
         if (
             (is_numeric($value) && 0 == $value) ||
@@ -96,26 +97,28 @@ while ($current_property = $pEstatesClone->estateIterator()):
     $image_width_xxxl = '598';
     ?>
 
-    <div class="c-property-card --bg-transparent <?php if ($bg_color) {
-        echo '--on-' . $bg_color;
-    } ?> <?php if ($is_slider) {
+<div class="c-property-card --bg-transparent <?php if ($bg_color) {
+    echo '--on-' . $bg_color;
+} ?> <?php if ($is_slider) {
      echo '--on-slider c-slider__slide splide__slide';
  } ?>">
-        <div class="c-property-card__inner">
-            <?php if (!$is_reference || !$is_restricted_view) { ?>
-                <a href="<?php echo esc_url(
-                    $property_url,
-                ); ?>" class="c-property-card__link">
-            <?php } ?>
 
-                <?php
-                $property_pictures = $pEstatesClone->getEstatePictures();
-                $pictures_count = is_array($property_pictures)
-                    ? count($property_pictures)
-                    : 0;
-                if ($pictures_count > 0) {
-                    foreach ($property_pictures as $id) {
-                        if ($first_picture === true) {
+ <?php
+ $property_pictures = $pEstatesClone->getEstatePictures();
+ $pictures_count = is_array($property_pictures) ? count($property_pictures) : 0;
+ ?>
+
+    
+        <div class="c-property-card__inner --is-properties-images-slider --on-slider <?php if (
+            $pictures_count > 0
+        ) {
+            echo 'c-slider splide';
+        } ?>" data-splide='{"perPage":1,"perMove":1,"pagination":false,"arrows":true, "drag":false,"snap":true,"lazyLoad":"nearby", "type":"loop"}'>
+                <?php if ($pictures_count > 0) { ?>   
+                <div class="c-slider__track splide__track">
+                    <div class="c-slider__list splide__list">
+
+                        <?php foreach ($property_pictures as $id) {
                             $picture_values = $pEstatesClone->getEstatePictureValues(
                                 $id,
                             );
@@ -141,7 +144,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
                                 [
                                     'image' => $image,
                                     'picture_class' =>
-                                        'c-property-card__picture o-picture',
+                                        'c-property-card__picture o-picture c-slider__slide splide__slide',
                                     'image_class' =>
                                         'c-property-card__image o-image',
                                     'dimensions' => [
@@ -191,23 +194,41 @@ while ($current_property = $pEstatesClone->estateIterator()):
                                 ],
                             );
                         }
-                        $first_picture = false;
-                    }
-                } else {
-                     ?>
-                    <div class="c-property-card__picture"></div>
-                <?php
-                }
-                ?>
-            
-                <?php if (!$is_reference && !$is_restricted_view) { ?>
-                </a>
-            <?php } ?>
-            
-            <?php if (
-                $property_status ||
-                (Favorites::isFavorizationEnabled() && !$is_reference)
-            ) { ?>
+                    // }
+                    ?>
+                    </div>
+                </div>
+                <?php } else { ?>
+                        <div class="c-property-card__picture"></div>
+                    <?php } ?>
+              <?php if ($pictures_count > 0) { ?>   
+                    <div class="c-slider__navigation splide__navigation --is-properties-images-slider">
+                        <div class="c-slider__arrows splide__arrows">
+                            <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
+                                <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
+                                    'Vorheriges',
+                                    'oo_theme',
+                                ); ?></span>
+                                <span class="c-slider__arrow-icon --chevron-left"><?php oo_get_icon(
+                                    'chevron-left',
+                                ); ?></span>
+                            </button>
+                            <button class="c-slider__arrow --next splide__arrow splide__arrow--next">
+                                <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
+                                    'Nächstes',
+                                    'oo_theme',
+                                ); ?></span>
+                                <span class="c-slider__arrow-icon --chevron-right"><?php oo_get_icon(
+                                    'chevron-right',
+                                ); ?></span>
+                            </button>
+                        </div>
+                    </div>
+                <?php } ?>      
+                    <?php if (
+                        $property_status ||
+                        (Favorites::isFavorizationEnabled() && !$is_reference)
+                    ) { ?>
                 <div class="c-property-card__flags c-flags">
                     <?php if ($property_status) { ?>
                         <span class="c-property-card__status c-flag">
@@ -230,6 +251,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
                                             'oo_theme',
                                         ),
                                     );
+                                    $favorite_icon = 'bookmark';
                                 } else {
                                     esc_html_e(
                                         __(
@@ -237,44 +259,19 @@ while ($current_property = $pEstatesClone->estateIterator()):
                                             'oo_theme',
                                         ),
                                     );
+                                    $favorite_icon = 'star';
                                 }
                                 ?>
                             </span>
                             <span class="c-icon-button__icon --favorite"><?php oo_get_icon(
-                                'star',
+                                $favorite_icon,
                             ); ?></span>
                         </span>
                     <?php } ?>
                 </div>
-            <?php } ?>
-        </div>
-
-            <div class="c-property-card__content">
-                <?php if ($is_location_fields) { ?>
-                    <p class="c-property-card__location">
-                        <span class="c-property-card__location-icon"><?php oo_get_icon(
-                            'location',
-                        ); ?></span>
-                        <span class="c-property-card__location-text">
-                            <?php if ($current_property['plz']) {
-                                echo $current_property['plz'];
-                            } ?> <?php
- if ($current_property['ort']) {
-     echo $current_property['ort'];
- }
- if (
-     ($current_property['plz'] || $current_property['ort']) &&
-     $current_property['land']
- ) {
-     echo ', ';
- }
- if ($current_property['land']) {
-     echo $current_property['land'];
- }
- ?>
-                    </span>
-                </p>
-            <?php } ?>
+            <?php } ?>  
+        </div>  
+    <div class="c-property-card__content">
             <?php if ($current_property['objekttitel']) { ?>
                 <h3 class="c-property-card__title">
                     <?php echo $current_property['objekttitel']; ?>
@@ -296,26 +293,59 @@ while ($current_property = $pEstatesClone->estateIterator()):
                             continue;
                         } ?>
                         <span class="c-property-features c-flag">
-                          <?php if (is_array($value)) {
-                              esc_html_e(implode(', ', $value));
-                          } else {
-                              echo esc_html($value);
-                          } ?>
                           <?php
                           $dont_echo_label = [
                               'objektart',
                               'objekttyp',
                               'vermarktungsart',
-                              'immoNr',
                           ];
                           if (!in_array($field, $dont_echo_label)) {
-                              esc_html_e($pEstates->getFieldLabel($field));
+                              esc_html_e(
+                                  $pEstates->getFieldLabel($field) . ': ',
+                              );
+                          }
+
+                          if (is_array($value)) {
+                              esc_html_e(implode(', ', $value));
+                          } else {
+                              echo esc_html($value);
                           }
                           ?>
+                          <?php  ?>
+
+
+
 
                         </span>
                     <?php
                     } ?>
+
+                    
+
+
+
+                    <span class="c-property-features c-flag <?php if (
+                        !$current_property['plz'] &&
+                        !$current_property['ort'] &&
+                        !$current_property['land']
+                    ) {
+                        echo '--empty';
+                    } ?>"><?php if ($current_property['plz']) {
+    echo $current_property['plz'];
+} ?> <?php
+ if ($current_property['ort'] && $current_property['ort'] !== '') {
+     echo $current_property['ort'];
+ }
+ if (
+     ($current_property['plz'] || $current_property['ort']) &&
+     $current_property['land']
+ ) {
+     echo ', ';
+ }
+ if ($current_property['land']) {
+     echo $current_property['land'];
+ }
+ ?></span>
                 </div>
             <?php } ?>
             <?php if (!empty($current_property['objektbeschreibung'])) { ?>
@@ -332,8 +362,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
                     </p>
                 </div>
             <?php } ?>
-            <div class="c-property-card__footer">
-                <?php if ($is_price_fields) { ?>
+            <?php if ($is_price_fields) { ?>
                     <?php foreach ($price_fields as $price_field) {
 
                         $price_value = $current_property[$price_field];
@@ -353,9 +382,8 @@ while ($current_property = $pEstatesClone->estateIterator()):
                               esc_html_e(
                                   $pEstates->getFieldLabel($price_field),
                               );
-                              if (!$is_slider) {
-                                  echo ':';
-                              }
+
+                              echo ':';
                               ?>
                               <?php if (is_array($price_value)) {
                                   esc_html_e(implode(', ', $price_value));
@@ -367,13 +395,16 @@ while ($current_property = $pEstatesClone->estateIterator()):
                     <?php
                     } ?>
                 <?php } ?>
-
-                <?php if (!$is_reference && !$is_restricted_view) { ?>
+            <div class="c-property-card__footer">
+                <?php if (!$is_reference || !$is_restricted_view) { ?>
                     <?php
                     $button = [
                         [
                             'link' => [
-                                'title' => esc_html__('Details', 'oo_theme'),
+                                'title' => esc_html__(
+                                    'Zur Detailansicht',
+                                    'oo_theme',
+                                ),
                                 'url' => $property_url,
                             ],
                         ],
@@ -396,9 +427,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
 endwhile;
 ?>
 
-
-
-    <?php if (Favorites::isFavorizationEnabled()) { ?>
+<?php if (Favorites::isFavorizationEnabled()) { ?>
     <?php wp_enqueue_script('oo-favorites-script'); ?>
 
     <script>

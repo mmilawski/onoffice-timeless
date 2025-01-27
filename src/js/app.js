@@ -41,9 +41,11 @@ jQuery(document).ready(function() {
 
       if (select.hasClass('--multiple')) {
         var clear = false;
-      } else {
+    } else if (select.hasClass('onofficeSortListSelector')) {
+        var clear = false;
+    } else {
         var clear = true;
-      }
+    }
 
       select.select2({
         minimumResultsForSearch: Infinity,
@@ -361,13 +363,37 @@ jQuery(document).ready(function() {
     });
   }
 
+
   // Slider
   const sliders = document.querySelectorAll('.c-slider');
 
   if( sliders.length > 0 ) {
-    sliders.forEach(function(slider) {
-      const splide = new Splide(slider);
+   // 
 
+      //for ( let i = 0, splideLength = sliders.length; i < splideLength; i++ ) {
+      sliders.forEach(function(slider) {
+
+      const splide = new Splide(slider);
+      let outerslider = false; 
+      
+      if (slider.classList.contains("--is-properties-slider"))
+      {
+        outerslider = true;
+      }
+      if( outerslider) {
+
+        const btnNextOuter = slider.querySelector(".c-slider__navigation:not(.--is-properties-images-slider) .c-slider__arrow.--next");
+        const btnPrevOuter = slider.querySelector(".c-slider__navigation:not(.--is-properties-images-slider) .c-slider__arrow.--prev");
+
+        btnNextOuter.addEventListener('click', e => {
+          splide.go('+1')
+        })
+      
+        btnPrevOuter.addEventListener('click', e => {
+          splide.go('-1')
+        })
+      }
+   
       // progress bar animation
       const bar = slider.querySelector('.c-slider__progress-bar');
       if (bar) {
@@ -384,7 +410,9 @@ jQuery(document).ready(function() {
       });
       splide.mount();
     });
-  }
+  //}
+}
+
 
   // Toogle Property Card
   const propertyFeatureOpenerButton = $('.c-property-details__more');

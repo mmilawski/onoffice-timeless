@@ -2,13 +2,10 @@
   $c-property-features: &;
 
   border-radius: $border-radius;
-  color: var(--oo-color-property-status-contrast-bg);
-  background-color: var(--oo-color-property-status-bg);
+  color: var(--oo-color-text);
+  background-color: var(--oo-color-transparent-primary-10);
   border: 0px;
-  padding: 0.15rem 0.5rem;
-  margin: 2px;
-  white-space: nowrap;
-  display: inline-block;
+  padding: 0.25rem 0.5rem;
 
   &.--on-detail-page {
     background-color: initial;
@@ -54,5 +51,9 @@
     @include media-breakpoint-up(xl) {
       grid-template-columns: repeat(3, 1fr);
     }
+  }
+
+  &.--empty {
+    display: none;
   }
 }
