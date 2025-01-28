@@ -42,28 +42,33 @@
   }
 
   &__content {
-    display: flex;
-    flex-direction: column;
     gap: 1.5rem;
+    margin-bottom: 1rem;
     @include media-breakpoint-up(xl) {
       gap: 2rem;
+      margin-bottom: 3rem;
     }
   }
 
   &__boxes {
     display: grid;
-    gap: 2rem;
-    @include media-breakpoint-up(lg) {
+    gap: 1.5rem;
+    @include media-breakpoint-up(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @include media-breakpoint-up(xl) {
       grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
     }
   }
 
   &__text {
   }
 
+  &__buttons-wrapper {
+  }
+
   &__buttons {
-    gap: 2rem;
-    justify-content: center;
   }
 
   &.--has-bg-image {

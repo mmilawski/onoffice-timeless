@@ -130,12 +130,12 @@ $max_num_pages = $reviews_query->max_num_pages ?? null;
         	<?php oo_get_template('components', '', 'component-headline', [
              'headline' => $headline,
              'additional_headline_class' =>
-                 'c-reviews__headline o-col-12 o-col-md-8',
+                 'c-reviews__headline o-col-12 o-col-lg-10 o-col-xl-8',
          ]); ?>
                 <?php } ?>
 
             <?php if (!empty($text['wysiwyg'])) { ?>
-                <div class="c-reviews__text o-text --is-wysiwyg o-col-12 o-col-md-8">
+                <div class="c-reviews__text o-text --is-wysiwyg o-col-12 o-col-lg-10 o-col-xl-8">
                     <?php echo $text['wysiwyg']; ?>
                 </div>
             <?php } ?>
@@ -283,7 +283,8 @@ $max_num_pages = $reviews_query->max_num_pages ?? null;
         oo_get_template('components', '', 'component-buttons', [
             'buttons' => $buttons['buttons'],
             'additional_button_class' => $bg_color ? '--on-' . $bg_color : '',
-            'additional_container_class' => 'c-reviews__buttons o-col-12',
+            'additional_container_class' =>
+                'c-reviews__buttons --position-center o-col-12',
         ]);
     } ?>
     </div>

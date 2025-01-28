@@ -6,4 +6,8 @@
   &.--is-column {
     flex-direction: column;
   }
+
+  &.--position-center {
+    justify-content: center;
+  }
 }

@@ -19,22 +19,22 @@ $is_slider = filter_var($slider['slider'], FILTER_VALIDATE_BOOLEAN);
     $icon_url = $icon['url'] ?? null;
 
     // Image width
-    $image_width_xs = '539';
-    $image_width_sm = '508';
-    $image_width_md = '690';
-    $image_width_lg = '444';
-    $image_width_xl = '540';
-    $image_width_xxl = '636';
-    $image_width_xxxl = '702';
+    $image_width_xs = '541';
+    $image_width_sm = '510';
+    $image_width_md = '333';
+    $image_width_lg = '450';
+    $image_width_xl = '350';
+    $image_width_xxl = '414';
+    $image_width_xxxl = '458';
 
     // Icon width
-    $icon_width_xs = '411';
-    $icon_width_sm = '380';
-    $icon_width_md = '562';
-    $icon_width_lg = '316';
-    $icon_width_xl = '412';
-    $icon_width_xxl = '508';
-    $icon_width_xxxl = '574';
+    $icon_width_xs = '477';
+    $icon_width_sm = '446';
+    $icon_width_md = '270';
+    $icon_width_lg = '386';
+    $icon_width_xl = '286';
+    $icon_width_xxl = '350';
+    $icon_width_xxxl = '394';
     ?>
     <article class="c-link-boxes-card --bg-transparent <?php if ($is_slider) {
         echo '--on-slider c-slider__slide splide__slide';
@@ -55,31 +55,31 @@ $is_slider = filter_var($slider['slider'], FILTER_VALIDATE_BOOLEAN);
                     'dimensions' => [
                         '575' => [
                             'w' => $image_width_xs,
-                            'h' => round(($image_width_xs * 3) / 4),
+                            'h' => round(($image_width_xs * 2) / 3),
                         ],
                         '1600' => [
                             'w' => $image_width_xxxl,
-                            'h' => round(($image_width_xxxl * 3) / 4),
+                            'h' => round(($image_width_xxxl * 2) / 3),
                         ],
                         '1400' => [
                             'w' => $image_width_xxl,
-                            'h' => round(($image_width_xxl * 3) / 4),
+                            'h' => round(($image_width_xxl * 2) / 3),
                         ],
                         '1200' => [
                             'w' => $image_width_xl,
-                            'h' => round(($image_width_xl * 3) / 4),
+                            'h' => round(($image_width_xl * 2) / 3),
                         ],
                         '992' => [
                             'w' => $image_width_lg,
-                            'h' => round(($image_width_lg * 3) / 4),
+                            'h' => round(($image_width_lg * 2) / 3),
                         ],
                         '768' => [
                             'w' => $image_width_md,
-                            'h' => round(($image_width_md * 3) / 4),
+                            'h' => round(($image_width_md * 2) / 3),
                         ],
                         '576' => [
                             'w' => $image_width_sm,
-                            'h' => round(($image_width_sm * 3) / 4),
+                            'h' => round(($image_width_sm * 2) / 3),
                         ],
                     ],
                 ]); ?>
@@ -105,31 +105,31 @@ $is_slider = filter_var($slider['slider'], FILTER_VALIDATE_BOOLEAN);
                         'dimensions' => [
                             '575' => [
                                 'w' => $icon_width_xs,
-                                'h' => round(($icon_width_xs * 3) / 4),
+                                'h' => round(($icon_width_xs * 2) / 3),
                             ],
                             '1600' => [
                                 'w' => $icon_width_xxxl,
-                                'h' => round(($icon_width_xxxl * 3) / 4),
+                                'h' => round(($icon_width_xxxl * 2) / 3),
                             ],
                             '1400' => [
                                 'w' => $icon_width_xxl,
-                                'h' => round(($icon_width_xxl * 3) / 4),
+                                'h' => round(($icon_width_xxl * 2) / 3),
                             ],
                             '1200' => [
                                 'w' => $icon_width_xl,
-                                'h' => round(($icon_width_xl * 3) / 4),
+                                'h' => round(($icon_width_xl * 2) / 3),
                             ],
                             '992' => [
                                 'w' => $icon_width_lg,
-                                'h' => round(($icon_width_lg * 3) / 4),
+                                'h' => round(($icon_width_lg * 2) / 3),
                             ],
                             '768' => [
                                 'w' => $icon_width_md,
-                                'h' => round(($icon_width_md * 3) / 4),
+                                'h' => round(($icon_width_md * 2) / 3),
                             ],
                             '576' => [
                                 'w' => $icon_width_sm,
-                                'h' => round(($icon_width_sm * 3) / 4),
+                                'h' => round(($icon_width_sm * 2) / 3),
                             ],
                         ],
                     ]);

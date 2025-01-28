@@ -103,13 +103,13 @@ $max_num_pages = $news_query->max_num_pages ?? null;
                         [
                             'headline' => $headline,
                             'additional_headline_class' =>
-                                'c-news__headline o-col-12 o-col-xl-8',
+                                'c-news__headline o-col-12 o-col-lg-10 o-col-xl-8',
                         ],
                     ); ?>
                 <?php } ?>
 
                 <?php if (!empty($text['wysiwyg'])) { ?>
-                    <div class="c-news__text o-text o-col-12 o-col-xl-8 --is-wysiwyg">
+                    <div class="c-news__text o-text o-col-12 o-col-lg-10 o-col-xl-8 --is-wysiwyg">
                         <?php echo $text['wysiwyg']; ?>
                     </div>
                 <?php } ?>
@@ -195,7 +195,8 @@ $max_num_pages = $news_query->max_num_pages ?? null;
 						<?php oo_get_template('components', '', 'component-buttons', [
           'buttons' => $buttons['buttons'],
           'additional_button_class' => $bg_color ? '--on-' . $bg_color : '',
-          'additional_container_class' => 'c-news__buttons c-buttons o-col-12',
+          'additional_container_class' =>
+              'c-news__buttons --position-center o-col-12',
       ]); ?> 
                     <?php } ?>
         </div>

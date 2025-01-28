@@ -26,11 +26,11 @@ $background_width_xxxl = '1920';
 
 <section <?php oo_block_id(
     $block,
-); ?> class="c-link-boxes o-section --with-separator --<?php echo $bg_color; ?> <?php echo !empty(
+); ?> class="c-link-boxes o-section --<?php echo $bg_color; ?> <?php echo !empty(
      $background_image_url
  )
      ? '--has-bg-image'
-     : '--' . $bg_color . '-mixed'; ?>"> 
+     : ''; ?>">
 
     <?php if (!empty($background_image_url)): ?>
         <div class="c-link-boxes__background">
@@ -67,7 +67,7 @@ $background_width_xxxl = '1920';
  
     <div class="c-link-boxes__container o-container">
         <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
-            <div class="c-link-boxes__content o-row">
+            <div class="c-link-boxes__content o-row --position-center">
                 <?php if (!empty($headline['text'])) { ?>
 
                     <?php oo_get_template(
@@ -77,13 +77,13 @@ $background_width_xxxl = '1920';
                         [
                             'headline' => $headline,
                             'additional_headline_class' =>
-                                'c-link-boxes__headline o-col-12 o-col-xl-8',
+                                'c-link-boxes__headline o-col-12 o-col-lg-10 o-col-xl-8',
                         ],
                     ); ?>
                 <?php } ?>
 
                 <?php if (!empty($text['wysiwyg'])) { ?>
-                    <div class="c-link-boxes__text o-text o-col-12 o-col-xl-8 --is-wysiwyg">
+                    <div class="c-link-boxes__text o-text o-col-12 o-col-lg-10 o-col-xl-8 --is-wysiwyg">
                         <?php echo $text['wysiwyg']; ?>
                     </div>
                 <?php } ?>
@@ -92,7 +92,7 @@ $background_width_xxxl = '1920';
     
         <?php if (!empty($boxes)) { ?>
             <?php if ($is_slider) { ?>
-                <div class="c-link-boxes__slider --on-<?php echo $bg_color; ?> c-slider --is-link-boxes-slider splide" data-splide='{"perPage":1,"perMove":1,"gap":32,"pagination":false,"snap":true,"lazyLoad":"nearby","mediaQuery":"min","breakpoints":{"992":{"perPage":2}}}'>
+                <div class="c-link-boxes__slider --on-<?php echo $bg_color; ?> c-slider --is-link-boxes-slider splide" data-splide='{"perPage":1,"perMove":1,"gap":32,"pagination":false,"snap":true,"lazyLoad":"nearby","mediaQuery":"min","breakpoints":{"768":{"perPage":2},"1200":{"perPage":3}}}'>
                     <div class="c-slider__track splide__track">
                         <div class="c-slider__list splide__list">
                             <?php include 'link-boxes-card.php'; ?>
@@ -104,19 +104,23 @@ $background_width_xxxl = '1920';
                             <div class="c-slider__progress-bar splide__progress-bar"></div>
                         </div>
                         <div class="c-slider__arrows splide__arrows">
-                            <button class="c-slider__arrow splide__arrow c-slider__arrow--prev splide__arrow--prev">
-                                <span class="u-screen-reader-only"><?php esc_html_e(
+                            <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
+                                <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
                                     'Vorheriges',
                                     'oo_theme',
                                 ); ?></span>
-                                <svg class="c-slider__icon splide__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10.12 17.41"><path d="m9.41.71L1.41,8.71l8,8" vector-effect="non-scaling-stroke" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                                <span class="c-slider__arrow-icon --chevron-left"><?php oo_get_icon(
+                                    'chevron-left',
+                                ); ?></span>
                             </button>
-                            <button class="c-slider__arrow c-slider__arrow--next splide__arrow splide__arrow--next">
-                                <span class="u-screen-reader-only"><?php esc_html_e(
+                            <button class="c-slider__arrow --next splide__arrow splide__arrow--next">
+                                <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
                                     'Nächstes',
                                     'oo_theme',
                                 ); ?></span>
-                                <svg class="c-slider__icon splide__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10.12 17.41"><path d="m.71,16.71l8-8L.71.71" vector-effect="non-scaling-stroke" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                                <span class="c-slider__arrow-icon --chevron-right"><?php oo_get_icon(
+                                    'chevron-right',
+                                ); ?></span>
                             </button>
                         </div>
                     </div>
@@ -129,14 +133,14 @@ $background_width_xxxl = '1920';
         <?php } ?>
 
         <?php if (!empty($buttons['buttons'][0]['link'])) { ?>
-            <div class="c-link-boxes__content o-row">
+            <div class="c-link-boxes__buttons-wrapper o-row --position-center">
                 <?php oo_get_template('components', '', 'component-buttons', [
                     'buttons' => $buttons['buttons'],
                     'additional_button_class' => $bg_color
                         ? '--on-' . $bg_color
                         : '',
                     'additional_container_class' =>
-                        'c-link-boxes__buttons c-buttons o-col-12',
+                        'c-link-boxes__buttons --position-center o-col-12',
                 ]); ?>
             </div>
         <?php } ?>

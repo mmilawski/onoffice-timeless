@@ -391,10 +391,14 @@
     &.--is-link-boxes-slider {
       #{$c-slider}__list {
         display: grid;
-        gap: 2rem;
+        gap: 1.5rem;
 
-        @include media-breakpoint-up(lg) {
+        @include media-breakpoint-up(md) {
           grid-template-columns: repeat(2, 1fr);
+        }
+        @include media-breakpoint-up(xl) {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 2rem;
         }
       }
     }

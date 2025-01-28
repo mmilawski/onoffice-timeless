@@ -44,7 +44,24 @@ $settings = get_field('settings') ?? null;
                                 'headline'
                             ]; ?></h3>
                             <div class="c-accordion-card__icon-wrapper">
-                                <svg class="c-accordion-card__icon" width="24" viewBox="0 0 23.41 13.12"><path d="m.71.71l11,11L22.71.71" vector-effect="non-scaling-stroke" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                                <button class="c-accordion-card__icon c-icon-button --close">
+                                    <span class="c-icon-button__text u-screen-reader-only"><?php esc_html_e(
+                                        'Weniger anzeigen',
+                                        'oo_theme',
+                                    ); ?></span>
+                                    <span class="c-icon-button__icon --chevron-up"><?php oo_get_icon(
+                                        'chevron-up',
+                                    ); ?></span>
+                                </button>
+                                <button class="c-accordion-card__icon c-icon-button --open">
+                                    <span class="c-icon-button__text u-screen-reader-only"><?php esc_html_e(
+                                        'Mehr anzeigen',
+                                        'oo_theme',
+                                    ); ?></span>
+                                    <span class="c-icon-button__icon --chevron-down"><?php oo_get_icon(
+                                        'chevron-down',
+                                    ); ?></span>
+                                </button>
                             </div>
                         </div>
                         <div class="c-accordion-card__content o-text --is-wysiwyg">
