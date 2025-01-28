@@ -2,6 +2,53 @@ $ = jQuery;
 
 jQuery(document).ready(function() {
 
+  // Function to calculate and set the position of dropdown menus
+  function adjustDropdownMenuPosition() {
+    const headerContainer = document.querySelector('.c-header__container');
+    const headerMenuItems = document.querySelectorAll('.c-main-nav__list .c-main-nav__item.--has-children.--is-top-level');
+
+    if (!headerContainer) {
+      console.error(
+        'Header container not found. Cannot calculate dropdown menu positions.'
+      );
+      return;
+    }
+
+    if (headerMenuItems.length === 0) {
+      console.warn(
+        'No top-level <li> elements with submenus found. Skipping position adjustments.'
+      );
+      return;
+    }
+
+    const containerBottom = headerContainer.getBoundingClientRect().bottom;
+
+    headerMenuItems.forEach((li) => {
+      const subMenu = li.querySelector('.c-main-nav__sub-menu');
+
+      if (!subMenu) {
+        console.error('Submenu not found for a top-level <li> element.');
+        return;
+      }
+
+      const { bottom: liBottom, height: liHeight } = li.getBoundingClientRect();
+      const distanceFromContainer = containerBottom - liBottom;
+      const subMenuPosition = liHeight + distanceFromContainer;
+
+      subMenu.style.top = `${subMenuPosition}px`;
+    });
+  } 
+
+  if (window.innerWidth >= 1400) {
+    adjustDropdownMenuPosition();
+  }
+
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 1400) {
+      adjustDropdownMenuPosition();
+    }
+  });
+ 
   if( $('.c-table').length > 0  ) {
     $('.c-table').each(function( index, element) {
 
@@ -555,8 +602,8 @@ function menuOpenClose() {
   $(".c-header").toggleClass("--main-nav-open");
   $(".c-main-nav").toggleClass("--is-open");
   $(".c-main-nav__item").toggleClass("--is-open");
-  $(".c-main-nav__button-icon.--open").toggle();
-  $(".c-main-nav__button-icon.--close").toggle();
+  $(".c-main-nav__button .--open").toggle();
+  $(".c-main-nav__button .--close").toggle();
 }
 
 // Correct padding for first element in main

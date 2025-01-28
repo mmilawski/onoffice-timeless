@@ -6,50 +6,93 @@
   position: fixed;
   left: 0;
   right: 0;
+  max-height: 100dvh;
+  transition: all 0.25s;
   display: flex;
   flex-direction: column;
-  max-height: 100dvh;
-  overflow: hidden;
-  transition: all 0.5s;
+  background-color: var(--oo-color-header-bg, var(--oo-color-bg));
 
-  @include media-breakpoint-up(xxl) {
+  &.--logo-transparent {
+    background-color: var(--oo-color-header-transparent-bg-80);
+
+    &.--main-nav-open {
+      background-color: var(--oo-color-header-bg, var(--oo-color-bg));
+    }
+  }
+
+  &__container {
+    padding: 0;
     overflow: unset;
+
+    @include media-breakpoint-down(xl) {
+      max-width: unset;
+    }
+
+    @include media-breakpoint-up(xxl) {
+      display: flex;
+      align-items: center;
+      gap: 3.75rem;
+      padding: 1rem;
+      &.--has-no-meta {
+      }
+    }
   }
 
   // main
   &__main-wrapper {
     z-index: 1000;
-    padding-block: 1rem;
-    background-color: var(--oo-color-header-bg, var(--oo-color-bg));
+    padding-block: 0.5rem;
+    position: relative;
     @include media-breakpoint-up(xxl) {
-      padding-block: 0.5rem;
+      padding-block: 0;
       order: 2;
+      z-index: 1;
     }
 
-    .--logo-transparent & {
-      background-color: var(--oo-color-header-transparent-bg-90);
+    .--main-nav-open &::after {
+      content: ' ';
+      position: absolute;
+      left: 0;
+      height: 2px;
+      bottom: 0;
+      z-index: 9999;
+      width: 100%;
+      box-shadow: 0px 1px 4px var(--oo-color-transparent-shadow-10);
     }
   }
+
   &__main {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 0 1rem;
     @include media-breakpoint-up(xxl) {
-      justify-content: center;
+      padding: 0;
     }
   }
 
   // wrapper
   &__wrapper {
-    display: flex;
     flex-direction: column;
-    max-height: 0;
     height: 100dvh;
     overflow: hidden;
-    transition: 0.25s;
+    transition: 0.5s ease-in-out;
+    height: 0;
+    opacity: 0;
+    transform: translateY(-100%);
     @include media-breakpoint-up(xxl) {
       display: contents;
+    }
+    .--main-nav-open & {
+      overflow-y: scroll;
+      display: flex;
+      opacity: 1;
+      height: auto;
+      transform: translateY(0);
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
 
@@ -58,15 +101,14 @@
     display: flex;
     width: 100%;
     flex: 1;
-    padding-block: 2rem;
-    background-color: var(--oo-color-header-bg, var(--oo-color-bg));
+    padding-block: 2rem 1.5rem;
     transition: 0.25s;
 
     @include media-breakpoint-up(xxl) {
       order: 3;
+      padding: 0;
       padding-block: 0;
-      margin-top: 0.125rem;
-      background-color: var(--oo-color-header-transparent-bg-90);
+      justify-content: flex-end;
     }
   }
   &__nav {
@@ -74,35 +116,51 @@
 
   // meta
   &__meta-wrapper {
+    color: var(--oo-color-header-mix-text-contrast-20);
     position: relative;
     display: flex;
     width: 100%;
     padding: 0;
     margin-top: auto;
-    background-color: var(--oo-color-header-primary, var(--oo-color-primary));
-    color: var(--oo-color-header-contrast-primary);
+    background-color: var(--oo-color-header-mix-bg-contrast-5);
     transition: 0.25s;
+    z-index: 9991;
+    order: 2;
+    display: none;
 
-    @include media-breakpoint-up(xxl) {
-      order: 1;
-      padding: 0.25rem 0 0 0;
-      margin: 0;
-      background-color: var(--oo-color-header-bg, var(--oo-color-bg));
-      color: var(--oo-color-header-text, var(--oo-color-text));
+    .--main-nav-open & {
+      display: flex;
     }
 
-    .--logo-transparent & {
-      @include media-breakpoint-up(xxl) {
-        background-color: var(--oo-color-header-transparent-bg-90);
-      }
+    @include media-breakpoint-up(xxl) {
+      padding: 0.5rem 0;
+      order: unset;
+      margin: 0;
+      display: flex;
     }
 
     * {
-      font-size: $small-font-size;
-      line-height: $small-line-height;
+      font-size: $global-font-size;
+      line-height: $global-line-height;
+
+      @include media-breakpoint-up(xxl) {
+        font-size: $small-font-size;
+        line-height: $small-line-height;
+      }
+    }
+
+    &.--collapsed {
+      height: 0;
+      opacity: 0;
+      padding: 0;
+      visibility: hidden;
+      overflow: hidden;
     }
   }
   &__meta {
+    @include media-breakpoint-down(xl) {
+      max-width: unset;
+    }
     padding-block: 2rem;
     @include media-breakpoint-up(xxl) {
       padding-block: 0;
@@ -111,30 +169,38 @@
   &__meta-row {
     display: flex;
     flex-direction: column;
-    gap: 2rem 0;
+    gap: 2rem;
 
     @include media-breakpoint-up(xxl) {
-      flex-direction: unset;
-      gap: unset;
+      align-items: flex-start;
+      flex-direction: row;
+      justify-content: space-between;
     }
   }
   &__meta-column {
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
     flex-wrap: wrap;
-    flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
 
     @include media-breakpoint-up(xxl) {
+      gap: 0.5rem;
       flex-direction: unset;
+      align-items: center;
       display: inline;
+      line-height: 2rem;
     }
 
     &.--left {
+      @include media-breakpoint-up(xxl) {
+        flex-basis: 50%;
+      }
     }
 
     &.--right {
       @include media-breakpoint-up(xxl) {
+        flex-basis: 50%;
         text-align: right;
         margin-left: auto;
       }
@@ -143,39 +209,23 @@
 
   &.--fixed {
     z-index: 9999;
-    box-shadow: 0 1px 4px var(--oo-color-header-transparent-text-10);
+    background-color: var(--oo-color-header-bg, var(--oo-color-bg));
     margin-top: 0;
-
-    #{$c-header}__meta-wrapper {
-      @include media-breakpoint-up(xxl) {
-        background-color: var(--oo-color-header-bg, var(--oo-color-bg));
-      }
-    }
-
-    #{$c-header}__main-wrapper {
-      background-color: var(--oo-color-header-bg, var(--oo-color-bg));
-    }
 
     #{$c-header}__nav-wrapper {
       margin-top: 0;
-      @include media-breakpoint-up(xxl) {
-        background-color: var(--oo-color-header-bg, var(--oo-color-bg));
-      }
     }
   }
 
   &.--main-nav-open {
+    overflow: hidden scroll;
+    max-height: 100dvh;
+
     #{$c-header}__main-wrapper {
       position: sticky;
       top: 0;
       z-index: 1000;
       background-color: var(--oo-color-header-bg, var(--oo-color-bg));
-      box-shadow: 0px 1px 4px var(--oo-color-header-transparent-text-10);
-    }
-
-    #{$c-header}__wrapper {
-      max-height: 100dvh;
-      overflow-y: scroll;
     }
   }
 
@@ -183,13 +233,6 @@
     @include media-breakpoint-up(xxl) {
       position: sticky;
       top: 0;
-    }
-
-    #{$c-header}__nav-wrapper {
-      @include media-breakpoint-up(xxl) {
-        position: absolute;
-        top: 100%;
-      }
     }
   }
 }

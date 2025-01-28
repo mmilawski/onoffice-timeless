@@ -7,7 +7,7 @@
       gap: 1.5rem;
 
       @include media-breakpoint-up(xxl) {
-        display: inline;
+        display: inline-block;
         margin-right: 1.5rem;
         &:last-child {
           margin-right: 0;

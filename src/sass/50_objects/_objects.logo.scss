@@ -44,11 +44,6 @@
 
   &.--white {
     background: #fff;
-    padding: 0.25rem;
-
-    @include media-breakpoint-up(xxl) {
-      padding: 0.5rem;
-    }
   }
 
   &.--no-image {

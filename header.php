@@ -66,6 +66,34 @@ if (empty($header_modules_left) && empty($header_modules_right)) {
  } ?> <?php if (!$has_bg_picture) {
      echo '--has-no-bg-picture --fixed';
  } ?>">
+
+<?php if (!empty($header_modules_left) || !empty($header_modules_right)): ?>
+                        <div class="c-header__meta-wrapper">
+                            <div class="c-header__meta o-container">
+                                <div class="c-header__meta-row">
+                                    <?php if (!empty($header_modules_left)): ?>
+                                        <div class="c-header__meta-column --left c-modules --is-header">
+                                            <?php oo_load_modules_flexible_content(
+                                                $header_content_left,
+                                                'header',
+                                            ); ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <?php if (!empty($header_modules_right)): ?>
+                                        <div class="c-header__meta-column --right c-modules --is-header">
+                                                                                <?php oo_load_modules_flexible_content(
+                                                                                    $header_content_right,
+                                                                                    'header',
+                                                                                ); ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
     <div class="c-header__container o-container<?php echo $has_no_meta; ?>">
 
 			
@@ -91,16 +119,19 @@ if (empty($header_modules_left) && empty($header_modules_right)) {
                             </a>
                         </div>
 
-						<button class="c-main-nav__button">
-							<span class="u-screen-reader-only"><?php esc_html_e(
+						<button class="c-main-nav__button c-icon-button --small-corners">
+							<span class="c-icon-button__text u-screen-reader-only"><?php esc_html_e(
            'Menu',
            'oo_theme',
        ); ?></span>
+                            <span class="c-icon-button__icon --open">
+                                <?php oo_get_icon('bars'); ?>
+                            </span>
 
-                        <svg class="c-main-nav__button-icon --open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-
-                        <svg class="c-main-nav__button-icon --close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
-
+                            <span class="c-icon-button__icon --close">
+                                <?php oo_get_icon('close'); ?>
+                            </span>
+                 
 						</button>
 
 					</div><!-- #container -->
@@ -108,7 +139,7 @@ if (empty($header_modules_left) && empty($header_modules_right)) {
 
                 <div class="c-header__wrapper">
                     <div class="c-header__nav-wrapper">
-                        <nav class="c-header__nav c-main-nav o-container">
+                        <nav class="c-header__nav c-main-nav">
                             <?php wp_nav_menu([
                                 'theme_location' => 'main-nav',
                                 'menu_class' => 'c-main-nav__list',
@@ -124,36 +155,7 @@ if (empty($header_modules_left) && empty($header_modules_right)) {
                         </nav>
                     </div>
 
-                    <?php if (
-                        !empty($header_modules_left) ||
-                        !empty($header_modules_right)
-                    ): ?>
-                        <div class="c-header__meta-wrapper">
-
-                        <div class="c-header__meta o-container">
-
-                            <div class="c-header__meta-row">
-
-                                <?php if (!empty($header_modules_left)): ?>
-                                    <div class="c-header__meta-column --left c-modules --is-header">
-                                        <?php oo_load_modules_flexible_content(
-                                            $header_content_left,
-                                            'header',
-                                        ); ?>
-                                    </div>
-                                <?php endif; ?>
-
-                                <?php if (!empty($header_modules_right)): ?>
-                                    <div class="c-header__meta-column --right c-modules --is-header">
-																			<?php oo_load_modules_flexible_content($header_content_right, 'header'); ?>
-                                    </div>
-                                <?php endif; ?>
-
-                            </div>
-                        </div>
-
-                        </div>
-                    <?php endif; ?>
+    
 
                 </div>
     </div>

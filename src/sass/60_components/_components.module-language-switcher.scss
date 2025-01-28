@@ -11,21 +11,34 @@
       a {
         background: transparent;
         border: 0;
-        color: currentColor;
         line-height: $small-line-height;
         text-align: left;
         padding: 0 1.5rem 0 0;
-        @include media-breakpoint-up(xxl) {
+
+        @include plain-visited() {
+          color: var(--oo-color-header-mix-text-contrast-20);
+        }
+
+        @include hover-focus() {
           color: var(--oo-color-header-primary, var(--oo-color-primary));
         }
-        @include hover-focus-active() {
-          span {
-            border-color: transparent;
+
+        &:not(.wpml-ls-link) {
+          transition: text-decoration-color 0.25s ease-in-out,
+            text-decoration 0.25s ease-in-out;
+          text-decoration: underline currentColor;
+          text-underline-offset: $link-underline-offset;
+
+          @include hover() {
+            text-decoration-color: transparent;
           }
         }
+      }
+    }
+    .wpml-ls-legacy-dropdown {
+      a {
         span {
-          border-bottom: 1px solid currentColor;
-          transition: border-color 0.25s ease-in-out;
+          vertical-align: unset;
         }
       }
     }
@@ -40,6 +53,17 @@
         display: flex;
         flex-direction: column-reverse;
         padding-bottom: 0.5rem;
+
+        @include media-breakpoint-up(xl) {
+          border-radius: 0px 0px $border-radius $border-radius;
+          li:last-of-type {
+            border-radius: inherit;
+            a {
+              border-radius: inherit;
+            }
+          }
+        }
+
         @include media-breakpoint-up(xxl) {
           top: 100%;
           bottom: auto;
@@ -48,12 +72,21 @@
           padding-top: 0.5rem;
         }
         a {
-          color: currentColor;
-          background: var(--oo-color-header-primary, var(--oo-color-primary));
           padding: 0.25rem 0.5rem;
-          @include media-breakpoint-up(xxl) {
-            color: var(--oo-color-header-primary, var(--oo-color-primary));
-            background: var(--oo-color-header-bg, var(--oo-color-bg));
+          text-align: center;
+          border-radius: inherit;
+
+          @include plain-visited() {
+            color: var(--oo-color-header-text, var(--oo-color-text));
+            background: var(--oo-color-header-mix-bg-contrast-5);
+          }
+
+          @include hover() {
+            color: var(--oo-color-header-contrast-primary);
+            background-color: var(
+              --oo-color-header-primary,
+              var(--oo-color-primary)
+            );
           }
         }
       }

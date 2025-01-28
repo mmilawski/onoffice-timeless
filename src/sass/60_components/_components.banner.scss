@@ -16,6 +16,10 @@
       justify-content: center;
       padding-block: $desktop-section-padding-top
         $desktop-section-padding-bottom;
+
+      .--is-header-style-transparent & {
+        min-height: calc(70vh + var(--header-height));
+      }
     }
 
     &.--content-none {

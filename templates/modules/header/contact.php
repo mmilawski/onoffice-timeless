@@ -68,48 +68,62 @@ if ($is_phone && !empty($phone)) {
     $phone_number =
         ($phone_country_code ? $phone_country_code . '&nbsp;' : '') . $phone;
 
-    echo '<a class="c-module-contact__list c-link --underlined --on-bg-' .
+    echo '<dl class="c-module-contact__list">';
+    echo '<dt class="c-module-contact__label">' .
+        __('Tel.:', 'oo_theme') .
+        '</dt>';
+    echo '<dd class="c-module-contact__value">';
+    echo '<a class="c-link --underlined --on-bg-' .
         $location .
-        '" href="tel:' .
+        '" 
+            href="tel:' .
         str_replace(['&nbsp;', ' '], '', $phone_number) .
-        '">';
-    echo '<dt class="c-module-contact__label">';
-    oo_get_icon('phone');
-    echo '</dt>';
-    echo '<dd class="c-module-contact__value">' . $phone_number . '</dd>';
-    echo '</a>';
+        '">' .
+        $phone_number .
+        '</a>';
+    echo '</dd>';
+    echo '</dl>';
 }
 
 if ($is_fax && !empty($fax)) {
     $fax_number =
         ($fax_country_code ? $fax_country_code . '&nbsp;' : '') . $fax;
 
-    echo '<a class="c-module-contact__list c-link --underlined --on-bg-' .
+    echo '<dl class="c-module-contact__list">';
+    echo '<dt class="c-module-contact__label">' .
+        __('Fax:', 'oo_theme') .
+        '</dt>';
+    echo '<dd class="c-module-contact__value">';
+    echo '<a class="c-link --underlined --on-bg-' .
         $location .
-        '" href="fax:' .
+        '" 
+            href="fax:' .
         str_replace(['&nbsp;', ' '], '', $fax_number) .
-        '">';
-    echo '<dt class="c-module-contact__label">';
-    oo_get_icon('fax');
-    echo '</dt>';
-    echo '<dd class="c-module-contact__value">' . $fax_number . '</dd>';
-    echo '</a>';
+        '">' .
+        $fax_number .
+        '</a>';
+    echo '</dd>';
+    echo '</dl>';
 }
 
 if ($is_mobile && !empty($mobile)) {
     $mobile_number =
         ($mobile_country_code ? $mobile_country_code . '&nbsp;' : '') . $mobile;
 
-    echo '<a class="c-module-contact__list c-link --underlined --on-bg-' .
+    echo '<dl class="c-module-contact__list">';
+    echo '<dt class="c-module-contact__label">' .
+        __('Mobil:', 'oo_theme') .
+        '</dt>';
+    echo '<dd class="c-module-contact__value">';
+    echo '<a class="c-link --underlined --on-bg-' .
         $location .
         '" href="tel:' .
         str_replace(['&nbsp;', ' '], '', $mobile_number) .
-        '">';
-    echo '<dt class="c-module-contact__label">';
-    oo_get_icon('mobile');
-    echo '</dt>';
-    echo '<dd class="c-module-contact__value">' . $mobile_number . '</dd>';
-    echo '</a>';
+        '">' .
+        $mobile_number .
+        '</a>';
+    echo '</dd>';
+    echo '</dl>';
 }
 
 if ($is_email && !empty($email)) {
@@ -118,15 +132,19 @@ if ($is_email && !empty($email)) {
     $email_antispam = oo_antispambot(esc_html($email_utf8));
     $mailto_link = antispambot(esc_html($email_ascii));
 
-    echo '<a class="c-module-contact__list c-link --underlined --on-bg-' .
+    echo '<dl class="c-module-contact__list">';
+    echo '<dt class="c-module-contact__label">' .
+        __('Mail:', 'oo_theme') .
+        '</dt>';
+    echo '<dd class="c-module-contact__value">';
+    echo '<a class="c-link --underlined --on-bg-' .
         $location .
         '" href="mailto:' .
         $mailto_link .
-        '">';
-    echo '<dt class="c-module-contact__label">';
-    oo_get_icon('email');
-    echo '</dt>';
-    echo '<dd class="c-module-contact__value">' . $email_antispam . '</dd>';
-    echo '</a>';
+        '">' .
+        $email_antispam .
+        '</a>';
+    echo '</dd>';
+    echo '</dl>';
 }
 echo '</div>';

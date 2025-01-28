@@ -323,6 +323,16 @@
       top: 50%;
       transform: translateY(-50%);
 
+      .--is-header-style-transparent & {
+        @include media-breakpoint-up(lg) {
+          transform: translateY(calc(-50% + 3rem));
+        }
+
+        @include media-breakpoint-up(xxl) {
+          transform: translateY(calc(-50% + 7rem));
+        }
+      }
+
       &.--next {
         right: 1rem;
       }

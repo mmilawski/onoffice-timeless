@@ -60,6 +60,12 @@
   }
 }
 
+@mixin visited-hover {
+  &:visited:hover {
+    @content;
+  }
+}
+
 @mixin visited {
   &:visited {
     @content;

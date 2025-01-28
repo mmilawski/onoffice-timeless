@@ -56,40 +56,26 @@
   }
 
   &.--is-header {
-    --oo-social-media-size: 1rem;
-    --oo-social-media-gap: 0.5rem;
+    --oo-social-media-size: 2rem;
+    --oo-social-media-gap: 1.5rem;
 
     display: inline-flex;
     @include media-breakpoint-up(xxl) {
+      --oo-social-media-size: 1rem;
+      --oo-social-media-gap: 0.75rem;
       position: relative;
       top: 0.25rem;
     }
 
     #{$c-social-media}__link {
-      --oo-social-media-color: var(--oo-color-header-contrast-primary);
-      @include visited-active() {
-        --oo-social-media-color: var(--oo-color-header-contrast-primary);
+      @include plain-visited() {
+        --oo-social-media-color: var(--oo-color-header-mix-text-contrast-20);
       }
       @include hover-focus() {
-        --oo-social-media-color: var(--oo-color-header-contrast-primary);
-      }
-
-      @include media-breakpoint-up(xxl) {
         --oo-social-media-color: var(
           --oo-color-header-primary,
           var(--oo-color-primary)
         );
-        @include visited-active() {
-          --oo-social-media-color: var(
-            --oo-color-header-primary,
-            var(--oo-color-primary)
-          );
-        }
-        @include hover-focus() {
-          --oo-social-media-color: var(
-            --oo-color-header-mix-primary-contrast-20
-          );
-        }
       }
     }
   }

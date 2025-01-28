@@ -66,10 +66,13 @@ $logo-width-sm: 6.25rem;
 $logo-height-sm: 2.5rem;
 $logo-width-md: 11.25rem;
 $logo-height-md: 3.75rem;
+$mobile-logo-height-md: 3.125rem;
 $logo-width-lg: 16.25rem;
-$logo-height-lg: 5rem;
+$logo-height-lg: 6rem;
+$mobile-logo-height-lg: 3.75rem;
 $logo-width-xl: 21.25rem;
-$logo-height-xl: 6.25rem;
+$logo-height-xl: 7.25rem;
+$mobile-logo-height-xl: 5rem;
 
 // icon sizes
 $icon-wrapper-size: 2.375rem;
@@ -84,6 +87,9 @@ $mobile-section-padding-bottom: 2.5rem;
 // border radius
 $border-radius-small: 0.25rem;
 $border-radius: 0.5rem;
+
+// link underline offset
+$link-underline-offset: 0.375rem;
 
 [hidden] {
   display: none;

@@ -15,6 +15,7 @@
 
   &.--underlined {
     text-decoration: underline currentColor;
+    text-underline-offset: $link-underline-offset;
 
     @include visited() {
       text-decoration-color: currentColor;
@@ -22,6 +23,7 @@
 
     @include hover-focus-active() {
       text-decoration-color: transparent;
+      color: var(--oo-color-primary);
     }
   }
 
@@ -42,8 +44,15 @@
   }
 
   &.--on-bg-header {
-    color: currentColor;
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-down(xxl) {
+      &:first-of-type {
+        padding-left: 0;
+      }
+      padding: 0.5rem;
+    }
+    color: var(--oo-color-header-mix-text-contrast-20);
+
+    @include hover-focus-active() {
       color: var(--oo-color-header-primary, var(--oo-color-primary));
     }
   }
