@@ -99,146 +99,152 @@ if (empty($addresses)) {
             </div>
         <?php } ?>
 
-        <div class="c-contact__addresses">
-            <?php foreach ($addresses as $address) {
-                $name = $address['name'] ?? null;
-                $street = $address['street'] ?? null;
-                $zip = $address['zip'] ?? null;
-                $country = $address['country']['native'] ?? null;
-                $opening_hours = $address['opening_hours'] ?? null;
+        <div class="c-contact__wrapper o-row">
+            <div class="c-contact__addresses o-col-12 o-col-xl-8"> 
+                <?php foreach ($addresses as $address) {
+                    $name = $address['name'] ?? null;
+                    $street = $address['street'] ?? null;
+                    $zip = $address['zip'] ?? null;
+                    $country = $address['country']['native'] ?? null;
+                    $opening_hours = $address['opening_hours'] ?? null;
 
-                $contact = $address['contact'] ?? [];
-                $email = $contact['email'] ?? null;
-                $phone_country_code = $contact['phone-country'] ?? null;
-                $phone = $contact['phone'] ?? null;
-                $fax_country_code = $contact['fax-country'] ?? null;
-                $fax = $contact['fax'] ?? null;
-                $mobile_country_code = $contact['mobile-country'] ?? null;
-                $mobile = $contact['mobile'] ?? null;
+                    $contact = $address['contact'] ?? [];
+                    $email = $contact['email'] ?? null;
+                    $phone_country_code = $contact['phone-country'] ?? null;
+                    $phone = $contact['phone'] ?? null;
+                    $fax_country_code = $contact['fax-country'] ?? null;
+                    $fax = $contact['fax'] ?? null;
+                    $mobile_country_code = $contact['mobile-country'] ?? null;
+                    $mobile = $contact['mobile'] ?? null;
 
-                echo '<div class="c-contact-card">';
-                if ($is_address) {
-                    echo '<p class="c-contact-card__data --is-address">';
-                    if (!empty($name)) {
-                        echo $name . '<br>';
-                    }
-                    if (!empty($street)) {
-                        echo $street . '<br>';
-                    }
+                    echo '<div class="c-contact-card">';
+                    if ($is_address) {
+                        echo '<p class="c-contact-card__data --is-address">';
+                        if (!empty($name)) {
+                            echo '<span class="c-contact-card__title">' .
+                                $name .
+                                '</span><br>';
+                        }
+                        if (!empty($street)) {
+                            echo $street . '<br>';
+                        }
 
-                    if (!empty($zip)) {
-                        echo $zip . '<br>';
-                    }
+                        if (!empty($zip)) {
+                            echo $zip . '<br>';
+                        }
 
-                    if (!empty($country)) {
-                        echo $country;
-                    }
-                    echo '</p>';
-                }
-
-                // Contact Info
-                if (
-                    $is_contact_numbers &&
-                    (!empty($phone) ||
-                        !empty($fax) ||
-                        !empty($mobile) ||
-                        !empty($email))
-                ) {
-                    echo '<div class="c-contact-card__data --is-contact">';
-                    if (!empty($phone)) {
-                        $phone_number =
-                            ($phone_country_code
-                                ? $phone_country_code . '&nbsp;'
-                                : '') . $phone;
-                        echo '<dl class="c-contact-card__list">';
-                        echo '<dt class="c-contact-card__label">' .
-                            __('Tel.:', 'oo_theme') .
-                            '</dt>';
-                        echo '<dd class="c-contact-card__value"><a class="c-link --text-color --on-' .
-                            $bg_color .
-                            '" href="tel:' .
-                            str_replace(['&nbsp;', ' '], '', $phone_number) .
-                            '">' .
-                            $phone_number .
-                            '</a></dd>';
-                        echo '</dl>';
+                        if (!empty($country)) {
+                            echo $country;
+                        }
+                        echo '</p>';
                     }
 
-                    if (!empty($fax)) {
-                        $fax_number =
-                            ($fax_country_code
-                                ? $fax_country_code . '&nbsp;'
-                                : '') . $fax;
-                        echo '<dl class="c-contact-card__list">';
-                        echo '<dt class="c-contact-card__label">' .
-                            __('Fax:', 'oo_theme') .
-                            '</dt>';
-                        echo '<dd class="c-contact-card__value"><a class="c-link --text-color --on-' .
-                            $bg_color .
-                            '" href="tel:' .
-                            str_replace(['&nbsp;', ' '], '', $fax_number) .
-                            '">' .
-                            $fax_number .
-                            '</a></dd>';
-                        echo '</dl>';
+                    // Contact Info
+                    if (
+                        $is_contact_numbers &&
+                        (!empty($phone) ||
+                            !empty($fax) ||
+                            !empty($mobile) ||
+                            !empty($email))
+                    ) {
+                        echo '<div class="c-contact-card__data --is-contact">';
+                        if (!empty($phone)) {
+                            $phone_number =
+                                ($phone_country_code
+                                    ? $phone_country_code . '&nbsp;'
+                                    : '') . $phone;
+                            echo '<dl class="c-contact-card__list">';
+                            echo '<dt class="c-contact-card__label">' .
+                                __('Tel.:', 'oo_theme') .
+                                '</dt>';
+                            echo '<dd class="c-contact-card__value"><a class="c-link --text-color --on-' .
+                                $bg_color .
+                                '" href="tel:' .
+                                oo_clean_link_number($phone_number) .
+                                '">' .
+                                $phone_number .
+                                '</a></dd>';
+                            echo '</dl>';
+                        }
+
+                        if (!empty($fax)) {
+                            $fax_number =
+                                ($fax_country_code
+                                    ? $fax_country_code . '&nbsp;'
+                                    : '') . $fax;
+                            echo '<dl class="c-contact-card__list">';
+                            echo '<dt class="c-contact-card__label">' .
+                                __('Fax:', 'oo_theme') .
+                                '</dt>';
+                            echo '<dd class="c-contact-card__value"><a class="c-link --text-color --on-' .
+                                $bg_color .
+                                '" href="tel:' .
+                                oo_clean_link_number($fax_number) .
+                                '">' .
+                                $fax_number .
+                                '</a></dd>';
+                            echo '</dl>';
+                        }
+
+                        if (!empty($mobile)) {
+                            $mobile_number =
+                                ($mobile_country_code
+                                    ? $mobile_country_code . '&nbsp;'
+                                    : '') . $mobile;
+                            echo '<dl class="c-contact-card__list">';
+                            echo '<dt class="c-contact-card__label">' .
+                                __('Mobile:', 'oo_theme') .
+                                '</dt>';
+                            echo '<dd class="c-contact-card__value"><a class="c-link --text-color --on-' .
+                                $bg_color .
+                                '" href="tel:' .
+                                oo_clean_link_number($mobile_number) .
+                                '">' .
+                                $mobile_number .
+                                '</a></dd>';
+                            echo '</dl>';
+                        }
+
+                        if (!empty($email)) {
+                            $email_utf8 = oo_clean_acf_email_utf8($email);
+                            $email_ascii = oo_clean_acf_email_ascii($email);
+                            $email_antispam = oo_antispambot(
+                                esc_html($email_utf8),
+                            );
+                            $mailto_link = antispambot(esc_html($email_ascii));
+
+                            echo '<dl class="c-contact-card__list">';
+                            echo '<dt class="c-contact-card__label">' .
+                                __('E-Mail:', 'oo_theme') .
+                                '</dt>';
+                            echo '<dd class="c-contact-card__value"><a class="c-link --text-color --on-' .
+                                $bg_color .
+                                '" href="mailto:' .
+                                $mailto_link .
+                                '">' .
+                                $email_antispam .
+                                '</a></dd>';
+                            echo '</dl>';
+                        }
+                        echo '</div>';
                     }
 
-                    if (!empty($mobile)) {
-                        $mobile_number =
-                            ($mobile_country_code
-                                ? $mobile_country_code . '&nbsp;'
-                                : '') . $mobile;
-                        echo '<dl class="c-contact-card__list">';
-                        echo '<dt class="c-contact-card__label">' .
-                            __('Mobile:', 'oo_theme') .
-                            '</dt>';
-                        echo '<dd class="c-contact-card__value"><a class="c-link --text-color --on-' .
-                            $bg_color .
-                            '" href="tel:' .
-                            str_replace(['&nbsp;', ' '], '', $mobile_number) .
-                            '">' .
-                            $mobile_number .
-                            '</a></dd>';
-                        echo '</dl>';
-                    }
-
-                    if (!empty($email)) {
-                        $email_utf8 = oo_clean_acf_email_utf8($email);
-                        $email_ascii = oo_clean_acf_email_ascii($email);
-                        $email_antispam = oo_antispambot(esc_html($email_utf8));
-                        $mailto_link = antispambot(esc_html($email_ascii));
-
-                        echo '<dl class="c-contact-card__list">';
-                        echo '<dt class="c-contact-card__label">' .
-                            __('E-Mail:', 'oo_theme') .
-                            '</dt>';
-                        echo '<dd class="c-contact-card__value"><a class="c-link --text-color --on-' .
-                            $bg_color .
-                            '" href="mailto:' .
-                            $mailto_link .
-                            '">' .
-                            $email_antispam .
-                            '</a></dd>';
-                        echo '</dl>';
+                    // Opening Hours
+                    if ($is_opening_hours && is_array($opening_hours)) {
+                        echo '<div class="c-contact-card__data --is-opening-hours">';
+                        foreach ($opening_hours as $item) {
+                            echo '<dl class="c-contact-card__list --is-opening-hours"><dt class="c-contact-card__label">' .
+                                $item['days'] .
+                                '</dt>';
+                            echo '<dd class="c-contact-card__value">' .
+                                $item['times'] .
+                                '</dd></dl>';
+                        }
+                        echo '</div>';
                     }
                     echo '</div>';
-                }
-
-                // Opening Hours
-                if ($is_opening_hours && is_array($opening_hours)) {
-                    echo '<dl class="c-contact-card__list --is-opening-hours">';
-                    foreach ($opening_hours as $item) {
-                        echo '<dt class="c-contact-card__label">' .
-                            $item['days'] .
-                            '</dt>';
-                        echo '<dd class="c-contact-card__value">' .
-                            $item['times'] .
-                            '</dd>';
-                    }
-                    echo '</dl>';
-                }
-                echo '</div>';
-            } ?>
+                } ?>
+            </div>
         </div>
     </div>
 </section>

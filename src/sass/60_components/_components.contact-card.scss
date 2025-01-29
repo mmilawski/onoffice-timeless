@@ -1,19 +1,24 @@
 .c-contact-card {
   $c-contact-card: &;
 
-  display: grid;
-  grid: subgrid / subgrid;
-  grid-row: span 3;
+  display: flex;
   gap: 1rem;
+  flex-direction: column;
 
   @include media-breakpoint-up(md) {
-    gap: 1.5rem;
+    gap: 1rem;
   }
 
   &__data {
     &.--is-address {
     }
     &.--is-contact {
+    }
+
+    &.--is-opening-hours {
+      display: grid;
+      grid-gap: 0 1rem;
+      grid-template-columns: auto 1fr;
     }
   }
 
@@ -23,12 +28,18 @@
 
     &.--is-opening-hours {
       display: grid;
-      grid-template-columns: auto 1fr;
+      grid-template-columns: subgrid;
+      grid-column: span 2;
     }
   }
 
   &__label {
-    flex-shrink: 0;
+    max-width: 250px;
+  }
+
+  &__title {
+    font-family: var(--oo-font-text-bold, var(--oo-font-text));
+    font-weight: var(--oo-font-text-bold-weight, var(--oo-font-text-weight));
   }
 
   &__value {
