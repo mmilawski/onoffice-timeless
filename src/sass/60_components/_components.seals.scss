@@ -9,14 +9,14 @@
   }
 
   &__item {
-    width: calc(50% - 0.5rem);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: calc(50% - (0.5rem / 2));
 
     padding: 0.5rem;
     aspect-ratio: 1 / 1;
+
+    @include media-breakpoint-up(xxxl) {
+      width: calc(33% - ((0.5rem * 2) / 3));
+    }
   }
 
   &__link {
@@ -77,5 +77,10 @@
       height: 140px;
       max-width: 140px;
     }
+  }
+
+  &.--is-grid {
+    display: flex;
+    flex-wrap: wrap;
   }
 }
