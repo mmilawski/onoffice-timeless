@@ -54,17 +54,17 @@ $team_query = new WP_Query($query_args);
 ); ?> class="c-team o-section --<?php echo $bg_color; ?>">
     <div class="c-team__container o-container">
         <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
-            <div class="c-team__row o-row">
+            <div class="c-team__content o-row --position-center">
                 <?php if (!empty($headline['text'])) { ?>
 									<?php oo_get_template('components', '', 'component-headline', [
              'headline' => $headline,
              'additional_headline_class' =>
-                 'c-team__headline o-col-12 o-col-xl-8',
+                 'c-team__headline o-col-12 o-col-lg-10 o-col-xl-8',
          ]); ?>
                 <?php } ?>
 
                 <?php if (!empty($text['wysiwyg'])) { ?>
-                    <div class="c-team__text o-text --is-wysiwyg o-col-12 o-col-xl-8">
+                    <div class="c-team__text o-text --is-wysiwyg o-col-12 o-col-lg-10 o-col-xl-8">
                         <?php echo $text['wysiwyg']; ?>
                     </div>
                 <?php } ?>
@@ -122,17 +122,14 @@ $team_query = new WP_Query($query_args);
         <?php endif; ?>
 
         <?php if (!empty($buttons['buttons'][0]['link'])) { ?>
-            <div class="c-team__row o-row">
-                <?php oo_get_template('components', '', 'component-buttons', [
-                    'buttons' => $buttons['buttons'],
-                    'additional_button_class' => $bg_color
-                        ? '--on-' . $bg_color
-                        : '',
-                    'additional_container_class' => !$is_slider
-                        ? 'c-team__buttons o-col-12 o-col-xl-8'
-                        : 'c-team__buttons --position-center o-col-12',
-                ]); ?>
-            </div>
+            <?php oo_get_template('components', '', 'component-buttons', [
+                'buttons' => $buttons['buttons'],
+                'additional_button_class' => $bg_color
+                    ? '--on-' . $bg_color
+                    : '',
+                'additional_container_class' =>
+                    'c-team__buttons --position-center o-col-12',
+            ]); ?>
         <?php } ?>
     </div>
 </section>

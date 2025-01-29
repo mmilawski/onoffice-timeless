@@ -3,12 +3,11 @@
 
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
   border-radius: $border-radius;
   scroll-margin-top: calc($mobile-header-height + $mobile-section-padding-top);
   scroll-snap-align: start;
+  gap: 2rem;
   @include media-breakpoint-up(xl) {
-    gap: 2rem;
     scroll-margin-top: calc(
       $mobile-header-height + $desktop-section-padding-top
     );
@@ -21,33 +20,60 @@
 
   &__picture {
     background-color: var(--oo-color-mix-bg-text-10);
-    border-bottom: 0px;
+    width: 100%;
     height: auto;
-    aspect-ratio: 3 / 4;
-    border-radius: $border-radius $border-radius 0 0;
+    border-radius: $border-radius;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
   }
 
   &__image {
-    border-radius: $border-radius;
   }
 
   &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
   &__name {
-    margin: 0;
+  }
+
+  &__rating {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    &-link {
+      text-decoration: underline;
+      color: var(--oo-color-text);
+      .--mobile {
+        @include media-breakpoint-up(xxl) {
+          display: none;
+        }
+      }
+      .--desktop {
+        display: none;
+        @include media-breakpoint-up(xxl) {
+          display: flex;
+        }
+      }
+    }
   }
 
   &__job {
     font-family: $font-family-text-bold;
     font-weight: $font-weight-text-bold;
-    font-size: 1.1rem;
-    line-height: 1.75rem;
-    margin-bottom: 1rem;
-    @include media-breakpoint-up(xl) {
-      font-size: 1.1rem;
-      line-height: 2rem;
-    }
+    font-size: $global-font-size;
+    line-height: $global-line-height;
+  }
+
+  &__contact-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__languages {
   }
 
   &__contact {
@@ -63,18 +89,23 @@
     }
 
     &.--is-networks {
-      margin-top: 1rem;
     }
+  }
+
+  &__description-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
   &__description {
     &.--shorten {
       position: relative;
       overflow: hidden;
-      max-height: calc($global-line-height * 10);
+      max-height: calc($global-line-height * 8);
       transition: max-height 0.25s ease-in-out;
-      @include media-breakpoint-up(xl) {
-        max-height: calc($global-line-height * 10);
+      @include media-breakpoint-up(xxl) {
+        max-height: calc($global-line-height * 6);
       }
       &.--is-open {
         max-height: 100rem;
@@ -82,28 +113,27 @@
     }
   }
 
+  &__more {
+  }
+
   &.--on-bg-light {
     #{$c-team-card}__picture {
       background-color: var(--oo-color-light-mix-bg-text-10);
-      border-color: var(--oo-color-light-primary, var(--oo-color-primary));
     }
   }
   &.--on-bg-dark {
     #{$c-team-card}__picture {
       background-color: var(--oo-color-dark-mix-bg-text-10);
-      border-color: var(--oo-color-dark-primary, var(--oo-color-primary));
     }
   }
   &.--on-bg-primary {
     #{$c-team-card}__picture {
       background-color: var(--oo-color-primary-mix-bg-text-10);
-      border-color: var(--oo-color-primary-primary, var(--oo-color-primary));
     }
   }
   &.--on-bg-secondary {
     #{$c-team-card}__picture {
       background-color: var(--oo-color-secondary-mix-bg-text-10);
-      border-color: var(--oo-color-secondary-primary, var(--oo-color-primary));
     }
   }
 
@@ -131,7 +161,9 @@
       }
     }
     #{$c-team-card}__picture {
-      aspect-ratio: 3/2;
+      @include media-breakpoint-up(lg) {
+        aspect-ratio: 1/1;
+      }
     }
     #{$c-team-card}__name {
       font-size: 1.125rem;
