@@ -20,7 +20,7 @@
   }
 
   // First section gets more padding-top because of the transparent header
-  & > *:not(.c-banner):not(.c-property-details) {
+  & > *:not(.c-banner):not(.c-property-details):first-child {
     padding-top: calc($mobile-header-height + $mobile-section-padding-top);
     @include media-breakpoint-up(xl) {
       padding-top: calc($mobile-header-height + $desktop-section-padding-top);
@@ -33,7 +33,7 @@
   .--is-header-style-white &,
   .--is-header-style-white + & {
     // First section gets more padding-top because of the transparent header
-    & > *:not(.c-banner):not(.c-property-details) {
+    & > *:not(.c-banner):not(.c-property-details):first-child {
       @include media-breakpoint-up(xl) {
         padding-top: $desktop-section-padding-top;
       }
@@ -42,7 +42,6 @@
       }
     }
   }
-
   // First banner gets more padding-top because of the transparent header
   & > *:first-child {
     .c-banner__slide {

@@ -25,11 +25,9 @@ $post = get_post();
 if (has_blocks($post->post_content)) {
     $blocks = parse_blocks($post->post_content);
     $is_banner = $blocks[0]['blockName'] === 'oo/banner';
-    $is_news = $blocks[0]['blockName'] === 'oo/news-details';
-    $has_picture = !empty($blocks[0]['attrs']['data']['image']);
-    $is_news_with_picture = $is_news && $has_picture;
+    $is_property_details = $blocks[0]['blockName'] === 'oo/property-details';
     $blocks_count = is_array($blocks) ? count($blocks) : 0;
-    if ($blocks_count > 0 && ($is_banner || $is_news_with_picture)) {
+    if ($blocks_count > 0 && ($is_banner || $is_property_details)) {
         $has_bg_picture = true;
     }
 }

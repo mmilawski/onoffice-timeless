@@ -116,9 +116,7 @@ $max_num_pages = $reviews_query->max_num_pages ?? null;
 
 <section <?php oo_block_id($block); ?> class="c-reviews <?php echo '--is-' .
      $type .
-     '-reviews'; ?> o-section --<?php echo $bg_color; ?> <?php echo '--' .
-     $bg_color .
-     '-mixed'; ?>">
+     '-reviews'; ?> o-section --<?php echo $bg_color; ?>">
     <div class="c-reviews__container o-container">
 
         <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>

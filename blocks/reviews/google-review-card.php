@@ -66,19 +66,16 @@ if (
           </div>
           
           <?php if ($is_long_text && $is_slider) { ?>
-            <a href="#" class="c-google-review-card__more c-link --read-more" data-open-text="<?php esc_html_e(
-                'Mehr anzeigen',
-                'oo_theme',
-            ); ?>" data-close-text="<?php esc_html_e(
-    'Weniger anzeigen',
-    'oo_theme',
-); ?>"
-            >
-              <span class="u-screen-reader-only"><?php esc_html_e(
-                  'Mehr anzeigen',
-                  'oo_theme',
-              ); ?></span>
-            </a>
+            <div class="c-google-review-card__more c-read-more">
+                <span class="c-read-more__text --more"><?php echo esc_html(
+                    'Mehr anzeigen',
+                    'oo_theme',
+                ); ?></span> 
+                <span class="c-read-more__text --less"><?php echo esc_html(
+                    'Weniger anzeigen',
+                    'oo_theme',
+                ); ?></span>
+            </div>
         <?php } ?>
 
           <?php if ($rating) { ?>

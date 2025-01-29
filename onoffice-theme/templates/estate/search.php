@@ -67,7 +67,7 @@ if (get_field('property_search_result')) {
                 if ($number == $fields_counter - 1) { ?>
                     </div>
 
-                    <div class="c-form__more c-read-more">
+                    <div class="c-form__more c-read-more --text-align-center">
                         <span class="c-read-more__text --more"><?php echo esc_html(
                             'Mehr anzeigen',
                             'oo_theme',

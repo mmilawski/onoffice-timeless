@@ -4,9 +4,8 @@
   &__text {
     display: inline-block;
     width: 100%;
-    text-align: center;
     margin: 0;
-    padding: 0.5rem 2rem;
+    padding: 0.5rem 0;
     color: var(--oo-color-primary);
     background: transparent;
     border: 2px solid transparent;
@@ -50,5 +49,9 @@
         display: block;
       }
     }
+  }
+
+  &.--text-align-center {
+    text-align: center;
   }
 }

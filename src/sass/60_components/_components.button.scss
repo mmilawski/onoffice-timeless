@@ -462,24 +462,6 @@
     width: 100%;
   }
 
-  &.--read-more {
-    &:before {
-      content: attr(data-open-text);
-    }
-    &:after {
-      content: attr(data-close-text);
-      display: none;
-    }
-    &.--is-open {
-      &:before {
-        display: none;
-      }
-      &:after {
-        display: inline-block;
-      }
-    }
-  }
-
   &.--show-more {
     display: inline-block;
     margin-top: 1rem;

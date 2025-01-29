@@ -193,7 +193,7 @@ jQuery(document).ready(function() {
     });
   }
   // Read more
-  const buttonMore = document.querySelectorAll('.--read-more');
+  const buttonMore = document.querySelectorAll('.c-read-more');
 
   if( buttonMore.length > 0 ) {
     buttonMore.forEach(button => {
