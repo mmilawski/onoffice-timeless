@@ -19,16 +19,32 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: auto;
+
+    &.--is-image {
+      min-width: 150px;
+      max-width: 337px;
+    }
   }
 
   &__picture {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    max-height: 225px;
   }
 
   &__image {
+    width: auto;
+    max-height: inherit;
+    height: auto;
     object-fit: contain;
+    border-radius: $border-radius;
   }
 
   &__placeholder {
+    border-radius: $border-radius;
     aspect-ratio: 1 / 1;
   }
 
@@ -72,66 +88,48 @@
   &__row {
     display: flex;
     align-items: flex-start;
-    gap: 1.5rem;
+    justify-content: center;
+    gap: 2.5rem;
     @include media-breakpoint-up(lg) {
-      gap: 2rem;
+      gap: 5rem;
     }
   }
+
+  &__contents {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__link {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+
   &__inner {
-    &.--is-masonry {
+    &.--is-grid {
       display: flex;
+      justify-content: center;
       flex-wrap: wrap;
       gap: 2rem;
-      flex-direction: row;
 
       #{$c-gallery}__item {
-        width: calc(50% - (2rem / 2));
-        padding: 0.625rem;
-        margin-bottom: 0.5rem;
-        border: 1px solid var(--oo-color-mix-bg-text-10);
-
-        @include media-breakpoint-up(md) {
-          width: calc(33% - ((2rem * 2) / 3));
-          padding: 1.5rem;
-          margin-bottom: unset;
-          aspect-ratio: 1 / 1;
-        }
-
         @include media-breakpoint-up(xl) {
-          width: calc(25% - ((2rem * 3) / 4));
+          height: 225px;
         }
       }
 
       &.--on-bg-light {
-        #{$c-gallery}__item {
-          border: 1px solid var(--oo-color-light-mix-bg-text-20);
-        }
       }
       &.--on-bg-dark {
-        #{$c-gallery}__item {
-          border: 1px solid var(--oo-color-dark-mix-bg-text-20);
-        }
       }
       &.--on-bg-primary {
-        #{$c-gallery}__item {
-          border: 1px solid var(--oo-color-primary-mix-bg-text-20);
-        }
       }
       &.--on-bg-secondary {
-        #{$c-gallery}__item {
-          border: 1px solid var(--oo-color-secondary-mix-bg-text-20);
-        }
       }
     }
     &.--is-slider {
-      #{$c-gallery}__link {
-        height: 100%;
-        width: 100%;
-      }
-      #{$c-gallery}__item {
-        height: 220px;
-        max-width: 220px;
-      }
     }
   }
 }

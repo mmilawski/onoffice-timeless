@@ -415,9 +415,6 @@ jQuery(document).ready(function() {
   const sliders = document.querySelectorAll('.c-slider');
 
   if( sliders.length > 0 ) {
-   // 
-
-      //for ( let i = 0, splideLength = sliders.length; i < splideLength; i++ ) {
       sliders.forEach(function(slider) {
 
       const splide = new Splide(slider);
@@ -457,8 +454,7 @@ jQuery(document).ready(function() {
       });
       splide.mount();
     });
-  //}
-}
+  }
 
 
   // Toogle Property Card

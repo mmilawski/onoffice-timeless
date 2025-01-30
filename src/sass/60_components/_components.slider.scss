@@ -343,6 +343,21 @@
   }
 
   &.--is-gallery-slider {
+    &.--is-destroyed {
+      #{$c-slider}__list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+      }
+
+      #{$c-slider}__slide {
+        width: auto;
+        height: 225px;
+        border-radius: $border-radius;
+        overflow: hidden;
+      }
+    }
   }
 
   // when slider has not enough slides
@@ -461,6 +476,22 @@
         @include media-breakpoint-up(xxl) {
           grid-template-columns: repeat(3, 1fr);
         }
+      }
+    }
+
+    &.--is-gallery-slider {
+      #{$c-slider}__list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+      }
+
+      #{$c-slider}__slide {
+        width: auto;
+        height: 225px;
+        border-radius: $border-radius;
+        overflow: hidden;
       }
     }
 
