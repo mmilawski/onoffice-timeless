@@ -23,16 +23,11 @@ include get_template_directory() . '/onoffice-theme/templates/fields.php';
 
 // ACF
 // Settings
-global $post;
-$settings = get_field('settings', $post->ID) ?? [];
+$settings = get_field('settings') ?? [];
 $bg_color = $settings['bg_color'] ?? 'bg-footer';
 ?>
 
-<form method="post" action="#onoffice-form" id="onoffice-form" class="c-form --is-newsletter-form <?php if (
-    !empty($bg_color)
-) {
-    echo '--on-' . $bg_color;
-} ?>">
+<form method="post" action="#onoffice-form" id="onoffice-form" class="c-form --is-newsletter-form --on-<?php echo $bg_color; ?>">
 
     <input type="hidden" name="oo_formid" value="<?php echo $pForm->getFormId(); ?>">
     <input type="hidden" name="oo_formno" value="<?php echo $pForm->getFormNo(); ?>">

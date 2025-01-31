@@ -27,11 +27,8 @@ $settings = get_field('settings') ?? [];
 $bg_color = $settings['bg_color'] ?? 'bg-footer';
 ?>
 
-<form method="post" action="#onoffice-form" id="onoffice-form" class="c-form --is-contact-form <?php if (
-    !empty($bg_color)
-) {
-    echo '--on-' . $bg_color;
-} ?>">
+<form method="post" action="#onoffice-form" id="onoffice-form" class="c-form --is-contact-form --on-<?php echo $bg_color; ?>">
+
     <?php if (!empty($pForm->getEstateContextLabel())) {
         echo '<h2 class="c-form__property-context o-headline">';
         echo $pForm->getEstateContextLabel();

@@ -6,7 +6,7 @@
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 2.5rem;
   @include media-breakpoint-up(xl) {
     scroll-margin-top: calc(
       $mobile-header-height + $desktop-section-padding-top
@@ -16,7 +16,7 @@
     scroll-margin-top: calc(
       $desktop-header-height + $desktop-section-padding-top
     );
-    gap: 2rem;
+    gap: 5rem;
   }
 
   &__property-context {
@@ -34,9 +34,9 @@
     // add more margin to button if there is no read-more
     &:not(:has(.c-read-more)) {
       #{$c-form}__button {
-        margin-top: 1rem;
+        margin-top: 0;
         @include media-breakpoint-up(xl) {
-          margin-top: 0;
+          margin-top: 1rem;
         }
       }
     }
@@ -45,22 +45,49 @@
   &__header {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
+
     @include media-breakpoint-up(xl) {
       grid-column: span 2;
     }
   }
 
   &__legend {
-    color: var(--oo-color-primary);
-    font-size: $desktop-h3-font-size;
-    line-height: $desktop-h3-line-height;
+    color: var(--oo-color-headline);
+    font-size: $mobile-h3-font-size;
+    line-height: $mobile-h3-line-height;
     font-family: $font-family-headline;
     font-weight: $font-weight-headline;
     display: inline-block;
-    padding: 0.5rem 0.75rem;
-    margin: -0.75rem auto 0 -0.75rem;
-    border-radius: $form-radius;
+
+    @include media-breakpoint-up(sm) {
+      font-size: $desktop-h3-font-size;
+      line-height: $desktop-h3-line-height;
+    }
+
+    .--bg-light & {
+      color: var(--oo-color-light-headline, var(--oo-color-headline));
+    }
+
+    .--bg-dark & {
+      color: var(--oo-color-dark-headline, var(--oo-color-headline));
+    }
+
+    .--bg-primary & {
+      color: var(--oo-color-primary-headline, var(--oo-color-headline));
+    }
+
+    .--bg-secondary & {
+      color: var(--oo-color-secondary-headline, var(--oo-color-headline));
+    }
+
+    .--bg-footer & {
+      color: var(--oo-color-footer-text, var(--oo-color-text));
+    }
+
+    .--bg-transparent & {
+      color: var(--oo-color-headline);
+    }
   }
 
   &__required {

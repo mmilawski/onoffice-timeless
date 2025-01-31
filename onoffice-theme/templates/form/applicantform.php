@@ -25,12 +25,7 @@ include get_template_directory() . '/onoffice-theme/templates/fields.php';
 $settings = get_field('settings') ?? [];
 $bg_color = $settings['bg_color'] ?? 'bg-footer';
 ?>
-
-<form method="post" action="#onoffice-form" id="onoffice-form" class="c-form --is-interest-form <?php if (
-    !empty($bg_color)
-) {
-    echo '--on-' . $bg_color;
-} ?>">
+<form method="post" action="#onoffice-form" id="onoffice-form" class="c-form --is-interest-form --on-<?php echo $bg_color; ?>">
 
     <input type="hidden" name="oo_formid" value="<?php echo $pForm->getFormId(); ?>">
     <input type="hidden" name="oo_formno" value="<?php echo $pForm->getFormNo(); ?>">
@@ -53,7 +48,6 @@ foreach ($pForm->getInputFields() as $input => $table) {
         }
     }
     $line = renderFormField($input, $pForm);
-
     if (
         in_array($input, ['gdprcheckbox', 'Id']) ||
         in_array($input, ['newsletter', 'Id']) ||
@@ -64,19 +58,15 @@ foreach ($pForm->getInputFields() as $input => $table) {
     ) {
         $table = 'other';
     }
-
     if ($table == 'address') {
         $addressValues[] = $line;
     }
-
     if ($table == 'searchcriteria') {
         $searchcriteriaValues[] = $line;
     }
-
     if ($table == '') {
         $addressValues[] = $line;
     }
-
     if ($table == 'other') {
         $otherValues[] = $line;
     }

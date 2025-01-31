@@ -490,11 +490,7 @@ if (!function_exists('renderFormField')) {
                         $pForm->getSearchcriteriaRangeInfosForField($fieldName),
                     )) > 0
             ) {
-                if (str_contains($fieldName, 'preis')) {
-                    $placeholderAddition = ' (in EUR)';
-                } elseif (str_contains($fieldName, 'miete')) {
-                    $placeholderAddition = ' (in EUR)';
-                } elseif (str_contains($fieldName, 'zimmer')) {
+                if (str_contains($fieldName, 'zimmer')) {
                     $placeholderAddition = ' ...';
                 } elseif (str_contains($fieldName, 'flaeche')) {
                     $placeholderAddition = ' (in m²)';

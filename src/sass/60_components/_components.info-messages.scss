@@ -3,10 +3,51 @@
 
   font-family: $font-family-text-bold;
   font-weight: $font-weight-text-bold;
-  padding: 1rem;
+  padding: 0.625rem;
   color: var(--oo-color-contrast-text);
   background-color: var(--oo-color-bg);
   border: 2px solid var(--oo-color-text);
+  border-radius: $border-radius;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+
+  &__icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: $global-line-height;
+
+    svg {
+      height: $icon-size;
+      width: $icon-size;
+    }
+  }
+
+  .--bg-light & {
+    color: var(--oo-color-contrast-text);
+    border: 2px solid var(--oo-color-light-text);
+  }
+
+  .--bg-dark & {
+    color: var(--oo-color-contrast-text);
+    border: 2px solid var(--oo-color-dark-text);
+  }
+
+  .--bg-primary & {
+    color: var(--oo-color-contrast-text);
+    border: 2px solid var(--oo-color-primary-text);
+  }
+
+  .--bg-secondary & {
+    color: var(--oo-color-contrast-text);
+    border: 2px solid var(--oo-color-secondary-text);
+  }
+
+  .--bg-footer & {
+    color: var(--oo-color-contrast-text);
+    border: 2px solid var(--oo-color-footer-text);
+  }
 
   &.--is-success {
     color: var(--oo-color-contrast-success);

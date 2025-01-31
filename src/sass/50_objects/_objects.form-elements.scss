@@ -122,6 +122,12 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     background-color: $form-color;
   }
 
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* Remove spin buttons in Chrome, Safari */
+    margin: 0; /* Remove any margin (optional) */
+  }
+
   &::placeholder {
     color: $form-placeholder;
     font-weight: $font-weight-text;
@@ -1480,6 +1486,13 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   position: relative;
   margin: 0;
   box-sizing: border-box;
+
+  &:not(& ~ &) {
+    margin-top: 0.5rem;
+    @include media-breakpoint-up(xl) {
+      margin-top: 1rem;
+    }
+  }
 
   // Input -------------------------------------------------------------- //
   &__input {
