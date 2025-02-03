@@ -29,7 +29,7 @@ use onOffice\WPlugin\ViewFieldModifier\AddressViewFieldModifierTypes;
 /* @var $pAddresses AddressList */
 
 return function (AddressList $pAddressClone) {
-    $pAddressClone->resetAddresssIterator();
+    $pAddressClone->resetAddressesIterator();
     $addressData = [];
 
     foreach (
