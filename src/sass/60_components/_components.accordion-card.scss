@@ -97,10 +97,6 @@
         }
       }
     }
-    #{$c-accordion-card}__icon-wrapper {
-      background-color: var(--oo-color-light-primary, var(--oo-color-primary));
-      color: var(--oo-color-light-contrast-primary);
-    }
   }
   .--bg-dark & {
     #{$c-accordion-card}__title {
@@ -115,10 +111,6 @@
           color: var(--oo-color-dark-primary, var(--oo-color-primary));
         }
       }
-    }
-    #{$c-accordion-card}__icon-wrapper {
-      background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
-      color: var(--oo-color-dark-contrast-primary);
     }
   }
   .--bg-secondary & {
@@ -135,13 +127,6 @@
         }
       }
     }
-    #{$c-accordion-card}__icon-wrapper {
-      background-color: var(
-        --oo-color-secondary-primary,
-        var(--oo-color-primary)
-      );
-      color: var(--oo-color-secondary-contrast-primary);
-    }
   }
   .--bg-primary & {
     #{$c-accordion-card}__title {
@@ -156,13 +141,6 @@
           color: var(--oo-color-primary-primary, var(--oo-color-primary));
         }
       }
-    }
-    #{$c-accordion-card}__icon-wrapper {
-      background-color: var(
-        --oo-color-primary-primary,
-        var(--oo-color-primary)
-      );
-      color: var(--oo-color-primary-contrast-primary);
     }
   }
 }

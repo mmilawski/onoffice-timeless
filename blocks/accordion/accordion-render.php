@@ -13,7 +13,7 @@ $settings = get_field('settings') ?? null;
 ); ?> class="c-accordion o-section --<?php echo $settings['bg_color']; ?>">
     <div class="c-accordion__container o-container">
         <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
-            <div class="c-accordion__content o-row">
+            <div class="c-accordion__content o-row --position-center">
                 <?php if (!empty($headline['text'])) { ?>
 										<?php oo_get_template('components', '', 'component-headline', [
               'headline' => $headline,
@@ -30,7 +30,7 @@ $settings = get_field('settings') ?? null;
         <?php } ?>
 
         <?php if (!empty($accordion)) { ?>
-            <div class="c-accordion__accordions o-row">
+            <div class="c-accordion__accordions o-row --position-center">
                 <?php foreach ($accordion as $key => $card) { ?>
                     <div class="c-accordion-card o-col-12 o-col-xl-8 <?php if (
                         $key === 0
