@@ -50,4 +50,4 @@ jobs:
           ssh-private-key: ${{ secrets.DEPLOY_KEY2 }}
 
       - name: Deploy on Server
-        run: rsync -e 'ssh -o StrictHostKeyChecking=no' -rlczh --delete-after ./ b33507otmyrdbxio@b33507ot.ssh.myrdbx.io:~/www/wp-content/themes/onoffice-classic
+        run: rsync -e 'ssh -o StrictHostKeyChecking=no' -rlczh --delete-after ./ b13w22pmyrdbxio@b13w22p.ssh.myrdbx.io:~/www/wp-content/themes/onoffice-classic
