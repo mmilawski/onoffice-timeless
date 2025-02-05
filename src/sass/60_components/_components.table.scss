@@ -4,14 +4,23 @@
   width: 100%;
   max-width: 100%;
 
+  @include media-breakpoint-up(xl) {
+    border: 1px solid var(--oo-color-mix-bg-contrast-50);
+    border-radius: $border-radius;
+  }
+
   &.--is-scrollable {
     @include media-breakpoint-up(xl) {
       overflow-x: scroll;
     }
   }
 
+  &__wrapper {
+  }
+
   &__head {
     display: none;
+
     @include media-breakpoint-up(xl) {
       display: table-header-group;
     }
@@ -20,7 +29,7 @@
   &__body {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
 
     @include media-breakpoint-up(md) {
       display: grid;
@@ -33,63 +42,67 @@
   }
 
   &__row {
+    border: 1px solid var(--oo-color-mix-bg-contrast-50);
+    border-radius: $border-radius;
+    padding: 1rem;
+
+    @include media-breakpoint-up(xl) {
+      border: none;
+      padding: 0;
+    }
+
     &.--is-head {
-      background: var(--oo-color-bg);
     }
 
     &.--is-body {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      background: var(--oo-color-bg);
-      border-bottom: 2px solid var(--oo-color-primary);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      border-bottom: 1px solid var(--oo-color-mix-bg-contrast-50);
       padding: 1rem;
+
       @include media-breakpoint-up(xl) {
         display: table-row;
-        background-color: transparent;
-        border-bottom: 2px solid var(--oo-color-mix-bg-text-20);
         padding: 0;
+      }
+
+      &:last-child {
+        @include media-breakpoint-up(xl) {
+          border-bottom: none;
+        }
       }
     }
   }
 
   &__data {
     display: flex;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 0;
     min-width: 7.5rem;
+    padding: 0;
 
     @include media-breakpoint-up(xl) {
       display: table-cell;
+      padding: 1rem;
     }
 
     .--is-head & {
       font-family: $font-family-text-bold;
       font-weight: $font-weight-text-bold;
-      @include font-size(16px, 1.25rem);
       text-align: left;
-      border-bottom: 2px solid var(--oo-color-primary);
-      padding: 0.5rem 1rem;
-
-      @include media-breakpoint-up(xl) {
-        @include font-size(18px, 1.5rem);
-      }
     }
 
     .--is-body & {
-      padding: 0;
-      @include media-breakpoint-up(xl) {
-        padding: 0.5rem 1rem;
-      }
-
       &:before {
         content: attr(data-label);
         font-family: $font-family-text-bold;
         font-weight: $font-weight-text-bold;
         min-width: 40%;
-        width: 40%;
+        width: 100%;
         hyphens: auto;
 
         @include media-breakpoint-up(xl) {
+          width: 40%;
           content: none;
         }
       }

@@ -1,0 +1,23 @@
+.c-property-fields {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+
+  &__item {
+    padding: 0.25rem 0;
+    border-bottom: 1px solid var(--oo-color-mix-bg-contrast-50);
+
+    @include media-breakpoint-up(xl) {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  &__label {
+  }
+
+  &__value {
+    font-weight: $font-weight-text-bold;
+    font-family: $font-family-text-bold;
+  }
+}

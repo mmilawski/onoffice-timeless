@@ -192,6 +192,7 @@ jQuery(document).ready(function() {
       });
     });
   }
+
   // Read more
   const buttonMore = document.querySelectorAll('.c-read-more');
 
@@ -420,7 +421,7 @@ jQuery(document).ready(function() {
       const splide = new Splide(slider);
       let outerslider = false; 
       
-      if (slider.classList.contains("--is-properties-slider"))
+      if (slider.classList.contains("--is-properties-slider") || slider.classList.contains("--is-properties-similar-slider"))
       {
         outerslider = true;
       }
@@ -556,6 +557,7 @@ jQuery(document).ready(function() {
       scrollBackToTop.classList.remove('--visible');
     }
  });
+
 });
 
 // Fixed Header on scroll

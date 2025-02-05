@@ -11,10 +11,10 @@ function oo_property_field_type($field, $item)
 
             <dl class="c-contact-person__contact --is-phone">
                 <dt class="c-contact-person__contact-label">
-                    <?php echo esc_html('Tel.:', 'oo_theme'); ?>
+                    <?php esc_html_e('Tel.:', 'oo_theme'); ?>
                 </dt>
                 <dd class="c-contact-person__contact-value">
-                    <a class="c-link --text-color --is-underlined --on-bg-transparent" href="tel:<?php echo oo_clean_link_number(
+                    <a class="c-link --text-color --on-bg-transparent" href="tel:<?php echo oo_clean_link_number(
                         $item,
                     ); ?>">
                         <?php echo esc_html($item); ?>
@@ -30,10 +30,10 @@ function oo_property_field_type($field, $item)
 
             <dl class="c-contact-person__contact --is-mobile">
                 <dt class="c-contact-person__contact-label">
-                    <?php echo esc_html('Mobile:', 'oo_theme'); ?>
+                    <?php esc_html_e('Mobile:', 'oo_theme'); ?>
                 </dt>
                 <dd class="c-contact-person__contact-value">
-                    <a class="c-link --text-color --is-underlined --on-bg-transparent" href="tel:<?php echo oo_clean_link_number(
+                    <a class="c-link --text-color --on-bg-transparent" href="tel:<?php echo oo_clean_link_number(
                         $item,
                     ); ?>">
                         <?php echo esc_html($item); ?>
@@ -52,10 +52,10 @@ function oo_property_field_type($field, $item)
     ) { ?>
         <dl class="c-contact-person__contact --is-fax">
             <dt class="c-contact-person__contact-label">
-                <?php echo esc_html('Fax:', 'oo_theme'); ?>
+                <?php esc_html_e('Fax:', 'oo_theme'); ?>
             </dt>
             <dd class="c-contact-person__contact-value">
-                <a class="c-link --text-color --is-underlined --on-bg-transparent" href="fax:<?php echo oo_clean_link_number(
+                <a class="c-link --text-color --on-bg-transparent" href="fax:<?php echo oo_clean_link_number(
                     $item,
                 ); ?>">
                     <?php echo esc_html($item); ?>
@@ -73,15 +73,15 @@ function oo_property_field_type($field, $item)
         ?>
         <dl class="c-contact-person__contact --is-email">
             <dt class="c-contact-person__contact-label">
-                <?php echo esc_html('E-Mail:', 'oo_theme'); ?>
+                <?php esc_html_e('E-Mail:', 'oo_theme'); ?>
             </dt>
             <dd class="c-contact-person__contact-value">
-                <a class="c-link --text-color --is-underlined --on-bg-transparent" href="mailto:<?= $mailto_link ?>">
+                <a class="c-link --text-color --on-bg-transparent" href="mailto:<?= $mailto_link ?>">
                     <?php echo $email_antispam; ?>
                 </a>
             </dd>
         </dl>
-        <?php
+    <?php
     }
 
     if ($field == 'Homepage' || $field == 'url') {
@@ -91,10 +91,10 @@ function oo_property_field_type($field, $item)
 
             <dl class="c-contact-person__contact --is-website">
                 <dt class="c-contact-person__contact-label">
-                    <?php echo esc_html('Web:', 'oo_theme'); ?>
+                    <?php esc_html_e('Web:', 'oo_theme'); ?>
                 </dt>
                 <dd class="c-contact-person__contact-value">
-                    <a class="c-link --text-color --is-underlined --on-bg-transparent" target="_blank" href="<?php echo esc_html(
+                    <a class="c-link --text-color --on-bg-transparent" target="_blank" href="<?php echo esc_html(
                         $item,
                     ); ?>">
                         <?php echo esc_html($item); ?>
@@ -139,7 +139,7 @@ if (!empty($pEstates->getEstateContacts())) {
     $headline = oo_get_contacts_headline($contacts);
     $contact_count = is_array($contacts) ? count($contacts) : 0;
 
-    echo '<h2 class="c-property-details__headline o-headline --h3 --is-property-detail">';
+    echo '<h2 class="c-property-details__headline o-headline">';
     echo $headline;
     echo '</h2>';
 
@@ -147,12 +147,23 @@ if (!empty($pEstates->getEstateContacts())) {
         echo '<div class="c-property-details__contacts-wrapper">';
     }
 
-    foreach ($pEstates->getEstateContacts() as $contact_data) { ?>
+    foreach ($pEstates->getEstateContacts() as $contact_data) {
+        if (is_null($contact_data['id'])) {
+            continue;
+        } ?>
         <div class="c-property-details__contact c-contact-person">
             <?php
+            $contact_link = isset($contact_data['id'])
+                ? $pEstates->getAddressLink($contact_data['id'])
+                : '';
+            if (!empty($contact_link)) {
+                echo '<a href="' .
+                    esc_url($contact_link) .
+                    '" class="c-contact-person__link">';
+            }
+
             if ($contact_data['imageUrl']) {
                 $image = '';
-
                 if (
                     $contact_data['Vorname'] !== '' ||
                     $contact_data['Name'] !== ''
@@ -165,7 +176,7 @@ if (!empty($pEstates->getEstateContacts())) {
                         ' ' .
                         $contact_data['Name'];
                 } else {
-                    $image_alt = esc_html('Ansprechpartner', 'oo_theme');
+                    $image_alt = esc_html__('Ansprechpartner', 'oo_theme');
                 }
 
                 $image = [
@@ -193,41 +204,38 @@ if (!empty($pEstates->getEstateContacts())) {
                         'dimensions' => [
                             '575' => [
                                 'w' => $contact_image_width_xs,
-                                'h' => round(($contact_image_width_xs * 1) / 1),
+                                'h' => $contact_image_width_xs,
                             ],
                             '1600' => [
                                 'w' => $contact_image_width_xxxl,
-                                'h' => round(
-                                    ($contact_image_width_xxxl * 1) / 1,
-                                ),
+                                'h' => $contact_image_width_xxxl,
                             ],
                             '1400' => [
                                 'w' => $contact_image_width_xxl,
-                                'h' => round(
-                                    ($contact_image_width_xxl * 1) / 1,
-                                ),
+                                'h' => $contact_image_width_xxl,
                             ],
                             '1200' => [
                                 'w' => $contact_image_width_xl,
-                                'h' => round(($contact_image_width_xl * 1) / 1),
+                                'h' => $contact_image_width_xl,
                             ],
                             '992' => [
                                 'w' => $contact_image_width_lg,
-                                'h' => round(($contact_image_width_lg * 1) / 1),
+                                'h' => $contact_image_width_lg,
                             ],
                             '768' => [
                                 'w' => $contact_image_width_md,
-                                'h' => round(($contact_image_width_md * 1) / 1),
+                                'h' => $contact_image_width_md,
                             ],
                             '576' => [
                                 'w' => $contact_image_width_sm,
-                                'h' => round(($contact_image_width_sm * 1) / 1),
+                                'h' => $contact_image_width_sm,
                             ],
                         ],
                     ]);
                 }
-            } else {
-                echo '<div class="c-contact-person__picture"></div>';
+            }
+            if (!empty($contact_link)) {
+                echo '</a>';
             }
 
             $salutation = $contact_data['Anrede'];
@@ -260,119 +268,83 @@ if (!empty($pEstates->getEstateContacts())) {
                 $name_components[] = $last_name;
             }
             $name_output = join(' ', $name_components);
-            ?>
-            <div class="c-contact-person__overlay">
-                <div class="c-contact-person__header">
-                    <?php if (
-                        !empty($job_title) ||
-                        !empty($phone) ||
-                        !empty($mobile) ||
-                        !empty($fax) ||
-                        !empty($email) ||
-                        !empty($address_fields)
-                    ) { ?>
-                        <div class="c-contact-person__icon c-button --only-icon --more">
-                            <span class="c-button__icon --plus">
-                                <?php oo_get_icon('plus'); ?> </span>
-                        </div>
-                        <div class="c-contact-person__icon c-button --only-icon --less">
-                            <span class="c-button__icon --minus">
-                                <?php oo_get_icon('minus'); ?>
-                            </span>
-                        </div>
-                    <?php } ?>
-                    <?php if (!empty($name_output)) {
-                        echo '<p class="c-contact-person__name o-headline --h3">';
-                        echo esc_html($name_output);
-                        echo '</p>';
-                    } ?>
-                </div>
 
-                <?php if (!empty($address_fields)): ?>
-                    <div class="c-contact-person__content">
-                        <?php if (!empty($job_title)) { ?>
-                            <p class="c-contact-person__job"><?php echo $job_title; ?></p>
-                        <?php } ?>
+            if ($name_output) {
+                echo '<p class="c-contact-person__name o-headline --h3">';
+                echo esc_html($name_output);
+                echo '</p>';
+            }
 
-                        <?php
-                        // Output all other configured fields.
-                        foreach ($address_fields as $field) {
-                            if (empty($contact_data[$field])) {
-                                continue;
-                            } elseif (is_array($contact_data[$field])) {
-                                foreach ($contact_data[$field] as $item) {
-                                    if (in_array($field, $labels_fields)) {
-                                        oo_property_field_type($field, $item);
-                                    } else {
-                                        if (!empty($contact_data[$field])) {
-                                            echo '<p class="c-contact-person__data --is-' .
-                                                strtolower($field) .
-                                                '">';
-                                            echo esc_html(
-                                                $contact_data[$field],
-                                            );
-                                            echo '</p>';
-                                        }
-                                    }
-                                }
-                            } else {
-                                if (in_array($field, $labels_fields)) {
-                                    oo_property_field_type(
-                                        $field,
-                                        $contact_data[$field],
-                                    );
-                                } else {
-                                    if (!empty($contact_data[$field])) {
-                                        echo '<p class="c-contact-person__data --is-' .
-                                            strtolower($field) .
-                                            '">';
-                                        echo esc_html($contact_data[$field]);
-                                        echo '</p>';
-                                    }
-                                }
+            // Output all other configured fields.
+            foreach ($address_fields as $field) {
+                if (empty($contact_data[$field])) {
+                    continue;
+                } elseif (is_array($contact_data[$field])) {
+                    foreach ($contact_data[$field] as $item) {
+                        if (in_array($field, $labels_fields)) {
+                            oo_property_field_type($field, $item);
+                        } else {
+                            if (!empty($contact_data[$field])) {
+                                echo '<p class="c-contact-person__data --is-' .
+                                    strtolower($field) .
+                                    '">';
+                                echo esc_html($contact_data[$field]);
+                                echo '</p>';
                             }
                         }
+                    }
+                } else {
+                    if (in_array($field, $labels_fields)) {
+                        oo_property_field_type($field, $contact_data[$field]);
+                    } else {
+                        if (!empty($contact_data[$field])) {
+                            echo '<p class="c-contact-person__data --is-' .
+                                strtolower($field) .
+                                '">';
+                            echo esc_html($contact_data[$field]);
+                            echo '</p>';
+                        }
+                    }
+                }
+            }
 
-                        $street_output = '';
-                        if ($street) {
-                            $street_output = $street;
-                        }
-                        $city_components = [];
-                        if ($postCode) {
-                            $city_components[] = $postCode;
-                        }
-                        if ($town) {
-                            $city_components[] = $town;
-                        }
-                        $city_output = join(' ', $city_components);
+            $street_output = '';
+            if ($street) {
+                $street_output = $street;
+            }
+            $city_components = [];
+            if ($postCode) {
+                $city_components[] = $postCode;
+            }
+            if ($town) {
+                $city_components[] = $town;
+            }
+            $city_output = join(' ', $city_components);
 
-                        if ($street_output && $city_output) {
-                            echo '<p class="c-contact-person__address">' .
-                                esc_html($street_output) .
-                                '<br>' .
-                                esc_html($city_output) .
-                                '</p>';
-                        } elseif ($street_output) {
-                            echo '<p class="c-contact-person__address">' .
-                                esc_html($street_output) .
-                                '</p>';
-                        } elseif ($city_output) {
-                            echo '<p class="c-contact-person__address">' .
-                                esc_html($city_output) .
-                                '</p>';
-                        }
-                        ?>
-                    </div>
-                <?php endif; ?>
-            </div>
+            if ($street_output && $city_output) {
+                echo '<p class="c-contact-person__address">' .
+                    esc_html($street_output) .
+                    '<br>' .
+                    esc_html($city_output) .
+                    '</p>';
+            } elseif ($street_output) {
+                echo '<p class="c-contact-person__address">' .
+                    esc_html($street_output) .
+                    '</p>';
+            } elseif ($city_output) {
+                echo '<p class="c-contact-person__address">' .
+                    esc_html($city_output) .
+                    '</p>';
+            }
+            ?>
+
         </div>
-
-<?php }
+    <?php
+    }
 
     if ($contact_count > 1 == true) {
         echo '</div>';
     }
 
     echo '</div>';
-}
-?>
+} ?>

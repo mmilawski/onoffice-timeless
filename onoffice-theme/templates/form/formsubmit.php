@@ -23,7 +23,7 @@
 // Settings
 global $post;
 $settings = get_field('settings') ?? [];
-$bg_color = $settings['bg_color'] ?? 'bg-footer';
+$bg_color = $settings['bg_color'] ?? null;
 
 $key = get_option('onoffice-settings-captcha-sitekey', '');
 
@@ -41,7 +41,9 @@ if ($pForm->needsReCaptcha() && $key !== '') {
 		data-sitekey="<?php echo esc_attr($key); ?>"
 		data-callback="onSubmit"
 		data-size="invisible"></div>
-	<button class="c-form__button c-button --on-<?php echo $bg_color; ?>"><?php echo esc_html(
+	<button class="c-form__button c-button <?php if (!empty($bg_color)) {
+     echo '--on-' . $bg_color;
+ } ?>"><?php echo esc_html(
     $pForm->getGenericSetting('submitButtonLabel'),
 ); ?></button>
 	<script type="text/javascript">
@@ -77,7 +79,9 @@ if ($pForm->needsReCaptcha() && $key !== '') {
 <?php
 } else {
      ?>
-	<button class="c-form__button c-button --on-<?php echo $bg_color; ?>"><?php echo esc_html(
+	<button class="c-form__button c-button <?php if (!empty($bg_color)) {
+     echo '--on-' . $bg_color;
+ } ?>"><?php echo esc_html(
     $pForm->getGenericSetting('submitButtonLabel'),
 ); ?></button>
 <?php

@@ -1,0 +1,150 @@
+.c-energy-certificate {
+  $c-energy-certificate: &;
+
+  border: 1px solid var(--oo-color-mix-bg-text-50);
+  background: var(--oo-color-energy-bg);
+  color: var(--oo-color-contrast-energy-bg);
+  border-radius: $border-radius;
+  display: flex;
+  white-space: nowrap;
+  gap: 0.5rem;
+  padding: 1rem;
+
+  &__class {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    flex: 1;
+    text-align: center;
+
+    &:after {
+      content: '';
+      display: block;
+      height: 0.5rem;
+      width: 100%;
+      border-radius: 2px;
+    }
+
+    &.#{--a\+} {
+      &:after {
+        background-color: var(--oo-color-energy-class-a-plus);
+      }
+    }
+
+    &.--a {
+      &:after {
+        background-color: var(--oo-color-energy-class-a);
+      }
+    }
+
+    &.--b {
+      &:after {
+        background-color: var(--oo-color-energy-class-b);
+      }
+    }
+
+    &.--c {
+      &:after {
+        background-color: var(--oo-color-energy-class-c);
+      }
+    }
+
+    &.--d {
+      &:after {
+        background-color: var(--oo-color-energy-class-d);
+      }
+    }
+
+    &.--e {
+      &:after {
+        background-color: var(--oo-color-energy-class-e);
+      }
+    }
+
+    &.--f {
+      &:after {
+        background-color: var(--oo-color-energy-class-f);
+      }
+    }
+
+    &.--g {
+      &:after {
+        background-color: var(--oo-color-energy-class-g);
+      }
+    }
+
+    &.--h {
+      &:after {
+        background-color: var(--oo-color-energy-class-h);
+      }
+    }
+
+    &.--is-active {
+      border-radius: $border-radius-small;
+
+      &:after {
+        content: none;
+      }
+
+      &.#{--a\+} {
+        background-color: var(--oo-color-energy-class-a-plus);
+        color: var(--oo-color-contrast-energy-a-plus);
+      }
+
+      &.--a {
+        background-color: var(--oo-color-energy-class-a);
+        color: var(--oo-color-contrast-energy-a);
+      }
+
+      &.--b {
+        background-color: var(--oo-color-energy-class-b);
+        color: var(--oo-color-contrast-energy-b);
+      }
+
+      &.--c {
+        background-color: var(--oo-color-energy-class-c);
+        color: var(--oo-color-contrast-energy-c);
+      }
+
+      &.--d {
+        background-color: var(--oo-color-energy-class-d);
+        color: var(--oo-color-contrast-energy-d);
+      }
+
+      &.--e {
+        background-color: var(--oo-color-energy-class-e);
+        color: var(--oo-color-contrast-energy-e);
+      }
+
+      &.--f {
+        background-color: var(--oo-color-energy-class-f);
+        color: var(--oo-color-contrast-energy-f);
+      }
+
+      &.--g {
+        background-color: var(--oo-color-energy-class-g);
+        color: var(--oo-color-contrast-energy-g);
+      }
+
+      &.--h {
+        background-color: var(--oo-color-energy-class-h);
+        color: var(--oo-color-contrast-energy-h);
+      }
+    }
+  }
+
+  &__label {
+    padding: 0 0 0.5rem;
+    .--is-active & {
+      padding: 0.5rem;
+    }
+  }
+
+  &__value {
+    display: none;
+    .--is-active & {
+      display: block;
+      padding: 0 0.5rem 0.5rem;
+    }
+  }
+}

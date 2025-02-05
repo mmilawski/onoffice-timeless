@@ -18,6 +18,17 @@
     opacity 0.25s ease-in-out;
   cursor: pointer;
 
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      max-width: $icon-size-small;
+      height: $icon-size-small;
+    }
+  }
+
   @include plain-visited() {
     color: var(--oo-color-contrast-primary);
     background-color: var(--oo-color-primary);
@@ -44,6 +55,13 @@
     opacity: 0.4;
     outline-color: transparent;
     cursor: default;
+  }
+
+  &.--has-icon {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
   }
 
   &.--on-bg-light,

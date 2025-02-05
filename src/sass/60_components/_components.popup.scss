@@ -21,7 +21,7 @@
     position: fixed;
     inset: 0;
     cursor: pointer;
-    background: var(--oo-color-transparent-text-80);
+    background: var(--oo-color-transparent-shadow-80);
   }
 
   &__wrapper {
@@ -29,11 +29,12 @@
     max-height: calc(100dvh - 2rem);
     display: flex;
     flex-direction: column;
+    gap: 2rem;
     background: var(--oo-color-bg);
-    border-bottom: 2px solid var(--oo-color-primary);
-    box-shadow: 0px 1px 4px var(--oo-color-transparent-text-10);
+    box-shadow: 0 0 5px var(--oo-color-transparent-shadow-15);
     position: relative;
     z-index: 1003;
+    border-radius: $border-radius;
 
     @include media-breakpoint-up(lg) {
       max-width: 50vw;
@@ -43,44 +44,39 @@
   &__header {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: flex-start;
+    gap: 1rem;
+    padding: 0.5rem 0.5rem 0 1rem;
   }
 
-  &__label {
-    color: var(--oo-color-contrast-primary);
-    background-color: var(--oo-color-primary);
-    border: 2px solid var(--oo-color-bg);
-    font-family: $font-family-button;
-    font-weight: $font-weight-button;
-    display: inline-block;
-    padding: 0.5rem 0.75rem;
-    margin: 0 auto 0 0;
+  &__title {
+    @include font-size($mobile-h4-font-size, $mobile-h4-line-height);
+    font-weight: $font-weight-headline;
+
+    @include media-breakpoint-up(xl) {
+      @include font-size($desktop-h4-font-size, $desktop-h4-line-height);
+    }
   }
 
   &__close {
-    cursor: pointer;
-    color: var(--oo-color-text);
-    transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
-      border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
-    padding: 1rem;
-    @include visited-active {
-      color: var(--oo-color-text);
-    }
-    @include hover-focus {
-      color: var(--oo-color-primary);
-    }
-  }
-
-  &__icon {
-    width: 1rem;
-    height: 1rem;
-    display: block;
+    flex-shrink: 0;
   }
 
   &__content {
-    padding: 2rem;
+    padding: 0 1rem 2rem;
     overflow-y: auto;
+  }
+
+  &.--is-share {
+    #{$c-popup}__wrapper {
+      @include media-breakpoint-up(lg) {
+        min-width: 600px;
+      }
+    }
+    #{$c-popup}__content {
+      overflow: visible;
+    }
   }
 
   &.--is-widget {
@@ -99,7 +95,7 @@
 
       &__wrapper {
         border: none;
-        box-shadow: 0px 1px 11px 7px var(--oo-color-transparent-text-10);
+        box-shadow: 0 0 5px var(--oo-color-transparent-shadow-15);
         overflow-y: auto;
 
         @include media-breakpoint-up(lg) {

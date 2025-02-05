@@ -15,11 +15,90 @@
   --oo-color-shadow-r: 0;
   --oo-color-shadow-g: 0;
   --oo-color-shadow-b: 0;
+  --oo-color-energy-class-a-plus: #2e7d32;
+  --oo-color-energy-class-a-plus-r: 46;
+  --oo-color-energy-class-a-plus-g: 125;
+  --oo-color-energy-class-a-plus-b: 50;
+  --oo-color-energy-class-a: #76a330;
+  --oo-color-energy-class-a-r: 118;
+  --oo-color-energy-class-a-g: 163;
+  --oo-color-energy-class-a-b: 48;
+  --oo-color-energy-class-b: #94b94a;
+  --oo-color-energy-class-b-r: 148;
+  --oo-color-energy-class-b-g: 185;
+  --oo-color-energy-class-b-b: 74;
+  --oo-color-energy-class-c: #bacd7f;
+  --oo-color-energy-class-c-r: 186;
+  --oo-color-energy-class-c-g: 205;
+  --oo-color-energy-class-c-b: 127;
+  --oo-color-energy-class-d: #f6cc09;
+  --oo-color-energy-class-d-r: 246;
+  --oo-color-energy-class-d-g: 204;
+  --oo-color-energy-class-d-b: 9;
+  --oo-color-energy-class-e: #f4b615;
+  --oo-color-energy-class-e-r: 244;
+  --oo-color-energy-class-e-g: 182;
+  --oo-color-energy-class-e-b: 21;
+  --oo-color-energy-class-f: #eea212;
+  --oo-color-energy-class-f-r: 238;
+  --oo-color-energy-class-f-g: 162;
+  --oo-color-energy-class-f-b: 18;
+  --oo-color-energy-class-g: #db6b28;
+  --oo-color-energy-class-g-r: 219;
+  --oo-color-energy-class-g-g: 107;
+  --oo-color-energy-class-g-b: 40;
+  --oo-color-energy-class-h: #da5138;
+  --oo-color-energy-class-h-r: 218;
+  --oo-color-energy-class-h-g: 81;
+  --oo-color-energy-class-h-b: 56;
+  --oo-color-energy-bg: #ffffff;
+  --oo-color-energy-bg-r: 255;
+  --oo-color-energy-bg-g: 255;
+  --oo-color-energy-bg-b: 255;
 
   // global
   #{--oo-color-contrast-success}: contrast-color(var(--oo-color-success));
   #{--oo-color-contrast-warning}: contrast-color(var(--oo-color-warning));
   #{--oo-color-contrast-error}: contrast-color(var(--oo-color-error));
+
+  #{--oo-color-contrast-energy-a-plus}: contrast-color(
+    var(--oo-color-energy-class-a-plus)
+  );
+
+  #{--oo-color-contrast-energy-a}: contrast-color(
+    var(--oo-color-energy-class-a)
+  );
+
+  #{--oo-color-contrast-energy-b}: contrast-color(
+    var(--oo-color-energy-class-b)
+  );
+
+  #{--oo-color-contrast-energy-c}: contrast-color(
+    var(--oo-color-energy-class-c)
+  );
+
+  #{--oo-color-contrast-energy-d}: contrast-color(
+    var(--oo-color-energy-class-d)
+  );
+
+  #{--oo-color-contrast-energy-e}: contrast-color(
+    var(--oo-color-energy-class-e)
+  );
+
+  #{--oo-color-contrast-energy-f}: contrast-color(
+    var(--oo-color-energy-class-f)
+  );
+
+  #{--oo-color-contrast-energy-g}: contrast-color(
+    var(--oo-color-energy-class-g)
+  );
+
+  #{--oo-color-contrast-energy-h}: contrast-color(
+    var(--oo-color-energy-class-h)
+  );
+
+  #{--oo-color-contrast-energy-bg}: contrast-color(var(--oo-color-energy-bg));
+
   #{--oo-color-transparent-shadow-10}: transparent-color(
     var(--oo-color-shadow),
     0.1
@@ -32,24 +111,12 @@
     var(--oo-color-shadow),
     0.2
   );
-  #{--oo-color-transparent-shadow-15}: transparent-color(
-    var(--oo-color-shadow),
-    0.15
-  );
   #{--oo-color-transparent-shadow-50}: transparent-color(
     var(--oo-color-shadow),
     0.5
   );
-  #{--oo-color-transparent-text-10}: transparent-color(
-    var(--oo-color-text),
-    0.1
-  );
-  #{--oo-color-transparent-text-20}: transparent-color(
-    var(--oo-color-text),
-    0.2
-  );
-  #{--oo-color-transparent-text-80}: transparent-color(
-    var(--oo-color-text),
+  #{--oo-color-transparent-shadow-80}: transparent-color(
+    var(--oo-color-shadow),
     0.8
   );
   #{--oo-color-transparent-bg-25}: transparent-color(var(--oo-color-bg), 0.25);
@@ -117,16 +184,6 @@
   );
 
   // light
-  #{--oo-color-light-transparent-text-10}: transparent-color(
-    var(--oo-color-light-text),
-    0.1,
-    var(--oo-color-text)
-  );
-  #{--oo-color-light-transparent-text-20}: transparent-color(
-    var(--oo-color-light-text),
-    0.2,
-    var(--oo-color-text)
-  );
   #{--oo-color-light-transparent-bg-25}: transparent-color(
     var(--oo-color-light-bg),
     0.25,
@@ -218,16 +275,6 @@
   );
 
   // dark
-  #{--oo-color-dark-transparent-text-10}: transparent-color(
-    var(--oo-color-dark-text),
-    0.1,
-    var(--oo-color-text)
-  );
-  #{--oo-color-dark-transparent-text-20}: transparent-color(
-    var(--oo-color-dark-text),
-    0.2,
-    var(--oo-color-text)
-  );
   #{--oo-color-dark-transparent-bg-25}: transparent-color(
     var(--oo-color-dark-bg),
     0.25,
@@ -319,16 +366,6 @@
   );
 
   // primary
-  #{--oo-color-primary-transparent-text-10}: transparent-color(
-    var(--oo-color-primary-text),
-    0.1,
-    var(--oo-color-text)
-  );
-  #{--oo-color-primary-transparent-text-20}: transparent-color(
-    var(--oo-color-primary-text),
-    0.2,
-    var(--oo-color-text)
-  );
   #{--oo-color-primary-transparent-bg-25}: transparent-color(
     var(--oo-color-primary-bg),
     0.25,
@@ -420,16 +457,6 @@
   );
 
   // secondary
-  #{--oo-color-secondary-transparent-text-10}: transparent-color(
-    var(--oo-color-secondary-text),
-    0.1,
-    var(--oo-color-text)
-  );
-  #{--oo-color-secondary-transparent-text-20}: transparent-color(
-    var(--oo-color-secondary-text),
-    0.2,
-    var(--oo-color-text)
-  );
   #{--oo-color-secondary-transparent-bg-25}: transparent-color(
     var(--oo-color-secondary-bg),
     0.25,
@@ -557,16 +584,6 @@
   );
 
   // footer
-  #{--oo-color-footer-transparent-text-10}: transparent-color(
-    var(--oo-color-footer-text),
-    0.1,
-    var(--oo-color-text)
-  );
-  #{--oo-color-footer-transparent-text-20}: transparent-color(
-    var(--oo-color-footer-text),
-    0.2,
-    var(--oo-color-text)
-  );
   #{--oo-color-footer-transparent-primary-20}: transparent-color(
     var(--oo-color-footer-primary),
     0.2,

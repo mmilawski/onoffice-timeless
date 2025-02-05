@@ -1,0 +1,11 @@
+.c-flags {
+  $c-flags: &;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  &.--space-between {
+    justify-content: space-between;
+  }
+}

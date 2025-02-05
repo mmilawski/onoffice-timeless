@@ -229,9 +229,9 @@ while ($current_property = $pEstatesClone->estateIterator()):
                         $property_status ||
                         (Favorites::isFavorizationEnabled() && !$is_reference)
                     ) { ?>
-                <div class="c-property-card__flags c-flags">
+                <div class="c-property-card__flags c-flags --space-between">
                     <?php if ($property_status) { ?>
-                        <span class="c-property-card__status c-flag">
+                        <span class="c-property-card__status c-flag --property-status">
                             <?php echo ucfirst($property_status); ?>
                         </span>
                     <?php } ?>
@@ -278,7 +278,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
                 </h3>
             <?php } ?>
             <?php if ($is_fields) { ?>
-                <div class="c-property-card__features">
+                <div class="c-property-card__features c-property-features">
                     <?php foreach ($current_property as $field => $value) {
                         if (
                             (is_numeric($value) && 0 == $value) ||
@@ -292,7 +292,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
                         ) {
                             continue;
                         } ?>
-                        <span class="c-property-features c-flag">
+                        <span class="c-property-features__item">
                           <?php
                           $dont_echo_label = [
                               'objektart',
@@ -324,7 +324,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
 
 
 
-                    <span class="c-property-features c-flag <?php if (
+                    <span class="c-property-features__item <?php if (
                         !$current_property['plz'] &&
                         !$current_property['ort'] &&
                         !$current_property['land']

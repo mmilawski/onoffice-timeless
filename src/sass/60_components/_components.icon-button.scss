@@ -44,10 +44,20 @@
   &__text {
   }
 
-  &__icon,
-  svg {
+  &__icon {
     height: $icon-size;
     width: $icon-size;
+
+    svg {
+      height: $icon-size;
+      width: $icon-size;
+    }
+
+    &.--filled {
+      svg {
+        fill: var(--oo-color-contrast-primary);
+      }
+    }
   }
 
   &.--on-bg-light,
