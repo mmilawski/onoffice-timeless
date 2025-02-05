@@ -46,7 +46,7 @@ jobs:
           json: '{"version":"${{github.ref_name}}", "details_url":"https://onoffice-wp-updates.de", "download_url": "https://onoffice-wp-updates.de/releases/themes/${{ github.event.repository.name }}/${{ github.event.repository.name }}.zip"}'
 
       - name: Upload release build
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ github.event.repository.name }} Prerelease Bundle ${{github.ref_name}}
           path: |
