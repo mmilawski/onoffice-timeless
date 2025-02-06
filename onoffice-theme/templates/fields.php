@@ -118,8 +118,6 @@ if (!function_exists('renderFieldEstateSearch')) {
             $placeholder = esc_html__('Bitte wählen', 'oo_theme');
         } elseif (in_array($typeCurrentInput, $typesBoolean)) {
             $placeholder = esc_html__('Bitte wählen', 'oo_theme');
-        } else {
-            $placeholder = esc_html__('z.B. "..."', 'oo_theme');
         }
 
         if ($fieldName === 'regionaler_zusatz') {
