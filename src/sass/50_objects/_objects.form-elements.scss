@@ -107,6 +107,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   -moz-appearance: textfield;
   transition: outline-color $form-duration $form-timing,
     border-color $form-duration $form-timing;
+  height: 2.375rem;
 
   @include focus() {
     outline-color: $form-focus;
