@@ -169,12 +169,12 @@ $is_long_description = $description_word_count > 50 ? true : false;
             </div>
         <?php endif; ?>
         <?php if (
-            $card['languages'] ||
-            $contact['phone'] ||
-            $contact['mobile'] ||
-            $contact['fax'] ||
-            $card['networks'] ||
-            $contact['email']
+            !empty($card['languages']) ||
+            !empty($contact['phone']) ||
+            !empty($contact['mobile']) ||
+            !empty($contact['fax']) ||
+            !empty($card['networks']) ||
+            !empty($contact['email'])
         ) { ?>
             <div class="c-team-card__contact-wrapper">
                 <?php if (!empty($card['languages'])) { ?>
