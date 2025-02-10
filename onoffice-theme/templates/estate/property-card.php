@@ -34,7 +34,7 @@ $dont_echo = [
     'sonstige_angaben',
 ];
 $location_fields = ['plz', 'ort', 'land'];
-$price_fields = ['kaufpreis', 'kaltmiete'];
+$price_fields = ['kaufpreis', 'kaltmiete', 'nettokaltmiete'];
 
 $pEstatesClone = clone $pEstates;
 $pEstatesClone->resetEstateIterator();
@@ -125,7 +125,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
                             if ($picture_values['title'] == true) {
                                 $image_alt = esc_html($picture_values['title']);
                             } else {
-                                $image_alt = esc_html(
+                                $image_alt = esc_html__(
                                     'Immobilienbild',
                                     'oo_theme',
                                 );

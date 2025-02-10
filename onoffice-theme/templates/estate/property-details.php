@@ -284,18 +284,14 @@ while ($current_property = $pEstates->estateIterator()) {
                                     $favorite_label = Favorites::getFavorizationLabel();
                                     if ($favorite_label == 'Watchlist') {
                                         esc_html_e(
-                                            __(
-                                                'Zur Merkliste hinzufügen',
-                                                'oo_theme',
-                                            ),
+                                            'Zur Merkliste hinzufügen',
+                                            'oo_theme',
                                         );
                                         $favorite_icon = 'bookmark';
                                     } else {
                                         esc_html_e(
-                                            __(
-                                                'Zu Favoriten hinzufügen',
-                                                'oo_theme',
-                                            ),
+                                            'Zu Favoriten hinzufügen',
+                                            'oo_theme',
                                         );
                                         $favorite_icon = 'star';
                                     }
@@ -741,7 +737,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                     $property_ogulo_link['title']
                                 )
                                     ? esc_attr($property_ogulo_link['title'])
-                                    : esc_attr(
+                                    : esc_attr__(
                                         '360°-Rundgang starten',
                                         'oo_theme',
                                     );
@@ -867,7 +863,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                 // Button Text
                                 $button_title = !empty($property_link['title'])
                                     ? esc_attr($property_link['title'])
-                                    : esc_attr('Link öffnen', 'oo_theme');
+                                    : esc_attr__('Link öffnen', 'oo_theme');
 
                                 echo '<a class="c-button --ghost" href="' .
                                     esc_attr($property_link['url']) .
@@ -931,7 +927,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                     $property_object_link['title']
                                 )
                                     ? esc_attr($property_object_link['title'])
-                                    : esc_attr(
+                                    : esc_attr__(
                                         'Objekt-Link öffnen',
                                         'oo_theme',
                                     );
@@ -966,7 +962,7 @@ while ($current_property = $pEstates->estateIterator()) {
 
                                 <div class="c-property-details__text-wrapper">
                                     <h2 class="c-property-details__headline o-headline --h2">
-                                        <?php echo esc_html__(
+                                        <?php esc_html_e(
                                             $field['label'],
                                             'oo_theme',
                                         ); ?>
@@ -990,11 +986,11 @@ while ($current_property = $pEstates->estateIterator()) {
                                         </div>
                                         <?php if ($is_long_description) { ?>
                                             <div class="c-property-details__more c-read-more">
-                                                <span class="c-read-more__text --more"><?php echo esc_html(
+                                                <span class="c-read-more__text --more"><?php esc_html_e(
                                                     'Mehr anzeigen',
                                                     'oo_theme',
                                                 ); ?></span>
-                                                <span class="c-read-more__text --less"><?php echo esc_html(
+                                                <span class="c-read-more__text --less"><?php esc_html_e(
                                                     'Weniger anzeigen',
                                                     'oo_theme',
                                                 ); ?></span>
@@ -1230,9 +1226,9 @@ if (Favorites::isFavorizationEnabled()) { ?>
                     favoriteText.text('<?php if (
                         $favorite_label == 'Watchlist'
                     ) {
-                        esc_html_e(__('Zur Merkliste hinzufügen', 'oo_theme'));
+                        esc_html_e('Zur Merkliste hinzufügen', 'oo_theme');
                     } else {
-                        esc_html_e(__('Zu Favoriten hinzufügen', 'oo_theme'));
+                        esc_html_e('Zu Favoriten hinzufügen', 'oo_theme');
                     } ?>');
                     favoriteIcon.removeClass(favoriteClass);
                     favorite.on('click', function() {
@@ -1243,9 +1239,9 @@ if (Favorites::isFavorizationEnabled()) { ?>
                     favoriteText.text('<?php if (
                         $favorite_label == 'Watchlist'
                     ) {
-                        esc_html_e(__('Von Merkliste entfernen', 'oo_theme'));
+                        esc_html_e('Von Merkliste entfernen', 'oo_theme');
                     } else {
-                        esc_html_e(__('Von Favoriten entfernen', 'oo_theme'));
+                        esc_html_e('Von Favoriten entfernen', 'oo_theme');
                     } ?>');
                     favoriteIcon.addClass(favoriteClass);
                     favorite.on('click', function() {

@@ -158,7 +158,6 @@ return function (EstateList $pEstatesClone) {
 
                         oo_get_template('components', '', 'component-buttons', [
                             'buttons' => $button,
-                            'icon_first' => 'arrow-right',
                             'additional_button_class' =>
                                 'c-map__button --on-bg-transparent',
                             'additional_container_class' =>

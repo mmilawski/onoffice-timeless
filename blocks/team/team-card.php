@@ -169,12 +169,12 @@ $is_long_description = $description_word_count > 50 ? true : false;
             </div>
         <?php endif; ?>
         <?php if (
-            $card['languages'] ||
-            $contact['phone'] ||
-            $contact['mobile'] ||
-            $contact['fax'] ||
-            $card['networks'] ||
-            $contact['email']
+            !empty($card['languages']) ||
+            !empty($contact['phone']) ||
+            !empty($contact['mobile']) ||
+            !empty($contact['fax']) ||
+            !empty($card['networks']) ||
+            !empty($contact['email'])
         ) { ?>
             <div class="c-team-card__contact-wrapper">
                 <?php if (!empty($card['languages'])) { ?>
@@ -298,11 +298,11 @@ $is_long_description = $description_word_count > 50 ? true : false;
             </div>
             <?php if ($is_long_description) { ?>
                 <div class="c-team-card__more c-read-more">
-            <span class="c-read-more__text --more"><?php echo esc_html(
+            <span class="c-read-more__text --more"><?php esc_html_e(
                 'Mehr anzeigen',
                 'oo_theme',
             ); ?></span>
-                    <span class="c-read-more__text --less"><?php echo esc_html(
+                    <span class="c-read-more__text --less"><?php esc_html_e(
                         'Weniger anzeigen',
                         'oo_theme',
                     ); ?></span>

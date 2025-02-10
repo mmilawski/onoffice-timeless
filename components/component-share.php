@@ -67,7 +67,7 @@ $networks =
 } ?>>
 	<div class="c-popup__wrapper">
         <div class="c-popup__header">
-            <p class="c-popup__title"><?php echo esc_html__(
+            <p class="c-popup__title"><?php esc_html_e(
                 'Immobilie teilen',
                 'oo_theme',
             ); ?></p>
