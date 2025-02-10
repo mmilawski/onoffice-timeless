@@ -68,11 +68,11 @@ if (get_field('property_search_result')) {
                     </div>
 
                     <div class="c-form__more c-read-more --text-align-center">
-                        <span class="c-read-more__text --more"><?php echo esc_html(
+                        <span class="c-read-more__text --more"><?php esc_html_e(
                             'Mehr anzeigen',
                             'oo_theme',
                         ); ?></span> 
-                        <span class="c-read-more__text --less"><?php echo esc_html(
+                        <span class="c-read-more__text --less"><?php esc_html_e(
                             'Weniger anzeigen',
                             'oo_theme',
                         ); ?></span>

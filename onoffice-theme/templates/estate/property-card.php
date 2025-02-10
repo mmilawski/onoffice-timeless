@@ -125,7 +125,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
                             if ($picture_values['title'] == true) {
                                 $image_alt = esc_html($picture_values['title']);
                             } else {
-                                $image_alt = esc_html(
+                                $image_alt = esc_html__(
                                     'Immobilienbild',
                                     'oo_theme',
                                 );

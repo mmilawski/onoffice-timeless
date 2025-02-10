@@ -447,16 +447,16 @@ if (!empty($currentAddressArr && is_array($currentAddressArr))) {
                                         <div>
                                             <button
                                                 class="c-address-details__more c-button --show-more"
-                                                data-open-text="<?php echo esc_html__(
+                                                data-open-text="<?php esc_html_e(
                                                     'Mehr anzeigen',
                                                     'oo_theme',
                                                 ); ?>"
-                                                data-close-text="<?php echo esc_html__(
+                                                data-close-text="<?php esc_html_e(
                                                     'Weniger anzeigen',
                                                     'oo_theme',
                                                 ); ?>"
                                             >
-                                                <?php echo esc_html__(
+                                                <?php esc_html_e(
                                                     'Mehr anzeigen',
                                                     'oo_theme',
                                                 ); ?>

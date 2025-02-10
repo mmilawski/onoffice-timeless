@@ -70,11 +70,11 @@ foreach ($pForm->getInputFields() as $input => $table) {
 
     <fieldset class="c-form__fieldset">
         <div class="c-form__header">
-            <p class="c-form__legend"><?php echo esc_html__(
+            <p class="c-form__legend"><?php esc_html_e(
                 'Ihre Kontaktdaten',
                 'oo_theme',
             ); ?></p>
-            <p class="c-form__required"><?php echo esc_html__(
+            <p class="c-form__required"><?php esc_html_e(
                 '* Pflichtfelder',
                 'oo_theme',
             ); ?></p>
