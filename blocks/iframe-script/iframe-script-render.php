@@ -118,6 +118,26 @@ $pricehubble_gatrackingid = get_field('pricehubble_gatrackingid')
     ? esc_attr(get_field('pricehubble_gatrackingid'))
     : null;
 
+$baufipasst_partner_id = get_field('baufipasst_partner_id')
+    ? esc_attr(get_field('baufipasst_partner_id'))
+    : null;
+
+$baufipasst_europace_id = get_field('baufipasst_europace_id')
+    ? esc_attr(get_field('baufipasst_europace_id'))
+    : null;
+
+$exkulpa_api_key = get_field('exkulpa_api_key')
+    ? esc_attr(get_field('exkulpa_api_key'))
+    : null;
+
+$huettig_rompf_branch_id = get_field('huettig_rompf_branch_id')
+    ? esc_attr(get_field('huettig_rompf_branch_id'))
+    : null;
+
+$huettig_rompf_employee_id = get_field('huettig_rompf_employee_id')
+    ? esc_attr(get_field('huettig_rompf_employee_id'))
+    : null;
+
 $etracker_domain = get_field('etracker_domain')
     ? esc_attr(get_field('etracker_domain'))
     : null;
@@ -147,6 +167,10 @@ $iframe_class = match ($type) {
     'immowelt' => '--is-immowelt',
     'areabutler' => '--is-areabutler',
     'pricehubble' => '--is-pricehubble',
+    'baufipasst' => '--is-baufipasst',
+    'huettig_rompf_finanzierungsrechner'
+        => '--is-huettig-rompf-finanzierungsrechner',
+    'exkulpa' => '--is-exkulpa',
     'eTracker' => '--is-eTracker',
     default => '',
 };
@@ -172,6 +196,9 @@ $iframe_name = match ($type) {
     'baufi_lead' => 'baufi_lead',
     'immowelt' => 'immowelt',
     'areabutler' => 'areabutler',
+    'baufipasst' => 'baufipasst',
+    'huettig_rompf_finanzierungsrechner' => 'huettigrompffinanzierungsrechner',
+    'exkulpa' => 'Exkulpa',
     'pricehubble' => 'PriceHubble',
     default => '',
 };
@@ -182,6 +209,12 @@ if (isset($type)) {
         wp_enqueue_script('oo-iframe-noscroll');
     } elseif ($type === 'heyflow') {
         wp_enqueue_script('heyflow-webview');
+    } elseif ($type === 'baufipasst') {
+        wp_enqueue_script('baufipasst-script');
+    } elseif ($type === 'exkulpa') {
+        wp_enqueue_script('exkulpa-script');
+    } elseif ($type === 'huettig_rompf_finanzierungsrechner') {
+        wp_enqueue_script('huettig-rompf-script');
     }
 }
 ?>
@@ -646,6 +679,52 @@ if (isset($type)) {
                                 FisherWidget.grantConsent();
                             } 
                         </script>
+                <?php endif; ?>
+
+                <?php if (
+                    isset($type) &&
+                    $type === 'baufipasst' &&
+                    isset($baufipasst_partner_id) &&
+                    isset($baufipasst_europace_id)
+                ): ?>
+
+                    <div class="c-iframe-script__iframe <?php echo esc_attr(
+                        $iframe_class,
+                    ); ?>">
+                        <baufi-passt frontend-key-id="<?php echo esc_attr(
+                            $baufipasst_europace_id,
+                        ); ?>" partner-id="<?php echo esc_attr(
+    $baufipasst_partner_id,
+); ?>" datenkontext="ECHT_GESCHAEFT"></baufi-passt>
+                    </div>
+
+                <?php endif; ?>
+
+                <?php if (
+                    isset($type) &&
+                    $type === 'huettig_rompf_finanzierungsrechner'
+                ): ?>
+
+                    <div class="c-iframe-script__iframe <?php echo $iframe_class; ?>"><script type="application/json" data-huettig-und-rompf-snippet>{"snippetType":"embedMedium","branch":{"preset":"<?php echo esc_attr(
+    $huettig_rompf_branch_id,
+); ?>"},"employee":{"preset":"<?php echo esc_attr(
+    $huettig_rompf_employee_id,
+); ?>"}}</script></div>
+
+                <?php endif; ?>
+
+                 <?php if (
+                    isset($type) &&
+                    $type === 'exkulpa' &&
+                    isset($exkulpa_api_key)
+                ): ?>
+
+<div class="c-iframe-script__iframe <?php echo esc_attr($iframe_class); ?>">
+                    <comply-privacy-policy-sync apiKey="<?php echo esc_attr(
+                        $exkulpa_api_key,
+                    ); ?>"></comply-privacy-policy-sync>
+</div>
+
                 <?php endif; ?>
                 
                 <?php if (
