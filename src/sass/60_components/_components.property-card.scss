@@ -16,6 +16,9 @@
     border-radius: $border-radius $border-radius 0 0;
   }
 
+  &__inner-wrapper {
+  }
+
   &__link {
     @include hover-focus() {
       #{$c-property-card}__overlay {
