@@ -108,13 +108,13 @@ while ($current_property = $pEstatesClone->estateIterator()):
  $pictures_count = is_array($property_pictures) ? count($property_pictures) : 0;
  ?>
 
-    
+    <div class="c-property-card__inner-wrapper">
         <div class="c-property-card__inner --is-properties-images-slider --on-slider <?php if (
             $pictures_count > 0
         ) {
             echo 'c-slider splide';
         } ?>" data-splide='{"perPage":1,"perMove":1,"pagination":false,"arrows":true, "drag":false,"snap":true,"lazyLoad":"nearby", "type":"loop"}'>
-                <?php if ($pictures_count > 0) { ?>   
+                <?php if ($pictures_count > 0) { ?>
                 <div class="c-slider__track splide__track">
                     <div class="c-slider__list splide__list">
 
@@ -201,7 +201,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
                 <?php } else { ?>
                         <div class="c-property-card__picture"></div>
                     <?php } ?>
-              <?php if ($pictures_count > 0) { ?>   
+              <?php if ($pictures_count > 0) { ?>
                     <div class="c-slider__navigation splide__navigation --is-properties-images-slider">
                         <div class="c-slider__arrows splide__arrows">
                             <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
@@ -224,7 +224,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
                             </button>
                         </div>
                     </div>
-                <?php } ?>      
+                <?php } ?>
                     <?php if (
                         $property_status ||
                         (Favorites::isFavorizationEnabled() && !$is_reference)
@@ -235,7 +235,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
                             <?php echo ucfirst($property_status); ?>
                         </span>
                     <?php } ?>
-                
+
                     <?php if (
                         Favorites::isFavorizationEnabled() &&
                         !$is_reference
@@ -269,8 +269,9 @@ while ($current_property = $pEstatesClone->estateIterator()):
                         </span>
                     <?php } ?>
                 </div>
-            <?php } ?>  
-        </div>  
+            <?php } ?>
+        </div>
+    </div>
     <div class="c-property-card__content">
             <?php if ($current_property['objekttitel']) { ?>
                 <h3 class="c-property-card__title">
