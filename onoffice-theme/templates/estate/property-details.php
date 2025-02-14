@@ -784,7 +784,19 @@ while ($current_property = $pEstates->estateIterator()) {
                                         $property_movie_player['url'],
                                     ) .
                                     '">';
-                                echo $property_movie_player['player'];
+                                if (
+                                    isset($property_movie_player['player']) &&
+                                    strpos(
+                                        $property_movie_player['player'],
+                                        '<a',
+                                    ) !== false
+                                ) {
+                                    echo '<iframe class="c-property-details__iframe"" src="' .
+                                        $property_movie_player['url'] .
+                                        '"></iframe>';
+                                } else {
+                                    echo $property_movie_player['player'];
+                                }
                                 echo '</div>';
                             }
 
