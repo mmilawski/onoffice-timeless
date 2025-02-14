@@ -309,6 +309,7 @@ jQuery(document).ready(function() {
     </div>`;
     
     const lightbox = GLightbox({
+      loop: true,
       moreLength: 0,
       zoomable: false,
       skin: 'custom',
