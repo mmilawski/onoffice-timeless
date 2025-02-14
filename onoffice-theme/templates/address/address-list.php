@@ -62,6 +62,10 @@ $image_width_lg = '444';
 $image_width_xl = '348';
 $image_width_xxl = '412';
 $image_width_xxxl = '456';
+
+$placeholder_image =
+    get_field('general', 'option')['address_detail']['placeholder_image'] ??
+    null;
 ?>
 
 <section class="c-address-list__inner o-row --<?php echo $settings[
@@ -101,7 +105,11 @@ $image_width_xxxl = '456';
     <?php foreach ($pAddressList->getRows() as $addressId => $escapedValues) {
 
         $estate_count = $pAddressList->getCountEstates($addressId);
-        $image_url = $escapedValues['imageUrl'];
+        $image_url = !empty($escapedValues['imageUrl'])
+            ? $escapedValues['imageUrl']
+            : (!empty($placeholder_image['url'])
+                ? $placeholder_image['url']
+                : null);
         $image_alt = $pAddressList->generateImageAlt($addressId);
         $image = [
             'url' => $image_url,

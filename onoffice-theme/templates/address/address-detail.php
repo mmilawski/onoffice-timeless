@@ -37,6 +37,10 @@ $image_width_xxxl = '350';
 
 $show_more_count = get_field('show_more_count') ?? 12;
 
+$placeholder_image =
+    get_field('general', 'option')['address_detail']['placeholder_image'] ??
+    null;
+
 $current_url = home_url(add_query_arg([], $wp->request)) ?? '';
 /* @var $pAddressList AddressList */
 $currentAddressArr = [];
@@ -52,8 +56,12 @@ if (!empty($currentAddressArr && is_array($currentAddressArr))) {
         $email = $escapedValues['Email'] ?? null;
         $phone = $escapedValues['Telefon1'] ?? null;
         $phone_url = oo_clean_link_number($phone);
-        $imageUrl['url'] = $escapedValues['imageUrl'] ?? null;
-        $imageUrl['alt'] = $pAddressList->generateImageAlt($addressId) ?? null;
+        $image_url['url'] = !empty($escapedValues['imageUrl'])
+            ? $escapedValues['imageUrl']
+            : (!empty($placeholder_image['url'])
+                ? $placeholder_image['url']
+                : null);
+        $image_url['alt'] = $pAddressList->generateImageAlt($addressId) ?? null;
 
         $jobTitle = $escapedValues['jobTitle'] ?? null;
 
@@ -119,7 +127,7 @@ if (!empty($currentAddressArr && is_array($currentAddressArr))) {
                         <div class="c-address-details o-col-12">
                             <div class="c-address-details__main">
                                 <div class="c-address-details__media">
-                                    <?php if (!empty($imageUrl['url'])) {
+                                    <?php if (!empty($image_url['url'])) {
                                         oo_get_template(
                                             'components',
                                             '',
@@ -127,7 +135,7 @@ if (!empty($currentAddressArr && is_array($currentAddressArr))) {
                                             [
                                                 'picture_class' =>
                                                     'c-address-details__picture o-picture',
-                                                'image' => $imageUrl,
+                                                'image' => $image_url,
                                                 'additional_cloudimg_params' =>
                                                     '&func=crop&gravity=face',
                                                 'loading' => 'eager',
