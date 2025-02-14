@@ -389,7 +389,7 @@ while ($current_property = $pEstates->estateIterator()) {
 
                         //  Lightbox Cloud Image
                         $lightbox_image_options =
-                            '&?force_format=webp&?org_if_sml=1';
+                            '?force_format=webp&org_if_sml=1';
                         $lightbox_url =
                             'https://acnaayzuen.cloudimg.io/v7/' .
                             $image['url'] .
@@ -486,7 +486,7 @@ while ($current_property = $pEstates->estateIterator()) {
                         <a
                             class="c-property-details__gallery-link glightbox" data-gallery="gallery"
                             href="<?php echo $lightbox_url .
-                                'w=' .
+                                '&w=' .
                                 end($lightbox_image_size_list)[
                                     'image_size'
                                 ]; ?>"
