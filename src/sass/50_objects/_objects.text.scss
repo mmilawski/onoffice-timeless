@@ -5,6 +5,11 @@
     }
   }
 
+  :is(h1, h2, h3, h4, h5, h6) {
+    color: var(--oo-color-text);
+    text-wrap-style: balance;
+  }
+
   h1 {
     margin-bottom: 1.5rem;
     @include media-breakpoint-up(xl) {
