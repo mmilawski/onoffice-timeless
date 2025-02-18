@@ -1,8 +1,7 @@
 <?php
-
 /**
  *
- *    Copyright (C) 2024 onOffice GmbH
+ *    Copyright (C) 2018-2025 onOffice GmbH
  *
  *    This program is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
@@ -30,33 +29,34 @@ use onOffice\WPlugin\ViewFieldModifier\AddressViewFieldModifierTypes;
 
 return function (AddressList $pAddressClone) {
     $pAddressClone->resetAddressesIterator();
-    $addressData = [];
+    $address_data = [];
 
     foreach (
         $pAddressClone->getRows(
             AddressViewFieldModifierTypes::MODIFIER_TYPE_MAP,
         )
-        as $addressId => $escapedValues
+        as $address_id => $current_address
     ) {
         $position = [
-            'lat' => (float) $escapedValues['breitengrad'],
-            'lng' => (float) $escapedValues['laengengrad'],
+            'lat' => (float) $current_address['breitengrad'],
+            'lng' => (float) $current_address['laengengrad'],
         ];
 
         if (0.0 !== $position['lng'] && 0.0 !== $position['lat']) {
-            $addressData[] = [
+            $address_data[] = [
                 'position' => $position,
                 'title' =>
-                    $escapedValues['Vorname'] . ' ' . $escapedValues['Name'],
-                'company' => $escapedValues['Zusatz1'],
+                    $current_address['Vorname'] .
+                    ' ' .
+                    $current_address['Name'],
+                'company' => $current_address['Zusatz1'],
                 'link' =>
-                    esc_url($pAddressClone->getAddressLink($addressId)) ?? '',
-                'visible' => true,
+                    esc_url($pAddressClone->getAddressLink($address_id)) ?? '',
             ];
         }
     }
 
-    if ($addressData === []) {
+    if ($address_data === []) {
         return;
     }
 
@@ -64,13 +64,14 @@ return function (AddressList $pAddressClone) {
     $colors = get_field('colors', 'option') ?? null;
     $primary_color = $colors['global']['primary'] ?? 'currentColor';
 
+    // Scripts
     wp_enqueue_style('oo-leaflet-style');
     wp_enqueue_script('oo-leaflet-script');
     wp_enqueue_script('oo-init-open-street-map-script');
     ?>
 
     <div class="c-map --is-open-street-map" data-max-zoom="12" data-marker-color="<?php echo $primary_color; ?>" style="width: 100%;">
-        <?php foreach ($addressData as $address) {
+        <?php foreach ($address_data as $address) {
 
             $position = $address['position'] ?? [];
             $lat = $position['lat'] ?? null;
@@ -92,14 +93,29 @@ return function (AddressList $pAddressClone) {
                         echo '<h3 class="c-map__headline o-headline --h3">' .
                             $title .
                             '</h3>';
-                        echo '<p>' . $company . '</p>';
+                    }
+                    if (!empty($company)) {
+                        echo '<p class="c-map__text">' . $company . '</p>';
                     }
                     if (!empty($link)) {
-                        echo '<p class="c-map__button-wrapper"><a href="' .
-                            $link .
-                            '" class="c-map__button c-button">' .
-                            esc_html__('Zur Detailansicht', 'oo_theme') .
-                            '</a></p>';
+                        $button = [
+                            [
+                                'link' => [
+                                    'title' => esc_html__(
+                                        'Zur Detailansicht',
+                                        'oo_theme',
+                                    ),
+                                    'url' => $link,
+                                ],
+                            ],
+                        ];
+                        oo_get_template('components', '', 'component-buttons', [
+                            'buttons' => $button,
+                            'additional_container_class' =>
+                                'c-map__button-wrapper',
+                            'additional_button_class' =>
+                                'c-map__button --small-corners --full-width --on-bg-transparent',
+                        ]);
                     }
                     ?>
                 </div>

@@ -1,8 +1,7 @@
 <?php
-
 /**
  *
- *    Copyright (C) 2018-2020 onOffice GmbH
+ *    Copyright (C) 2018-2025 onOffice GmbH
  *
  *    This program is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
@@ -30,19 +29,19 @@ use onOffice\WPlugin\ViewFieldModifier\EstateViewFieldModifierTypes;
 
 return function (EstateList $pEstatesClone) {
     $pEstatesClone->resetEstateIterator();
-    $estateData = [];
+    $property_data = [];
 
     while (
-        $currentEstateMap = $pEstatesClone->estateIterator(
+        $current_property = $pEstatesClone->estateIterator(
             EstateViewFieldModifierTypes::MODIFIER_TYPE_MAP,
         )
     ) {
-        $virtualAddressSet = (bool) $currentEstateMap['virtualAddress'];
+        $virtual_address = (bool) $current_property['virtualAddress'];
         $position = [
-            'lat' => (float) $currentEstateMap['breitengrad'],
-            'lng' => (float) $currentEstateMap['laengengrad'],
+            'lat' => (float) $current_property['breitengrad'],
+            'lng' => (float) $current_property['laengengrad'],
         ];
-        $visible = !$virtualAddressSet;
+        $visible = !$virtual_address;
 
         $property_url = esc_url($pEstatesClone->getEstateLink());
         $property_id = $pEstatesClone->getCurrentMultiLangEstateMainId();
@@ -63,45 +62,48 @@ return function (EstateList $pEstatesClone) {
         if (
             0.0 !== $position['lng'] &&
             0.0 !== $position['lat'] &&
-            $currentEstateMap['showGoogleMap']
+            $current_property['showGoogleMap']
         ) {
-            $estateData[] = [
+            $property_data[] = [
                 'position' => $position,
-                'title' => $currentEstateMap['objekttitel'],
-                'zip' => $currentEstateMap['plz'],
-                'city' => $currentEstateMap['ort'],
-                'country' => $currentEstateMap['land'],
+                'title' => $current_property['objekttitel'],
+                'street' => $current_property['strasse'],
+                'number' => $current_property['hausnummer'],
+                'zip' => $current_property['plz'],
+                'city' => $current_property['ort'],
+                'country' => $current_property['land'],
                 'link' => $link,
                 'visible' => $visible,
             ];
         }
     }
 
-    if ($estateData === []) {
+    if ($property_data === []) {
         return;
     }
 
     // Styling
     $colors = get_field('colors', 'option') ?? null;
     $primary_color = $colors['global']['primary'] ?? 'currentColor';
-    ?>
 
-    <?php
+    // Scripts
     wp_enqueue_script('oo-google-map-script');
     wp_enqueue_script('oo-init-google-map-script');
     ?>
 
     <div class="c-map --is-google-map" data-max-zoom="12" data-marker-color="<?php echo $primary_color; ?>" style="width: 100%;">
-        <?php foreach ($estateData as $estate) {
+        <?php foreach ($property_data as $property) {
 
-            $position = $estate['position'] ?? [];
+            $position = $property['position'] ?? [];
             $lat = $position['lat'] ?? null;
             $lng = $position['lng'] ?? null;
-            $title = $estate['title'] ?? null;
-            $zip = $estate['zip'] ?? null;
-            $city = $estate['city'] ?? null;
-            $country = $estate['country'] ?? null;
-            $link = $estate['link'] ?? null;
+            $title = $property['title'] ?? null;
+            $street = $property['street'] ?? null;
+            $number = $property['number'] ?? null;
+            $zip = $property['zip'] ?? null;
+            $city = $property['city'] ?? null;
+            $country = $property['country'] ?? null;
+            $link = $property['link'] ?? null;
 
             if (empty($lat) || empty($lng)) {
                 continue;
@@ -111,57 +113,69 @@ return function (EstateList $pEstatesClone) {
                 $lat,
             ); ?>" data-lng="<?php echo esc_attr($lng); ?>">
                 <div class="c-map__info --bg-transparent">
-                    <?php if (
+                    <?php
+                    if (!empty($title)) {
+                        echo '<h3 class="c-map__headline o-headline --h3">' .
+                            $title .
+                            '</h3>';
+                    }
+                    if (
+                        !empty($street) ||
+                        !empty($number) ||
                         !empty($zip) ||
                         !empty($city) ||
                         !empty($country)
-                    ) { ?>
-                        <p class="c-map__location">
-                            <span class="c-map__location-icon"><?php oo_get_icon(
-                                'location',
-                            ); ?></span>
-                            <span class="c-map__location-text">
-                                <?php if ($zip) {
-                                    echo $zip;
-                                } ?> <?php
- if ($city) {
-     echo $city;
- }
- if (($zip || $city) && $country) {
-     echo ', ';
- }
- if ($country) {
-     echo $country;
- }
- ?>
-                            </span>
-                        </p>
-                    <?php } ?>
-                    <?php
-                    if (!empty($title)) {
-                        echo '<h3 class="c-map__headline o-headline">' .
-                            $title .
-                            '</h3>';
+                    ) {
+                        echo '<p class="c-map__text">';
+                        if (!empty($street) || !empty($number)) {
+                            if (!empty($street)) {
+                                echo $street . ' ';
+                            }
+                            if (!empty($number)) {
+                                echo $number;
+                            }
+                            if (
+                                !empty($zip) ||
+                                !empty($city) ||
+                                !empty($country)
+                            ) {
+                                echo '<br>';
+                            }
+                        }
+                        if (!empty($zip) || !empty($city)) {
+                            if (!empty($zip)) {
+                                echo $zip . ' ';
+                            }
+                            if (!empty($city)) {
+                                echo $city;
+                            }
+                            if (!empty($country)) {
+                                echo '<br>';
+                            }
+                        }
+                        if (!empty($country)) {
+                            echo $country;
+                        }
+                        echo '</p>';
                     }
                     if (!empty($link)) {
                         $button = [
                             [
                                 'link' => [
                                     'title' => esc_html__(
-                                        'Details',
+                                        'Zur Detailansicht',
                                         'oo_theme',
                                     ),
                                     'url' => $link,
                                 ],
                             ],
                         ];
-
                         oo_get_template('components', '', 'component-buttons', [
                             'buttons' => $button,
-                            'additional_button_class' =>
-                                'c-map__button --on-bg-transparent',
                             'additional_container_class' =>
                                 'c-map__button-wrapper',
+                            'additional_button_class' =>
+                                'c-map__button --small-corners --full-width --on-bg-transparent',
                         ]);
                     }
                     ?>

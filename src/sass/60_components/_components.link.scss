@@ -61,8 +61,15 @@
     color: var(--oo-color-footer-primary, var(--oo-color-primary));
   }
 
+  &.--on-bg-transparent {
+    color: var(--oo-color-primary);
+  }
+
   &.--text-color {
     color: currentColor;
+    &.--underlined {
+      color: currentColor;
+    }
   }
 
   &.--text-truncate {

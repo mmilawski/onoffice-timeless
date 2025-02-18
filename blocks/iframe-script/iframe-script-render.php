@@ -713,11 +713,11 @@ if (isset($type)) {
 
                 <?php endif; ?>
 
-                 <?php if (
-                     isset($type) &&
-                     $type === 'exkulpa' &&
-                     isset($exkulpa_api_key)
-                 ): ?>
+                <?php if (
+                    isset($type) &&
+                    $type === 'exkulpa' &&
+                    isset($exkulpa_api_key)
+                ): ?>
 
 <div class="c-iframe-script__iframe <?php echo esc_attr($iframe_class); ?>">
                     <comply-privacy-policy-sync apiKey="<?php echo esc_attr(

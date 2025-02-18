@@ -126,7 +126,7 @@ $excerpt_word_count = str_word_count(strip_tags($excerpt)) ?? null;
    ]); ?>
 
         <?php if ($is_date && !empty($date)) { ?>
-            <div class="c-news-card__date"><?php echo $date; ?></div>
+            <div class="c-news-card__date c-flag"><?php echo $date; ?></div>
         <?php } ?>
     <?php if (!empty($link)) { ?>
         </a>

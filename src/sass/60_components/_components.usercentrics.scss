@@ -3,57 +3,130 @@
 
   &-container {
     width: 100% !important;
-    background-color: var(--oo-color-mix-bg-text-10) !important;
+    background-color: var(--oo-color-transparent-primary-10) !important;
     min-height: 450px !important;
 
     #{$uc-embedding}-wrapper {
-      border-radius: 0 !important;
-      font-family: var(--oo-font-text, sans-serif) !important;
-      background-color: var(--oo-color-bg) !important;
-      gap: 0.5rem;
+      font-family: $font-family-text !important;
+      font-weight: $font-weight-text !important;
+      font-size: $global-font-size !important;
+      line-height: $global-line-height !important;
+      padding: 1rem !important;
+      background-color: var(--oo-color-transparent-bg-90) !important;
+      border-radius: $border-radius !important;
+      box-shadow: 0 0 5px var(--oo-color-transparent-shadow-15) !important;
+      width: 50%;
+      gap: 1rem;
 
       h3 {
         font-family: $font-family-headline !important;
         font-weight: $font-weight-headline !important;
-        color: var(--oo-color-headline, --oo-color-text) !important;
+        font-size: $mobile-h3-font-size !important;
+        color: var(--oo-color-headline) !important;
+        margin: 0;
+        text-wrap: balance;
       }
 
-      .description-text,
+      .description-text {
+        color: var(--oo-color-text) !important;
+      }
+
       span {
         color: var(--oo-color-text) !important;
+        font-size: $small-font-size !important;
+        line-height: $small-line-height !important;
+
+        a {
+          color: var(--oo-color-text);
+          text-decoration: underline currentColor;
+          text-underline-offset: $link-underline-offset;
+
+          @include visited() {
+            text-decoration-color: currentColor;
+          }
+
+          @include hover-focus-active() {
+            text-decoration-color: transparent;
+            color: var(--oo-color-text);
+          }
+        }
       }
     }
 
     #{$uc-embedding}-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+
       #{$uc-embedding}-accept,
       #{$uc-embedding}-more-info {
+        display: inline-block;
+        position: relative;
+        font-family: $font-family-button !important;
+        font-weight: $font-weight-button !important;
+        font-size: $global-font-size !important;
+        line-height: $global-line-height !important;
+        text-align: center;
+        margin: 0;
+        padding: 0.5rem 2rem;
+        border-radius: $border-radius-small;
+        border: 2px solid transparent;
+        outline: 2px solid transparent;
+        outline-offset: 2px;
+        height: auto;
+        width: auto;
         transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
-          border-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out !important;
-        border-radius: 0 !important;
-        border: 2px solid var(--oo-color-primary);
+          border-color 0.25s ease-in-out, outline-color 0.25s ease-in-out,
+          opacity 0.25s ease-in-out;
+        cursor: pointer;
+
+        @include plain-visited() {
+          color: var(--oo-color-contrast-primary);
+          background-color: var(--oo-color-primary);
+          border-color: var(--oo-color-primary);
+        }
+
+        @include hover() {
+          background-color: var(--oo-color-mix-primary-contrast-20);
+          border-color: var(--oo-color-mix-primary-contrast-20);
+        }
+
+        @include focus() {
+          outline-color: var(--oo-color-primary);
+        }
+
+        @include active() {
+          background-color: var(--oo-color-mix-primary-contrast-40);
+          border-color: var(--oo-color-mix-primary-contrast-40);
+        }
       }
 
       #{$uc-embedding}-more-info {
-        color: var(--oo-color-primary) !important;
-        background-color: transparent !important;
-        border-color: var(--oo-color-primary) !important;
+        @include plain-visited() {
+          color: var(--oo-color-text);
+          background-color: transparent;
+          border-color: var(--oo-color-text);
+        }
 
-        @include hover-focus() {
-          color: var(--oo-color-lighten-primary-40) !important;
-          background-color: transparent !important;
-          border-color: var(--oo-color-lighten-primary-40) !important;
-          box-shadow: 0px 0px 0px 2px var(--oo-color-lighten-primary-40) !important;
+        @include hover() {
+          color: var(--oo-color-mix-text-contrast-20);
+          background-color: transparent;
+          border-color: var(--oo-color-mix-text-contrast-20);
+        }
+
+        @include focus() {
+          outline-color: var(--oo-color-primary);
+        }
+
+        @include active() {
+          color: var(--oo-color-mix-text-contrast-40);
+          background-color: transparent;
+          border-color: var(--oo-color-mix-text-contrast-40);
         }
       }
 
       #{$uc-embedding}-accept {
-        background-color: var(--oo-color-primary) !important;
-
-        @include hover-focus() {
-          color: var(--oo-color-contrast-primary) !important;
-          background-color: var(--oo-color-lighten-primary-40) !important;
-          box-shadow: 0px 0px 0px 2px var(--oo-color-primary) !important;
-        }
       }
     }
 

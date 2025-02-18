@@ -7,17 +7,18 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-up(xxl) {
       gap: 2rem;
     }
   }
 
   &__content {
     display: flex;
-    flex-direction: column;
     gap: 1.5rem;
-    @include media-breakpoint-up(xl) {
+    margin-bottom: 1rem;
+    @include media-breakpoint-up(xxl) {
       gap: 2rem;
+      margin-bottom: 3rem;
     }
   }
 
@@ -27,14 +28,21 @@
   &__text {
   }
 
-  &__list {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    @include media-breakpoint-up(lg) {
+      gap: 2rem;
+    }
   }
 
   &__nav {
     display: flex;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-    @include media-breakpoint-up(md) {
+    align-items: flex-end;
+    gap: 1.5rem 0;
+
+    @include media-breakpoint-up(lg) {
       gap: unset;
     }
   }
@@ -43,21 +51,9 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 0.75rem;
+    gap: 1rem;
 
-    @include media-breakpoint-up(md) {
-      justify-content: flex-end;
-    }
-
-    &.--no-estates {
-      justify-content: flex-start;
-    }
-
-    & .o-label {
-      width: 100%;
-      @include media-breakpoint-up(md) {
-        width: auto;
-      }
+    &.--no-properties {
     }
   }
 
@@ -65,19 +61,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     border-radius: $border-radius;
     background-color: var(--oo-color-primary);
     color: var(--oo-color-contrast-primary);
     font-family: $font-family-button;
     font-weight: $font-weight-button;
-    width: 2.25rem;
-    height: 2.25rem;
-    padding: 0.25rem;
-
-    @include media-breakpoint-up(xl) {
-      width: 2.5rem;
-      height: 2.5rem;
-    }
+    min-width: $icon-wrapper-size;
+    height: $icon-wrapper-size;
+    padding: 0 0.5rem;
 
     .--bg-light & {
       background-color: var(--oo-color-light-primary, var(--oo-color-primary));
@@ -103,11 +95,19 @@
     }
   }
 
-  &__sort {
+  &__sort-wrapper {
     display: flex;
-    align-items: center;
-    gap: 1rem;
-    select {
+    justify-content: flex-start;
+
+    @include media-breakpoint-up(lg) {
+      justify-content: flex-end;
+    }
+  }
+
+  &__sort {
+    width: 100%;
+
+    @include media-breakpoint-up(lg) {
       width: auto;
     }
   }
@@ -116,24 +116,23 @@
     display: grid;
     gap: 1.5rem;
 
-    @include media-breakpoint-up(md) {
-      gap: 2rem;
+    @include media-breakpoint-up(lg) {
       grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
     }
 
-    @include media-breakpoint-up(lg) {
-      gap: 2rem;
+    @include media-breakpoint-up(xxl) {
       grid-template-columns: repeat(3, 1fr);
     }
   }
 
-  &__image {
-    border-radius: $border-radius;
-  }
   &__slider {
   }
 
   &__pagination {
+  }
+
+  &__buttons-wrapper {
   }
 
   &__buttons {

@@ -79,7 +79,7 @@ echo $is_image;
             ]); ?>
         <?php } ?>
         <?php if ($date && $show_date) { ?>
-            <div class="c-review-card__date"><?php echo $date; ?></div>
+            <div class="c-review-card__date c-flag"><?php echo $date; ?></div>
         <?php } ?>
     </div>
     <?php if (!empty($title) || !empty($text['wysiwyg']) || !empty($stars)) { ?>

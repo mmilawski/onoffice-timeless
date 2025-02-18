@@ -244,4 +244,9 @@
   &.--small-corners {
     border-radius: $border-radius-small;
   }
+
+  &.--bigger {
+    width: $button-size;
+    height: $button-size;
+  }
 }

@@ -71,6 +71,9 @@
 
   &__info {
     color: var(--oo-color-text) !important;
+    font-family: $font-family-text;
+    font-weight: $font-weight-text;
+    @include font-size($global-font-size, $global-line-height);
     max-width: 20rem;
     padding: 0.25rem;
     display: flex;

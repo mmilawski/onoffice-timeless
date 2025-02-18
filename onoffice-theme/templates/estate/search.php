@@ -1,7 +1,7 @@
 <?php
 /**
  *
- *    Copyright (C) 2018  onOffice Software AG
+ *    Copyright (C) 2018-2025 onOffice GmbH
  *
  *    This program is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by

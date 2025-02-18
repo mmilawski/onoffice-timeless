@@ -36,13 +36,9 @@
   }
 
   &__date {
-    display: inline-block;
-    padding: 0.5rem 0.75rem;
-    border-radius: $border-radius-small;
-    background-color: var(--oo-color-primary);
-    color: var(--oo-color-contrast-primary);
-    font-family: var(--oo-font-button, var(--oo-font-text));
-    font-weight: var(--oo-font-button-weight, var(--oo-font-text-weight));
+    position: relative;
+    top: -$flag-offset;
+    left: -$flag-offset;
   }
 
   &__author {

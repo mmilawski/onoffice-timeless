@@ -1,8 +1,7 @@
 <?php
-
 /**
  *
- *    Copyright (C) 2016  onOffice Software AG
+ *    Copyright (C) 2018-2025 onOffice GmbH
  *
  *    This program is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
@@ -18,6 +17,7 @@
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+
 /**
  *
  *  Default template
@@ -47,12 +47,19 @@ $map = ob_get_clean();
 
 // Section ID for pagination anchor
 $anchor = isset($headline['text']) ? clean_id($headline['text']) : '';
+
+// Listing ID for pagination query parameter
+$list_id = $pEstates->getDataView()->getId();
+
+$property_count = method_exists($pEstates, 'getEstateOverallCount')
+    ? $pEstates->getEstateOverallCount()
+    : 0;
 ?>
 
-<?php if ($pEstates->getEstateOverallCount() > 0) { ?>
+<?php if ($property_count > 0) { ?>
     <?php if (!$is_slider) { ?>
         <?php if ($map) { ?>
-            <div class="c-property-list__wrapper o-col-12 o-col-xl-12">
+            <div class="c-property-list__map-wrapper">
                 <?php echo $map; ?>
             </div>
         <?php } ?>
@@ -60,27 +67,32 @@ $anchor = isset($headline['text']) ? clean_id($headline['text']) : '';
         <div class="c-property-list__wrapper">
 
             <div class="c-property-list__nav o-row">
-                <p class="c-property-list__sort o-col-12 o-col-md-6 o-col-xxl-4">
+                <p class="c-property-list__count o-col-12 o-col-md-6">
                     <?php esc_html_e(
                         'Gefundene Immobilien:',
                         'oo_theme',
                     ); ?> <span class="c-property-list__number"><?php echo sprintf(
      '%d',
-     $pEstates->getEstateOverallCount(),
+     $property_count,
  ); ?></span>
                 </p>
                 <?php if ($generateSortDropDown()) { ?>
-                    <div class="c-property-list__count o-col-12 o-col-md-6 o-col-xxl-8">
                         <?php if ($generateSortDropDown()) { ?>
-                            <?php wp_enqueue_script('oo-sort-list-script'); ?>
-                            <label class="o-label" for="onofficeSortListSelector">
-                                <?php esc_html_e('Sortieren', 'oo_theme'); ?>
-                                <?php echo $generateSortDropDown(); ?>
-                            </label>
+                            <div class="c-property-list__sort-wrapper o-col-12 o-col-md-6">
+                                <?php wp_enqueue_script(
+                                    'oo-sort-list-script',
+                                ); ?>
+                                <label class="c-property-list__sort o-label" for="onofficeSortListSelector">
+                                    <?php esc_html_e(
+                                        'Sortieren',
+                                        'oo_theme',
+                                    ); ?>
+                                    <?php echo $generateSortDropDown(); ?>
+                                </label>
+                            </div>
                         <?php } ?>
-                    </div>
+                    
                 <?php } ?>
-
             </div>
 
             <div class="c-property-list__properties">
@@ -91,6 +103,7 @@ $anchor = isset($headline['text']) ? clean_id($headline['text']) : '';
                 'type' => 'property',
                 'class' => 'c-property-list__pagination --on-' . $bg_color,
                 'anchor' => $anchor,
+                'list_id' => $list_id,
             ]); ?>
         </div>
     <?php } else { ?>
@@ -106,8 +119,7 @@ $anchor = isset($headline['text']) ? clean_id($headline['text']) : '';
                     <div class="c-slider__progress-bar splide__progress-bar"></div>
                 </div>
                 <div class="c-slider__arrows splide__arrows">
-                    <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev
-                    ">
+                    <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
                         <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
                             'Vorheriges',
                             'oo_theme',
@@ -130,13 +142,13 @@ $anchor = isset($headline['text']) ? clean_id($headline['text']) : '';
         </div>
     <?php } ?>
 <?php } else { ?>
-    <p class="c-property-list__count --no-estates">
+    <p class="c-property-list__count --no-properties">
         <?php esc_html_e(
             'Gefundene Immobilien:',
             'oo_theme',
         ); ?> <span class="c-property-list__number"><?php echo sprintf(
      '%d',
-     $pEstates->getEstateOverallCount(),
+     $property_count,
  ); ?></span>
     </p>
 <?php } ?>

@@ -1,8 +1,7 @@
 <?php
-
 /**
  *
- *    Copyright (C) 2020  onOffice GmbH
+ *    Copyright (C) 2018-2025 onOffice GmbH
  *
  *    This program is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
@@ -641,12 +640,12 @@ while ($current_property = $pEstates->estateIterator()) {
                                 }
                                 ?>
                                 <?php if (!empty($boolean_features)): ?>
-                                    <div class="c-property-details__features c-property-features">
+                                    <div class="c-property-details__features c-item-features">
                                         <?php foreach (
                                             $boolean_features
                                             as $feature
                                         ): ?>
-                                            <span class="c-property-features__item"><?php echo $feature[
+                                            <span class="c-item-features__item"><?php echo $feature[
                                                 'label'
                                             ]; ?></span>
                                         <?php endforeach; ?>
@@ -654,18 +653,18 @@ while ($current_property = $pEstates->estateIterator()) {
                                 <?php endif; ?>
 
                                 <?php if (!empty($regular_features)): ?>
-                                    <div class="c-property-details__fields c-property-fields">
+                                    <div class="c-property-details__fields c-item-fields">
                                         <?php foreach (
                                             $regular_features
                                             as $feature
                                         ): ?>
-                                            <dl class="c-property-fields__item">
-                                                <dt class="c-property-fields__label">
+                                            <dl class="c-item-fields__item">
+                                                <dt class="c-item-fields__label">
                                                     <?php echo esc_html(
                                                         $feature['label'],
                                                     ); ?>
                                                 </dt>
-                                                <dd class="c-property-fields__value">
+                                                <dd class="c-item-fields__value">
                                                     <?php echo is_array(
                                                         $feature['value'],
                                                     )
@@ -1117,7 +1116,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                 }
                             }
                             ?>
-                            <div class="c-property-fields">
+                            <div class="c-item-fields">
                                 <?php
                                 if (
                                     $energy_certificate_type ===
@@ -1163,9 +1162,9 @@ while ($current_property = $pEstates->estateIterator()) {
                                             continue;
                                         }
 
-                                        echo '<dl class="c-property-fields__item">';
+                                        echo '<dl class="c-item-fields__item">';
 
-                                        echo '<dt class="c-property-fields__label">' .
+                                        echo '<dt class="c-item-fields__label">' .
                                             esc_html(
                                                 $pEstates->getFieldLabel(
                                                     $field,
@@ -1173,7 +1172,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                             ) .
                                             '</dt>' .
                                             "\n" .
-                                            '<dd class="c-property-fields__value">' .
+                                            '<dd class="c-item-fields__value">' .
                                             (is_array($value)
                                                 ? esc_html(
                                                     implode(', ', $value),

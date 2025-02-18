@@ -24,14 +24,8 @@
 
   &__date {
     position: absolute;
-    border-radius: $border-radius-small;
-    top: 0.5rem;
-    left: 0.5rem;
-    color: var(--oo-color-contrast-primary);
-    background-color: var(--oo-color-primary);
-    font-family: $font-family-button;
-    display: flex;
-    padding: 0.5rem 0.75rem;
+    top: $flag-offset;
+    left: $flag-offset;
   }
 
   &__picture {

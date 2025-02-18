@@ -45,7 +45,7 @@ if (
       } ?> <?php echo '--is-' . $type . '-reviews'; ?>">
           <?php if (!empty($author) && !empty($date)) { ?>
             <div class="c-google-review-card__author">
-                <div class="c-google-review-card__date">
+                <div class="c-google-review-card__date c-flag">
                   <?php echo htmlspecialchars($date); ?>
                 </div>
                 <div class="c-google-review-card__name o-headline --h3">

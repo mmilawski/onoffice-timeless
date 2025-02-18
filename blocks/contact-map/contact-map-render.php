@@ -257,26 +257,33 @@ if (empty($addresses)) {
                                     $full_address = urlencode(
                                         $street . ', ' . $zip . ', ' . $country,
                                     );
-                                    $link = [
-                                        'title' => esc_html__(
-                                            'Zur Routenplanung',
-                                            'oo_theme',
-                                        ),
-                                        'url' =>
-                                            'https://www.google.com/maps/dir/?api=1&destination=' .
-                                            $full_address,
-                                        'target' => '_blank',
+                                    $button = [
+                                        [
+                                            'link' => [
+                                                'title' => esc_html__(
+                                                    'Zur Routenplanung',
+                                                    'oo_theme',
+                                                ),
+                                                'url' =>
+                                                    'https://www.google.com/maps/dir/?api=1&destination=' .
+                                                    $full_address,
+                                                'target' => '_blank',
+                                            ],
+                                        ],
                                     ];
-                                    echo '<p class="c-map__link-wrapper">';
-                                    echo '<a class="c-map__link c-link --underlined --text-color --on-bg-transparent" ' .
-                                        oo_set_link_attr($link) .
-                                        '>' .
-                                        esc_html__(
-                                            'Zur Routenplanung',
-                                            'oo_theme',
-                                        ) .
-                                        '</a>';
-                                    echo '</p>';
+
+                                    oo_get_template(
+                                        'components',
+                                        '',
+                                        'component-buttons',
+                                        [
+                                            'buttons' => $button,
+                                            'additional_container_class' =>
+                                                'c-map__button-wrapper',
+                                            'additional_button_class' =>
+                                                'c-map__button --small-corners --full-width --on-bg-transparent',
+                                        ],
+                                    );
                                 }
                                 ?>
                             </div>

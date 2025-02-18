@@ -2,87 +2,24 @@
   $c-address-list: &;
 
   position: relative;
-  z-index: 80;
 
   &__container {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-up(xxl) {
       gap: 2rem;
     }
   }
 
   &__content {
     display: flex;
-    flex-direction: column;
     gap: 1.5rem;
-    @include media-breakpoint-up(xl) {
+    margin-bottom: 1rem;
+    @include media-breakpoint-up(xxl) {
       gap: 2rem;
+      margin-bottom: 3rem;
     }
-  }
-
-  &__link {
-    position: relative;
-
-    @include hover-focus() {
-      #{$c-address-list}__overlay {
-        height: calc(100% - 2px);
-        z-index: 1;
-      }
-      #{$c-address-list}__button {
-        color: var(--oo-color-contrast-primary);
-        background-color: var(--oo-color-primary);
-      }
-    }
-  }
-
-  &__contact-wrapper {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    column-gap: 1rem;
-    margin-top: auto;
-  }
-  &__contact {
-    display: inline-flex;
-    flex-direction: column;
-    align-self: flex-start;
-    margin-top: 1rem;
-
-    &.--hide-desktop {
-      display: inline-flex;
-      @include media-breakpoint-up(lg) {
-        display: none;
-      }
-    }
-  }
-
-  &__overlay {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 2.75rem; // button height
-    position: absolute;
-    bottom: 2px;
-    background-color: var(--oo-color-transparent-bg-90);
-    transition: height 0.25s ease-in-out;
-    @include media-breakpoint-up(xl) {
-      height: 3rem; // button height
-    }
-  }
-
-  &__button {
-    font-family: $font-family-button;
-    font-weight: $font-weight-button;
-    text-align: center;
-    margin: 0;
-    padding: 0.5rem 0.75rem;
-    cursor: pointer;
-    color: var(--oo-color-primary);
-    background-color: transparent;
-    border: 2px solid transparent;
   }
 
   &__headline {
@@ -91,40 +28,25 @@
   &__text {
   }
 
-  &__list {
-    display: grid;
-    gap: 2rem;
-    @include media-breakpoint-up(lg) {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  &__inner {
+  &__wrapper {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
+    @include media-breakpoint-up(lg) {
+      gap: 2rem;
+    }
   }
 
   &__nav {
-    display: flex;
-    gap: 1.5rem;
-    @include media-breakpoint-up(md) {
-      gap: unset;
-    }
   }
 
   &__count {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 0.75rem;
+    gap: 1rem;
 
-    @include media-breakpoint-up(md) {
-      justify-content: flex-end;
-    }
-
-    &.--no-estates {
-      justify-content: flex-start;
+    &.--no-addresses {
     }
   }
 
@@ -132,19 +54,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     border-radius: $border-radius;
     background-color: var(--oo-color-primary);
     color: var(--oo-color-contrast-primary);
     font-family: $font-family-button;
     font-weight: $font-weight-button;
-    width: 2.25rem;
-    height: 2.25rem;
-    padding: 0.25rem;
-
-    @include media-breakpoint-up(xl) {
-      width: 2.5rem;
-      height: 2.5rem;
-    }
+    min-width: $icon-wrapper-size;
+    height: $icon-wrapper-size;
+    padding: 0 0.5rem;
 
     .--bg-light & {
       background-color: var(--oo-color-light-primary, var(--oo-color-primary));
@@ -170,33 +88,13 @@
     }
   }
 
-  &__estate-count {
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    padding: 0.5rem 0.75rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--oo-color-primary);
-    color: var(--oo-color-contrast-primary);
-    font-family: $font-family-button;
-    font-weight: $font-weight-button;
-    border: 2px solid var(--oo-color-bg);
-  }
-
-  &__sort {
-    select {
-      width: auto;
-    }
-  }
-
-  &__properties {
+  &__addresses {
     display: grid;
-    gap: 2rem;
+    gap: 1.5rem;
 
     @include media-breakpoint-up(lg) {
       grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
     }
 
     @include media-breakpoint-up(xxl) {
@@ -210,12 +108,9 @@
   &__pagination {
   }
 
-  &__buttons {
+  &__buttons-wrapper {
   }
 
-  :not(.--is-list-item) {
-    #{$c-address-list}__overlay {
-      border-bottom: unset;
-    }
+  &__buttons {
   }
 }

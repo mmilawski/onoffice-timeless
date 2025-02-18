@@ -73,7 +73,7 @@ $image_width_xxxl = '702';
 
                 <div class="c-news-details__content o-col-12 o-col-xl-8">
                     <?php if ($is_date && !empty($date)) { ?>
-                        <span class="c-news-details__date">
+                        <span class="c-news-details__date c-flag">
                             <?php echo $date; ?>            
                         </span>
                     <?php } ?>

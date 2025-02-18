@@ -1,8 +1,7 @@
 <?php
-
 /**
  *
- *    Copyright (C) 2016  onOffice Software AG
+ *    Copyright (C) 2018-2025 onOffice GmbH
  *
  *    This program is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU General Public License as published by
@@ -18,6 +17,7 @@
  *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+
 /**
  *
  *  Default template
@@ -89,19 +89,17 @@ while ($current_property = $pEstatesClone->estateIterator()):
 
     // image width
     $image_width_xs = '542';
-    $image_width_sm = '511';
-    $image_width_md = '593';
-    $image_width_lg = '463';
-    $image_width_xl = '463';
-    $image_width_xxl = '543';
-    $image_width_xxxl = '598';
+    $image_width_sm = '510';
+    $image_width_md = '692';
+    $image_width_lg = '446';
+    $image_width_xl = '542';
+    $image_width_xxl = '414';
+    $image_width_xxxl = '458';
     ?>
 
-<div class="c-property-card --bg-transparent <?php if ($bg_color) {
-    echo '--on-' . $bg_color;
-} ?> <?php if ($is_slider) {
-     echo '--on-slider c-slider__slide splide__slide';
- } ?>">
+<article class="c-property-card --bg-transparent <?php if ($is_slider) {
+    echo '--on-slider c-slider__slide splide__slide';
+} ?>">
 
  <?php
  $property_pictures = $pEstatesClone->getEstatePictures();
@@ -109,15 +107,14 @@ while ($current_property = $pEstatesClone->estateIterator()):
  ?>
 
     <div class="c-property-card__inner-wrapper">
-        <div class="c-property-card__inner --is-properties-images-slider --on-slider <?php if (
+        <div class="c-property-card__inner --on-bg-transparent --is-properties-images-slider --on-slider <?php if (
             $pictures_count > 0
         ) {
             echo 'c-slider splide';
         } ?>" data-splide='{"perPage":1,"perMove":1,"pagination":false,"arrows":true, "drag":false,"snap":true,"lazyLoad":"nearby", "type":"loop"}'>
-                <?php if ($pictures_count > 0) { ?>
+            <?php if ($pictures_count > 0) { ?>
                 <div class="c-slider__track splide__track">
                     <div class="c-slider__list splide__list">
-
                         <?php foreach ($property_pictures as $id) {
                             $picture_values = $pEstatesClone->getEstatePictureValues(
                                 $id,
@@ -193,42 +190,40 @@ while ($current_property = $pEstatesClone->estateIterator()):
                                     ],
                                 ],
                             );
-                        }
-                    // }
-                    ?>
+                        } ?>
                     </div>
                 </div>
-                <?php } else { ?>
-                        <div class="c-property-card__picture"></div>
-                    <?php } ?>
-              <?php if ($pictures_count > 0) { ?>
-                    <div class="c-slider__navigation splide__navigation --is-properties-images-slider">
-                        <div class="c-slider__arrows splide__arrows">
-                            <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
-                                <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
-                                    'Vorheriges',
-                                    'oo_theme',
-                                ); ?></span>
-                                <span class="c-slider__arrow-icon --chevron-left"><?php oo_get_icon(
-                                    'chevron-left',
-                                ); ?></span>
-                            </button>
-                            <button class="c-slider__arrow --next splide__arrow splide__arrow--next">
-                                <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
-                                    'Nächstes',
-                                    'oo_theme',
-                                ); ?></span>
-                                <span class="c-slider__arrow-icon --chevron-right"><?php oo_get_icon(
-                                    'chevron-right',
-                                ); ?></span>
-                            </button>
-                        </div>
+            <?php } else { ?>
+                    <div class="c-property-card__picture"></div>
+            <?php } ?>
+            <?php if ($pictures_count > 0) { ?>
+                <div class="c-slider__navigation splide__navigation --is-properties-images-slider">
+                    <div class="c-slider__arrows splide__arrows">
+                        <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
+                            <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
+                                'Vorheriges',
+                                'oo_theme',
+                            ); ?></span>
+                            <span class="c-slider__arrow-icon --chevron-left"><?php oo_get_icon(
+                                'chevron-left',
+                            ); ?></span>
+                        </button>
+                        <button class="c-slider__arrow --next splide__arrow splide__arrow--next">
+                            <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
+                                'Nächstes',
+                                'oo_theme',
+                            ); ?></span>
+                            <span class="c-slider__arrow-icon --chevron-right"><?php oo_get_icon(
+                                'chevron-right',
+                            ); ?></span>
+                        </button>
                     </div>
-                <?php } ?>
-                    <?php if (
-                        $property_status ||
-                        (Favorites::isFavorizationEnabled() && !$is_reference)
-                    ) { ?>
+                </div>
+            <?php } ?>
+            <?php if (
+                $property_status ||
+                (Favorites::isFavorizationEnabled() && !$is_reference)
+            ) { ?>
                 <div class="c-property-card__flags c-flags --space-between">
                     <?php if ($property_status) { ?>
                         <span class="c-property-card__status c-flag --property-status">
@@ -273,65 +268,53 @@ while ($current_property = $pEstatesClone->estateIterator()):
         </div>
     </div>
     <div class="c-property-card__content">
-            <?php if ($current_property['objekttitel']) { ?>
-                <h3 class="c-property-card__title">
-                    <?php echo $current_property['objekttitel']; ?>
-                </h3>
-            <?php } ?>
-            <?php if ($is_fields) { ?>
-                <div class="c-property-card__features c-property-features">
-                    <?php foreach ($current_property as $field => $value) {
-                        if (
-                            (is_numeric($value) && 0 == $value) ||
-                            $value == '0000-00-00' ||
-                            $value == '0.00' ||
-                            $value == '' ||
-                            empty($value) ||
-                            in_array($field, $dont_echo) ||
-                            in_array($field, $location_fields) ||
-                            in_array($field, $price_fields)
-                        ) {
-                            continue;
-                        } ?>
-                        <span class="c-property-features__item">
-                          <?php
-                          $dont_echo_label = [
-                              'objektart',
-                              'objekttyp',
-                              'vermarktungsart',
-                          ];
-                          if (!in_array($field, $dont_echo_label)) {
-                              esc_html_e(
-                                  $pEstates->getFieldLabel($field) . ': ',
-                              );
-                          }
-
-                          if (is_array($value)) {
-                              esc_html_e(implode(', ', $value));
-                          } else {
-                              echo esc_html($value);
-                          }
-                          ?>
-                          <?php  ?>
-
-
-
-
-                        </span>
-                    <?php
-                    } ?>
-
-                    
-
-
-
-                    <span class="c-property-features__item <?php if (
-                        !$current_property['plz'] &&
-                        !$current_property['ort'] &&
-                        !$current_property['land']
+        <?php if ($current_property['objekttitel']) { ?>
+            <h3 class="c-property-card__title o-headline --h3">
+                <?php echo $current_property['objekttitel']; ?>
+            </h3>
+        <?php } ?>
+        <?php if ($is_fields) { ?>
+            <div class="c-property-card__features c-item-features">
+                <?php foreach ($current_property as $field => $value) {
+                    if (
+                        (is_numeric($value) && 0 == $value) ||
+                        $value == '0000-00-00' ||
+                        $value == '0.00' ||
+                        $value == '' ||
+                        empty($value) ||
+                        in_array($field, $dont_echo) ||
+                        in_array($field, $location_fields) ||
+                        in_array($field, $price_fields)
                     ) {
-                        echo '--empty';
-                    } ?>"><?php if ($current_property['plz']) {
+                        continue;
+                    } ?>
+                    <span class="c-item-features__item">
+                        <?php
+                        $dont_echo_label = [
+                            'objektart',
+                            'objekttyp',
+                            'vermarktungsart',
+                        ];
+                        if (!in_array($field, $dont_echo_label)) {
+                            esc_html_e($pEstates->getFieldLabel($field) . ': ');
+                        }
+
+                        if (is_array($value)) {
+                            esc_html_e(implode(', ', $value));
+                        } else {
+                            echo esc_html($value);
+                        }
+                        ?>
+                    </span>
+                <?php
+                } ?>
+                <span class="c-item-features__item <?php if (
+                    !$current_property['plz'] &&
+                    !$current_property['ort'] &&
+                    !$current_property['land']
+                ) {
+                    echo '--empty';
+                } ?>"><?php if ($current_property['plz']) {
     echo $current_property['plz'];
 } ?> <?php
  if ($current_property['ort'] && $current_property['ort'] !== '') {
@@ -347,84 +330,81 @@ while ($current_property = $pEstatesClone->estateIterator()):
      echo $current_property['land'];
  }
  ?></span>
-                </div>
-            <?php } ?>
-            <?php if (!empty($current_property['objektbeschreibung'])) { ?>
-                <div class="c-property-card__description">
-                    <h4 class="c-property-card__description-headline">
-                        <?php esc_html_e(
-                            $pEstates->getFieldLabel('objektbeschreibung'),
-                        ); ?>:
-                    </h4>
-                    <p class="c-property-card__description-text">
-                        <?php echo nl2br(
-                            $current_property['objektbeschreibung'],
-                        ); ?>
-                    </p>
-                </div>
-            <?php } ?>
-            <?php if ($is_price_fields) { ?>
-                    <?php foreach ($price_fields as $price_field) {
-
-                        $price_value = $current_property[$price_field];
-                        if (
-                            (is_numeric($price_value) && 0 == $price_value) ||
-                            $price_value == '0000-00-00' ||
-                            $price_value == '0.00' ||
-                            $price_value == '' ||
-                            empty($price_value)
-                        ) {
-                            continue;
-                        }
-                        ?>
-                        <div class="c-property-card__price">
-                            <h4>
-                              <?php
-                              esc_html_e(
-                                  $pEstates->getFieldLabel($price_field),
-                              );
-
-                              echo ':';
-                              ?>
-                              <?php if (is_array($price_value)) {
-                                  esc_html_e(implode(', ', $price_value));
-                              } else {
-                                  echo esc_html($price_value);
-                              } ?>
-                            </h4>
-                        </div>
-                    <?php
-                    } ?>
-                <?php } ?>
-            <div class="c-property-card__footer">
-                <?php if (!$is_reference || !$is_restricted_view) { ?>
-                    <?php
-                    $button = [
-                        [
-                            'link' => [
-                                'title' => esc_html__(
-                                    'Zur Detailansicht',
-                                    'oo_theme',
-                                ),
-                                'url' => $property_url,
-                            ],
-                        ],
-                    ];
-
-                    oo_get_template('components', '', 'component-buttons', [
-                        'buttons' => $button,
-                        'additional_button_class' =>
-                            'c-property-card__button --full-width --on-bg-transparent',
-                        'additional_container_class' =>
-                            'c-property-card__buttons',
-                    ]);
-                    ?>
-                <?php } ?>
             </div>
+        <?php } ?>
+        <?php if (!empty($current_property['objektbeschreibung'])) { ?>
+            <div class="c-property-card__description">
+                <h4 class="c-property-card__description-headline">
+                    <?php esc_html_e(
+                        $pEstates->getFieldLabel('objektbeschreibung'),
+                    ); ?>:
+                </h4>
+                <p class="c-property-card__description-text">
+                    <?php echo nl2br(
+                        $current_property['objektbeschreibung'],
+                    ); ?>
+                </p>
+            </div>
+        <?php } ?>
+        <?php if ($is_price_fields) { ?>
+            <?php foreach ($price_fields as $price_field) {
+
+                $price_value = $current_property[$price_field];
+                if (
+                    (is_numeric($price_value) && 0 == $price_value) ||
+                    $price_value == '0000-00-00' ||
+                    $price_value == '0.00' ||
+                    $price_value == '' ||
+                    empty($price_value)
+                ) {
+                    continue;
+                }
+                ?>
+                <div class="c-property-card__price">
+                    <h4>
+                        <?php
+                        esc_html_e($pEstates->getFieldLabel($price_field));
+
+                        echo ':';
+                        ?>
+                        <?php if (is_array($price_value)) {
+                            esc_html_e(implode(', ', $price_value));
+                        } else {
+                            echo esc_html($price_value);
+                        } ?>
+                    </h4>
+                </div>
+            <?php
+            } ?>
+        <?php } ?>
+        <div class="c-property-card__footer">
+            <?php if (!$is_reference || !$is_restricted_view) { ?>
+                <?php
+                $button = [
+                    [
+                        'link' => [
+                            'title' => esc_html__(
+                                'Zur Detailansicht',
+                                'oo_theme',
+                            ),
+                            'url' => $property_url,
+                        ],
+                    ],
+                ];
+
+                oo_get_template('components', '', 'component-buttons', [
+                    'buttons' => $button,
+                    'additional_button_class' =>
+                        'c-property-card__button --small-corners --full-width --on-bg-transparent',
+                    'additional_container_class' => 'c-property-card__buttons',
+                ]);
+                ?>
+            <?php } ?>
         </div>
     </div>
+</article>
 
-    <?php
+<?php
 endwhile;
 ?>
 

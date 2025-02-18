@@ -1,0 +1,113 @@
+.c-address-card {
+  $c-address-card: &;
+
+  display: flex;
+  flex-direction: column;
+  background-color: var(--oo-color-bg);
+  border: 1px solid var(--oo-color-mix-bg-contrast-50);
+  color: var(--oo-color-text);
+  border-radius: $border-radius;
+  overflow: hidden;
+
+  &__wrapper {
+    position: relative;
+    border-radius: 0 0 $border-radius $border-radius;
+    overflow: hidden;
+    background-color: var(--oo-color-transparent-primary-10);
+  }
+
+  &__picture {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  &__image {
+  }
+
+  &__flag {
+    position: absolute;
+    top: $flag-offset;
+    left: $flag-offset;
+    display: flex;
+    width: fit-content;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  &__name {
+  }
+
+  &__job {
+    font-family: $font-family-text-bold;
+    font-weight: $font-weight-text-bold;
+  }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__label {
+    flex-shrink: 0;
+  }
+
+  &__value {
+    hyphens: auto;
+    word-break: break-word;
+  }
+
+  &__reviews {
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+  }
+
+  &__networks {
+  }
+
+  &__buttons {
+    display: grid;
+    grid-template-areas: 'detail phone' 'form form';
+    grid-template-columns: 1fr auto;
+    @include media-breakpoint-up(md) {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  &__button {
+    @include media-breakpoint-up(md) {
+      flex: 1 1 calc(50% - 1rem);
+      white-space: nowrap;
+    }
+
+    &.--is-detail {
+      grid-area: detail;
+    }
+    &.--is-phone {
+      grid-area: phone;
+      @include media-breakpoint-up(md) {
+        display: none;
+      }
+    }
+    &.--is-form {
+      grid-area: form;
+    }
+  }
+}
