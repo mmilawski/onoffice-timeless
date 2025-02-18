@@ -118,7 +118,6 @@ if (!empty($pEstates->getEstateContacts())) {
         'Titel',
         'Vorname',
         'Name',
-        'Zusatz1', // Company
         'jobPosition',
         'Strasse',
         'Plz',
@@ -148,7 +147,7 @@ if (!empty($pEstates->getEstateContacts())) {
     }
 
     foreach ($pEstates->getEstateContacts() as $contact_data) {
-        if (is_null($contact_data['id'])) {
+        if (!isset($contact_data['id'])) {
             continue;
         } ?>
         <div class="c-property-details__contact c-contact-person">
@@ -234,9 +233,6 @@ if (!empty($pEstates->getEstateContacts())) {
                     ]);
                 }
             }
-            if (!empty($contact_link)) {
-                echo '</a>';
-            }
 
             $salutation = $contact_data['Anrede'];
             $title = $contact_data['Titel'];
@@ -247,7 +243,6 @@ if (!empty($pEstates->getEstateContacts())) {
             $phone = $contact_data['defaultphone'];
             $mobile = $contact_data['mobile'];
             $fax = $contact_data['defaultfax'];
-            $company = $contact_data['Zusatz1'];
             $street = $contact_data['Strasse'];
             $postCode = $contact_data['Plz'];
             $town = $contact_data['Ort'];
@@ -273,6 +268,9 @@ if (!empty($pEstates->getEstateContacts())) {
                 echo '<p class="c-contact-person__name o-headline --h3">';
                 echo esc_html($name_output);
                 echo '</p>';
+            }
+            if (!empty($contact_link)) {
+                echo '</a>';
             }
 
             // Output all other configured fields.
