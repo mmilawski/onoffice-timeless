@@ -104,6 +104,8 @@ while ($current_property = $pEstatesClone->estateIterator()):
  <?php
  $property_pictures = $pEstatesClone->getEstatePictures();
  $pictures_count = is_array($property_pictures) ? count($property_pictures) : 0;
+ $is_visible_property_detail = !$is_reference || !$is_restricted_view;
+ $slider_item_classes = 'c-slider__slide splide__slide';
  ?>
 
     <div class="c-property-card__inner-wrapper">
@@ -134,6 +136,14 @@ while ($current_property = $pEstatesClone->estateIterator()):
                                 'alt' => $image_alt,
                             ];
 
+                            if ($is_visible_property_detail) {
+                                echo '<a class="c-property-card__picture-wrapper ' .
+                                    $slider_item_classes .
+                                    '" href="' .
+                                    esc_url($property_url) .
+                                    '">';
+                            }
+
                             oo_get_template(
                                 'components',
                                 '',
@@ -141,7 +151,10 @@ while ($current_property = $pEstatesClone->estateIterator()):
                                 [
                                     'image' => $image,
                                     'picture_class' =>
-                                        'c-property-card__picture o-picture c-slider__slide splide__slide',
+                                        'c-property-card__picture o-picture' .
+                                        (!$is_visible_property_detail
+                                            ? ' ' . $slider_item_classes
+                                            : ''),
                                     'image_class' =>
                                         'c-property-card__image o-image',
                                     'dimensions' => [
@@ -190,12 +203,24 @@ while ($current_property = $pEstatesClone->estateIterator()):
                                     ],
                                 ],
                             );
+
+                            if ($is_visible_property_detail) {
+                                echo '</a>';
+                            }
                         } ?>
                     </div>
                 </div>
-            <?php } else { ?>
-                    <div class="c-property-card__picture"></div>
-            <?php } ?>
+            <?php } else {if ($is_visible_property_detail) {
+                    echo '<a class="c-property-card__picture-wrapper" href="' .
+                        esc_url($property_url) .
+                        '">';
+                }
+
+                echo '<div class="c-property-card__picture"></div>';
+
+                if ($is_visible_property_detail) {
+                    echo '</a>';
+                }} ?>
             <?php if ($pictures_count > 0) { ?>
                 <div class="c-slider__navigation splide__navigation --is-properties-images-slider">
                     <div class="c-slider__arrows splide__arrows">
@@ -378,7 +403,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
             } ?>
         <?php } ?>
         <div class="c-property-card__footer">
-            <?php if (!$is_reference || !$is_restricted_view) { ?>
+            <?php if ($is_visible_property_detail) { ?>
                 <?php
                 $button = [
                     [
