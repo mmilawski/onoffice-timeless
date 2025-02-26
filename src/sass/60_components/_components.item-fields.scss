@@ -19,5 +19,7 @@
   &__value {
     font-weight: $font-weight-text-bold;
     font-family: $font-family-text-bold;
+    hyphens: auto;
+    word-break: break-word;
   }
 }

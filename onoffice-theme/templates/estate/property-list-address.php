@@ -28,51 +28,73 @@ use onOffice\WPlugin\Favorites;
 
 /* @var $pEstates onOffice\WPlugin\EstateList */
 
-$slider['slider'] = 'yes';
+// ACF
+// Settings
+$settings = get_field('settings') ?? [];
+$bg_color = $settings['bg_color'] ?? 'bg-transparent';
+
+// Slider
+$slider = ['slider' => 'yes'];
+$is_slider = true;
+
+// Map
+ob_start();
+require 'map/map.php';
+$map = ob_get_clean();
+
+$property_count = method_exists($pEstates, 'getEstateOverallCount')
+    ? $pEstates->getEstateOverallCount()
+    : 0;
 ?>
 
-<?php require 'map/map.php'; ?>
+<?php if ($property_count > 0) { ?>
+    <?php if ($map) { ?>
+        <div class="c-property-list__map-wrapper">
+            <?php echo $map; ?>
+        </div>
+    <?php } ?>
 
-<?php if ($pEstates->getEstateOverallCount() > 0) { ?>
-	<div class="c-property-list__slider c-slider --is-properties-slider splide" data-splide='{
-   "perPage":1,
-   "perMove":1,
-   "gap":32,
-   "pagination": false,
-   "snap":true,
-   "lazyLoad":"nearby",
-   "mediaQuery":"min",
-   "breakpoints":{
-      "992":{
-         "perPage":4
-      }
-   }
-}'>
-		<div class="c-slider__track splide__track">
-			<div class="c-slider__list splide__list">
-				<?php require 'property-card.php'; ?>
-			</div>
-		</div>
-		<div class="c-slider__navigation splide__navigation">
-			<div class="c-slider__progress splide__progress">
-				<div class="c-slider__progress-bar splide__progress-bar"></div>
-			</div>
-			<div class="c-slider__arrows splide__arrows">
-				<button class="c-slider__arrow c-slider__arrow--prev splide__arrow splide__arrow--prev">
-					<span class="u-screen-reader-only"><?php esc_html_e(
-         'Vorheriges',
-         'oo_theme',
-     ); ?></span>
-					<svg class="c-slider__icon splide__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10.12 17.41"><path d="m9.41.71L1.41,8.71l8,8" vector-effect="non-scaling-stroke" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-				</button>
-				<button class="c-slider__arrow c-slider__arrow--next splide__arrow splide__arrow--next">
-					<span class="u-screen-reader-only"><?php esc_html_e(
-         'Nächstes',
-         'oo_theme',
-     ); ?></span>
-					<svg class="c-slider__icon splide__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10.12 17.41"><path d="m.71,16.71l8-8L.71.71" vector-effect="non-scaling-stroke" fill="none" stroke="currentColor" stroke-width="2"/></svg>
-				</button>
-			</div>
-		</div>
-	</div>
+    <div id="outerslider" class="c-property-list__slider --on-<?php echo $bg_color; ?> c-slider --is-properties-slider splide" data-splide='{"perPage":1,"perMove":1,"gap":32,"pagination":false,"arrows":false,"page":false,"snap":true,"lazyLoad":"nearby","mediaQuery":"min","breakpoints":{"992":{"perPage":2},"1400":{"perPage":3}}}'>
+        <div class="c-slider__track splide__track">
+            <div class="c-slider__list splide__list">
+                <?php require 'property-card.php'; ?>
+            </div>
+        </div>
+
+        <div class="c-slider__navigation splide__navigation --is-properties-slider">
+            <div class="c-slider__progress splide__progress">
+                <div class="c-slider__progress-bar splide__progress-bar"></div>
+            </div>
+            <div class="c-slider__arrows splide__arrows">
+                <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
+                    <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
+                        'Vorheriges',
+                        'oo_theme',
+                    ); ?></span>
+                    <span class="c-slider__arrow-icon --chevron-left"><?php oo_get_icon(
+                        'chevron-left',
+                    ); ?></span>
+                </button>
+                <button class="c-slider__arrow --next splide__arrow splide__arrow--next">
+                    <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
+                        'Nächstes',
+                        'oo_theme',
+                    ); ?></span>
+                    <span class="c-slider__arrow-icon --chevron-right"><?php oo_get_icon(
+                        'chevron-right',
+                    ); ?></span>
+                </button>
+            </div>
+        </div>
+</div>
+<?php } else { ?>
+    <p class="c-property-list__count --no-properties">
+        <?php esc_html_e(
+            'Gefundene Immobilien:',
+            'oo_theme',
+        ); ?> <span class="c-property-list__number"><?php echo sprintf(
+     '%d',
+     $property_count,
+ ); ?></span>
+    </p>
 <?php } ?>

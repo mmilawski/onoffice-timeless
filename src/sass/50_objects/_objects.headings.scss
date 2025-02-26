@@ -88,23 +88,23 @@
     color: var(--oo-color-text);
 
     .--bg-light & {
-      color: var(--oo-color-text);
+      color: var(--oo-color-light-text);
     }
 
     .--bg-dark & {
-      color: var(--oo-color-text);
+      color: var(--oo-color-dark-text);
     }
 
     .--bg-primary & {
-      color: var(--oo-color-text);
+      color: var(--oo-color-primary-text);
     }
 
     .--bg-secondary & {
-      color: var(--oo-color-text);
+      color: var(--oo-color-secondary-text);
     }
 
     .--bg-footer & {
-      color: var(--oo-color-text);
+      color: var(--oo-color-footer-text);
     }
 
     .--bg-transparent & {

@@ -368,7 +368,7 @@ foreach ($current_address as $field => $value) {
                     echo '<li class="c-social-media__item --' . $icon . '">';
                     echo '<a class="c-social-media__link" href="' .
                         esc_url($value) .
-                        '">';
+                        '" rel="noopener noreferrer" target="_blank">';
                     oo_get_icon($icon);
                     echo '<span class="c-social-media__text u-screen-reader-only">' .
                         $label .

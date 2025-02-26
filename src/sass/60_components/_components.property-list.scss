@@ -20,6 +20,10 @@
       gap: 2rem;
       margin-bottom: 3rem;
     }
+
+    .--is-address-details & {
+      margin-bottom: 0;
+    }
   }
 
   &__headline {

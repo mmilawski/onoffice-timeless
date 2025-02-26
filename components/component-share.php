@@ -2,6 +2,8 @@
 
 /** @var array $args */
 
+$args = $args ?? [];
+$popup_title = $args['popup_title'] ?? null;
 $button_class = $args['button_class'] ?? null;
 $button_title = $args['button_title'] ?? null;
 $button_icon = $args['button_icon'] ?? null;
@@ -13,37 +15,35 @@ $popup_id_data = !empty($args['popup_id'])
 // SHARE
 $share_link = $args['share_link'] ?? null;
 // COPY TO CLIPBOARD
-$copyText = __('Link kopieren', 'oo_theme');
-$copiedText = __('Link kopiert!', 'oo_theme');
+$copy_text = __('Link kopieren', 'oo_theme');
+$copied_text = __('Link kopiert!', 'oo_theme');
 
 // SOCIAL MEDIA
-$networks =
-    [
-        'email' => [
-            'url' => 'mailto:?body=' . $share_link,
-        ],
-        'whatsapp' => [
-            'url' => 'https://wa.me/?text=' . $share_link,
-        ],
-        'facebook' => [
-            'url' =>
-                'https://www.facebook.com/sharer/sharer.php?u=' . $share_link,
-        ],
-        'x' => [
-            'url' => 'https://twitter.com/intent/tweet?text=' . $share_link,
-        ],
-        'linkedin' => [
-            'url' =>
-                'https://www.linkedin.com/shareArticle?mini=true&url=' .
-                $share_link,
-        ],
-        'xing' => [
-            'url' => 'https://www.xing.com/spi/shares/new?url=' . $share_link,
-        ],
-        'link' => [
-            'url' => $share_link,
-        ],
-    ] ?? null;
+$networks = [
+    'email' => [
+        'url' => 'mailto:?body=' . $share_link,
+    ],
+    'whatsapp' => [
+        'url' => 'https://wa.me/?text=' . $share_link,
+    ],
+    'facebook' => [
+        'url' => 'https://www.facebook.com/sharer/sharer.php?u=' . $share_link,
+    ],
+    'x' => [
+        'url' => 'https://twitter.com/intent/tweet?text=' . $share_link,
+    ],
+    'linkedin' => [
+        'url' =>
+            'https://www.linkedin.com/shareArticle?mini=true&url=' .
+            $share_link,
+    ],
+    'xing' => [
+        'url' => 'https://www.xing.com/spi/shares/new?url=' . $share_link,
+    ],
+    'link' => [
+        'url' => $share_link,
+    ],
+];
 ?>
 
 <a href="#" class="<?php echo $button_class
@@ -52,9 +52,7 @@ $networks =
      ? '--has-icon'
      : ''; ?>" <?php echo $popup_id_data; ?>>
     <span class="c-button__text">
-    <?php echo $button_title
-        ? $button_title
-        : esc_html__('Immobilie teilen', 'oo_theme'); ?>
+    <?php echo $button_title ?? esc_html__('Immobilie teilen', 'oo_theme'); ?>
     </span>
     <?php if ($button_icon) { ?>
         <span class="c-button__icon"><?php oo_get_icon($button_icon); ?></span>
@@ -62,15 +60,15 @@ $networks =
 </a>
 
 
-<div class="c-popup --is-share" <?php if (!empty($popup_id)) {
+<div class="c-popup --is-share --bg-transparent" <?php if (!empty($popup_id)) {
     echo 'id="' . $popup_id . '"';
 } ?>>
 	<div class="c-popup__wrapper">
         <div class="c-popup__header">
-            <p class="c-popup__title"><?php esc_html_e(
-                'Immobilie teilen',
-                'oo_theme',
-            ); ?></p>
+            <p class="c-popup__title">
+                <?php echo $popup_title ??
+                    esc_html__('Immobilie teilen', 'oo_theme'); ?>
+            </p>
             <button class="c-popup__close c-icon-button">
                 <span class="c-icon-button__text u-screen-reader-only"><?php esc_html_e(
                     'Fenster schließen',
@@ -94,8 +92,8 @@ $networks =
                         <?php if ($key == 'link'): ?>
                             <?php oo_copy_clipboard(
                                 $network_url,
-                                $copyText,
-                                $copiedText,
+                                $copy_text,
+                                $copied_text,
                             ); ?>
                         <?php else: ?>
                             <a class="c-social-media__link" href="<?php echo esc_url(

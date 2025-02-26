@@ -1,4 +1,5 @@
 <?php
+
 /**
  *
  *    Copyright (C) 2018-2025 onOffice GmbH
@@ -20,548 +21,554 @@
 
 use onOffice\WPlugin\AddressList;
 global $wp;
-?>
 
-<?php
-$dont_echo = ['Vorname', 'Name', 'Sonstige1', 'Sonstige2', 'Sonstige3'];
+$dont_echo = [
+    'Anrede',
+    'Titel',
+    'Vorname',
+    'Name',
+    'jobTitle',
+    'jobPosition',
+    'Zusatz1',
+    'bewertungslinkWebseite',
+    'bildWebseite',
+    'imageUrl',
+    'id',
+    'defaultemail',
+    'defaultphone',
+    'defaultfax',
+];
+$network_fields = [
+    'facebook',
+    'instagram',
+    'linkedin',
+    'pinterest',
+    'tiktok',
+    'twitter',
+    'xing',
+    'youtube',
+];
+$text_fields = ['Sonstige1', 'Sonstige2', 'Sonstige3'];
 
-// Image width
-$image_width_xs = '380';
-$image_width_sm = '512';
-$image_width_md = '694';
-$image_width_lg = '350';
-$image_width_xl = '350';
-$image_width_xxl = '350';
-$image_width_xxxl = '350';
-
-$show_more_count = get_field('show_more_count') ?? 12;
-
-$placeholder_image =
-    get_field('general', 'option')['address_detail']['placeholder_image'] ??
-    null;
+// Settings
+$settings = get_field('settings') ?? [];
+$bg_color = $settings['bg_color'] ?? 'bg-transparent';
 
 $current_url = home_url(add_query_arg([], $wp->request)) ?? '';
+
 /* @var $pAddressList AddressList */
-$currentAddressArr = [];
+$current_address_array = [];
 if (
     is_object($pAddressList) &&
     method_exists($pAddressList, 'getCurrentAddress')
 ) {
-    $currentAddressArr = $pAddressList->getCurrentAddress() ?? [];
+    $current_address_array = $pAddressList->getCurrentAddress() ?? [];
 }
-if (!empty($currentAddressArr && is_array($currentAddressArr))) {
-    foreach ($currentAddressArr as $addressId => $escapedValues) {
 
-        $email = $escapedValues['Email'] ?? null;
-        $phone = $escapedValues['Telefon1'] ?? null;
-        $phone_url = oo_clean_link_number($phone);
-        $image_url['url'] = !empty($escapedValues['imageUrl'])
-            ? $escapedValues['imageUrl']
-            : (!empty($placeholder_image['url'])
-                ? $placeholder_image['url']
-                : null);
-        $image_url['alt'] = $pAddressList->generateImageAlt($addressId) ?? null;
+if (empty($current_address_array) || !is_array($current_address_array)) {
+    return;
+}
 
-        $jobTitle = $escapedValues['jobTitle'] ?? null;
+foreach ($current_address_array as $address_id => $current_address) {
 
-        $sonstiges = [
-            'Sonstige1' => [
-                'label' => $pAddressList->getFieldLabel('Sonstige1') ?? null,
-                'value' => $escapedValues['Sonstige1'] ?? null,
-            ],
-            'Sonstige2' => [
-                'label' => $pAddressList->getFieldLabel('Sonstige2') ?? null,
-                'value' => $escapedValues['Sonstige2'] ?? null,
-            ],
-            'Sonstige3' => [
-                'label' => $pAddressList->getFieldLabel('Sonstige3') ?? null,
-                'value' => $escapedValues['Sonstige3'] ?? null,
-            ],
+    $pAddressList->setAddressId($address_id);
+
+    // Image
+    $placeholder_image_url =
+        get_field('general', 'option')['address_detail']['placeholder_image'][
+            'url'
+        ] ?? null;
+    $image_url = !empty($current_address['bildWebseite'])
+        ? esc_url($current_address['bildWebseite'])
+        : (!empty($current_address['imageUrl'])
+            ? esc_url($current_address['imageUrl'])
+            : (!empty($placeholder_image_url)
+                ? esc_url($placeholder_image_url)
+                : null));
+    if (!empty($pAddressList->generateImageAlt($address_id))) {
+        $image_alt = esc_html($pAddressList->generateImageAlt($address_id));
+    } else {
+        $image_alt = esc_html__('Beraterbild', 'oo_theme');
+    }
+    $image = [
+        'url' => $image_url,
+        'alt' => $image_alt,
+    ];
+
+    $image_width_xs = '543';
+    $image_width_sm = '512';
+    $image_width_md = '694';
+    $image_width_lg = '288';
+    $image_width_xl = '352';
+    $image_width_xxl = '416';
+    $image_width_xxxl = '460';
+
+    // Name
+    $name_components = array_filter([
+        $current_address['Anrede'] ?? null,
+        $current_address['Titel'] ?? null,
+        $current_address['Vorname'] ?? null,
+        $current_address['Name'] ?? null,
+    ]);
+    $full_name = join(' ', $name_components);
+
+    // Jobs & company
+    $job_title = $current_address['jobTitle'] ?? null;
+    $job_position = $current_address['jobPosition'] ?? null;
+    $company = $current_address['Zusatz1'] ?? null;
+
+    // Reviews
+    $reviews = $current_address['bewertungslinkWebseite'] ?? null;
+    $reviews_check_url = $reviews
+        ? (preg_match('~^https?://~i', $reviews)
+            ? $reviews
+            : 'https://' . $reviews)
+        : null;
+    $reviews_url = filter_var($reviews_check_url, FILTER_VALIDATE_URL);
+
+    // shortcodes
+    $shortcode_active_properties = $pAddressList->getShortCodeActiveEstates();
+    $shortcode_reference_properties = $pAddressList->getShortCodeReferenceEstates();
+    $shortcode_form = $pAddressList->getShortCodeForm();
+
+    // fields
+    $address_features = [];
+    $address_fields_available = false;
+    $network_features = [];
+    $network_fields_available = false;
+    $text_features = [];
+    $text_fields_available = false;
+
+    foreach ($current_address as $field => $value) {
+        if (
+            (is_numeric($value) && 0 == $value) ||
+            (is_array($value) &&
+                empty(trim(implode(', ', array_filter($value)), ', '))) ||
+            $value == '0000-00-00' ||
+            $value == '0.00' ||
+            $value == 'Nein' ||
+            $value == 'No' ||
+            $value == 'Ne' ||
+            $value == '' ||
+            empty($value) ||
+            in_array($field, $dont_echo)
+        ) {
+            continue;
+        }
+
+        if (in_array($field, $text_fields)) {
+            $text_fields_available = true;
+            $text_features[] = [
+                'field' => $field,
+                'label' => $pAddressList->getFieldLabel($field),
+                'value' => $value,
+            ];
+            continue;
+        }
+
+        if (in_array($field, $network_fields)) {
+            $check_url = preg_match('~^https?://~i', $value)
+                ? $value
+                : 'https://' . $value;
+            if (!filter_var($check_url, FILTER_VALIDATE_URL)) {
+                continue;
+            }
+
+            $network_fields_available = true;
+            $network_features[] = [
+                'field' => $field,
+                'label' => $pAddressList->getFieldLabel($field),
+                'value' => $value,
+            ];
+            continue;
+        }
+
+        $address_fields_available = true;
+        $address_features[] = [
+            'field' => $field,
+            'label' => $pAddressList->getFieldLabel($field),
+            'value' => $value,
         ];
+    }
 
-        $ratingsUrl = $escapedValues['bewertungslinkWebseite'] ?? null;
-        $networks = [
-            'facebook' => ['url' => $escapedValues['facebook'] ?? null],
-            'instagram' => ['url' => $escapedValues['instagram'] ?? null],
-            'linkedin' => ['url' => $escapedValues['linkedin'] ?? null],
-            'twitter' => ['url' => $escapedValues['twitter'] ?? null],
-            'xing' => ['url' => $escapedValues['xing'] ?? null],
-            'youtube' => ['url' => $escapedValues['youtube'] ?? null],
-            'tiktok' => ['url' => $escapedValues['tiktok'] ?? null],
-            'pinterest' => ['url' => $escapedValues['pinterest'] ?? null],
-        ];
-        unset($escapedValues['imageUrl']);
-        unset($escapedValues['jobTitle']);
-        unset($escapedValues['Sonstige1']);
-        unset($escapedValues['bewertungslinkWebseite']);
-        unset($escapedValues['facebook']);
-        unset($escapedValues['instagram']);
-        unset($escapedValues['linkedin']);
-        unset($escapedValues['twitter']);
-        unset($escapedValues['xing']);
-        unset($escapedValues['youtube']);
-        unset($escapedValues['tiktok']);
-        unset($escapedValues['pinterest']);
+    // read more
+    $number = 0;
+    $fields_counter = is_array($address_features)
+        ? count($address_features)
+        : 0;
+    $fields_more = (int) (get_field('show_more_count') ?? 12);
+    ?>
 
-        $pAddressList->setAddressId($addressId);
-        $shortCodeActiveEstates = $pAddressList->getShortCodeActiveEstates();
-        $shortCodeReferenceEstates = $pAddressList->getShortCodeReferenceEstates();
-        $shortCodeForm = $pAddressList->getShortCodeForm();
+    <section class="c-address-details o-section --<?php echo $bg_color; ?>">
+        <div class="c-address-details__container o-container">
+            <div class="c-address-details__row o-row --position-center">
+                <div class="c-address-details__main o-col-12 o-col-lg-8">
+                    <div class="c-address-details__header">
+                        <?php if (!empty($full_name) || !empty($company)) { ?>
+                            <h1 class="c-address-details__name o-headline --h1">
+                                <?php if (!empty($full_name)) { ?>
+                                    <?php echo $full_name; ?>
+                                <?php } else { ?>
+                                    <?php echo $company; ?>
+                                <?php } ?>
+                            </h1>
+                        <?php } ?>
 
-        $fields_counter = count(
-            array_diff_key($escapedValues, array_flip($dont_echo)),
-        );
-        $fields_more = $show_more_count;
+                        <?php if (!empty($job_title)) { ?>
+                            <p class="c-address-details__job">
+                                <?php echo $job_title; ?>
+                            </p>
+                        <?php } ?>
 
-        $features_list_first = array_slice($escapedValues, 0, $fields_more);
-        $features_list_last = array_slice(
-            $escapedValues,
-            $fields_more,
-            $fields_counter,
-        );
-        ?>
-            <section class="o-section --bg-transparent">
-                <div class="o-container">
-                    <div class="o-row --center">
-                        <div class="c-address-details o-col-12">
-                            <div class="c-address-details__main">
-                                <div class="c-address-details__media">
-                                    <?php if (!empty($image_url['url'])) {
-                                        oo_get_template(
-                                            'components',
-                                            '',
-                                            'component-image',
-                                            [
-                                                'picture_class' =>
-                                                    'c-address-details__picture o-picture',
-                                                'image' => $image_url,
-                                                'additional_cloudimg_params' =>
-                                                    '&func=crop&gravity=face',
-                                                'loading' => 'eager',
-                                                'decoding' => 'auto',
-                                                'dimensions' => [
-                                                    '575' => [
-                                                        'w' => $image_width_xs,
-                                                        'h' => round(
-                                                            ($image_width_xs *
-                                                                2) /
-                                                                3,
-                                                        ),
-                                                    ],
-                                                    '1600' => [
-                                                        'w' => $image_width_xxxl,
-                                                        'h' => round(
-                                                            ($image_width_xxxl *
-                                                                2) /
-                                                                3,
-                                                        ),
-                                                    ],
-                                                    '1400' => [
-                                                        'w' => $image_width_xxl,
-                                                        'h' => round(
-                                                            ($image_width_xxl *
-                                                                2) /
-                                                                3,
-                                                        ),
-                                                    ],
-                                                    '1200' => [
-                                                        'w' => $image_width_xl,
-                                                        'h' => round(
-                                                            ($image_width_xl *
-                                                                2) /
-                                                                3,
-                                                        ),
-                                                    ],
-                                                    '992' => [
-                                                        'w' => $image_width_lg,
-                                                        'h' => round(
-                                                            ($image_width_lg *
-                                                                2) /
-                                                                3,
-                                                        ),
-                                                    ],
-                                                    '768' => [
-                                                        'w' => $image_width_md,
-                                                        'h' => round(
-                                                            ($image_width_md *
-                                                                2) /
-                                                                3,
-                                                        ),
-                                                    ],
-                                                    '576' => [
-                                                        'w' => $image_width_sm,
-                                                        'h' => round(
-                                                            ($image_width_sm *
-                                                                2) /
-                                                                3,
-                                                        ),
-                                                    ],
-                                                ],
-                                            ],
-                                        );
-                                    } else {
-                                         ?><picture class="c-address-details__picture o-picture"></picture><?php
-                                    } ?>
-                                    <?php if (!empty($shortCodeForm)) { ?>
-                                        <a class="c-address-details__contact c-button" href="#contact_form"><?php esc_html_e(
-                                            'Kontaktieren Sie mich',
-                                            'oo_theme',
-                                        ); ?></a>
-                                    <?php } ?>
-                                    <?php
-                                    if (!empty($phone)) {
-                                        echo '<a href="' .
-                                            esc_url('tel:' . $phone_url) .
-                                            '" class="c-address-details__contact c-button --ghost --hide-desktop">';
-                                        echo __('Anrufen', 'oo_theme');
-                                        echo '</a>';
-                                    }
+                        <?php if (!empty($job_position)) { ?>
+                            <p class="c-address-details__job">
+                                <?php echo $job_position; ?>
+                            </p>
+                        <?php } ?>
 
-                                    oo_get_template(
-                                        'components',
-                                        '',
-                                        'component-share',
-                                        [
-                                            'button_class' =>
-                                                'c-address-details__contact c-button --ghost',
-                                            'button_title' => esc_html__(
-                                                'Kontakt teilen',
-                                                'oo_theme',
-                                            ),
-                                            'share_link' => $current_url,
-                                        ],
+                        <?php if (!empty($full_name) && !empty($company)) { ?>
+                            <p class="c-address-details__job">
+                                <?php echo $company; ?>
+                            </p>
+                        <?php } ?>
+
+                        <?php if (!empty($reviews)) { ?>
+                            <p class="c-address-details__reviews">
+                                <a class="c-link --underlined --text-color --on-<?php echo $bg_color; ?>" href="<?php echo $reviews; ?>" rel="noopener noreferrer" target="_blank">
+                                    <?php echo __(
+                                        'Bewertungen ansehen',
+                                        'oo_theme',
+                                    ); ?>
+                                </a>
+                            </p>
+                        <?php } ?>
+                    </div>
+
+                    <?php if (!empty($address_features)): ?>
+                        <div class="c-address-details__features c-item-fields">
+                            <?php foreach (
+                                $address_features
+                                as $address_feature
+                            ) {
+                                $field = $address_feature['field'];
+                                $label = $address_feature['label'];
+                                $value = $address_feature['value'];
+
+                                if ($fields_counter > $fields_more) {
+                                    if ($number === $fields_more) { ?>
+                                        <div class="c-address-details__features-wrapper">
+                                    <?php }
+                                }
+
+                                if (
+                                    $field == 'phone' ||
+                                    $field == 'Telefon1' ||
+                                    $field == 'Telefon2'
+                                ) {
+                                    $class = '--is-phone';
+                                    $link = preg_match('/[0-9]/', $value)
+                                        ? 'tel:' . oo_clean_link_number($value)
+                                        : '';
+                                } elseif ($field == 'mobile') {
+                                    $class = '--is-mobile';
+                                    $link = preg_match('/[0-9]/', $value)
+                                        ? 'tel:' . oo_clean_link_number($value)
+                                        : '';
+                                } elseif (
+                                    $field == 'fax' ||
+                                    $field == 'Telefax' ||
+                                    $field == 'Telefax1' ||
+                                    $field == 'Telefax2'
+                                ) {
+                                    $class = '--is-fax';
+                                    $link = preg_match('/[0-9]/', $value)
+                                        ? 'fax:' . oo_clean_link_number($value)
+                                        : '';
+                                } elseif (
+                                    $field == 'email' ||
+                                    $field == 'Email'
+                                ) {
+                                    $email_utf8 = oo_clean_acf_email_utf8(
+                                        $value,
                                     );
-                                    ?>
-                                </div>
-                                <div class="c-address-details__info">
-                                    <div class="c-address-details__headline">
-                                        <?php if (
-                                            (!empty(
-                                                $escapedValues['Vorname']
-                                            ) &&
-                                                !empty(
-                                                    $escapedValues['Name']
-                                                )) ||
-                                            !empty($escapedValues['Zusatz1'])
-                                        ): ?>
-                                            <h1 class="o-headline --h2 --text-color">
-                                                <?php if (
-                                                    !empty(
-                                                        $escapedValues[
-                                                            'Vorname'
-                                                        ]
-                                                    ) &&
-                                                    !empty(
-                                                        $escapedValues['Name']
-                                                    )
-                                                ) {
-                                                    echo $escapedValues[
-                                                        'Vorname'
-                                                    ] .
-                                                        ' ' .
-                                                        $escapedValues['Name'];
-                                                } else {
-                                                    if (
-                                                        !empty(
-                                                            $escapedValues[
-                                                                'Zusatz1'
-                                                            ]
-                                                        )
-                                                    ) {
-                                                        echo $escapedValues[
-                                                            'Zusatz1'
-                                                        ];
-                                                        array_push(
-                                                            $dont_echo,
-                                                            'Zusatz1',
-                                                        );
-                                                    }
-                                                } ?>
-                                            </h1>
-                                        <?php endif; ?>
-                                        <?php if (!empty($jobTitle)): ?>
-                                            <h2 class="o-headline --h3 --text-color"><?php echo $jobTitle; ?></h2>
-                                        <?php endif; ?>
-                                    </div>
-                                    <?php if (
-                                        !empty(
-                                            array_filter(
-                                                array_column($networks, 'url'),
-                                            )
-                                        )
-                                    ): ?>
-                                            <div class="c-address-details__networks-ratings">
-                                                <?php oo_get_template(
-                                                    'components',
-                                                    '',
-                                                    'component-social-media',
-                                                    [
-                                                        'networks' => $networks,
-                                                    ],
-                                                ); ?>
-                                            </div>
-                                        <?php endif; ?>
-                                        <?php if ($ratingsUrl) { ?>
-                                            <div class="c-address-details__review">
-                                                <?php oo_get_template(
-                                                    'components',
-                                                    '',
-                                                    'component-stars',
-                                                    [
-                                                        'rating' => 5.0,
-                                                        'size' => 'small',
-                                                        'light_empty_stars' => true,
-                                                    ],
-                                                ); ?>
-                                                <p>
-                                                    <a href="<?php echo $ratingsUrl; ?>" class="c-link --underlined" target="_blank"><?php esc_html_e(
-    'Bewertungen',
-    'oo_theme',
-); ?></a>
-                                                </p>
-                                            </div>
-                                        <?php } ?>
-                                    <div class="c-address-details__info-table">
-                                        <?php if (
-                                            is_array($features_list_first)
-                                        ) {
-                                            foreach (
-                                                $features_list_first
-                                                as $field => $value
-                                            ) {
-                                                if (
-                                                    empty($value) ||
-                                                    in_array($field, $dont_echo)
-                                                ) {
-                                                    continue;
-                                                }
-                                                if (
-                                                    !str_starts_with(
-                                                        $field,
-                                                        'default',
-                                                    )
-                                                ) {
-                                                    $value = is_array($value)
-                                                        ? esc_html(
-                                                            implode(
-                                                                ', ',
-                                                                $value,
-                                                            ),
-                                                        )
-                                                        : esc_html($value);
-                                                    if ($field === 'Email') {
-                                                        $value = "<a href=\"mailto:$value\" class=\"c-link --text-color --text-truncate\">$value</a>";
-                                                    }
-                                                    if ($field === 'Telefon1') {
-                                                        $cleanNumber = oo_clean_link_number(
-                                                            $value,
-                                                        );
-                                                        $value = "<a href=\"tel:$cleanNumber\" class=\"c-link --text-color\">$value</a>";
-                                                    }
-                                                    if ($field === 'Telefax1') {
-                                                        $cleanNumber = oo_clean_link_number(
-                                                            $value,
-                                                        );
-                                                        $value = "<a href=\"fax:$cleanNumber\" class=\"c-link --text-color\">$value</a>";
-                                                    }
-                                                    echo '<dl class="c-address-details__criteria ' .
-                                                        ($field === 'Telefon1'
-                                                            ? '--hide-mobile'
-                                                            : '') .
-                                                        '"><dt class="c-address-details__criteria-name">' .
-                                                        esc_html(
-                                                            $pAddressList->getFieldLabel(
-                                                                $field,
-                                                            ),
-                                                        ) .
-                                                        '</dt>' .
-                                                        "\n" .
-                                                        '<dd class="c-address-details__criteria-value">' .
-                                                        $value .
-                                                        '</dd></dl>' .
-                                                        "\n";
-                                                }
-                                            }
-                                        } ?>
-                                    </div>
-                                    <div class="c-address-details__info-table --is-toggle">
-                                        <?php if (
-                                            is_array($features_list_last)
-                                        ) {
-                                            foreach (
-                                                $features_list_last
-                                                as $field => $value
-                                            ) {
-                                                if (
-                                                    empty($value) ||
-                                                    in_array($field, $dont_echo)
-                                                ) {
-                                                    continue;
-                                                }
-                                                if (
-                                                    !str_starts_with(
-                                                        $field,
-                                                        'default',
-                                                    )
-                                                ) {
-                                                    $value = is_array($value)
-                                                        ? esc_html(
-                                                            implode(
-                                                                ', ',
-                                                                $value,
-                                                            ),
-                                                        )
-                                                        : esc_html($value);
-                                                    if ($field === 'Email') {
-                                                        $value = "<a href=\"mailto:$value\" class=\"c-link --text-color\">$value</a>";
-                                                    }
-                                                    if ($field === 'Telefon1') {
-                                                        $cleanNumber = oo_clean_link_number(
-                                                            $value,
-                                                        );
-                                                        $value = "<a href=\"tel:$cleanNumber\" class=\"c-link --text-color\">$value</a>";
-                                                    }
-                                                    if ($field === 'Telefax1') {
-                                                        $cleanNumber = oo_clean_link_number(
-                                                            $value,
-                                                        );
-                                                        $value = "<a href=\"fax:$cleanNumber\" class=\"c-link --text-color\">$value</a>";
-                                                    }
+                                    $email_ascii = oo_clean_acf_email_ascii(
+                                        $value,
+                                    );
+                                    $value = oo_antispambot(
+                                        esc_html($email_utf8),
+                                    );
+                                    $class = '--is-email';
+                                    $link =
+                                        'mailto:' .
+                                        antispambot(esc_html($email_ascii));
+                                } elseif (
+                                    $field == 'Homepage' ||
+                                    $field == 'url'
+                                ) {
+                                    $class = '--is-website';
+                                    $check_url = preg_match(
+                                        '~^https?://~i',
+                                        $value,
+                                    )
+                                        ? $value
+                                        : 'https://' . $value;
+                                    $link = filter_var(
+                                        $check_url,
+                                        FILTER_VALIDATE_URL,
+                                    )
+                                        ? esc_url($check_url)
+                                        : '';
+                                    $target =
+                                        'rel="noopener noreferrer" target="_blank"';
+                                } else {
+                                    $class = '';
+                                    $link = '';
+                                    $target = '';
+                                }
 
-                                                    echo '<dl class="c-address-details__criteria ' .
-                                                        ($field === 'Telefon1'
-                                                            ? '--hide-mobile'
-                                                            : '') .
-                                                        '"><dt class="c-address-details__criteria-name">' .
-                                                        esc_html(
-                                                            $pAddressList->getFieldLabel(
-                                                                $field,
-                                                            ),
-                                                        ) .
-                                                        '</dt>' .
-                                                        "\n" .
-                                                        '<dd class="c-address-details__criteria-value">' .
-                                                        $value .
-                                                        '</dd></dl>' .
-                                                        "\n";
-                                                }
-                                            }
-                                        } ?>
-                                    </div>
-                                    <?php if (
-                                        $fields_counter > $fields_more
-                                    ) { ?>
-                                        <div>
-                                            <button
-                                                class="c-address-details__more c-button --show-more"
-                                                data-open-text="<?php esc_html_e(
-                                                    'Mehr anzeigen',
-                                                    'oo_theme',
-                                                ); ?>"
-                                                data-close-text="<?php esc_html_e(
-                                                    'Weniger anzeigen',
-                                                    'oo_theme',
-                                                ); ?>"
-                                            >
-                                                <?php esc_html_e(
-                                                    'Mehr anzeigen',
-                                                    'oo_theme',
-                                                ); ?>
-                                            </button>
+                                echo '<dl class="c-item-fields__item ' .
+                                    (!empty($class) ? $class : '') .
+                                    '">';
+                                echo '<dt class="c-item-fields__label">' .
+                                    esc_html($label) .
+                                    ':</dt>';
+                                echo '<dd class="c-item-fields__value">';
+                                if (!empty($link)) {
+                                    echo '<a class="c-link --text-color --on-' .
+                                        $bg_color .
+                                        '" href="' .
+                                        $link .
+                                        '" ' .
+                                        (!empty($target) ? $target : '') .
+                                        '>' .
+                                        esc_html($value) .
+                                        '</a>';
+                                } else {
+                                    echo is_array($value)
+                                        ? esc_html(implode(', ', $value))
+                                        : esc_html($value);
+                                }
+                                echo '</dd>';
+                                echo '</dl>';
+
+                                if ($fields_counter > $fields_more) {
+                                    if ($number == $fields_counter - 1) { ?>
                                         </div>
-                                    <?php } ?>
-                                </div>
+                                        <div class="c-address-details__more c-read-more">
+                                            <span class="c-read-more__text --more"><?php esc_html_e(
+                                                'Mehr anzeigen',
+                                                'oo_theme',
+                                            ); ?></span>
+                                            <span class="c-read-more__text --less"><?php esc_html_e(
+                                                'Weniger anzeigen',
+                                                'oo_theme',
+                                            ); ?></span>
+                                        </div>
+                                    <?php }
+                                }
+                                $number++;
+                            } ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <div class="c-address-details__sidebar o-col-12 o-col-lg-4">
+                    <?php if (!empty($image_url)) {
+                        oo_get_template('components', '', 'component-image', [
+                            'image' => $image,
+                            'picture_class' =>
+                                'c-address-details__picture o-picture',
+                            'image_class' => 'c-address-details__image o-image',
+                            'additional_cloudimg_params' =>
+                                '&func=crop&gravity=face',
+                            'loading' => 'eager',
+                            'decoding' => 'auto',
+                            'dimensions' => [
+                                '575' => [
+                                    'w' => $image_width_xs,
+                                    'h' => $image_width_xs,
+                                ],
+                                '1600' => [
+                                    'w' => $image_width_xxxl,
+                                    'h' => $image_width_xxxl,
+                                ],
+                                '1400' => [
+                                    'w' => $image_width_xxl,
+                                    'h' => $image_width_xxl,
+                                ],
+                                '1200' => [
+                                    'w' => $image_width_xl,
+                                    'h' => $image_width_xl,
+                                ],
+                                '992' => [
+                                    'w' => $image_width_lg,
+                                    'h' => $image_width_lg,
+                                ],
+                                '768' => [
+                                    'w' => $image_width_md,
+                                    'h' => $image_width_md,
+                                ],
+                                '576' => [
+                                    'w' => $image_width_sm,
+                                    'h' => $image_width_sm,
+                                ],
+                            ],
+                        ]);
+                    } ?>
+
+                    <div class="c-address-details__sidebar-wrapper">
+                        <?php if ($network_fields_available) {
+                            echo '<ul class="c-address-details__networks c-social-media --is-content">';
+                            foreach ($network_features as $network_feature) {
+                                $field = $network_feature['field'];
+                                $label = $network_feature['label'];
+                                $value = $network_feature['value'];
+
+                                $icon = match ($label) {
+                                    'Facebook' => 'facebook',
+                                    'Instagram' => 'instagram',
+                                    'LinkedIn' => 'linkedin',
+                                    'Pinterest' => 'pinterest',
+                                    'TikTok' => 'tiktok',
+                                    'Twitter' => 'x',
+                                    'Xing' => 'xing',
+                                    'YouTube' => 'youtube',
+                                    default => null,
+                                };
+
+                                echo '<li class="c-social-media__item --' .
+                                    $icon .
+                                    '">';
+                                echo '<a class="c-social-media__link" href="' .
+                                    esc_url($value) .
+                                    '" rel="noopener noreferrer" target="_blank">';
+                                oo_get_icon($icon);
+                                echo '<span class="c-social-media__text u-screen-reader-only">' .
+                                    $label .
+                                    '</span>';
+                                echo '</a>';
+                                echo '</li>';
+                            }
+                            echo '</ul>';
+                        } ?>
+
+                        <div class="c-address-details__buttons c-buttons --is-column --align-start">
+                            <?php if (!empty($shortcode_form)) { ?>
+                                <a class="c-address-details__button-contact c-button" href="#contact_form"><?php esc_html_e(
+                                    'Kontaktieren Sie mich',
+                                    'oo_theme',
+                                ); ?></a>
+                            <?php } ?>
+
+                            <?php oo_get_template(
+                                'components',
+                                '',
+                                'component-share',
+                                [
+                                    'button_class' =>
+                                        'c-address-details__button-share c-button --ghost',
+                                    'popup_title' => esc_html__(
+                                        'Kontakt teilen',
+                                        'oo_theme',
+                                    ),
+                                    'button_title' => esc_html__(
+                                        'Kontakt teilen',
+                                        'oo_theme',
+                                    ),
+                                    'button_icon' => 'share',
+                                    'share_link' => $current_url,
+                                ],
+                            ); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <?php if (!empty($shortcode_active_properties)) { ?>
+        <section class="c-address-details__properties c-property-list --is-address-details o-section --<?php echo $bg_color; ?>">
+            <div class="c-property-list__container o-container">
+                <div class="c-property-list__content o-row">
+                    <h2 class="c-property-list__headline o-col-12 o-col-xl-8 o-headline --h2"><?php esc_html_e(
+                        'Mein Portfolio',
+                        'oo_theme',
+                    ); ?></h2>
+                </div>
+                <?php echo do_shortcode($shortcode_active_properties); ?>
+            </div>
+        </section>
+    <?php } ?>
+
+    <?php if (!empty($shortcode_reference_properties)) { ?>
+        <section class="c-address-details__properties c-property-list --is-address-details o-section --<?php echo $bg_color; ?>">
+            <div class="c-property-list__container o-container">
+                <div class="c-property-list__content o-row">
+                    <h2 class="c-property-list__headline o-col-12 o-col-xl-8 o-headline --h2"><?php esc_html_e(
+                        'Meine Referenzen',
+                        'oo_theme',
+                    ); ?></h2>
+                </div>
+                <?php echo do_shortcode($shortcode_reference_properties); ?>
+            </div>
+        </section>
+    <?php } ?>
+
+    <?php foreach ($text_features as $text_feature) {
+
+        $field = $text_feature['field'];
+        $label = $text_feature['label'];
+        $value = $text_feature['value'];
+
+        if (!empty($value)) { ?>
+            <section class="c-text o-section --text-align-left --<?php echo $bg_color; ?>" id="<?php echo clean_id(
+    $label,
+); ?>">
+                <div class="c-text__container o-container">
+                    <div class="c-text__row o-row --position-center">
+                        <h2 class="c-text__headline o-col-12 o-col-xl-8 o-headline --h2">
+                            <?php echo nl2br($label); ?>
+                        </h2>
+                    </div>
+                    <div class="c-text__columns o-row --position-center">
+                        <div class="c-text__content o-col-12 o-col-xl-8">
+                            <div class="c-text__text o-text --is-wysiwyg">
+                                <p>
+                                    <?php echo nl2br(
+                                        htmlspecialchars(
+                                            $value,
+                                            ENT_QUOTES,
+                                            'UTF-8',
+                                        ),
+                                    ); ?>
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-<?php
-    }
-}
-?>
-<?php if (
-    !empty($shortCodeActiveEstates) ||
-    !empty($shortCodeReferenceEstates)
-): ?>
-    <section class="o-section --bg-transparent --bg-transparent-mixed c-address-details__estates-section">
-        <div class="o-container c-address-details__estates">
-            <?php if (!empty($shortCodeActiveEstates)) { ?>
-                <div class="o-row c-address-details__active-estates">
-                    <div class="o-col o-col-12">
-                        <h2><?php esc_html_e(
-                            'Mein Portfolio',
+        <?php }
+        ?>
+    <?php
+    } ?>
+
+    <?php if (!empty($shortcode_form)) { ?>
+        <section class="c-address-details__form c-forms o-section o-section --<?php echo $bg_color; ?>" id="contact_form">
+            <div class="c-forms__container o-container">
+                <div class="c-forms__content o-row --position-center">
+                    <h2 class="c-forms__headline o-col-12 o-col-lg-10 o-col-xl-8 o-headline --h2">
+                        <?php esc_html_e(
+                            'Nutzen Sie unser Kontaktformular',
                             'oo_theme',
-                        ); ?></h2>
-                        <div>
-                            <?php echo do_shortcode($shortCodeActiveEstates); ?>
-                        </div>
+                        ); ?>
+                    </h2>
+                </div>
+                <div class="c-forms__content o-row --position-center">
+                    <div class="c-forms__form detail-contact-form o-col-12 o-col-lg-10 o-col-xl-8">
+                        <?php echo do_shortcode($shortcode_form); ?>
                     </div>
                 </div>
-            <?php } ?>
-            <?php if (!empty($shortCodeReferenceEstates)) { ?>
-                <div class="o-row c-address-details__reference-estates">
-                    <div class="o-col o-col-12">
-                        <h2><?php esc_html_e(
-                            'Meine Referenzen',
-                            'oo_theme',
-                        ); ?></h2>
-                        <div>
-                            <?php echo do_shortcode(
-                                $shortCodeReferenceEstates,
-                            ); ?>
-                        </div>
-                    </div>
-                </div>
-            <?php } ?>
-        </div>
-    </section>
-<?php endif; ?>
-
-<?php foreach ($sonstiges as $key => $item) {
-    $label = $item['label'];
-    $value = $item['value'];
-    if (!empty($value)) { ?>
-            <section class="o-section --bg-transparent c-text" id="<?php echo clean_id(
-                $label,
-            ); ?>">
-                <div class="c-text__container o-container">
-                    <div class="c-text__row o-row --position-center">
-                        <h2 class="c-text__headline o-col-12 o-col-lg-8">
-                          <?php echo nl2br($label); ?>
-                        </h2>
-                    </div>
-                    <div class="c-text__row o-row --position-center">
-                        <div class="c-text__content o-col-12 o-col-lg-8 --is-wysiwyg">
-                            <p>
-                                <?php echo nl2br(
-                                    htmlspecialchars(
-                                        $value,
-                                        ENT_QUOTES,
-                                        'UTF-8',
-                                    ),
-                                ); ?>
-                            </p>
-                        </div>
-                    </div>
-                </section>
-                <?php }
-} ?>
-
-<?php if (!empty($shortCodeForm)) { ?>
-    <section class="o-section --bg-transparent --bg-transparent-mixed" id="contact_form">
-      <div class="o-container">
-        <div class="o-row">
-          <div class="c-address-details o-col-12 o-col-lg-8">
-            <h2><?php esc_html_e(
-                'Nutzen Sie unser Kontaktformular',
-                'oo_theme',
-            ); ?></h2>
-            <div class="detail-contact-form">
-              <?php echo do_shortcode($shortCodeForm); ?>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-<?php } ?>
+        </section>
+    <?php } ?>
+<?php
+} ?>

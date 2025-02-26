@@ -21,7 +21,7 @@
 
     @include hover-focus() {
       color: var(
-        --oo-social-media-color,
+        --oo-social-media-color-hover,
         var(--oo-color-mix-primary-contrast-20)
       );
     }
@@ -34,25 +34,72 @@
     height: var(--oo-social-media-size, 2rem);
   }
 
+  .--bg-light & {
+    --oo-social-media-color: var(
+      --oo-color-light-primary,
+      var(--oo-color-primary)
+    );
+    --oo-social-media-color-hover: var(
+      --oo-color-light-mix-primary-contrast-20
+    );
+  }
+
+  .--bg-dark & {
+    --oo-social-media-color: var(
+      --oo-color-dark-primary,
+      var(--oo-color-primary)
+    );
+    --oo-social-media-color-hover: var(--oo-color-dark-mix-primary-contrast-20);
+  }
+
+  .--bg-primary & {
+    --oo-social-media-color: var(
+      --oo-color-primary-primary,
+      var(--oo-color-primary)
+    );
+    --oo-social-media-color-hover: var(
+      --oo-color-primary-mix-primary-contrast-20
+    );
+  }
+
+  .--bg-secondary & {
+    --oo-social-media-color: var(
+      --oo-color-secondary-primary,
+      var(--oo-color-primary)
+    );
+    --oo-social-media-color-hover: var(
+      --oo-color-secondary-mix-primary-contrast-20
+    );
+  }
+
+  .--bg-header & {
+    --oo-social-media-color: var(
+      --oo-color-header-primary,
+      var(--oo-color-primary)
+    );
+    --oo-social-media-color-hover: var(
+      --oo-color-header-mix-primary-contrast-20
+    );
+  }
+
+  .--bg-footer & {
+    --oo-social-media-color: var(
+      --oo-color-footer-primary,
+      var(--oo-color-primary)
+    );
+    --oo-social-media-color-hover: var(
+      --oo-color-footer-mix-primary-contrast-20
+    );
+  }
+
+  .--bg-transparent & {
+    --oo-social-media-color: var(--oo-color-primary);
+    --oo-social-media-color-hover: var(--oo-color-mix-primary-contrast-20);
+  }
+
   &.--is-footer {
     --oo-social-media-size: 2rem;
     --oo-social-media-gap: 1rem;
-
-    #{$c-social-media}__link {
-      --oo-social-media-color: var(
-        --oo-color-footer-primary,
-        var(--oo-color-primary)
-      );
-      @include visited-active() {
-        --oo-social-media-color: var(
-          --oo-color-footer-primary,
-          var(--oo-color-primary)
-        );
-      }
-      @include hover-focus() {
-        --oo-social-media-color: var(--oo-color-footer-mix-primary-contrast-20);
-      }
-    }
   }
 
   &.--is-header {
@@ -65,18 +112,6 @@
       --oo-social-media-gap: 0.75rem;
       position: relative;
       top: 0.25rem;
-    }
-
-    #{$c-social-media}__link {
-      @include plain-visited() {
-        --oo-social-media-color: var(--oo-color-header-mix-text-contrast-20);
-      }
-      @include hover-focus() {
-        --oo-social-media-color: var(
-          --oo-color-header-primary,
-          var(--oo-color-primary)
-        );
-      }
     }
   }
 
