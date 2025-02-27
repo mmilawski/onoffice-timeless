@@ -154,7 +154,7 @@ $is_slider = filter_var($slider['slider'], FILTER_VALIDATE_BOOLEAN);
                 <?php } ?>
 
                 <?php if (!empty($text['wysiwyg'])) { ?>
-                    <div class="c-link-boxes-card__text o-text">
+                    <div class="c-link-boxes-card__text o-text --is-wysiwyg">
                         <?php echo $text['wysiwyg']; ?>
                     </div>
                 <?php } ?>
