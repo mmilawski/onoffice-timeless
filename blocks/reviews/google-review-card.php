@@ -30,7 +30,6 @@ if (
       $author = $review['authorAttribution']['displayName'] ?? null;
       $text = $review['originalText']['text'] ?? null;
       $text_word_count = str_word_count(trim(strip_tags($text))) ?? 0;
-      $is_long_text = $text_word_count > 150 ? true : false;
 
       // Review Item
       $rating = $review['rating'] ?? null;
@@ -65,7 +64,7 @@ if (
           <?php } ?>
           </div>
           
-          <?php if ($is_long_text && $is_slider) { ?>
+          <?php if ($is_slider) { ?>
             <div class="c-google-review-card__more c-read-more">
                 <span class="c-read-more__text --more"><?php esc_html_e(
                     'Mehr anzeigen',

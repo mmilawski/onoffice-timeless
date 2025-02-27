@@ -51,6 +51,26 @@
     }
   }
 
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-grow: 1;
+
+    &.--more {
+      display: flex;
+      .--is-open & {
+        display: none;
+      }
+    }
+    &.--less {
+      display: none;
+      .--is-open & {
+        display: flex;
+      }
+    }
+  }
+
   &.--text-align-center {
     text-align: center;
   }

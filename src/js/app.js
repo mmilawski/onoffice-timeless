@@ -217,6 +217,9 @@ jQuery(document).ready(function() {
     });
   }
 
+  // Function to apply text shortening, read-more button and visibility adjustments based on word count and screen size
+  applyResponsiveTextShortening();
+
   // Accordion
    if ( $('.c-accordion').length > 0) {
     $('.c-accordion-card').each(function() {
@@ -590,6 +593,8 @@ jQuery(window).on('resize', function(){
 
   // Correct padding for first element in main if header
   correctFirstElementPadding();
+  // Function to apply text shortening, read-more button and visibility adjustments based on word count and screen size
+  applyResponsiveTextShortening();
 });
 
 // Global variables
@@ -648,6 +653,40 @@ function correctFirstElementPadding() {
 
   body.style.setProperty('--header-height', `${headerHeightRounded}px`);
   
+}
+
+// Function to apply text shortening, read-more button and visibility adjustments based on word count and screen size
+function applyResponsiveTextShortening() {
+  const isMobile = window.innerWidth <= 768;
+  
+  function shortenElements(elementsEach, textElement, elementToShorten) {
+    $(elementsEach).each(function() {
+      const text = $(this).find(textElement).text(); 
+      const wordCount = text.trim().split(/\s+/).length;
+
+      let shouldShorten;
+      if (isMobile) {
+        shouldShorten = wordCount > 50;
+      } else {
+        shouldShorten = wordCount > 100;
+      }
+
+      if (shouldShorten) {
+        $(this).find(elementToShorten).addClass('--shorten');
+        $(this).find('.c-read-more').show();
+      } else {
+        $(this).find(elementToShorten).removeClass('--shorten');
+        $(this).find('.c-read-more').hide();
+      }
+    });
+  }
+
+  // google review slider
+  shortenElements('.c-google-review-card', '.c-google-review-card__text p', '.c-google-review-card__contents');
+  // review slider
+  shortenElements('.c-review-card', '.c-review-card__text', '.c-review-card__text');
+  // property list
+  shortenElements('.c-property-details__text-wrapper', '.c-property-details__text-content', '.c-property-details__text-content');
 }
 
 // Select2 copy class

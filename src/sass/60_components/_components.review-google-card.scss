@@ -19,7 +19,7 @@
 
     &.--shorten {
       overflow: hidden;
-      max-height: calc($small-line-height * 15);
+      max-height: calc($small-line-height * 7);
       transition: max-height 0.25s ease-in-out;
 
       @include media-breakpoint-up(xl) {
