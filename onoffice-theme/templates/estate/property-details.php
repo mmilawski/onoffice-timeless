@@ -181,6 +181,11 @@ while ($current_property = $pEstates->estateIterator()) {
             }
         }
     }
+    // show infrastructure information with map instead of data sheet if possible
+    if (!empty($area_butler_url)) {
+        $infrastructure_info = $property_features['Infrastruktur'] ?? [];
+        unset($property_features['Infrastruktur']);
+    }
     ?>
 
     <section class="c-property-details o-section --bg-transparent">
@@ -1023,6 +1028,36 @@ while ($current_property = $pEstates->estateIterator()) {
                         }
                     }
                     ?>
+                    <?php if (!empty($area_butler_url)) { ?>
+                        <div class="c-property-details__text-wrapper">
+                            <h2 class="c-property-details__headline o-headline --h2">
+                                <?php echo __('Infrastruktur', 'oo_theme'); ?>
+                            </h2>
+                            <span class="c-property-details__iframe --is-areabutler"><iframe src="
+                                <?php echo esc_html(
+                                    $area_butler_url['value'],
+                                ); ?>
+                                " class="--is-areabutler" data-usercentrics="AreaButler"></iframe></span>
+                            <?php if (!empty($infrastructure_info)) { ?>
+                                <div class="c-property-details__text">
+                                <div class="c-item-fields">
+                                <?php foreach (
+                                    $infrastructure_info
+                                    as $info
+                                ) { ?>
+                                    <dl class="c-item-fields__item">
+                                        <dt class="c-item-fields__label">
+                                            <?php echo $info['label']; ?>
+                                        </dt>
+                                        <dd class="c-item-fields__value">
+                                            <?php echo $info['value']; ?>
+                                        </dd>
+                                    </dl>
+                                <?php } ?>
+                                </div></div>
+                            <?php } ?>
+                        </div>
+                    <?php } ?>
                     <?php if ($energy_fields_available) {
 
                         $energy_class =
