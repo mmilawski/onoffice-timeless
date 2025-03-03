@@ -23,6 +23,15 @@
 
   &__picture {
     aspect-ratio: 3 / 2;
+
+    &-wrapper {
+      cursor: default;
+      pointer-events: none;
+      @include media-breakpoint-up(lg) {
+        cursor: pointer;
+        pointer-events: auto;
+      }
+    }
   }
 
   &__image {
