@@ -102,7 +102,7 @@
     &.--shorten {
       position: relative;
       overflow: hidden;
-      max-height: calc($global-line-height * 8);
+      max-height: calc($global-line-height * 6);
       transition: max-height 0.25s ease-in-out;
       @include media-breakpoint-up(xxl) {
         max-height: calc($global-line-height * 6);

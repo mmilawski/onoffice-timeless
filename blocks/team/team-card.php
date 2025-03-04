@@ -68,10 +68,6 @@ if ($rating_provider === 'google') {
         }
     }
 }
-
-// Description
-$description_word_count = str_word_count(trim(strip_tags($wysiwyg))) ?? 0;
-$is_long_description = $description_word_count > 50 ? true : false;
 ?>
 
 <article class="c-team-card --on-<?php echo $bg_color; ?> <?php if (
@@ -291,13 +287,12 @@ $is_long_description = $description_word_count > 50 ? true : false;
     </div>
     <?php if (!empty($description['wysiwyg']) && $is_description) { ?>
         <div class="c-team-card__description-wrapper">
-            <div class="c-team-card__description o-text --is-wysiwyg <?php echo $is_long_description
-                ? '--shorten'
-                : ''; ?>">
+            <div class="c-team-card__description o-text --is-wysiwyg">
+           
                 <?php echo $description['wysiwyg']; ?>
             </div>
-            <?php if ($is_long_description) { ?>
-                <div class="c-team-card__more c-read-more">
+
+            <div class="c-team-card__more c-read-more">
             <span class="c-read-more__text --more"><?php esc_html_e(
                 'Mehr anzeigen',
                 'oo_theme',
@@ -307,7 +302,6 @@ $is_long_description = $description_word_count > 50 ? true : false;
                         'oo_theme',
                     ); ?></span>
                 </div>
-            <?php } ?>
         </div>
     <?php } ?>
 </article>

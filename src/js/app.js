@@ -220,6 +220,7 @@ jQuery(document).ready(function() {
   // Function to apply text shortening, read-more button and visibility adjustments based on word count and screen size
   applyResponsiveTextShortening();
 
+
   // Accordion
    if ( $('.c-accordion').length > 0) {
     $('.c-accordion-card').each(function() {
@@ -687,6 +688,8 @@ function applyResponsiveTextShortening() {
   shortenElements('.c-review-card', '.c-review-card__text', '.c-review-card__text');
   // property list
   shortenElements('.c-property-details__text-wrapper', '.c-property-details__text-content', '.c-property-details__text-content');
+  // team
+  shortenElements('.c-team-card', '.c-team-card__description', '.c-team-card__description');
 }
 
 // Select2 copy class
