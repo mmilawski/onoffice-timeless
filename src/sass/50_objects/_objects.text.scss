@@ -70,7 +70,7 @@
     gap: 0.5rem;
     padding-left: 1.5rem;
 
-    li {
+    > li {
       list-style-type: none;
       position: relative;
 
@@ -86,15 +86,7 @@
         color: var(--oo-color-primary);
         background: currentColor;
       }
-
-      ul {
-        margin-top: 0.5rem;
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-
-      li {
+      > li {
         &:before {
           border: 2px solid currentColor;
           background: transparent;
@@ -109,11 +101,12 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    padding-left: 1.5rem;
+    padding-left: 0; //fix for wysiwig editor in backend view
 
-    li {
+    > li {
       position: relative;
       counter-increment: numbers;
+      padding-left: calc(1rem + 1ch);
 
       &:before {
         content: counters(numbers, '.') ' ';
@@ -124,24 +117,42 @@
         color: var(--oo-color-primary);
         font-family: $font-family-text-bold;
         font-weight: $font-weight-text-bold;
-        left: -1.5rem;
+        left: 0;
       }
+    }
 
-      ol {
-        margin-top: 0.5rem;
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
+    ul {
+      margin-top: 0.5rem;
 
       li {
-        &:before {
-          left: -2rem;
-        }
+        padding-left: 0;
+      }
+    }
+  }
 
+  /**
+  * For nested lists
+  */
+  ol,
+  ul {
+    > li {
+      ol {
+        margin-top: 0.5rem;
         li {
-          &:before {
-            left: -3rem;
+          /**
+          * calculate position by amount of characters in counter,
+          * every digit corresponds 1ch and every dot corresponds 0.5ch
+          * example: 2.1.1 = 4ch
+          **/
+          padding-left: calc(1rem + 2.5ch);
+          li {
+            padding-left: calc(1rem + 4ch);
+            li {
+              padding-left: calc(1rem + 5.5ch);
+              li {
+                padding-left: calc(1rem + 7ch);
+              }
+            }
           }
         }
       }
