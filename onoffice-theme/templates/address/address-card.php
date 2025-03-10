@@ -56,35 +56,6 @@ $address_link = esc_url($pAddressList->getAddressLink($address_id));
 // properties count
 $properties_count = $pAddressList->getCountEstates($address_id);
 
-// image
-$placeholder_image_url =
-    get_field('general', 'option')['address_detail']['placeholder_image'][
-        'url'
-    ] ?? null;
-$image_url = !empty($current_address['imageUrl'])
-    ? esc_url($current_address['imageUrl'])
-    : (!empty($placeholder_image_url)
-        ? esc_url($placeholder_image_url)
-        : null);
-unset($current_address['imageUrl']);
-if (!empty($pAddressList->generateImageAlt($address_id))) {
-    $image_alt = esc_html($pAddressList->generateImageAlt($address_id));
-} else {
-    $image_alt = esc_html__('Beraterbild', 'oo_theme');
-}
-$image = [
-    'url' => $image_url,
-    'alt' => $image_alt,
-];
-
-$image_width_xs = '542';
-$image_width_sm = '510';
-$image_width_md = '692';
-$image_width_lg = '446';
-$image_width_xl = '542';
-$image_width_xxl = '414';
-$image_width_xxxl = '458';
-
 // name
 $name_components = array_filter([
     $current_address['Anrede'] ?? null,
@@ -109,6 +80,36 @@ $reviews_check_url = $reviews
         : 'https://' . $reviews)
     : null;
 $reviews_url = filter_var($reviews_check_url, FILTER_VALIDATE_URL);
+
+// image
+$placeholder_image_url =
+    get_field('general', 'option')['address_detail']['placeholder_image'][
+        'url'
+    ] ?? null;
+$image_url = !empty($current_address['imageUrl'])
+    ? esc_url($current_address['imageUrl'])
+    : (!empty($placeholder_image_url)
+        ? esc_url($placeholder_image_url)
+        : null);
+$image_alt = !empty($pAddressList->generateImageAlt($address_id))
+    ? esc_html($pAddressList->generateImageAlt($address_id))
+    : (!empty($full_name)
+        ? esc_html($full_name)
+        : esc_html__('Beraterbild', 'oo_theme'));
+unset($current_address['imageUrl']);
+
+$image = [
+    'url' => $image_url,
+    'alt' => $image_alt,
+];
+
+$image_width_xs = '542';
+$image_width_sm = '510';
+$image_width_md = '692';
+$image_width_lg = '446';
+$image_width_xl = '542';
+$image_width_xxl = '414';
+$image_width_xxxl = '458';
 
 // fields
 $address_features = [];

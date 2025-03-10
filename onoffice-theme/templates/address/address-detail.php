@@ -73,36 +73,6 @@ foreach ($current_address_array as $address_id => $current_address) {
 
     $pAddressList->setAddressId($address_id);
 
-    // Image
-    $placeholder_image_url =
-        get_field('general', 'option')['address_detail']['placeholder_image'][
-            'url'
-        ] ?? null;
-    $image_url = !empty($current_address['bildWebseite'])
-        ? esc_url($current_address['bildWebseite'])
-        : (!empty($current_address['imageUrl'])
-            ? esc_url($current_address['imageUrl'])
-            : (!empty($placeholder_image_url)
-                ? esc_url($placeholder_image_url)
-                : null));
-    if (!empty($pAddressList->generateImageAlt($address_id))) {
-        $image_alt = esc_html($pAddressList->generateImageAlt($address_id));
-    } else {
-        $image_alt = esc_html__('Beraterbild', 'oo_theme');
-    }
-    $image = [
-        'url' => $image_url,
-        'alt' => $image_alt,
-    ];
-
-    $image_width_xs = '543';
-    $image_width_sm = '512';
-    $image_width_md = '694';
-    $image_width_lg = '288';
-    $image_width_xl = '352';
-    $image_width_xxl = '416';
-    $image_width_xxxl = '460';
-
     // Name
     $name_components = array_filter([
         $current_address['Anrede'] ?? null,
@@ -125,6 +95,36 @@ foreach ($current_address_array as $address_id => $current_address) {
             : 'https://' . $reviews)
         : null;
     $reviews_url = filter_var($reviews_check_url, FILTER_VALIDATE_URL);
+
+    // Image
+    $placeholder_image_url =
+        get_field('general', 'option')['address_detail']['placeholder_image'][
+            'url'
+        ] ?? null;
+    $image_url = !empty($current_address['bildWebseite'])
+        ? esc_url($current_address['bildWebseite'])
+        : (!empty($current_address['imageUrl'])
+            ? esc_url($current_address['imageUrl'])
+            : (!empty($placeholder_image_url)
+                ? esc_url($placeholder_image_url)
+                : null));
+    $image_alt = !empty($pAddressList->generateImageAlt($address_id))
+        ? esc_html($pAddressList->generateImageAlt($address_id))
+        : (!empty($full_name)
+            ? esc_html($full_name)
+            : esc_html__('Beraterbild', 'oo_theme'));
+    $image = [
+        'url' => $image_url,
+        'alt' => $image_alt,
+    ];
+
+    $image_width_xs = '543';
+    $image_width_sm = '512';
+    $image_width_md = '694';
+    $image_width_lg = '288';
+    $image_width_xl = '352';
+    $image_width_xxl = '416';
+    $image_width_xxxl = '460';
 
     // shortcodes
     $shortcode_active_properties = $pAddressList->getShortCodeActiveEstates();
