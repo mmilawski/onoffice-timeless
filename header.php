@@ -34,127 +34,180 @@ if (has_blocks($post->post_content)) {
 
 $has_no_meta = '';
 if (empty($header_modules_left) && empty($header_modules_right)) {
-    $has_no_meta = ' --has-no-meta';
+    $has_no_meta = '--has-no-meta';
 }
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
 
 <head>
-	<meta charset="<?php bloginfo('charset'); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="profile" href="https://gmpg.org/xfn/11">
-	<?php wp_head(); ?>
-
+    <meta charset="<?php bloginfo('charset'); ?>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="https://gmpg.org/xfn/11">
+    <?php wp_head(); ?>
 </head>
 
 <body <?php body_class('o-body'); ?>>
-	<?php wp_body_open(); ?>
-		<a class="u-screen-reader-only" href="#primary"><?php esc_html_e(
-      'Zum Inhalt wechseln',
-      'oo_theme',
-  ); ?></a>
+    <?php wp_body_open(); ?>
+    <a class="u-screen-reader-only" href="#primary"><?php esc_html_e(
+        'Zum Inhalt wechseln',
+        'oo_theme',
+    ); ?></a>
 
-		<header id="masthead" class="c-header --bg-header <?php if (
-      $logo['appearance']
-  ) {
-      echo '--logo-' . $logo['appearance'];
-  } ?> <?php if ($logo['size']) {
+    <header id="masthead" class="c-header --bg-header <?php if (
+        $logo['appearance']
+    ) {
+        echo '--logo-' . $logo['appearance'];
+    } ?> <?php if ($logo['size']) {
      echo '--logo-' . $logo['size'];
  } ?> <?php if (!$has_bg_picture) {
      echo '--has-no-bg-picture --fixed';
  } ?>">
 
-<?php if (!empty($header_modules_left) || !empty($header_modules_right)): ?>
-                        <div class="c-header__meta-wrapper">
-                            <div class="c-header__meta o-container">
-                                <div class="c-header__meta-row">
-                                    <?php if (!empty($header_modules_left)): ?>
-                                        <div class="c-header__meta-column --left c-modules --is-header">
-                                            <?php oo_load_modules_flexible_content(
-                                                $header_content_left,
-                                                'header',
-                                            ); ?>
-                                        </div>
-                                    <?php endif; ?>
-
-                                    <?php if (!empty($header_modules_right)): ?>
-                                        <div class="c-header__meta-column --right c-modules --is-header">
-                                                                                <?php oo_load_modules_flexible_content(
-                                                                                    $header_content_right,
-                                                                                    'header',
-                                                                                ); ?>
-                                        </div>
-                                    <?php endif; ?>
-
-                                </div>
+        <?php if (
+            !empty($header_modules_left) ||
+            !empty($header_modules_right)
+        ): ?>
+            <div class="c-header__meta-wrapper">
+                <div class="c-header__meta o-container">
+                    <div class="c-header__meta-row">
+                        <?php if (!empty($header_modules_left)): ?>
+                            <div class="c-header__meta-column --left c-modules --is-header">
+                                <?php oo_load_modules_flexible_content(
+                                    $header_content_left,
+                                    'header',
+                                ); ?>
                             </div>
-                        </div>
-                    <?php endif; ?>
+                        <?php endif; ?>
 
-    <div class="c-header__container o-container<?php echo $has_no_meta; ?>">
+                        <?php if (!empty($header_modules_right)): ?>
+                            <div class="c-header__meta-column --right c-modules --is-header">
+                                <?php oo_load_modules_flexible_content(
+                                    $header_content_right,
+                                    'header',
+                                ); ?>
+                            </div>
+                        <?php endif; ?>
 
-			
-				<div class="c-header__main-wrapper">
-                    <div class="c-header__main o-container">
-                        <?php $no_logo = empty($logo['image'])
-                            ? '--no-image '
-                            : ''; ?>
-                        <div class="o-logo <?php
-                        echo $no_logo;
-                        echo '--' . $logo['size'];
-                        ?> <?= '--' . $logo['appearance'] ?>">
-                            <a class="o-logo__link" href="<?= esc_url(
-                                home_url('/'),
-                            ) ?>">
-                                <?php if (!empty($logo['image'])): ?>
-                                    <img class="o-logo__image" src="<?php echo $logo[
-                                        'image'
-                                    ][
-                                        'url'
-                                    ]; ?>" alt="<?php echo $company_name; ?>">
-                                <?php endif; ?>
-                            </a>
-                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
 
-						<button class="c-main-nav__button c-icon-button --small-corners">
-							<span class="c-icon-button__text u-screen-reader-only"><?php esc_html_e(
-           'Menu',
-           'oo_theme',
-       ); ?></span>
-                            <span class="c-icon-button__icon --open">
-                                <?php oo_get_icon('bars'); ?>
-                            </span>
+        <div class="c-header__container o-container <?php echo $has_no_meta; ?>">
+            <div class="c-header__main-wrapper">
+                <div class="c-header__main o-container">
+                    <div class="o-logo <?php echo empty($logo['image'])
+                        ? '--no-image '
+                        : ''; ?> <?= '--' . $logo['size'] ?> <?= '--' .
+     $logo['appearance'] ?>">
+                        <a class="o-logo__link" href="<?= esc_url(
+                            home_url('/'),
+                        ) ?>">
+                            <?php if (!empty($logo['image']['url'])):
+                                $file_type = wp_check_filetype(
+                                    $logo['image']['url'],
+                                );
+                                if ($file_type['ext'] == 'svg') {
+                                    $svg_content = file_get_contents(
+                                        $logo['image']['url'],
+                                    );
+                                    if (empty($svg_content)) {
+                                        return;
+                                    }
 
-                            <span class="c-icon-button__icon --close">
-                                <?php oo_get_icon('close'); ?>
-                            </span>
-                 
-						</button>
+                                    $svg = new SimpleXMLElement($svg_content);
 
-					</div><!-- #container -->
-				</div>
+                                    // Default fallback size
+                                    $fallback_size_width = 340;
+                                    $fallback_size_height = 100;
 
-                <div class="c-header__wrapper">
-                    <div class="c-header__nav-wrapper">
-                        <nav class="c-header__nav c-main-nav">
-                            <?php wp_nav_menu([
-                                'theme_location' => 'main-nav',
-                                'menu_class' => 'c-main-nav__list',
-                                'container' => false,
-                                'before' => '',
-                                'after' => '',
-                                'link_before' => '',
-                                'link_after' => '',
-                                'items_wrap' =>
-                                    '<ul id="%1$s" class="%2$s">%3$s</ul>',
-                                'walker' => new No_Sub_Submenu_Walker_Nav_Menu(),
-                            ]); ?>
-                        </nav>
+                                    // Check if width or height is missing
+                                    $has_width = isset($svg['width']);
+                                    $has_height = isset($svg['height']);
+                                    $needs_size_fix =
+                                        !$has_width || !$has_height;
+
+                                    // Try to extract dimensions from viewBox if available
+                                    if (
+                                        $needs_size_fix &&
+                                        isset($svg['viewBox'])
+                                    ) {
+                                        $viewbox = explode(
+                                            ' ',
+                                            $svg['viewBox'],
+                                        ); // Expected format: "0 0 width height"
+                                        if (
+                                            count($viewbox) === 4 &&
+                                            $viewbox[2] > 0 &&
+                                            $viewbox[3] > 0
+                                        ) {
+                                            $width = (float) $viewbox[2];
+                                            $height = (float) $viewbox[3];
+                                        }
+                                    }
+
+                                    // If width or height is still missing, set fallback sizes
+                                    $width = $width ?? $fallback_size_width;
+                                    $height = $height ?? $fallback_size_height;
+
+                                    unset(
+                                        $svg['width'],
+                                        $svg['height'],
+                                        $svg['class'],
+                                    );
+                                    $svg->addAttribute('width', $width);
+                                    $svg->addAttribute('height', $height);
+                                    $svg->addAttribute(
+                                        'class',
+                                        'o-logo__image --is-svg',
+                                    );
+                                    echo "{$svg->asXML()}";
+                                } else {
+                                    echo '<img class="o-logo__image" src="' .
+                                        $logo['image']['url'] .
+                                        '" alt="' .
+                                        $company_name .
+                                        '">';
+                                }
+                            endif; ?>
+                        </a>
                     </div>
 
-    
+                    <button class="c-main-nav__button c-icon-button --small-corners">
+                        <span class="c-icon-button__text u-screen-reader-only"><?php esc_html_e(
+                            'Menu',
+                            'oo_theme',
+                        ); ?></span>
+                        <span class="c-icon-button__icon --open">
+                            <?php oo_get_icon('bars'); ?>
+                        </span>
 
+                        <span class="c-icon-button__icon --close">
+                            <?php oo_get_icon('close'); ?>
+                        </span>
+                    </button>
+
+                </div><!-- #container -->
+            </div>
+
+            <div class="c-header__wrapper">
+                <div class="c-header__nav-wrapper">
+                    <nav class="c-header__nav c-main-nav">
+                        <?php wp_nav_menu([
+                            'theme_location' => 'main-nav',
+                            'menu_class' => 'c-main-nav__list',
+                            'container' => false,
+                            'before' => '',
+                            'after' => '',
+                            'link_before' => '',
+                            'link_after' => '',
+                            'items_wrap' =>
+                                '<ul id="%1$s" class="%2$s">%3$s</ul>',
+                            'walker' => new No_Sub_Submenu_Walker_Nav_Menu(),
+                        ]); ?>
+                    </nav>
                 </div>
-    </div>
-</header><!-- #masthead -->
+            </div>
+        </div>
+    </header><!-- #masthead -->
