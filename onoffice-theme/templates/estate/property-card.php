@@ -221,8 +221,11 @@ while ($current_property = $pEstatesClone->estateIterator()):
                 if ($is_visible_property_detail) {
                     echo '</a>';
                 }} ?>
-            <?php if ($pictures_count > 0) { ?>
-                <div class="c-slider__navigation splide__navigation --is-properties-images-slider">
+            <?php if ($pictures_count > 0 || $is_slider) { ?>
+                <div class="c-slider__navigation splide__navigation --is-properties-images-slider <?php echo $pictures_count ==
+                0
+                    ? '--empty'
+                    : ''; ?>">
                     <div class="c-slider__arrows splide__arrows">
                         <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
                             <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
@@ -243,12 +246,11 @@ while ($current_property = $pEstatesClone->estateIterator()):
                             ); ?></span>
                         </button>
                     </div>
-                </div>
-            <?php } ?>
-            <?php if (
-                $property_status ||
-                (Favorites::isFavorizationEnabled() && !$is_reference)
-            ) { ?>
+                <?php } ?>
+                    <?php if (
+                        $property_status ||
+                        (Favorites::isFavorizationEnabled() && !$is_reference)
+                    ) { ?>
                 <div class="c-property-card__flags c-flags --space-between">
                     <?php if ($property_status) { ?>
                         <span class="c-property-card__status c-flag --property-status">
