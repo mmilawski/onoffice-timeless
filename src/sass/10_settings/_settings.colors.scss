@@ -162,6 +162,14 @@
     var(--oo-color-primary),
     0.4
   );
+  #{--oo-color-mix-status-contrast-20}: mix-color-with-contrast(
+    var(--oo-color-property-status-bg),
+    0.2
+  );
+  #{--oo-color-mix-status-contrast-40}: mix-color-with-contrast(
+    var(--oo-color-property-status-bg),
+    0.4
+  );
   #{--oo-color-mix-bg-text-10}: mix-colors(
     var(--oo-color-bg),
     var(--oo-color-text),

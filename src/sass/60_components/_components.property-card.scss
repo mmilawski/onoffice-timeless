@@ -49,6 +49,19 @@
 
   &__favorite {
     margin-left: auto;
+
+    &.c-icon-button {
+      color: var(--oo-color-property-status-contrast-bg);
+      background: var(--oo-color-property-status-bg);
+
+      @include hover() {
+        background-color: var(--oo-color-mix-status-contrast-20);
+      }
+
+      @include active() {
+        background-color: var(--oo-color-mix-status-contrast-40);
+      }
+    }
   }
 
   &__button {
