@@ -175,6 +175,9 @@ add_filter('onoffice_block_setup', function ($blocks) {
             'override-parent-render' =>
                 OO_PARENT_PATH . '/blocks/contact/contact-render.php',
         ],
+        'oo/shortcode' => [
+            'path' => OO_SHARED_PATH . '/blocks/shortcode',
+        ],
     ]);
 });
 
