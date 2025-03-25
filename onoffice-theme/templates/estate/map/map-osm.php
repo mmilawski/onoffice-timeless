@@ -88,11 +88,14 @@ return function (EstateList $pEstatesClone) {
 
     // Scripts
     wp_enqueue_style('oo-leaflet-style');
+    wp_enqueue_style('oo-leaflet-marker-cluster-style');
+    wp_enqueue_style('oo-leaflet-marker-cluster-default-style');
     wp_enqueue_script('oo-leaflet-script');
     wp_enqueue_script('oo-init-open-street-map-script');
+    wp_enqueue_script('oo-init-open-street-map-marker-cluster');
     ?>
 
-    <div class="c-map --is-open-street-map" data-max-zoom="12" data-marker-color="<?php echo $primary_color; ?>" style="width: 100%;">
+    <div class="c-map --is-open-street-map" data-max-zoom="15" data-marker-color="<?php echo $primary_color; ?>" style="width: 100%;">
         <?php foreach ($property_data as $property) {
 
             $position = $property['position'] ?? [];

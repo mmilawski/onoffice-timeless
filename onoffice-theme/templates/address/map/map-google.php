@@ -67,9 +67,10 @@ return function (AddressList $pAddressClone) {
     // Scripts
     wp_enqueue_script('oo-google-map-script');
     wp_enqueue_script('oo-init-google-map-script');
+    wp_enqueue_script('oo-google-map-marker-cluster-script');
     ?>
 
-    <div class="c-map --is-google-map" data-max-zoom="12" data-marker-color="<?php echo $primary_color; ?>" style="width: 100%;">
+    <div class="c-map --is-google-map" data-max-zoom="18" data-marker-color="<?php echo $primary_color; ?>" style="width: 100%;">
         <?php foreach ($address_data as $address) {
 
             $position = $address['position'] ?? [];
