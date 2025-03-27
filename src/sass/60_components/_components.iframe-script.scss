@@ -96,6 +96,21 @@
       }
     }
 
+    &.--is-trustlocal {
+      aspect-ratio: unset;
+    }
+
+    &.--is-justhome {
+      min-height: 1100px;
+
+      @include media-breakpoint-up(md) {
+        min-height: 900px;
+      }
+      @include media-breakpoint-up(xl) {
+        min-height: 1000px;
+      }
+    }
+
     &.--is-baufipasst {
       display: flex;
       justify-content: center;
