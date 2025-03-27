@@ -52,4 +52,4 @@ jobs:
           path: |
             ${{ github.event.repository.name }}.zip
             updater.json
-          retention-days: 90
+          retention-days: 7

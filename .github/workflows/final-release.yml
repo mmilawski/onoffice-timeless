@@ -52,7 +52,7 @@ jobs:
           path: |
             ${{ github.event.repository.name }}.zip
             updater.json
-          retention-days: 90
+          retention-days: 7
 
       - name: Set SSH Key for Raidboxes Server
         uses: webfactory/ssh-agent@v0.8.0
