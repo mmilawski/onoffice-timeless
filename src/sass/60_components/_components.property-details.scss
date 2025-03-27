@@ -469,6 +469,11 @@
   &__fields {
   }
 
+  &__calculator {
+    display: grid;
+    gap: 2rem;
+  }
+
   &__energy {
     position: relative;
     height: auto;

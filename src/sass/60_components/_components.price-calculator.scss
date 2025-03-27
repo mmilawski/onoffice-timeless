@@ -1,0 +1,84 @@
+.c-price-calculator {
+  $c-price-calculator: &;
+
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 2rem;
+
+  &__overview {
+    grid-column: span 2;
+    width: 100%;
+
+    @include media-breakpoint-up(md) {
+      order: 1;
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    line-height: $small-line-height;
+    border-top: 1px solid var(--oo-color-mix-bg-contrast-50);
+    padding: 0.275rem 0;
+    gap: 0.5rem;
+
+    &:first-child {
+      border-top: none;
+    }
+
+    &.--is-total-cost {
+      font-weight: $font-weight-text-bold;
+    }
+  }
+
+  &__color-indicator {
+    display: inline-block;
+    width: $icon-size-small;
+    height: $icon-size-small;
+    border-radius: $border-radius-small;
+    padding-right: 1.25rem;
+  }
+
+  &__criteria {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  &__value {
+    font-weight: $font-weight-text-bold;
+  }
+
+  &__chart {
+    grid-column: 1/ -1;
+    justify-self: center;
+
+    @include media-breakpoint-up(md) {
+      grid-column: auto;
+      order: 2;
+    }
+  }
+
+  &__notice {
+    font-size: $small-font-size;
+    padding-top: 2rem;
+  }
+
+  $colors: (
+    0: --oo-color-primary,
+    1: --oo-color-primary-complementary,
+    2: --oo-color-secondary,
+    3: --oo-color-secondary-complementary,
+    4: --oo-color-mix-primary-contrast-50,
+  );
+  @each $index, $color in $colors {
+    .oo-donut-chart-color#{$index} {
+      fill: var(#{$color});
+      background-color: var(#{$color});
+      stroke: #fff;
+      stroke-width: 4px;
+    }
+  }
+}

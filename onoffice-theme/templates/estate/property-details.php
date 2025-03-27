@@ -20,6 +20,7 @@
 
 use onOffice\WPlugin\EstateDetail;
 use onOffice\WPlugin\Favorites;
+use onOffice\WPlugin\EstateCostsChart;
 
 $dont_echo = ['objekttitel', 'vermarktungsstatus'];
 $energy_fields = [
@@ -960,6 +961,160 @@ while ($current_property = $pEstates->estateIterator()) {
                         }
 
                         echo '</div>';
+                    }
+
+                    if (!empty($pEstates->getTotalCostsData())) {
+                        $totalCostsData = $pEstates->getTotalCostsData(); ?>
+                        <div class="c-property-details__text-wrapper">
+                            <h2 class="c-property-details__headline o-headline --h2">
+                                <?php echo __(
+                                    'Gesamtpreiskalkulator',
+                                    'oo_theme',
+                                ); ?>
+                            </h2>
+                            <div class="c-property-details__calculator --is-price-calculator">
+                                <div class="c-price-calculator">
+                                <div class="c-price-calculator__chart">
+                                        <?php
+                                        $values = [
+                                            $totalCostsData['kaufpreis']['raw'],
+                                            $totalCostsData['bundesland'][
+                                                'raw'
+                                            ],
+                                            $totalCostsData['aussen_courtage'][
+                                                'raw'
+                                            ],
+                                            $totalCostsData['notary_fees'][
+                                                'raw'
+                                            ],
+                                            $totalCostsData[
+                                                'land_register_entry'
+                                            ]['raw'],
+                                        ];
+                                        $valuesTitle = [
+                                            $totalCostsData['kaufpreis'][
+                                                'default'
+                                            ],
+                                            $totalCostsData['bundesland'][
+                                                'default'
+                                            ],
+                                            $totalCostsData['aussen_courtage'][
+                                                'default'
+                                            ],
+                                            $totalCostsData['notary_fees'][
+                                                'default'
+                                            ],
+                                            $totalCostsData[
+                                                'land_register_entry'
+                                            ]['default'],
+                                        ];
+                                        $chart = new EstateCostsChart(
+                                            $values,
+                                            $valuesTitle,
+                                        );
+                                        echo $chart->generateSVG();
+                                        ?>
+                                    </div>
+                                    <div class="c-price-calculator__overview">
+                                        <div class="c-price-calculator__item">
+                                            <span class="c-price-calculator__color-indicator oo-donut-chart-color0"></span>
+                                            <dl class="c-price-calculator__criteria">
+                                                <dt class="c-price-calculator__label">
+                                                    <?php echo esc_html_e(
+                                                        $pEstates->getFieldLabel(
+                                                            'kaufpreis',
+                                                        ),
+                                                    ); ?>
+                                                    </dt>
+                                                <dd class="c-price-calculator__value">
+                                                    <?php echo esc_html(
+                                                        $totalCostsData[
+                                                            'kaufpreis'
+                                                        ]['default'],
+                                                    ); ?>
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                        <div class="c-price-calculator__item">
+                                            <span class="c-price-calculator__color-indicator oo-donut-chart-color1"></span>
+                                            <dl class="c-price-calculator__criteria">
+                                                <dt class="c-price-calculator__label"><?php esc_html_e(
+                                                    'Grunderwerbsteuer',
+                                                    'oo_theme',
+                                                ); ?></dt>
+                                                <dd class="c-price-calculator__value"><?php echo esc_html(
+                                                    $totalCostsData[
+                                                        'bundesland'
+                                                    ]['default'],
+                                                ); ?></dd>
+                                            </dl>
+                                        </div>
+                                        <div class="c-price-calculator__item">
+                                            <span class="c-price-calculator__color-indicator oo-donut-chart-color2"></span>
+                                            <dl class="c-price-calculator__criteria">
+                                                <dt class="c-price-calculator__label"><?php esc_html_e(
+                                                    'Maklerprovision',
+                                                    'oo_theme',
+                                                ); ?></dt>
+                                                <dd class="c-price-calculator__value"><?php echo esc_html(
+                                                    $totalCostsData[
+                                                        'aussen_courtage'
+                                                    ]['default'],
+                                                ); ?></dd>
+                                            </dl>
+                                        </div>
+                                        <div class="c-price-calculator__item">
+                                            <span class="c-price-calculator__color-indicator oo-donut-chart-color3"></span>
+                                            <dl class="c-price-calculator__criteria">
+                                                <dt class="c-price-calculator__label"><?php esc_html_e(
+                                                    'Notargebühren *',
+                                                    'oo_theme',
+                                                ); ?></dt>
+                                                <dd class="c-price-calculator__value"><?php echo esc_html(
+                                                    $totalCostsData[
+                                                        'notary_fees'
+                                                    ]['default'],
+                                                ); ?></dd>
+                                            </dl>
+                                        </div>
+                                        <div class="c-price-calculator__item">
+                                            <span class="c-price-calculator__color-indicator oo-donut-chart-color4"></span>
+                                            <dl class="c-price-calculator__criteria">
+                                                <dt class="c-price-calculator__label"><?php esc_html_e(
+                                                    'Grundbucheintrag *',
+                                                    'oo_theme',
+                                                ); ?></dt>
+                                                <dd class="c-price-calculator__value"><?php echo esc_html(
+                                                    $totalCostsData[
+                                                        'land_register_entry'
+                                                    ]['default'],
+                                                ); ?></dd>
+                                            </dl>
+                                        </div>
+                                        <div class="c-price-calculator__item --is-total-cost">
+                                            <dl class="c-price-calculator__criteria">
+                                                <dt class="c-price-calculator__label oo-total-costs-label"><?php esc_html_e(
+                                                    'Gesamtkosten',
+                                                    'oo_theme',
+                                                ); ?></dt>
+                                                <dd class="c-price-calculator__value"><?php echo esc_html(
+                                                    $totalCostsData[
+                                                        'total_costs'
+                                                    ]['default'],
+                                                ); ?></dd>
+                                            </dl>
+                                        </div>
+                                        <div class="c-price-calculator__notice">
+                                            <?php echo esc_html_e(
+                                                '* Für die Berechnung der Notar- und Grundbuchkosten wird ein Standardwert von 1,5% bzw. 0,5% verwendet.',
+                                                'oo_theme',
+                                            ); ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
                     }
 
                     if (!empty($property_free_texts)) {

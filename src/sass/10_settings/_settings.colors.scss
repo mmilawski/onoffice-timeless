@@ -162,6 +162,10 @@
     var(--oo-color-primary),
     0.4
   );
+  #{--oo-color-mix-primary-contrast-50}: mix-color-with-contrast(
+    var(--oo-color-primary),
+    0.5
+  );
   #{--oo-color-mix-status-contrast-20}: mix-color-with-contrast(
     var(--oo-color-property-status-bg),
     0.2
@@ -189,6 +193,12 @@
     var(--oo-color-bg),
     var(--oo-color-text),
     0.5
+  );
+  #{--oo-color-primary-complementary}: complementary-color(
+    var(--oo-color-primary)
+  );
+  #{--oo-color-secondary-complementary}: complementary-color(
+    var(--oo-color-secondary)
   );
 
   // light
