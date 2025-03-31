@@ -79,6 +79,38 @@
     }
   }
 
+  &.--is-login {
+    #{$c-popup}__wrapper {
+      @include media-breakpoint-up(md) {
+        min-width: 450px;
+        width: auto;
+      }
+    }
+
+    #{$c-popup}__content {
+      width: 100%;
+      padding: 2rem;
+      padding-top: 3rem;
+    }
+
+    #{$c-popup}__close {
+      min-width: unset;
+      background-color: transparent;
+      width: 2rem;
+      height: 2rem;
+      border-color: transparent;
+      padding: 0;
+      right: 16px;
+      top: 16px;
+      position: absolute;
+      .c-button__icon {
+        width: 2rem;
+        height: 2rem;
+        color: black;
+      }
+    }
+  }
+
   &.--is-widget {
     #{$c-popup} {
       &__close {
