@@ -19,7 +19,7 @@ $iframe_name = match ($type) {
     'check24' => 'check24',
     'drklein' => 'drklein',
     'energieausweisformulare' => 'energieausweisformulare',
-    'etracker' => 'etracker ',
+    'etracker' => 'etracker',
     'exkulpa' => 'exkulpa',
     'heyflow' => 'heyflow',
     'huettig_rompf_finanzierungsrechner'
