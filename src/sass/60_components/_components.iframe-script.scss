@@ -115,5 +115,11 @@
       display: flex;
       justify-content: center;
     }
+
+    &.--is-eTracker {
+      padding: 0;
+      justify-self: center;
+      aspect-ratio: auto;
+    }
   }
 }
