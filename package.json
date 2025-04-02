@@ -1,7 +1,7 @@
 {
 	"name": "onoffice-classic",
 	"description": "Package for WP-Websites Classic Clear.",
-	"version": "1.1.2",
+	"version": "1.1.2.1",
 	"browserslist": "last 5 versions",
 	"engines": {
 		"node": ">= 18.13.0"
