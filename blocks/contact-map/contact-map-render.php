@@ -122,13 +122,17 @@ if (empty($addresses)) {
                 <?php
                 wp_enqueue_script('oo-google-map-script');
                 wp_enqueue_script('oo-init-google-map-script');
+                wp_enqueue_script('oo-google-map-marker-cluster-script');
                 ?>
             <?php } ?>
             <?php if ($is_open_street_map) { ?>
                 <?php
                 wp_enqueue_style('oo-leaflet-style');
+                wp_enqueue_style('oo-leaflet-marker-cluster-style');
+                wp_enqueue_style('oo-leaflet-marker-cluster-default-style');
                 wp_enqueue_script('oo-leaflet-script');
                 wp_enqueue_script('oo-init-open-street-map-script');
+                wp_enqueue_script('oo-init-open-street-map-marker-cluster');
                 ?>
             <?php } ?>
             <div class="c-contact-map__map-wrapper o-col-12 o-col-lg-10 o-col-xl-8">
