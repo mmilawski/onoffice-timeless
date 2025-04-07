@@ -716,8 +716,8 @@ while ($current_property = $pEstates->estateIterator()) {
                                 $property_ogulo_embeds
                                 as $property_ogulo_embed
                             ) {
-                                echo '<div class="c-property-details__iframe --' .
-                                    oo_get_service_domain(
+                                echo '<div class="c-property-details__iframe --is-' .
+                                    oo_get_service_domain_without_tld(
                                         $property_ogulo_embed['url'],
                                     ) .
                                     '">';
@@ -784,8 +784,8 @@ while ($current_property = $pEstates->estateIterator()) {
                                 $property_movie_players
                                 as $property_movie_player
                             ) {
-                                echo '<div class="c-property-details__video --' .
-                                    oo_get_service_domain(
+                                echo '<div class="c-property-details__video --is-' .
+                                    oo_get_service_domain_without_tld(
                                         $property_movie_player['url'],
                                     ) .
                                     '">';
@@ -859,8 +859,8 @@ while ($current_property = $pEstates->estateIterator()) {
                                 $property_link_embeds
                                 as $property_link_embed
                             ) {
-                                echo '<div class="c-property-details__iframe --' .
-                                    oo_get_service_domain(
+                                echo '<div class="c-property-details__iframe --is-' .
+                                    oo_get_service_domain_without_tld(
                                         $property_link_embed['url'],
                                     ) .
                                     '">';
@@ -918,8 +918,8 @@ while ($current_property = $pEstates->estateIterator()) {
                                 $property_object_embeds
                                 as $property_object_embed
                             ) {
-                                echo '<div class="c-property-details__iframe --' .
-                                    oo_get_service_domain(
+                                echo '<div class="c-property-details__iframe --is-' .
+                                    oo_get_service_domain_without_tld(
                                         $property_object_embed['url'],
                                     ) .
                                     '">';
