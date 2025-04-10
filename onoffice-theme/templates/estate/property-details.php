@@ -187,6 +187,26 @@ while ($current_property = $pEstates->estateIterator()) {
         $infrastructure_info = $property_features['Infrastruktur'] ?? [];
         unset($property_features['Infrastruktur']);
     }
+
+    $title_image = null;
+    $sorted_pictures = [];
+
+    foreach ($property_pictures as $id) {
+        $picture_values = $pEstates->getEstatePictureValues($id);
+
+        if (
+            $picture_values['type'] ===
+            \onOffice\WPlugin\Types\ImageTypes::TITLE
+        ) {
+            $title_image = $id;
+        } else {
+            $sorted_pictures[] = $id;
+        }
+    }
+
+    if ($title_image) {
+        array_unshift($sorted_pictures, $title_image);
+    }
     ?>
 
     <section class="c-property-details o-section --bg-transparent">
@@ -196,9 +216,8 @@ while ($current_property = $pEstates->estateIterator()) {
                 !empty($property_pictures) &&
                 is_array($property_pictures)
             ) {
-                foreach ($property_pictures as $id) {
+                foreach ($sorted_pictures as $id) {
                     $picture_values = $pEstates->getEstatePictureValues($id);
-
                     if ($first_picture === true) {
                         if ($picture_values['title'] == true) {
                             $image_alt = esc_html($picture_values['title']);
@@ -372,12 +391,11 @@ while ($current_property = $pEstates->estateIterator()) {
                     <?php
                     $i = 1;
 
-                    foreach ($property_pictures as $id) {
+                    foreach ($sorted_pictures as $id) {
 
                         $picture_values = $pEstates->getEstatePictureValues(
                             $id,
                         );
-
                         if ($picture_values['title'] == true) {
                             $image_alt = esc_html($picture_values['title']);
                         } else {
