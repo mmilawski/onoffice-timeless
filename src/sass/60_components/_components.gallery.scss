@@ -88,14 +88,13 @@
   &__row {
     display: flex;
     align-items: flex-start;
-    justify-content: center;
     gap: 2.5rem;
     @include media-breakpoint-up(lg) {
       gap: 5rem;
     }
   }
 
-  &__contents {
+  &__content {
     display: flex;
     flex-direction: column;
     gap: 2rem;

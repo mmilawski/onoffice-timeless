@@ -18,6 +18,9 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
 $slider = get_field('slider') ?? [];
 $is_slider = filter_var($slider['slider'] ?? null, FILTER_VALIDATE_BOOLEAN);
 
+// Position
+$position_center = !empty($text['wysiwyg']) ? ' --position-center' : '';
+
 // Query Posts Settings
 switch ($type) {
     case 'all':
@@ -54,7 +57,8 @@ $team_query = new WP_Query($query_args);
 ); ?> class="c-team o-section --<?php echo $bg_color; ?>">
     <div class="c-team__container o-container">
         <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
-            <div class="c-team__content o-row --position-center">
+            <div class="c-team__content o-row <?php echo $position_center; ?>">
+
                 <?php if (!empty($headline['text'])) { ?>
 									<?php oo_get_template('components', '', 'component-headline', [
              'headline' => $headline,

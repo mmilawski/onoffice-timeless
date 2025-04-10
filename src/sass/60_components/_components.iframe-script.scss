@@ -8,10 +8,6 @@
     }
   }
 
-  &__row {
-    justify-content: center;
-  }
-
   &__text {
     margin-bottom: 2.5rem;
     @include media-breakpoint-up(xl) {
@@ -113,7 +109,6 @@
 
     &.--is-baufipasst {
       display: flex;
-      justify-content: center;
     }
 
     &.--is-eTracker {

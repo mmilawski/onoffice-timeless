@@ -22,22 +22,25 @@ $image_width_sm = '272';
 // Slider
 $slider = get_field('slider') ?? [];
 $is_slider = filter_var($slider['slider'] ?? null, FILTER_VALIDATE_BOOLEAN);
-$has_contents =
+$has_content =
     !empty($headline['text']) || !empty($text['wysiwyg']) ? true : false;
 
 // Slider destroy
 $slides_count = is_array($images) ? count($images) : 0;
 $slides_destroy = $slides_count < 5 ? true : false;
+
+// Position
+$posiiton_center = !empty($text['wysiwyg']) ? ' --position-center' : '';
 ?>
 
 <section <?php oo_block_id(
     $block,
 ); ?> class="c-gallery o-section --<?php echo $bg_color; ?>">
     <div class="c-gallery__container o-container">
-        <div class="c-gallery__row o-row">
+        <div class="c-gallery__row o-row <?php echo $posiiton_center; ?>">
 
-            <?php if ($has_contents) { ?>
-                <div class="c-gallery__contents o-col-12 o-col-xl-8">
+            <?php if ($has_content) { ?>
+                <div class="c-gallery__content o-col-12 o-col-xl-8">
             <?php } ?>
 
                 <?php if (!empty($headline['text'])) { ?>
@@ -59,7 +62,7 @@ $slides_destroy = $slides_count < 5 ? true : false;
                     </div>
                 <?php } ?>
 
-            <?php if ($has_contents) { ?>
+            <?php if ($has_content) { ?>
                 </div>
             <?php } ?>
             

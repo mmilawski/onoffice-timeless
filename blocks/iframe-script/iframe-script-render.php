@@ -44,13 +44,16 @@ $iframe_name = match ($type) {
     'vcita' => 'vcita',
     default => '',
 };
+
+// Position
+$posiiton_center = !empty($text['wysiwyg']) ? ' --position-center' : '';
 ?>
 
 <section <?php oo_block_id(
     $block,
 ); ?> class="c-iframe-script o-section --<?php echo $settings['bg_color']; ?>"> 
     <div class="c-iframe-script__container o-container">
-        <div class="c-iframe-script__row o-row">
+        <div class="c-iframe-script__row o-row <?php echo $posiiton_center; ?>">
 
             <?php if (!empty($headline['text'])) { ?>
                 <?php oo_get_template('components', '', 'component-headline', [

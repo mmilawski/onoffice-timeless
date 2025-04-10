@@ -25,6 +25,9 @@ $is_slider = filter_var($slider['slider'] ?? null, FILTER_VALIDATE_BOOLEAN);
 $global_posts_per_page = get_option('posts_per_page') ?? 12;
 $post_not_in = isset($current_post_id) ? [$current_post_id] : [];
 
+// Position
+$posiiton_center = !empty($text['wysiwyg']) ? ' --position-center' : '';
+
 switch ($filter) {
     case 'all':
         $posts_per_page = !empty($number_posts_per_page)
@@ -93,7 +96,7 @@ $max_num_pages = $news_query->max_num_pages ?? null;
 ); ?> class="c-news o-section --<?php echo $bg_color; ?>">
     <div class="c-news__container o-container">
         <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
-            <div class="c-news__content o-row">
+            <div class="c-news__content o-row <?php echo $posiiton_center; ?>">
                 <?php if (!empty($headline['text'])) { ?>
 
                     <?php oo_get_template(
