@@ -43,5 +43,10 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 5rem 1rem;
     }
+
+    &.--is-map {
+      display: flex;
+      flex-direction: column;
+    }
   }
 }
