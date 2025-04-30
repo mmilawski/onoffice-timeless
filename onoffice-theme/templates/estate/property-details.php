@@ -607,6 +607,7 @@ while ($current_property = $pEstates->estateIterator()) {
                             'button_class' =>
                                 'c-property-details__share-button c-button --ghost',
                             'button_icon' => 'share',
+                            'popup_id' => 'property-detail-share',
                             'share_link' => home_url(
                                 add_query_arg([], $wp->request),
                             ),

@@ -7,10 +7,8 @@ $popup_title = $args['popup_title'] ?? null;
 $button_class = $args['button_class'] ?? null;
 $button_title = $args['button_title'] ?? null;
 $button_icon = $args['button_icon'] ?? null;
-$popup_id = $args['popup_id'] ?? '';
-$popup_id_data = !empty($args['popup_id'])
-    ? 'data-popup="' . $args['popup_id'] . '"'
-    : '';
+$popup_id = $args['popup_id'] ?? 'share';
+$popup_id_data = 'data-popup="' . $popup_id . '"';
 
 // SHARE
 $share_link = $args['share_link'] ?? null;
@@ -60,9 +58,7 @@ $networks = [
 </a>
 
 
-<div class="c-popup --is-share --bg-transparent" <?php if (!empty($popup_id)) {
-    echo 'id="' . $popup_id . '"';
-} ?>>
+<div class="c-popup --is-share --bg-transparent" id="<?php echo $popup_id; ?>">
 	<div class="c-popup__wrapper">
         <div class="c-popup__header">
             <p class="c-popup__title">
