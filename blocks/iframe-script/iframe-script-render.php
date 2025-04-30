@@ -15,6 +15,7 @@ $iframe_name = match ($type) {
     'baufi_lead' => 'baufi_lead',
     'baufipasst' => 'baufipasst',
     'bottimmo' => 'bottimmo',
+    'bottimmo_widget' => 'bottimmo_widget',
     'calendly' => 'calendly',
     'check24' => 'check24',
     'drklein' => 'drklein',
