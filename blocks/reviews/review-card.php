@@ -94,24 +94,22 @@ echo $is_image;
                     <?php echo $text['wysiwyg']; ?>
                 </div>
             <?php } ?>
-            <?php if ($is_slider) { ?>
-                <div class="c-read-more">
-                    <div class="c-read-more__wrapper --more">
-                        
-                        <span class="c-read-more__text c-button --ghost"><?php echo esc_html(
-                            'Mehr anzeigen',
-                            'oo_theme',
-                        ); ?></span>
-                    </div>
-                    <div class="c-read-more__wrapper --less">
-                        
-                        <span class="c-read-more__text c-button --ghost"><?php echo esc_html(
-                            'Weniger anzeigen',
-                            'oo_theme',
-                        ); ?></span>
-                    </div>
+            <div class="c-read-more">
+                <div class="c-read-more__wrapper --more">
+                    
+                    <span class="c-read-more__text c-button --ghost"><?php echo esc_html(
+                        'Mehr anzeigen',
+                        'oo_theme',
+                    ); ?></span>
                 </div>
-        <?php } ?>
+                <div class="c-read-more__wrapper --less">
+                    
+                    <span class="c-read-more__text c-button --ghost"><?php echo esc_html(
+                        'Weniger anzeigen',
+                        'oo_theme',
+                    ); ?></span>
+                </div>
+            </div>
             <?php if ($stars) { ?>
                 <div class="c-review-card__stars c-stars">
                     <?php

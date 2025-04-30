@@ -475,6 +475,7 @@ foreach ($current_address_array as $address_id => $current_address) {
                                         'oo_theme',
                                     ),
                                     'button_icon' => 'share',
+                                    'popup_id' => 'address-detail-share',
                                     'share_link' => $current_url,
                                 ],
                             ); ?>

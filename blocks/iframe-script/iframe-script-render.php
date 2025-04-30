@@ -15,6 +15,7 @@ $iframe_name = match ($type) {
     'baufi_lead' => 'baufi_lead',
     'baufipasst' => 'baufipasst',
     'bottimmo' => 'bottimmo',
+    'bottimmo_widget' => 'bottimmo_widget',
     'calendly' => 'calendly',
     'check24' => 'check24',
     'drklein' => 'drklein',
@@ -26,7 +27,7 @@ $iframe_name = match ($type) {
         => 'huettig_rompf_finanzierungsrechner',
     'imag' => 'imag',
     'immobilienwertanalyse' => 'immobilienwertanalyse',
-    'immonewsfeed' => 'immonewsfeed ',
+    'immonewsfeed' => 'immonewsfeed',
     'immosparrow' => 'immosparrow',
     'immowelt' => 'immowelt',
     'justhome' => 'justhome',
@@ -44,13 +45,16 @@ $iframe_name = match ($type) {
     'vcita' => 'vcita',
     default => '',
 };
+
+// Position
+$posiiton_center = !empty($text['wysiwyg']) ? ' --position-center' : '';
 ?>
 
 <section <?php oo_block_id(
     $block,
 ); ?> class="c-iframe-script o-section --<?php echo $settings['bg_color']; ?>"> 
     <div class="c-iframe-script__container o-container">
-        <div class="c-iframe-script__row o-row">
+        <div class="c-iframe-script__row o-row <?php echo $posiiton_center; ?>">
 
             <?php if (!empty($headline['text'])) { ?>
                 <?php oo_get_template('components', '', 'component-headline', [

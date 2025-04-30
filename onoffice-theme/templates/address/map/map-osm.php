@@ -73,7 +73,7 @@ return function (AddressList $pAddressClone) {
     wp_enqueue_script('oo-init-open-street-map-marker-cluster');
     ?>
 
-    <div class="c-map --is-open-street-map" data-max-zoom="15" data-marker-color="<?php echo $primary_color; ?>" style="width: 100%;">
+    <div class="c-map --is-open-street-map" data-max-zoom="12" data-marker-color="<?php echo $primary_color; ?>" style="width: 100%;">
         <?php foreach ($address_data as $address) {
 
             $position = $address['position'] ?? [];

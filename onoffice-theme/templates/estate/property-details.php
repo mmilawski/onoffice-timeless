@@ -187,6 +187,26 @@ while ($current_property = $pEstates->estateIterator()) {
         $infrastructure_info = $property_features['Infrastruktur'] ?? [];
         unset($property_features['Infrastruktur']);
     }
+
+    $title_image = null;
+    $sorted_pictures = [];
+
+    foreach ($property_pictures as $id) {
+        $picture_values = $pEstates->getEstatePictureValues($id);
+
+        if (
+            $picture_values['type'] ===
+            \onOffice\WPlugin\Types\ImageTypes::TITLE
+        ) {
+            $title_image = $id;
+        } else {
+            $sorted_pictures[] = $id;
+        }
+    }
+
+    if ($title_image) {
+        array_unshift($sorted_pictures, $title_image);
+    }
     ?>
 
     <section class="c-property-details o-section --bg-transparent">
@@ -196,9 +216,8 @@ while ($current_property = $pEstates->estateIterator()) {
                 !empty($property_pictures) &&
                 is_array($property_pictures)
             ) {
-                foreach ($property_pictures as $id) {
+                foreach ($sorted_pictures as $id) {
                     $picture_values = $pEstates->getEstatePictureValues($id);
-
                     if ($first_picture === true) {
                         if ($picture_values['title'] == true) {
                             $image_alt = esc_html($picture_values['title']);
@@ -372,12 +391,11 @@ while ($current_property = $pEstates->estateIterator()) {
                     <?php
                     $i = 1;
 
-                    foreach ($property_pictures as $id) {
+                    foreach ($sorted_pictures as $id) {
 
                         $picture_values = $pEstates->getEstatePictureValues(
                             $id,
                         );
-
                         if ($picture_values['title'] == true) {
                             $image_alt = esc_html($picture_values['title']);
                         } else {
@@ -589,6 +607,7 @@ while ($current_property = $pEstates->estateIterator()) {
                             'button_class' =>
                                 'c-property-details__share-button c-button --ghost',
                             'button_icon' => 'share',
+                            'popup_id' => 'property-detail-share',
                             'share_link' => home_url(
                                 add_query_arg([], $wp->request),
                             ),
@@ -716,8 +735,8 @@ while ($current_property = $pEstates->estateIterator()) {
                                 $property_ogulo_embeds
                                 as $property_ogulo_embed
                             ) {
-                                echo '<div class="c-property-details__iframe --' .
-                                    oo_get_service_domain(
+                                echo '<div class="c-property-details__iframe --is-' .
+                                    oo_get_service_domain_without_tld(
                                         $property_ogulo_embed['url'],
                                     ) .
                                     '">';
@@ -784,8 +803,8 @@ while ($current_property = $pEstates->estateIterator()) {
                                 $property_movie_players
                                 as $property_movie_player
                             ) {
-                                echo '<div class="c-property-details__video --' .
-                                    oo_get_service_domain(
+                                echo '<div class="c-property-details__video --is-' .
+                                    oo_get_service_domain_without_tld(
                                         $property_movie_player['url'],
                                     ) .
                                     '">';
@@ -859,8 +878,8 @@ while ($current_property = $pEstates->estateIterator()) {
                                 $property_link_embeds
                                 as $property_link_embed
                             ) {
-                                echo '<div class="c-property-details__iframe --' .
-                                    oo_get_service_domain(
+                                echo '<div class="c-property-details__iframe --is-' .
+                                    oo_get_service_domain_without_tld(
                                         $property_link_embed['url'],
                                     ) .
                                     '">';
@@ -918,8 +937,8 @@ while ($current_property = $pEstates->estateIterator()) {
                                 $property_object_embeds
                                 as $property_object_embed
                             ) {
-                                echo '<div class="c-property-details__iframe --' .
-                                    oo_get_service_domain(
+                                echo '<div class="c-property-details__iframe --is-' .
+                                    oo_get_service_domain_without_tld(
                                         $property_object_embed['url'],
                                     ) .
                                     '">';

@@ -8,10 +8,6 @@
     }
   }
 
-  &__row {
-    justify-content: center;
-  }
-
   &__text {
     margin-bottom: 2.5rem;
     @include media-breakpoint-up(xl) {
@@ -113,7 +109,18 @@
 
     &.--is-baufipasst {
       display: flex;
-      justify-content: center;
+    }
+
+    &.--is-eTracker {
+      padding: 0;
+      justify-self: center;
+      aspect-ratio: auto;
+    }
+
+    &.--is-immonewsfeed {
+      aspect-ratio: unset;
+      height: revert-layer;
+      min-height: 630px;
     }
 
     &.--is-eTracker {

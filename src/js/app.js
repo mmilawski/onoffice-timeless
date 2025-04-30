@@ -246,32 +246,68 @@ jQuery(document).ready(function() {
     );
   }
 
-    // Open popup
-  if ($('.--open-popup').length > 0) {
-      $('.--open-popup').on('click', function(e) {
-          e.preventDefault();
-          const popup = $(this).parent().find('.c-popup');
-          popup.toggleClass('--is-open');
-      });
-  
-      // Close popup with click on icon or overlay
-      $('.c-popup__overlay, .c-popup__close').on('click', function() {
-          const popup = $(this).closest('.c-popup');
-          if (!popup.hasClass('--is-widget')) {
-              popup.removeClass('--is-open');
+  // Open popup
+  const openPopup = document.querySelectorAll('.--open-popup');
+  const popUpHeadline = document.querySelectorAll('.c-popup__headline');
+
+  // Trim Popup Headine
+  if (popUpHeadline.length > 0) {
+    popUpHeadline.forEach(function(headline) {
+      const originalText = headline.textContent;
+      const lineHeight = parseFloat(window.getComputedStyle(headline).lineHeight);
+      const maxHeight = lineHeight * 5;
+
+      let truncatedText = originalText;
+      headline.textContent = truncatedText;
+
+      while (headline.scrollHeight > maxHeight) {
+        truncatedText = truncatedText.slice(0, -1);
+        headline.textContent = truncatedText + '…';
+      }
+    });
+  }
+
+  if (openPopup.length > 0) {
+    openPopup.forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Get the ID of the popup from the data-popup attribute
+        const popupId = button.getAttribute('data-popup');
+        const popupElement = document.getElementById(popupId);
+
+        if (!popupElement) {
+          return;
+        }
+
+        if (popupElement) {
+          popupElement.classList.add('--is-open');
+          document.body.classList.add('--modal-open');
+
+          function closePopup() {
+            popupElement.classList.remove('--is-open');
+            document.body.classList.remove('--modal-open');
           }
-      });
-  
-      // Close popup on press ESC
-      $(document).keyup(function(e) {
-          if (e.key === "Escape") {
-              $('.c-popup.--is-open').each(function() {
-                  if (!$(this).hasClass('--is-widget')) {
-                      $(this).removeClass('--is-open');
-                  }
-              });
+
+          // Close popup with click on icon or overlay
+          const overlay = popupElement.querySelector('.c-popup__overlay');
+          const closeButton = popupElement.querySelector('.c-popup__close');
+
+          if (overlay) {
+            overlay.addEventListener('click', closePopup);
           }
+          if (closeButton) {
+            closeButton.addEventListener('click', closePopup);
+          }
+
+          // Close popup on press ESC
+          document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+              closePopup();
+            }
+          });
+        }
       });
+    });
   }
 
   // Lightbox

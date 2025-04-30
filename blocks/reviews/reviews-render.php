@@ -28,6 +28,9 @@ $is_slider = filter_var($slider['slider'] ?? null, FILTER_VALIDATE_BOOLEAN);
 $paged = is_home() || is_front_page() ? 'page' : 'paged';
 $no_found_rows = false;
 
+// Posiiton
+$posiiton_center = !empty($text['wysiwyg']) ? ' --position-center' : '';
+
 $query_args = [
     'post_type' => 'oo_reviews',
     'post_status' => 'publish',
@@ -122,7 +125,8 @@ $max_num_pages = $reviews_query->max_num_pages ?? null;
         <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
             <div class="c-reviews__content o-row <?php echo '--is-' .
                 $type .
-                '-reviews'; ?> ">
+                '-reviews' .
+                $posiiton_center; ?> ">
 
                 <?php if (!empty($headline['text'])) { ?>
         	<?php oo_get_template('components', '', 'component-headline', [

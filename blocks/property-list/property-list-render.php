@@ -12,6 +12,9 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
 // Slider
 $slider = get_field('slider') ?? [];
 $is_slider = filter_var($slider['slider'] ?? null, FILTER_VALIDATE_BOOLEAN);
+
+// Position
+$position_center = !empty($text['wysiwyg']) ? ' --position-center' : '';
 ?>
 
 <section <?php oo_block_id(
@@ -19,7 +22,7 @@ $is_slider = filter_var($slider['slider'] ?? null, FILTER_VALIDATE_BOOLEAN);
 ); ?> class="c-property-list o-section --<?php echo $bg_color; ?>">
     <div class="c-property-list__container o-container">
         <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
-            <div class="c-property-list__content o-row --position-center">
+            <div class="c-property-list__content o-row <?php echo $position_center; ?>">
                 <?php if (!empty($headline['text'])) {
                     oo_get_template('components', '', 'component-headline', [
                         'headline' => $headline,

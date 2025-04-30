@@ -39,6 +39,31 @@ $price_fields = ['kaufpreis', 'kaltmiete', 'nettokaltmiete'];
 $pEstatesClone = clone $pEstates;
 $pEstatesClone->resetEstateIterator();
 
+// image alignment
+
+// image alignment
+$image_positions = get_field('image_positions') ?? [];
+$image_position_vertical = $image_positions['vertical'] ?? 'center';
+$image_position_horizontal = $image_positions['horizontal'] ?? 'center';
+
+if (
+    $image_position_vertical === 'center' &&
+    $image_position_horizontal === 'center'
+) {
+    $image_position_vertical = 'center';
+    $image_position_horizontal = '';
+} elseif (
+    $image_position_vertical === 'center' &&
+    $image_position_horizontal != 'center'
+) {
+    $image_position_vertical = '';
+} elseif (
+    $image_position_horizontal === 'center' &&
+    $image_position_vertical != 'center'
+) {
+    $image_position_horizontal = '';
+}
+
 while ($current_property = $pEstatesClone->estateIterator()):
 
     $property_status = $current_property['vermarktungsstatus'];
@@ -157,6 +182,12 @@ while ($current_property = $pEstatesClone->estateIterator()):
                                             : ''),
                                     'image_class' =>
                                         'c-property-card__image o-image',
+                                    'additional_cloudimg_params' =>
+                                        '&func=crop&gravity=' .
+                                            $image_position_vertical .
+                                            $image_position_horizontal .
+                                            '' ??
+                                        null,
                                     'dimensions' => [
                                         '575' => [
                                             'w' => $image_width_xs,

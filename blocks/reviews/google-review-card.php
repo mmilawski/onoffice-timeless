@@ -64,18 +64,16 @@ if (
           <?php } ?>
           </div>
           
-          <?php if ($is_slider) { ?>
-            <div class="c-google-review-card__more c-read-more">
-                <span class="c-read-more__text --more"><?php esc_html_e(
-                    'Mehr anzeigen',
-                    'oo_theme',
-                ); ?></span> 
-                <span class="c-read-more__text --less"><?php esc_html_e(
-                    'Weniger anzeigen',
-                    'oo_theme',
-                ); ?></span>
-            </div>
-        <?php } ?>
+        <div class="c-google-review-card__more c-read-more">
+            <span class="c-read-more__text --more"><?php esc_html_e(
+                'Mehr anzeigen',
+                'oo_theme',
+            ); ?></span> 
+            <span class="c-read-more__text --less"><?php esc_html_e(
+                'Weniger anzeigen',
+                'oo_theme',
+            ); ?></span>
+        </div>
 
           <?php if ($rating) { ?>
               <div class="c-google-review-card__stars c-stars">
