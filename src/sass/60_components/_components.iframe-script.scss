@@ -116,5 +116,11 @@
       justify-self: center;
       aspect-ratio: auto;
     }
+
+    &.--is-immonewsfeed {
+      aspect-ratio: unset;
+      height: revert-layer;
+      min-height: 630px;
+    }
   }
 }
