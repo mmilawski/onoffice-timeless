@@ -8,16 +8,10 @@ jQuery(document).ready(function() {
     const headerMenuItems = document.querySelectorAll('.c-main-nav__list .c-main-nav__item.--has-children.--is-top-level');
 
     if (!headerContainer) {
-      console.error(
-        'Header container not found. Cannot calculate dropdown menu positions.'
-      );
       return;
     }
 
     if (headerMenuItems.length === 0) {
-      console.warn(
-        'No top-level <li> elements with submenus found. Skipping position adjustments.'
-      );
       return;
     }
 
@@ -27,7 +21,6 @@ jQuery(document).ready(function() {
       const subMenu = li.querySelector('.c-main-nav__sub-menu');
 
       if (!subMenu) {
-        console.error('Submenu not found for a top-level <li> element.');
         return;
       }
 
@@ -583,22 +576,24 @@ jQuery(document).ready(function() {
 
   // Scroll Back To Top Button
   const scrollBackToTop = document.querySelector('.c-back-to-top');
-  scrollBackToTop.onclick = () => {
-    window.scroll({
-      top: 0,
-      behavior: 'smooth'
-    });
-  }
+
+  if (scrollBackToTop) {
+    scrollBackToTop.onclick = () => {
+      window.scroll({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
 
   window.addEventListener('scroll', () => {
-    let scrollPosition = window.scrollY;
-    if (scrollPosition > 200) {
-      scrollBackToTop.classList.add('--visible');
-    } else {
-      scrollBackToTop.classList.remove('--visible');
-    }
- });
-
+      let scrollPosition = window.scrollY;
+      if (scrollPosition > 200) {
+        scrollBackToTop.classList.add('--visible');
+      } else {
+        scrollBackToTop.classList.remove('--visible');
+      }
+  });
+  }
 });
 
 // Fixed Header on scroll

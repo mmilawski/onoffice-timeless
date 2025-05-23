@@ -1,0 +1,46 @@
+.--iframe-display {
+  .o-section {
+    padding-block: 2rem !important;
+    &.c-property-details {
+      padding-top: 0 !important;
+    }
+  }
+
+  .o-container,
+  .o-container-fluid {
+    max-width: 100%;
+  }
+
+  .c-footer__bottom {
+    @include media-breakpoint-up(lg) {
+      gap: 0;
+      padding: 1rem 0;
+    }
+
+    .onoffice-logo {
+      @include media-breakpoint-up(lg) {
+        margin: 0;
+      }
+    }
+  }
+
+  .c-property-details__banner {
+    @include media-breakpoint-up(xl) {
+      min-height: 800px !important;
+      flex-direction: row !important;
+    }
+  }
+
+  .c-property-details__banner-picture {
+    @include media-breakpoint-up(xl) {
+      min-height: 800px !important;
+      flex-direction: row !important;
+    }
+  }
+
+  .c-property-list__properties {
+    @include media-breakpoint-up(lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+}

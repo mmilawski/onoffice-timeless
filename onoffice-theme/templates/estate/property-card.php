@@ -39,7 +39,10 @@ $price_fields = ['kaufpreis', 'kaltmiete', 'nettokaltmiete'];
 $pEstatesClone = clone $pEstates;
 $pEstatesClone->resetEstateIterator();
 
-// image alignment
+$iframe_display = filter_var(
+    get_field('iframe_display', 'option')['display_as_iframe'] ?? false,
+    FILTER_VALIDATE_BOOLEAN,
+);
 
 // image alignment
 $image_positions = get_field('image_positions') ?? [];
@@ -280,7 +283,9 @@ while ($current_property = $pEstatesClone->estateIterator()):
                 <?php } ?>
                     <?php if (
                         $property_status ||
-                        (Favorites::isFavorizationEnabled() && !$is_reference)
+                        (Favorites::isFavorizationEnabled() &&
+                            !$is_reference &&
+                            !$iframe_display)
                     ) { ?>
                 <div class="c-property-card__flags c-flags --space-between">
                     <?php if ($property_status) { ?>
@@ -291,7 +296,8 @@ while ($current_property = $pEstatesClone->estateIterator()):
 
                     <?php if (
                         Favorites::isFavorizationEnabled() &&
-                        !$is_reference
+                        !$is_reference &&
+                        !$iframe_display
                     ) { ?>
                         <span class="c-property-card__favorite c-icon-button --small-corners" data-onoffice-property-id="<?php echo $property_id; ?>">
                             <span class="c-icon-button__text u-screen-reader-only">
