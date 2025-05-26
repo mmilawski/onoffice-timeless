@@ -11,6 +11,7 @@ $third_parties = get_field('third_parties', 'option') ?? null;
 $google_api_key = get_option('onoffice-settings-googlemaps-key') ?? null;
 $place_id = $third_parties['google']['place_id'] ?? null;
 $place_id_override = get_field('place_id') ?? null;
+$count_stars = is_numeric($val = get_field('count_stars')) ? (int) $val : 5;
 
 if (!empty($place_id_override)) {
     $place_id = $place_id_override;
@@ -21,7 +22,7 @@ if (
     !empty($google_api_key) &&
     !empty($place_id)
 ) {
-    $reviews = oo_get_google_place($place_id, $google_api_key);
+    $reviews = oo_get_google_place($place_id, $google_api_key, $count_stars);
 
     if (is_array($reviews)) { ?>
 
