@@ -1,25 +1,39 @@
 <?php
-get_header();
+$iframe_display = filter_var(
+    get_field('iframe_display', 'option')['display_as_iframe'] ?? false,
+    FILTER_VALIDATE_BOOLEAN,
+);
+
+if (!$iframe_display) {
+    get_header();
+} else {
+    oo_get_template('templates', 'iframe-display', 'header', []);
+}
+
 do_action('oo_page_main_top');
 ?>
 
-    <main id="primary" class="o-main">
+<main id="primary" class="o-main">
+	
+	<?php
+ do_action('oo_page_content_top');
 
-        <?php
-        do_action('oo_page_content_top');
+ while (have_posts()):
+     the_post();
+     the_content();
+ endwhile;
 
-        while (have_posts()):
-            the_post();
+ do_action('oo_page_content_bottom');
+ ?>
 
-            the_content();
-        endwhile;
-
-        do_action('oo_page_content_bottom');
-        ?>
-
-    </main><!-- #main -->
+</main><!-- #main -->
 
 <?php
 do_action('oo_page_main_bottom');
-get_footer();
+
+if (!$iframe_display) {
+    get_footer();
+} else {
+    oo_get_template('templates', 'iframe-display', 'footer', []);
+}
 

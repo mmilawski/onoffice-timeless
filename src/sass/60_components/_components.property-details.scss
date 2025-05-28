@@ -497,4 +497,13 @@
       scroll-margin-top: $desktop-header-height;
     }
   }
+
+  &__back-button {
+    position: absolute;
+    margin: 1rem;
+    z-index: 10;
+    @include media-breakpoint-up(lg) {
+      margin: 2rem;
+    }
+  }
 }

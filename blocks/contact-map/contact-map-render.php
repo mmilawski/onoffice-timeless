@@ -11,8 +11,34 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
 $map_color = $settings['map_color'] ?? 'colored';
 
 // Marker color
-$colors = get_field('colors', 'option') ?? null;
-$primary_color = $colors['global']['primary'] ?? 'currentColor';
+$colors = get_field('colors', 'option') ?? [];
+$marker_color = match ($bg_color) {
+    'bg-transparent' => !empty($colors['global']['primary'])
+        ? $colors['global']['primary']
+        : 'currentColor',
+    'bg-light' => !empty($colors['variations']['light']['primary'])
+        ? $colors['variations']['light']['primary']
+        : (!empty($colors['global']['primary'])
+            ? $colors['global']['primary']
+            : 'currentColor'),
+    'bg-dark' => !empty($colors['variations']['dark']['primary'])
+        ? $colors['variations']['dark']['primary']
+        : (!empty($colors['global']['primary'])
+            ? $colors['global']['primary']
+            : 'currentColor'),
+    'bg-primary' => !empty($colors['variations']['primary']['primary'])
+        ? $colors['variations']['primary']['primary']
+        : (!empty($colors['global']['primary'])
+            ? $colors['global']['primary']
+            : 'currentColor'),
+    'bg-secondary' => !empty($colors['variations']['secondary']['primary'])
+        ? $colors['variations']['secondary']['primary']
+        : (!empty($colors['global']['primary'])
+            ? $colors['global']['primary']
+            : 'currentColor'),
+    default => 'currentColor',
+};
+
 // Map
 $third_parties = get_field('third_parties', 'option') ?? null;
 $map_provider = get_option('onoffice-maps-mapprovider') ?? null;
@@ -136,7 +162,7 @@ if (empty($addresses)) {
                 ?>
             <?php } ?>
             <div class="c-contact-map__map-wrapper o-col-12 o-col-lg-10 o-col-xl-8">
-                <div class="c-contact-map__map c-map --is-<?php echo $map_type; ?> --is-<?php echo $map_color; ?>" data-map-color="<?php echo $map_color; ?>" data-marker-color="<?php echo $primary_color; ?>" style="width: 100%;">
+                <div class="c-contact-map__map c-map --is-<?php echo $map_type; ?> --is-<?php echo $map_color; ?>" data-map-color="<?php echo $map_color; ?>" data-marker-color="<?php echo $marker_color; ?>" style="width: 100%;">
                     <?php foreach ($addresses as $address) {
 
                         $map = $address['maps'] ?? [];

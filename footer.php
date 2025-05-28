@@ -50,7 +50,6 @@ $company_name = $company['name'] ?? (get_bloginfo('name') ?? null);
             </div>
         </div>
     <?php } ?>
-    
     <div class="c-footer__bottom">
         <div class="c-footer__bottom-container o-container">
             <div class="c-footer__bottom-row o-row">

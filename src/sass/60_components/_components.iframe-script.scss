@@ -117,6 +117,18 @@
       aspect-ratio: auto;
     }
 
+    &.--is-dr-klein {
+      min-height: 2000px;
+
+      @include media-breakpoint-up(md) {
+        min-height: 1500px;
+      }
+
+      @include media-breakpoint-up(lg) {
+        min-height: 1250px;
+      }
+    }
+
     &.--is-immonewsfeed {
       aspect-ratio: unset;
       height: revert-layer;

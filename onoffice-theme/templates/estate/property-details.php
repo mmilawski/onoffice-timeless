@@ -51,6 +51,11 @@ $energy_fields = [
 
 $price_fields = ['kaufpreis', 'kaltmiete'];
 
+$iframe_display = filter_var(
+    get_field('iframe_display', 'option')['display_as_iframe'] ?? false,
+    FILTER_VALIDATE_BOOLEAN,
+);
+
 /** @var EstateDetail $pEstates */
 
 $pEstates->resetEstateIterator();
@@ -211,6 +216,13 @@ while ($current_property = $pEstates->estateIterator()) {
 
     <section class="c-property-details o-section --bg-transparent">
 
+    <?php if ($iframe_display) { ?>
+        <a class="c-button c-property-details__back-button" href="javascript:history.back();"><?php esc_html_e(
+            'Zurück',
+            'oo_theme',
+        ); ?></a>
+    <?php } ?>
+
         <div class="c-property-details__banner">
             <?php if (
                 !empty($property_pictures) &&
@@ -283,7 +295,9 @@ while ($current_property = $pEstates->estateIterator()) {
 
                     <?php if (
                         $property_status ||
-                        (Favorites::isFavorizationEnabled() && !$is_reference)
+                        (Favorites::isFavorizationEnabled() &&
+                            !$is_reference &&
+                            !$iframe_display)
                     ) { ?>
                         <div class="c-property-details__banner-flags c-flags <?= !$property_status &&
                         Favorites::isFavorizationEnabled()
@@ -300,7 +314,8 @@ while ($current_property = $pEstates->estateIterator()) {
                         <?php
                         if (
                             Favorites::isFavorizationEnabled() &&
-                            !$is_reference
+                            !$is_reference &&
+                            !$iframe_display
                         ) { ?>
                             <span class="c-property-details__favorite c-icon-button --small-corners" data-onoffice-property-id="<?php echo $property_id; ?>">
                                 <span class="c-icon-button__text u-screen-reader-only">
@@ -330,7 +345,8 @@ while ($current_property = $pEstates->estateIterator()) {
                         if (
                             $property_status ||
                             (Favorites::isFavorizationEnabled() &&
-                                !$is_reference)
+                                !$is_reference &&
+                                !$iframe_display)
                         ) { ?>
                         </div>
                     <?php }
