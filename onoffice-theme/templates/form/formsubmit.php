@@ -59,20 +59,103 @@ if ($pForm->needsReCaptcha() && $key !== '') {
   ); ?>" data-size="invisible">
 	</div>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const selectorFormById = `form[id="onoffice-form"] input[name="oo_formno"][value="<?php echo $pFormNo; ?>"]`;
-            const form = document.querySelector(selectorFormById)?.parentElement;
-            const submitButtonElement = form.querySelector('.c-form__button');
+        // Prevents the script from being initialized more than once on the same page.
+        if (!window.onOfficeFormInitialized) {
+            window.onOfficeFormInitialized = true;
 
-            if (!form) {
-                console.error('Form not found.');
-                return;
-            }
+            // Define the Usercentrics template IDs for Google Recaptcha and the desired consent state.
+            const serviceConsents = [
+                { id: 'Hko_qNsui-Q', consent: true }, // Google Recaptcha v2
+                { id: 'cfADcn3E3', consent: true }, // Google Recaptcha v3
+            ];
 
-            if (onOffice && typeof onOffice.captchaControl === 'function') {
-                onOffice.captchaControl(form, submitButtonElement);
+            /**
+             * Asynchronously checks if the Usercentrics Consent Management Platform (CMP) is initialized.
+             * @returns {Promise<boolean>} A promise that resolves to true if the CMP is ready, otherwise false.
+             */
+            const ensureCmpIsInitialized = async () => {
+                try {
+                    // Safely check for the existence and initialization status of the Usercentrics CMP.
+                    const isInitialized = await window.__ucCmp?.isInitialized() ?? false;
+                    if (isInitialized) { return true; }
+                } catch (error) {
+                    console.error('Error checking CMP initialization:', error);
+                }
+                return false;
+            };
+
+            /**
+             * Checks if consent has been given for any of the specified service IDs.
+             * @param {string[]} serviceIds - An array of service IDs to check for consent.
+             * @returns {boolean} True if consent is granted for at least one of the IDs, otherwise false.
+             */
+            function hasConsent(serviceIds = []) {
+                // Access the Set of whitelisted services from the Usercentrics object.
+                const raw = uc?.whitelisted?.value;
+                if (!(raw instanceof Set)) return false;
+
+                // Flatten the consented service entries into a single array of IDs.
+                // An entry can contain multiple IDs separated by '|'.
+                const allowed = Array.from(raw)
+                    .flatMap(entry => entry.split('|').map(id => id.trim()));
+
+                // Return true if any of the required service IDs are in the allowed list.
+                return serviceIds.some(id => allowed.includes(id));
             }
-        });
+        
+            document.addEventListener('DOMContentLoaded', () => {
+                const selectorFormById = `form[id="onoffice-form"] input[name="oo_formno"][value="<?php echo $pFormNo; ?>"]`;
+                const form = document.querySelector(selectorFormById)?.parentElement;
+                const submitButtonElement = form.querySelector('.c-form__button');
+
+                if (!form || !submitButtonElement) {
+                    console.warn('Form or submit button not found for CMP logic.');
+                    return;
+                }
+
+                // Async IIFE to handle CMP logic.
+                (async () => {
+                    const isReady = await ensureCmpIsInitialized();
+                    // Proceed only if the Usercentrics CMP is initialized.
+                    if (isReady) {
+                        // If consent for reCaptcha is already granted, enable the form's submit button.
+                        if (hasConsent(["Hko_qNsui-Q", "cfADcn3E3"])) { 
+                            submitButtonElement.disabled = false;
+                        } else {
+                            // If consent is not granted, replace the placeholder "Accept" buttons with clones that have a custom event listener.
+                            document.querySelectorAll('[mock=uc-recaptcha-mock] .uc-inline-button-accept').forEach(button => {
+                                // Cloning the node and replacing it is a robust way to remove all existing event listeners.
+                                const newButton = button.cloneNode(true);
+                                button.parentNode.replaceChild(newButton, button);
+
+                                // Add a new listener to grant consent programmatically via the Usercentrics API.
+                                newButton.addEventListener('click', async () => {
+                                    try {
+                                        // Update and save the consent state.
+                                        __ucCmp.updateServicesConsents(serviceConsents);
+                                        window.__ucCmp.saveConsents();
+                                        // Enable the submit button after consent is given.
+                                        submitButtonElement.disabled = false;
+                                    } catch (error) {
+                                        console.error('Failed to update consents:', error);
+                                    }
+                                });
+                            });
+                        }
+                    }
+                })();
+
+                if (!form) {
+                    console.error('Form not found.');
+                    return;
+                }
+
+                if (onOffice && typeof onOffice.captchaControl === 'function') {
+                    onOffice.captchaControl(form, submitButtonElement);
+                }
+            });
+
+        }
 	</script>
 	<button class="c-form__button c-button <?php if (
      !empty($settings['bg_color'])
@@ -80,7 +163,7 @@ if ($pForm->needsReCaptcha() && $key !== '') {
      echo '--on-' . $settings['bg_color'];
  } else {
      echo '--on-bg-footer';
- } ?>"><?php echo esc_html(
+ } ?>" disabled><?php echo esc_html(
     $pForm->getGenericSetting('submitButtonLabel'),
 ); ?></button>
 

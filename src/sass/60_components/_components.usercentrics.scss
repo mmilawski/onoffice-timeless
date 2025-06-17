@@ -137,3 +137,11 @@
     }
   }
 }
+
+.uc-text-embedding {
+  margin-bottom: 1.5rem;
+
+  .--on-bg-footer & a {
+    color: var(--oo-color-footer-primary, var(--oo-color-primary));
+  }
+}
