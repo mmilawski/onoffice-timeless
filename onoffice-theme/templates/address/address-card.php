@@ -209,7 +209,11 @@ foreach ($current_address as $field => $value) {
             ],
         ]);
     } else {
-        echo '<div class="c-address-card__picture"></div>';
+        echo '<div class="c-address-card__picture">';
+        echo '<span class="u-screen-reader-only">';
+        echo __('Details anzeigen', 'oo_theme');
+        echo '</span>';
+        echo '</div>';
     }
     if ($properties_count > 0) {
         echo '<div class="c-address-card__flag c-flag --property-status">';
