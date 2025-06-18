@@ -42,6 +42,7 @@ if (function_exists('oo_setup_parent_theme')) {
     $oo_scripts = [
         [OO_SHARED_PATH . '/build/js/select2/select2.js', ['jquery']],
         [OO_SHARED_PATH . '/build/js/splide/splide.js', []],
+        [OO_SHARED_PATH . '/build/js/firefox-iframe-fix.js', ['jquery']],
         [
             OO_PARENT_PATH . '/build/js/app.js',
             [
