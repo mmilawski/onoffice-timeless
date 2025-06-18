@@ -27,11 +27,11 @@
     }
   }
 
-  &__icon,
-  svg {
+  &__icon {
     display: block;
     width: var(--oo-social-media-size, 2rem);
     height: var(--oo-social-media-size, 2rem);
+    transition: opacity 0.25s ease-in-out;
   }
 
   .--bg-light & {
@@ -125,22 +125,12 @@
   &.--is-share {
     --oo-social-media-size: 2.5rem;
     --oo-social-media-gap: 2rem;
+
     justify-content: center;
 
     .--link {
       #{$c-social-media}__link {
         position: relative;
-
-        svg {
-          transition: opacity 0.3s ease;
-        }
-
-        .copy-icon {
-        }
-
-        .copy-icon-success {
-          display: none;
-        }
 
         &::before {
           content: attr(data-tooltip);
@@ -158,7 +148,7 @@
           white-space: nowrap;
           opacity: 0;
           visibility: hidden;
-          transition: opacity 0.3s ease, visibility 0.3s ease;
+          transition: opacity 0.25s ease-in-out, visibility 0.25s ease-in-out;
         }
 
         &:hover::before,
@@ -167,17 +157,13 @@
           opacity: 1;
           visibility: visible;
         }
+      }
+      #{$c-social-media}__icon {
+        &.--copy {
+        }
 
-        .sr-only {
-          position: absolute;
-          width: 1px;
-          height: 1px;
-          padding: 0;
-          margin: -1px;
-          overflow: hidden;
-          clip: rect(0, 0, 0, 0);
-          white-space: nowrap;
-          border-width: 0;
+        &.--copy-success {
+          display: none;
         }
       }
     }

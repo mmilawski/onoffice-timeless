@@ -72,8 +72,8 @@
         padding: 0.5rem 2rem;
         border-radius: $border-radius-small;
         border: 2px solid transparent;
-        outline: 2px solid transparent;
-        outline-offset: 2px;
+        outline: $outline;
+        outline-offset: $outline-offset;
         height: auto;
         width: auto;
         transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
@@ -92,7 +92,7 @@
           border-color: var(--oo-color-mix-primary-contrast-20);
         }
 
-        @include focus() {
+        @include focus-visible() {
           outline-color: var(--oo-color-primary);
         }
 
@@ -115,7 +115,7 @@
           border-color: var(--oo-color-mix-text-contrast-20);
         }
 
-        @include focus() {
+        @include focus-visible() {
           outline-color: var(--oo-color-primary);
         }
 

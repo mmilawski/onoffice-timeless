@@ -10,6 +10,7 @@ $job = $card['job'] ?? null;
 $description = $card['description'] ?? [];
 $wysiwyg = $description['wysiwyg'] ?? null;
 $contact = $card['contact'] ?? null;
+$networks = $card['networks'] ?? [];
 
 // From team block
 // Content
@@ -68,6 +69,8 @@ if ($rating_provider === 'google') {
         }
     }
 }
+
+$uniqid = 'team-' . uniqid();
 ?>
 
 <article class="c-team-card --on-<?php echo $bg_color; ?> <?php if (
@@ -169,7 +172,7 @@ if ($rating_provider === 'google') {
             !empty($contact['phone']) ||
             !empty($contact['mobile']) ||
             !empty($contact['fax']) ||
-            !empty($card['networks']) ||
+            !empty($networks) ||
             !empty($contact['email'])
         ) { ?>
             <div class="c-team-card__contact-wrapper">
@@ -267,19 +270,14 @@ if ($rating_provider === 'google') {
                 <?php endif; ?>
             </div>
         <?php } ?>
-        <?php if (
-            !empty(
-                $card['networks'] &&
-                    count(array_filter($card['networks'])) !== 0
-            )
-        ): ?>
+        <?php if (!empty($networks && count(array_filter($networks)) !== 0)): ?>
                 <div class="c-team-card__contact --is-networks">
                     <?php oo_get_template(
                         'components',
                         '',
                         'component-social-media',
                         [
-                            'networks' => $card['networks'],
+                            'networks' => $networks,
                         ],
                     ); ?>
                 </div>
@@ -287,21 +285,22 @@ if ($rating_provider === 'google') {
     </div>
     <?php if (!empty($description['wysiwyg']) && $is_description) { ?>
         <div class="c-team-card__description-wrapper">
-            <div class="c-team-card__description o-text --is-wysiwyg">
-           
+            <div class="c-team-card__description o-text --is-wysiwyg" id="<?php echo $uniqid; ?>">
                 <?php echo $description['wysiwyg']; ?>
             </div>
 
-            <div class="c-team-card__more c-read-more">
-            <span class="c-read-more__text --more"><?php esc_html_e(
-                'Mehr anzeigen',
-                'oo_theme',
-            ); ?></span>
-                    <span class="c-read-more__text --less"><?php esc_html_e(
-                        'Weniger anzeigen',
-                        'oo_theme',
-                    ); ?></span>
-                </div>
+            <button class="c-team-card__more c-read-more" 
+                data-open-text="<?php esc_html_e(
+                    'Mehr anzeigen',
+                    'oo_theme',
+                ); ?>"
+                data-close-text="<?php esc_html_e(
+                    'Weniger anzeigen',
+                    'oo_theme',
+                ); ?>"
+                aria-expanded="false" aria-controls="<?php echo $uniqid; ?>">
+                <?php echo esc_html('Mehr anzeigen', 'oo_theme'); ?>
+            </button>
         </div>
     <?php } ?>
 </article>

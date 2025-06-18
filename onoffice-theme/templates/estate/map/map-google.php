@@ -92,7 +92,10 @@ return function (EstateList $pEstatesClone) {
     wp_enqueue_script('oo-google-map-marker-cluster-script');
     ?>
 
-    <div class="c-map --is-google-map" data-max-zoom="12" data-marker-color="<?php echo $primary_color; ?>" style="width: 100%;">
+    <div class="c-map --is-google-map" data-max-zoom="12" data-marker-color="<?php echo $primary_color; ?>" style="width: 100%;" role="application" aria-label="<?php echo esc_html__(
+    'Karte mit Immobilienstandorten',
+    'oo_theme',
+); ?>">
         <?php foreach ($property_data as $property) {
 
             $position = $property['position'] ?? [];

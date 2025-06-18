@@ -39,6 +39,7 @@
   }
 
   &__bottom {
+    color: var(--oo-color-footer-text, var(--oo-color-text));
     background-color: var(--oo-color-footer-mix-bg-contrast-10);
     padding: 1rem 0 0.5rem 0;
 
@@ -74,8 +75,11 @@
       }
 
       &.--right {
-        a {
-          color: var(--oo-color-footer-contrast-bg);
+        display: flex;
+        justify-content: center;
+
+        @include media-breakpoint-up(lg) {
+          justify-content: flex-end;
         }
       }
     }
@@ -94,22 +98,32 @@
       }
     }
 
+    .onoffice-link {
+      display: flex;
+
+      @include plain-visited-hover-focus-active() {
+        color: var(--oo-color-footer-text, var(--oo-color-text));
+        outline: $outline;
+        outline-offset: $outline-offset;
+        transition: color 0.25s ease-in-out, outline-color 0.25s ease-in-out;
+      }
+
+      @include focus-visible() {
+        outline-color: currentColor;
+      }
+    }
+
     .onoffice-logo {
       display: flex;
       align-items: center;
-      color: var(--oo-color-footer-contrast-bg);
-      max-width: 150px;
-      margin: 0 auto;
+      color: currentColor;
 
-      @include media-breakpoint-up(lg) {
-        margin: 0 0 0 auto;
+      &__svg {
+        height: 2.25rem;
       }
     }
 
     &-text {
-      &.--year {
-        color: var(--oo-color-footer-text, var(--oo-color-text));
-      }
     }
   }
 

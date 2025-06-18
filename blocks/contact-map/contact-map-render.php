@@ -162,7 +162,10 @@ if (empty($addresses)) {
                 ?>
             <?php } ?>
             <div class="c-contact-map__map-wrapper o-col-12 o-col-lg-10 o-col-xl-8">
-                <div class="c-contact-map__map c-map --is-<?php echo $map_type; ?> --is-<?php echo $map_color; ?>" data-map-color="<?php echo $map_color; ?>" data-marker-color="<?php echo $marker_color; ?>" style="width: 100%;">
+                <div class="c-contact-map__map c-map --is-<?php echo $map_type; ?> --is-<?php echo $map_color; ?>" data-map-color="<?php echo $map_color; ?>" data-marker-color="<?php echo $marker_color; ?>" style="width: 100%;" aria-label="<?php echo esc_html__(
+    'Karte mit Kontaktinformationen',
+    'oo_theme',
+); ?>">
                     <?php foreach ($addresses as $address) {
 
                         $map = $address['maps'] ?? [];
@@ -253,7 +256,11 @@ if (empty($addresses)) {
 
                         <div class="c-map__marker" data-lat="<?php echo esc_attr(
                             $map_lat,
-                        ); ?>" data-lng="<?php echo esc_attr($map_lng); ?>">
+                        ); ?>" data-lng="<?php echo esc_attr(
+    $map_lng,
+); ?>" data-aria-label="<?php echo !empty($name)
+    ? $name
+    : esc_html__('Marker', 'oo_theme'); ?>">
                             <div class="c-map__info --bg-transparent">
                                 <?php
                                 if (!empty($name)) {

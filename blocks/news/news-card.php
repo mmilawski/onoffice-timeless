@@ -83,9 +83,7 @@ $excerpt_word_count = str_word_count(strip_tags($excerpt)) ?? null;
     echo '--on-slider c-slider__slide splide__slide';
 } ?>">
     <?php if (!empty($link)) { ?>
-        <a class="c-news-card__wrapper" href="<?php echo $link; ?>" title="<?php echo esc_html(
-    $title,
-); ?>">
+        <a class="c-news-card__link" href="<?php echo $link; ?>">
     <?php } else { ?>
         <div class="c-news-card__wrapper">
     <?php } ?>

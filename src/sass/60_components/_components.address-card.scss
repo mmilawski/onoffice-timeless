@@ -7,13 +7,25 @@
   border: 1px solid var(--oo-color-mix-bg-contrast-50);
   color: var(--oo-color-text);
   border-radius: $border-radius;
-  overflow: hidden;
 
-  &__wrapper {
+  &__wrapper,
+  &__link {
     position: relative;
-    border-radius: 0 0 $border-radius $border-radius;
+    border-radius: $border-radius;
     overflow: hidden;
     background-color: var(--oo-color-transparent-primary-10);
+  }
+
+  &__link {
+    outline: $outline;
+    outline-offset: $outline-offset;
+    box-shadow: 0px 0px 0px $outline-offset transparent;
+    transition: outline-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+
+    @include focus-visible() {
+      outline-color: var(--oo-color-primary);
+      box-shadow: 0px 0px 0px $outline-offset var(--oo-color-contrast-primary);
+    }
   }
 
   &__picture {

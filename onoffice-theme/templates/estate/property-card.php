@@ -169,6 +169,14 @@ while ($current_property = $pEstatesClone->estateIterator()):
                                     $slider_item_classes .
                                     '" href="' .
                                     esc_url($property_url) .
+                                    '" aria-label="' .
+                                    sprintf(
+                                        esc_html_x(
+                                            'Zur Detailansicht der Immobilie Nr. %d',
+                                            'oo_theme',
+                                        ),
+                                        $property_id,
+                                    ) .
                                     '">';
                             }
 
@@ -247,6 +255,14 @@ while ($current_property = $pEstatesClone->estateIterator()):
             <?php } else {if ($is_visible_property_detail) {
                     echo '<a class="c-property-card__picture-wrapper" href="' .
                         esc_url($property_url) .
+                        '" aria-label="' .
+                        sprintf(
+                            esc_html_x(
+                                'Zur Detailansicht der Immobilie Nr. %d',
+                                'oo_theme',
+                            ),
+                            $property_id,
+                        ) .
                         '">';
                 }
 
@@ -298,35 +314,30 @@ while ($current_property = $pEstatesClone->estateIterator()):
                         Favorites::isFavorizationEnabled() &&
                         !$is_reference &&
                         !$iframe_display
-                    ) { ?>
-                        <span class="c-property-card__favorite c-icon-button --small-corners" data-onoffice-property-id="<?php echo $property_id; ?>">
-                            <span class="c-icon-button__text u-screen-reader-only">
-                                <?php
-                                $favorite_label = Favorites::getFavorizationLabel();
-                                if ($favorite_label == 'Watchlist') {
-                                    esc_html_e(
-                                        __(
-                                            'Zur Merkliste hinzufügen',
-                                            'oo_theme',
-                                        ),
-                                    );
-                                    $favorite_icon = 'bookmark';
-                                } else {
-                                    esc_html_e(
-                                        __(
-                                            'Zu Favoriten hinzufügen',
-                                            'oo_theme',
-                                        ),
-                                    );
-                                    $favorite_icon = 'star';
-                                }
-                                ?>
-                            </span>
-                            <span class="c-icon-button__icon --favorite"><?php oo_get_icon(
-                                $favorite_icon,
-                            ); ?></span>
-                        </span>
-                    <?php } ?>
+                    ) {
+
+                        $favorite_label = Favorites::getFavorizationLabel();
+                        if ($favorite_label == 'Watchlist') {
+                            $favorite_text = esc_html__(
+                                'Zur Merkliste hinzufügen',
+                                'oo_theme',
+                            );
+                            $favorite_icon = 'bookmark';
+                        } else {
+                            $favorite_text = esc_html__(
+                                'Zu Favoriten hinzufügen',
+                                'oo_theme',
+                            );
+                            $favorite_icon = 'star';
+                        }
+                        ?>
+                        <button class="c-property-card__favorite c-icon-button --small-corners" data-onoffice-property-id="<?php echo $property_id; ?>" aria-label="<?php echo $favorite_text; ?>">
+                            <?php oo_get_icon($favorite_icon, true, [
+                                'class' => 'c-icon-button__icon --favorite',
+                            ]); ?>
+                        </button>
+                    <?php
+                    } ?>
                 </div>
             <?php } ?>
         </div>
@@ -443,26 +454,12 @@ while ($current_property = $pEstatesClone->estateIterator()):
         <?php } ?>
         <div class="c-property-card__footer">
             <?php if ($is_visible_property_detail) { ?>
-                <?php
-                $button = [
-                    [
-                        'link' => [
-                            'title' => esc_html__(
-                                'Zur Detailansicht',
-                                'oo_theme',
-                            ),
-                            'url' => $property_url,
-                        ],
-                    ],
-                ];
-
-                oo_get_template('components', '', 'component-buttons', [
-                    'buttons' => $button,
-                    'additional_button_class' =>
-                        'c-property-card__button --small-corners --full-width --on-bg-transparent',
-                    'additional_container_class' => 'c-property-card__buttons',
-                ]);
-                ?>
+                <a class="c-property-card__button c-button --small-corners --full-width --on-bg-transparent" href="<?php echo $property_url; ?>" aria-label="<?php echo sprintf(
+    esc_html_x('Zur Detailansicht der Immobilie Nr. %d', 'oo_theme'),
+    $property_id,
+); ?>">
+                    <?php esc_html_e('Zur Detailansicht', 'oo_theme'); ?>
+                </a>
             <?php } ?>
         </div>
     </div>
@@ -483,16 +480,15 @@ endwhile;
             onOffice.addFavoriteButtonLabel = function(i, element) {
                 var favorite = $(element);
                 var propertyId = favorite.attr('data-onoffice-property-id');
-                var favoriteText = favorite.find('.u-screen-reader-text');
                 var favoriteIcon = favorite.find('.--favorite');
                 var favoriteClass = '--filled';
                 if (!onofficeFavorites.favoriteExists(propertyId)) {
-                    favoriteText.text('<?php if (
+                    favorite.attr('aria-label', '<?php if (
                         $favorite_label == 'Watchlist'
                     ) {
-                        esc_html_e(__('Zur Merkliste hinzufügen', 'oo_theme'));
+                        esc_html_e('Zur Merkliste hinzufügen', 'oo_theme');
                     } else {
-                        esc_html_e(__('Zu Favoriten hinzufügen', 'oo_theme'));
+                        esc_html_e('Zu Favoriten hinzufügen', 'oo_theme');
                     } ?>');
                     favoriteIcon.removeClass(favoriteClass);
                     favorite.on('click', function() {
@@ -500,12 +496,12 @@ endwhile;
                         onOffice.addFavoriteButtonLabel(0, favorite);
                     });
                 } else {
-                    favoriteText.text('<?php if (
+                    favorite.attr('aria-label', '<?php if (
                         $favorite_label == 'Watchlist'
                     ) {
-                        esc_html_e(__('Von Merkliste entfernen', 'oo_theme'));
+                        esc_html_e('Von Merkliste entfernen', 'oo_theme');
                     } else {
-                        esc_html_e(__('Von Favoriten entfernen', 'oo_theme'));
+                        esc_html_e('Von Favoriten entfernen', 'oo_theme');
                     } ?>');
                     favoriteIcon.addClass(favoriteClass);
                     favorite.on('click', function() {

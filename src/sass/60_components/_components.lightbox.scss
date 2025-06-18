@@ -104,8 +104,8 @@
       padding: 0;
       border: 0;
       border-radius: $border-radius;
-      outline: 2px solid transparent;
-      outline-offset: 2px;
+      outline: $outline;
+      outline-offset: $outline-offset;
       opacity: 1;
       cursor: pointer;
       transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
@@ -120,7 +120,7 @@
         background-color: var(--oo-color-mix-primary-contrast-20);
       }
 
-      @include focus() {
+      @include focus-visible() {
         outline-color: var(--oo-color-primary);
       }
 
@@ -164,8 +164,13 @@
       }
 
       &.--close {
-        top: 0.5rem;
-        right: 0.5rem;
+        top: 1rem;
+        right: 1rem;
+
+        @include media-breakpoint-up(xl) {
+          top: 2rem;
+          right: 2rem;
+        }
       }
     }
 

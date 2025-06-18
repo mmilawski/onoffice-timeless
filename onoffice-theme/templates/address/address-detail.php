@@ -256,7 +256,7 @@ foreach ($current_address_array as $address_id => $current_address) {
 
                                 if ($fields_counter > $fields_more) {
                                     if ($number === $fields_more) { ?>
-                                        <div class="c-address-details__features-wrapper">
+                                        <div class="c-address-details__features-wrapper" id="more-address-features">
                                     <?php }
                                 }
 
@@ -354,16 +354,21 @@ foreach ($current_address_array as $address_id => $current_address) {
                                 if ($fields_counter > $fields_more) {
                                     if ($number == $fields_counter - 1) { ?>
                                         </div>
-                                        <div class="c-address-details__more c-read-more">
-                                            <span class="c-read-more__text --more"><?php esc_html_e(
+                                        <button class="c-address-details__more c-read-more" 
+                                            data-open-text="<?php esc_html_e(
                                                 'Mehr anzeigen',
                                                 'oo_theme',
-                                            ); ?></span>
-                                            <span class="c-read-more__text --less"><?php esc_html_e(
+                                            ); ?>"
+                                            data-close-text="<?php esc_html_e(
                                                 'Weniger anzeigen',
                                                 'oo_theme',
-                                            ); ?></span>
-                                        </div>
+                                            ); ?>"
+                                            aria-expanded="false" aria-controls="more-address-features">
+                                            <?php echo esc_html(
+                                                'Mehr anzeigen',
+                                                'oo_theme',
+                                            ); ?>
+                                        </button>
                                     <?php }
                                 }
                                 $number++;

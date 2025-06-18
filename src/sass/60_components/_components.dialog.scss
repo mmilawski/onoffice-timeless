@@ -1,0 +1,65 @@
+.c-dialog {
+  $c-dialog: &;
+
+  position: fixed;
+  background: var(--oo-color-bg);
+  z-index: 50000;
+  margin: auto;
+  padding: 0;
+  overflow: hidden;
+  overflow-y: auto;
+  border: 0;
+  border-radius: $border-radius;
+  max-width: calc(100vw - 2rem);
+  max-height: calc(100dvh - 2rem);
+  box-shadow: 0 0 5px var(--oo-color-transparent-shadow-15);
+  outline: $outline;
+  outline-offset: $outline-offset;
+
+  @include media-breakpoint-up(lg) {
+    min-width: 600px;
+    max-width: 50vw;
+  }
+
+  @include focus-visible() {
+    outline-color: var(--oo-color-primary);
+  }
+
+  &::backdrop {
+    cursor: pointer;
+    background: var(--oo-color-transparent-shadow-80);
+  }
+
+  &__wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.5rem 0.5rem 0 1rem;
+  }
+
+  &__title {
+    @include font-size($mobile-h4-font-size, $mobile-h4-line-height);
+    font-weight: $font-weight-headline;
+
+    @include media-breakpoint-up(xl) {
+      @include font-size($desktop-h4-font-size, $desktop-h4-line-height);
+    }
+  }
+
+  &__close {
+    flex-shrink: 0;
+  }
+
+  &__content {
+    padding: 0 1rem 2rem;
+  }
+}

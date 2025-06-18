@@ -29,6 +29,8 @@ $image_width_lg = '446';
 $image_width_xl = '350';
 $image_width_xxl = '414';
 $image_width_xxxl = '458';
+
+$uniqid = 'review-' . uniqid();
 ?>
 
 <article class="c-review-card --bg-transparent <?php
@@ -90,32 +92,35 @@ echo $is_image;
                 <h3 class="c-review-card__name o-headline --h3"><?php echo $title; ?></h3>
             <?php } ?>
             <?php if (!empty($text['wysiwyg'])) { ?>
-                <div class="c-review-card__text o-text --is-wysiwyg">
+                <div class="c-review-card__text o-text --is-wysiwyg" id="<?php echo $uniqid; ?>">
                     <?php echo $text['wysiwyg']; ?>
                 </div>
             <?php } ?>
-            <div class="c-read-more">
-                <div class="c-read-more__wrapper --more">
-                    
-                    <span class="c-read-more__text c-button --ghost"><?php echo esc_html(
-                        'Mehr anzeigen',
-                        'oo_theme',
-                    ); ?></span>
-                </div>
-                <div class="c-read-more__wrapper --less">
-                    
-                    <span class="c-read-more__text c-button --ghost"><?php echo esc_html(
-                        'Weniger anzeigen',
-                        'oo_theme',
-                    ); ?></span>
-                </div>
-            </div>
-            <?php if ($stars) { ?>
-                <div class="c-review-card__stars c-stars">
-                    <?php
-                    $stars_average = round($stars * 2) / 2;
-                    $stars_all = 5;
 
+            <button class="c-review-card__more c-read-more" 
+                data-open-text="<?php esc_html_e(
+                    'Mehr anzeigen',
+                    'oo_theme',
+                ); ?>"
+                data-close-text="<?php esc_html_e(
+                    'Weniger anzeigen',
+                    'oo_theme',
+                ); ?>"
+                aria-expanded="false" aria-controls="<?php echo $uniqid; ?>">
+                <?php echo esc_html('Mehr anzeigen', 'oo_theme'); ?>
+            </button>
+
+            <?php if ($stars) { ?>
+                <?php
+                $stars_average = round($stars * 2) / 2;
+                $stars_all = 5;
+                ?>
+                <div class="c-review-card__stars c-stars" role="img" aria-label="<?php echo sprintf(
+                    esc_attr__('Bewertung: %1$s von %2$s Sternen', 'oo_theme'),
+                    $stars_average,
+                    $stars_all,
+                ); ?>">
+                    <?php
                     // full stars
                     for ($i = 0; $i < floor($stars_average); $i++) {
                         $stars_all--;

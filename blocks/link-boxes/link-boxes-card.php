@@ -17,6 +17,11 @@ $is_slider = filter_var($slider['slider'], FILTER_VALIDATE_BOOLEAN);
     $link = $card['link'] ?? [];
     $icon = $card['icon'] ?? [];
     $icon_url = $icon['url'] ?? null;
+    $icon_alt = !empty($icon['alt'])
+        ? $icon['alt']
+        : (!empty($icon['title'])
+            ? $icon['title']
+            : null);
 
     // Image width
     $image_width_xs = '541';
@@ -41,7 +46,7 @@ $is_slider = filter_var($slider['slider'], FILTER_VALIDATE_BOOLEAN);
     } ?>">
         <?php if (!empty($image) || !empty($icon)) { ?>
         <?php if (!empty($link['url'])) { ?>
-            <a class="c-link-boxes-card__wrapper --has-<?php echo $type; ?>" <?php echo oo_set_link_attr(
+            <a class="c-link-boxes-card__link --has-<?php echo $type; ?>" <?php echo oo_set_link_attr(
     $link,
 ); ?>>
         <?php } else { ?>
@@ -92,6 +97,8 @@ $is_slider = filter_var($slider['slider'], FILTER_VALIDATE_BOOLEAN);
                     $svg_content = file_get_contents($icon_url);
                     if (!empty($svg_content)) {
                         $svg = new SimpleXMLElement($svg_content);
+                        $svg->addAttribute('role', 'img');
+                        $svg->addAttribute('aria-label', $icon_alt);
                         $svg->addAttribute('class', 'c-link-boxes-card__icon');
                         echo "{$svg->asXML()}";
                     }

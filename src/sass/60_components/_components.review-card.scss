@@ -70,25 +70,33 @@
 
   &__text {
     &.--shorten {
+      max-height: calc($global-line-height * 7);
       overflow: hidden;
-      max-height: calc($small-line-height * 7);
-      transition: max-height 0.25s ease-in-out;
+      text-overflow: ellipsis;
       display: -webkit-box;
       -webkit-line-clamp: 7;
+      line-clamp: 7;
       -webkit-box-orient: vertical;
+      transition: max-height 0.25s ease-in-out;
 
       @include media-breakpoint-up(xl) {
-        max-height: calc($small-line-height * 10);
+        max-height: calc($global-line-height * 10);
         -webkit-line-clamp: 10;
+        line-clamp: 10;
+      }
+
+      &.--is-open {
+        flex-grow: 1;
+        max-height: none;
+        -webkit-line-clamp: unset;
+        line-clamp: unset;
+        overflow: visible;
       }
     }
+  }
 
-    &.--is-open {
-      flex-grow: 1;
-      max-height: 100%;
-      -webkit-line-clamp: unset;
-      overflow: visible;
-    }
+  &__more {
+    display: none;
   }
 
   &__stars {

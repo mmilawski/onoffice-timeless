@@ -42,6 +42,8 @@ if (get_field('property_search_result')) {
 } else {
     $result = null;
 }
+
+$uniqid = 'property-search-' . uniqid();
 ?>
 
 <form <?php if (!empty($result)) {
@@ -61,22 +63,24 @@ if (get_field('property_search_result')) {
             if ($fields_counter > 12) {
 
                 if ($number === 12) { ?>
-                    <div class="c-form__field-wrapper">
+                    <div class="c-form__field-wrapper" id="<?php echo $uniqid; ?>">
                 <?php }
                 renderFieldEstateSearch($inputName, $properties);
                 if ($number == $fields_counter - 1) { ?>
                     </div>
 
-                    <div class="c-form__more c-read-more --text-align-center">
-                        <span class="c-read-more__text --more"><?php esc_html_e(
+                    <button class="c-form__more c-read-more --text-align-center --small-corners" 
+                        data-open-text="<?php esc_html_e(
                             'Mehr anzeigen',
                             'oo_theme',
-                        ); ?></span> 
-                        <span class="c-read-more__text --less"><?php esc_html_e(
+                        ); ?>"
+                        data-close-text="<?php esc_html_e(
                             'Weniger anzeigen',
                             'oo_theme',
-                        ); ?></span>
-                    </div>
+                        ); ?>"
+                        aria-expanded="false" aria-controls="<?php echo $uniqid; ?>">
+                        <?php echo esc_html('Mehr anzeigen', 'oo_theme'); ?>
+                    </button>
 
                     <button class="c-form__button c-button <?php if (
                         $is_banner

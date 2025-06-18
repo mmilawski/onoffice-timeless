@@ -40,7 +40,7 @@ if (!empty($video)) {
     }
 
     // Add extra attributes to iframe HTML
-    $attributes = 'loading="lazy" class="c-media__iframe"';
+    $attributes = 'loading="lazy" class="c-media__iframe" tabindex="0"';
     $iframe = str_replace(' frameborder="0"', '', $iframe);
     $iframe_with_attributes = str_replace(
         '></iframe>',
@@ -219,11 +219,13 @@ if ($width_container == 'content-width') {
                                 ); ?>
                                 <button 
                                     class="c-media__play c-player --on-<?php echo $bg_color; ?>" 
-                                    title="<?php esc_html_e(
+                                    aria-label="<?php esc_html_e(
                                         'Video ansehen',
                                         'oo_theme',
                                     ); ?>">
-                                    <?php oo_get_icon('play'); ?>
+                                    <?php oo_get_icon('play', true, [
+                                        'class' => 'c-player__icon',
+                                    ]); ?>
                                 </button>
                             </div>
                         <?php endif; ?>
@@ -394,11 +396,13 @@ if ($width_container == 'content-width') {
 
                             <button 
                                 class="c-media__play c-player --on-<?php echo $bg_color; ?>" 
-                                title="<?php esc_html_e(
+                                aria-label="<?php esc_html_e(
                                     'Video ansehen',
                                     'oo_theme',
                                 ); ?>">
-                                <?php oo_get_icon('play'); ?>
+                                <?php oo_get_icon('play', true, [
+                                    'class' => 'c-player__icon',
+                                ]); ?>
                             </button>
                         </div>
                     <?php echo $iframe_without_source;} else { ?>

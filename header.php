@@ -37,7 +37,7 @@ if (empty($header_modules_left) && empty($header_modules_right)) {
     $has_no_meta = '--has-no-meta';
 }
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 
 <head>
@@ -158,6 +158,11 @@ if (empty($header_modules_left) && empty($header_modules_right)) {
                                     );
                                     $svg->addAttribute('width', $width);
                                     $svg->addAttribute('height', $height);
+                                    $svg->addAttribute('role', 'img');
+                                    $svg->addAttribute(
+                                        'aria-label',
+                                        $company_name,
+                                    );
                                     $svg->addAttribute(
                                         'class',
                                         'o-logo__image --is-svg',
@@ -174,18 +179,22 @@ if (empty($header_modules_left) && empty($header_modules_right)) {
                         </a>
                     </div>
 
-                    <button class="c-main-nav__button c-icon-button --small-corners">
-                        <span class="c-icon-button__text u-screen-reader-only"><?php esc_html_e(
-                            'Menu',
-                            'oo_theme',
-                        ); ?></span>
-                        <span class="c-icon-button__icon --open">
-                            <?php oo_get_icon('bars'); ?>
-                        </span>
-
-                        <span class="c-icon-button__icon --close">
-                            <?php oo_get_icon('close'); ?>
-                        </span>
+                    <button class="c-main-nav__button c-icon-button --small-corners" data-open-text="<?php esc_html_e(
+                        'Menü öffnen',
+                        'oo_theme',
+                    ); ?>" data-close-text="<?php esc_html_e(
+    'Menü schließen',
+    'oo_theme',
+); ?>" aria-label="<?php esc_html_e(
+    'Menü öffnen',
+    'oo_theme',
+); ?>" aria-expanded="false" aria-controls="main-nav">
+                        <?php echo oo_get_icon('bars', true, [
+                            'class' => 'c-icon-button__icon --open',
+                        ]); ?>
+                        <?php echo oo_get_icon('close', true, [
+                            'class' => 'c-icon-button__icon --close',
+                        ]); ?>
                     </button>
 
                 </div><!-- #container -->
@@ -193,7 +202,7 @@ if (empty($header_modules_left) && empty($header_modules_right)) {
 
             <div class="c-header__wrapper">
                 <div class="c-header__nav-wrapper">
-                    <nav class="c-header__nav c-main-nav">
+                    <nav id="main-nav" class="c-header__nav c-main-nav">
                         <?php wp_nav_menu([
                             'theme_location' => 'main-nav',
                             'menu_class' => 'c-main-nav__list',

@@ -203,14 +203,6 @@
         );
       }
 
-      @include visited-hover() {
-        color: var(--oo-color-header-contrast-primary);
-        background-color: var(
-          --oo-color-header-primary,
-          var(--oo-color-primary)
-        );
-      }
-
       @include media-breakpoint-down(xl) {
         padding-inline: 2rem;
       }

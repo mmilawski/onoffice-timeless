@@ -7,6 +7,14 @@
     max-height: var(--oo-logo-height, 100%);
     line-height: 0;
     border: 0;
+
+    @include focus-visible() {
+      outline-color: currentColor;
+    }
+
+    .--bg-header & {
+      color: var(--oo-color-header-primary, var(--oo-color-primary));
+    }
   }
 
   &__image {

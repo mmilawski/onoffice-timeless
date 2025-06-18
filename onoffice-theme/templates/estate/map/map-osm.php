@@ -95,7 +95,10 @@ return function (EstateList $pEstatesClone) {
     wp_enqueue_script('oo-init-open-street-map-marker-cluster');
     ?>
 
-    <div class="c-map --is-open-street-map" data-max-zoom="12" data-marker-color="<?php echo $primary_color; ?>" style="width: 100%;">
+    <div class="c-map --is-open-street-map" data-max-zoom="12" data-marker-color="<?php echo $primary_color; ?>" style="width: 100%;" aria-label="<?php echo esc_html__(
+    'Karte mit Immobilienstandorten',
+    'oo_theme',
+); ?>">
         <?php foreach ($property_data as $property) {
 
             $position = $property['position'] ?? [];
@@ -115,7 +118,11 @@ return function (EstateList $pEstatesClone) {
             ?>
             <div class="c-map__marker" data-lat="<?php echo esc_attr(
                 $lat,
-            ); ?>" data-lng="<?php echo esc_attr($lng); ?>">
+            ); ?>" data-lng="<?php echo esc_attr(
+    $lng,
+); ?>" data-aria-label="<?php echo !empty($title)
+    ? $title
+    : esc_html__('Marker', 'oo_theme'); ?>">
                 <div class="c-map__info --bg-transparent">
                     <?php
                     if (!empty($title)) {

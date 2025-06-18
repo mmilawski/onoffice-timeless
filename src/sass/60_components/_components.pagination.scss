@@ -27,8 +27,8 @@
     margin: 0;
     padding: 0 0.5rem;
     border-radius: $border-radius;
-    outline: 2px solid transparent;
-    outline-offset: 2px;
+    outline: $outline;
+    outline-offset: $outline-offset;
     transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
       outline-color 0.25s ease-in-out;
     cursor: pointer;
@@ -42,7 +42,7 @@
       background-color: var(--oo-color-mix-bg-contrast-10);
     }
 
-    @include focus() {
+    @include focus-visible() {
       outline-color: var(--oo-color-primary);
     }
 
@@ -82,7 +82,7 @@
         background-color: var(--oo-color-light-mix-bg-contrast-10);
       }
 
-      @include focus() {
+      @include focus-visible() {
         outline-color: var(--oo-color-light-primary, var(--oo-color-primary));
       }
 
@@ -110,7 +110,7 @@
         background-color: var(--oo-color-dark-mix-bg-contrast-10);
       }
 
-      @include focus() {
+      @include focus-visible() {
         outline-color: var(--oo-color-dark-primary, var(--oo-color-primary));
       }
 
@@ -135,7 +135,7 @@
         background-color: var(--oo-color-primary-mix-bg-contrast-10);
       }
 
-      @include focus() {
+      @include focus-visible() {
         outline-color: var(--oo-color-primary-primary, var(--oo-color-primary));
       }
 
@@ -163,7 +163,7 @@
         background-color: var(--oo-color-secondary-mix-bg-contrast-10);
       }
 
-      @include focus() {
+      @include focus-visible() {
         outline-color: var(
           --oo-color-secondary-primary,
           var(--oo-color-primary)

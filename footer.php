@@ -16,14 +16,13 @@ $company_name = $company['name'] ?? (get_bloginfo('name') ?? null);
 ?>
 
 <footer class="c-footer">
-    <button class="c-back-to-top">
-        <span class="c-back-to-top__text u-screen-reader-only"><?php echo __(
-            'Zurück zum Anfang',
-            'oo_theme',
-        ); ?></span>
-        <span class="c-back-to-top__icon --chevron-up"><?php oo_get_icon(
-            'chevron-up',
-        ); ?></span>
+    <button class="c-back-to-top" aria-label="<?php echo __(
+        'Zurück zum Anfang',
+        'oo_theme',
+    ); ?>">
+        <?php echo oo_get_icon('chevron-up', true, [
+            'class' => 'c-back-to-top__icon --chevron-up',
+        ]); ?>
     </button>
 
     <?php if (is_array($footer_content_rows)) { ?>
@@ -50,7 +49,8 @@ $company_name = $company['name'] ?? (get_bloginfo('name') ?? null);
             </div>
         </div>
     <?php } ?>
-    <div class="c-footer__bottom">
+    
+    <div class="c-footer__bottom --bg-footer">
         <div class="c-footer__bottom-container o-container">
             <div class="c-footer__bottom-row o-row">
                 <div class="c-footer__bottom-column --left o-col-12 o-col-lg-8 o-col-xl-10">
