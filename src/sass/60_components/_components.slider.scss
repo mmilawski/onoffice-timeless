@@ -11,6 +11,30 @@
   &__slide {
   }
 
+  &__toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--oo-color-contrast-primary);
+    background-color: var(--oo-color-primary);
+    border: 2px solid var(--oo-color-primary);
+    width: $icon-wrapper-size;
+    height: $icon-wrapper-size;
+    padding: 0.25rem;
+    border-radius: $border-radius;
+    pointer-events: auto;
+
+    #{$c-slider}__icon {
+      width: $icon-size;
+      height: $icon-size;
+
+      @include media-breakpoint-up(xl) {
+        width: $icon-size;
+        height: $icon-size;
+      }
+    }
+  }
+
   &__pagination {
     bottom: 0;
     padding: 0 1rem;
@@ -233,6 +257,18 @@
         height: 100%;
       }
     }
+
+    #{$c-slider}__toggle {
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      translate: -50%;
+      padding: 0;
+      @include media-breakpoint-up(lg) {
+        bottom: 4rem;
+      }
+    }
+
     #{$c-slider}__pagination {
       position: absolute;
       pointer-events: auto;
