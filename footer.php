@@ -61,7 +61,7 @@ $company_name = $company['name'] ?? (get_bloginfo('name') ?? null);
                             ); ?> <?php echo $company_name; ?>
                         </span>
                     </p>
-                    <nav class="c-footer-nav">
+                    <nav class="c-footer-nav" role="navigation">
                         <?php wp_nav_menu([
                             'theme_location' => 'footer-nav',
                             'menu_class' => '',
