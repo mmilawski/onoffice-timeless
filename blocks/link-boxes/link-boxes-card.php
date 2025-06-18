@@ -165,7 +165,14 @@ $is_slider = filter_var($slider['slider'], FILTER_VALIDATE_BOOLEAN);
                     $button_text = $link['title']
                         ? $link['title']
                         : esc_html__('Mehr erfahren', 'oo_theme');
-                    echo '<a class="c-link-boxes-card__button c-button --full-width --on-bg-transparent" ' .
+
+                        $aria_label = !empty($headline)
+                        ? sprintf('%s zu %s', $button_text, $headline)
+                        : $button_text;
+
+                    echo '<a class="c-link-boxes-card__button c-button --full-width --on-bg-transparent" aria-label="' .
+                        esc_attr($aria_label) .
+                        '" ' .
                         oo_set_link_attr($link) .
                         '>';
                     echo $button_text;
