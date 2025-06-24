@@ -173,7 +173,7 @@ $is_slider = filter_var($slider['slider'], FILTER_VALIDATE_BOOLEAN);
                         ? $link['title']
                         : esc_html__('Mehr erfahren', 'oo_theme');
 
-                        $aria_label = !empty($headline)
+                    $aria_label = !empty($headline)
                         ? sprintf('%s zu %s', $button_text, $headline)
                         : $button_text;
 
