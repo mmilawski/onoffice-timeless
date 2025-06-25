@@ -60,6 +60,12 @@
       @include active() {
         background-color: var(--oo-color-mix-status-contrast-40);
       }
+
+      &__icon {
+        .--filled {
+          stroke: var(--color-contrast-primary);
+        }
+      }
     }
   }
 

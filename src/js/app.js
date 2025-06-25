@@ -183,7 +183,7 @@ jQuery(document).ready(function() {
               }
           }
       }
-      
+
       /**
        * Converts an HTML string into a DOM node.
        * @param {string} html
@@ -318,11 +318,11 @@ jQuery(document).ready(function() {
         plugins: plugins,
         onInitialize: function() {
           let labelText = '';
-        
+
           // 1. Primary Method: Try to get the label from the original <select>
           if (this.input.labels && this.input.labels.length > 0) {
             labelText = this.input.labels[0].innerText;
-          } 
+          }
           // 2. Fallback Method: If the first fails, try the control input
           else if (this.control_input.labels && this.control_input.labels.length > 0) {
             labelText = this.control_input.labels[0].innerText;
@@ -343,12 +343,12 @@ jQuery(document).ready(function() {
           this.items_wrapper = itemsWrapper; // Save reference for onItemAdd
 
           // --- Re-parent existing elements ---
-          
+
           // Move all initial .ts-item elements into the new wrapper
           this.control.querySelectorAll('.ts-item').forEach(item => {
               itemsWrapper.appendChild(item);
           });
-          
+
           // Build the new structure within controlInner
           controlInner.appendChild(itemsWrapper);
           controlInner.appendChild(this.control_input); // Move the input as well
@@ -362,7 +362,7 @@ jQuery(document).ready(function() {
         render: {
           option: function(data, escape) {
 
-            if (isMultiselect) { 
+            if (isMultiselect) {
               return '<div class="ts-dropdown__item o-control" tabindex="0">' +
                         '<span class="ts-dropdown__label o-control__label">' +
                           '<span class="ts-dropdown__text o-control__text">' + escape(data.text) + '</span>' +
@@ -432,7 +432,7 @@ jQuery(document).ready(function() {
     details.forEach(detail => {
       detail.style.height = (detail.querySelector('summary').offsetHeight + 4) + 'px';
       detail.style.transition = 'height 0.3s ease';
-    
+
       detail.addEventListener('toggle', () => {
         const srOpen = detail.querySelector('.u-screen-reader-only.--open');
         const srClose = detail.querySelector('.u-screen-reader-only.--close');
@@ -672,6 +672,16 @@ jQuery(document).ready(function() {
   // Slider
   const sliders = document.querySelectorAll('.c-slider');
 
+  function updateTabIndex() {
+    document.querySelectorAll('.splide__slide').forEach(slide => {
+      slide.tabIndex = slide.classList.contains('is-active') ? 0 : -1
+    });
+    document.querySelectorAll('.splide__slide--clone').forEach(slide => {
+      slide.tabIndex = -1
+    });
+  }
+
+
   if( sliders.length > 0 ) {
       sliders.forEach(function(slider) {
 
@@ -711,7 +721,9 @@ jQuery(document).ready(function() {
           focusableNodes: 'a, button, input, textarea, select:not([aria-hidden])'
         };
       });
+      splide.on('mounted moved', () => requestAnimationFrame(updateTabIndex));
       splide.mount();
+
     });
   }
 
@@ -914,10 +926,10 @@ function correctFirstElementPadding() {
 // Function to apply text shortening, read-more button and visibility adjustments based on word count and screen size
 function applyResponsiveTextShortening() {
   const isMobile = window.innerWidth <= 768;
-  
+
   function shortenElements(elementsEach, textElement, elementToShorten) {
     $(elementsEach).each(function() {
-      const text = $(this).find(textElement).text(); 
+      const text = $(this).find(textElement).text();
       const wordCount = text.trim().split(/\s+/).length;
 
       let shouldShorten;
