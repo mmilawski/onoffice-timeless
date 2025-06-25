@@ -1,8 +1,11 @@
 <?php
+// Post ID
+$post_id = get_the_ID() ?? null;
+
 $image = get_field('image') ?? [];
 $title = get_field('title') ? get_field('title') : get_the_title() ?? null;
 $text = get_field('text') ?? [];
-$date = get_the_date('d.m.Y') ?? null;
+$date = get_the_date('d.m.Y', $post_id) ?? null;
 $bg_color = $settings['bg_color'] ?? 'bg-transparent';
 
 // Settings
@@ -21,6 +24,9 @@ $image_width_lg = '444';
 $image_width_xl = '540';
 $image_width_xxl = '636';
 $image_width_xxxl = '702';
+
+// Set Alt attribute for background image
+$image['alt'] = $image['alt'] ?? $title;
 ?>
 <section <?php oo_block_id(
     $block,

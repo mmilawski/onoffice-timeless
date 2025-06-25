@@ -18,7 +18,15 @@ foreach ($blocks as $block) {
 $card = get_field('news', $post_id) ?? [];
 $link = get_the_permalink($post_id) ?? null;
 $date = get_the_date('d.m.Y', $post_id) ?? null;
+$dateYMD = get_the_date('Y-m-d', $post_id) ?? null;
 
+if (isset($card['title']) && $card['title']) {
+    $title = $card['title'] ?? null;
+} elseif (!empty($details['title'])) {
+    $title = $details['title'] ?? null;
+} else {
+    $title = get_the_title($post_id) ?? null;
+}
 if (isset($card['image']) && $card['image']) {
     $image = $card['image'] ?? null;
 } elseif (!empty($details['image'])) {
@@ -30,17 +38,10 @@ if (isset($card['image']) && $card['image']) {
                 $details['image'],
                 '_wp_attachment_image_alt',
                 true,
-            ) ?? null,
+            ) ?? $title,
     ];
 } else {
     $image = [];
-}
-if (isset($card['title']) && $card['title']) {
-    $title = $card['title'] ?? null;
-} elseif (!empty($details['title'])) {
-    $title = $details['title'] ?? null;
-} else {
-    $title = get_the_title($post_id) ?? null;
 }
 $excerpt = $card['excerpt']['wysiwyg_excerpt']
     ? $card['excerpt']['wysiwyg_excerpt']
@@ -76,6 +77,21 @@ $excerpt_delimiter =
 $excerpt_trim =
     wp_trim_words($excerpt, $excerpt_limit, $excerpt_delimiter) ?? null;
 $excerpt_word_count = str_word_count(strip_tags($excerpt)) ?? null;
+
+// Helpers
+$link_title_date = esc_html($title);
+if ($is_date && !empty($date)) {
+    $link_title_date =
+        $link_title_date .
+        sprintf(
+            esc_html__(', veröffentlicht am %s', 'oo_theme'),
+            esc_html($date),
+        );
+}
+$link_title_more = sprintf(
+    esc_html__('Mehr erfahren über %s', 'oo_theme'),
+    esc_html($title),
+);
 ?>
 
 
@@ -83,7 +99,7 @@ $excerpt_word_count = str_word_count(strip_tags($excerpt)) ?? null;
     echo '--on-slider c-slider__slide splide__slide';
 } ?>">
     <?php if (!empty($link)) { ?>
-        <a class="c-news-card__link" href="<?php echo $link; ?>">
+        <a class="c-news-card__link" href="<?php echo $link; ?>" aria-label="<?php echo $link_title_date; ?>">
     <?php } else { ?>
         <div class="c-news-card__wrapper">
     <?php } ?>
@@ -124,7 +140,7 @@ $excerpt_word_count = str_word_count(strip_tags($excerpt)) ?? null;
    ]); ?>
 
         <?php if ($is_date && !empty($date)) { ?>
-            <div class="c-news-card__date c-flag"><?php echo $date; ?></div>
+            <time class="c-news-card__date c-flag" datetime="<?php echo $dateYMD; ?>"><?php echo $date; ?></time>
         <?php } ?>
     <?php if (!empty($link)) { ?>
         </a>
@@ -134,7 +150,7 @@ $excerpt_word_count = str_word_count(strip_tags($excerpt)) ?? null;
     <?php if (!empty($title) || !empty($excerpt) || !empty($link)) { ?>
 	    <div class="c-news-card__content">
             <?php if (!empty($title)) { ?>
-                <h3 class="c-news-card__title o-headline --h3"><?php echo $title; ?></h3>
+                <span class="c-news-card__title o-headline --h3"><?php echo $title; ?></span>
             <?php } ?>
 			<?php if (!empty($excerpt)) { ?>
 				<div class="c-news-card__text o-text --is-wysiwyg">
@@ -147,7 +163,10 @@ $excerpt_word_count = str_word_count(strip_tags($excerpt)) ?? null;
 			<?php } ?>
 
 			<?php if (!empty($link)) {
-       echo '<a class="c-news-card__button c-button --full-width --on-bg-transparent" href="' .
+       echo '<a class="c-news-card__button c-button --full-width --on-bg-transparent"  
+                aria-label="' .
+           $link_title_more .
+           '" href="' .
            $link .
            '">';
        echo esc_html__('Mehr erfahren', 'oo_theme');
