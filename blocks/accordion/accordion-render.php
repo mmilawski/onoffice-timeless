@@ -31,44 +31,55 @@ $settings = get_field('settings') ?? null;
 
         <?php if (!empty($accordion)) { ?>
             <div class="c-accordion__accordions o-row --position-center">
-                <?php foreach ($accordion as $key => $card) { ?>
-                    <div class="c-accordion-card o-col-12 o-col-xl-8 <?php if (
-                        $key === 0
-                    ) {
-                        echo '--is-open';
-                    } else {
-                        echo '--is-closed';
-                    } ?>">
-                        <div class="c-accordion-card__title">
-                            <h3 class="c-accordion-card__headline o-headline --h3"><?php echo $card[
-                                'headline'
-                            ]; ?></h3>
-                            <div class="c-accordion-card__icon-wrapper">
-                                <button class="c-accordion-card__icon c-icon-button --close">
-                                    <span class="c-icon-button__text u-screen-reader-only"><?php esc_html_e(
-                                        'Weniger anzeigen',
-                                        'oo_theme',
-                                    ); ?></span>
-                                    <span class="c-icon-button__icon --chevron-up"><?php oo_get_icon(
-                                        'chevron-up',
-                                    ); ?></span>
-                                </button>
-                                <button class="c-accordion-card__icon c-icon-button --open">
-                                    <span class="c-icon-button__text u-screen-reader-only"><?php esc_html_e(
-                                        'Mehr anzeigen',
-                                        'oo_theme',
-                                    ); ?></span>
-                                    <span class="c-icon-button__icon --chevron-down"><?php oo_get_icon(
+                <?php foreach ($accordion as $key => $card) {
+                    $accordion_headline = $card['headline'] ?? ''; ?>
+                    <details class="c-accordion-card o-col-12 o-col-xl-8">
+                        <summary class="c-accordion-card__title">
+                           
+                                <span class="c-accordion-card__headline o-headline --h3 --span">
+                                    <?php echo $accordion_headline; ?>
+                                </span>
+                                <span class="c-accordion-card__icon-wrapper c-icon-button">
+                                    <?php echo oo_get_icon(
                                         'chevron-down',
-                                    ); ?></span>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="c-accordion-card__content o-text --is-wysiwyg">
+                                        true,
+                                        [
+                                            'class' =>
+                                                'c-accordion-card__icon ',
+                                        ],
+                                    ); ?>
+                               
+                                <span class="u-screen-reader-only --open" aria-hidden="false"> <?php echo sprintf(
+                                    esc_html_x(
+                                        'Mehr anzeigen zum Thema %s',
+                                        'Screenreader-Text für Akkordeon-Klappe',
+                                        'oo_theme',
+                                    ),
+                                    $accordion_headline,
+                                ); ?>
+                            </span>
+                            <span class="u-screen-reader-only --close" aria-hidden="true"> <?php echo sprintf(
+                                esc_html_x(
+                                    'Weniger anzeigen zum Thema %s',
+                                    'Screenreader-Text für Akkordeon-Klappe',
+                                    'oo_theme',
+                                ),
+                                $accordion_headline,
+                            ); ?>
+                            </span>
+                
+                            </span>
+                        </summary>
+                        <div
+                            
+                            class="c-accordion-card__content o-text --is-wysiwyg" 
+                         
+                        >
                             <?php echo $card['text']['wysiwyg']; ?>
                         </div>
-                    </div>
-                <?php } ?>
+                                </details>
+                <?php
+                } ?>
             </div>
         <?php } ?>
 

@@ -187,34 +187,24 @@ jQuery(document).ready(function() {
   }
 
   // Read more
-  const readMoreButton = document.querySelectorAll('.c-read-more, .c-property-details__more, .c-address-details__more');
+  const buttonMore = document.querySelectorAll('.c-read-more');
 
-  if( readMoreButton.length > 0 ) {
-    readMoreButton.forEach(button => {
-      const openClass = '--is-open';
-
-      const targetId = button.getAttribute('aria-controls');
-      const content = document.getElementById(targetId);
+  if( buttonMore.length > 0 ) {
+    buttonMore.forEach(button => {
+      let openClass = '--is-open';
+      const moreContainer = button.previousElementSibling;
       const parentContainer = button.parentNode;
 
-      if (!content) return;
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
 
-      const openText = button.getAttribute('data-open-text');
-      const closeText = button.getAttribute('data-close-text');
-
-      button.addEventListener('click', event => {
-        event.preventDefault();
-
-        const isExpanded = button.getAttribute('aria-expanded') === 'true';
-        const shouldExpand = !isExpanded;
-
-        button.setAttribute('aria-expanded', String(shouldExpand));
-        content.classList.toggle(openClass, shouldExpand);
-        button.classList.toggle(openClass, shouldExpand);
-        button.textContent = shouldExpand ? closeText : openText;
-
-        if (isExpanded && parentContainer) {
-          parentContainer.scrollIntoView({ behavior: 'smooth' });
+        if (!moreContainer.classList.contains(openClass)) {
+          moreContainer.classList.add(openClass);
+          button.classList.add(openClass);
+        } else {
+          moreContainer.classList.remove(openClass);
+          button.classList.remove(openClass);
+          parentContainer.scrollIntoView({ behavior: 'smooth'});
         }
       });
     });
@@ -226,16 +216,27 @@ jQuery(document).ready(function() {
 
   // Accordion
    if ( $('.c-accordion').length > 0) {
-    $('.c-accordion-card').each(function() {
-      const accordion = $(this);
-      const accordionTitle = accordion.find('.c-accordion-card__title');
-      const accordionContent = accordion.find('.c-accordion-card__content');
-        $(accordionTitle).click(function() {
-            $(accordionContent).slideToggle('1500', function() {
-              $(accordion).toggleClass('--is-open --is-closed').trigger('classChanged');
-            });
-        });
+    const details = document.querySelectorAll('details');
+    details.forEach(detail => {
+      detail.style.height = (detail.querySelector('summary').offsetHeight + 4) + 'px';
+      detail.style.transition = 'height 0.3s ease';
+    
+      detail.addEventListener('toggle', () => {
+        const srOpen = detail.querySelector('.u-screen-reader-only.--open');
+        const srClose = detail.querySelector('.u-screen-reader-only.--close');
+        if (detail.open) {
+          detail.style.height = (detail.scrollHeight + 2) + 'px';
+          srOpen.setAttribute('aria-hidden', 'true');
+          srClose.setAttribute('aria-hidden', 'false');
+
+        } else {
+          detail.style.height = (detail.querySelector('summary').offsetHeight + 2) + 'px';
+          srOpen.setAttribute('aria-hidden', 'false');
+          srClose.setAttribute('aria-hidden', 'true');
+        }
+      });
     });
+
     // after map accordion is opened, resize osm map
     $('.c-accordion-card.--is-map').on(
       "classChanged", (e) => {
@@ -249,9 +250,11 @@ jQuery(document).ready(function() {
     );
   }
 
-  // Trim Popup Headine
+  // Open popup
+  const openPopup = document.querySelectorAll('.--open-popup');
   const popUpHeadline = document.querySelectorAll('.c-popup__headline');
 
+  // Trim Popup Headine
   if (popUpHeadline.length > 0) {
     popUpHeadline.forEach(function(headline) {
       const originalText = headline.textContent;
@@ -268,46 +271,47 @@ jQuery(document).ready(function() {
     });
   }
 
-  // Open popup
-  const openPopupButtons = document.querySelectorAll('.--open-popup');
+  if (openPopup.length > 0) {
+    openPopup.forEach(button => {
+      button.addEventListener('click', function(e) {
+        e.preventDefault();
+        // Get the ID of the popup from the data-popup attribute
+        const popupId = button.getAttribute('data-popup');
+        const popupElement = document.getElementById(popupId);
 
-  if (openPopupButtons.length > 0) {
-      openPopupButtons.forEach(openButton => {
-          // Get the ID of the popup from the data-popup attribute-
-          const popupId = openButton.getAttribute('data-popup');
-          const popup = document.getElementById(popupId);
+        if (!popupElement) {
+          return;
+        }
 
-          if (!popup) return;
-
-          const closeButton = popup.querySelector('.--close-popup');
-          
-          openButton.addEventListener('click', () => {
-              document.body.classList.add('--modal-open');
-              popup.showModal();
-              closeButton.focus();
-          });
+        if (popupElement) {
+          popupElement.classList.add('--is-open');
+          document.body.classList.add('--modal-open');
 
           function closePopup() {
-              document.body.classList.remove('--modal-open');
-              popup.close();
-              openButton.focus();
+            popupElement.classList.remove('--is-open');
+            document.body.classList.remove('--modal-open');
           }
-          
-          closeButton.addEventListener('click', () => {
+
+          // Close popup with click on icon or overlay
+          const overlay = popupElement.querySelector('.c-popup__overlay');
+          const closeButton = popupElement.querySelector('.c-popup__close');
+
+          if (overlay) {
+            overlay.addEventListener('click', closePopup);
+          }
+          if (closeButton) {
+            closeButton.addEventListener('click', closePopup);
+          }
+
+          // Close popup on press ESC
+          document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
               closePopup();
+            }
           });
-          
-          popup.addEventListener('click', (event) => {
-              if (event.target === popup) {
-                  closePopup();
-              }
-          });
-          
-          popup.addEventListener('cancel', (event) => {
-              event.preventDefault();
-              closePopup();
-          });
+        }
       });
+    });
   }
 
   // Lightbox
@@ -315,19 +319,16 @@ jQuery(document).ready(function() {
 
   if( lightboxClass.length > 0 ) {
     const customLightboxHTML = 
-    `<div id="glightbox-body" class="glightbox-container c-lightbox" tabindex="-1" role="dialog" aria-hidden="false">
+    `<div id="glightbox-body" class="glightbox-container c-lightbox">
       <div class="gloader visible c-lightbox__loader"></div>
       <div class="goverlay c-lightbox__overlay"></div>
       <div class="gcontainer c-lightbox__container">
         <div id="glightbox-slider" class="gslider c-lightbox__slider"></div>
-        <button class="gprev gbtn c-lightbox__icon-wrapper --arrow --prev" aria-label="Next" data-taborder="1">
-          <svg class="c-lightbox__icon --arrow" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m15 18-6-6 6-6"/></svg>
+        <button class="gprev gbtn c-lightbox__icon-wrapper --arrow --prev" tabindex="0" aria-label="Next">
+          <svg class="c-lightbox__icon --arrow" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
         </button>
-        <button class="gnext gbtn c-lightbox__icon-wrapper --arrow --next" aria-label="Previous" data-taborder="2">
-          <svg class="c-lightbox__icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6"/></svg>
-        </button>
-        <button class="gclose gbtn c-lightbox__icon-wrapper --close" tabindex="2" aria-label="Close" data-taborder="3">
-          <svg class="c-lightbox__icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        <button class="gnext gbtn c-lightbox__icon-wrapper --arrow --next" tabindex="1" aria-label="Previous">
+          <svg class="c-lightbox__icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
         </button>
       </div>
     </div>`;
@@ -336,7 +337,11 @@ jQuery(document).ready(function() {
     `<div class="gslide c-lightbox__slide">
       <div class="gslide-inner-content c-lightbox__wrapper">
         <div class="ginner-container c-lightbox__content">
-          <div class="gslide-media c-lightbox__media"></div>
+          <div class="gslide-media c-lightbox__media">
+            <button class="gclose gbtn c-lightbox__icon-wrapper --close" tabindex="2" aria-label="Close">
+              <svg class="c-lightbox__icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+          </div>
           <div class="gslide-description c-lightbox__description-wrapper">
             <div class="gdesc-inner c-lightbox__description-inner">
               <p class="gslide-title c-lightbox__title"></p>
@@ -379,7 +384,6 @@ jQuery(document).ready(function() {
           thumbnail.on('click', function(e) {
             thumbnail.hide();
             iframe.attr('src', iframe.attr('data-src') ).show();
-            iframe.focus();
           });
         }
     });
@@ -641,26 +645,12 @@ const doc = document.documentElement;
 
 // Menu open & close
 function menuOpenClose() {
-  document.body.classList.toggle('--main-nav-open');
-
-  const header = document.querySelector('.c-header');
-  const nav = header.querySelector('.c-main-nav');
-  const navItems = header.querySelectorAll('.c-main-nav__item');
-  const button = header.querySelector('.c-main-nav__button');
-  const openIcon = button.querySelector('.--open');
-  const openText = button.getAttribute('data-open-text');
-  const closeIcon = button.querySelector('.--close');
-  const closeText = button.getAttribute('data-close-text');
-
-  if (header) header.classList.toggle('--main-nav-open');
-  if (nav) nav.classList.toggle('--is-open');
-  navItems.forEach(item => item.classList.toggle('--is-open'));
-
-  const isMenuOpen = button.getAttribute('aria-expanded') === 'true';
-  button.setAttribute('aria-expanded', !isMenuOpen);
-  button.setAttribute('aria-label', (isMenuOpen ? openText : closeText));
-  if (openIcon) openIcon.style.display = isMenuOpen  ? 'flex' : 'none';
-  if (closeIcon) closeIcon.style.display = isMenuOpen  ? 'none' : 'flex';
+  $("body").toggleClass("--main-nav-open");
+  $(".c-header").toggleClass("--main-nav-open");
+  $(".c-main-nav").toggleClass("--is-open");
+  $(".c-main-nav__item").toggleClass("--is-open");
+  $(".c-main-nav__button .--open").toggle();
+  $(".c-main-nav__button .--close").toggle();
 }
 
 // Correct padding for first element in main
@@ -711,38 +701,37 @@ function correctFirstElementPadding() {
 // Function to apply text shortening, read-more button and visibility adjustments based on word count and screen size
 function applyResponsiveTextShortening() {
   const isMobile = window.innerWidth <= 768;
+  
+  function shortenElements(elementsEach, textElement, elementToShorten) {
+    $(elementsEach).each(function() {
+      const text = $(this).find(textElement).text(); 
+      const wordCount = text.trim().split(/\s+/).length;
 
-  function shortenElements(containerSelector, shortenTargetSelector) {
-    const containers = document.querySelectorAll(containerSelector);
-    containers.forEach(container => {
-      const shortenTarget = container.querySelector(shortenTargetSelector);
-      const readMoreButton = container.querySelector('.c-read-more');
-
-      if (!shortenTarget || !readMoreButton) return;
-
-      const text = shortenTarget.textContent.trim();
-      const wordCount = text.split(/\s+/).length;
-
-      const shouldShorten = isMobile ? wordCount > 50 : wordCount > 50;
+      let shouldShorten;
+      if (isMobile) {
+        shouldShorten = wordCount > 50;
+      } else {
+        shouldShorten = wordCount > 100;
+      }
 
       if (shouldShorten) {
-        shortenTarget.classList.add('--shorten');
-        readMoreButton.style.display = 'flex';
+        $(this).find(elementToShorten).addClass('--shorten');
+        $(this).find('.c-read-more').show();
       } else {
-        shortenTarget.classList.remove('--shorten');
-        readMoreButton.style.display = 'none';
+        $(this).find(elementToShorten).removeClass('--shorten');
+        $(this).find('.c-read-more').hide();
       }
     });
   }
 
   // google review slider
-  shortenElements('.c-google-review-card', '.c-google-review-card__text');
+  shortenElements('.c-google-review-card', '.c-google-review-card__text p', '.c-google-review-card__contents');
   // review slider
-  shortenElements('.c-review-card', '.c-review-card__text');
+  shortenElements('.c-review-card', '.c-review-card__text', '.c-review-card__text');
   // property list
-  // shortenElements('.c-property-details__text-wrapper', '.c-property-details__text-content', '.c-property-details__text-content');
+  shortenElements('.c-property-details__text-wrapper', '.c-property-details__text-content', '.c-property-details__text-content');
   // team
-  shortenElements('.c-team-card', '.c-team-card__description');
+  shortenElements('.c-team-card', '.c-team-card__description', '.c-team-card__description');
 }
 
 // Select2 copy class

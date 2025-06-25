@@ -29,4 +29,15 @@
 
   &__text {
   }
+
+  Summary::-webkit-details-marker,
+  summary::marker {
+    content: '';
+    transition: all 0.5s;
+  }
+
+  details {
+    transition: all 0.5s;
+    overflow: hidden;
+  }
 }
