@@ -61,8 +61,11 @@ if (!function_exists('printCountry')) {
 
 /* fields in search forms */
 if (!function_exists('renderFieldEstateSearch')) {
-    function renderFieldEstateSearch(string $fieldName, array $properties)
-    {
+    function renderFieldEstateSearch(
+        string $fieldName,
+        array $properties,
+        string $formId,
+    ) {
         $output = '';
         $typeCurrentInput = $properties['type'];
         $permittedValues = $properties['permittedvalues'];
@@ -121,8 +124,10 @@ if (!function_exists('renderFieldEstateSearch')) {
         }
 
         if ($fieldName === 'regionaler_zusatz') {
-            $output .= '<label class="o-label --is-multiple-select">';
+            $output .= '<div class="o-label --is-multiple-select">';
+            $output .= '<label for="' . $fieldName . '-ts-control">';
             $output .= $fieldLabel;
+            $output .= '</label>';
             $output .= renderRegionalAddition(
                 $fieldName,
                 $selectedValue ?? [],
@@ -131,16 +136,18 @@ if (!function_exists('renderFieldEstateSearch')) {
                 $properties['label'],
                 $properties['permittedvalues'] ?? null,
             );
-            $output .= '</label>';
+            $output .= '</div>';
         } elseif (
             $fieldName === 'ort' &&
             !empty($properties['permittedvalues']) &&
             function_exists('renderCityField')
         ) {
-            $output .= '<label class="o-label --is-multiple-select">';
+            $output .= '<div class="o-label --is-multiple-select">';
+            $output .= '<label for="' . $fieldName . '-ts-control">';
             $output .= $fieldLabel;
-            $output .= renderCityField($fieldName, $properties);
             $output .= '</label>';
+            $output .= renderCityField($fieldName, $properties);
+            $output .= '</div>';
         } elseif ($fieldName === 'message') {
             $output .= '<label class="o-label --is-textarea">';
             $output .= $fieldLabel;
@@ -168,22 +175,36 @@ if (!function_exists('renderFieldEstateSearch')) {
                     esc_html($value) .
                     '</option>';
             }
-            $output .= '<label class="o-label --is-multiple-select">';
-            $output .= $fieldLabel;
+            $output .= '<div class="o-label --is-multiple-select">';
             $output .=
-                '<select class="o-select --multiple" name="' .
+                '<label for="' . $fieldName . '_' . $formId . '-ts-control">';
+            $output .= $fieldLabel;
+            $output .= '</label>';
+            $output .=
+                '<select hidden="hidden" aria-hidden="true" tabindex="-1" class="o-select --multiple" id="' .
+                esc_html($fieldName) .
+                '_' .
+                $formId .
+                '" name="' .
                 esc_html($fieldName) .
                 '[]" multiple="multiple" data-placeholder="' .
                 $placeholder .
                 '">';
             $output .= $htmlOptions;
             $output .= '</select>';
-            $output .= '</label>';
+            $output .= '</div>';
         } elseif (in_array($typeCurrentInput, $typesBoolean)) {
-            $output .= '<label class="o-label --is-single-select">';
-            $output .= $fieldLabel;
+            $output .= '<div class="o-label --is-single-select">';
             $output .=
-                '<select class="o-select --single" name="' .
+                '<label for="' . $fieldName . '_' . $formId . '-ts-control">';
+            $output .= $fieldLabel;
+            $output .= '</label>';
+            $output .=
+                '<select hidden="hidden" aria-hidden="true" tabindex="-1" class="o-select --single" id="' .
+                esc_html($fieldName) .
+                '_' .
+                $formId .
+                '" name="' .
                 esc_html($fieldName) .
                 '" data-placeholder="' .
                 $placeholder .
@@ -207,7 +228,7 @@ if (!function_exists('renderFieldEstateSearch')) {
                 esc_html__('Nein', 'oo_theme') .
                 '</option>';
             $output .= '</select>';
-            $output .= '</label>';
+            $output .= '</div>';
         } elseif (
             in_array($typeCurrentInput, $typesFloat) ||
             in_array($typeCurrentInput, $typesDate)
@@ -337,8 +358,10 @@ if (!function_exists('renderFormField')) {
             if (!is_array($selectedValue)) {
                 $selectedValue = [];
             }
-            $output .= '<label class="o-label --is-multiple-select">';
+            $output .= '<div class="o-label --is-multiple-select">';
+            $output .= '<label for="' . $fieldName . '-ts-control">';
             $output .= $fieldLabel . $addition;
+            $output .= '</label>';
             $output .= renderRegionalAddition(
                 $fieldName,
                 $selectedValue,
@@ -347,7 +370,7 @@ if (!function_exists('renderFormField')) {
                 $fieldLabel,
                 $permittedValues ?? null,
             );
-            $output .= '</label>';
+            $output .= '</div>';
         } elseif ($fieldName === 'message') {
             $output .= '<label class="o-label --is-textarea">';
             $output .= $fieldLabel . $addition;
@@ -364,10 +387,14 @@ if (!function_exists('renderFormField')) {
             \onOffice\WPlugin\Types\FieldTypes::FIELD_TYPE_SINGLESELECT ==
             $typeCurrentInput
         ) {
-            $output .= '<label class="o-label --is-single-select">';
+            $output .= '<div class="o-label --is-single-select">';
+            $output .= '<label for="' . $fieldName . '-ts-control">';
             $output .= $fieldLabel . $addition;
+            $output .= '</label>';
             $output .=
-                '<select class="o-select --single" name="' .
+                '<select hidden="hidden" aria-hidden="true" tabindex="-1" class="o-select --single" id="' .
+                esc_html($fieldName) .
+                '" name="' .
                 esc_html($fieldName) .
                 '" size="1" ' .
                 $requiredAttribute .
@@ -395,7 +422,7 @@ if (!function_exists('renderFormField')) {
                     '</option>';
             }
             $output .= '</select>';
-            $output .= '</label>';
+            $output .= '</div>';
         } elseif (
             \onOffice\WPlugin\Types\FieldTypes::FIELD_TYPE_MULTISELECT ===
             $typeCurrentInput
@@ -416,10 +443,14 @@ if (!function_exists('renderFormField')) {
                     esc_html($value) .
                     '</option>';
             }
-            $output .= '<label class="o-label --is-multiple-select">';
+            $output .= '<div class="o-label --is-multiple-select">';
+            $output .= '<label for="' . $fieldName . '-ts-control">';
             $output .= $fieldLabel . $addition;
+            $output .= '</label>';
             $output .=
-                '<select class="o-select --multiple" name="' .
+                '<select hidden="hidden" aria-hidden="true" tabindex="-1" class="o-select --multiple" id="' .
+                esc_html($fieldName) .
+                '" name="' .
                 esc_html($fieldName) .
                 '[]" multiple="multiple" ' .
                 $requiredAttribute .
@@ -428,7 +459,7 @@ if (!function_exists('renderFormField')) {
                 '">';
             $output .= $htmlOptions;
             $output .= '</select>';
-            $output .= '</label>';
+            $output .= '</div>';
         } elseif (
             \onOffice\WPlugin\Types\FieldTypes::FIELD_TYPE_BOOLEAN ===
             $typeCurrentInput
@@ -560,7 +591,9 @@ if (!function_exists('renderRegionalAddition')) {
         $multipleAttr = $multiple ? 'multiple' : 'size="1"';
         $requiredAttribute = $isRequired ? 'required ' : '';
         $output .=
-            '<select class="o-select --multiple --is-styled" name="' .
+            '<select hidden="hidden" aria-hidden="true" tabindex="-1" class="o-select --multiple --is-styled" id="' .
+            esc_html($fieldName) .
+            '" name="' .
             $name .
             '" ' .
             $multipleAttr .
@@ -599,7 +632,9 @@ if (!function_exists('renderCityField')) {
     ): string {
         $permittedValues = $properties['permittedvalues'] ?? [];
         $htmlSelect =
-            '<select class="o-select --multiple" name="' .
+            '<select hidden="hidden" aria-hidden="true" tabindex="-1" class="o-select --multiple" id="' .
+            esc_html($fieldName) .
+            '" name="' .
             esc_attr($fieldName) .
             '[]" multiple="multiple" ' .
             $requiredAttribute .

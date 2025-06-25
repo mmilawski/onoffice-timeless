@@ -63,15 +63,225 @@ jQuery(document).ready(function() {
     menuOpenClose();
   });
 
-  // Select2
+  /**
+   * Tomselect Plugin: "oo_remove_button" (Corrected)
+   */
+  TomSelect.define('oo_remove_button', function(userOptions) {
+      const self = this;
+
+      function esc_html(str) {
+          if (!str) return '';
+          return (str + '')
+              .replace(/&/g, '&amp;')
+              .replace(/</g, '&lt;')
+              .replace(/>/g, '&gt;')
+              .replace(/"/g, '&quot;');
+      }
+
+      function getDom(html) {
+          const tpl = document.createElement('template');
+          tpl.innerHTML = html.trim();
+          return tpl.content.firstChild;
+      }
+
+      const options = Object.assign({
+          label: '&times;',
+          title: 'Remove',
+          className: 'remove',
+          append: true,
+          position: 'before',
+      }, userOptions);
+
+      if (!options.append) {
+          return;
+      }
+
+      // Encapsulated logic to add a button to any item element
+      const addButtonToItem = (itemElement) => {
+          // Prevent adding a button twice
+          if (itemElement.querySelector(`.${options.className}`)) return;
+
+          const buttonHTML = `<button class="${options.className}" tabindex="-1" title="${esc_html(options.title)}">${options.label}</button>`;
+          const closeButton = getDom(buttonHTML);
+
+          if (options.position === 'before') {
+              itemElement.prepend(closeButton);
+          } else {
+              itemElement.appendChild(closeButton);
+          }
+
+          closeButton.addEventListener('mousedown', (evt) => {
+              evt.preventDefault();
+              evt.stopPropagation();
+          });
+
+          closeButton.addEventListener('click', (evt) => {
+              if (self.isLocked) return;
+              evt.preventDefault();
+              evt.stopPropagation();
+
+              const value = itemElement.dataset.value;
+              if (value) {
+                  self.removeItem(value);
+                  self.refreshOptions(false);
+              }
+          });
+      };
+
+      self.on('initialize', () => {
+          // Wrap the render function for items added dynamically
+          const originalRenderItem = self.settings.render.item;
+          self.settings.render.item = (data, escape) => {
+              const itemElement = getDom(originalRenderItem.call(self, data, escape));
+              addButtonToItem(itemElement);
+              return itemElement;
+          };
+
+          // Apply the button to items that were already rendered on init
+          self.control.querySelectorAll('.ts-item').forEach(itemElement => {
+              addButtonToItem(itemElement);
+          });
+      });
+  });
+
+  /**
+   * Tom Select Plugin: "oo_checkbox_options"
+   */
+  TomSelect.define('oo_checkbox_options', function(userOptions) {
+      const self = this;
+      const orig_onOptionSelect = self.onOptionSelect;
+
+      self.settings.hideSelected = false;
+
+      const options = Object.assign({
+          className: "tomselect-checkbox",
+          checkedClassNames: undefined,
+          uncheckedClassNames: undefined,
+      }, userOptions);
+
+      /**
+       * Hashes a value for use as a key.
+       * @param {string|number|boolean} value
+       * @returns {string|number|null}
+       */
+      function hash_key(value) {
+          if (typeof value === 'undefined' || value === null) return null;
+          if (typeof value === 'boolean') return value ? '1' : '0';
+          return value + '';
+      }
+
+      /**
+       * Prevents default event behavior and optionally stops propagation.
+       * @param {Event} evt
+       * @param {boolean} [stop=false]
+       */
+      function preventDefault(evt, stop = false) {
+          if (evt) {
+              evt.preventDefault();
+              if (stop) {
+                  evt.stopPropagation();
+              }
+          }
+      }
+      
+      /**
+       * Converts an HTML string into a DOM node.
+       * @param {string} html
+       * @returns {HTMLElement}
+       */
+      function getDom(html) {
+          const tpl = document.createElement('template');
+          tpl.innerHTML = html.trim();
+          return tpl.content.firstChild;
+      }
+
+      /**
+       * Toggles checkbox state and associated classes.
+       * @param {HTMLInputElement} checkbox
+       * @param {boolean} toCheck
+       */
+      function updateChecked(checkbox, toCheck) {
+          checkbox.checked = toCheck;
+          if (toCheck) {
+              if (options.uncheckedClassNames) checkbox.classList.remove(...options.uncheckedClassNames);
+              if (options.checkedClassNames) checkbox.classList.add(...options.checkedClassNames);
+          } else {
+              if (options.checkedClassNames) checkbox.classList.remove(...options.checkedClassNames);
+              if (options.uncheckedClassNames) checkbox.classList.add(...options.uncheckedClassNames);
+          }
+      }
+
+      /**
+       * Updates the checkbox for a given option element.
+       * @param {HTMLElement} option
+       */
+      function updateCheckbox(option) {
+          setTimeout(() => {
+              const checkbox = option.querySelector(`input.${options.className}`);
+              if (checkbox instanceof HTMLInputElement) {
+                  updateChecked(checkbox, option.classList.contains('selected'));
+              }
+          }, 1);
+      }
+
+      self.on('initialize', () => {
+          const originalRenderOption = self.settings.render.option;
+
+          self.settings.render.option = (data, escape) => {
+              const rendered = getDom(originalRenderOption.call(self, data, escape));
+              const checkbox = document.createElement('input');
+
+              checkbox.type = 'checkbox';
+              checkbox.tabIndex = '-1';
+              checkbox.ariaHidden = true;
+              checkbox.classList.add(options.className);
+              checkbox.addEventListener('click', (evt) => preventDefault(evt));
+
+              // Use the local hash_key function
+              const hashedValue = hash_key(data[self.settings.valueField]);
+              updateChecked(checkbox, !!(hashedValue && self.items.includes(hashedValue)));
+
+              rendered.prepend(checkbox);
+              return rendered;
+          };
+      });
+
+      self.on('item_remove', (value) => {
+          const option = self.getOption(value);
+          if (option) {
+              option.classList.remove('selected');
+              updateCheckbox(option);
+          }
+      });
+
+      self.on('item_add', (value) => {
+          const option = self.getOption(value);
+          if (option) {
+              updateCheckbox(option);
+          }
+      });
+
+      self.hook('instead', 'onOptionSelect', (evt, option) => {
+          if (option.classList.contains('selected')) {
+              option.classList.remove('selected');
+              self.removeItem(option.dataset.value);
+              self.refreshOptions();
+              preventDefault(evt, true); // prevent default and stop propagation
+              return;
+          }
+
+          orig_onOptionSelect.call(self, evt, option);
+          updateCheckbox(option);
+      });
+  });
+
+  // Tomselect
   if ($('select').length) {
     $('select').each(function() {
       var select = $(this);
-      var parent = select.closest('form');
-      if (!parent.length) {
-        parent = select.closest('.o-section');
-      }
       var options = select.find('option');
+      var isMultiselect = select.hasClass('--multiple');
+
       if (options.length === 1) {
           var firstOption = options[0];
           if (firstOption) {
@@ -79,98 +289,100 @@ jQuery(document).ready(function() {
           }
       }
 
-      if (select.hasClass('--multiple')) {
-        var clear = false;
-    } else if (select.hasClass('onofficeSortListSelector')) {
-        var clear = false;
-    } else {
-        var clear = true;
-    }
+      var plugins = {
+          'oo_remove_button': {
+              'className': 'ts-item-remove',
+              'title': 'Remove this item',
+              'label': '',
+              'position': 'before'
+          },
+      };
 
-      select.select2({
-        minimumResultsForSearch: Infinity,
-        language: { noResults: () => "Keine Ergebnisse"},
-        dropdownParent: parent,
-        allowClear: clear,
-        dropdownAutoWidth: true,
-        templateResult: select2CopyClasses,
-        templateSelection: select2CopyClasses,
-      });
-
-      if ($('select.--is-styled').length) {
-        $('select.--is-styled').on("select2:select", function(e) {
-            var selectedID = e.params.data.id;
-            var selectedOptions = $(this).find('[value=' + selectedID + ']');
-            $(selectedOptions).each(function() {
-                var selectedLevel = $(this).attr('data-level');
-                var currentNode = $(this).next();
-                while ( (currentNode.attr('data-level')) > selectedLevel) {
-                    currentNode.prop('selected', true);
-                    currentNode = currentNode.next();
-                }
-            });
-            $(this).trigger('change');
-        });
-
-        $('select.--is-styled').on('select2:unselect', function(e) {
-            var selectedID = e.params.data.id;
-            var selectedOptions = $(this).find('[value=' + selectedID + ']');
-            $(selectedOptions).each(function() {
-                var selectedLevel = $(this).attr('data-level');
-                var selectSiblings = $(this).nextUntil("[data-level='" + selectedLevel + "']");
-                $(selectSiblings).prop('selected', false);
-            });
-            $(this).trigger('change');
-        });
-      }
-    });
-  }
-
-  // Select2
-  $('input[name="geo_search"]').select2({
-    minimumInputLength: 4,
-    ajax: {
-      url: `https://nominatim.openstreetmap.org/search`,
-      type: "GET",
-      allowClear: true,
-      data: function (params) {
-        let addCountryFilter = (!!window.geoFilter && !!window.geoFilter.country && window.geoFilter.country.length > 0)? " ,"+window.geoFilter.country : "";
-        let query = {
-          q: params.term+addCountryFilter,
-          format: 'geojson'
-        }
-        return query;
-      },
-      processResults: function (data) {
-        let results = data.features.map(x => {
-          return {
-            text: x.properties.display_name,
-            id: encodeURI(x.geometry.coordinates)
+      if (isMultiselect) {
+          plugins['oo_checkbox_options'] = {
+              'className': 'o-control__input',
+              'checkedClassNames': ['ts-checked'],
+              'uncheckedClassNames': ['ts-unchecked'],
           };
-        });
-        return {results};
-      },
-      language: document.getElementsByTagName('html')[0].getAttribute('lang')
-    },
-  });
-  if ($('input[name="geo_search"]').length) {
-    $('input[name="geo_search"]').on("select2:select", function(e) {
-      if($('input[name="geo_search"]').parent().find('.select2-selection__rendered').length) {
-        $('input[name="geo_search"]').parent().find('.select2-selection__rendered')[0].innerHTML = e.params.data.text;
-        $('input[name="geo_search_text"]')[0].value = e.params.data.text;
       }
+
+      new TomSelect(select, {
+        itemClass: 'ts-item',
+        createOnBlur: false,
+        create: false,
+        diacritics: true,
+        sortField: {
+          field: "text",
+          direction: "asc"
+        },
+        plugins: plugins,
+        onInitialize: function() {
+          let labelText = '';
+        
+          // 1. Primary Method: Try to get the label from the original <select>
+          if (this.input.labels && this.input.labels.length > 0) {
+            labelText = this.input.labels[0].innerText;
+          } 
+          // 2. Fallback Method: If the first fails, try the control input
+          else if (this.control_input.labels && this.control_input.labels.length > 0) {
+            labelText = this.control_input.labels[0].innerText;
+          }
+
+          // 3. Use the found label text if it's not empty
+          if (labelText) {
+            this.dropdown_content.setAttribute('aria-label', labelText.trim() + ' dropdown');
+          }
+
+          this.control_input.removeAttribute('tabindex');
+          // --- Create custom wrappers ---
+          const controlInner = document.createElement('div');
+          controlInner.classList.add('ts-control-inner');
+
+          const itemsWrapper = document.createElement('div');
+          itemsWrapper.classList.add('ts-items');
+          this.items_wrapper = itemsWrapper; // Save reference for onItemAdd
+
+          // --- Re-parent existing elements ---
+          
+          // Move all initial .ts-item elements into the new wrapper
+          this.control.querySelectorAll('.ts-item').forEach(item => {
+              itemsWrapper.appendChild(item);
+          });
+          
+          // Build the new structure within controlInner
+          controlInner.appendChild(itemsWrapper);
+          controlInner.appendChild(this.control_input); // Move the input as well
+
+          // Replace the control's content with the new structured content
+          this.control.appendChild(controlInner);
+        },
+        onItemAdd: function(value, item) {
+          this.items_wrapper.appendChild(item);
+        },
+        render: {
+          option: function(data, escape) {
+
+            if (isMultiselect) { 
+              return '<div class="ts-dropdown__item o-control" tabindex="0">' +
+                        '<span class="ts-dropdown__label o-control__label">' +
+                          '<span class="ts-dropdown__text o-control__text">' + escape(data.text) + '</span>' +
+                        '</span>' +
+                      '</div>';
+            } else {
+              return '<div class="ts-dropdown__item" tabindex="0">' +
+                        '<span class="ts-dropdown__label">' +
+                          '<span class="ts-dropdown__text">' + escape(data.text) + '</span>' +
+                        '</span>' +
+                      '</div>';
+            }
+
+          },
+          no_results:function(data,escape){
+            return '<div class="no-results">Keine Ergebnisse</div>';
+          },
+        }
+      });
     });
-    $('input[name="geo_search"]').on("select2:open", function(e) {
-      $('input[name="geo_search"]')[0].value = "";
-      $('input[name="geo_search"]').parent().find('.select2-selection__rendered')[0].innerHTML = "";
-      $('input[name="geo_search_text"]')[0].value = "";
-    });
-  }
-  //preselect
-  if ($('input[name="geo_search_text"]').length) {
-    if($('input[name="geo_search"]').parent().find('.select2-selection__rendered').length) {
-      $('input[name="geo_search"]').parent().find('.select2-selection__rendered')[0].innerHTML = $('input[name="geo_search_text"]')[0].value;
-    }
   }
 
   // Textarea auto expand
@@ -496,6 +708,7 @@ jQuery(document).ready(function() {
       splide.on( 'overflow', function ( isOverflow ) {
         splide.options = {
           drag : isOverflow,
+          focusableNodes: 'a, button, input, textarea, select:not([aria-hidden])'
         };
       });
       splide.mount();

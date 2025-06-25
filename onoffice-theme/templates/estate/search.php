@@ -44,6 +44,7 @@ if (get_field('property_search_result')) {
 }
 
 $uniqid = 'property-search-' . uniqid();
+$formId = sanitize_key($getListName());
 ?>
 
 <form <?php if (!empty($result)) {
@@ -55,6 +56,7 @@ $uniqid = 'property-search-' . uniqid();
  } ?> <?php if (!empty($bg_color)) {
      echo ' --on-' . $bg_color;
  } ?>" data-estate-search-name="<?php echo esc_attr($getListName()); ?>">
+
     <fieldset class="c-form__fieldset">
         <?php
         $number = 0;
@@ -65,7 +67,7 @@ $uniqid = 'property-search-' . uniqid();
                 if ($number === 12) { ?>
                     <div class="c-form__field-wrapper" id="<?php echo $uniqid; ?>">
                 <?php }
-                renderFieldEstateSearch($inputName, $properties);
+                renderFieldEstateSearch($inputName, $properties, $formId);
                 if ($number == $fields_counter - 1) { ?>
                     </div>
 
@@ -95,7 +97,7 @@ $uniqid = 'property-search-' . uniqid();
                 ?>
             <?php
             } else {
-                renderFieldEstateSearch($inputName, $properties); ?>
+                renderFieldEstateSearch($inputName, $properties, $formId); ?>
                 <?php if ($number == $fields_counter - 1) { ?>
                     <button class="c-form__button c-button <?php if (
                         $is_banner

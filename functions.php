@@ -32,7 +32,7 @@ if (function_exists('oo_setup_parent_theme')) {
     // STYLES
     $oo_styles = [
         OO_PARENT_PATH . '/build/css/reset.css',
-        OO_SHARED_PATH . '/build/css/select2/select2.css',
+        OO_SHARED_PATH . '/build/css/tomselect/tom-select.css',
         OO_SHARED_PATH . '/build/css/splide/splide.css',
         [OO_PARENT_PATH . '/build/css/style.css', ['oo-glightbox-style']],
         OO_SHARED_PATH . '/build/css/nouislider/nouislider.css',
@@ -40,7 +40,7 @@ if (function_exists('oo_setup_parent_theme')) {
 
     // SCRIPTS
     $oo_scripts = [
-        [OO_SHARED_PATH . '/build/js/select2/select2.js', ['jquery']],
+        [OO_SHARED_PATH . '/build/js/tomselect/tom-select.min.js', ['jquery']],
         [OO_SHARED_PATH . '/build/js/splide/splide.js', []],
         [OO_SHARED_PATH . '/build/js/firefox-iframe-fix.js', ['jquery']],
         [
