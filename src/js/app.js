@@ -349,6 +349,11 @@ jQuery(document).ready(function() {
             this.dropdown_content.setAttribute('aria-label', labelText.trim() + ' dropdown');
           }
 
+          // Ensure accessibility for required fields
+          if (this.input.required) {
+            this.control_input.setAttribute('aria-required', 'true');
+          }
+
           this.control_input.removeAttribute('tabindex');
           // --- Create custom wrappers ---
           const controlInner = document.createElement('div');
@@ -553,10 +558,10 @@ jQuery(document).ready(function() {
       <div class="gcontainer c-lightbox__container">
         <div id="glightbox-slider" class="gslider c-lightbox__slider"></div>
         <button class="gprev gbtn c-lightbox__icon-wrapper --arrow --prev" tabindex="0" aria-label="Next">
-          <svg class="c-lightbox__icon --arrow" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          <svg class="c-lightbox__icon --arrow" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" role="img" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
         </button>
         <button class="gnext gbtn c-lightbox__icon-wrapper --arrow --next" tabindex="1" aria-label="Previous">
-          <svg class="c-lightbox__icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          <svg class="c-lightbox__icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" role="img" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
         </button>
       </div>
     </div>`;
@@ -567,7 +572,7 @@ jQuery(document).ready(function() {
         <div class="ginner-container c-lightbox__content">
           <div class="gslide-media c-lightbox__media">
             <button class="gclose gbtn c-lightbox__icon-wrapper --close" tabindex="2" aria-label="Close">
-              <svg class="c-lightbox__icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+              <svg class="c-lightbox__icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" role="img" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
             </button>
           </div>
           <div class="gslide-description c-lightbox__description-wrapper">

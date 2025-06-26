@@ -114,13 +114,10 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-focus;
   }
 
+  &::-webkit-inner-spin-button,
+  &::-webkit-clear-button,
   &::-webkit-calendar-picker-indicator {
-    mask: $form-svg-calendar;
-    background-image: unset;
-    mask-repeat: no-repeat;
-    mask-size: 0.6328rem;
-    mask-position: center;
-    background-color: $form-color;
+    display: none;
   }
 
   &::-webkit-outer-spin-button,
@@ -1083,12 +1080,6 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
         }
       }
     }
-  }
-}
-
-.o-select {
-  &.ts-hidden-accessible {
-    visibility: hidden;
   }
 }
 

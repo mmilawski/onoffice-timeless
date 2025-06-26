@@ -59,6 +59,30 @@ if (!function_exists('printCountry')) {
     }
 }
 
+if (!function_exists('get_unique_field_id')) {
+    /**
+     * Generates a unique, sequential ID for a given field name.
+     *
+     * @param string $fieldName The base name for the ID.
+     * @param string|int|null $prefix An optional prefix (like a form number) for grouping.
+     * @return string The unique ID.
+     */
+    function get_unique_field_id(string $fieldName, $prefix = null): string
+    {
+        static $counters = [];
+        $fieldName = esc_attr($fieldName);
+        $key = $prefix ? $prefix . '_' . $fieldName : $fieldName;
+
+        if (!isset($counters[$key])) {
+            $counters[$key] = 0;
+        }
+
+        $counters[$key]++;
+
+        return esc_attr($key . '_' . $counters[$key]);
+    }
+}
+
 /* fields in search forms */
 if (!function_exists('renderFieldEstateSearch')) {
     function renderFieldEstateSearch(
@@ -154,7 +178,9 @@ if (!function_exists('renderFieldEstateSearch')) {
             $output .=
                 '<textarea class="o-textarea" name="' .
                 esc_html($fieldName) .
-                '">' .
+                '" ' .
+                renderAutocomplete($fieldName) .
+                '>' .
                 $selectedValue .
                 '</textarea>';
             $output .= '</label>';
@@ -181,7 +207,9 @@ if (!function_exists('renderFieldEstateSearch')) {
             $output .= $fieldLabel;
             $output .= '</label>';
             $output .=
-                '<select hidden="hidden" aria-hidden="true" tabindex="-1" class="o-select --multiple" id="' .
+                '<select aria-hidden="true" tabindex="-1" class="o-select --multiple" ' .
+                renderAutocomplete($fieldName) .
+                ' id="' .
                 esc_html($fieldName) .
                 '_' .
                 $formId .
@@ -200,7 +228,9 @@ if (!function_exists('renderFieldEstateSearch')) {
             $output .= $fieldLabel;
             $output .= '</label>';
             $output .=
-                '<select hidden="hidden" aria-hidden="true" tabindex="-1" class="o-select --single" id="' .
+                '<select aria-hidden="true" tabindex="-1" class="o-select --single" ' .
+                renderAutocomplete($fieldName) .
+                ' id="' .
                 esc_html($fieldName) .
                 '_' .
                 $formId .
@@ -244,6 +274,7 @@ if (!function_exists('renderFieldEstateSearch')) {
                     $inputClass .
                     '" ' .
                     $inputType .
+                    renderAutocomplete($fieldName) .
                     ' name="' .
                     esc_attr($fieldName) .
                     '__bis" value="' .
@@ -258,6 +289,7 @@ if (!function_exists('renderFieldEstateSearch')) {
                     $inputClass .
                     '" ' .
                     $inputType .
+                    renderAutocomplete($fieldName) .
                     ' name="' .
                     esc_attr($fieldName) .
                     '__von" value="' .
@@ -273,6 +305,7 @@ if (!function_exists('renderFieldEstateSearch')) {
                 $inputClass .
                 '" ' .
                 $inputType .
+                renderAutocomplete($fieldName) .
                 ' name="' .
                 esc_attr($fieldName) .
                 '" value="' .
@@ -290,12 +323,13 @@ if (!function_exists('renderFieldEstateSearch')) {
                 $inputClass .
                 '" ' .
                 $inputType .
+                renderAutocomplete($fieldName) .
                 ' name="' .
                 esc_attr($fieldName) .
                 '" value="' .
                 esc_attr($selectedValue) .
                 '" placeholder="' .
-                $placeholder .
+                ($placeholder ?? '') .
                 '" ' .
                 $lengthAttr .
                 '>';
@@ -305,6 +339,84 @@ if (!function_exists('renderFieldEstateSearch')) {
     }
 }
 
+/* Autofill / Autocomplete */
+if (!function_exists('renderAutocomplete')) {
+    function renderAutocomplete($fieldName)
+    {
+        switch ($fieldName) {
+            case 'Briefanrede':
+            case 'Anrede':
+                return 'autocomplete="honorific-prefix"';
+                break;
+
+            case 'Vorname':
+            case 'Vorname2':
+            case 'gwgWbVorname':
+                return 'autocomplete="given-name"';
+                break;
+
+            case 'Name':
+            case 'Name2':
+                return 'autocomplete="family-name"';
+                break;
+
+            case 'Telefon1':
+                return 'autocomplete="tel"';
+                break;
+
+            case 'Email':
+                return 'autocomplete="email"';
+                break;
+
+            case 'Zusatz1':
+            case 'employer':
+                return 'autocomplete="organization"';
+                break;
+
+            case 'jobTitle':
+            case 'jobPosition':
+            case 'Position_iU':
+                return 'autocomplete="organization-title"';
+                break;
+
+            case 'gwgGeburtsname':
+            case 'gwgWbName':
+                return 'autocomplete="name"';
+                break;
+
+            case 'gwgWbGeburtsdatum':
+            case 'gwgGeburtsdatum':
+                return 'autocomplete="bday"';
+                break;
+
+            case 'Land':
+                return 'autocomplete="country-name"';
+                break;
+
+            case 'plz':
+            case 'Plz':
+            case 'gwgWbPlz':
+                return 'autocomplete="postal-code"';
+                break;
+
+            case 'ort':
+            case 'Ort':
+            case 'gwgWbOrt':
+                return 'autocomplete="address-level2"';
+                break;
+
+            case 'Strasse':
+            case 'strasse':
+            case 'gwgWbStrasse':
+                return 'autocomplete="street-address"';
+                break;
+
+            default:
+                return 'autocomplete="off"';
+                break;
+        }
+    }
+}
 /* fields in forms */
 if (!function_exists('renderFormField')) {
     function renderFormField(
@@ -314,6 +426,7 @@ if (!function_exists('renderFormField')) {
     ): string {
         $output = '';
         $typeCurrentInput = $pForm->getFieldType($fieldName);
+        $uniqueId = get_unique_field_id($fieldName, $pForm->getFormNo());
         if (method_exists($pForm, 'isHiddenField')) {
             $isHiddenField = $pForm->isHiddenField($fieldName);
         } else {
@@ -332,7 +445,9 @@ if (!function_exists('renderFormField')) {
                 $value = is_array($value) ? implode(', ', $value) : $value;
             }
 
-            return '<input type="hidden" name="' .
+            return '<input type="hidden"' .
+                renderAutocomplete($fieldName) .
+                ' name="' .
                 esc_attr($name) .
                 '" value="' .
                 esc_attr($value) .
@@ -361,6 +476,12 @@ if (!function_exists('renderFormField')) {
             $output .= '<div class="o-label --is-multiple-select">';
             $output .= '<label for="' . $fieldName . '-ts-control">';
             $output .= $fieldLabel . $addition;
+            $output .=
+                '<span class="u-screen-reader-only">' .
+                $pForm->getFormId() .
+                '_' .
+                $pForm->getFormNo() .
+                '</span>';
             $output .= '</label>';
             $output .= renderRegionalAddition(
                 $fieldName,
@@ -375,9 +496,16 @@ if (!function_exists('renderFormField')) {
             $output .= '<label class="o-label --is-textarea">';
             $output .= $fieldLabel . $addition;
             $output .=
+                '<span class="u-screen-reader-only">' .
+                $pForm->getFormId() .
+                '_' .
+                $pForm->getFormNo() .
+                '</span>';
+            $output .=
                 '<textarea class="o-textarea" name="' .
                 esc_html($fieldName) .
                 '"' .
+                renderAutocomplete($fieldName) .
                 $requiredAttribute .
                 '>' .
                 $selectedValue .
@@ -388,15 +516,22 @@ if (!function_exists('renderFormField')) {
             $typeCurrentInput
         ) {
             $output .= '<div class="o-label --is-single-select">';
-            $output .= '<label for="' . $fieldName . '-ts-control">';
+            $output .= '<label for="' . $uniqueId . '-ts-control">';
             $output .= $fieldLabel . $addition;
+            $output .=
+                '<span class="u-screen-reader-only">' .
+                $pForm->getFormId() .
+                '_' .
+                $pForm->getFormNo() .
+                '</span>';
             $output .= '</label>';
             $output .=
-                '<select hidden="hidden" aria-hidden="true" tabindex="-1" class="o-select --single" id="' .
-                esc_html($fieldName) .
+                '<select aria-hidden="true" tabindex="-1" class="o-select --single" id="' .
+                $uniqueId .
                 '" name="' .
                 esc_html($fieldName) .
                 '" size="1" ' .
+                renderAutocomplete($fieldName) .
                 $requiredAttribute .
                 ' data-placeholder="' .
                 esc_html__('Bitte wählen', 'oo_theme') .
@@ -444,12 +579,20 @@ if (!function_exists('renderFormField')) {
                     '</option>';
             }
             $output .= '<div class="o-label --is-multiple-select">';
-            $output .= '<label for="' . $fieldName . '-ts-control">';
+            $output .= '<label for="' . $uniqueId . '-ts-control">';
             $output .= $fieldLabel . $addition;
+            $output .=
+                '<span class="u-screen-reader-only">' .
+                $pForm->getFormId() .
+                '_' .
+                $pForm->getFormNo() .
+                '</span>';
             $output .= '</label>';
             $output .=
-                '<select hidden="hidden" aria-hidden="true" tabindex="-1" class="o-select --multiple" id="' .
-                esc_html($fieldName) .
+                '<select aria-hidden="true" tabindex="-1" class="o-select --multiple" ' .
+                renderAutocomplete($fieldName) .
+                ' id="' .
+                $uniqueId .
                 '" name="' .
                 esc_html($fieldName) .
                 '[]" multiple="multiple" ' .
@@ -467,11 +610,12 @@ if (!function_exists('renderFormField')) {
             $output .= '<label class="o-label o-control --is-boolean">';
             $output .=
                 '<input class="o-control__input" type="checkbox" id="' .
-                esc_attr($fieldName) .
+                $uniqueId .
                 '" name="' .
                 esc_attr($fieldName) .
                 '" value="y" ' .
                 $requiredAttribute .
+                renderAutocomplete($fieldName) .
                 ' ' .
                 ($selectedValue === true ? 'checked' : '') .
                 '>';
@@ -480,6 +624,11 @@ if (!function_exists('renderFormField')) {
                 '<span class="o-control__text">' .
                 $fieldLabel .
                 $addition .
+                '<span class="u-screen-reader-only">' .
+                $pForm->getFormId() .
+                '_' .
+                $pForm->getFormNo() .
+                '</span>' .
                 '</span>';
             $output .= '</span>';
             $output .= '</label>';
@@ -505,7 +654,8 @@ if (!function_exists('renderFormField')) {
                 $inputClass = 'o-input --number';
             } elseif ($fieldName == 'Email') {
                 $inputType =
-                    'type="email" pattern="([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4})$"';
+                    'type="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}"';
+
                 $inputClass = 'o-input --email';
             }
 
@@ -528,6 +678,12 @@ if (!function_exists('renderFormField')) {
                 }
                 $output .= '<label class="o-label --is-range">';
                 $output .= $fieldLabel . $addition;
+                $output .=
+                    '<span class="u-screen-reader-only">' .
+                    $pForm->getFormId() .
+                    '_' .
+                    $pForm->getFormNo() .
+                    '</span>';
                 $output .= '<div class="o-fieldset">';
                 foreach (
                     $pForm->getSearchcriteriaRangeInfosForField($fieldName)
@@ -549,6 +705,7 @@ if (!function_exists('renderFormField')) {
                         $placeholderAddition .
                         '" ' .
                         $requiredAttribute .
+                        renderAutocomplete($fieldName) .
                         '>';
                 }
                 $output .= '</div>';
@@ -557,10 +714,16 @@ if (!function_exists('renderFormField')) {
                 $output .= '<label class="o-label --is-input">';
                 $output .= $fieldLabel . $addition;
                 $output .=
+                    '<span class="u-screen-reader-only">' .
+                    $pForm->getFormId() .
+                    '_' .
+                    $pForm->getFormNo() .
+                    '</span>';
+                $output .=
                     '<input  class="' .
                     $inputClass .
                     '" id="' .
-                    esc_attr($fieldName) .
+                    $uniqueId .
                     '" ' .
                     $inputType .
                     ' name="' .
@@ -569,6 +732,7 @@ if (!function_exists('renderFormField')) {
                     $value .
                     '" ' .
                     $requiredAttribute .
+                    renderAutocomplete($fieldName) .
                     '>';
                 $output .= '</label>';
             }
@@ -591,7 +755,9 @@ if (!function_exists('renderRegionalAddition')) {
         $multipleAttr = $multiple ? 'multiple' : 'size="1"';
         $requiredAttribute = $isRequired ? 'required ' : '';
         $output .=
-            '<select hidden="hidden" aria-hidden="true" tabindex="-1" class="o-select --multiple --is-styled" id="' .
+            '<select aria-hidden="true" tabindex="-1" class="o-select --multiple --is-styled" ' .
+            renderAutocomplete($fieldName) .
+            ' id="' .
             esc_html($fieldName) .
             '" name="' .
             $name .
@@ -632,7 +798,9 @@ if (!function_exists('renderCityField')) {
     ): string {
         $permittedValues = $properties['permittedvalues'] ?? [];
         $htmlSelect =
-            '<select hidden="hidden" aria-hidden="true" tabindex="-1" class="o-select --multiple" id="' .
+            '<select aria-hidden="true" tabindex="-1" class="o-select --multiple" ' .
+            renderAutocomplete($fieldName) .
+            ' id="' .
             esc_html($fieldName) .
             '" name="' .
             esc_attr($fieldName) .

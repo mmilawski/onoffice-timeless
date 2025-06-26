@@ -26,7 +26,7 @@ $settings = get_field('settings') ?? [];
 $bg_color = $settings['bg_color'] ?? null;
 ?>
 
-<form method="post" action="#onoffice-form" id="onoffice-form" class="c-form --is-owner-form <?php if (
+<form method="post" action="#onoffice-form" id="onoffice-form-<?php echo $pForm->getFormNo(); ?>" class="c-form --is-owner-form <?php if (
     !empty($bg_color)
 ) {
     echo '--on-' . $bg_color;
@@ -89,12 +89,12 @@ foreach ($pForm->getInputFields() as $input => $table) {
         '</p>';
 } ?>
 
-    <fieldset class="c-form__fieldset">
+    <div class="c-form__fieldset">
         <div class="c-form__header">
-            <p class="c-form__legend"><?php esc_html_e(
+            <legend class="c-form__legend"><?php esc_html_e(
                 'Ihre Kontaktdaten',
                 'oo_theme',
-            ); ?></p>
+            ); ?></legend>
             <p class="c-form__required"><?php esc_html_e(
                 '* Pflichtfelder',
                 'oo_theme',
@@ -103,14 +103,14 @@ foreach ($pForm->getInputFields() as $input => $table) {
         <?php if (is_array($addressValues)) {
             echo implode($addressValues);
         } ?>
-    </fieldset>
+    </div>
 
-    <fieldset class="c-form__fieldset">
+    <div class="c-form__fieldset">
         <div class="c-form__header">
-            <p class="c-form__legend"><?php esc_html_e(
+            <legend class="c-form__legend"><?php esc_html_e(
                 'Angaben zu Ihrem Eigentum',
                 'oo_theme',
-            ); ?></p>
+            ); ?></legend>
         </div>
         <?php if (is_array($estateValues)) {
             echo implode($estateValues);
@@ -125,6 +125,6 @@ foreach ($pForm->getInputFields() as $input => $table) {
             <?php include get_template_directory() .
                 '/onoffice-theme/templates/form/formsubmit.php'; ?>
         </div>
-    </fieldset>
+    </div>
 
 </form>

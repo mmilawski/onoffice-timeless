@@ -38,7 +38,7 @@ if ($pForm->needsReCaptcha() && $key !== '') {
     ?>
     <script>
         function submitForm<?php echo $pFormNo; ?>(e) {
-            const selectorFormById = `form[id="onoffice-form"] input[name="oo_formno"][value="<?php echo $pFormNo; ?>"]`;
+            const selectorFormById = `form[id^="onoffice-form"] input[name="oo_formno"][value="<?php echo $pFormNo; ?>"]`;
             const form = document.querySelector(selectorFormById)?.parentElement;
             const submitButtonElement = form.querySelector('.c-form__button');
 
@@ -104,7 +104,7 @@ if ($pForm->needsReCaptcha() && $key !== '') {
             }
         
             document.addEventListener('DOMContentLoaded', () => {
-                const selectorFormById = `form[id="onoffice-form"] input[name="oo_formno"][value="<?php echo $pFormNo; ?>"]`;
+                const selectorFormById = `form[id^="onoffice-form"] input[name="oo_formno"][value="<?php echo $pFormNo; ?>"]`;
                 const form = document.querySelector(selectorFormById)?.parentElement;
                 const submitButtonElement = form.querySelector('.c-form__button');
 
