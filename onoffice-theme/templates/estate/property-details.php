@@ -832,9 +832,10 @@ while ($current_property = $pEstates->estateIterator()) {
                                         '<a',
                                     ) !== false
                                 ) {
-                                    echo '<iframe class="c-property-details__iframe"" src="' .
+                                    echo '<iframe class="c-property-details__iframe" src="' .
                                         $property_movie_player['url'] .
-                                        '"></iframe>';
+                                        '" title="'.esc_attr__('Externer Video Inhalt', 'oo_theme').
+                                    '"></iframe>';
                                 } else {
                                     echo $property_movie_player['player'];
                                 }
@@ -1158,6 +1159,7 @@ while ($current_property = $pEstates->estateIterator()) {
                             if ($field['has_value']) {
 
                                 $content = $field['value'];
+                                $field_toggle_id = "more-property-features"."-".$field['field'];
 
                                 $description_word_count =
                                     str_word_count(
@@ -1179,7 +1181,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                     <div class="c-property-details__text">
                                         <div class="c-property-details__text-content <?php echo $is_long_description
                                             ? '--shorten'
-                                            : ''; ?>" id="more-property-features">
+                                            : ''; ?>" id="<?php echo $field_toggle_id; ?>">
                                             <?php echo nl2br($content); ?>
                                             <?php if (
                                                 $field['field'] == 'lage' &&
@@ -1201,7 +1203,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                                     'Weniger anzeigen',
                                                     'oo_theme',
                                                 ); ?>"
-                                                aria-expanded="false" aria-controls="more-property-features">
+                                                aria-expanded="false" aria-controls="<?php echo $field_toggle_id; ?>">
                                                 <?php echo esc_html(
                                                     'Mehr anzeigen',
                                                     'oo_theme',
@@ -1233,7 +1235,8 @@ while ($current_property = $pEstates->estateIterator()) {
                                 <?php echo esc_html(
                                     $area_butler_url['value'],
                                 ); ?>
-                                " class="--is-areabutler" data-usercentrics="AreaButler"></iframe></span>
+                                " class="--is-areabutler" data-usercentrics="AreaButler"
+                                 title="<?php echo sprintf( esc_attr__('Externer Inhalt von %s', 'oo_theme'), 'AreaButler', ); ?>"></iframe></span>
                             <?php if (!empty($infrastructure_info)) { ?>
                                 <div class="c-property-details__text">
                                 <div class="c-item-fields">
