@@ -44,6 +44,28 @@
     }
   }
 
+  &__toggle {
+    color: var(--oo-color-contrast-primary);
+    background-color: var(--oo-color-primary);
+    border: 2px solid var(--oo-color-primary);
+    width: $icon-wrapper-size;
+    height: $icon-wrapper-size;
+    border-radius: $border-radius;
+    padding: 0.25rem;
+
+    #{$c-slider}__icon {
+      height: $icon-size;
+      width: $icon-size;
+      fill: none;
+      transform: none;
+
+      @include media-breakpoint-up(xl) {
+        width: $icon-size;
+        height: $icon-size;
+      }
+    }
+  }
+
   &__pagination {
     bottom: 0;
     padding: 0 1rem;
@@ -278,6 +300,19 @@
       }
     }
 
+    #{$c-slider}__toggle {
+      pointer-events: auto;
+      position: absolute;
+      bottom: 3.5rem;
+      left: 50%;
+      translate: -50%;
+      margin: 0 auto;
+      @include media-breakpoint-up(xl) {
+        top: auto;
+        bottom: 4.5rem;
+        padding: 0.25rem;
+      }
+    }
     #{$c-slider}__pagination {
       position: absolute;
       pointer-events: auto;

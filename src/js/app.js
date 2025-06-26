@@ -63,6 +63,22 @@ jQuery(document).ready(function() {
     menuOpenClose();
   });
 
+  $(document).on("keydown", function (event) {
+    if ( $('.o-body.--main-nav-open').length ) {
+      if (event.key === "Escape") {
+        menuOpenClose();
+      } 
+    }
+  });
+
+  $(document).on("keydown", function (event) {
+    if ( $('.o-body.--main-nav-open').length ) {
+      if (event.key === "Escape") {
+        menuOpenClose();
+      } 
+    }
+  });
+
   /**
    * Tomselect Plugin: "oo_remove_button" (Corrected)
    */

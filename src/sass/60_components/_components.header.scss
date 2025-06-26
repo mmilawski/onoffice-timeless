@@ -132,6 +132,20 @@
       display: flex;
     }
 
+    &.--hide-mobile {
+      display: none;
+      @include media-breakpoint-up(xxl) {
+        display: flex;
+      }
+    }
+
+    &.--hide-desktop {
+      display: flex;
+      @include media-breakpoint-up(xxl) {
+        display: none;
+      }
+    }
+
     @include media-breakpoint-up(xxl) {
       padding: 0.5rem 0;
       order: unset;
