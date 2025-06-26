@@ -45,13 +45,25 @@ $is_slider = filter_var($slider['slider'], FILTER_VALIDATE_BOOLEAN);
         echo '--on-slider c-slider__slide splide__slide';
     } ?>">
         <?php if (!empty($image) || !empty($icon)) { ?>
-        <?php if (!empty($link['url'])) { ?>
-            <a class="c-link-boxes-card__link --has-<?php echo $type; ?>" <?php echo oo_set_link_attr(
-    $link,
-); ?>>
-        <?php } else { ?>
+        <?php if (!empty($link['url'])) {
+
+            $button_text = $link['title']
+                ? $link['title']
+                : esc_html__('Mehr erfahren', 'oo_theme');
+
+            $aria_label = !empty($headline)
+                ? sprintf('%s zu %s', $button_text, $headline)
+                : $button_text;
+            ?>
+            <a class="c-link-boxes-card__link --has-<?php echo $type; ?>"
+                aria-label="<?php echo esc_attr($aria_label); ?>"
+                <?php echo oo_set_link_attr($link); ?>>
+        <?php
+        } else {
+             ?>
             <div class="c-link-boxes-card__wrapper --has-<?php echo $type; ?>">
-        <?php } ?>
+        <?php
+        } ?>
             <?php if (!empty($image) && $type === 'image'): ?>
                 <?php oo_get_template('components', '', 'component-image', [
                     'image' => $image,
