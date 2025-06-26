@@ -114,6 +114,11 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-focus;
   }
 
+  &:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 2px;
+  }
+
   &::-webkit-inner-spin-button,
   &::-webkit-clear-button,
   &::-webkit-calendar-picker-indicator {
@@ -426,6 +431,11 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   &.focus {
     outline-color: $form-focus;
     border-color: $form-focus;
+  }
+
+  &.focus, &:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 2px;
   }
 
   .ts-control {
@@ -1109,6 +1119,11 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-focus;
   }
 
+  &:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 2px;
+  }
+
   &::placeholder {
     color: $form-placeholder;
     font-weight: $font-weight-text;
@@ -1358,6 +1373,13 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     &:before {
       outline-color: $form-focus;
       border-color: $form-focus;
+    }
+  }
+
+  &__input:focus-visible + &__label {
+    &:before {
+      outline: 1px solid $form-focus;
+      outline-offset: 2px;
     }
   }
 
