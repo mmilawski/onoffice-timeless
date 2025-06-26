@@ -113,9 +113,21 @@ return function (EstateList $pEstatesClone) {
                 continue;
             }
             ?>
-            <div class="c-map__marker" data-lat="<?php echo esc_attr(
-                $lat,
-            ); ?>" data-lng="<?php echo esc_attr($lng); ?>">
+            <div class="c-map__marker" data-aria-label="<?php echo oo_get_map_marker_aria_label(
+                [
+                    'title' => $title,
+                    'street' => implode(
+                        ' ',
+                        array_filter([$street ?? '', $number ?? '']),
+                    ),
+                    'zip' => $zip,
+                    'city' => $city,
+                    'country' => $country,
+                ],
+                'Immobilienstandort',
+            ); ?>" data-lat="<?php echo esc_attr(
+    $lat,
+); ?>" data-lng="<?php echo esc_attr($lng); ?>">
                 <div class="c-map__info --bg-transparent">
                     <?php
                     if (!empty($title)) {

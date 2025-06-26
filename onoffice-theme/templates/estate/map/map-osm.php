@@ -120,9 +120,16 @@ return function (EstateList $pEstatesClone) {
                 $lat,
             ); ?>" data-lng="<?php echo esc_attr(
     $lng,
-); ?>" data-aria-label="<?php echo !empty($title)
-    ? $title
-    : esc_html__('Marker', 'oo_theme'); ?>">
+); ?>" data-aria-label="<?php echo oo_get_map_marker_aria_label(
+    [
+        'title' => $title,
+        'street' => implode(' ', array_filter([$street ?? '', $number ?? ''])),
+        'zip' => $zip,
+        'city' => $city,
+        'country' => $country,
+    ],
+    'Immobilienstandort',
+); ?>">
                 <div class="c-map__info --bg-transparent">
                     <?php
                     if (!empty($title)) {
