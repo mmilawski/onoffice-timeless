@@ -73,9 +73,7 @@ if ($rating_provider === 'google') {
 $uniqid = 'team-' . uniqid();
 ?>
 
-<article class="c-team-card --on-<?php echo $bg_color; ?> <?php if (
-     $is_slider
- ) {
+<div class="c-team-card --on-<?php echo $bg_color; ?> <?php if ($is_slider) {
      echo '--on-slider c-slider__slide splide__slide';
  } ?>">
     <div class="c-team-card__content">
@@ -198,6 +196,10 @@ $uniqid = 'team-' . uniqid();
                                 'additional_link_class' => $bg_color
                                     ? '--text-color --on-' . $bg_color
                                     : '--text-color',
+                                'aria-label' => esc_attr__(
+                                    'Telefonnummer %s anrufen',
+                                    'oo_theme',
+                                ),
                             ],
                         ); ?>
                         </dd>
@@ -220,6 +222,10 @@ $uniqid = 'team-' . uniqid();
                                 'additional_link_class' => $bg_color
                                     ? '--text-color --on-' . $bg_color
                                     : '--text-color',
+                                'aria-label' => esc_attr__(
+                                    'Mobilnummer %s anrufen',
+                                    'oo_theme',
+                                ),
                             ],
                         ); ?>
                         </dd>
@@ -242,6 +248,10 @@ $uniqid = 'team-' . uniqid();
                                 'additional_link_class' => $bg_color
                                     ? '--text-color --on-' . $bg_color
                                     : '--text-color',
+                                'aria-label' => esc_attr__(
+                                    'Fax an %s senden',
+                                    'oo_theme',
+                                ),
                             ],
                         ); ?>
                         </dd>
@@ -263,6 +273,13 @@ $uniqid = 'team-' . uniqid();
                                 'additional_link_class' => $bg_color
                                     ? '--text-color --on-' . $bg_color
                                     : '--text-color',
+                                'aria-label' => sprintf(
+                                    esc_attr__(
+                                        'E-Mail senden an %s',
+                                        'oo_theme',
+                                    ),
+                                    esc_html($contact['email']),
+                                ),
                             ],
                         ); ?>
                         </dd>
@@ -303,4 +320,4 @@ $uniqid = 'team-' . uniqid();
             </button>
         </div>
     <?php } ?>
-</article>
+</div>

@@ -166,7 +166,22 @@ foreach ($current_address as $field => $value) {
 } ?>">
     <?php
     if (!empty($address_link)) {
-        echo '<a href="' . $address_link . '" class="c-address-card__link">';
+        echo '<a href="' .
+            $address_link .
+            '" class="c-address-card__wrapper" aria-label="' .
+            (!empty($full_name)
+                ? sprintf(
+                    esc_html_x('Details anzeigen zu %s', 'oo_theme'),
+                    $full_name,
+                )
+                : sprintf(
+                    esc_html_x(
+                        'Details anzeigen zur Adresse Nr. %d',
+                        'oo_theme',
+                    ),
+                    $address_id,
+                )) .
+            '">';
     } else {
         echo '<div class="c-address-card__wrapper">';
     }

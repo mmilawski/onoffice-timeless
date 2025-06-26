@@ -181,6 +181,14 @@ while ($current_property = $pEstatesClone->estateIterator()):
                                         ),
                                         $property_id,
                                     ) .
+                                    '" aria-label="' .
+                                    sprintf(
+                                        esc_html_x(
+                                            'Zur Detailansicht der Immobilie Nr. %d',
+                                            'oo_theme',
+                                        ),
+                                        $property_id,
+                                    ) .
                                     '">';
                             }
 
