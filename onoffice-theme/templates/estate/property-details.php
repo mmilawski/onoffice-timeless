@@ -834,8 +834,12 @@ while ($current_property = $pEstates->estateIterator()) {
                                 ) {
                                     echo '<iframe class="c-property-details__iframe" src="' .
                                         $property_movie_player['url'] .
-                                        '" title="'.esc_attr__('Externer Video Inhalt', 'oo_theme').
-                                    '"></iframe>';
+                                        '" title="' .
+                                        esc_attr__(
+                                            'Externer Video Inhalt',
+                                            'oo_theme',
+                                        ) .
+                                        '"></iframe>';
                                 } else {
                                     echo $property_movie_player['player'];
                                 }
@@ -1159,7 +1163,10 @@ while ($current_property = $pEstates->estateIterator()) {
                             if ($field['has_value']) {
 
                                 $content = $field['value'];
-                                $field_toggle_id = "more-property-features"."-".$field['field'];
+                                $field_toggle_id =
+                                    'more-property-features' .
+                                    '-' .
+                                    $field['field'];
 
                                 $description_word_count =
                                     str_word_count(
@@ -1236,7 +1243,13 @@ while ($current_property = $pEstates->estateIterator()) {
                                     $area_butler_url['value'],
                                 ); ?>
                                 " class="--is-areabutler" data-usercentrics="AreaButler"
-                                 title="<?php echo sprintf( esc_attr__('Externer Inhalt von %s', 'oo_theme'), 'AreaButler', ); ?>"></iframe></span>
+                                 title="<?php echo sprintf(
+                                     esc_attr__(
+                                         'Externer Inhalt von %s',
+                                         'oo_theme',
+                                     ),
+                                     'AreaButler',
+                                 ); ?>"></iframe></span>
                             <?php if (!empty($infrastructure_info)) { ?>
                                 <div class="c-property-details__text">
                                 <div class="c-item-fields">
