@@ -448,24 +448,22 @@ jQuery(document).ready(function() {
 
 
   // Accordion
-   if ( $('.c-accordion').length > 0) {
+  if (document.querySelectorAll('.c-accordion').length > 0) {
     const details = document.querySelectorAll('details');
-    details.forEach(detail => {
-      detail.style.height = (detail.querySelector('summary').offsetHeight + 4) + 'px';
-      detail.style.transition = 'height 0.3s ease';
 
+    details.forEach(detail => {
       detail.addEventListener('toggle', () => {
         const srOpen = detail.querySelector('.u-screen-reader-only.--open');
         const srClose = detail.querySelector('.u-screen-reader-only.--close');
+  
         if (detail.open) {
-          detail.style.height = (detail.scrollHeight + 2) + 'px';
-          srOpen.setAttribute('aria-hidden', 'true');
-          srClose.setAttribute('aria-hidden', 'false');
-
+          detail.classList.add('--is-open');
+          srOpen?.setAttribute('aria-hidden', 'true');
+          srClose?.setAttribute('aria-hidden', 'false');
         } else {
-          detail.style.height = (detail.querySelector('summary').offsetHeight + 2) + 'px';
-          srOpen.setAttribute('aria-hidden', 'false');
-          srClose.setAttribute('aria-hidden', 'true');
+          detail.classList.remove('--is-open');
+          srOpen?.setAttribute('aria-hidden', 'false');
+          srClose?.setAttribute('aria-hidden', 'true');
         }
       });
     });

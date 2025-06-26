@@ -30,12 +30,12 @@ $settings = get_field('settings') ?? null;
         <?php } ?>
 
         <?php if (!empty($accordion)) { ?>
-            <div class="c-accordion__accordions o-row --position-center">
-                <?php foreach ($accordion as $key => $card) {
-                    $accordion_headline = $card['headline'] ?? ''; ?>
-                    <details class="c-accordion-card o-col-12 o-col-xl-8">
-                        <summary class="c-accordion-card__title">
-                           
+            <div class="c-accordion__accordions-wrapper o-row --position-center">
+                <div class="c-accordion__accordions o-col-12 o-col-xl-8">
+                    <?php foreach ($accordion as $key => $card) {
+                        $accordion_headline = $card['headline'] ?? ''; ?>
+                        <details class="c-accordion-card">
+                            <summary class="c-accordion-card__title">
                                 <span class="c-accordion-card__headline o-headline --h3 --span">
                                     <?php echo $accordion_headline; ?>
                                 </span>
@@ -48,38 +48,35 @@ $settings = get_field('settings') ?? null;
                                                 'c-accordion-card__icon ',
                                         ],
                                     ); ?>
-                               
-                                <span class="u-screen-reader-only --open" aria-hidden="false"> <?php echo sprintf(
-                                    esc_html_x(
-                                        'Mehr anzeigen zum Thema %s',
-                                        'Screenreader-Text für Akkordeon-Klappe',
-                                        'oo_theme',
-                                    ),
-                                    $accordion_headline,
-                                ); ?>
-                            </span>
-                            <span class="u-screen-reader-only --close" aria-hidden="true"> <?php echo sprintf(
-                                esc_html_x(
-                                    'Weniger anzeigen zum Thema %s',
-                                    'Screenreader-Text für Akkordeon-Klappe',
-                                    'oo_theme',
-                                ),
-                                $accordion_headline,
-                            ); ?>
-                            </span>
-                
-                            </span>
-                        </summary>
-                        <div
-                            
-                            class="c-accordion-card__content o-text --is-wysiwyg" 
-                         
-                        >
-                            <?php echo $card['text']['wysiwyg']; ?>
-                        </div>
-                                </details>
-                <?php
-                } ?>
+                                    <span class="u-screen-reader-only --open" aria-hidden="false">
+                                        <?php echo sprintf(
+                                            esc_html_x(
+                                                'Mehr anzeigen zum Thema %s',
+                                                'Screenreader-Text für Akkordeon-Klappe',
+                                                'oo_theme',
+                                            ),
+                                            $accordion_headline,
+                                        ); ?>
+                                    </span>
+                                    <span class="u-screen-reader-only --close" aria-hidden="true">
+                                        <?php echo sprintf(
+                                            esc_html_x(
+                                                'Weniger anzeigen zum Thema %s',
+                                                'Screenreader-Text für Akkordeon-Klappe',
+                                                'oo_theme',
+                                            ),
+                                            $accordion_headline,
+                                        ); ?>
+                                    </span>
+                                </span>
+                            </summary>
+                            <div class="c-accordion-card__content o-text --is-wysiwyg">
+                                <?php echo $card['text']['wysiwyg']; ?>
+                            </div>
+                        </details>
+                    <?php
+                    } ?>
+                </div>
             </div>
         <?php } ?>
 

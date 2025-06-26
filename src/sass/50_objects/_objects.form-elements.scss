@@ -433,7 +433,8 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-focus;
   }
 
-  &.focus, &:focus-visible {
+  &.focus,
+  &:focus-visible {
     outline: 1px solid currentColor;
     outline-offset: 2px;
   }
