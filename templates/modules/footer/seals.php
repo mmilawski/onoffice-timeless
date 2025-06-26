@@ -88,7 +88,13 @@ if ($is_slider) { ?>
         if ($seal['type'] === 'image') {
             $image = $seal['image']['image'] ?? [];
             $link = $seal['image']['link'] ?? [];
-
+            if (empty($image['alt'])) {
+                //BFSG: fallback if no alt text is set
+                $image['alt'] = sprintf(
+                    esc_html__('Siegel für %s', 'oo_theme'),
+                    esc_html($image['title']),
+                );
+            }
             if (!empty($link)) {
                 echo '<a class="c-seals__link" ' .
                     oo_set_link_attr($link) .
