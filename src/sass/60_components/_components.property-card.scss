@@ -30,6 +30,11 @@
         cursor: pointer;
         pointer-events: auto;
       }
+      @include focus-visible() {
+        outline: $outline !important;
+        outline-offset: -4px !important;
+        outline-color: var(--oo-color-primary) !important;
+      }
     }
   }
 

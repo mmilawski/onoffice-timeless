@@ -691,22 +691,36 @@ jQuery(document).ready(function() {
   // Slider
   const sliders = document.querySelectorAll('.c-slider');
 
-  function updateTabIndex() {
-    document.querySelectorAll('.splide__slide').forEach(slide => {
-      slide.tabIndex = slide.classList.contains('is-active') ? 0 : -1
-    });
-    document.querySelectorAll('.splide__slide--clone').forEach(slide => {
-      slide.tabIndex = -1
+  function innerSliderUpdateTabIndex(slider) {
+    slider.querySelectorAll('.c-property-card__picture-wrapper').forEach(slide => {
+      slide.tabIndex = slide.classList.contains('is-visible') ? 0 : -1
+    })
+  }
+  function outerSliderUpdateTabIndex(slider) {
+    slider.querySelectorAll('.c-property-card').forEach(slide => {
+      if(slide.classList.contains('is-visible')){
+        const innerSlider = slide.querySelector('.c-slider')
+        if(innerSlider){
+          innerSliderUpdateTabIndex(innerSlider)
+        }
+        slide.querySelectorAll('button').forEach(el=>el.tabIndex=0)
+        slide.querySelectorAll('.c-property-card__button').forEach(el=>el.tabIndex=0)
+      }
+      else{
+        slide.querySelectorAll('button, a').forEach(el=>el.tabIndex = -1);
+      }
     });
   }
 
-
   if( sliders.length > 0 ) {
+      let innerSliderTotalCount = 0;
+      let innerSliderMountedCount = 0;
       sliders.forEach(function(slider) {
 
       const splide = new Splide(slider);
-      let outerslider = false; 
-      
+      let outerslider = false;
+      let innerslider = slider.classList.contains("--is-properties-images-slider")
+
       if (slider.classList.contains("--is-properties-slider") || slider.classList.contains("--is-properties-similar-slider"))
       {
         outerslider = true;
@@ -723,6 +737,20 @@ jQuery(document).ready(function() {
         btnPrevOuter.addEventListener('click', e => {
           splide.go('-1')
         })
+
+        splide.on('moved', () => requestAnimationFrame(()=>requestAnimationFrame(()=>outerSliderUpdateTabIndex(slider))))
+      }
+      else if(innerslider){
+        innerSliderTotalCount++;
+        splide.on('mounted', () => requestAnimationFrame(()=>requestAnimationFrame(()=> {
+          innerSliderUpdateTabIndex(slider)
+          // needed because mounted callback for inner sliders makes elements inside focussable, even if the containing property card is not visible
+          innerSliderMountedCount++;
+          if(innerSliderMountedCount === innerSliderTotalCount){
+            document.querySelectorAll('.c-property-list__slider').forEach(slider=>outerSliderUpdateTabIndex(slider))
+          }
+        })))
+        splide.on('moved', () => requestAnimationFrame(()=>requestAnimationFrame(()=>innerSliderUpdateTabIndex(slider))))
       }
    
       // progress bar animation
@@ -733,16 +761,16 @@ jQuery(document).ready(function() {
           bar.style.width = String(100 * (splide.index + 1) / end) + '%';
         });
       }
+
+      const manuallyHandleFocus = !!innerslider || !!outerslider
       // remove drag when not enough slides
       splide.on( 'overflow', function ( isOverflow ) {
         splide.options = {
           drag : isOverflow,
-          focusableNodes: 'a, button, input, textarea, select:not([aria-hidden])'
+          focusableNodes: manuallyHandleFocus ? '' : 'a, button, input, textarea, select:not([aria-hidden])'
         };
       });
-      splide.on('mounted moved', () => requestAnimationFrame(updateTabIndex));
       splide.mount();
-
     });
   }
 
