@@ -6,6 +6,8 @@
     line-height: 1.5rem;
     align-items: center;
     gap: 0.5rem;
+    outline: $outline;
+    outline-offset: $outline-offset;
     @include media-breakpoint-up(xxl) {
       align-items: baseline;
       display: inline-flex;
@@ -19,6 +21,10 @@
     }
     svg {
       color: var(--oo-color-header-primary, var(--oo-color-primary));
+    }
+    
+    @include focus-visible() {
+      outline-color: var(--oo-color-primary);
     }
   }
 

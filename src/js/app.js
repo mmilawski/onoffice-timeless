@@ -515,23 +515,33 @@ jQuery(document).ready(function() {
         }
 
         if (popupElement) {
-          popupElement.classList.add('--is-open');
+          if (popupElement instanceof HTMLDialogElement && typeof popupElement.showModal === 'function') {
+            popupElement.showModal();
+          } else {
+            popupElement.classList.add('--is-open');
+          }
           document.body.classList.add('--modal-open');
 
           function closePopup() {
-            popupElement.classList.remove('--is-open');
+            if (popupElement instanceof HTMLDialogElement && typeof popupElement.close === 'function') {
+              popupElement.close();
+            } else {
+              popupElement.classList.remove('--is-open');
+            }
             document.body.classList.remove('--modal-open');
           }
 
           // Close popup with click on icon or overlay
           const overlay = popupElement.querySelector('.c-popup__overlay');
-          const closeButton = popupElement.querySelector('.c-popup__close');
+          const closeButton = popupElement.querySelector('.c-popup__close, .--close-popup');
 
           if (overlay) {
             overlay.addEventListener('click', closePopup);
           }
           if (closeButton) {
             closeButton.addEventListener('click', closePopup);
+            // Set timeout to ensure focus is set after the popup is fully open
+            setTimeout(() => closeButton.focus(), 50);
           }
 
           // Close popup on press ESC
