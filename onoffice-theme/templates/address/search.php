@@ -65,7 +65,7 @@ $uniqid = 'address-search-' . uniqid();
                 if ($number === 12) { ?>
                     <div class="c-form__field-wrapper" id="<?php echo $uniqid; ?>">
                 <?php }
-                renderFieldEstateSearch($inputName, $properties);
+                renderFieldEstateSearch($inputName, $properties, $uniqid);
                 if ($number == $fields_counter - 1) {
                     if (
                         method_exists($pAddressList, 'getHasGeoFilter') &&
@@ -74,15 +74,23 @@ $uniqid = 'address-search-' . uniqid();
                         echo '<script>window.geoFilter = ' .
                             json_encode($pAddressList->getGeoFilter()) .
                             '</script>';
-                        renderFieldEstateSearch('geo_search', [
-                            'type' => 'select',
-                            'label' => esc_attr__('PLZ/Ort', 'oo_theme'),
-                            'value' => $_GET['geo_search'] ?? '',
-                        ]);
-                        renderFieldEstateSearch('geo_search_text', [
-                            'type' => 'hidden',
-                            'value' => $_GET['geo_search_text'] ?? '',
-                        ]);
+                        renderFieldEstateSearch(
+                            'geo_search',
+                            [
+                                'type' => 'select',
+                                'label' => esc_attr__('PLZ/Ort', 'oo_theme'),
+                                'value' => $_GET['geo_search'] ?? '',
+                            ],
+                            $uniqid,
+                        );
+                        renderFieldEstateSearch(
+                            'geo_search_text',
+                            [
+                                'type' => 'hidden',
+                                'value' => $_GET['geo_search_text'] ?? '',
+                            ],
+                            $uniqid,
+                        );
                     } ?>
                     </div>
 
@@ -113,7 +121,7 @@ $uniqid = 'address-search-' . uniqid();
                 ?>
             <?php
             } else {
-                renderFieldEstateSearch($inputName, $properties); ?>
+                renderFieldEstateSearch($inputName, $properties, $uniqid); ?>
                 <?php if ($number == $fields_counter - 1) {
                     if (
                         method_exists($pAddressList, 'getHasGeoFilter') &&
@@ -122,15 +130,23 @@ $uniqid = 'address-search-' . uniqid();
                         echo '<script>window.geoFilter = ' .
                             json_encode($pAddressList->getGeoFilter()) .
                             '</script>';
-                        renderFieldEstateSearch('geo_search', [
-                            'type' => 'select',
-                            'label' => esc_attr__('PLZ/Ort', 'oo_theme'),
-                            'value' => $_GET['geo_search'] ?? '',
-                        ]);
-                        renderFieldEstateSearch('geo_search_text', [
-                            'type' => 'hidden',
-                            'value' => $_GET['geo_search_text'] ?? '',
-                        ]);
+                        renderFieldEstateSearch(
+                            'geo_search',
+                            [
+                                'type' => 'select',
+                                'label' => esc_attr__('PLZ/Ort', 'oo_theme'),
+                                'value' => $_GET['geo_search'] ?? '',
+                            ],
+                            $uniqid,
+                        );
+                        renderFieldEstateSearch(
+                            'geo_search_text',
+                            [
+                                'type' => 'hidden',
+                                'value' => $_GET['geo_search_text'] ?? '',
+                            ],
+                            $uniqid,
+                        );
                     } ?>
                     <button class="c-form__button c-button <?php if (
                         $is_banner
