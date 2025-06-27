@@ -149,151 +149,165 @@ if (!empty($pEstates->getEstateContacts())) {
     foreach ($pEstates->getEstateContacts() as $contact_data) {
         if (!isset($contact_data['id'])) {
             continue;
-        } ?>
-        <div class="c-property-details__contact c-contact-person">
-            <?php
-            $contact_link = isset($contact_data['id'])
-                ? $pEstates->getAddressLink($contact_data['id'])
-                : '';
-            if (!empty($contact_link)) {
-                echo '<a href="' .
-                    esc_url($contact_link) .
-                    '" class="c-contact-person__link">';
+        }
+
+        echo '<div class="c-property-details__contact c-contact-person">';
+
+        if ($contact_data['imageUrl']) {
+            $image = '';
+            if (
+                $contact_data['Vorname'] !== '' ||
+                $contact_data['Name'] !== ''
+            ) {
+                $image_alt =
+                    ($contact_data['Titel']
+                        ? $contact_data['Titel'] . ' '
+                        : '') .
+                    $contact_data['Vorname'] .
+                    ' ' .
+                    $contact_data['Name'];
+            } else {
+                $image_alt = esc_html__('Ansprechpartner', 'oo_theme');
             }
 
-            if ($contact_data['imageUrl']) {
-                $image = '';
-                if (
-                    $contact_data['Vorname'] !== '' ||
-                    $contact_data['Name'] !== ''
-                ) {
-                    $image_alt =
-                        ($contact_data['Titel']
-                            ? $contact_data['Titel'] . ' '
-                            : '') .
-                        $contact_data['Vorname'] .
-                        ' ' .
-                        $contact_data['Name'];
-                } else {
-                    $image_alt = esc_html__('Ansprechpartner', 'oo_theme');
+            $image = [
+                'url' => $contact_data['imageUrl'],
+                'alt' => $image_alt,
+            ];
+
+            // image width
+            $contact_image_width_xs = '543';
+            $contact_image_width_sm = '512';
+            $contact_image_width_md = '694';
+            $contact_image_width_lg = '288';
+            $contact_image_width_xl = '352';
+            $contact_image_width_xxl = '416';
+            $contact_image_width_xxxl = '460';
+
+            if (!empty($image)) {
+                $contact_link = isset($contact_data['id'])
+                    ? $pEstates->getAddressLink($contact_data['id'])
+                    : '';
+                if (!empty($contact_link)) {
+                    echo '<a href="' .
+                        esc_url($contact_link) .
+                        '" class="c-contact-person__link" aria-label="' .
+                        sprintf(
+                            esc_html_x('Details anzeigen zu %s', 'oo_theme'),
+                            $image_alt,
+                        ) .
+                        '">';
                 }
 
-                $image = [
-                    'url' => $contact_data['imageUrl'],
-                    'alt' => $image_alt,
-                ];
-
-                // image width
-                $contact_image_width_xs = '543';
-                $contact_image_width_sm = '512';
-                $contact_image_width_md = '694';
-                $contact_image_width_lg = '288';
-                $contact_image_width_xl = '352';
-                $contact_image_width_xxl = '416';
-                $contact_image_width_xxxl = '460';
-
-                if (!empty($image)) {
-                    oo_get_template('components', '', 'component-image', [
-                        'image' => $image,
-                        'picture_class' =>
-                            'c-contact-person__picture o-picture',
-                        'image_class' => 'c-contact-person__image o-image',
-                        'additional_cloudimg_params' =>
-                            '&func=crop&gravity=face',
-                        'dimensions' => [
-                            '575' => [
-                                'w' => $contact_image_width_xs,
-                                'h' => $contact_image_width_xs,
-                            ],
-                            '1600' => [
-                                'w' => $contact_image_width_xxxl,
-                                'h' => $contact_image_width_xxxl,
-                            ],
-                            '1400' => [
-                                'w' => $contact_image_width_xxl,
-                                'h' => $contact_image_width_xxl,
-                            ],
-                            '1200' => [
-                                'w' => $contact_image_width_xl,
-                                'h' => $contact_image_width_xl,
-                            ],
-                            '992' => [
-                                'w' => $contact_image_width_lg,
-                                'h' => $contact_image_width_lg,
-                            ],
-                            '768' => [
-                                'w' => $contact_image_width_md,
-                                'h' => $contact_image_width_md,
-                            ],
-                            '576' => [
-                                'w' => $contact_image_width_sm,
-                                'h' => $contact_image_width_sm,
-                            ],
+                oo_get_template('components', '', 'component-image', [
+                    'image' => $image,
+                    'picture_class' => 'c-contact-person__picture o-picture',
+                    'image_class' => 'c-contact-person__image o-image',
+                    'additional_cloudimg_params' => '&func=crop&gravity=face',
+                    'dimensions' => [
+                        '575' => [
+                            'w' => $contact_image_width_xs,
+                            'h' => $contact_image_width_xs,
                         ],
-                    ]);
+                        '1600' => [
+                            'w' => $contact_image_width_xxxl,
+                            'h' => $contact_image_width_xxxl,
+                        ],
+                        '1400' => [
+                            'w' => $contact_image_width_xxl,
+                            'h' => $contact_image_width_xxl,
+                        ],
+                        '1200' => [
+                            'w' => $contact_image_width_xl,
+                            'h' => $contact_image_width_xl,
+                        ],
+                        '992' => [
+                            'w' => $contact_image_width_lg,
+                            'h' => $contact_image_width_lg,
+                        ],
+                        '768' => [
+                            'w' => $contact_image_width_md,
+                            'h' => $contact_image_width_md,
+                        ],
+                        '576' => [
+                            'w' => $contact_image_width_sm,
+                            'h' => $contact_image_width_sm,
+                        ],
+                    ],
+                ]);
+
+                if (!empty($contact_link)) {
+                    echo '</a>';
                 }
             }
+        }
 
-            $salutation = $contact_data['Anrede'];
-            $title = $contact_data['Titel'];
-            $first_name = $contact_data['Vorname'];
-            $last_name = $contact_data['Name'];
-            $job_title = $contact_data['jobPosition'];
-            $email = $contact_data['Email'];
-            $phone = $contact_data['defaultphone'];
-            $mobile = $contact_data['mobile'];
-            $fax = $contact_data['defaultfax'];
-            $street = $contact_data['Strasse'];
-            $postCode = $contact_data['Plz'];
-            $town = $contact_data['Ort'];
+        $salutation = $contact_data['Anrede'];
+        $title = $contact_data['Titel'];
+        $first_name = $contact_data['Vorname'];
+        $last_name = $contact_data['Name'];
+        $job_title = $contact_data['jobPosition'];
+        $email = $contact_data['Email'];
+        $phone = $contact_data['defaultphone'];
+        $mobile = $contact_data['mobile'];
+        $fax = $contact_data['defaultfax'];
+        $street = $contact_data['Strasse'];
+        $postCode = $contact_data['Plz'];
+        $town = $contact_data['Ort'];
 
-            // Output name, depending on available fields.
-            $name_components = [];
+        // Output name, depending on available fields.
+        $name_components = [];
 
-            if ($salutation) {
-                $name_components[] = $salutation;
-            }
-            if ($title) {
-                $name_components[] = $title;
-            }
-            if ($first_name) {
-                $name_components[] = $first_name;
-            }
-            if ($last_name) {
-                $name_components[] = $last_name;
-            }
-            $name_output = join(' ', $name_components);
+        if ($salutation) {
+            $name_components[] = $salutation;
+        }
+        if ($title) {
+            $name_components[] = $title;
+        }
+        if ($first_name) {
+            $name_components[] = $first_name;
+        }
+        if ($last_name) {
+            $name_components[] = $last_name;
+        }
+        $name_output = join(' ', $name_components);
 
-            if ($name_output) {
-                echo '<p class="c-contact-person__name o-headline --h3">';
-                echo esc_html($name_output);
-                echo '</p>';
-            }
-            if (!empty($contact_link)) {
-                echo '</a>';
-            }
+        $street_output = '';
+        if ($street) {
+            $street_output = $street;
+        }
+        $city_components = [];
+        if ($postCode) {
+            $city_components[] = $postCode;
+        }
+        if ($town) {
+            $city_components[] = $town;
+        }
+        $city_output = join(' ', $city_components);
 
-            // Output all other configured fields.
-            foreach ($address_fields as $field) {
-                if (empty($contact_data[$field])) {
-                    continue;
-                } elseif (is_array($contact_data[$field])) {
-                    foreach ($contact_data[$field] as $item) {
-                        if (in_array($field, $labels_fields)) {
-                            oo_property_field_type($field, $item);
-                        } else {
-                            if (!empty($contact_data[$field])) {
-                                echo '<p class="c-contact-person__data --is-' .
-                                    strtolower($field) .
-                                    '">';
-                                echo esc_html($contact_data[$field]);
-                                echo '</p>';
-                            }
-                        }
-                    }
-                } else {
+        if (
+            !empty($name_output) ||
+            !empty($address_fields) ||
+            !empty($street_output) ||
+            !empty($city_output)
+        ) {
+            echo '<div class="c-contact-person__content">';
+        }
+
+        if ($name_output) {
+            echo '<p class="c-contact-person__name o-headline --h3">';
+            echo esc_html($name_output);
+            echo '</p>';
+        }
+
+        // Output all other configured fields.
+        foreach ($address_fields as $field) {
+            if (empty($contact_data[$field])) {
+                continue;
+            } elseif (is_array($contact_data[$field])) {
+                foreach ($contact_data[$field] as $item) {
                     if (in_array($field, $labels_fields)) {
-                        oo_property_field_type($field, $contact_data[$field]);
+                        oo_property_field_type($field, $item);
                     } else {
                         if (!empty($contact_data[$field])) {
                             echo '<p class="c-contact-person__data --is-' .
@@ -304,40 +318,47 @@ if (!empty($pEstates->getEstateContacts())) {
                         }
                     }
                 }
+            } else {
+                if (in_array($field, $labels_fields)) {
+                    oo_property_field_type($field, $contact_data[$field]);
+                } else {
+                    if (!empty($contact_data[$field])) {
+                        echo '<p class="c-contact-person__data --is-' .
+                            strtolower($field) .
+                            '">';
+                        echo esc_html($contact_data[$field]);
+                        echo '</p>';
+                    }
+                }
             }
+        }
 
-            $street_output = '';
-            if ($street) {
-                $street_output = $street;
-            }
-            $city_components = [];
-            if ($postCode) {
-                $city_components[] = $postCode;
-            }
-            if ($town) {
-                $city_components[] = $town;
-            }
-            $city_output = join(' ', $city_components);
+        if ($street_output && $city_output) {
+            echo '<p class="c-contact-person__address">' .
+                esc_html($street_output) .
+                '<br>' .
+                esc_html($city_output) .
+                '</p>';
+        } elseif ($street_output) {
+            echo '<p class="c-contact-person__address">' .
+                esc_html($street_output) .
+                '</p>';
+        } elseif ($city_output) {
+            echo '<p class="c-contact-person__address">' .
+                esc_html($city_output) .
+                '</p>';
+        }
 
-            if ($street_output && $city_output) {
-                echo '<p class="c-contact-person__address">' .
-                    esc_html($street_output) .
-                    '<br>' .
-                    esc_html($city_output) .
-                    '</p>';
-            } elseif ($street_output) {
-                echo '<p class="c-contact-person__address">' .
-                    esc_html($street_output) .
-                    '</p>';
-            } elseif ($city_output) {
-                echo '<p class="c-contact-person__address">' .
-                    esc_html($city_output) .
-                    '</p>';
-            }
-            ?>
+        if (
+            !empty($name_output) ||
+            !empty($address_fields) ||
+            !empty($street_output) ||
+            !empty($city_output)
+        ) {
+            echo '</div>';
+        }
 
-        </div>
-    <?php
+        echo '</div>';
     }
 
     if ($contact_count > 1 == true) {

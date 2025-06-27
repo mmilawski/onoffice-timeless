@@ -316,31 +316,30 @@ while ($current_property = $pEstates->estateIterator()) {
                             Favorites::isFavorizationEnabled() &&
                             !$is_reference &&
                             !$iframe_display
-                        ) { ?>
-                            <span class="c-property-details__favorite c-icon-button --small-corners" data-onoffice-property-id="<?php echo $property_id; ?>">
-                                <span class="c-icon-button__text u-screen-reader-only">
-                                    <?php
-                                    $favorite_label = Favorites::getFavorizationLabel();
-                                    if ($favorite_label == 'Watchlist') {
-                                        esc_html_e(
-                                            'Zur Merkliste hinzufügen',
-                                            'oo_theme',
-                                        );
-                                        $favorite_icon = 'bookmark';
-                                    } else {
-                                        esc_html_e(
-                                            'Zu Favoriten hinzufügen',
-                                            'oo_theme',
-                                        );
-                                        $favorite_icon = 'star';
-                                    }
-                                    ?>
-                                </span>
-                                <span class="c-icon-button__icon --favorite"><?php oo_get_icon(
-                                    $favorite_icon,
-                                ); ?></span>
-                            </span>
-                        <?php }
+                        ) {
+
+                            $favorite_label = Favorites::getFavorizationLabel();
+                            if ($favorite_label == 'Watchlist') {
+                                $favorite_text = esc_html__(
+                                    'Zur Merkliste hinzufügen',
+                                    'oo_theme',
+                                );
+                                $favorite_icon = 'bookmark';
+                            } else {
+                                $favorite_text = esc_html__(
+                                    'Zu Favoriten hinzufügen',
+                                    'oo_theme',
+                                );
+                                $favorite_icon = 'star';
+                            }
+                            ?>
+                            <button class="c-property-details__favorite c-icon-button --small-corners" data-onoffice-property-id="<?php echo $property_id; ?>" aria-label="<?php echo $favorite_text; ?>">
+                                <?php oo_get_icon($favorite_icon, true, [
+                                    'class' => 'c-icon-button__icon --favorite',
+                                ]); ?>
+                            </button>
+                        <?php
+                        }
 
                         if (
                             $property_status ||
@@ -522,8 +521,7 @@ while ($current_property = $pEstates->estateIterator()) {
                             }
                         }
                         ?>
-                        <a
-                            class="c-property-details__gallery-link glightbox" data-gallery="gallery"
+                        <a class="c-property-details__gallery-link glightbox" data-gallery="gallery"
                             href="<?php echo $lightbox_url .
                                 '&w=' .
                                 end($lightbox_image_size_list)[
@@ -531,10 +529,15 @@ while ($current_property = $pEstates->estateIterator()) {
                                 ]; ?>"
                             data-sizes="<?php echo $lightbox_image_breakpoints; ?>"
                             data-srcset="<?php echo $lightbox_image_sizes; ?>"
-                            <?php if (!empty($image['alt'])): ?>
                             data-caption="<?php echo $image['alt']; ?>"
                             title="<?php echo $image['alt']; ?>"
-                            <?php endif; ?>>
+                            aria-label="<?php echo sprintf(
+                                esc_attr_x(
+                                    'Bild %s vergrößert anzeigen',
+                                    'oo_theme',
+                                ),
+                                $image['alt'],
+                            ); ?>">
                             <?php oo_get_template(
                                 'components',
                                 '',
@@ -570,13 +573,11 @@ while ($current_property = $pEstates->estateIterator()) {
                                     ],
                                 ],
                             ); ?>
-                            <span class="c-property-details__open-lightbox" title="<?php esc_html_e(
-                                'Alle Fotos ansehen',
-                                'oo_theme',
-                            ); ?>">
-                                <span class="c-property-details__open-lightbox-icon"><?php oo_get_icon(
-                                    'plus',
-                                ); ?></span>
+                            <span class="c-property-details__open-lightbox">
+                                <?php oo_get_icon('plus', true, [
+                                    'class' =>
+                                        'c-property-details__open-lightbox-icon',
+                                ]); ?>
                             </span>
                         </a>
                     <?php $i++;
@@ -831,8 +832,13 @@ while ($current_property = $pEstates->estateIterator()) {
                                         '<a',
                                     ) !== false
                                 ) {
-                                    echo '<iframe class="c-property-details__iframe"" src="' .
+                                    echo '<iframe class="c-property-details__iframe" src="' .
                                         $property_movie_player['url'] .
+                                        '" title="' .
+                                        esc_attr__(
+                                            'Externer Video Inhalt',
+                                            'oo_theme',
+                                        ) .
                                         '"></iframe>';
                                 } else {
                                     echo $property_movie_player['player'];
@@ -1157,6 +1163,10 @@ while ($current_property = $pEstates->estateIterator()) {
                             if ($field['has_value']) {
 
                                 $content = $field['value'];
+                                $field_toggle_id =
+                                    'more-property-features' .
+                                    '-' .
+                                    $field['field'];
 
                                 $description_word_count =
                                     str_word_count(
@@ -1178,7 +1188,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                     <div class="c-property-details__text">
                                         <div class="c-property-details__text-content <?php echo $is_long_description
                                             ? '--shorten'
-                                            : ''; ?>">
+                                            : ''; ?>" id="<?php echo $field_toggle_id; ?>">
                                             <?php echo nl2br($content); ?>
                                             <?php if (
                                                 $field['field'] == 'lage' &&
@@ -1191,16 +1201,21 @@ while ($current_property = $pEstates->estateIterator()) {
                                             <?php endif; ?>
                                         </div>
                                         <?php if ($is_long_description) { ?>
-                                            <div class="c-property-details__more c-read-more">
-                                                <span class="c-read-more__text --more"><?php esc_html_e(
+                                            <button class="c-property-details__more c-read-more" 
+                                                data-open-text="<?php esc_html_e(
                                                     'Mehr anzeigen',
                                                     'oo_theme',
-                                                ); ?></span>
-                                                <span class="c-read-more__text --less"><?php esc_html_e(
+                                                ); ?>"
+                                                data-close-text="<?php esc_html_e(
                                                     'Weniger anzeigen',
                                                     'oo_theme',
-                                                ); ?></span>
-                                            </div>
+                                                ); ?>"
+                                                aria-expanded="false" aria-controls="<?php echo $field_toggle_id; ?>">
+                                                <?php echo esc_html(
+                                                    'Mehr anzeigen',
+                                                    'oo_theme',
+                                                ); ?>
+                                            </button>
                                         <?php } ?>
                                         <?php if (
                                             $field['field'] == 'lage' &&
@@ -1227,7 +1242,14 @@ while ($current_property = $pEstates->estateIterator()) {
                                 <?php echo esc_html(
                                     $area_butler_url['value'],
                                 ); ?>
-                                " class="--is-areabutler" data-usercentrics="AreaButler"></iframe></span>
+                                " class="--is-areabutler" data-usercentrics="AreaButler"
+                                 title="<?php echo sprintf(
+                                     esc_attr__(
+                                         'Externer Inhalt von %s',
+                                         'oo_theme',
+                                     ),
+                                     'AreaButler',
+                                 ); ?>"></iframe></span>
                             <?php if (!empty($infrastructure_info)) { ?>
                                 <div class="c-property-details__text">
                                 <div class="c-item-fields">
@@ -1455,11 +1477,10 @@ if (Favorites::isFavorizationEnabled()) { ?>
             onOffice.addFavoriteButtonLabel = function(i, element) {
                 var favorite = $(element);
                 var propertyId = favorite.attr('data-onoffice-property-id');
-                var favoriteText = favorite.find('.u-screen-reader-text');
                 var favoriteIcon = favorite.find('.--favorite');
                 var favoriteClass = '--filled';
                 if (!onofficeFavorites.favoriteExists(propertyId)) {
-                    favoriteText.text('<?php if (
+                    favorite.attr('aria-label', '<?php if (
                         $favorite_label == 'Watchlist'
                     ) {
                         esc_html_e('Zur Merkliste hinzufügen', 'oo_theme');
@@ -1472,7 +1493,7 @@ if (Favorites::isFavorizationEnabled()) { ?>
                         onOffice.addFavoriteButtonLabel(0, favorite);
                     });
                 } else {
-                    favoriteText.text('<?php if (
+                    favorite.attr('aria-label', '<?php if (
                         $favorite_label == 'Watchlist'
                     ) {
                         esc_html_e('Von Merkliste entfernen', 'oo_theme');

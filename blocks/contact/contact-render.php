@@ -480,7 +480,12 @@ if (empty($addresses)) {
                             $map_color .
                             '" data-marker-color="' .
                             $marker_color .
-                            '" style="width: 100%;" data-max-zoom="15">';
+                            '" style="width: 100%;" data-max-zoom="15" role="region" aria-label="' .
+                            esc_html__(
+                                'Karte mit Kontaktinformationen',
+                                'oo_theme',
+                            ) .
+                            '">';
                         $map = $address['maps'] ?? [];
                         if (
                             $map_type == 'open-street-map' &&
@@ -562,7 +567,18 @@ if (empty($addresses)) {
 
                         <div class="c-map__marker" data-lat="<?php echo esc_attr(
                             $map_lat,
-                        ); ?>" data-lng="<?php echo esc_attr($map_lng); ?>">
+                        ); ?>" data-lng="<?php echo esc_attr(
+    $map_lng,
+); ?>" data-aria-label="<?php echo oo_get_map_marker_aria_label(
+    [
+        'title' => $name,
+        'street' => $street,
+        'zip' => $zip,
+        'city' => $map_city,
+        'country' => $country,
+    ],
+    'Immobilienstandort',
+); ?>">
                             <div class="c-map__info --bg-transparent">
                                 <?php
                                 if (!empty($name)) {

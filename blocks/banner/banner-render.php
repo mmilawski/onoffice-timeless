@@ -295,27 +295,47 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
 <?php if ($slide_count > 1) { ?>
             </div>
             <div class="c-slider__navigation splide__navigation">
-                <ul class="c-slider__pagination splide__pagination"></ul>
                 <div class="c-slider__arrows splide__arrows">
                     <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
                         <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
                             'Vorheriges',
                             'oo_theme',
                         ); ?></span>
-                        <span class="c-slider__arrow-icon --chevron-left"><?php oo_get_icon(
-                            'chevron-left',
-                        ); ?></span>
+                       <?php echo oo_get_icon('chevron-left', true, [
+                           'class' => 'c-slider__icon splide__icon',
+                       ]); ?>
                     </button>
                     <button class="c-slider__arrow --next splide__arrow splide__arrow--next">
                         <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
                             'Nächstes',
                             'oo_theme',
                         ); ?></span>
-                        <span class="c-slider__arrow-icon --chevron-right"><?php oo_get_icon(
-                            'chevron-right',
-                        ); ?></span>
+                        <?php echo oo_get_icon('chevron-right', true, [
+                            'class' => 'c-slider__icon splide__icon',
+                        ]); ?>
                     </button>
                 </div>
+                <?php if ($autoslide) { ?>
+                    <button class="c-slider__toggle splide__toggle" type="button">
+                        <span class="u-screen-reader-only"><?php esc_html_e(
+                            'Start',
+                            'oo_theme',
+                        ); ?></span>
+                        <?php echo oo_get_icon('play', true, [
+                            'class' =>
+                                'c-slider__icon splide__icon splide__toggle --play',
+                        ]); ?>
+                        <span class="u-screen-reader-only"><?php esc_html_e(
+                            'Stopp',
+                            'oo_theme',
+                        ); ?></span>
+                        <?php echo oo_get_icon('pause', true, [
+                            'class' =>
+                                'c-slider__icon splide__icon splide__toggle --pause',
+                        ]); ?>
+                    </button>
+                <?php } ?>
+                <ul class="c-slider__pagination splide__pagination"></ul>
             </div>
         </div>
     </div>

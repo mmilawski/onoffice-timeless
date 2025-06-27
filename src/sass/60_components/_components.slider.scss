@@ -9,6 +9,61 @@
   }
 
   &__slide {
+    outline: $outline !important;
+    outline-offset: $outline-offset !important;
+    box-shadow: 0px 0px 0px $outline-offset transparent;
+    transition: outline-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+
+    @include focus-visible() {
+      outline-color: var(--oo-color-primary) !important;
+      box-shadow: 0px 0px 0px $outline-offset var(--oo-color-contrast-primary);
+    }
+  }
+
+  &__toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--oo-color-contrast-primary);
+    background-color: var(--oo-color-primary);
+    border: 2px solid var(--oo-color-primary);
+    width: $icon-wrapper-size;
+    height: $icon-wrapper-size;
+    padding: 0.25rem;
+    border-radius: $border-radius;
+    pointer-events: auto;
+
+    #{$c-slider}__icon {
+      width: $icon-size;
+      height: $icon-size;
+
+      @include media-breakpoint-up(xl) {
+        width: $icon-size;
+        height: $icon-size;
+      }
+    }
+  }
+
+  &__toggle {
+    color: var(--oo-color-contrast-primary);
+    background-color: var(--oo-color-primary);
+    border: 2px solid var(--oo-color-primary);
+    width: $icon-wrapper-size;
+    height: $icon-wrapper-size;
+    border-radius: $border-radius;
+    padding: 0.25rem;
+
+    #{$c-slider}__icon {
+      height: $icon-size;
+      width: $icon-size;
+      fill: none;
+      transform: none;
+
+      @include media-breakpoint-up(xl) {
+        width: $icon-size;
+        height: $icon-size;
+      }
+    }
   }
 
   &__pagination {
@@ -38,8 +93,8 @@
     margin: 0;
     padding: 0;
     position: relative;
-    outline: 2px solid transparent;
-    outline-offset: 2px;
+    outline: $outline !important;
+    outline-offset: $outline-offset !important;
     opacity: 1 !important;
     cursor: pointer;
     transition: background-color 0.25s ease-in-out,
@@ -53,8 +108,8 @@
       background-color: var(--oo-color-mix-primary-contrast-20);
     }
 
-    @include focus() {
-      outline-color: var(--oo-color-primary);
+    @include focus-visible() {
+      outline-color: var(--oo-color-primary) !important;
     }
 
     @include active() {
@@ -108,8 +163,8 @@
     padding: 0;
     border-radius: $border-radius;
     border: 0;
-    outline: 2px solid transparent;
-    outline-offset: 2px;
+    outline: $outline !important;
+    outline-offset: $outline-offset !important;
     opacity: 1;
     cursor: pointer;
     transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
@@ -126,8 +181,8 @@
       opacity: 1;
     }
 
-    @include focus() {
-      outline-color: var(--oo-color-primary);
+    @include focus-visible() {
+      outline-color: var(--oo-color-primary) !important;
     }
 
     @include active() {
@@ -231,6 +286,31 @@
       @include media-breakpoint-up(lg) {
         aspect-ratio: unset;
         height: 100%;
+      }
+    }
+
+    #{$c-slider}__toggle {
+      position: absolute;
+      bottom: 3rem;
+      left: 50%;
+      translate: -50%;
+      padding: 0;
+      @include media-breakpoint-up(lg) {
+        bottom: 4rem;
+      }
+    }
+
+    #{$c-slider}__toggle {
+      pointer-events: auto;
+      position: absolute;
+      bottom: 3.5rem;
+      left: 50%;
+      translate: -50%;
+      margin: 0 auto;
+      @include media-breakpoint-up(xl) {
+        top: auto;
+        bottom: 4.5rem;
+        padding: 0.25rem;
       }
     }
     #{$c-slider}__pagination {
@@ -539,8 +619,8 @@
       @include hover() {
         background-color: var(--oo-color-light-mix-primary-contrast-20);
       }
-      @include focus() {
-        outline-color: var(--oo-color-light-primary);
+      @include focus-visible() {
+        outline-color: var(--oo-color-light-primary) !important;
       }
       @include active() {
         background-color: var(--oo-color-light-mix-primary-contrast-40);
@@ -566,8 +646,8 @@
       @include hover() {
         background-color: var(--oo-color-light-mix-primary-contrast-20);
       }
-      @include focus() {
-        outline-color: var(--oo-color-light-primary);
+      @include focus-visible() {
+        outline-color: var(--oo-color-light-primary) !important;
       }
       @include active() {
         background-color: var(--oo-color-light-mix-primary-contrast-40);
@@ -587,8 +667,8 @@
       @include hover() {
         background-color: var(--oo-color-dark-mix-primary-contrast-20);
       }
-      @include focus() {
-        outline-color: var(--oo-color-dark-primary);
+      @include focus-visible() {
+        outline-color: var(--oo-color-dark-primary) !important;
       }
       @include active() {
         background-color: var(--oo-color-dark-mix-primary-contrast-40);
@@ -614,8 +694,8 @@
       @include hover() {
         background-color: var(--oo-color-dark-mix-primary-contrast-20);
       }
-      @include focus() {
-        outline-color: var(--oo-color-dark-primary);
+      @include focus-visible() {
+        outline-color: var(--oo-color-dark-primary) !important;
       }
       @include active() {
         background-color: var(--oo-color-dark-mix-primary-contrast-40);
@@ -635,8 +715,8 @@
       @include hover() {
         background-color: var(--oo-color-primary-mix-primary-contrast-20);
       }
-      @include focus() {
-        outline-color: var(--oo-color-primary-primary);
+      @include focus-visible() {
+        outline-color: var(--oo-color-primary-primary) !important;
       }
       @include active() {
         background-color: var(--oo-color-primary-mix-primary-contrast-40);
@@ -662,8 +742,8 @@
       @include hover() {
         background-color: var(--oo-color-primary-mix-primary-contrast-20);
       }
-      @include focus() {
-        outline-color: var(--oo-color-primary-primary);
+      @include focus-visible() {
+        outline-color: var(--oo-color-primary-primary) !important;
       }
       @include active() {
         background-color: var(--oo-color-primary-mix-primary-contrast-40);
@@ -683,8 +763,8 @@
       @include hover() {
         background-color: var(--oo-color-secondary-mix-primary-contrast-20);
       }
-      @include focus() {
-        outline-color: var(--oo-color-secondary-primary);
+      @include focus-visible() {
+        outline-color: var(--oo-color-secondary-primary) !important;
       }
       @include active() {
         background-color: var(--oo-color-secondary-mix-primary-contrast-40);
@@ -710,8 +790,8 @@
       @include hover() {
         background-color: var(--oo-color-secondary-mix-primary-contrast-20);
       }
-      @include focus() {
-        outline-color: var(--oo-color-secondary-primary);
+      @include focus-visible() {
+        outline-color: var(--oo-color-secondary-primary) !important;
       }
       @include active() {
         background-color: var(--oo-color-secondary-mix-primary-contrast-40);
@@ -731,8 +811,8 @@
       @include hover() {
         background-color: var(--oo-color-footer-mix-primary-contrast-20);
       }
-      @include focus() {
-        outline-color: var(--oo-color-footer-primary);
+      @include focus-visible() {
+        outline-color: var(--oo-color-footer-primary) !important;
       }
       @include active() {
         background-color: var(--oo-color-footer-mix-primary-contrast-40);
@@ -758,8 +838,8 @@
       @include hover() {
         background-color: var(--oo-color-footer-mix-primary-contrast-20);
       }
-      @include focus() {
-        outline-color: var(--oo-color-footer-primary);
+      @include focus-visible() {
+        outline-color: var(--oo-color-footer-primary) !important;
       }
       @include active() {
         background-color: var(--oo-color-footer-mix-primary-contrast-40);
@@ -779,8 +859,8 @@
       @include hover() {
         background-color: var(--oo-color-mix-primary-contrast-20);
       }
-      @include focus() {
-        outline-color: var(--oo-color-primary);
+      @include focus-visible() {
+        outline-color: var(--oo-color-primary) !important;
       }
       @include active() {
         background-color: var(--oo-color-mix-primary-contrast-40);
@@ -806,8 +886,8 @@
       @include hover() {
         background-color: var(--oo-color-mix-primary-contrast-20);
       }
-      @include focus() {
-        outline-color: var(--oo-color-primary);
+      @include focus-visible() {
+        outline-color: var(--oo-color-primary) !important;
       }
       @include active() {
         background-color: var(--oo-color-mix-primary-contrast-40);

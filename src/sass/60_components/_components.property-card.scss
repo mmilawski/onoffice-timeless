@@ -4,7 +4,6 @@
   background-color: var(--oo-color-bg);
   border: 1px solid var(--oo-color-mix-bg-contrast-50);
   border-radius: $border-radius;
-  overflow: hidden;
 
   @include media-breakpoint-up(lg) {
     grid-template-rows: min-content;
@@ -16,7 +15,7 @@
 
   &__inner {
     position: relative;
-    border-radius: 0 0 $border-radius $border-radius;
+    border-radius: $border-radius;
     overflow: hidden;
     background-color: var(--oo-color-transparent-primary-10);
   }
@@ -30,6 +29,11 @@
       @include media-breakpoint-up(lg) {
         cursor: pointer;
         pointer-events: auto;
+      }
+      @include focus-visible() {
+        outline: $outline !important;
+        outline-offset: -4px !important;
+        outline-color: var(--oo-color-primary) !important;
       }
     }
   }
@@ -60,6 +64,12 @@
 
       @include active() {
         background-color: var(--oo-color-mix-status-contrast-40);
+      }
+
+      &__icon {
+        .--filled {
+          stroke: var(--color-contrast-primary);
+        }
       }
     }
   }

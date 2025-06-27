@@ -28,14 +28,13 @@ $image_width_xxxl = '796';
     'o-container',
 ); ?>>
    <div class="c-popup__wrapper">
-        <button class="c-popup__close c-icon-button">
-            <span class="c-icon-button__text u-screen-reader-only"><?php esc_html_e(
-                'Fenster schließen',
-                'oo_theme',
-            ); ?></span>
-            <span class="c-icon-button__icon --close"><?php oo_get_icon(
-                'close',
-            ); ?></span>
+        <button class="c-popup__close c-icon-button --close-popup" aria-label="<?php esc_html_e(
+            'Fenster schließen',
+            'oo_theme',
+        ); ?>">
+            <?php oo_get_icon('close', true, [
+                'class' => 'c-icon-button__icon --close',
+            ]); ?>
         </button>
         <div class="c-popup__row o-row">
             <?php if (!empty($image)) {

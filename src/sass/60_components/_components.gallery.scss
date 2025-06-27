@@ -103,7 +103,16 @@
   &__link {
     display: flex;
     width: 100%;
-    height: 100%;
+    border-radius: $border-radius;
+    outline: $outline;
+    outline-offset: $outline-offset;
+    box-shadow: 0px 0px 0px $outline-offset transparent;
+    transition: outline-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+
+    @include focus-visible() {
+      outline-color: var(--oo-color-primary);
+      box-shadow: 0px 0px 0px $outline-offset var(--oo-color-contrast-primary);
+    }
   }
 
   &__inner {
@@ -118,17 +127,55 @@
           height: 225px;
         }
       }
-
-      &.--on-bg-light {
-      }
-      &.--on-bg-dark {
-      }
-      &.--on-bg-primary {
-      }
-      &.--on-bg-secondary {
-      }
     }
     &.--is-slider {
+    }
+  }
+  &.--bg-light {
+    #{$c-gallery}__link {
+      @include focus-visible() {
+        outline-color: var(--oo-color-light-primary, var(--oo-color-primary));
+        box-shadow: 0px 0px 0px $outline-offset
+          var(--oo-color-light-contrast-primary);
+      }
+    }
+  }
+  &.--bg-dark {
+    #{$c-gallery}__link {
+      @include focus-visible() {
+        outline-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+        box-shadow: 0px 0px 0px $outline-offset
+          var(--oo-color-dark-contrast-primary);
+      }
+    }
+  }
+  &.--bg-primary {
+    #{$c-gallery}__link {
+      @include focus-visible() {
+        outline-color: var(--oo-color-primary-primary, var(--oo-color-primary));
+        box-shadow: 0px 0px 0px $outline-offset
+          var(--oo-color-primary-contrast-primary);
+      }
+    }
+  }
+  &.--bg-secondary {
+    #{$c-gallery}__link {
+      @include focus-visible() {
+        outline-color: var(
+          --oo-color-secondary-primary,
+          var(--oo-color-primary)
+        );
+        box-shadow: 0px 0px 0px $outline-offset
+          var(--oo-color-secondary-contrast-primary);
+      }
+    }
+  }
+  &.--bg-transparent {
+    #{$c-gallery}__link {
+      @include focus-visible() {
+        outline-color: var(--oo-color-primary);
+        box-shadow: 0px 0px 0px $outline-offset var(--oo-color-contrast-primary);
+      }
     }
   }
 }

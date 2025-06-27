@@ -40,7 +40,7 @@ if (!empty($video)) {
     }
 
     // Add extra attributes to iframe HTML
-    $attributes = 'loading="lazy" class="c-media-text__iframe"';
+    $attributes = 'loading="lazy" class="c-media-text__iframe" tabindex="0"';
     $iframe = str_replace(' frameborder="0"', '', $iframe);
     $iframe_with_attributes = str_replace(
         '></iframe>',
@@ -218,12 +218,13 @@ $media_width_xxxl = '460';
 
                             <button 
                                 class="c-media-text__play c-player --on-<?php echo $bg_color; ?> "
-                                title="<?php esc_html_e(
+                                aria-label="<?php esc_html_e(
                                     'Video ansehen',
                                     'oo_theme',
-                                ); ?>"
-                            >
-                                <?php oo_get_icon('play'); ?>
+                                ); ?>">
+                                <?php oo_get_icon('play', true, [
+                                    'class' => 'c-player__icon',
+                                ]); ?>
                             </button>
                         </div>
                     <?php echo $iframe_without_source;} else { ?>

@@ -37,7 +37,7 @@ if (empty($header_modules_left) && empty($header_modules_right)) {
     $has_no_meta = '--has-no-meta';
 }
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 
 <head>
@@ -68,7 +68,7 @@ if (empty($header_modules_left) && empty($header_modules_right)) {
             !empty($header_modules_left) ||
             !empty($header_modules_right)
         ): ?>
-            <div class="c-header__meta-wrapper">
+            <div class="c-header__meta-wrapper --hide-mobile">
                 <div class="c-header__meta o-container">
                     <div class="c-header__meta-row">
                         <?php if (!empty($header_modules_left)): ?>
@@ -158,6 +158,11 @@ if (empty($header_modules_left) && empty($header_modules_right)) {
                                     );
                                     $svg->addAttribute('width', $width);
                                     $svg->addAttribute('height', $height);
+                                    $svg->addAttribute('role', 'img');
+                                    $svg->addAttribute(
+                                        'aria-label',
+                                        $company_name,
+                                    );
                                     $svg->addAttribute(
                                         'class',
                                         'o-logo__image --is-svg',
@@ -174,18 +179,22 @@ if (empty($header_modules_left) && empty($header_modules_right)) {
                         </a>
                     </div>
 
-                    <button class="c-main-nav__button c-icon-button --small-corners">
-                        <span class="c-icon-button__text u-screen-reader-only"><?php esc_html_e(
-                            'Menu',
-                            'oo_theme',
-                        ); ?></span>
-                        <span class="c-icon-button__icon --open">
-                            <?php oo_get_icon('bars'); ?>
-                        </span>
-
-                        <span class="c-icon-button__icon --close">
-                            <?php oo_get_icon('close'); ?>
-                        </span>
+                    <button class="c-main-nav__button c-icon-button --small-corners" data-open-text="<?php esc_html_e(
+                        'Menü öffnen',
+                        'oo_theme',
+                    ); ?>" data-close-text="<?php esc_html_e(
+    'Menü schließen',
+    'oo_theme',
+); ?>" aria-label="<?php esc_html_e(
+    'Menü öffnen',
+    'oo_theme',
+); ?>" aria-expanded="false" aria-controls="main-nav">
+                        <?php echo oo_get_icon('bars', true, [
+                            'class' => 'c-icon-button__icon --open',
+                        ]); ?>
+                        <?php echo oo_get_icon('close', true, [
+                            'class' => 'c-icon-button__icon --close',
+                        ]); ?>
                     </button>
 
                 </div><!-- #container -->
@@ -193,7 +202,10 @@ if (empty($header_modules_left) && empty($header_modules_right)) {
 
             <div class="c-header__wrapper">
                 <div class="c-header__nav-wrapper">
-                    <nav class="c-header__nav c-main-nav">
+                    <nav id="main-nav" class="c-header__nav c-main-nav o-container" aria-label="<?php echo esc_html_e(
+                        'Hauptmenü',
+                        'oo_theme',
+                    ); ?>" role="navigation">
                         <?php wp_nav_menu([
                             'theme_location' => 'main-nav',
                             'menu_class' => 'c-main-nav__list',
@@ -203,11 +215,40 @@ if (empty($header_modules_left) && empty($header_modules_right)) {
                             'link_before' => '',
                             'link_after' => '',
                             'items_wrap' =>
-                                '<ul id="%1$s" class="%2$s">%3$s</ul>',
+                                '<ul id="%1$s" class="%2$s" role="menu">%3$s</ul>',
                             'walker' => new No_Sub_Submenu_Walker_Nav_Menu(),
                         ]); ?>
                     </nav>
                 </div>
+                <?php if (
+                    !empty($header_modules_left) ||
+                    !empty($header_modules_right)
+                ): ?>
+                    <div class="c-header__meta-wrapper --hide-desktop">
+                        <div class="c-header__meta o-container">
+                            <div class="c-header__meta-row">
+                                <?php if (!empty($header_modules_left)): ?>
+                                    <div class="c-header__meta-column --left c-modules --is-header">
+                                        <?php oo_load_modules_flexible_content(
+                                            $header_content_left,
+                                            'header',
+                                        ); ?>
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if (!empty($header_modules_right)): ?>
+                                    <div class="c-header__meta-column --right c-modules --is-header">
+                                        <?php oo_load_modules_flexible_content(
+                                            $header_content_right,
+                                            'header',
+                                        ); ?>
+                                    </div>
+                                <?php endif; ?>
+
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
     </header><!-- #masthead -->

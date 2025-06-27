@@ -70,7 +70,10 @@ return function (AddressList $pAddressClone) {
     wp_enqueue_script('oo-google-map-marker-cluster-script');
     ?>
 
-    <div class="c-map --is-google-map" data-max-zoom="12" data-marker-color="<?php echo $primary_color; ?>" style="width: 100%;">
+    <div class="c-map --is-google-map" data-max-zoom="12" data-marker-color="<?php echo $primary_color; ?>" style="width: 100%;" role="application" aria-label="<?php echo esc_html__(
+    'Karte mit Adressenstandorten',
+    'oo_theme',
+); ?>">
         <?php foreach ($address_data as $address) {
 
             $position = $address['position'] ?? [];
@@ -84,9 +87,12 @@ return function (AddressList $pAddressClone) {
                 continue;
             }
             ?>
-            <div class="c-map__marker" data-lat="<?php echo esc_attr(
-                $lat,
-            ); ?>" data-lng="<?php echo esc_attr($lng); ?>">
+            <div class="c-map__marker" data-aria-label="<?php echo oo_get_map_marker_aria_label(
+                ['title' => $title],
+                'Adressstandort',
+            ); ?>" data-lat="<?php echo esc_attr(
+    $lat,
+); ?>" data-lng="<?php echo esc_attr($lng); ?>">
                 <div class="c-map__info --bg-transparent">
                     <?php
                     if (!empty($title)) {

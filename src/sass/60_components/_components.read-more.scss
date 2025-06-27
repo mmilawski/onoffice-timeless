@@ -1,77 +1,57 @@
 .c-read-more {
   $c-read-more: &;
 
-  &__text {
-    display: inline-block;
-    width: 100%;
-    margin: 0;
-    padding: 0.5rem 0;
-    color: var(--oo-color-primary);
-    background: transparent;
-    border: 2px solid transparent;
+  display: flex;
+  width: auto;
+  margin: 0;
+  padding: 0.5rem 0;
+  color: var(--oo-color-primary);
+  background: transparent;
+  border: 2px solid transparent;
+  text-decoration: underline currentColor;
+  text-align: left;
+  border-radius: $border-radius;
+  border: 2px solid transparent;
+  outline: $outline;
+  outline-offset: $outline-offset;
+  transition: text-decoration 0.25s ease-in-out, outline-color 0.25s ease-in-out;
+  cursor: pointer;
+
+  @include visited() {
     text-decoration: underline currentColor;
-    transition: text-decoration 0.25s ease-in-out;
-    cursor: pointer;
-
-    @include visited() {
-      text-decoration: underline currentColor;
-    }
-
-    @include hover-focus-active() {
-      text-decoration-color: transparent;
-    }
-
-    .--bg-light & {
-      color: var(--oo-color-light-primary, var(--oo-color-primary));
-    }
-    .--bg-dark & {
-      color: var(--oo-color-dark-primary, var(--oo-color-primary));
-    }
-    .--bg-primary & {
-      color: var(--oo-color-primary-primary, var(--oo-color-primary));
-    }
-    .--bg-secondary & {
-      color: var(--oo-color-secondary-primary, var(--oo-color-primary));
-    }
-    .--bg-transparent & {
-      color: var(--oo-color-primary);
-    }
-
-    &.--more {
-      display: block;
-      .--is-open & {
-        display: none;
-      }
-    }
-    &.--less {
-      display: none;
-      .--is-open & {
-        display: block;
-      }
-    }
   }
 
-  &__wrapper {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    flex-grow: 1;
-
-    &.--more {
-      display: flex;
-      .--is-open & {
-        display: none;
-      }
-    }
-    &.--less {
-      display: none;
-      .--is-open & {
-        display: flex;
-      }
-    }
+  @include hover-focus-active() {
+    text-decoration-color: transparent;
   }
 
-  &.--text-align-center {
+  @include focus-visible() {
+    outline-color: currentColor;
+  }
+
+  .--bg-light & {
+    color: var(--oo-color-light-primary, var(--oo-color-primary));
+  }
+  .--bg-dark & {
+    color: var(--oo-color-dark-primary, var(--oo-color-primary));
+  }
+  .--bg-primary & {
+    color: var(--oo-color-primary-primary, var(--oo-color-primary));
+  }
+  .--bg-secondary & {
+    color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+  }
+  .--bg-transparent & {
+    color: var(--oo-color-primary);
+  }
+
+  &.--full-width {
     text-align: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  &.--small-corners {
+    border-radius: $border-radius-small;
   }
 }

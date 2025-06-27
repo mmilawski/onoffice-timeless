@@ -114,13 +114,15 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-focus;
   }
 
+  &:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-clear-button,
   &::-webkit-calendar-picker-indicator {
-    mask: $form-svg-calendar;
-    background-image: unset;
-    mask-repeat: no-repeat;
-    mask-size: 0.6328rem;
-    mask-position: center;
-    background-color: $form-color;
+    display: none;
   }
 
   &::-webkit-outer-spin-button,
@@ -409,16 +411,162 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   }
 }
 
-/* Select2 */
-.select2 {
-  width: 100% !important;
-}
+// TomSelect
+.ts-wrapper,
+.ts-wrapper.single,
+.ts-wrapper.multi {
+  &.o-select {
+    position: relative;
+    padding: unset;
+    height: 2.5rem;
+    max-height: 2.5rem;
 
-.select2-container--default {
-  $container: '.select2-container';
-  $selection: '.select2-selection';
+    border-radius: $form-radius;
+    border: $form-border $form-border-color;
+    outline: $form-outline;
+    transition: outline-color $form-duration $form-timing,
+      border-color $form-duration $form-timing;
+  }
 
-  .select2-dropdown {
+  &.focus {
+    outline-color: $form-focus;
+    border-color: $form-focus;
+  }
+
+  &.focus,
+  &:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  .ts-control {
+    height: 100%;
+    background: $form-bg;
+    color: $form-color;
+    border: none;
+    line-height: 1.5rem;
+    padding: $form-padding;
+    border-radius: $form-radius;
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: 0.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 14px;
+      height: 100%;
+      background: $form-color;
+      mask: $form-svg-arrow;
+      mask-repeat: no-repeat;
+      mask-size: $form-select-size;
+      mask-position: center;
+    }
+
+    &:not(.rtl) {
+      padding-right: 2.75rem !important; // requires !important because Tomselect uses it
+    }
+
+    > .ts-control-inner {
+      position: relative;
+      display: inline-block;
+      height: 100%;
+      width: 100%;
+      background: unset;
+      white-space: nowrap;
+      padding: unset;
+      margin: unset;
+      border: unset;
+      border-radius: 0;
+
+      input {
+        max-width: 100%;
+        height: 100%;
+        vertical-align: middle;
+        min-width: 100%;
+        border: none;
+        line-height: $form-line-height;
+        font-size: 1rem;
+
+        &::placeholder {
+          color: $form-placeholder;
+          font-weight: $font-weight-text;
+          opacity: 1; // Reset opacity for Firefox
+        }
+
+        &:focus-visible {
+          outline: unset;
+        }
+      }
+    }
+  }
+
+  .ts-items {
+    display: inline-block;
+    max-width: calc(100% - 3.5rem);
+    height: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    vertical-align: middle;
+    font-size: 1rem;
+    line-height: 30px;
+  }
+
+  .ts-item {
+    display: inline;
+    max-width: 100%;
+    height: 100%;
+    padding: unset !important;
+    margin: 0;
+    margin-right: 0.5rem;
+    border-radius: $form-radius;
+    background: none;
+    border: 0;
+    cursor: default;
+
+    &-remove {
+      margin: 0;
+      margin-right: 0.25rem;
+      padding: 0;
+      width: $form-remove-wrapper;
+      height: $form-remove-wrapper;
+      font-size: 0;
+      border: 0;
+      border-radius: $form-radius-small;
+      position: relative;
+      top: -0.125rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      vertical-align: middle;
+      background: transparent;
+      transition: background-color $form-duration $form-timing;
+      cursor: pointer;
+
+      &:before {
+        content: '';
+        display: inline-block;
+        width: $form-remove-size;
+        height: $form-remove-size;
+        background: $form-primary;
+        mask: $form-svg-close;
+        mask-repeat: no-repeat;
+        mask-size: $form-remove-size;
+        mask-position: center;
+        transition: background-color $form-duration $form-timing;
+      }
+
+      @include hover-focus-active() {
+        background: $form-primary;
+        &:before {
+          background: $form-primary-contrast;
+        }
+      }
+    }
+  }
+
+  .ts-dropdown {
     color: $form-color;
     background: $form-dropdown;
     box-shadow: $form-shadow;
@@ -427,388 +575,134 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     overflow: hidden;
     margin: 0;
     text-align: left;
-    &--below {
-      margin-top: 1px;
-    }
-    &--above {
-      margin-top: -1px;
-    }
-  }
 
-  .select2-results {
-    border-radius: $form-radius;
+    &__item {
+      display: flex;
+      flex-direction: row;
+      font-size: 1rem;
+      min-height: 2.25rem;
+      padding: 0.25rem 0.75rem;
 
-    &__options {
-    }
-
-    &__option {
-      padding: $form-padding;
-      hyphens: auto;
-      display: grid;
-      grid-template-columns: 0.5rem 1fr;
-      gap: 0.625rem;
-      padding: $form-padding;
-
-      &:before {
-        content: '';
-        background: $form-primary;
-        width: 0.5rem;
-        height: 0.5rem;
-        border-radius: 50%;
-        margin-top: calc(($global-line-height / 2) - 0.25rem);
+      &.o-control {
+        margin-top: unset;
       }
 
-      &[aria-selected='true'],
-      &--selected {
+      &.selected {
         background-color: $form-selected;
       }
 
-      &--highlighted[aria-selected] {
+      &.active {
         background-color: $form-primary;
         color: $form-primary-contrast;
-        &:before {
-          background-color: currentColor;
-        }
+      }
+    }
+
+    &__label {
+      &::before {
+        margin-top: unset;
       }
 
-      &.level-0 {
-        font-family: $font-family-text-bold;
-        font-weight: $font-weight-text-bold;
+      &::after {
+        margin-top: unset;
       }
+    }
 
-      &.level-1 {
-        padding-left: 1.5rem;
-      }
-
-      &.level-2 {
-        padding-left: 3rem;
-      }
-
-      &.level-3 {
-        padding-left: 4.5rem;
-      }
-
-      &.level-4 {
-        padding-left: 6rem;
-      }
-
-      &.level-5 {
-        padding-left: 7.5rem;
-      }
+    &__text {
+      display: block;
+      align-self: center;
+      height: 100%;
+      line-height: 1.75rem;
     }
   }
 
-  .select2-search {
-    $search: '.select2-search';
+  &.has-items {
+    .ts-control {
+      padding: $form-padding;
 
-    &--inline {
-      #{$search}__field {
-        margin: 0;
-        line-height: inherit;
-        height: $form-line-height;
-        font-family: inherit;
-        font-weight: inherit;
-      }
-    }
+      input {
+        min-width: 3.5rem;
 
-    &__field {
-      font-family: inherit;
-      font-weight: inherit;
-      font-size: 100%;
-      line-height: inherit;
-      color: $form-color;
-
-      &::placeholder {
-        color: $form-placeholder;
-        font-weight: $font-weight-text;
-        opacity: 1; // Reset opacity for Firefox
-      }
-    }
-  }
-
-  .select2-selection {
-    height: $form-height;
-    color: $form-color;
-    background: $form-bg;
-    border: $form-border $form-border-color;
-    border-radius: $form-radius !important;
-    padding: $form-padding;
-    padding-right: calc(($form-padding-right * 2) + $form-select-size);
-    display: flex;
-    align-items: center;
-    outline: $form-outline;
-    transition: outline-color $form-duration $form-timing,
-      border-color $form-duration $form-timing;
-
-    // Single -------------------------------------------------------------- //
-    &--single {
-      #{$selection}__rendered {
-        color: inherit;
-        padding: 0;
-      }
-
-      #{$selection}__clear {
-        float: none;
-        margin: 0;
-        margin-right: 0.25rem;
-        padding: 0;
-        width: $form-remove-wrapper;
-        height: $form-remove-wrapper;
-        font-size: 0;
-        border: 0;
-        border-radius: $form-radius-small;
-        position: static;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        transition: background-color $form-duration $form-timing;
-
-        &:before {
-          content: '';
-          display: inline-block;
-          width: $form-remove-size;
-          height: $form-remove-size;
-          background: $form-primary;
-          mask: $form-svg-close;
-          mask-repeat: no-repeat;
-          mask-size: $form-remove-size;
-          mask-position: center;
-          transition: background-color $form-duration $form-timing;
-        }
-
-        @include hover-focus-active() {
-          background: $form-primary;
-          &:before {
-            background: $form-primary-contrast;
-          }
-        }
-      }
-
-      #{$selection}__arrow {
-        width: $form-select-size;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        right: $form-padding-right;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        b {
-          position: relative;
-          top: auto;
-          left: auto;
-          display: inline-block;
-          width: $form-select-size;
-          height: $form-select-size;
-          margin: 0;
-          border: 0;
-          background: $form-color;
-          mask: $form-svg-arrow;
-          mask-repeat: no-repeat;
-          mask-size: $form-select-size;
-          mask-position: center;
-        }
-      }
-
-      #{$selection}__placeholder {
-        color: $form-placeholder;
-      }
-    }
-
-    // Multiple -------------------------------------------------------------- //
-    &--multiple {
-      &:after {
-        content: '';
-        position: absolute;
-        right: $form-padding-right;
-        display: inline-block;
-        width: $form-remove-size;
-        height: $form-remove-size;
-        background: $form-color;
-        mask: $form-svg-arrow;
-        mask-repeat: no-repeat;
-        mask-size: $form-remove-size;
-        mask-position: center;
-      }
-
-      #{$selection}__rendered {
-        display: inline-block;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      #{$selection}__choice {
-        border: none;
-        border-radius: 0;
-        padding: 0;
-        margin: 0 0.75rem 0 0;
-        background: none;
-        cursor: default;
-        display: inline-block;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-
-        &__display {
-          padding: 0;
-        }
-
-        &__remove {
-          margin: 0;
-          margin-right: 0.25rem;
-          padding: 0;
-          width: $form-remove-wrapper;
-          height: $form-remove-wrapper;
-          font-size: 0;
-          border: 0;
-          border-radius: $form-radius-small;
-          position: relative;
-          top: -0.125rem;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          vertical-align: middle;
-          background: transparent;
-          transition: background-color $form-duration $form-timing;
-
-          &:before {
-            content: '';
-            display: inline-block;
-            width: $form-remove-size;
-            height: $form-remove-size;
-            background: $form-primary;
-            mask: $form-svg-close;
-            mask-repeat: no-repeat;
-            mask-size: $form-remove-size;
-            mask-position: center;
-            transition: background-color $form-duration $form-timing;
-          }
-
-          @include hover-focus-active() {
-            background: $form-primary;
-            &:before {
-              background: $form-primary-contrast;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  &#{$container}--open,
-  &#{$container}--focus {
-    #{$selection} {
-      outline: $form-outline;
-      outline-color: $form-focus;
-      border: $form-border $form-border-color;
-      border-color: $form-focus;
-      &--single {
-        #{$selection}__arrow {
-          b {
-            background: $form-primary;
-          }
-        }
-      }
-      &--multiple {
-        &:after {
-          background-color: $form-primary;
+        &::placeholder {
+          color: transparent;
         }
       }
     }
   }
 
   .--on-bg-light & {
-    .select2-dropdown {
-      color: $form-light-color;
-      background: $form-light-dropdown;
-    }
-    .select2-results {
-      &__option {
-        &:before {
+    border-color: $form-light-border-color;
+
+    &.focus {
+      outline-color: $form-light-focus;
+      border-color: $form-light-focus;
+
+      .ts-control {
+        &::after {
           background: $form-light-primary;
-        }
-        &[aria-selected='true'],
-        &--selected {
-          background-color: $form-light-selected;
-        }
-        &--highlighted[aria-selected] {
-          background-color: $form-light-primary;
-          color: $form-light-primary-contrast;
-          &:before {
-            background-color: currentColor;
-          }
         }
       }
     }
-    .select2-search {
-      &__field {
+
+    .ts-dropdown {
+      color: $form-light-color;
+      background: $form-light-dropdown;
+
+      &__item {
+        &.selected {
+          background-color: $form-light-selected;
+        }
+
+        &.active {
+          background-color: $form-light-primary;
+          color: $form-light-primary-contrast;
+        }
+      }
+    }
+
+    .ts-items {
+      color: $form-light-color;
+    }
+
+    .ts-item {
+      &-remove {
+        @include hover-focus-active() {
+          background: $form-light-primary;
+          &:before {
+            background: $form-light-primary-contrast;
+          }
+        }
+
+        &::before {
+          background: $form-light-primary;
+        }
+      }
+    }
+
+    .ts-control {
+      color: $form-light-color;
+      background-color: $form-light-bg;
+      border-color: $form-light-border-color;
+
+      &::after {
+        // dropdown chevron
+        background: $form-light-color;
+      }
+
+      input {
+        color: $form-light-color;
+        background-color: $form-light-bg;
+        border-color: $form-light-border-color;
         &::placeholder {
           color: $form-light-placeholder;
         }
       }
     }
-    .select2-selection {
-      color: $form-light-color;
-      background-color: $form-light-bg;
-      border-color: $form-light-border-color;
-      &--single {
-        #{$selection}__clear {
-          &:before {
-            background: $form-light-primary;
-          }
-          @include hover-focus-active() {
-            background: $form-light-primary;
-            &:before {
-              background: $form-light-primary-contrast;
-            }
-          }
-        }
-        #{$selection}__arrow {
-          b {
-            background: $form-light-color;
-          }
-        }
 
-        #{$selection}__placeholder {
-          color: $form-light-placeholder;
-        }
-      }
-      &--multiple {
-        &:after {
-          background: $form-light-color;
-        }
-        #{$selection}__choice {
-          &__remove {
-            &:before {
-              background: $form-light-primary;
-            }
-            @include hover-focus-active() {
-              background: $form-light-primary;
-              &:before {
-                background: $form-light-primary-contrast;
-              }
-            }
-          }
-        }
-      }
-    }
-    &#{$container}--open,
-    &#{$container}--focus {
-      #{$selection} {
-        outline-color: $form-light-focus;
-        border-color: $form-light-focus;
-        &--single {
-          #{$selection}__arrow {
-            b {
-              background: $form-light-primary;
-            }
-          }
-        }
-        &--multiple {
-          &:after {
-            background-color: $form-light-primary;
+    &.has-items {
+      .ts-control {
+        input {
+          &::placeholder {
+            color: transparent;
           }
         }
       }
@@ -816,95 +710,75 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   }
 
   .--on-bg-dark & {
-    .select2-dropdown {
-      color: $form-dark-color;
-      background: $form-dark-dropdown;
-    }
-    .select2-results {
-      &__option {
-        &:before {
+    border-color: $form-dark-border-color;
+
+    &.focus {
+      outline-color: $form-dark-focus;
+      border-color: $form-dark-focus;
+
+      .ts-control {
+        &::after {
           background: $form-dark-primary;
-        }
-        &[aria-selected='true'],
-        &--selected {
-          background-color: $form-dark-selected;
-        }
-        &--highlighted[aria-selected] {
-          background-color: $form-dark-primary;
-          color: $form-dark-primary-contrast;
-          &:before {
-            background-color: currentColor;
-          }
         }
       }
     }
-    .select2-search {
-      &__field {
+    .ts-dropdown {
+      color: $form-dark-color;
+      background: $form-dark-dropdown;
+
+      &__item {
+        &.selected {
+          background-color: $form-dark-selected;
+        }
+
+        &.active {
+          background-color: $form-dark-primary;
+          color: $form-dark-primary-contrast;
+        }
+      }
+    }
+    .ts-items {
+      color: $form-dark-color;
+    }
+    .ts-item {
+      &-remove {
+        @include hover-focus-active() {
+          background: $form-dark-primary;
+          &:before {
+            background: $form-dark-primary-contrast;
+          }
+        }
+
+        &::before {
+          background: $form-dark-primary;
+        }
+      }
+    }
+    .ts-control {
+      color: $form-dark-color;
+      background-color: $form-dark-bg;
+      border-color: $form-dark-border-color;
+
+      &::after {
+        // dropdown chevron
+        background: $form-dark-color;
+      }
+
+      input {
+        color: $form-dark-color;
+        background-color: $form-dark-bg;
+        border-color: $form-dark-border-color;
         &::placeholder {
           color: $form-dark-placeholder;
         }
       }
     }
-    .select2-selection {
-      color: $form-dark-color;
-      background-color: $form-dark-bg;
-      border-color: $form-dark-border-color;
-      &--single {
-        #{$selection}__clear {
-          &:before {
-            background: $form-dark-primary;
-          }
-          @include hover-focus-active() {
-            background: $form-dark-primary;
-            &:before {
-              background: $form-dark-primary-contrast;
-            }
-          }
-        }
-        #{$selection}__arrow {
-          b {
-            background: $form-dark-color;
-          }
-        }
 
-        #{$selection}__placeholder {
-          color: $form-dark-placeholder;
-        }
-      }
-      &--multiple {
-        &:after {
-          background: $form-dark-color;
-        }
-        #{$selection}__choice {
-          &__remove {
-            &:before {
-              background: $form-dark-primary;
-            }
-            @include hover-focus-active() {
-              background: $form-dark-primary;
-              &:before {
-                background: $form-dark-primary-contrast;
-              }
-            }
-          }
-        }
-      }
-    }
-    &#{$container}--open,
-    &#{$container}--focus {
-      #{$selection} {
-        outline-color: $form-dark-focus;
-        border-color: $form-dark-focus;
-        &--single {
-          #{$selection}__arrow {
-            b {
-              background: $form-dark-primary;
-            }
-          }
-        }
-        &--multiple {
-          &:after {
-            background-color: $form-dark-primary;
+    &.has-items {
+      .ts-control {
+        input {
+          &::placeholder {
+            color: transparent;
           }
         }
       }
@@ -912,95 +786,75 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   }
 
   .--on-bg-primary & {
-    .select2-dropdown {
-      color: $form-primary-color;
-      background: $form-primary-dropdown;
-    }
-    .select2-results {
-      &__option {
-        &:before {
+    border-color: $form-primary-border-color;
+
+    &.focus {
+      outline-color: $form-primary-focus;
+      border-color: $form-primary-focus;
+
+      .ts-control {
+        &::after {
           background: $form-primary-primary;
-        }
-        &[aria-selected='true'],
-        &--selected {
-          background-color: $form-primary-selected;
-        }
-        &--highlighted[aria-selected] {
-          background-color: $form-primary-primary;
-          color: $form-primary-primary-contrast;
-          &:before {
-            background-color: currentColor;
-          }
         }
       }
     }
-    .select2-search {
-      &__field {
+    .ts-dropdown {
+      color: $form-primary-color;
+      background: $form-primary-dropdown;
+
+      &__item {
+        &.selected {
+          background-color: $form-primary-selected;
+        }
+
+        &.active {
+          background-color: $form-primary-primary;
+          color: $form-primary-primary-contrast;
+        }
+      }
+    }
+    .ts-items {
+      color: $form-primary-color;
+    }
+    .ts-item {
+      &-remove {
+        @include hover-focus-active() {
+          background: $form-primary-primary;
+          &:before {
+            background: $form-primary-primary-contrast;
+          }
+        }
+
+        &::before {
+          background: $form-primary-primary;
+        }
+      }
+    }
+    .ts-control {
+      color: $form-primary-color;
+      background-color: $form-primary-bg;
+      border-color: $form-primary-border-color;
+
+      &::after {
+        // dropdown chevron
+        background: $form-primary-color;
+      }
+
+      input {
+        color: $form-primary-color;
+        background-color: $form-primary-bg;
+        border-color: $form-primary-border-color;
         &::placeholder {
           color: $form-primary-placeholder;
         }
       }
     }
-    .select2-selection {
-      color: $form-primary-color;
-      background-color: $form-primary-bg;
-      border-color: $form-primary-border-color;
-      &--single {
-        #{$selection}__clear {
-          &:before {
-            background: $form-primary-primary;
-          }
-          @include hover-focus-active() {
-            background: $form-primary-primary;
-            &:before {
-              background: $form-primary-primary-contrast;
-            }
-          }
-        }
-        #{$selection}__arrow {
-          b {
-            background: $form-primary-color;
-          }
-        }
 
-        #{$selection}__placeholder {
-          color: $form-primary-placeholder;
-        }
-      }
-      &--multiple {
-        &:after {
-          background: $form-primary-color;
-        }
-        #{$selection}__choice {
-          &__remove {
-            &:before {
-              background: $form-primary-primary;
-            }
-            @include hover-focus-active() {
-              background: $form-primary-primary;
-              &:before {
-                background: $form-primary-primary-contrast;
-              }
-            }
-          }
-        }
-      }
-    }
-    &#{$container}--open,
-    &#{$container}--focus {
-      #{$selection} {
-        outline-color: $form-primary-focus;
-        border-color: $form-primary-focus;
-        &--single {
-          #{$selection}__arrow {
-            b {
-              background: $form-primary-primary;
-            }
-          }
-        }
-        &--multiple {
-          &:after {
-            background-color: $form-primary-primary;
+    &.has-items {
+      .ts-control {
+        input {
+          &::placeholder {
+            color: transparent;
           }
         }
       }
@@ -1008,95 +862,77 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   }
 
   .--on-bg-secondary & {
-    .select2-dropdown {
-      color: $form-secondary-color;
-      background: $form-secondary-dropdown;
-    }
-    .select2-results {
-      &__option {
-        &:before {
+    border-color: $form-secondary-border-color;
+
+    &.focus {
+      outline-color: $form-secondary-focus;
+      border-color: $form-secondary-focus;
+
+      .ts-control {
+        &::after {
           background: $form-secondary-primary;
-        }
-        &[aria-selected='true'],
-        &--selected {
-          background-color: $form-secondary-selected;
-        }
-        &--highlighted[aria-selected] {
-          background-color: $form-secondary-primary;
-          color: $form-secondary-primary-contrast;
-          &:before {
-            background-color: currentColor;
-          }
         }
       }
     }
-    .select2-search {
-      &__field {
+
+    .ts-dropdown {
+      color: $form-secondary-color;
+      background: $form-secondary-dropdown;
+
+      &__item {
+        &.selected {
+          background-color: $form-secondary-selected;
+        }
+
+        &.active {
+          background-color: $form-secondary-primary;
+          color: $form-secondary-primary-contrast;
+        }
+      }
+    }
+    .ts-items {
+      color: $form-secondary-color;
+    }
+    .ts-item {
+      &-remove {
+        @include hover-focus-active() {
+          background: $form-secondary-primary;
+          &:before {
+            // background: $form-secondary-contrast;
+            background: $form-secondary-primary-contrast;
+          }
+        }
+
+        &::before {
+          background: $form-secondary-primary;
+        }
+      }
+    }
+    .ts-control {
+      color: $form-secondary-color;
+      background-color: $form-secondary-bg;
+      border-color: $form-secondary-border-color;
+
+      &::after {
+        // dropdown chevron
+        background: $form-secondary-color;
+      }
+
+      input {
+        color: $form-secondary-color;
+        background-color: $form-secondary-bg;
+        border-color: $form-secondary-border-color;
         &::placeholder {
           color: $form-secondary-placeholder;
         }
       }
     }
-    .select2-selection {
-      color: $form-secondary-color;
-      background-color: $form-secondary-bg;
-      border-color: $form-secondary-border-color;
-      &--single {
-        #{$selection}__clear {
-          &:before {
-            background: $form-secondary-primary;
-          }
-          @include hover-focus-active() {
-            background: $form-secondary-primary;
-            &:before {
-              background: $form-secondary-primary-contrast;
-            }
-          }
-        }
-        #{$selection}__arrow {
-          b {
-            background: $form-secondary-color;
-          }
-        }
 
-        #{$selection}__placeholder {
-          color: $form-secondary-placeholder;
-        }
-      }
-      &--multiple {
-        &:after {
-          background: $form-secondary-color;
-        }
-        #{$selection}__choice {
-          &__remove {
-            &:before {
-              background: $form-secondary-primary;
-            }
-            @include hover-focus-active() {
-              background: $form-secondary-primary;
-              &:before {
-                background: $form-secondary-primary-contrast;
-              }
-            }
-          }
-        }
-      }
-    }
-    &#{$container}--open,
-    &#{$container}--focus {
-      #{$selection} {
-        outline-color: $form-secondary-focus;
-        border-color: $form-secondary-focus;
-        &--single {
-          #{$selection}__arrow {
-            b {
-              background: $form-secondary-primary;
-            }
-          }
-        }
-        &--multiple {
-          &:after {
-            background-color: $form-secondary-primary;
+    &.has-items {
+      .ts-control {
+        input {
+          &::placeholder {
+            color: transparent;
           }
         }
       }
@@ -1104,95 +940,76 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   }
 
   .--on-bg-footer & {
-    .select2-dropdown {
-      color: $form-footer-color;
-      background: $form-footer-dropdown;
-    }
-    .select2-results {
-      &__option {
-        &:before {
+    border-color: $form-footer-border-color;
+
+    &.focus {
+      outline-color: $form-footer-focus;
+      border-color: $form-footer-focus;
+
+      .ts-control {
+        &::after {
           background: $form-footer-primary;
-        }
-        &[aria-selected='true'],
-        &--selected {
-          background-color: $form-footer-selected;
-        }
-        &--highlighted[aria-selected] {
-          background-color: $form-footer-primary;
-          color: $form-footer-primary-contrast;
-          &:before {
-            background-color: currentColor;
-          }
         }
       }
     }
-    .select2-search {
-      &__field {
+
+    .ts-dropdown {
+      color: $form-footer-color;
+      background: $form-footer-dropdown;
+
+      &__item {
+        &.selected {
+          background-color: $form-footer-selected;
+        }
+
+        &.active {
+          background-color: $form-footer-primary;
+          color: $form-footer-primary-contrast;
+        }
+      }
+    }
+    .ts-items {
+      color: $form-footer-color;
+    }
+    .ts-item {
+      &-remove {
+        @include hover-focus-active() {
+          background: $form-footer-primary;
+          &:before {
+            background: $form-footer-primary-contrast;
+          }
+        }
+
+        &::before {
+          background: $form-footer-primary;
+        }
+      }
+    }
+    .ts-control {
+      color: $form-footer-color;
+      background-color: $form-footer-bg;
+      border-color: $form-footer-border-color;
+
+      &::after {
+        // dropdown chevron
+        background: $form-footer-color;
+      }
+
+      input {
+        color: $form-footer-color;
+        background-color: $form-footer-bg;
+        border-color: $form-footer-border-color;
         &::placeholder {
           color: $form-footer-placeholder;
         }
       }
     }
-    .select2-selection {
-      color: $form-footer-color;
-      background-color: $form-footer-bg;
-      border-color: $form-footer-border-color;
-      &--single {
-        #{$selection}__clear {
-          &:before {
-            background: $form-footer-primary;
-          }
-          @include hover-focus-active() {
-            background: $form-footer-primary;
-            &:before {
-              background: $form-footer-primary-contrast;
-            }
-          }
-        }
-        #{$selection}__arrow {
-          b {
-            background: $form-footer-color;
-          }
-        }
 
-        #{$selection}__placeholder {
-          color: $form-footer-placeholder;
-        }
-      }
-      &--multiple {
-        &:after {
-          background: $form-footer-color;
-        }
-        #{$selection}__choice {
-          &__remove {
-            &:before {
-              background: $form-footer-primary;
-            }
-            @include hover-focus-active() {
-              background: $form-footer-primary;
-              &:before {
-                background: $form-footer-primary-contrast;
-              }
-            }
-          }
-        }
-      }
-    }
-    &#{$container}--open,
-    &#{$container}--focus {
-      #{$selection} {
-        outline-color: $form-footer-focus;
-        border-color: $form-footer-focus;
-        &--single {
-          #{$selection}__arrow {
-            b {
-              background: $form-footer-primary;
-            }
-          }
-        }
-        &--multiple {
-          &:after {
-            background-color: $form-footer-primary;
+    &.has-items {
+      .ts-control {
+        input {
+          &::placeholder {
+            color: transparent;
           }
         }
       }
@@ -1200,95 +1017,76 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   }
 
   .--on-bg-transparent & {
-    .select2-dropdown {
-      color: $form-color;
-      background: $form-dropdown;
-    }
-    .select2-results {
-      &__option {
-        &:before {
+    border-color: $form-border-color;
+
+    &.focus {
+      outline-color: $form-focus;
+      border-color: $form-focus;
+
+      .ts-control {
+        &::after {
           background: $form-primary;
-        }
-        &[aria-selected='true'],
-        &--selected {
-          background-color: $form-selected;
-        }
-        &--highlighted[aria-selected] {
-          background-color: $form-primary;
-          color: $form-primary-contrast;
-          &:before {
-            background-color: currentColor;
-          }
         }
       }
     }
-    .select2-search {
-      &__field {
+
+    .ts-dropdown {
+      color: $form-color;
+      background: $form-dropdown;
+
+      &__item {
+        &.selected {
+          background-color: $form-selected;
+        }
+
+        &.active {
+          background-color: $form-primary;
+          color: $form-primary-contrast;
+        }
+      }
+    }
+    .ts-items {
+      color: $form-color;
+    }
+    .ts-item {
+      &-remove {
+        @include hover-focus-active() {
+          background: $form-primary;
+          &:before {
+            background: $form-primary-contrast;
+          }
+        }
+
+        &::before {
+          background: $form-primary;
+        }
+      }
+    }
+    .ts-control {
+      color: $form-color;
+      background-color: $form-bg;
+      border-color: $form-border-color;
+
+      &::after {
+        // dropdown chevron
+        background: $form-color;
+      }
+
+      input {
+        color: $form-color;
+        background-color: $form-bg;
+        border-color: $form-border-color;
         &::placeholder {
           color: $form-placeholder;
         }
       }
     }
-    .select2-selection {
-      color: $form-color;
-      background-color: $form-bg;
-      border-color: $form-border-color;
-      &--single {
-        #{$selection}__clear {
-          &:before {
-            background: $form-primary;
-          }
-          @include hover-focus-active() {
-            background: $form-primary;
-            &:before {
-              background: $form-primary-contrast;
-            }
-          }
-        }
-        #{$selection}__arrow {
-          b {
-            background: $form-color;
-          }
-        }
 
-        #{$selection}__placeholder {
-          color: $form-placeholder;
-        }
-      }
-      &--multiple {
-        &:after {
-          background: $form-color;
-        }
-        #{$selection}__choice {
-          &__remove {
-            &:before {
-              background: $form-primary;
-            }
-            @include hover-focus-active() {
-              background: $form-primary;
-              &:before {
-                background: $form-primary-contrast;
-              }
-            }
-          }
-        }
-      }
-    }
-    &#{$container}--open,
-    &#{$container}--focus {
-      #{$selection} {
-        outline-color: $form-focus;
-        border-color: $form-focus;
-        &--single {
-          #{$selection}__arrow {
-            b {
-              background: $form-primary;
-            }
-          }
-        }
-        &--multiple {
-          &:after {
-            background-color: $form-primary;
+    &.has-items {
+      .ts-control {
+        input {
+          &::placeholder {
+            color: transparent;
           }
         }
       }
@@ -1320,6 +1118,11 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   @include focus() {
     outline-color: $form-focus;
     border-color: $form-focus;
+  }
+
+  &:focus-visible {
+    outline: 1px solid currentColor;
+    outline-offset: 2px;
   }
 
   &::placeholder {
@@ -1574,6 +1377,13 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     }
   }
 
+  &__input:focus-visible + &__label {
+    &:before {
+      outline: 1px solid $form-focus;
+      outline-offset: 2px;
+    }
+  }
+
   &__input:checked + &__label {
     &:before {
       background-color: $form-primary;
@@ -1819,15 +1629,15 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   .o-textarea {
     border-radius: $form-radius-small;
   }
-  .select2 {
-    &-dropdown {
+
+  .ts-wrapper.o-select,
+  .ts-wrapper.multi.o-select {
+    border-radius: $form-radius-small;
+    .ts-control {
       border-radius: $form-radius-small;
     }
-    &-results {
+    .ts-dropdown {
       border-radius: $form-radius-small;
-    }
-    &-selection {
-      border-radius: $form-radius-small !important;
     }
   }
 }

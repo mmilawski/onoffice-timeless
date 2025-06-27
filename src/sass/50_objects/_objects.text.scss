@@ -1,7 +1,7 @@
 .o-text {
   &.--is-wysiwyg {
     > *:not(:last-child) {
-      margin-bottom: 1rem;
+      margin-bottom: $global-line-height;
     }
   }
 

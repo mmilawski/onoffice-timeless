@@ -1,6 +1,12 @@
 // Generate `:hover` and `:focus` styles in one go.
 
 // Nore Link styles in one go.
+@mixin plain {
+  & {
+    @content;
+  }
+}
+
 @mixin hover {
   &:hover {
     @content;
@@ -13,9 +19,8 @@
   }
 }
 
-@mixin focus-within {
-  &:focus,
-  &:focus-within {
+@mixin focus-visible {
+  &:focus-visible {
     @content;
   }
 }
@@ -28,6 +33,12 @@
 
 @mixin active {
   &:active {
+    @content;
+  }
+}
+
+@mixin visited {
+  &:visited {
     @content;
   }
 }
@@ -47,26 +58,8 @@
   }
 }
 
-@mixin plain {
-  & {
-    @content;
-  }
-}
-
 @mixin plain-visited {
   &,
-  &:visited {
-    @content;
-  }
-}
-
-@mixin visited-hover {
-  &:visited:hover {
-    @content;
-  }
-}
-
-@mixin visited {
   &:visited {
     @content;
   }
@@ -82,6 +75,16 @@
 @mixin plain-visited-active {
   &,
   &:visited,
+  &:active {
+    @content;
+  }
+}
+
+@mixin plain-visited-hover-focus-active {
+  &,
+  &:visited,
+  &:hover,
+  &:focus,
   &:active {
     @content;
   }

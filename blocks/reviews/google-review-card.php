@@ -25,91 +25,101 @@ if (
     $reviews = oo_get_google_place($place_id, $google_api_key, $count_stars);
 
     if (is_array($reviews)) { ?>
+        <?php foreach ($reviews as $review) {
 
-  <?php foreach ($reviews as $review) {
+            $uniqid = 'google-review-' . uniqid();
 
-      $author = $review['authorAttribution']['displayName'] ?? null;
-      $text = $review['originalText']['text'] ?? null;
-      $text_word_count = str_word_count(trim(strip_tags($text))) ?? 0;
+            $author = $review['authorAttribution']['displayName'] ?? null;
+            $text = $review['originalText']['text'] ?? null;
+            $text_word_count = str_word_count(trim(strip_tags($text))) ?? 0;
 
-      // Review Item
-      $rating = $review['rating'] ?? null;
-      $publish_time = $review['publishTime'];
-      $date_time = new DateTime($publish_time);
-      $date = $date_time->format('d.m.Y');
-      ?>
-      <article class="c-google-review-card --bg-transparent <?php if (
-          $is_slider
-      ) {
-          echo '--on-slider c-slider__slide splide__slide';
-      } ?> <?php echo '--is-' . $type . '-reviews'; ?>">
-          <?php if (!empty($author) && !empty($date)) { ?>
-            <div class="c-google-review-card__author">
-                <div class="c-google-review-card__date c-flag">
-                  <?php echo htmlspecialchars($date); ?>
-                </div>
-                <div class="c-google-review-card__name o-headline --h3">
-                  <p><?php echo htmlspecialchars($author); ?></p>
-                </div>
-            </div>
-          <?php } ?>
-          <div class="c-google-review-card__contents <?php echo $is_long_text
-              ? '--shorten'
-              : ''; ?>">
-          <?php if (!empty($text)) { ?>
-            <div class="c-google-review-card__text o-text">
-                <p>
-                    <?php echo htmlspecialchars($text); ?>
-                </p>
-            </div>
-          <?php } ?>
-          </div>
-          
-        <div class="c-google-review-card__more c-read-more">
-            <span class="c-read-more__text --more"><?php esc_html_e(
-                'Mehr anzeigen',
-                'oo_theme',
-            ); ?></span> 
-            <span class="c-read-more__text --less"><?php esc_html_e(
-                'Weniger anzeigen',
-                'oo_theme',
-            ); ?></span>
-        </div>
+            // Review Item
+            $rating = $review['rating'] ?? null;
+            $publish_time = $review['publishTime'];
+            $date_time = new DateTime($publish_time);
+            $date = $date_time->format('d.m.Y');
+            ?>
+            <article class="c-google-review-card --bg-transparent <?php if (
+                $is_slider
+            ) {
+                echo '--on-slider c-slider__slide splide__slide';
+            } ?> <?php echo '--is-' . $type . '-reviews'; ?>">
+                <?php if (!empty($author) && !empty($date)) { ?>
+                    <div class="c-google-review-card__author">
+                        <div class="c-google-review-card__date c-flag">
+                        <?php echo htmlspecialchars($date); ?>
+                        </div>
+                        <div class="c-google-review-card__name o-headline --h3">
+                        <p><?php echo htmlspecialchars($author); ?></p>
+                        </div>
+                    </div>
+                <?php } ?>
 
-          <?php if ($rating) { ?>
-              <div class="c-google-review-card__stars c-stars">
-                  <?php
-                  $rating = round($rating * 2) / 2;
-                  $stars_total = 5;
+                <?php if (!empty($text)) { ?>
+                    <div class="c-google-review-card__contents">
+                        <div class="c-google-review-card__text o-text" id="<?php echo $uniqid; ?>">
+                            <p>
+                                <?php echo htmlspecialchars($text); ?>
+                            </p>
+                        </div>
 
-                  for ($i = 0; $i < floor($rating); $i++) {
-                      $stars_total--;
-                      echo '<span class="c-stars__star --filled">';
-                      oo_get_icon('star');
-                      echo '</span>';
-                  }
+                        <button class="c-google-review-card__more c-read-more" 
+                            data-open-text="<?php esc_html_e(
+                                'Mehr anzeigen',
+                                'oo_theme',
+                            ); ?>"
+                            data-close-text="<?php esc_html_e(
+                                'Weniger anzeigen',
+                                'oo_theme',
+                            ); ?>"
+                            aria-expanded="false" aria-controls="<?php echo $uniqid; ?>">
+                            <?php echo esc_html('Mehr anzeigen', 'oo_theme'); ?>
+                        </button>
+                    </div>
+                <?php } ?>
 
-                  if ($rating - floor($rating) === 0.5) {
-                      $stars_total--;
-                      echo '<span class="c-stars__star --half">';
-                      echo '<span class="c-stars__star --filled">';
-                      oo_get_icon('star');
-                      echo '</span>';
-                      echo '<span class="c-stars__star --empty">';
-                      oo_get_icon('star');
-                      echo '</span>';
-                      echo '</span>';
-                  }
+                <?php if ($rating) { ?>
+                    <?php
+                    $rating = round($rating * 2) / 2;
+                    $stars_total = 5;
+                    ?>
+                    <div class="c-google-review-card__stars c-stars" role="img" aria-label="<?php echo sprintf(
+                        esc_attr__(
+                            'Bewertung: %1$s von %2$s Sternen',
+                            'oo_theme',
+                        ),
+                        $rating,
+                        $stars_total,
+                    ); ?>">
+                        <?php
+                        for ($i = 0; $i < floor($rating); $i++) {
+                            $stars_total--;
+                            echo '<span class="c-stars__star --filled">';
+                            oo_get_icon('star');
+                            echo '</span>';
+                        }
 
-                  for ($i = 0; $i < $stars_total; $i++) {
-                      echo '<span class="c-stars__star --empty">';
-                      oo_get_icon('star');
-                      echo '</span>';
-                  }
-                  ?>
-              </div>
-          <?php } ?> 
-      </article>
-  <?php
-  }}
+                        if ($rating - floor($rating) === 0.5) {
+                            $stars_total--;
+                            echo '<span class="c-stars__star --half">';
+                            echo '<span class="c-stars__star --filled">';
+                            oo_get_icon('star');
+                            echo '</span>';
+                            echo '<span class="c-stars__star --empty">';
+                            oo_get_icon('star');
+                            echo '</span>';
+                            echo '</span>';
+                        }
+
+                        for ($i = 0; $i < $stars_total; $i++) {
+                            echo '<span class="c-stars__star --empty">';
+                            oo_get_icon('star');
+                            echo '</span>';
+                        }
+                        ?>
+                    </div>
+                <?php } ?> 
+            </article>
+        <?php
+        }}
 }

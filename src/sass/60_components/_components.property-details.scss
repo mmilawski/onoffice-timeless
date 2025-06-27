@@ -263,8 +263,6 @@
       display: flex;
       justify-content: center;
       width: 100%;
-      overflow: hidden;
-      border-radius: $border-radius;
       aspect-ratio: 3 / 2;
 
       @include media-breakpoint-up(xl) {
@@ -294,6 +292,12 @@
       max-width: 100%;
       position: relative;
       margin-bottom: 1rem;
+      overflow: hidden;
+      border-radius: $border-radius;
+      outline: $outline;
+      outline-offset: $outline-offset;
+      box-shadow: 0px 0px 0px $outline-offset transparent;
+      transition: outline-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
 
       &::after {
         content: none;
@@ -368,6 +372,11 @@
         }
       }
     }
+
+    @include focus-visible() {
+      outline-color: var(--oo-color-primary);
+      box-shadow: 0px 0px 0px $outline-offset var(--oo-color-contrast-primary);
+    }
   }
 
   &__open-lightbox {
@@ -377,11 +386,9 @@
   }
 
   &__open-lightbox-icon {
-    svg {
-      max-width: $icon-size;
-      height: $icon-size;
-      transition: fill 0.25s ease-in-out;
-    }
+    max-width: $icon-size;
+    height: $icon-size;
+    transition: fill 0.25s ease-in-out;
   }
 
   &__aside {
@@ -417,21 +424,32 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
   }
 
   &__text-content {
     &.--shorten {
-      position: relative;
+      max-height: calc($global-line-height * 7);
       overflow: hidden;
-      max-height: calc($global-line-height * 6);
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 7;
+      line-clamp: 7;
+      -webkit-box-orient: vertical;
       transition: max-height 0.25s ease-in-out;
 
       @include media-breakpoint-up(xl) {
-        max-height: calc($global-line-height * 6);
+        max-height: calc($global-line-height * 10);
+        -webkit-line-clamp: 10;
+        line-clamp: 10;
       }
 
       &.--is-open {
-        max-height: 100rem;
+        max-height: none;
+        -webkit-line-clamp: unset;
+        line-clamp: unset;
+        overflow: visible;
       }
     }
   }

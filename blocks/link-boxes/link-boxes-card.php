@@ -17,6 +17,11 @@ $is_slider = filter_var($slider['slider'], FILTER_VALIDATE_BOOLEAN);
     $link = $card['link'] ?? [];
     $icon = $card['icon'] ?? [];
     $icon_url = $icon['url'] ?? null;
+    $icon_alt = !empty($icon['alt'])
+        ? $icon['alt']
+        : (!empty($icon['title'])
+            ? $icon['title']
+            : null);
 
     // Image width
     $image_width_xs = '541';
@@ -40,13 +45,25 @@ $is_slider = filter_var($slider['slider'], FILTER_VALIDATE_BOOLEAN);
         echo '--on-slider c-slider__slide splide__slide';
     } ?>">
         <?php if (!empty($image) || !empty($icon)) { ?>
-        <?php if (!empty($link['url'])) { ?>
-            <a class="c-link-boxes-card__wrapper --has-<?php echo $type; ?>" <?php echo oo_set_link_attr(
-    $link,
-); ?>>
-        <?php } else { ?>
+        <?php if (!empty($link['url'])) {
+
+            $button_text = $link['title']
+                ? $link['title']
+                : esc_html__('Mehr erfahren', 'oo_theme');
+
+            $aria_label = !empty($headline)
+                ? sprintf('%s zu %s', $button_text, $headline)
+                : $button_text;
+            ?>
+            <a class="c-link-boxes-card__link --has-<?php echo $type; ?>"
+                aria-label="<?php echo esc_attr($aria_label); ?>"
+                <?php echo oo_set_link_attr($link); ?>>
+        <?php
+        } else {
+             ?>
             <div class="c-link-boxes-card__wrapper --has-<?php echo $type; ?>">
-        <?php } ?>
+        <?php
+        } ?>
             <?php if (!empty($image) && $type === 'image'): ?>
                 <?php oo_get_template('components', '', 'component-image', [
                     'image' => $image,
@@ -92,6 +109,8 @@ $is_slider = filter_var($slider['slider'], FILTER_VALIDATE_BOOLEAN);
                     $svg_content = file_get_contents($icon_url);
                     if (!empty($svg_content)) {
                         $svg = new SimpleXMLElement($svg_content);
+                        $svg->addAttribute('role', 'img');
+                        $svg->addAttribute('aria-label', $icon_alt);
                         $svg->addAttribute('class', 'c-link-boxes-card__icon');
                         echo "{$svg->asXML()}";
                     }
@@ -165,7 +184,14 @@ $is_slider = filter_var($slider['slider'], FILTER_VALIDATE_BOOLEAN);
                     $button_text = $link['title']
                         ? $link['title']
                         : esc_html__('Mehr erfahren', 'oo_theme');
-                    echo '<a class="c-link-boxes-card__button c-button --full-width --on-bg-transparent" ' .
+
+                    $aria_label = !empty($headline)
+                        ? sprintf('%s zu %s', $button_text, $headline)
+                        : $button_text;
+
+                    echo '<a class="c-link-boxes-card__button c-button --full-width --on-bg-transparent" aria-label="' .
+                        esc_attr($aria_label) .
+                        '" ' .
                         oo_set_link_attr($link) .
                         '>';
                     echo $button_text;

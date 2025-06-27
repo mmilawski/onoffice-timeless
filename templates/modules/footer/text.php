@@ -36,10 +36,13 @@ if (!empty($buttons[0]['link'])):
 
         if (!empty($button['link'])):
             echo '<li class="c-module-links__item">';
+            $attr = oo_set_link_attr($link_item);
+            $attr = preg_replace('/\s*title="[^"]*"/i', '', $attr);
+
             echo '<a class="c-module-links__link c-link --underlined --on-bg-' .
                 $location .
                 '" ' .
-                oo_set_link_attr($link_item) .
+                $attr .
                 '>';
             if (!empty($link_item['title'])) {
                 echo $link_item['title'];

@@ -93,7 +93,11 @@ $max_num_pages = $news_query->max_num_pages ?? null;
 
 <section <?php oo_block_id(
     $block,
-); ?> class="c-news o-section --<?php echo $bg_color; ?>">
+); ?> class="c-news o-section --<?php echo $bg_color; ?>" <?php if (
+    empty($headline['text'])
+) {
+    echo 'aria-label="' . __('News Übersicht', 'oo_theme') . '"';
+} ?>>
     <div class="c-news__container o-container">
         <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
             <div class="c-news__content o-row <?php echo $posiiton_center; ?>">

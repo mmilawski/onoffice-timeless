@@ -166,7 +166,22 @@ foreach ($current_address as $field => $value) {
 } ?>">
     <?php
     if (!empty($address_link)) {
-        echo '<a href="' . $address_link . '" class="c-address-card__wrapper">';
+        echo '<a href="' .
+            $address_link .
+            '" class="c-address-card__wrapper" aria-label="' .
+            (!empty($full_name)
+                ? sprintf(
+                    esc_html_x('Details anzeigen zu %s', 'oo_theme'),
+                    $full_name,
+                )
+                : sprintf(
+                    esc_html_x(
+                        'Details anzeigen zur Adresse Nr. %d',
+                        'oo_theme',
+                    ),
+                    $address_id,
+                )) .
+            '">';
     } else {
         echo '<div class="c-address-card__wrapper">';
     }
@@ -209,7 +224,11 @@ foreach ($current_address as $field => $value) {
             ],
         ]);
     } else {
-        echo '<div class="c-address-card__picture"></div>';
+        echo '<div class="c-address-card__picture">';
+        echo '<span class="u-screen-reader-only">';
+        echo __('Details anzeigen', 'oo_theme');
+        echo '</span>';
+        echo '</div>';
     }
     if ($properties_count > 0) {
         echo '<div class="c-address-card__flag c-flag --property-status">';
@@ -383,23 +402,40 @@ foreach ($current_address as $field => $value) {
             <?php if (!empty($address_link) || !empty($phone)) { ?>
                 <div class="c-address-card__buttons c-buttons">
                     <?php if (!empty($address_link)) { ?>
-                        <a href="<?php echo $address_link; ?>" class="c-address-card__button --is-detail c-button --small-corners">
+                        <a href="<?php echo $address_link; ?>" class="c-address-card__button --is-detail c-button --small-corners" aria-label="<?php echo !empty(
+    $full_name
+)
+    ? sprintf(esc_html_x('Details anzeigen zu %s', 'oo_theme'), $full_name)
+    : sprintf(
+        esc_html_x('Details anzeigen zur Adresse Nr. %d', 'oo_theme'),
+        $address_id,
+    ); ?>">
                             <?php echo __('Details anzeigen', 'oo_theme'); ?>
                         </a>
                     <?php } ?>
                     <?php if (!empty($phone_url)) { ?>
-                        <a class="c-address-card__button --is-phone c-icon-button --bigger --small-corners" href="<?php echo $phone_url; ?>">
-                            <span class="c-icon-button__text u-screen-reader-only"><?php echo __(
-                                'Anrufen',
-                                'oo_theme',
-                            ); ?></span>
+                        <a class="c-address-card__button --is-phone c-icon-button --bigger --small-corners" href="<?php echo $phone_url; ?>" aria-label="<?php echo !empty(
+    $full_name
+)
+    ? sprintf(esc_html_x('Anrufen bei %s', 'oo_theme'), $full_name)
+    : sprintf(
+        esc_html_x('Anrufen bei Adresse Nr. %d', 'oo_theme'),
+        $address_id,
+    ); ?>">
                             <span class="c-icon-button__icon --phone"><?php oo_get_icon(
                                 'phone',
                             ); ?></span>
                         </a>
                     <?php } ?>
                     <?php if (!empty($address_link)) { ?>
-                        <a href="<?php echo $address_link; ?>#contact_form" class="c-address-card__button --is-form c-button --small-corners --ghost">
+                        <a href="<?php echo $address_link; ?>#contact_form" class="c-address-card__button --is-form c-button --small-corners --ghost" aria-label="<?php echo !empty(
+    $full_name
+)
+    ? sprintf(esc_html_x('Zum Kontaktformular von %s', 'oo_theme'), $full_name)
+    : sprintf(
+        esc_html_x('Zum Kontaktformular der Adresse Nr. %d', 'oo_theme'),
+        $address_id,
+    ); ?>">
                             <?php echo __('Kontaktformular', 'oo_theme'); ?>
                         </a>
                     <?php } ?>

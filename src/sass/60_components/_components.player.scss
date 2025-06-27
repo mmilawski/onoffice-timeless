@@ -1,4 +1,6 @@
 .c-player {
+  $c-player: &;
+
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -7,11 +9,26 @@
   padding: 0;
   outline: none;
   background-color: transparent;
+  border-radius: $border-radius;
+  outline: $outline;
+  outline-offset: $outline-offset;
+  box-shadow: 0px 0px 0px $outline-offset transparent;
   cursor: pointer;
-  transition: background-color 0.25s ease-in-out, transform 0.25s ease-in-out;
+  transition: background-color 0.25s ease-in-out, transform 0.25s ease-in-out,
+    outline-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
 
-  svg {
+  .--is-full-width & {
+    border-radius: 0;
+  }
+
+  @include focus-visible() {
+    outline-color: currentColor;
+    box-shadow: 0px 0px 0px $outline-offset var(--oo-color-contrast-primary);
+  }
+
+  &__icon {
     height: 2.5rem;
+    width: 2.5rem;
     filter: drop-shadow(2px 2px 10px var(--oo-color-transparent-shadow-50));
   }
 
@@ -20,6 +37,11 @@
 
     @include hover() {
       background-color: var(--oo-color-transparent-bg-25);
+    }
+
+    @include focus-visible() {
+      outline-color: currentColor;
+      box-shadow: 0px 0px 0px $outline-offset var(--oo-color-contrast-primary);
     }
   }
 
@@ -32,6 +54,12 @@
         var(--oo-color-transparent-bg-25)
       );
     }
+
+    @include focus-visible() {
+      outline-color: currentColor;
+      box-shadow: 0px 0px 0px $outline-offset
+        var(--oo-color-light-contrast-primary);
+    }
   }
 
   &.--on-bg-dark {
@@ -42,6 +70,12 @@
         --oo-color-dark-transparent-bg-25,
         var(--oo-color-transparent-bg-25)
       );
+    }
+
+    @include focus-visible() {
+      outline-color: currentColor;
+      box-shadow: 0px 0px 0px $outline-offset
+        var(--oo-color-dark-contrast-primary);
     }
   }
 
@@ -54,6 +88,12 @@
         var(--oo-color-transparent-bg-25)
       );
     }
+
+    @include focus-visible() {
+      outline-color: currentColor;
+      box-shadow: 0px 0px 0px $outline-offset
+        var(--oo-color-primary-contrast-primary);
+    }
   }
 
   &.--on-bg-secondary {
@@ -64,6 +104,12 @@
         --oo-color-secondary-transparent-bg-25,
         var(--oo-color-transparent-bg-25)
       );
+    }
+
+    @include focus-visible() {
+      outline-color: currentColor;
+      box-shadow: 0px 0px 0px $outline-offset
+        var(--oo-color-secondary-contrast-primary);
     }
   }
 }

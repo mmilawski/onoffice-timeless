@@ -5,6 +5,24 @@
   height: auto;
   aspect-ratio: 2 / 1;
   max-height: 60vh;
+  outline: $outline;
+  outline-offset: $outline-offset;
+  box-shadow: 0px 0px 0px $outline-offset transparent;
+
+  @include focus-visible() {
+    outline-color: currentColor;
+    box-shadow: 0px 0px 0px $outline-offset var(--oo-color-contrast-primary);
+  }
+
+  button,
+  a[role='button'] {
+    outline: $outline;
+    outline-offset: $outline-offset;
+
+    @include focus-visible() {
+      outline-color: var(--oo-color-primary);
+    }
+  }
 
   &.--is-colored {
   }
@@ -20,6 +38,12 @@
     // marker
     div {
       color: var(--oo-color-primary);
+      outline: $outline;
+      outline-offset: $outline-offset;
+
+      @include focus-visible() {
+        outline-color: var(--oo-color-primary);
+      }
     }
     // info window
     .gm-style-iw {
@@ -67,6 +91,22 @@
 
   &__marker {
     display: none;
+    outline: $outline;
+    outline-offset: $outline-offset;
+
+    @include focus-visible() {
+      outline-color: var(--oo-color-primary);
+    }
+  }
+
+  &__cluster-marker {
+    display: none;
+    outline: $outline;
+    outline-offset: $outline-offset;
+
+    @include focus-visible() {
+      outline-color: var(--oo-color-primary);
+    }
   }
 
   &__info {

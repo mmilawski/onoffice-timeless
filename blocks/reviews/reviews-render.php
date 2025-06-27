@@ -104,7 +104,7 @@ if ($filter == 'all') {
 } elseif ($filter == 'individual') {
     $query_args += [
         'posts_per_page' => -1,
-        'post_in' => $reviews,
+        'post__in' => $reviews,
         'orderby' => [
             'post__in' => 'ASC',
         ],

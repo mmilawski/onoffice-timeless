@@ -73,11 +73,11 @@
   }
 
   &.--text-truncate {
-    *:has(> &) {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: 100%;
   }
 
   &.--show-more {

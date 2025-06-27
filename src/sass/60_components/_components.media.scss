@@ -61,7 +61,6 @@
 
   &__thumbnail-wrapper {
     position: relative;
-    overflow: hidden;
     cursor: pointer;
 
     .--is-content-width & {
@@ -76,6 +75,11 @@
   }
 
   &__thumbnail-picture {
+    overflow: hidden;
+
+    .--is-content-width & {
+      border-radius: $border-radius;
+    }
   }
 
   &__thumbnail-image {

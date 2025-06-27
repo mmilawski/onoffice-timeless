@@ -92,7 +92,10 @@ return function (EstateList $pEstatesClone) {
     wp_enqueue_script('oo-google-map-marker-cluster-script');
     ?>
 
-    <div class="c-map --is-google-map" data-max-zoom="12" data-marker-color="<?php echo $primary_color; ?>" style="width: 100%;">
+    <div class="c-map --is-google-map" data-max-zoom="12" data-marker-color="<?php echo $primary_color; ?>" style="width: 100%;" role="application" aria-label="<?php echo esc_html__(
+    'Karte mit Immobilienstandorten',
+    'oo_theme',
+); ?>">
         <?php foreach ($property_data as $property) {
 
             $position = $property['position'] ?? [];
@@ -110,9 +113,21 @@ return function (EstateList $pEstatesClone) {
                 continue;
             }
             ?>
-            <div class="c-map__marker" data-lat="<?php echo esc_attr(
-                $lat,
-            ); ?>" data-lng="<?php echo esc_attr($lng); ?>">
+            <div class="c-map__marker" data-aria-label="<?php echo oo_get_map_marker_aria_label(
+                [
+                    'title' => $title,
+                    'street' => implode(
+                        ' ',
+                        array_filter([$street ?? '', $number ?? '']),
+                    ),
+                    'zip' => $zip,
+                    'city' => $city,
+                    'country' => $country,
+                ],
+                'Immobilienstandort',
+            ); ?>" data-lat="<?php echo esc_attr(
+    $lat,
+); ?>" data-lng="<?php echo esc_attr($lng); ?>">
                 <div class="c-map__info --bg-transparent">
                     <?php
                     if (!empty($title)) {
