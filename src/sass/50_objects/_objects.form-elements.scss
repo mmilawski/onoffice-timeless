@@ -109,14 +109,9 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color $form-duration $form-timing;
   height: 2.375rem;
 
-  @include focus() {
+  @include focus-all() {
     outline-color: $form-focus;
     border-color: $form-focus;
-  }
-
-  &:focus-visible {
-    outline: 1px solid currentColor;
-    outline-offset: 2px;
   }
 
   &::-webkit-inner-spin-button,
@@ -142,7 +137,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-light-border-color;
     color: $form-light-color;
 
-    @include focus() {
+    @include focus-all() {
       outline-color: $form-light-focus;
       border-color: $form-light-focus;
     }
@@ -161,7 +156,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-dark-border-color;
     color: $form-dark-color;
 
-    @include focus() {
+    @include focus-all() {
       outline-color: $form-dark-focus;
       border-color: $form-dark-focus;
     }
@@ -180,7 +175,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-primary-border-color;
     color: $form-primary-color;
 
-    @include focus() {
+    @include focus-all() {
       outline-color: $form-primary-focus;
       border-color: $form-primary-focus;
     }
@@ -199,7 +194,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-secondary-border-color;
     color: $form-secondary-color;
 
-    @include focus() {
+    @include focus-all() {
       outline-color: $form-secondary-focus;
       border-color: $form-secondary-focus;
     }
@@ -218,7 +213,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-footer-border-color;
     color: $form-footer-color;
 
-    @include focus() {
+    @include focus-all() {
       outline-color: $form-footer-focus;
       border-color: $form-footer-focus;
     }
@@ -233,7 +228,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-border-color;
     color: $form-color;
 
-    @include focus() {
+    @include focus-all() {
       outline-color: $form-focus;
       border-color: $form-focus;
     }
@@ -264,7 +259,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   transition: outline-color $form-duration $form-timing,
     border-color $form-duration $form-timing;
 
-  @include focus() {
+  @include focus-all() {
     outline-color: $form-focus;
     border-color: $form-focus;
   }
@@ -295,7 +290,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-light-border-color;
     color: $form-light-color;
 
-    @include focus() {
+    @include focus-all() {
       outline-color: $form-light-focus;
       border-color: $form-light-focus;
     }
@@ -315,7 +310,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-dark-border-color;
     color: $form-dark-color;
 
-    @include focus() {
+    @include focus-all() {
       outline-color: $form-dark-focus;
       border-color: $form-dark-focus;
     }
@@ -335,7 +330,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-primary-border-color;
     color: $form-primary-color;
 
-    @include focus() {
+    @include focus-all() {
       outline-color: $form-primary-focus;
       border-color: $form-primary-focus;
     }
@@ -355,7 +350,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-secondary-border-color;
     color: $form-secondary-color;
 
-    @include focus() {
+    @include focus-all() {
       outline-color: $form-secondary-focus;
       border-color: $form-secondary-focus;
     }
@@ -375,7 +370,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-footer-border-color;
     color: $form-footer-color;
 
-    @include focus() {
+    @include focus-all() {
       outline-color: $form-footer-focus;
       border-color: $form-footer-focus;
     }
@@ -395,7 +390,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-border-color;
     color: $form-color;
 
-    @include focus() {
+    @include focus-all() {
       outline-color: $form-focus;
       border-color: $form-focus;
     }
@@ -433,10 +428,9 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-focus;
   }
 
-  &.focus,
-  &:focus-visible {
-    outline: 1px solid currentColor;
-    outline-offset: 2px;
+  @include focus-all() {
+    outline-color: $form-focus;
+    border-color: $form-focus;
   }
 
   .ts-control {
@@ -494,7 +488,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
           opacity: 1; // Reset opacity for Firefox
         }
 
-        &:focus-visible {
+        @include focus-all() {
           outline: unset;
         }
       }
@@ -1115,14 +1109,9 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   transition: outline-color $form-duration $form-timing,
     border-color $form-duration $form-timing;
 
-  @include focus() {
+  @include focus-all() {
     outline-color: $form-focus;
     border-color: $form-focus;
-  }
-
-  &:focus-visible {
-    outline: 1px solid currentColor;
-    outline-offset: 2px;
   }
 
   &::placeholder {
@@ -1136,7 +1125,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-light-border-color;
     color: $form-light-color;
 
-    @include focus() {
+    @include focus-all() {
       outline-color: $form-light-focus;
       border-color: $form-light-focus;
     }
@@ -1151,7 +1140,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-dark-border-color;
     color: $form-dark-color;
 
-    @include focus() {
+    @include focus-all() {
       outline-color: $form-dark-focus;
       border-color: $form-dark-focus;
     }
@@ -1166,7 +1155,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-primary-border-color;
     color: $form-primary-color;
 
-    @include focus() {
+    @include focus-all() {
       outline-color: $form-primary-focus;
       border-color: $form-primary-focus;
     }
@@ -1181,7 +1170,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-secondary-border-color;
     color: $form-secondary-color;
 
-    @include focus() {
+    @include focus-all() {
       outline-color: $form-secondary-focus;
       border-color: $form-secondary-focus;
     }
@@ -1196,7 +1185,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-footer-border-color;
     color: $form-footer-color;
 
-    @include focus() {
+    @include focus-all() {
       outline-color: $form-footer-focus;
       border-color: $form-footer-focus;
     }
@@ -1211,7 +1200,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     border-color: $form-border-color;
     color: $form-color;
 
-    @include focus() {
+    @include focus-all() {
       outline-color: $form-focus;
       border-color: $form-focus;
     }
@@ -1370,20 +1359,6 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     }
   }
 
-  &__input:focus + &__label {
-    &:before {
-      outline-color: $form-focus;
-      border-color: $form-focus;
-    }
-  }
-
-  &__input:focus-visible + &__label {
-    &:before {
-      outline: 1px solid $form-focus;
-      outline-offset: 2px;
-    }
-  }
-
   &__input:checked + &__label {
     &:before {
       background-color: $form-primary;
@@ -1393,6 +1368,14 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
     &:after {
       transform: scale(1);
+    }
+  }
+
+  &__input:focus + &__label,
+  &__input:focus-visible + &__label {
+    &:before {
+      outline-color: $form-focus;
+      border-color: $form-focus;
     }
   }
 
@@ -1414,18 +1397,18 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       }
     }
 
-    #{$o-control}__input:focus + #{$o-control}__label {
-      &:before {
-        outline-color: $form-light-focus;
-        border-color: $form-light-focus;
-      }
-    }
-
     #{$o-control}__input:checked + #{$o-control}__label {
       &:before {
         background-color: $form-light-primary;
         border-color: $form-light-bg;
         outline-color: $form-light-border-color;
+      }
+    }
+
+    #{$o-control}__input:focus + #{$o-control}__label {
+      &:before {
+        outline-color: $form-light-focus;
+        border-color: $form-light-focus;
       }
     }
   }
@@ -1448,18 +1431,18 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       }
     }
 
-    #{$o-control}__input:focus + #{$o-control}__label {
-      &:before {
-        outline-color: $form-dark-focus;
-        border-color: $form-dark-focus;
-      }
-    }
-
     #{$o-control}__input:checked + #{$o-control}__label {
       &:before {
         background-color: $form-dark-primary;
         border-color: $form-dark-bg;
         outline-color: $form-dark-border-color;
+      }
+    }
+
+    #{$o-control}__input:focus + #{$o-control}__label {
+      &:before {
+        outline-color: $form-dark-focus;
+        border-color: $form-dark-focus;
       }
     }
   }
@@ -1482,18 +1465,18 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       }
     }
 
-    #{$o-control}__input:focus + #{$o-control}__label {
-      &:before {
-        outline-color: $form-primary-focus;
-        border-color: $form-primary-focus;
-      }
-    }
-
     #{$o-control}__input:checked + #{$o-control}__label {
       &:before {
         background-color: $form-primary-primary;
         border-color: $form-primary-bg;
         outline-color: $form-primary-border-color;
+      }
+    }
+
+    #{$o-control}__input:focus + #{$o-control}__label {
+      &:before {
+        outline-color: $form-primary-focus;
+        border-color: $form-primary-focus;
       }
     }
   }
@@ -1516,18 +1499,18 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       }
     }
 
-    #{$o-control}__input:focus + #{$o-control}__label {
-      &:before {
-        outline-color: $form-secondary-focus;
-        border-color: $form-secondary-focus;
-      }
-    }
-
     #{$o-control}__input:checked + #{$o-control}__label {
       &:before {
         background-color: $form-secondary-primary;
         border-color: $form-secondary-bg;
         outline-color: $form-secondary-border-color;
+      }
+    }
+
+    #{$o-control}__input:focus + #{$o-control}__label {
+      &:before {
+        outline-color: $form-secondary-focus;
+        border-color: $form-secondary-focus;
       }
     }
   }
@@ -1550,18 +1533,18 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       }
     }
 
-    #{$o-control}__input:focus + #{$o-control}__label {
-      &:before {
-        outline-color: $form-footer-focus;
-        border-color: $form-footer-focus;
-      }
-    }
-
     #{$o-control}__input:checked + #{$o-control}__label {
       &:before {
         background-color: $form-footer-primary;
         border-color: $form-footer-bg;
         outline-color: $form-footer-border-color;
+      }
+    }
+
+    #{$o-control}__input:focus + #{$o-control}__label {
+      &:before {
+        outline-color: $form-footer-focus;
+        border-color: $form-footer-focus;
       }
     }
   }
@@ -1584,18 +1567,18 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       }
     }
 
-    #{$o-control}__input:focus + #{$o-control}__label {
-      &:before {
-        outline-color: $form-focus;
-        border-color: $form-focus;
-      }
-    }
-
     #{$o-control}__input:checked + #{$o-control}__label {
       &:before {
         background-color: $form-primary;
         border-color: $form-bg;
         outline-color: $form-border-color;
+      }
+    }
+
+    #{$o-control}__input:focus + #{$o-control}__label {
+      &:before {
+        outline-color: $form-focus;
+        border-color: $form-focus;
       }
     }
   }
