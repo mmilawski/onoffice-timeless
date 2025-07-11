@@ -420,24 +420,33 @@ jQuery(document).ready(function() {
   }
 
   // Read more
-  const buttonMore = document.querySelectorAll('.c-read-more');
-
-  if( buttonMore.length > 0 ) {
-    buttonMore.forEach(button => {
-      let openClass = '--is-open';
-      const moreContainer = button.previousElementSibling;
+  const readMoreButton = document.querySelectorAll('.c-read-more, .c-property-details__more, .c-address-details__more');
+  if( readMoreButton.length > 0 ) {
+    readMoreButton.forEach(button => {
+      const openClass = '--is-open';
+    
+      const targetId = button.getAttribute('aria-controls');
+      const content = document.getElementById(targetId);
       const parentContainer = button.parentNode;
-
-      button.addEventListener('click', (e) => {
-        e.preventDefault();
-
-        if (!moreContainer.classList.contains(openClass)) {
-          moreContainer.classList.add(openClass);
-          button.classList.add(openClass);
-        } else {
-          moreContainer.classList.remove(openClass);
-          button.classList.remove(openClass);
-          parentContainer.scrollIntoView({ behavior: 'smooth'});
+    
+      if (!content) return;
+    
+      const openText = button.getAttribute('data-open-text');
+      const closeText = button.getAttribute('data-close-text');
+    
+      button.addEventListener('click', event => {
+        event.preventDefault();
+      
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        const shouldExpand = !isExpanded;
+      
+        button.setAttribute('aria-expanded', String(shouldExpand));
+        content.classList.toggle(openClass, shouldExpand);
+        button.classList.toggle(openClass, shouldExpand);
+        button.textContent = shouldExpand ? closeText : openText;
+      
+        if (isExpanded && parentContainer) {
+          parentContainer.scrollIntoView({ behavior: 'smooth' });
         }
       });
     });
@@ -1007,7 +1016,7 @@ function applyResponsiveTextShortening() {
   }
 
   // google review slider
-  shortenElements('.c-google-review-card', '.c-google-review-card__text p', '.c-google-review-card__contents');
+  shortenElements('.c-google-review-card', '.c-google-review-card__text p', '.c-google-review-card__text');
   // review slider
   shortenElements('.c-review-card', '.c-review-card__text', '.c-review-card__text');
   // property list
