@@ -21,11 +21,15 @@ $image_width_xl = '396';
 $image_width_xxl = '396';
 $image_width_xxxl = '396';
 ?>
-<div <?php oo_popup_get_template_attributes(
+<dialog <?php oo_popup_get_template_attributes(
     get_the_id(),
     $content,
     'sticky',
-); ?>>
+); ?>
+    role="status"
+    aria-live="polite"
+    aria-atomic="true"
+>
     <div class="c-popup__wrapper">
         <button class="c-popup__close c-icon-button --close-popup" aria-label="<?php esc_html_e(
             'Fenster schließen',
@@ -104,5 +108,4 @@ $image_width_xxxl = '396';
             <?php } ?>
         </div>
     </div>
-    <div class="c-popup__overlay"></div>
-</div>
+</dialog>

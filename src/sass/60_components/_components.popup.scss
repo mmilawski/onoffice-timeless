@@ -1,27 +1,34 @@
 .c-popup {
   $c-popup: &;
-
+  display: flex;
   position: fixed;
   inset: 0;
   z-index: 50001;
-  display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.35s ease-in-out, visibility 0.35s ease-in-out;
+  max-height: 80vh;
+
+  @include media-breakpoint-up(lg) {
+    max-width: 50vw;
+  }
 
   &.--is-open {
     opacity: 1;
     visibility: visible;
   }
 
-  &__overlay {
-    position: fixed;
-    inset: 0;
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0);
+    transition: background-color 0.35s ease;
+  }
+
+  &.--is-open::backdrop {
     cursor: pointer;
-    background: var(--oo-color-transparent-shadow-80);
+    background-color: var(--oo-color-transparent-shadow-80);
   }
 
   &__wrapper {
@@ -35,10 +42,6 @@
     position: relative;
     z-index: 1003;
     border-radius: $border-radius;
-
-    @include media-breakpoint-up(lg) {
-      max-width: 50vw;
-    }
   }
 
   &__header {
@@ -80,6 +83,8 @@
   }
 
   &.--is-login {
+    margin: auto;
+    width: fit-content;
     #{$c-popup}__wrapper {
       @include media-breakpoint-up(md) {
         min-width: 450px;
@@ -143,7 +148,7 @@
 
         @include media-breakpoint-up(lg) {
           height: 100%;
-          max-height: calc(100dvh - 2rem);
+          max-height: 80vh;
           padding-top: 3.5rem;
         }
       }
@@ -223,10 +228,16 @@
   }
 
   &.--is-fullscreen {
+    width: fit-content;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-left: 0;
+    padding-right: 0;
+    @include media-breakpoint-up(lg) {
+      min-width: 600px;
+      max-width: 95%;
+    }
     #{$c-popup}__wrapper {
-      @include media-breakpoint-up(lg) {
-        max-width: 95%;
-      }
     }
 
     &:not(.--has-image) {
@@ -256,12 +267,6 @@
     }
 
     #{$c-popup} {
-      &__overlay {
-        @include media-breakpoint-up(lg) {
-          display: none;
-        }
-      }
-
       &__wrapper {
         max-width: 400px;
         overflow-y: auto;

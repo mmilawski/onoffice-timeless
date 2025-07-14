@@ -21,12 +21,12 @@ $image_width_xl = '617';
 $image_width_xxl = '723';
 $image_width_xxxl = '796';
 ?>
-<div <?php oo_popup_get_template_attributes(
+<dialog <?php oo_popup_get_template_attributes(
     get_the_id(),
     $content,
     'fullscreen',
     'o-container',
-); ?>>
+); ?> aria-label="<?php echo $headline; ?>">
    <div class="c-popup__wrapper">
         <button class="c-popup__close c-icon-button --close-popup" aria-label="<?php esc_html_e(
             'Fenster schließen',
@@ -109,5 +109,4 @@ $image_width_xxxl = '796';
             </div>
         </div>
    </div>
-   <div class="c-popup__overlay"></div>
-</div>
+</dialog>

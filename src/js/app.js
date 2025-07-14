@@ -524,38 +524,46 @@ jQuery(document).ready(function() {
         }
 
         if (popupElement) {
+          const closeButton = popupElement.querySelector('.c-popup__close, .--close-popup');
           if (popupElement instanceof HTMLDialogElement && typeof popupElement.showModal === 'function') {
             popupElement.showModal();
-          } else {
-            popupElement.classList.add('--is-open');
           }
+          popupElement.classList.add('--is-open');
           document.body.classList.add('--modal-open');
+          if(closeButton){
+            popupElement.addEventListener(
+                'transitionend',
+                () => closeButton.focus(),
+                { once: true }
+            );
+          }
 
           function closePopup() {
+            popupElement.classList.remove('--is-open');
             if (popupElement instanceof HTMLDialogElement && typeof popupElement.close === 'function') {
-              popupElement.close();
-            } else {
-              popupElement.classList.remove('--is-open');
+              popupElement.addEventListener(
+                  'transitionend',
+                  () => popupElement.close(),
+                  { once: true }
+              );
             }
             document.body.classList.remove('--modal-open');
           }
 
           // Close popup with click on icon or overlay
           const overlay = popupElement.querySelector('.c-popup__overlay');
-          const closeButton = popupElement.querySelector('.c-popup__close, .--close-popup');
 
           if (overlay) {
             overlay.addEventListener('click', closePopup);
           }
           if (closeButton) {
             closeButton.addEventListener('click', closePopup);
-            // Set timeout to ensure focus is set after the popup is fully open
-            setTimeout(() => closeButton.focus(), 50);
           }
 
           // Close popup on press ESC
           document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
+              e.preventDefault();
               closePopup();
             }
           });
