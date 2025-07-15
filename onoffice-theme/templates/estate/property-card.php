@@ -143,224 +143,177 @@ while ($current_property = $pEstatesClone->estateIterator()):
  $slider_item_classes = 'c-slider__slide splide__slide';
  ?>
 
-    <div class="c-property-card__inner-wrapper">
-        <div class="c-property-card__inner --on-bg-transparent --is-properties-images-slider --on-slider <?php if (
-            $pictures_count > 0
-        ) {
-            echo 'c-slider splide';
-        } ?>" data-splide='{"perPage":1,"perMove":1,"pagination":false,"arrows":true, "drag":false,"snap":true,"lazyLoad":"nearby", "type":"loop"}'
-        aria-label="<?php echo __('Property Images Slider', 'oo-theme') .
-            ' ' .
-            $property_counter; ?>">
-            <?php if ($pictures_count > 0) { ?>
-                <div class="c-slider__track splide__track">
-                    <div class="c-slider__list splide__list">
-                        <?php foreach ($property_pictures as $id) {
-                            $picture_values = $pEstatesClone->getEstatePictureValues(
-                                $id,
-                            );
-                            if ($picture_values['title'] == true) {
-                                $image_alt = esc_html($picture_values['title']);
-                            } else {
-                                $image_alt = esc_html__(
-                                    'Immobilienbild',
-                                    'oo_theme',
-                                );
-                            }
-                            $image = [
-                                'url' => $pEstatesClone->getEstatePictureUrl(
-                                    $id,
-                                ),
-                                'alt' => $image_alt,
-                            ];
+<div class="c-property-card__inner --on-bg-transparent --is-properties-images-slider --on-slider <?php echo $pictures_count >
+0
+    ? 'c-slider splide'
+    : ''; ?>"
+     <?php if ($pictures_count > 0): ?>
+         data-splide='{"perPage":1,"perMove":1,"pagination":false,"arrows":true,"drag":false,"snap":true,"lazyLoad":"nearby","type":"loop"}'
+         aria-label="<?php echo __('Property Images Slider', 'oo-theme') .
+             ' ' .
+             $property_counter; ?>"
+     <?php endif; ?>
+>
 
-                            if ($is_visible_property_detail) {
-                                echo '<a class="c-property-card__picture-wrapper ' .
-                                    $slider_item_classes .
-                                    '" href="' .
-                                    esc_url($property_url) .
-                                    '" aria-label="' .
-                                    sprintf(
-                                        esc_html_x(
-                                            'Zur Detailansicht der Immobilie Nr. %d',
-                                            'oo_theme',
-                                        ),
-                                        $property_id,
-                                    ) .
-                                    '" aria-label="' .
-                                    sprintf(
-                                        esc_html_x(
-                                            'Zur Detailansicht der Immobilie Nr. %d',
-                                            'oo_theme',
-                                        ),
-                                        $property_id,
-                                    ) .
-                                    '">';
-                            }
-
-                            oo_get_template(
-                                'components',
-                                '',
-                                'component-image',
-                                [
-                                    'image' => $image,
-                                    'picture_class' =>
-                                        'c-property-card__picture o-picture' .
-                                        (!$is_visible_property_detail
-                                            ? ' ' . $slider_item_classes
-                                            : ''),
-                                    'image_class' =>
-                                        'c-property-card__image o-image',
-                                    'additional_cloudimg_params' =>
-                                        '&func=crop&gravity=' .
-                                            $image_position_vertical .
-                                            $image_position_horizontal .
-                                            '' ??
-                                        null,
-                                    'dimensions' => [
-                                        '575' => [
-                                            'w' => $image_width_xs,
-                                            'h' => round(
-                                                ($image_width_xs * 2) / 3,
-                                            ),
-                                        ],
-                                        '1600' => [
-                                            'w' => $image_width_xxxl,
-                                            'h' => round(
-                                                ($image_width_xxxl * 2) / 3,
-                                            ),
-                                        ],
-                                        '1400' => [
-                                            'w' => $image_width_xxl,
-                                            'h' => round(
-                                                ($image_width_xxl * 2) / 3,
-                                            ),
-                                        ],
-                                        '1200' => [
-                                            'w' => $image_width_xl,
-                                            'h' => round(
-                                                ($image_width_xl * 2) / 3,
-                                            ),
-                                        ],
-                                        '992' => [
-                                            'w' => $image_width_lg,
-                                            'h' => round(
-                                                ($image_width_lg * 2) / 3,
-                                            ),
-                                        ],
-                                        '768' => [
-                                            'w' => $image_width_md,
-                                            'h' => round(
-                                                ($image_width_md * 2) / 3,
-                                            ),
-                                        ],
-                                        '576' => [
-                                            'w' => $image_width_sm,
-                                            'h' => round(
-                                                ($image_width_sm * 2) / 3,
-                                            ),
-                                        ],
-                                    ],
-                                ],
-                            );
-
-                            if ($is_visible_property_detail) {
-                                echo '</a>';
-                            }
-                        } ?>
-                    </div>
-                </div>
-            <?php } else {if ($is_visible_property_detail) {
-                    echo '<a class="c-property-card__picture-wrapper" href="' .
-                        esc_url($property_url) .
-                        '" aria-label="' .
-                        sprintf(
-                            esc_html_x(
-                                'Zur Detailansicht der Immobilie Nr. %d',
-                                'oo_theme',
-                            ),
-                            $property_id,
-                        ) .
-                        '">';
-                }
-
-                echo '<div class="c-property-card__picture"></div>';
-
-                if ($is_visible_property_detail) {
-                    echo '</a>';
-                }} ?>
-            <?php if ($pictures_count > 0 || $is_slider) { ?>
-                <div class="c-slider__navigation splide__navigation --is-properties-images-slider <?php echo $pictures_count ==
-                0
-                    ? '--empty'
-                    : ''; ?>">
-                    <div class="c-slider__arrows splide__arrows">
-                        <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
-                            <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
-                                'Vorheriges',
-                                'oo_theme',
-                            ); ?></span>
-                            <span class="c-slider__arrow-icon --chevron-left"><?php oo_get_icon(
-                                'chevron-left',
-                            ); ?></span>
-                        </button>
-                        <button class="c-slider__arrow --next splide__arrow splide__arrow--next">
-                            <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
-                                'Nächstes',
-                                'oo_theme',
-                            ); ?></span>
-                            <span class="c-slider__arrow-icon --chevron-right"><?php oo_get_icon(
-                                'chevron-right',
-                            ); ?></span>
-                        </button>
-                    </div>
-                <?php } ?>
-                    <?php if (
-                        $property_status ||
-                        (Favorites::isFavorizationEnabled() &&
-                            !$is_reference &&
-                            !$iframe_display)
-                    ) { ?>
-                <div class="c-property-card__flags c-flags --space-between">
-                    <?php if ($property_status) { ?>
-                        <span class="c-property-card__status c-flag --property-status">
-                            <?php echo ucfirst($property_status); ?>
-                        </span>
-                    <?php } ?>
-
-                    <?php if (
-                        Favorites::isFavorizationEnabled() &&
-                        !$is_reference &&
-                        !$iframe_display
-                    ) {
-
-                        $favorite_label = Favorites::getFavorizationLabel();
-                        if ($favorite_label == 'Watchlist') {
-                            $favorite_text = esc_html__(
-                                'Zur Merkliste hinzufügen',
-                                'oo_theme',
-                            );
-                            $favorite_icon = 'bookmark';
-                        } else {
-                            $favorite_text = esc_html__(
-                                'Zu Favoriten hinzufügen',
-                                'oo_theme',
-                            );
-                            $favorite_icon = 'star';
-                        }
-                        ?>
-                        <button class="c-property-card__favorite c-icon-button --small-corners" data-onoffice-property-id="<?php echo $property_id; ?>" aria-label="<?php echo $favorite_text; ?>">
-                            <?php oo_get_icon($favorite_icon, true, [
-                                'class' => 'c-icon-button__icon --favorite',
-                            ]); ?>
-                        </button>
+    <?php if ($pictures_count > 0): ?>
+        <div class="c-slider__track splide__track">
+            <div class="c-slider__list splide__list">
+                <?php foreach ($property_pictures as $id): ?>
                     <?php
-                    } ?>
-                </div>
-            <?php } ?>
+                    $picture_values = $pEstatesClone->getEstatePictureValues(
+                        $id,
+                    );
+                    $image_alt = $picture_values['title']
+                        ? esc_html($picture_values['title'])
+                        : esc_html__('Immobilienbild', 'oo_theme');
+                    $image_url = $pEstatesClone->getEstatePictureUrl($id);
+                    ?>
+                    <?php if ($is_visible_property_detail): ?>
+                        <a class="c-property-card__picture-wrapper c-slider__slide splide__slide"
+                           href="<?php echo esc_url($property_url); ?>"
+                           aria-label="<?php echo sprintf(
+                               esc_html__(
+                                   'Zur Detailansicht der Immobilie Nr. %d',
+                                   'oo_theme',
+                               ),
+                               $property_id,
+                           ); ?>">
+                    <?php endif; ?>
+
+                    <?php oo_get_template('components', '', 'component-image', [
+                        'image' => ['url' => $image_url, 'alt' => $image_alt],
+                        'picture_class' =>
+                            'c-property-card__picture o-picture' .
+                            (!$is_visible_property_detail
+                                ? ' c-slider__slide splide__slide'
+                                : ''),
+                        'image_class' => 'c-property-card__image o-image',
+                        'additional_cloudimg_params' =>
+                            '&func=crop&gravity=' .
+                            $image_position_vertical .
+                            $image_position_horizontal,
+                        'dimensions' => [
+                            '575' => [
+                                'w' => $image_width_xs,
+                                'h' => round(($image_width_xs * 2) / 3),
+                            ],
+                            '1600' => [
+                                'w' => $image_width_xxxl,
+                                'h' => round(($image_width_xxxl * 2) / 3),
+                            ],
+                            '1400' => [
+                                'w' => $image_width_xxl,
+                                'h' => round(($image_width_xxl * 2) / 3),
+                            ],
+                            '1200' => [
+                                'w' => $image_width_xl,
+                                'h' => round(($image_width_xl * 2) / 3),
+                            ],
+                            '992' => [
+                                'w' => $image_width_lg,
+                                'h' => round(($image_width_lg * 2) / 3),
+                            ],
+                            '768' => [
+                                'w' => $image_width_md,
+                                'h' => round(($image_width_md * 2) / 3),
+                            ],
+                            '576' => [
+                                'w' => $image_width_sm,
+                                'h' => round(($image_width_sm * 2) / 3),
+                            ],
+                        ],
+                    ]); ?>
+
+                    <?php if ($is_visible_property_detail): ?>
+                        </a>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
         </div>
-    </div>
+    <?php else: ?>
+        <?php if ($is_visible_property_detail): ?>
+            <a class="c-property-card__picture-wrapper"
+               href="<?php echo esc_url($property_url); ?>"
+               aria-label="<?php echo sprintf(
+                   esc_html_x(
+                       'Zur Detailansicht der Immobilie Nr. %d',
+                       'oo_theme',
+                   ),
+                   $property_id,
+               ); ?>">
+        <?php endif; ?>
+        <div class="c-property-card__picture"></div>
+        <?php if ($is_visible_property_detail): ?>
+            </a>
+        <?php endif; ?>
+    <?php endif; ?>
+
+    <?php if ($pictures_count > 0): ?>
+        <div class="c-slider__navigation splide__navigation --is-properties-images-slider">
+            <div class="c-slider__arrows splide__arrows">
+                <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
+                    <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
+                        'Vorheriges',
+                        'oo_theme',
+                    ); ?></span>
+                    <span class="c-slider__arrow-icon --chevron-left"><?php oo_get_icon(
+                        'chevron-left',
+                    ); ?></span>
+                </button>
+                <button class="c-slider__arrow --next splide__arrow splide__arrow--next">
+                    <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
+                        'Nächstes',
+                        'oo_theme',
+                    ); ?></span>
+                    <span class="c-slider__arrow-icon --chevron-right"><?php oo_get_icon(
+                        'chevron-right',
+                    ); ?></span>
+                </button>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if (
+        $property_status ||
+        (Favorites::isFavorizationEnabled() &&
+            !$is_reference &&
+            !$iframe_display)
+    ): ?>
+        <div class="c-property-card__flags c-flags --space-between">
+            <?php if ($property_status): ?>
+                <span class="c-property-card__status c-flag --property-status">
+                    <?php echo ucfirst($property_status); ?>
+                </span>
+            <?php endif; ?>
+
+            <?php if (
+                Favorites::isFavorizationEnabled() &&
+                !$is_reference &&
+                !$iframe_display
+            ): ?>
+                <?php
+                $favorite_label = Favorites::getFavorizationLabel();
+                $favorite_text =
+                    $favorite_label == 'Watchlist'
+                        ? esc_html__('Zur Merkliste hinzufügen', 'oo_theme')
+                        : esc_html__('Zu Favoriten hinzufügen', 'oo_theme');
+                $favorite_icon =
+                    $favorite_label == 'Watchlist' ? 'bookmark' : 'star';
+                ?>
+                <button class="c-property-card__favorite c-icon-button --small-corners"
+                        data-onoffice-property-id="<?php echo $property_id; ?>"
+                        aria-label="<?php echo $favorite_text; ?>">
+                    <?php oo_get_icon($favorite_icon, true, [
+                        'class' => 'c-icon-button__icon --favorite',
+                    ]); ?>
+                </button>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+</div>
+
     <div class="c-property-card__content">
+    <div class="c-property-card__main-content-group">
         <?php if ($current_property['objekttitel']) { ?>
             <span class="c-property-card__title o-headline --h3">
                 <?php echo $current_property['objekttitel']; ?>
@@ -463,7 +416,9 @@ while ($current_property = $pEstatesClone->estateIterator()):
                 </p>
             </div>
         <?php } ?>
-        <?php if ($is_price_fields) { ?>
+    </div>
+    <div class="c-property-card__footer">
+    <?php if ($is_price_fields) { ?>
             <?php foreach ($price_fields as $price_field) {
 
                 $price_value = $current_property[$price_field];
@@ -489,7 +444,6 @@ while ($current_property = $pEstatesClone->estateIterator()):
                     <span class="o-headline --h4 --text-color">
                         <?php
                         esc_html_e($pEstates->getFieldLabel($price_field));
-
                         echo ':';
                         ?>
                         <?php if (is_array($price_value)) {
@@ -502,17 +456,16 @@ while ($current_property = $pEstatesClone->estateIterator()):
             <?php
             } ?>
         <?php } ?>
-        <div class="c-property-card__footer">
-            <?php if ($is_visible_property_detail) { ?>
-                <a class="c-property-card__button c-button --small-corners --full-width --on-bg-transparent" href="<?php echo $property_url; ?>" aria-label="<?php echo sprintf(
+        <?php if ($is_visible_property_detail) { ?>
+            <a class="c-property-card__button c-button --small-corners --full-width --on-bg-transparent" href="<?php echo $property_url; ?>" aria-label="<?php echo sprintf(
     esc_html_x('Zur Detailansicht der Immobilie Nr. %d', 'oo_theme'),
     $property_id,
 ); ?>">
-                    <?php esc_html_e('Zur Detailansicht', 'oo_theme'); ?>
-                </a>
-            <?php } ?>
-        </div>
+                <?php esc_html_e('Zur Detailansicht', 'oo_theme'); ?>
+            </a>
+        <?php } ?>
     </div>
+</div>
 </article>
 
 <?php

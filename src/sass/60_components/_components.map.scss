@@ -3,11 +3,15 @@
 
   width: 100%;
   height: auto;
-  aspect-ratio: 2 / 1;
+  aspect-ratio: 2/3;
   max-height: 60vh;
   outline: $outline;
   outline-offset: $outline-offset;
   box-shadow: 0px 0px 0px $outline-offset transparent;
+
+  @include media-breakpoint-up(md) {
+    aspect-ratio: 2/1;
+  }
 
   @include focus-visible() {
     outline-color: currentColor;

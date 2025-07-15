@@ -681,4 +681,9 @@
     0.1,
     var(--oo-color-bg)
   );
+
+  #{--oo-color-transparent-primary-20-contrast}: contrast-color(
+    var(--oo-color-transparent-primary-20),
+    var(--oo-color-bg)
+  );
 }
