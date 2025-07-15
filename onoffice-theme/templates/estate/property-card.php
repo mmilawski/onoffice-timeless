@@ -92,6 +92,12 @@ while ($current_property = $pEstatesClone->estateIterator()):
             $value == '0000-00-00' ||
             $value == '0.00' ||
             $value == '' ||
+            (is_string($value) &&
+                $value !== '' &&
+                !is_numeric($value) &&
+                ($raw_values->getValueRaw($property_id)['elements'][$field] ??
+                    null) ===
+                    '0') || // skip negative boolean fields
             empty($value) ||
             in_array($field, $dont_echo)
         ) {
@@ -363,10 +369,19 @@ while ($current_property = $pEstatesClone->estateIterator()):
         <?php if ($is_fields) { ?>
             <div class="c-property-card__features c-item-features">
                 <?php foreach ($current_property as $field => $value) {
+
                     if (
                         (is_numeric($value) && 0 == $value) ||
                         $value == '0000-00-00' ||
                         $value == '0.00' ||
+                        (is_string($value) &&
+                            $value !== '' &&
+                            !is_numeric($value) &&
+                            ($raw_values->getValueRaw($property_id)['elements'][
+                                $field
+                            ] ??
+                                null) ===
+                                '0') || // skip negative boolean fields
                         $value == '' ||
                         empty($value) ||
                         in_array($field, $dont_echo) ||
@@ -374,7 +389,22 @@ while ($current_property = $pEstatesClone->estateIterator()):
                         in_array($field, $price_fields)
                     ) {
                         continue;
-                    } ?>
+                    }
+                    if (
+                        ($raw_values->getValueRaw($property_id)['elements'][
+                            'provisionsfrei'
+                        ] ??
+                            null) ===
+                            '1' &&
+                        in_array(
+                            $field,
+                            ['innen_courtage', 'aussen_courtage'],
+                            true,
+                        )
+                    ) {
+                        continue;
+                    }
+                    ?>
                     <span class="c-item-features__item">
                         <?php
                         $dont_echo_label = [
@@ -441,6 +471,14 @@ while ($current_property = $pEstatesClone->estateIterator()):
                     (is_numeric($price_value) && 0 == $price_value) ||
                     $price_value == '0000-00-00' ||
                     $price_value == '0.00' ||
+                    (is_string($price_value) &&
+                        $price_value !== '' &&
+                        !is_numeric($price_value) &&
+                        ($raw_values->getValueRaw($property_id)['elements'][
+                            $price_field
+                        ] ??
+                            null) ===
+                            '0') || // skip negative boolean fields
                     $price_value == '' ||
                     empty($price_value)
                 ) {

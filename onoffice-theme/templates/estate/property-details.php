@@ -120,9 +120,12 @@ while ($current_property = $pEstates->estateIterator()) {
             (is_numeric($value) && 0 == $value) ||
             $value == '0000-00-00' ||
             $value == '0.00' ||
-            $value == 'Nein' ||
-            $value == 'No' ||
-            $value == 'Ne' ||
+            (is_string($value) &&
+                $value !== '' &&
+                !is_numeric($value) &&
+                ($raw_values->getValueRaw($property_id)['elements'][$field] ??
+                    null) ===
+                    '0') || // skip negative boolean fields
             $value == '' ||
             empty($value) ||
             in_array($field, $dont_echo)
@@ -700,6 +703,25 @@ while ($current_property = $pEstates->estateIterator()) {
                                             $regular_features
                                             as $feature
                                         ): ?>
+                                            <?php if (
+                                                ($raw_values->getValueRaw(
+                                                    $property_id,
+                                                )['elements'][
+                                                    'provisionsfrei'
+                                                ] ??
+                                                    null) ===
+                                                    '1' &&
+                                                in_array(
+                                                    $field,
+                                                    [
+                                                        'innen_courtage',
+                                                        'aussen_courtage',
+                                                    ],
+                                                    true,
+                                                )
+                                            ) {
+                                                continue;
+                                            } ?>
                                             <dl class="c-item-fields__item">
                                                 <dt class="c-item-fields__label">
                                                     <?php echo esc_html(
@@ -1400,9 +1422,14 @@ while ($current_property = $pEstates->estateIterator()) {
                                                 0 == $value) ||
                                             $value == '0000-00-00' ||
                                             $value == '0.00' ||
-                                            $value == 'Nein' ||
-                                            $value == 'No' ||
-                                            $value == 'Ne' ||
+                                            (is_string($value) &&
+                                                $value !== '' &&
+                                                !is_numeric($value) &&
+                                                ($raw_values->getValueRaw(
+                                                    $property_id,
+                                                )['elements'][$field] ??
+                                                    null) ===
+                                                    '0') || // skip negative boolean fields
                                             $value == '' ||
                                             empty($value)
                                         ) {
