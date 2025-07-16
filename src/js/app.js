@@ -894,16 +894,25 @@ jQuery(document).ready(function() {
         behavior: 'smooth'
       });
     }
-
-  window.addEventListener('scroll', () => {
-      let scrollPosition = window.scrollY;
-      if (scrollPosition > 200) {
-        scrollBackToTop.classList.add('--visible');
-      } else {
-        scrollBackToTop.classList.remove('--visible');
-      }
-  });
   }
+
+  const header = document.querySelector('.c-header');
+  function handleScroll() {
+    if (window.scrollY > 0) {
+      header.classList.add('--scrolled');
+    } else {
+      header.classList.remove('--scrolled');
+    }
+    if (scrollY > 200) {
+      scrollBackToTop.classList.add('--visible');
+    } else {
+      scrollBackToTop.classList.remove('--visible');
+    }
+  }
+
+  // needed to not make the scroll callback fire 50 times on each scroll.
+  const debouncedScroll = debounce(handleScroll, 30);
+  window.addEventListener('scroll', debouncedScroll);
 });
 
 // Fixed Header on scroll
@@ -1040,3 +1049,15 @@ function select2CopyClasses(data, container) {
   }
   return data.text;
 }
+
+function debounce(func, delay) {
+  let timeoutId;
+
+  return function(...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+}
+

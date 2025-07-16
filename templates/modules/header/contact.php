@@ -6,6 +6,7 @@
  */
 
 $id = $args['id'] ?? null;
+$side = $args['side'] ?? null;
 $content = $args['content'] ?? [];
 $location = $args['location'] ?? 'header';
 
@@ -57,7 +58,8 @@ $mobile_country_code = $data_contact['mobile-country'] ?? null;
 $mobile = $data_contact['mobile'] ?? null;
 
 echo '<div class="c-module-contact__wrapper ' .
-    ($is_name ? '--has-name' : '') .
+    ($is_name ? '--has-name ' : '') .
+    ($side ? '--' . $side : '') .
     '">';
 
 if ($is_name) {
