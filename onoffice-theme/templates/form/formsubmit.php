@@ -73,18 +73,33 @@ if ($pForm->needsReCaptcha() && $key !== '') {
              * Asynchronously checks if the Usercentrics Consent Management Platform (CMP) is initialized.
              * @returns {Promise<boolean>} A promise that resolves to true if the CMP is ready, otherwise false.
              */
-            const ensureCmpIsInitialized = async () => {
+            const ensureCmpIsInitialized = async (timeoutMs = 5000) => {
+              const interval = 100; // ms between checks
+              const maxAttempts = timeoutMs / interval;
+              let attempts = 0;
+
+              while (attempts < maxAttempts) {
                 try {
-                    // Safely check for the existence and initialization status of the Usercentrics CMP.
-                    const isInitialized = await window.__ucCmp?.isInitialized() ?? false;
-                    if (isInitialized) { return true; }
+                  if (window.__ucCmp) {
+                    const initialized = await window.__ucCmp.isInitialized();
+                    if (initialized) {
+                      return true; // Ready!
+                    }
+                  }
                 } catch (error) {
-                    console.error('Error checking CMP initialization:', error);
+                  console.error('Error checking CMP initialization:', error);
                 }
-                return false;
+
+                await new Promise(resolve => setTimeout(resolve, interval));
+                attempts++;
+              }
+
+              console.warn('CMP did not initialize within timeout');
+              return false;
             };
 
-            /**
+
+          /**
              * Checks if consent has been given for any of the specified service IDs.
              * @param {string[]} serviceIds - An array of service IDs to check for consent.
              * @returns {boolean} True if consent is granted for at least one of the IDs, otherwise false.
