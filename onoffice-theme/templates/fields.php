@@ -469,6 +469,11 @@ if (!function_exists('renderFormField')) {
                 onOffice\WPlugin\Types\FieldTypes::FIELD_TYPE_INTEGER;
         }
 
+        if ($fieldName === 'range_ort') {
+            // BFSG Fix: duplicate label error for range_ort and ort
+            $fieldLabel = esc_html__('Ort (Umkreissuche)', 'oo_theme');
+        }
+
         if ($fieldName === 'regionaler_zusatz') {
             if (!is_array($selectedValue)) {
                 $selectedValue = [];
@@ -676,7 +681,7 @@ if (!function_exists('renderFormField')) {
                 } else {
                     $placeholderAddition = '';
                 }
-                $output .= '<label class="o-label --is-range">';
+                $output .= '<div class="o-label --is-range" role="group">';
                 $output .= $fieldLabel . $addition;
                 $output .=
                     '<span class="u-screen-reader-only">' .
@@ -691,6 +696,21 @@ if (!function_exists('renderFormField')) {
                 ) {
                     $value = esc_attr($pForm->getFieldValue($key, true));
                     $inputClass = 'o-input --number';
+
+                    // Create unique aria-label based on field name and range type (von/bis)
+                    $uniqueLabel = '';
+                    if (substr($key, -3) == 'von') {
+                        $uniqueLabel =
+                            esc_attr(strip_tags($fieldLabel)) .
+                            ' ' .
+                            esc_html__('Minimalwert', 'oo_theme');
+                    } else {
+                        $uniqueLabel =
+                            esc_attr(strip_tags($fieldLabel)) .
+                            ' ' .
+                            esc_html__('Maximalwert', 'oo_theme');
+                    }
+
                     $output .=
                         '<input  class="' .
                         $inputClass .
@@ -706,10 +726,12 @@ if (!function_exists('renderFormField')) {
                         '" ' .
                         $requiredAttribute .
                         renderAutocomplete($fieldName) .
-                        '>';
+                        ' aria-label="' .
+                        $uniqueLabel .
+                        '">';
                 }
                 $output .= '</div>';
-                $output .= '</label>';
+                $output .= '</div>';
             } else {
                 $output .= '<label class="o-label --is-input">';
                 $output .= $fieldLabel . $addition;
