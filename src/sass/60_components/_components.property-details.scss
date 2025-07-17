@@ -404,6 +404,7 @@
 
   &__map {
     padding-top: 2rem;
+    width: 100%;
 
     @include media-breakpoint-up(xl) {
       padding-top: 1.5rem;
@@ -462,22 +463,14 @@
 
     @include media-breakpoint-up(xl) {
       gap: 0;
-    }
-  }
-
-  &__fields-column {
-    display: flex;
-    gap: 2.5rem;
-    flex-direction: column;
-
-    @include media-breakpoint-up(xl) {
-      gap: 5rem;
+      row-gap: 5rem;
     }
   }
 
   &__fields-group {
     display: grid;
     gap: 1.5rem;
+    grid-template-rows: auto 1fr;
 
     @include media-breakpoint-up(xl) {
       gap: 2rem;

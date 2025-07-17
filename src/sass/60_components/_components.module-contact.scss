@@ -83,6 +83,16 @@
         }
       }
     }
+    .--right {
+      #{$c-module-contact}__headline {
+        margin-right: 0;
+        margin-left: 0;
+      }
+      #{$c-module-contact}__list {
+        margin-right: 0;
+        margin-left: 1.5rem;
+      }
+    }
   }
 
   &.--is-footer {

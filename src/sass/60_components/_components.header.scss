@@ -3,17 +3,24 @@
 
   width: 100%;
   z-index: 999;
-  position: fixed;
+  position: sticky;
   left: 0;
   right: 0;
+  top: 0;
   max-height: 100dvh;
   transition: all 0.25s;
   display: flex;
   flex-direction: column;
   background-color: var(--oo-color-header-bg, var(--oo-color-bg));
 
+  &.--scrolled {
+    box-shadow: 1px 1px 5px 2px var(--oo-color-transparent-shadow-20);
+  }
+
   &.--logo-transparent {
     background-color: var(--oo-color-header-transparent-bg-80);
+    position: fixed;
+    top: auto;
 
     &.--main-nav-open {
       background-color: var(--oo-color-header-bg, var(--oo-color-bg));
@@ -217,6 +224,11 @@
         flex-basis: 50%;
         text-align: right;
         margin-left: auto;
+
+        .c-modules__item {
+          margin-right: 0;
+          margin-left: 1.5rem;
+        }
       }
     }
   }

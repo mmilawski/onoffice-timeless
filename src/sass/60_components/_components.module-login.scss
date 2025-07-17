@@ -8,6 +8,7 @@
     gap: 0.5rem;
     outline: $outline;
     outline-offset: $outline-offset;
+    color: var(--oo-color-header-text, var(--oo-color-text));
     @include media-breakpoint-up(xxl) {
       align-items: baseline;
       display: inline-flex;
@@ -15,21 +16,26 @@
       .--left &:not(:last-of-type) {
         margin-right: 1.5rem;
       }
-      .--right & {
-        margin-left: 1.5rem;
-      }
     }
-    svg {
-      color: var(--oo-color-header-primary, var(--oo-color-primary));
-    }
-    
+
     @include focus-visible() {
-      outline-color: var(--oo-color-primary);
+      #{$c-module-login}__link {
+        outline-color: var(--oo-color-header-primary, var(--oo-color-primary));
+        text-decoration-color: transparent;
+        color: var(--oo-color-header-primary, var(--oo-color-primary));
+      }
     }
   }
 
   &__label {
+    width: 1rem;
+    height: 1rem;
     align-self: center;
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
   }
 
   &__value {
@@ -39,5 +45,8 @@
 
   &__link {
     cursor: pointer;
+    outline: $outline;
+    outline-offset: $outline-offset;
+    border-radius: $outline-border-radius;
   }
 }

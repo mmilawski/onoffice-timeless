@@ -76,6 +76,7 @@ if (empty($header_modules_left) && empty($header_modules_right)) {
                                 <?php oo_load_modules_flexible_content(
                                     $header_content_left,
                                     'header',
+                                    'left',
                                 ); ?>
                             </div>
                         <?php endif; ?>
@@ -85,6 +86,7 @@ if (empty($header_modules_left) && empty($header_modules_right)) {
                                 <?php oo_load_modules_flexible_content(
                                     $header_content_right,
                                     'header',
+                                    'right',
                                 ); ?>
                             </div>
                         <?php endif; ?>

@@ -13,7 +13,7 @@
 
   &__item {
     border-radius: $border-radius;
-    color: #000000;
+    color: var(--oo-color-transparent-primary-20-contrast);
     background-color: var(--oo-color-transparent-primary-20);
     border: 0px;
     padding: 0.25rem 0.5rem;

@@ -102,7 +102,7 @@ jQuery(document).ready(function() {
 
       const options = Object.assign({
           label: '&times;',
-          title: 'Remove',
+          title: window.wpAppTranslations.removeThisItem || 'Remove this item',
           className: 'remove',
           append: true,
           position: 'before',
@@ -308,7 +308,7 @@ jQuery(document).ready(function() {
       var plugins = {
           'oo_remove_button': {
               'className': 'ts-item-remove',
-              'title': 'Remove this item',
+              'title': window.wpAppTranslations.removeThisItem || 'Remove this item',
               'label': '',
               'position': 'before'
           },
@@ -399,7 +399,7 @@ jQuery(document).ready(function() {
 
           },
           no_results:function(data,escape){
-            return '<div class="no-results">Keine Ergebnisse</div>';
+            return `<div class="no-results">${window.wpAppTranslations.noResults || 'No results'}</div>`;
           },
         }
       });
@@ -420,24 +420,33 @@ jQuery(document).ready(function() {
   }
 
   // Read more
-  const buttonMore = document.querySelectorAll('.c-read-more');
-
-  if( buttonMore.length > 0 ) {
-    buttonMore.forEach(button => {
-      let openClass = '--is-open';
-      const moreContainer = button.previousElementSibling;
+  const readMoreButton = document.querySelectorAll('.c-read-more, .c-property-details__more, .c-address-details__more');
+  if( readMoreButton.length > 0 ) {
+    readMoreButton.forEach(button => {
+      const openClass = '--is-open';
+    
+      const targetId = button.getAttribute('aria-controls');
+      const content = document.getElementById(targetId);
       const parentContainer = button.parentNode;
-
-      button.addEventListener('click', (e) => {
-        e.preventDefault();
-
-        if (!moreContainer.classList.contains(openClass)) {
-          moreContainer.classList.add(openClass);
-          button.classList.add(openClass);
-        } else {
-          moreContainer.classList.remove(openClass);
-          button.classList.remove(openClass);
-          parentContainer.scrollIntoView({ behavior: 'smooth'});
+    
+      if (!content) return;
+    
+      const openText = button.getAttribute('data-open-text');
+      const closeText = button.getAttribute('data-close-text');
+    
+      button.addEventListener('click', event => {
+        event.preventDefault();
+      
+        const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        const shouldExpand = !isExpanded;
+      
+        button.setAttribute('aria-expanded', String(shouldExpand));
+        content.classList.toggle(openClass, shouldExpand);
+        button.classList.toggle(openClass, shouldExpand);
+        button.textContent = shouldExpand ? closeText : openText;
+      
+        if (isExpanded && parentContainer) {
+          parentContainer.scrollIntoView({ behavior: 'smooth' });
         }
       });
     });
@@ -515,38 +524,46 @@ jQuery(document).ready(function() {
         }
 
         if (popupElement) {
+          const closeButton = popupElement.querySelector('.c-popup__close, .--close-popup');
           if (popupElement instanceof HTMLDialogElement && typeof popupElement.showModal === 'function') {
             popupElement.showModal();
-          } else {
-            popupElement.classList.add('--is-open');
           }
+          popupElement.classList.add('--is-open');
           document.body.classList.add('--modal-open');
+          if(closeButton){
+            popupElement.addEventListener(
+                'transitionend',
+                () => closeButton.focus(),
+                { once: true }
+            );
+          }
 
           function closePopup() {
+            popupElement.classList.remove('--is-open');
             if (popupElement instanceof HTMLDialogElement && typeof popupElement.close === 'function') {
-              popupElement.close();
-            } else {
-              popupElement.classList.remove('--is-open');
+              popupElement.addEventListener(
+                  'transitionend',
+                  () => popupElement.close(),
+                  { once: true }
+              );
             }
             document.body.classList.remove('--modal-open');
           }
 
           // Close popup with click on icon or overlay
           const overlay = popupElement.querySelector('.c-popup__overlay');
-          const closeButton = popupElement.querySelector('.c-popup__close, .--close-popup');
 
           if (overlay) {
             overlay.addEventListener('click', closePopup);
           }
           if (closeButton) {
             closeButton.addEventListener('click', closePopup);
-            // Set timeout to ensure focus is set after the popup is fully open
-            setTimeout(() => closeButton.focus(), 50);
           }
 
           // Close popup on press ESC
           document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
+              e.preventDefault();
               closePopup();
             }
           });
@@ -558,17 +575,17 @@ jQuery(document).ready(function() {
   // Lightbox
   const lightboxClass = document.querySelectorAll('.glightbox');
 
-  if( lightboxClass.length > 0 ) {
+  if(lightboxClass.length > 0 ) {
     const customLightboxHTML = 
     `<div id="glightbox-body" class="glightbox-container c-lightbox">
       <div class="gloader visible c-lightbox__loader"></div>
       <div class="goverlay c-lightbox__overlay"></div>
       <div class="gcontainer c-lightbox__container">
         <div id="glightbox-slider" class="gslider c-lightbox__slider"></div>
-        <button class="gprev gbtn c-lightbox__icon-wrapper --arrow --prev" tabindex="0" aria-label="Next">
+        <button class="gprev gbtn c-lightbox__icon-wrapper --arrow --prev" tabindex="0" aria-label="${window.wpAppTranslations.previous || 'Previous'}">
           <svg class="c-lightbox__icon --arrow" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" role="img" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
         </button>
-        <button class="gnext gbtn c-lightbox__icon-wrapper --arrow --next" tabindex="1" aria-label="Previous">
+        <button class="gnext gbtn c-lightbox__icon-wrapper --arrow --next" tabindex="1" aria-label="${window.wpAppTranslations.next || 'Next'}">
           <svg class="c-lightbox__icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" role="img" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
         </button>
       </div>
@@ -579,7 +596,7 @@ jQuery(document).ready(function() {
       <div class="gslide-inner-content c-lightbox__wrapper">
         <div class="ginner-container c-lightbox__content">
           <div class="gslide-media c-lightbox__media">
-            <button class="gclose gbtn c-lightbox__icon-wrapper --close" tabindex="2" aria-label="Close">
+            <button class="gclose gbtn c-lightbox__icon-wrapper --close" tabindex="2" aria-label="${window.wpAppTranslations.close || 'Close'}">
               <svg class="c-lightbox__icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" role="img" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
             </button>
           </div>
@@ -877,16 +894,25 @@ jQuery(document).ready(function() {
         behavior: 'smooth'
       });
     }
-
-  window.addEventListener('scroll', () => {
-      let scrollPosition = window.scrollY;
-      if (scrollPosition > 200) {
-        scrollBackToTop.classList.add('--visible');
-      } else {
-        scrollBackToTop.classList.remove('--visible');
-      }
-  });
   }
+
+  const header = document.querySelector('.c-header');
+  function handleScroll() {
+    if (window.scrollY > 0) {
+      header.classList.add('--scrolled');
+    } else {
+      header.classList.remove('--scrolled');
+    }
+    if (scrollY > 200) {
+      scrollBackToTop.classList.add('--visible');
+    } else {
+      scrollBackToTop.classList.remove('--visible');
+    }
+  }
+
+  // needed to not make the scroll callback fire 50 times on each scroll.
+  const debouncedScroll = debounce(handleScroll, 30);
+  window.addEventListener('scroll', debouncedScroll);
 });
 
 // Fixed Header on scroll
@@ -1007,7 +1033,7 @@ function applyResponsiveTextShortening() {
   }
 
   // google review slider
-  shortenElements('.c-google-review-card', '.c-google-review-card__text p', '.c-google-review-card__contents');
+  shortenElements('.c-google-review-card', '.c-google-review-card__text p', '.c-google-review-card__text');
   // review slider
   shortenElements('.c-review-card', '.c-review-card__text', '.c-review-card__text');
   // property list
@@ -1023,3 +1049,15 @@ function select2CopyClasses(data, container) {
   }
   return data.text;
 }
+
+function debounce(func, delay) {
+  let timeoutId;
+
+  return function(...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+}
+

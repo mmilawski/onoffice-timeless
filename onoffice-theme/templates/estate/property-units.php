@@ -4,6 +4,7 @@ $dont_echo = ['vermarktungsstatus'];
 
 $pEstatesClone = clone $pEstates;
 $pEstatesClone->resetEstateIterator();
+$raw_values = $pEstates->getRawValues();
 ?>
 
 <?php if (
@@ -23,6 +24,7 @@ $pEstatesClone->resetEstateIterator();
                     while (
                         $current_property = $pEstatesClone->estateIterator()
                     ) {
+                        $property_id = $pEstatesClone->getCurrentMultiLangEstateMainId();
                         if (!empty($current_property)) {
                             foreach ($current_property as $field => $value) {
                                 if (in_array($field, $dont_echo)) {
@@ -38,9 +40,14 @@ $pEstatesClone->resetEstateIterator();
                                         (is_numeric($value) && 0 == $value) ||
                                         $value == '0000-00-00' ||
                                         $value == '0.00' ||
-                                        $value == 'Nein' ||
-                                        $value == 'No' ||
-                                        $value == 'Ne' ||
+                                        (is_string($value) &&
+                                            $value !== '' &&
+                                            !is_numeric($value) &&
+                                            ($raw_values->getValueRaw(
+                                                $property_id,
+                                            )['elements'][$field] ??
+                                                null) ===
+                                                '0') || // skip negative boolean fields
                                         $value == '' ||
                                         empty($value)
                                     )
@@ -53,6 +60,7 @@ $pEstatesClone->resetEstateIterator();
 
                     $pEstates->resetEstateIterator();
                     $first_property = $pEstates->estateIterator();
+                    $property_id = $pEstates->getCurrentMultiLangEstateMainId();
 
                     if ($first_property) {
                         foreach ($first_property as $field => $value) {
@@ -80,6 +88,7 @@ $pEstatesClone->resetEstateIterator();
                 <?php
                 $pEstates->resetEstateIterator();
                 while ($current_property = $pEstates->estateIterator()) {
+                    $property_id = $pEstates->getCurrentMultiLangEstateMainId();
                     echo '<tr class="c-table__row --is-body">';
                     foreach ($current_property as $field => $value):
                         if (
@@ -94,11 +103,26 @@ $pEstatesClone->resetEstateIterator();
                             (is_numeric($value) && 0 == $value) ||
                             $value == '0000-00-00' ||
                             $value == '0.00' ||
-                            $value == 'Nein' ||
-                            $value == 'No' ||
-                            $value == 'Ne' ||
+                            (is_string($value) &&
+                                $value !== '' &&
+                                !is_numeric($value) &&
+                                ($raw_values->getValueRaw($property_id)[
+                                    'elements'
+                                ][$field] ??
+                                    null) ===
+                                    '0') || // skip negative boolean fields
                             $value == '' ||
-                            empty($value)
+                            empty($value) ||
+                            (($raw_values->getValueRaw($property_id)[
+                                'elements'
+                            ]['provisionsfrei'] ??
+                                null) ===
+                                '1' &&
+                                in_array(
+                                    $field,
+                                    ['innen_courtage', 'aussen_courtage'],
+                                    true,
+                                ))
                         ) {
                             $value = '-';
                             $class = '--empty';

@@ -120,9 +120,12 @@ while ($current_property = $pEstates->estateIterator()) {
             (is_numeric($value) && 0 == $value) ||
             $value == '0000-00-00' ||
             $value == '0.00' ||
-            $value == 'Nein' ||
-            $value == 'No' ||
-            $value == 'Ne' ||
+            (is_string($value) &&
+                $value !== '' &&
+                !is_numeric($value) &&
+                ($raw_values->getValueRaw($property_id)['elements'][$field] ??
+                    null) ===
+                    '0') || // skip negative boolean fields
             $value == '' ||
             empty($value) ||
             in_array($field, $dont_echo)
@@ -634,53 +637,35 @@ while ($current_property = $pEstates->estateIterator()) {
                 </div>
             </div>
 
-            <?php
-            $filtered_features = [];
-
-            // Remove empty categories
-            $filtered_features = array_filter($property_features, function (
-                $category,
-            ) {
-                return !empty($category);
-            });
-
-            $keys = array_keys($filtered_features);
-            $values = array_values($filtered_features);
-
-            $odd_columns = [];
-            $even_columns = [];
-
-            foreach ($keys as $index => $key) {
-                if ($index % 2 === 0) {
-                    $odd_columns[$key] = $values[$index];
-                } else {
-                    $even_columns[$key] = $values[$index];
-                }
-            }
-
-            $columns = [$odd_columns, $even_columns];
-            ?>
-
+            <?php $filtered_features = array_filter(
+                $property_features,
+                function ($category) {
+                    return !empty($category);
+                },
+            ); ?>
+            
             <div class="c-property-details__fields-row o-row">
-                <?php foreach ($columns as $column): ?>
-                    <div class="c-property-details__fields-column o-col-12 o-col-lg-6">
-                        <?php foreach ($column as $group_name => $features): ?>
-                            <div class="c-property-details__fields-group">
-                                <h2 class="c-property-details__headline o-headline --h2">
-                                    <?php echo esc_html($group_name); ?>
-                                </h2>
-                                <?php
-                                $boolean_features = [];
-                                $regular_features = [];
+                <?php foreach (
+                    $filtered_features
+                    as $group_name => $features
+                ): ?>
+                    <div class="c-property-details__fields-group o-col-12 o-col-lg-6">
+                        <h2 class="c-property-details__headline o-headline --h2">
+                            <?php echo esc_html($group_name); ?>
+                        </h2>
+                
+                        <?php
+                        $boolean_features = [];
+                        $regular_features = [];
 
-                                foreach ($features as $feature) {
-                                    if ($feature['type'] === 'boolean') {
-                                        $boolean_features[] = $feature;
-                                    } else {
-                                        $regular_features[] = $feature;
-                                    }
-                                }
-                                ?>
+                        foreach ($features as $feature) {
+                            if ($feature['type'] === 'boolean') {
+                                $boolean_features[] = $feature;
+                            } else {
+                                $regular_features[] = $feature;
+                            }
+                        }
+                        ?>
                                 <?php if (!empty($boolean_features)): ?>
                                     <div class="c-property-details__features c-item-features">
                                         <?php foreach (
@@ -700,6 +685,25 @@ while ($current_property = $pEstates->estateIterator()) {
                                             $regular_features
                                             as $feature
                                         ): ?>
+                                            <?php if (
+                                                ($raw_values->getValueRaw(
+                                                    $property_id,
+                                                )['elements'][
+                                                    'provisionsfrei'
+                                                ] ??
+                                                    null) ===
+                                                    '1' &&
+                                                in_array(
+                                                    $field,
+                                                    [
+                                                        'innen_courtage',
+                                                        'aussen_courtage',
+                                                    ],
+                                                    true,
+                                                )
+                                            ) {
+                                                continue;
+                                            } ?>
                                             <dl class="c-item-fields__item">
                                                 <dt class="c-item-fields__label">
                                                     <?php echo esc_html(
@@ -726,8 +730,6 @@ while ($current_property = $pEstates->estateIterator()) {
                                         <?php endforeach; ?>
                                     </div>
                                 <?php endif; ?>
-                            </div>
-                        <?php endforeach; ?>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -1167,15 +1169,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                     'more-property-features' .
                                     '-' .
                                     $field['field'];
-
-                                $description_word_count =
-                                    str_word_count(
-                                        trim(strip_tags($content)),
-                                    ) ?? 0;
-                                $is_long_description =
-                                    $description_word_count > 75 ? true : false;
                                 ?>
-
                                 <div class="c-property-details__text-wrapper">
                                     <h2 class="c-property-details__headline o-headline --h2">
                                         <?php esc_html_e(
@@ -1183,25 +1177,15 @@ while ($current_property = $pEstates->estateIterator()) {
                                             'oo_theme',
                                         ); ?>
                                     </h2>
-                                    <?php  ?>
-
                                     <div class="c-property-details__text">
-                                        <div class="c-property-details__text-content <?php echo $is_long_description
-                                            ? '--shorten'
-                                            : ''; ?>" id="<?php echo $field_toggle_id; ?>">
-                                            <?php echo nl2br($content); ?>
-                                            <?php if (
-                                                $field['field'] == 'lage' &&
-                                                $map &&
-                                                $is_long_description
-                                            ): ?>
-                                                <div class="c-property-details__map">
-                                                    <?php echo $map; ?>
-                                                </div>
-                                            <?php endif; ?>
+                                        <div class="c-property-details__text-content --shorten" id="<?php echo esc_attr(
+                                            $field_toggle_id,
+                                        ); ?>">
+                                            <?php echo nl2br(
+                                                esc_html($content),
+                                            ); ?>
                                         </div>
-                                        <?php if ($is_long_description) { ?>
-                                            <button class="c-property-details__more c-read-more" 
+                                        <button class="c-property-details__more c-read-more"
                                                 data-open-text="<?php esc_html_e(
                                                     'Mehr anzeigen',
                                                     'oo_theme',
@@ -1211,16 +1195,14 @@ while ($current_property = $pEstates->estateIterator()) {
                                                     'oo_theme',
                                                 ); ?>"
                                                 aria-expanded="false" aria-controls="<?php echo $field_toggle_id; ?>">
-                                                <?php echo esc_html(
-                                                    'Mehr anzeigen',
-                                                    'oo_theme',
-                                                ); ?>
-                                            </button>
-                                        <?php } ?>
+                                            <?php echo esc_html_e(
+                                                'Mehr anzeigen',
+                                                'oo_theme',
+                                            ); ?>
+                                        </button>
                                         <?php if (
-                                            $field['field'] == 'lage' &&
-                                            $map &&
-                                            !$is_long_description
+                                            $field['field'] === 'lage' &&
+                                            !empty($map)
                                         ): ?>
                                             <div class="c-property-details__map">
                                                 <?php echo $map; ?>
@@ -1288,7 +1270,7 @@ while ($current_property = $pEstates->estateIterator()) {
                             $energy_certificate_values['value_ranges'];
                         ?>
                         <div class="c-property-details__energy">
-                            <h2><?php echo esc_html(
+                            <h2 class="c-property-details__headline o-headline --h2"><?php echo esc_html(
                                 $pEstates->getFieldLabel('energieausweistyp'),
                             ); ?></h2>
                             <?php
@@ -1400,9 +1382,14 @@ while ($current_property = $pEstates->estateIterator()) {
                                                 0 == $value) ||
                                             $value == '0000-00-00' ||
                                             $value == '0.00' ||
-                                            $value == 'Nein' ||
-                                            $value == 'No' ||
-                                            $value == 'Ne' ||
+                                            (is_string($value) &&
+                                                $value !== '' &&
+                                                !is_numeric($value) &&
+                                                ($raw_values->getValueRaw(
+                                                    $property_id,
+                                                )['elements'][$field] ??
+                                                    null) ===
+                                                    '0') || // skip negative boolean fields
                                             $value == '' ||
                                             empty($value)
                                         ) {

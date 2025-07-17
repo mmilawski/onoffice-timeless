@@ -61,6 +61,27 @@ if (function_exists('oo_setup_parent_theme')) {
         styles: $oo_styles ?? null,
         scripts: $oo_scripts ?? null,
     );
+
+    // localize for app.js
+    $app_script_handle = oo_make_handle(
+        'theme',
+        OO_PARENT_PATH . '/build/js/app.js',
+    );
+
+    // localize for app.js
+    add_action(
+        'wp_enqueue_scripts',
+        function () use ($app_script_handle) {
+            wp_localize_script($app_script_handle, 'wpAppTranslations', [
+                'noResults' => __('Keine Ergebnisse', 'oo_theme'),
+                'removeThisItem' => __('Entferne dieses Element', 'oo_theme'),
+                'previous' => __('Vorheriger', 'oo_theme'),
+                'next' => __('Nächster', 'oo_theme'),
+                'close' => __('Schließen', 'oo_theme'),
+            ]);
+        },
+        20,
+    );
 }
 
 /**

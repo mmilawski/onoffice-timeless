@@ -6,8 +6,8 @@
   border-radius: $border-radius;
 
   @include media-breakpoint-up(lg) {
-    grid-template-rows: min-content;
     display: grid;
+    grid-template-rows: auto 1fr;
   }
 
   &__inner-wrapper {
@@ -66,9 +66,10 @@
         background-color: var(--oo-color-mix-status-contrast-40);
       }
 
-      &__icon {
-        .--filled {
-          stroke: var(--color-contrast-primary);
+      .c-icon-button__icon {
+        stroke: var(--oo-color-property-status-contrast-bg);
+        &.--filled {
+          fill: var(--oo-color-property-status-contrast-bg);
         }
       }
     }
@@ -80,11 +81,21 @@
   &__content {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 1rem;
     padding: 1rem;
   }
 
+  &__main-content-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
   &__footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
   &__title {
