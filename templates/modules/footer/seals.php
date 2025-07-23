@@ -28,6 +28,40 @@ if (empty($seals)) {
     return;
 }
 
+if ($is_slider) {
+    $image_width_xs = '100';
+    $image_width_sm = '130';
+    $image_width_md = '80';
+    $image_width_lg = '120';
+    $image_width_xl = '90';
+    $image_width_xxl = '100';
+    $image_width_xxxl = '130';
+
+    $image_height_xs = '';
+    $image_height_sm = '';
+    $image_height_md = '';
+    $image_height_lg = '';
+    $image_height_xl = '';
+    $image_height_xxl = '';
+    $image_height_xxxl = '';
+} else {
+    $image_width_xs = '240';
+    $image_width_sm = '240';
+    $image_width_md = '160';
+    $image_width_lg = '210';
+    $image_width_xl = '160';
+    $image_width_xxl = '190';
+    $image_width_xxxl = '140';
+
+    $image_height_xs = '';
+    $image_height_sm = '';
+    $image_height_md = '';
+    $image_height_lg = '';
+    $image_height_xl = '';
+    $image_height_xxl = '';
+    $image_height_xxxl = '';
+}
+
 if ($is_slider) { ?>
     <div class="c-seals --is-slider">
         <div class="c-seals__slider c-slider --is-seals-slider --on-bg-<?php echo $location; ?> splide" 
@@ -47,7 +81,75 @@ if ($is_slider) { ?>
                         echo '<div class="c-seals__cover --is-' .
                             $seal['type'] .
                             '">';
-                        oo_set_seal_content($seal, 'c-seals', $is_slider);
+
+                        if ($seal['type'] === 'image') {
+                            $image = $seal['image']['image'] ?? [];
+                            $link = $seal['image']['link'] ?? [];
+
+                            if (empty($image['alt'])) {
+                                //BFSG: fallback if no alt text is set
+                                $image['alt'] = sprintf(
+                                    esc_html__('Siegel für %s', 'oo_theme'),
+                                    esc_html($image['title']),
+                                );
+                            }
+                            if (!empty($link)) {
+                                echo '<a class="c-seals__link" ' .
+                                    oo_set_link_attr($link) .
+                                    '>';
+                            }
+
+                            oo_get_template(
+                                'components',
+                                '',
+                                'component-image',
+                                [
+                                    'image' => $image,
+                                    'picture_class' =>
+                                        'c-seals__picture o-picture',
+                                    'image_class' => 'c-seals__image o-image',
+                                    'additional_cloudimg_params' =>
+                                        '&func=bound&gravity=center&org_if_sml=1',
+                                    'dimensions' => [
+                                        '575' => [
+                                            'w' => $image_width_xs,
+                                            'h' => $image_height_xs,
+                                        ],
+                                        '1600' => [
+                                            'w' => $image_width_xxxl,
+                                            'h' => $image_height_xxxl,
+                                        ],
+                                        '1400' => [
+                                            'w' => $image_width_xxl,
+                                            'h' => $image_height_xxl,
+                                        ],
+                                        '1200' => [
+                                            'w' => $image_width_xl,
+                                            'h' => $image_height_xl,
+                                        ],
+                                        '992' => [
+                                            'w' => $image_width_lg,
+                                            'h' => $image_height_lg,
+                                        ],
+                                        '768' => [
+                                            'w' => $image_width_md,
+                                            'h' => $image_height_md,
+                                        ],
+                                        '576' => [
+                                            'w' => $image_width_sm,
+                                            'h' => $image_height_sm,
+                                        ],
+                                    ],
+                                ],
+                            );
+
+                            if (!empty($link)) {
+                                echo '</a>';
+                            }
+                        } else {
+                            oo_set_seal_content($seal, 'c-seals', $is_slider);
+                        }
+
                         echo '</div>';
                         echo '</div>';
                         echo '</div>';
@@ -105,7 +207,8 @@ if ($is_slider) { ?>
                 'image' => $image,
                 'picture_class' => 'c-seals__picture o-picture',
                 'image_class' => 'c-seals__image o-image',
-                'additional_cloudimg_params' => '&func=bound&gravity=center',
+                'additional_cloudimg_params' =>
+                    '&func=bound&gravity=center&org_if_sml=1',
                 'dimensions' => [
                     '575' => [
                         'w' => $image_width_xs,
