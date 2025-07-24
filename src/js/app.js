@@ -322,12 +322,15 @@ jQuery(document).ready(function() {
           };
       }
 
-      new TomSelect(select, {
+      const is_regionaler_zusatz = select.length && select[0].id === 'regionaler_zusatz';
+
+      const tom = new TomSelect(select, {
         itemClass: 'ts-item',
         createOnBlur: false,
         create: false,
         diacritics: true,
-        sortField: {
+        maxOptions: false,
+        sortField: is_regionaler_zusatz ? null : {
           field: "text",
           direction: "asc"
         },
@@ -384,7 +387,7 @@ jQuery(document).ready(function() {
           option: function(data, escape) {
 
             if (isMultiselect) {
-              return '<div class="ts-dropdown__item o-control" tabindex="0">' +
+              return '<div class="ts-dropdown__item o-control '+data.level+'" tabindex="0">' +
                         '<span class="ts-dropdown__label o-control__label">' +
                           '<span class="ts-dropdown__text o-control__text">' + escape(data.text) + '</span>' +
                         '</span>' +
@@ -403,6 +406,131 @@ jQuery(document).ready(function() {
           },
         }
       });
+
+      if (select.hasClass('--is-styled')) {
+        // 1) Grab the static, initial array of <option> elements
+        const allOptions = select.find('option').toArray();
+
+        if (!allOptions.length) {
+          console.warn('No options found for styled select');
+          return;
+        }
+
+        let isSubRegionAutoChanging = false;
+
+        const getOptionLevel = (optEl) => {
+          if (!optEl) return 0;
+          const lvlStr = $(optEl).data('level') || '';
+          return parseInt((lvlStr+'').replace('level-', ''), 10) || 0;
+        };
+
+        // 2) Walk the fixed allOptions array, not the live DOM order
+        const getFollowingOptions = ($opt) => {
+          const idx = allOptions.findIndex(el => el.value === $opt.val());
+          if (idx === -1) return $();
+          return $(allOptions.slice(idx + 1));
+        };
+
+        function getTomValues(ts) {
+          const v = ts.getValue();
+          return Array.isArray(v) ? v : [v];
+        }
+
+        function collectDescendants($opt) {
+          const baseLevel = getOptionLevel($opt.get(0));
+          const descendants = [];
+          getFollowingOptions($opt).each((_, el) => {
+            const lvl = getOptionLevel(el);
+            if (lvl > baseLevel) {
+              descendants.push(el.value);
+            } else {
+              return false;
+            }
+          });
+          return descendants;
+        }
+
+        tom.on('item_add', value => {
+          if (isSubRegionAutoChanging) return;
+
+          isSubRegionAutoChanging = true;
+
+          const $opt = select.find(`option[value="${value}"]`);
+          const toAdd = new Set([value, ...collectDescendants($opt)]);
+          const current = getTomValues(tom);
+          const newSet = new Set([...current, ...toAdd]);
+
+          let idx = allOptions.findIndex(o => o.value === value);
+          let lastLevelSeen = getOptionLevel($opt.get(0));
+
+          // also select parents if all children are selected
+          for (let i = idx - 1; i >= 0; i--) {
+            const el = allOptions[i];
+            const lvl = getOptionLevel(el);
+
+            if (lvl < lastLevelSeen) {
+              const parentIdx = i;
+              const parentLevel = lvl;
+              const children = [];
+
+              for (let j = parentIdx + 1; j < allOptions.length; j++) {
+                const cEl = allOptions[j];
+                const cLvl = getOptionLevel(cEl);
+
+                if (cLvl === parentLevel + 1) {
+                  children.push(cEl.value);
+                }
+
+                if (cLvl <= parentLevel) break;
+              }
+
+              if (children.length > 0 && children.every(v => newSet.has(v))) {
+                newSet.add(el.value);
+              }
+
+              lastLevelSeen = parentLevel;
+              if (lastLevelSeen === 0) break;
+            }
+          }
+
+          tom.setValue(Array.from(newSet), true);
+
+          isSubRegionAutoChanging = false;
+        });
+
+        tom.on('item_remove', value => {
+          if (isSubRegionAutoChanging) return;
+          isSubRegionAutoChanging = true;
+
+          const $opt      = select.find(`option[value="${value}"]`);
+          const baseLevel = getOptionLevel($opt.get(0));
+          const toRemove  = new Set([ value, ...collectDescendants($opt) ]);
+
+          // remove all parents, grandparents, ...
+          if (baseLevel > 0) {
+            let currentLevel = baseLevel;
+            const startIdx = allOptions.findIndex(opt => opt.value === value);
+
+            for (let i = startIdx - 1; i >= 0; i--) {
+              const optEl = allOptions[i];
+              const lvl   = getOptionLevel(optEl);
+
+              if (lvl < currentLevel) {
+                toRemove.add(optEl.value);
+                currentLevel = lvl;
+                if (currentLevel === 0) break;
+              }
+            }
+          }
+
+          const current      = getTomValues(tom);
+          const newSelection = current.filter(v => !toRemove.has(v));
+
+          tom.setValue(newSelection);
+
+          isSubRegionAutoChanging = false;
+        });
+      }
     });
   }
 

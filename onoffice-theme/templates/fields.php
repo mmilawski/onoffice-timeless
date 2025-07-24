@@ -518,7 +518,8 @@ if (!function_exists('renderFormField')) {
             $output .= '</label>';
         } elseif (
             \onOffice\WPlugin\Types\FieldTypes::FIELD_TYPE_SINGLESELECT ==
-            $typeCurrentInput
+                $typeCurrentInput &&
+            ($fieldName !== 'range_land' && $fieldName !== 'range_ort')
         ) {
             $output .= '<div class="o-label --is-single-select">';
             $output .= '<label for="' . $uniqueId . '-ts-control">';
