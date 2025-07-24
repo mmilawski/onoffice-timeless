@@ -251,7 +251,7 @@ $posiiton_center = !empty($text['wysiwyg']) ? ' --position-center' : '';
                                                 'image_class' =>
                                                     'c-gallery__image o-image',
                                                 'additional_cloudimg_params' =>
-                                                    '&func=bound&gravity=center',
+                                                    '&func=bound&gravity=center&org_if_sml=1',
                                                 'dimensions' => [
                                                     '575' => [
                                                         'w' => $image_width_sm,

@@ -211,3 +211,28 @@ add_filter('oo_theme_updates_data', function ($data) {
 
     return $data;
 });
+
+// Allow for YouTube video pausing via JS
+function oo_enqueue_youtube_api()
+{
+    wp_enqueue_script(
+        'youtube‑iframe‑api',
+        'https://www.youtube.com/iframe_api',
+        [],
+        null,
+        true,
+    );
+}
+add_action('wp_enqueue_scripts', 'oo_enqueue_youtube_api');
+
+function oo_enqueue_vimeo_api()
+{
+    wp_enqueue_script(
+        'vimeo-player-api',
+        'https://player.vimeo.com/api/player.js',
+        [],
+        null,
+        true,
+    );
+}
+add_action('wp_enqueue_scripts', 'oo_enqueue_vimeo_api');

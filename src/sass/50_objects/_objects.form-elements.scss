@@ -589,6 +589,31 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
         background-color: $form-primary;
         color: $form-primary-contrast;
       }
+
+      &.level-0 {
+        font-family: $font-family-text-bold;
+        font-weight: $font-weight-text-bold;
+      }
+
+      &.level-1 {
+        padding-left: 1.5rem;
+      }
+
+      &.level-2 {
+        padding-left: 3rem;
+      }
+
+      &.level-3 {
+        padding-left: 4.5rem;
+      }
+
+      &.level-4 {
+        padding-left: 6rem;
+      }
+
+      &.level-5 {
+        padding-left: 7.5rem;
+      }
     }
 
     &__label {

@@ -3,6 +3,7 @@
 $slider = get_field('slider') ?? [];
 $slide_count = is_array($slider) ? count($slider) : 0;
 $first_slide = true;
+$has_video = false;
 
 // Settings
 $settings = get_field('settings') ?? [];
@@ -96,6 +97,7 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
                                 'playsinline' => 1,
                                 'loop' => 1,
                                 'playlist' => $video_id,
+                                'enablejsapi' => 1,
                             ];
                         } else {
                             $video_class = '';
@@ -104,17 +106,16 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
                         $new_src = add_query_arg($params, $src);
                         $iframe = str_replace($src, $new_src, $video);
                         $attributes =
-                            'class="c-banner__video" loading="' .
-                            $slide_loading .
-                            '"';
+                            ' class="c-banner__video"' . ' tabindex="-1"';
                         $iframe = str_replace(' frameborder="0"', '', $iframe);
                         $iframe_with_attributes = str_replace(
-                            '></iframe>',
-                            ' ' . $attributes . '></iframe>',
+                            '<iframe',
+                            '<iframe' . $attributes,
                             $iframe,
                         );
-                    }
 
+                        $has_video = true;
+                    }
                     // Background width
                     $background_width_xs = '576';
                     $background_width_sm = '768';
@@ -210,9 +211,47 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
                                 !empty($video) &&
                                 $background == 'video'
                             ): ?>
-                                <div class="c-banner__video-wrapper <?php echo $video_class; ?>">
+                                <div class="c-banner__video-wrapper <?php echo $video_class; ?>" aria-hidden="true">
                                     <?php echo $iframe_with_attributes; ?>
                                 </div>
+                                <button
+                                    class="c-banner__video-playback-toggle<?php echo $slide_count ===
+                                    1
+                                        ? ' --single-slide'
+                                        : ''; ?>"
+                                    type="button"
+                                    aria-pressed="false"
+                                    aria-label="<?php esc_html_e(
+                                        'Video pausieren',
+                                        'oo_theme',
+                                    ); ?>"
+                                    data-label-play="<?php esc_html_e(
+                                        'Video abspielen',
+                                        'oo_theme',
+                                    ); ?>"
+                                    data-label-pause="<?php esc_html_e(
+                                        'Video pausieren',
+                                        'oo_theme',
+                                    ); ?>"
+                                    data-video-id="<?php echo $video_id; ?>"
+>                               
+                                    <span class="c-banner__sr-label u-screen-reader-only">
+                                        <?php esc_html_e(
+                                            'Video pausieren',
+                                            'oo_theme',
+                                        ); ?>
+                                    </span>
+
+                                    <?php echo oo_get_icon('play', true, [
+                                        'class' => 'c-banner__icon --play',
+                                        'aria-hidden' => 'true',
+                                    ]); ?>
+
+                                    <?php echo oo_get_icon('pause', true, [
+                                        'class' => 'c-banner__icon --pause',
+                                        'aria-hidden' => 'true',
+                                    ]); ?>
+                                </button>
                             <?php endif; ?>
                         </div>
 
@@ -296,17 +335,17 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
             </div>
             <div class="c-slider__navigation splide__navigation">
                 <div class="c-slider__arrows splide__arrows">
-                    <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
-                        <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
+                    <button class="c-slider__arrow c-slider__arrow--prev splide__arrow splide__arrow--prev">
+                        <span class="u-screen-reader-only"><?php esc_html_e(
                             'Vorheriges',
                             'oo_theme',
                         ); ?></span>
-                       <?php echo oo_get_icon('chevron-left', true, [
-                           'class' => 'c-slider__icon splide__icon',
-                       ]); ?>
+                        <?php echo oo_get_icon('chevron-left', true, [
+                            'class' => 'c-slider__icon splide__icon',
+                        ]); ?>
                     </button>
-                    <button class="c-slider__arrow --next splide__arrow splide__arrow--next">
-                        <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
+                    <button class="c-slider__arrow c-slider__arrow--next splide__arrow splide__arrow--next">
+                        <span class="u-screen-reader-only"><?php esc_html_e(
                             'Nächstes',
                             'oo_theme',
                         ); ?></span>
@@ -315,27 +354,27 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
                         ]); ?>
                     </button>
                 </div>
+            </div>
+            <div class="c-slider__controls splide__controls">
+            <ul class="c-slider__pagination splide__pagination"></ul>
                 <?php if ($autoslide) { ?>
-                    <button class="c-slider__toggle splide__toggle" type="button">
-                        <span class="u-screen-reader-only"><?php esc_html_e(
-                            'Start',
-                            'oo_theme',
-                        ); ?></span>
+                    <button class="c-slider__autoslide-toggle splide__toggle" type="button">
+                        <span class="u-screen-reader-only">
+                            <?php esc_html_e('Autoplay starten', 'oo_theme'); ?>
+                        </span>
                         <?php echo oo_get_icon('play', true, [
                             'class' =>
                                 'c-slider__icon splide__icon splide__toggle --play',
                         ]); ?>
-                        <span class="u-screen-reader-only"><?php esc_html_e(
-                            'Stopp',
-                            'oo_theme',
-                        ); ?></span>
+                        <span class="u-screen-reader-only">
+                            <?php esc_html_e('Autoplay stoppen', 'oo_theme'); ?>
+                        </span>
                         <?php echo oo_get_icon('pause', true, [
                             'class' =>
                                 'c-slider__icon splide__icon splide__toggle --pause',
                         ]); ?>
                     </button>
                 <?php } ?>
-                <ul class="c-slider__pagination splide__pagination"></ul>
             </div>
         </div>
     </div>

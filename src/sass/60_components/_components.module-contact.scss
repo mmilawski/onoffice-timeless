@@ -34,7 +34,8 @@
 
     &.--is-opening-hours {
       display: grid;
-      grid-template-columns: auto 1fr;
+      grid-template-columns: auto minmax(100px, auto);
+      column-gap: 1.5rem;
     }
 
     .--is-header & {
