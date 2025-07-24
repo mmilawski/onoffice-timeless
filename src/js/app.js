@@ -716,72 +716,79 @@ jQuery(document).ready(function() {
 
 
   // Slider
-  const sliders = document.querySelectorAll('.c-slider');
+  const $sliders = $('.c-slider');
 
-  function innerSliderUpdateTabIndex(slider) {
-    slider.querySelectorAll('.c-property-card__picture-wrapper').forEach(slide => {
-      slide.tabIndex = slide.classList.contains('is-visible') ? 0 : -1
-    })
+  function innerSliderUpdateTabIndex($slider) {
+    $slider.find('.c-property-card__picture-wrapper').each(function() {
+      this.tabIndex = $(this).hasClass('is-visible') ? 0 : -1;
+    });
   }
-  function outerSliderUpdateTabIndex(slider) {
-    slider.querySelectorAll('.c-property-card').forEach(slide => {
-      if(slide.classList.contains('is-visible')){
-        const innerSlider = slide.querySelector('.c-slider')
-        if(innerSlider){
-          innerSliderUpdateTabIndex(innerSlider)
+
+  function outerSliderUpdateTabIndex($slider) {
+    $slider.find('.c-property-card').each(function() {
+      const $slide = $(this);
+      if ($slide.hasClass('is-visible')) {
+        const $innerSlider = $slide.find('.c-slider').first();
+        if ($innerSlider.length) {
+          innerSliderUpdateTabIndex($innerSlider);
         }
-        slide.querySelectorAll('button').forEach(el=>el.tabIndex=0)
-        slide.querySelectorAll('.c-property-card__button').forEach(el=>el.tabIndex=0)
-      }
-      else{
-        slide.querySelectorAll('button, a').forEach(el=>el.tabIndex = -1);
+        $slide.find('button').each(function() { this.tabIndex = 0; });
+        $slide.find('.c-property-card__button').each(function() { this.tabIndex = 0; });
+      } else {
+        $slide.find('button, a').each(function() { this.tabIndex = -1; });
       }
     });
   }
 
-  if( sliders.length > 0 ) {
-      let innerSliderTotalCount = 0;
-      let innerSliderMountedCount = 0;
-      sliders.forEach(function(slider) {
+  if ($sliders.length > 0) {
+    let innerSliderTotalCount = 0;
+    let innerSliderMountedCount = 0;
 
+    $sliders.each(function() {
+      const slider = this;
+      const $slider = $(slider);
       const splide = new Splide(slider);
-      let outerslider = false;
-      let innerslider = slider.classList.contains("--is-properties-images-slider")
 
-      if (slider.classList.contains("--is-properties-slider") || slider.classList.contains("--is-properties-similar-slider"))
-      {
-        outerslider = true;
+      const hasVideoIframe = $slider.find('iframe[src*="youtube"], iframe[src*="vimeo"]').length > 0;
+      if (hasVideoIframe) {
+        const sanitize = () => sanitizeClonedYouTubeIframes(slider);
+        splide.on('mounted', sanitize);
+        splide.on('move', sanitize);
+        splide.on('refresh', sanitize);
       }
-      if( outerslider) {
 
-        const btnNextOuter = slider.querySelector(".c-slider__navigation:not(.--is-properties-images-slider) .c-slider__arrow.--next");
-        const btnPrevOuter = slider.querySelector(".c-slider__navigation:not(.--is-properties-images-slider) .c-slider__arrow.--prev");
+      const innerslider = $slider.hasClass("--is-properties-images-slider");
+      const outerslider = $slider.hasClass("--is-properties-slider") || $slider.hasClass("--is-properties-similar-slider");
 
-        btnNextOuter.addEventListener('click', e => {
-          splide.go('+1')
-        })
-      
-        btnPrevOuter.addEventListener('click', e => {
-          splide.go('-1')
-        })
+      if (outerslider) {
+        const $btnNextOuter = $slider.find(".c-slider__navigation:not(.--is-properties-images-slider) .c-slider__arrow.--next");
+        const $btnPrevOuter = $slider.find(".c-slider__navigation:not(.--is-properties-images-slider) .c-slider__arrow.--prev");
 
-        splide.on('moved', () => requestAnimationFrame(()=>requestAnimationFrame(()=>outerSliderUpdateTabIndex(slider))))
-      }
-      else if(innerslider){
+        $btnNextOuter.on('click', e => {
+          splide.go('+1');
+        });
+
+        $btnPrevOuter.on('click', e => {
+          splide.go('-1');
+        });
+
+        splide.on('moved', () => requestAnimationFrame(() => requestAnimationFrame(() => outerSliderUpdateTabIndex($slider))));
+      } else if (innerslider) {
         innerSliderTotalCount++;
-        splide.on('mounted', () => requestAnimationFrame(()=>requestAnimationFrame(()=> {
-          innerSliderUpdateTabIndex(slider)
-          // needed because mounted callback for inner sliders makes elements inside focussable, even if the containing property card is not visible
+        splide.on('mounted', () => requestAnimationFrame(() => requestAnimationFrame(() => {
+          innerSliderUpdateTabIndex($slider);
           innerSliderMountedCount++;
-          if(innerSliderMountedCount === innerSliderTotalCount){
-            document.querySelectorAll('.c-property-list__slider').forEach(slider=>outerSliderUpdateTabIndex(slider))
+          if (innerSliderMountedCount === innerSliderTotalCount) {
+            $('.c-property-list__slider').each(function() {
+              outerSliderUpdateTabIndex($(this));
+            });
           }
-        })))
-        splide.on('moved', () => requestAnimationFrame(()=>requestAnimationFrame(()=>innerSliderUpdateTabIndex(slider))))
+        })));
+        splide.on('moved', () => requestAnimationFrame(() => requestAnimationFrame(() => innerSliderUpdateTabIndex($slider))));
       }
-   
+
       // progress bar animation
-      const bar = slider.querySelector('.c-slider__progress-bar');
+      const bar = $slider.find('.c-slider__progress-bar')[0];
       if (bar) {
         splide.on('mounted move', function() {
           const end = splide.Components.Controller.getEnd() + 1;
@@ -789,14 +796,23 @@ jQuery(document).ready(function() {
         });
       }
 
-      const manuallyHandleFocus = !!innerslider || !!outerslider
-      // remove drag when not enough slides
-      splide.on( 'overflow', function ( isOverflow ) {
+      const manuallyHandleFocus = !!innerslider || !!outerslider;
+
+      splide.on('overflow', function(isOverflow) {
         splide.options = {
-          drag : isOverflow,
+          drag: isOverflow,
           focusableNodes: manuallyHandleFocus ? '' : 'a, button, input, textarea, select:not([aria-hidden])'
         };
       });
+
+      splide.on('mounted', function() {
+        const $pagination = $slider.find('.splide__pagination').first();
+        const $autoslideItem = $pagination.find('.c-slider__autoslide-item').first();
+        if ($pagination.length && $autoslideItem.length) {
+          $pagination.append($autoslideItem);
+        }
+      });
+
       splide.mount();
     });
   }
@@ -1061,3 +1077,108 @@ function debounce(func, delay) {
   };
 }
 
+function getSlide(element) {
+  return element.closest('.c-banner__slide');
+}
+
+function initVideoToggle() {
+    $('.c-banner__video-playback-toggle').off('click').on('click', function (e) {
+      e.preventDefault();
+  
+      const btn = $(this);
+      const slide = getSlide(this);
+      const iframe = $(slide).find('iframe');
+      const isPlaying = btn.attr('aria-pressed') === 'false';
+      const labelPlay = btn.data('label-play');
+      const labelPause = btn.data('label-pause');
+  
+      // Toggle video playback
+      iframe.each(function () {
+        const isYouTube = this.src.includes('youtube');
+        const isVimeo = this.src.includes('vimeo');
+        const player = $(this).data('yt-player') || $(this).data('vimeo-player');
+        if (!player) return;
+  
+        try {
+          if (isYouTube) {
+            isPlaying ? player.pauseVideo() : player.playVideo();
+          } else if (isVimeo) {
+            isPlaying ? player.pause() : player.play();
+          }
+        } catch (e) {
+          console.warn('Video control failed', e);
+        }
+      });
+  
+      // Update ARIA and screen reader label
+      const newState = isPlaying ? 'true' : 'false';
+      const newLabel = isPlaying ? labelPlay : labelPause;
+  
+      btn.attr('aria-pressed', newState);
+      btn.attr('aria-label', newLabel);
+      btn.find('.c-banner__sr-label').text(newLabel);
+    });
+}
+
+function onYouTubeIframeAPIReady() {
+  $('iframe[src*="youtube"]').each(function () {
+    const iframe = this;
+
+    if ($(iframe).closest('.splide__slide--clone').length > 0) return;
+    if ($(iframe).data('yt-player')) return;
+
+    try {
+      const player = new YT.Player(iframe, {
+        events: {
+          onReady: onPlayerReady,
+        },
+      });
+
+      $(iframe).data('yt-player', player);
+    } catch (e) {
+      console.error('YouTube Player Error:', e);
+    }
+  });
+}
+
+function onPlayerReady() {
+  // No-op for now; autoplay is handled by iframe URL params
+}
+
+function initVimeoPlayers() {
+  $('iframe[src*="vimeo"]').each(function () {
+    const iframe = this;
+
+    if ($(iframe).closest('.splide__slide--clone').length > 0) return;
+    if ($(iframe).data('vimeo-player')) return;
+
+    const player = new Vimeo.Player(iframe);
+    $(iframe).data('vimeo-player', player);
+  });
+}
+
+function sanitizeClonedYouTubeIframes(root) {
+    $(root).find('.splide__slide--clone iframe[src*="youtube"]').each(function () {
+      const $iframe = $(this);
+      const iframeEl = this;
+
+      const currentId = $iframe.attr('id');
+      if (currentId?.startsWith('widget')) {
+        $iframe.removeAttr('id');
+      }
+      // Remove all YouTube-injected data attributes
+      const attrs = iframeEl.attributes;
+      for (let i = attrs.length - 1; i >= 0; i--) {
+        const attr = attrs[i];
+        if (attr.name.startsWith('data-ytplayer')) {
+          $iframe.removeAttr(attr.name);
+        }
+      }
+    });
+}
+
+jQuery(window).on('load', function () {
+  initVideoToggle();
+  initVimeoPlayers();
+  sanitizeClonedYouTubeIframes(document);
+});

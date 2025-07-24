@@ -20,13 +20,16 @@
     }
   }
 
-  &__toggle {
+  &__autoslide-toggle {
     display: flex;
     justify-content: center;
     align-items: center;
     color: var(--oo-color-contrast-primary);
     background-color: var(--oo-color-primary);
-    border: 2px solid var(--oo-color-primary);
+    border: 0;
+    outline: $outline !important;
+    outline-offset: $outline-offset !important;
+    opacity: 1;
     width: $icon-wrapper-size;
     height: $icon-wrapper-size;
     padding: 0.25rem;
@@ -42,41 +45,47 @@
         height: $icon-size;
       }
     }
-  }
 
-  &__toggle {
-    color: var(--oo-color-contrast-primary);
-    background-color: var(--oo-color-primary);
-    border: 2px solid var(--oo-color-primary);
-    width: $icon-wrapper-size;
-    height: $icon-wrapper-size;
-    border-radius: $border-radius;
-    padding: 0.25rem;
+    @include plain-visited() {
+      color: var(--oo-color-contrast-primary);
+      background-color: var(--oo-color-primary);
+      opacity: 1;
+    }
 
-    #{$c-slider}__icon {
-      height: $icon-size;
-      width: $icon-size;
-      fill: none;
-      transform: none;
+    @include hover() {
+      background-color: var(--oo-color-mix-primary-contrast-20);
+      opacity: 1;
+    }
 
-      @include media-breakpoint-up(xl) {
-        width: $icon-size;
-        height: $icon-size;
-      }
+    @include focus-visible() {
+      outline-color: var(--oo-color-primary) !important;
+    }
+
+    @include active() {
+      background-color: var(--oo-color-mix-primary-contrast-40);
     }
   }
 
-  &__pagination {
-    bottom: 0;
-    padding: 0 1rem;
+  &__controls {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
     display: flex;
-    gap: 0.5rem;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     height: fit-content;
 
     @include media-breakpoint-up(xl) {
       height: auto;
+      bottom: 2rem;
     }
+  }
+
+  &__pagination {
+    position: static;
+    display: flex;
+    gap: 0.5rem;
 
     li {
       line-height: inherit;
@@ -289,38 +298,6 @@
       }
     }
 
-    #{$c-slider}__toggle {
-      position: absolute;
-      bottom: 3rem;
-      left: 50%;
-      translate: -50%;
-      padding: 0;
-      @include media-breakpoint-up(lg) {
-        bottom: 4rem;
-      }
-    }
-
-    #{$c-slider}__toggle {
-      pointer-events: auto;
-      position: absolute;
-      bottom: 3.5rem;
-      left: 50%;
-      translate: -50%;
-      margin: 0 auto;
-      @include media-breakpoint-up(xl) {
-        top: auto;
-        bottom: 4.5rem;
-        padding: 0.25rem;
-      }
-    }
-    #{$c-slider}__pagination {
-      position: absolute;
-      pointer-events: auto;
-      bottom: 1rem;
-      @include media-breakpoint-up(lg) {
-        bottom: 2rem;
-      }
-    }
     #{$c-slider}__arrows {
       height: 100%;
     }
@@ -354,14 +331,7 @@
         height: 100%;
       }
     }
-    #{$c-slider}__pagination {
-      position: absolute;
-      pointer-events: auto;
-      bottom: 1rem;
-      @include media-breakpoint-up(lg) {
-        bottom: 2rem;
-      }
-    }
+
     #{$c-slider}__arrows {
       height: 100%;
     }
@@ -395,14 +365,7 @@
         height: 100%;
       }
     }
-    #{$c-slider}__pagination {
-      position: absolute;
-      pointer-events: auto;
-      bottom: 1rem;
-      @include media-breakpoint-up(lg) {
-        bottom: 2rem;
-      }
-    }
+
     #{$c-slider}__arrows {
       height: 100%;
     }
