@@ -205,9 +205,9 @@ add_filter('onoffice_block_setup', function ($blocks) {
 
 // UPDATE SYSTEM
 add_filter('oo_theme_updates_data', function ($data) {
-    $data['slug'] = 'onoffice-classic';
+    $data['slug'] = 'onoffice-timeless';
     $data['json'] =
-        'https://onoffice-wp-updates.de/releases/themes/onoffice-classic/updater.json';
+        'https://onoffice-wp-updates.de/releases/themes/onoffice-timeless/updater.json';
 
     return $data;
 });
