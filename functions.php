@@ -205,6 +205,12 @@ add_filter('onoffice_block_setup', function ($blocks) {
 if (is_plugin_active('oo-vue-addons/on-office-vue-addons.php')) {
     add_filter('onoffice_block_setup', function ($blocks) {
         return array_merge($blocks, [
+            'oo/customer-area' => [
+                'path' => OO_SHARED_PATH . '/blocks/customer-area',
+                'override-parent-render' =>
+                    OO_PARENT_PATH .
+                    '/blocks/customer-area/customer-area-render.php',
+            ],
             'oo/appointment' => [
                 'path' => OO_SHARED_PATH . '/blocks/appointment',
                 'override-parent-render' =>
