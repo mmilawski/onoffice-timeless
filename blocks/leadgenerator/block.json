@@ -1,0 +1,28 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 2,
+    "name": "oo/leadgenerator",
+    "title": "Wertermittlung",
+    "category": "oo-other",
+    "icon": {
+        "background": "#3f9de4",
+        "foreground": "#ffffff",
+        "src": "calendar"
+    },
+    "description": "Einbindung der Wertermittlung",
+    "textdomain": "oo_theme",
+    "acf": {
+        "renderTemplate": "leadgenerator-render.php"
+    },
+    "editorStyle": "",
+    "style": "",
+    "supports": {
+        "html": false,
+        "align": false,
+        "anchor": false,
+        "reusable": false,
+        "lock": false,
+        "customClassName": false,
+        "renaming": false
+    }
+}
