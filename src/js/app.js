@@ -659,34 +659,28 @@ jQuery(document).ready(function() {
           popupElement.classList.add('--is-open');
           document.body.classList.add('--modal-open');
           if(closeButton){
-            popupElement.addEventListener(
-                'transitionend',
-                () => closeButton.focus(),
-                { once: true }
-            );
+              setTimeout(() => {
+                  closeButton.focus();
+              }, 100);
           }
 
           function closePopup() {
             popupElement.classList.remove('--is-open');
             if (popupElement instanceof HTMLDialogElement && typeof popupElement.close === 'function') {
-              popupElement.addEventListener(
-                  'transitionend',
-                  () => popupElement.close(),
-                  { once: true }
-              );
+              popupElement.close();
             }
             document.body.classList.remove('--modal-open');
           }
 
-          // Close popup with click on icon or overlay
-          const overlay = popupElement.querySelector('.c-popup__overlay');
-
-          if (overlay) {
-            overlay.addEventListener('click', closePopup);
-          }
           if (closeButton) {
             closeButton.addEventListener('click', closePopup);
           }
+
+          popupElement.addEventListener('click', (event) => {
+            if (event.target === popupElement) {
+              closePopup();
+            }
+          });
 
           // Close popup on press ESC
           document.addEventListener('keydown', function(event) {

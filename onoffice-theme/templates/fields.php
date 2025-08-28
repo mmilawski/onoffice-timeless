@@ -417,6 +417,116 @@ if (!function_exists('renderAutocomplete')) {
         }
     }
 }
+
+if (!function_exists('renderIconButtonsField')) {
+    /**
+     * Renders selectable icon buttons for a form field.
+     * Used in lead generator forms for specific fields.
+     *
+     * @param string $fieldName The name of the field.
+     * @param onOffice\WPlugin\Form $pForm The form object.
+     * @return string The HTML for the icon buttons.
+     */
+    function renderIconButtonsField(
+        string $fieldName,
+        onOffice\WPlugin\Form $pForm,
+    ): string {
+        $output = '';
+        $permittedValues = $pForm->getPermittedValues($fieldName, true);
+
+        $dependencies = $pForm->getFieldDependencies($fieldName);
+        $selectedValue = $pForm->getFieldValue($fieldName, true);
+        $fieldLabel = $pForm->getFieldLabel($fieldName, true);
+        $isRequired = $pForm->isRequiredField($fieldName);
+        $addition = $isRequired ? '&nbsp;*' : '';
+        $uniqueId = get_unique_field_id($fieldName, $pForm->getFormNo());
+        $labelId = $uniqueId . '-label';
+        $requiredAttribute = $isRequired ? 'required' : '';
+
+        $output .= '<div class="o-label" data-icon-button-group>';
+        $output .=
+            '<span class="o-label__text" id="' .
+            $labelId .
+            '">' .
+            $fieldLabel .
+            $addition .
+            '</span>';
+
+        // Hidden input to store the actual value for form submission
+        $output .=
+            '<input class="o-control__input" tabindex="-1" aria-hidden="true" name="' .
+            esc_attr($fieldName) .
+            '" id="' .
+            $uniqueId .
+            '" value="' .
+            esc_attr($selectedValue) .
+            '" ' .
+            $requiredAttribute .
+            ' aria-invalid="false">';
+
+        $dependenciesAttribute = !empty($dependencies)
+            ? ' data-dependencies="' .
+                esc_attr(wp_json_encode($dependencies)) .
+                '"'
+            : '';
+        $output .=
+            '<div class="c-selectable-cards"' . $dependenciesAttribute . '>';
+
+        foreach ($permittedValues as $key => $value) {
+            $isSelected = $selectedValue == $key;
+
+            $output .=
+                '<button type="button" tabindex="0" class="c-selectable-card' .
+                ($isSelected ? ' --is-selected' : '') .
+                '" data-value="' .
+                esc_attr($key) .
+                '" title="' .
+                esc_attr($value) .
+                '" aria-pressed="' .
+                ($isSelected ? 'true' : 'false') .
+                '"  aria-label="' .
+                esc_attr(strip_tags($fieldLabel)) .
+                ': ' .
+                esc_attr($value) .
+                '" >';
+
+            ob_start();
+            $output .=
+                '<span class="c-selectable-card__icon" aria-hidden="true">';
+            oo_get_leadgenerator_icon($key, true);
+            $output .= ob_get_clean();
+            $output .= '</span>';
+
+            $output .=
+                '<span class="c-selectable-card__label">' .
+                esc_html($value) .
+                '</span>';
+            $output .= '</button>';
+        }
+
+        $output .= '</div>'; // .c-selectable-cards
+        $output .= '</div>'; // .o-label
+
+        // We render the standard dropdown and hide it if the buttons are shown initially.
+        $output .= '<div class="view--dropdown" style="display: none;">';
+        // Temporarily store and remove the field name
+        ob_start();
+        $dropdownHtml = renderFormField($fieldName, $pForm);
+        // Remove the name attribute from the select element to prevent duplicate submission
+        $dropdownHtml = preg_replace(
+            '/name=["\'][^"\']+["\']/',
+            'data-field-name="' . esc_attr($fieldName) . '"',
+            $dropdownHtml,
+        );
+        $output .= $dropdownHtml;
+        ob_end_clean();
+
+        $output .= '</div>';
+
+        return $output;
+    }
+}
+
 /* fields in forms */
 if (!function_exists('renderFormField')) {
     function renderFormField(

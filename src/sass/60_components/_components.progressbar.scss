@@ -1,0 +1,222 @@
+.c-progressbar {
+  $c-progressbar: &;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  @include media-breakpoint-up(md) {
+    margin: 2rem auto 2.5rem;
+  }
+
+  &__bar,
+  &__status {
+    position: absolute;
+    top: 0.625rem; // half of the circle height
+    left: 0;
+    height: 2px;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+
+  &__bar {
+    width: 100%;
+    background-color: var(--oo-color-progressbar-bg);
+  }
+
+  &__status {
+    width: 0;
+    background-color: var(--oo-color-primary);
+    transition: width 0.4s ease-in-out;
+  }
+
+  &__step {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2; // Above the bar
+
+    &[data-step='1'] {
+      align-items: flex-start;
+    }
+
+    &:last-of-type {
+      align-items: flex-end;
+    }
+  }
+
+  &__circle {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 50%;
+    background-color: var(--oo-color-progressbar-bg);
+    border: 1px solid var(--oo-color-progressbar-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.4s ease-in-out, background-color 0.4s ease-in-out,
+      color 0.4s ease-in-out;
+    position: relative;
+    z-index: 3;
+  }
+
+  &__icon {
+    &.--is-check {
+      display: none;
+    }
+  }
+
+  &__label {
+    display: none;
+    position: absolute; // Always absolute, even on mobile
+    top: 100%;
+    margin-top: 0.75rem;
+    color: var(--oo-color-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.875rem;
+    z-index: 1;
+
+    // Default: centered
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+
+    // Mobile: wider for active label
+    width: 200px;
+    max-width: 80vw; // Prevent overflow on very small screens
+
+    #{$c-progressbar}__step[data-step='1'] & {
+      left: 0;
+      transform: none;
+      text-align: left;
+    }
+
+    // Last step: right-aligned
+    #{$c-progressbar}__step:last-of-type & {
+      left: auto;
+      right: 0;
+      transform: none;
+      text-align: right;
+    }
+
+    @include media-breakpoint-up(md) {
+      display: block;
+      // Use viewport width for dynamic sizing
+      // This ensures labels scale with container but don't overlap
+      width: 15vw;
+      max-width: 200px;
+      min-width: 80px;
+    }
+
+    @include media-breakpoint-up(lg) {
+      width: 12vw;
+      max-width: 250px;
+      min-width: 100px;
+    }
+
+    @include media-breakpoint-up(xl) {
+      width: 10vw;
+      max-width: 300px;
+      min-width: 120px;
+    }
+
+    // Hide/show label parts based on context
+    &-number {
+      &.--is-mobile.--in-modal {
+        display: inline; // Always show numbers on mobile
+        @include media-breakpoint-up(md) {
+          display: none; // Hide on desktop by default
+        }
+      }
+    }
+
+    &-title {
+      &.--not-in-modal {
+        display: none; // Hide by default on mobile
+
+        // Show only for active step on mobile (when not in modal)
+        #{$c-progressbar}__step.--is-active & {
+          display: inline;
+        }
+
+        @include media-breakpoint-up(md) {
+          display: inline; // Show all titles on desktop when not in modal
+        }
+      }
+    }
+
+    // When progressbar is in modal
+    &.--in-modal {
+      #{$c-progressbar}__label {
+        // Show label for active step on mobile in modal
+        display: block;
+
+        @include media-breakpoint-up(md) {
+          display: block; // Keep showing on desktop
+        }
+
+        &-number {
+          &.--is-mobile.--in-modal {
+            display: inline; // Always show numbers in modal (all screen sizes)
+          }
+        }
+        &-title {
+          &.--not-in-modal {
+            display: none; // Never show titles in modal
+          }
+        }
+      }
+    }
+  }
+
+  // When progressbar is in modal
+  &.--in-modal {
+    #{$c-progressbar}__label {
+      &-number {
+        &.--is-mobile.--in-modal {
+          display: inline; // Always show numbers in modal (all screen sizes)
+        }
+      }
+      &-title {
+        &.--not-in-modal {
+          display: none; // Never show titles in modal
+        }
+      }
+    }
+  }
+
+  &__step.--is-active {
+    #{$c-progressbar}__circle {
+      border-color: var(--oo-color-primary);
+      background-color: var(--oo-color-primary);
+    }
+
+    #{$c-progressbar}__label {
+      display: block; // Show active label on mobile
+    }
+
+    #{$c-progressbar}__label-number {
+      display: none;
+    }
+  }
+
+  &__step.--is-completed {
+    #{$c-progressbar}__circle {
+      background-color: var(--oo-color-primary);
+      border-color: var(--oo-color-primary);
+      color: var(--oo-color-contrast-primary);
+    }
+
+    #{$c-progressbar}__icon {
+      &.--is-step {
+        display: none;
+      }
+      &.--is-check {
+        display: block;
+      }
+    }
+  }
+}
