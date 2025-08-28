@@ -21,7 +21,7 @@
 
   &__bar {
     width: 100%;
-    background-color: var(--oo-color-progressbar-bg);
+    background-color: var(--oo-color-mix-bg-text-10);
   }
 
   &__status {
@@ -50,8 +50,8 @@
     width: 1.25rem;
     height: 1.25rem;
     border-radius: 50%;
-    background-color: var(--oo-color-progressbar-bg);
-    border: 1px solid var(--oo-color-progressbar-bg);
+    background-color: var(--oo-color-mix-bg-text-10);
+    border: 1px solid var(--oo-color-mix-bg-text-10);
     display: flex;
     align-items: center;
     justify-content: center;
