@@ -23,16 +23,16 @@ $font-weight-navigation: var(
 $font-weight-button: var(--oo-font-button-weight, var(--oo-font-text-weight));
 
 // font sizes
-$global-font-size: 16px;
-$global-line-height: 28px;
+$global-font-size: 18px;
+$global-line-height: 2.125rem;
 
 $small-font-size: 14px;
 $small-line-height: 24px;
 
 $mobile-h1-font-size: 32px;
-$mobile-h1-line-height: 2rem;
+$mobile-h1-line-height: 2.75rem;
 $mobile-h2-font-size: 28px;
-$mobile-h2-line-height: 2rem;
+$mobile-h2-line-height: 2.5rem;
 $mobile-h3-font-size: 24px;
 $mobile-h3-line-height: 1.5rem;
 $mobile-h4-font-size: 18px;
@@ -43,17 +43,17 @@ $mobile-h6-font-size: 16px;
 $mobile-h6-line-height: 1.5rem;
 
 $desktop-h1-font-size: 40px;
-$desktop-h1-line-height: 3rem;
+$desktop-h1-line-height: 3.375rem;
 $desktop-h2-font-size: 32px;
-$desktop-h2-line-height: 2.5rem;
+$desktop-h2-line-height: 2.75rem;
 $desktop-h3-font-size: 28px;
-$desktop-h3-line-height: 2rem;
+$desktop-h3-line-height: 2.5rem;
 $desktop-h4-font-size: 24px;
-$desktop-h4-line-height: 1.75rem;
+$desktop-h4-line-height: 2rem;
 $desktop-h5-font-size: 18px;
-$desktop-h5-line-height: 1.75rem;
+$desktop-h5-line-height: 1.5rem;
 $desktop-h6-font-size: 16px;
-$desktop-h6-line-height: 1.75rem;
+$desktop-h6-line-height: 1.5rem;
 
 // header height
 $mobile-header-height: var(--header-height, 6.5rem);
