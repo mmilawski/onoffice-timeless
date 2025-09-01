@@ -11,9 +11,9 @@
   }
 
   h1 {
-    margin-bottom: 1.5rem;
+    margin-bottom: 2.5rem;
     @include media-breakpoint-up(xl) {
-      margin-bottom: 2rem;
+      margin-bottom: 2rem; // how much margin bottom in mobile?
     }
   }
 
