@@ -95,10 +95,10 @@
 
   &__page {
     border: 0;
-    border-radius: $border-radius;
+    border-radius: 0;
     display: inline-block;
-    height: $icon-size;
-    width: $icon-size;
+    height: 1.5rem;
+    width: 1.5rem;
     margin: 0;
     padding: 0;
     position: relative;
@@ -170,7 +170,7 @@
     text-align: center;
     margin: 0;
     padding: 0;
-    border-radius: $border-radius;
+    border-radius: 0;
     border: 0;
     outline: $outline !important;
     outline-offset: $outline-offset !important;
@@ -181,7 +181,7 @@
 
     @include plain-visited() {
       color: var(--oo-color-contrast-primary);
-      background-color: var(--oo-color-primary);
+      background-color: var(--oo-color-header-mix-bg-contrast-5);
       opacity: 1;
     }
 
@@ -214,8 +214,8 @@
     }
 
     svg {
-      width: 1.5rem;
-      height: 1.5rem;
+      width: $icon-size;
+      height: $icon-size;
       transform: none;
       fill: transparent;
     }
