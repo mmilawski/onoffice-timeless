@@ -109,21 +109,14 @@ require 'info-messages.php'; ?>
             <div id="leadform-<?php echo sanitize_title(
                 $pForm->getFormId(),
             ); ?>">
+            <div class="c-form__required"><?php echo esc_html__(
+                '* Pflichtfelder',
+                'oo_theme',
+            ); ?>
+            </div>
                 <?php foreach ($estateValues as $pageNumber => $fields): ?>
                     <div class="lead-lightbox lead-page-<?php echo $pageNumber; ?>">
                         <div class="c-form__fieldset">
-                            <div class="c-form__header --is-mobile-only">
-                                <?php if ($totalPages > 1): ?>
-                                    <legend class="c-form__legend"><?php echo sprintf(
-                                        '%s',
-                                        $pageTitles[$pageNumber - 1],
-                                    ); ?></legend>
-                                <?php endif; ?>
-                                <p class="c-form__required"><?php esc_html_e(
-                                    '* Pflichtfelder',
-                                    'oo_theme',
-                                ); ?></p>
-                            </div>
                             <?php echo implode($fields); ?>
                         </div>
                     </div>
