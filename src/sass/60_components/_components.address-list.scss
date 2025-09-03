@@ -41,10 +41,8 @@
   }
 
   &__count {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 1rem;
+    font-size: 1.5rem;
+    text-transform: uppercase;
 
     &.--no-addresses {
     }
