@@ -13,19 +13,26 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
 ); ?> class="c-customer-area o-section --<?php echo $bg_color; ?>">
     <div class="c-customer-area__container o-container">
 
-    <?php if (!empty($headline['text']) && !empty($text['wysiwyg'])) { ?>
+    <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
             <div class="c-customer-area__content o-row --position-center">
-                <?php oo_get_template('components', '', 'component-headline', [
-                    'headline' => $headline,
-                    'additional_headline_class' =>
-                        'c-customer-area__headline o-col-12 o-col-xl-8',
-                ]); ?> 
+                <?php if (!empty($headline['text'])) { ?>
+                    <?php oo_get_template(
+                        'components',
+                        '',
+                        'component-headline',
+                        [
+                            'headline' => $headline,
+                            'additional_headline_class' =>
+                                'c-customer-area__headline o-col-12 o-col-xl-8',
+                        ],
+                    ); ?> 
+                <?php } ?>
     
-        <?php if (!empty($text['wysiwyg'])) { ?>
-        <div class="c-customer-area__text o-text --is-wysiwyg o-col-12 o-col-xl-8">
-            <?php echo $text['wysiwyg']; ?>
-        </div>
-    <?php } ?>
+                <?php if (!empty($text['wysiwyg'])) { ?>
+                    <div class="c-customer-area__text o-text --is-wysiwyg o-col-12 o-col-xl-8">
+                        <?php echo $text['wysiwyg']; ?>
+                    </div>
+                <?php } ?>
     
             </div>
     <?php } ?>
