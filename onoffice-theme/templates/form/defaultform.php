@@ -74,16 +74,18 @@ foreach ($pForm->getInputFields() as $input => $table) {
                 'oo_theme',
             ); ?></legend>
             <p class="c-form__required"><?php esc_html_e(
-                '* Pflichtfelder',
+                '* Pflichtfelder default',
                 'oo_theme',
             ); ?></p>
         </div>
-        <?php if (is_array($addressValues)) {
-            echo implode($addressValues);
-        } ?>
-        <div class="c-form__button-wrapper">
-            <?php include get_template_directory() .
-                '/onoffice-theme/templates/form/formsubmit.php'; ?>
+        <div class="c-form__body">
+            <?php if (is_array($addressValues)) {
+                echo implode($addressValues);
+            } ?>
+            <div class="c-form__button-wrapper">
+                <?php include get_template_directory() .
+                    '/onoffice-theme/templates/form/formsubmit.php'; ?>
+            </div>
         </div>
     </div>
 </form>
