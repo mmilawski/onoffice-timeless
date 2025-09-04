@@ -211,6 +211,11 @@
     var(--oo-color-secondary)
   );
 
+  #{--oo-color-transparent-text-60}: transparent-color(
+    var(--oo-color-text),
+    0.6
+  );
+
   // light
   #{--oo-color-light-transparent-bg-25}: transparent-color(
     var(--oo-color-light-bg),
