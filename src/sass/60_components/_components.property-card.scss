@@ -1,9 +1,6 @@
 .c-property-card {
   $c-property-card: &;
-
-  background-color: var(--oo-color-bg);
-  border: 1px solid var(--oo-color-mix-bg-contrast-50);
-  border-radius: $border-radius;
+  background-color: var(--oo-color-mix-bg-text-05);
 
   @include media-breakpoint-up(lg) {
     display: grid;
@@ -15,7 +12,6 @@
 
   &__inner {
     position: relative;
-    border-radius: $border-radius;
     overflow: hidden;
     background-color: var(--oo-color-transparent-primary-10);
   }
@@ -42,22 +38,17 @@
   }
 
   &__flags {
-    position: absolute;
-    top: $flag-offset;
-    left: $flag-offset;
-    right: $flag-offset;
+    // position: absolute;
+    // top: $flag-offset;
+    // left: $flag-offset;
+    // right: $flag-offset;
   }
 
   &__status {
   }
 
   &__favorite {
-    margin-left: auto;
-
     &.c-icon-button {
-      color: var(--oo-color-property-status-contrast-bg);
-      background: var(--oo-color-property-status-bg);
-
       @include hover() {
         background-color: var(--oo-color-mix-status-contrast-20);
       }
@@ -107,5 +98,6 @@
     line-clamp: 2;
     -webkit-box-orient: vertical;
     hyphens: manual;
+    text-transform: uppercase;
   }
 }
