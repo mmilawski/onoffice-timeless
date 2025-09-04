@@ -7,8 +7,8 @@ $form-line-height: $global-line-height;
 $form-remove-wrapper: 1.5rem; // Size of the remove background //
 $form-remove-size: 1.25rem; // Size of the remove icon //
 $form-select-size: 1.25rem; // Size of the select arrow icon //
-$form-control-wrapper: 1.25rem; // Size of the checkbox and radio button //
-$form-control-icon: 1rem; // Size of the checkbox and radio button icon //
+$form-control-wrapper: 1.875rem; // Size of the checkbox and radio button //
+$form-control-icon: 1.875rem; // Size of the checkbox and radio button icon //
 $form-checkbox-icon: 0.875rem; // Size of the checkbox icon //
 $form-border: 2px solid;
 $form-border-color: var(--oo-color-transparent-text-60);
@@ -1328,15 +1328,12 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
     &:before {
       content: '';
-      display: block;
       width: $form-control-wrapper;
       height: $form-control-wrapper;
-      border-radius: $border-radius-small;
       flex-shrink: 0;
-      margin-right: 0.5rem;
+      margin-right: 1rem;
       background: $form-bg;
       position: relative;
-      top: 0.125rem;
       border: $form-border $form-border-color;
       outline: $form-outline;
       transition: outline $form-duration $form-timing,
@@ -1349,10 +1346,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       display: block;
       width: $form-control-icon;
       height: $form-control-icon;
-      border-radius: $border-radius-small;
       position: absolute;
-      top: 0.25rem;
-      left: 0.125rem;
       background-color: $form-primary-contrast;
       background-size: 100%;
       background-repeat: no-repeat;
@@ -1379,11 +1373,11 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   }
 
   &__input:checked + &__label {
-    &:before {
-      background-color: $form-primary;
-      border: 2px solid $form-bg;
-      outline: 1px solid $form-border-color;
-    }
+    // &:before {
+    //   background-color: $form-primary;
+    //   border: 2px solid $form-bg;
+    //   outline: 1px solid $form-border-color;
+    // }
 
     &:after {
       transform: scale(1);
@@ -1570,13 +1564,13 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
   .--on-bg-transparent & {
     #{$o-control}__label {
-      &:before {
-        background-color: $form-bg;
-        border-color: $form-border-color;
-      }
+      // &:before {
+      //   background-color: $form-bg;
+      //   border-color: $form-border-color;
+      // }
 
       &:after {
-        background-color: $form-primary-contrast;
+        background-color: var(--oo-color-text);
       }
     }
 
@@ -1587,11 +1581,11 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     }
 
     #{$o-control}__input:checked + #{$o-control}__label {
-      &:before {
-        background-color: $form-primary;
-        border-color: $form-bg;
-        outline-color: $form-border-color;
-      }
+      // &:before {
+      //   background-color: $form-primary;
+      //   border-color: $form-bg;
+      //   outline-color: $form-border-color;
+      // }
     }
 
     #{$o-control}__input:focus + #{$o-control}__label {
