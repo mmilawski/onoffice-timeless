@@ -179,6 +179,11 @@
     var(--oo-color-text),
     0.02
   );
+  #{--oo-color-mix-bg-text-05}: mix-colors(
+    var(--oo-color-bg),
+    var(--oo-color-text),
+    0.05
+  );
   #{--oo-color-mix-bg-text-10}: mix-colors(
     var(--oo-color-bg),
     var(--oo-color-text),
