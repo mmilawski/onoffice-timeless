@@ -46,6 +46,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 
     @include media-breakpoint-up(xl) {
       grid-column: span 2;
@@ -98,6 +99,10 @@
   }
 
   &__required {
+    position: absolute;
+    right: 0;
+    bottom: -2.5rem; // must match fieldset gap
+    font-size: 0.875rem;
   }
 
   &__more {
