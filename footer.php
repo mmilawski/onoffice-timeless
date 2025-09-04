@@ -62,17 +62,98 @@ $company_name = $company['name'] ?? (get_bloginfo('name') ?? null);
                         </span>
                     </p>
                     <nav class="c-footer-nav" role="navigation">
-                        <?php wp_nav_menu([
-                            'theme_location' => 'footer-nav',
-                            'menu_class' => '',
-                            'container' => false,
-                            'before' => '',
-                            'after' => '',
-                            'link_before' => '',
-                            'link_after' => '',
-                            'items_wrap' =>
-                                '<ul class="c-footer-nav__list">%3$s</ul>',
-                        ]); ?>
+                        <ul class="c-footer-nav__list">
+                            <?php wp_nav_menu([
+                                'theme_location' => 'footer-nav',
+                                'menu_class' => '',
+                                'container' => false,
+                                'before' => '',
+                                'after' => '',
+                                'link_before' => '',
+                                'link_after' => '',
+                                'items_wrap' => '%3$s',
+                            ]); ?>
+                            <li class="c-footer-nav__item --is-top-level">
+                                <?php
+                                $is_https =
+                                    (!empty($_SERVER['HTTPS']) &&
+                                        $_SERVER['HTTPS'] !== 'off') ||
+                                    (isset(
+                                        $_SERVER['HTTP_X_FORWARDED_PROTO'],
+                                    ) &&
+                                        $_SERVER['HTTP_X_FORWARDED_PROTO'] ===
+                                            'https');
+                                $scheme = $is_https ? 'https' : 'http';
+
+                                $host = isset($_SERVER['HTTP_HOST'])
+                                    ? $_SERVER['HTTP_HOST']
+                                    : '';
+                                $request_uri = $_SERVER['REQUEST_URI'] ?? '/';
+
+                                $path =
+                                    parse_url($request_uri, PHP_URL_PATH) ?:
+                                    '/';
+                                $raw_query = parse_url(
+                                    $request_uri,
+                                    PHP_URL_QUERY,
+                                );
+
+                                $path = trim($path, '/');
+                                if ($path === '') {
+                                    $clean_path = '';
+                                } else {
+                                    $segments = array_filter(
+                                        explode('/', $path),
+                                        'strlen',
+                                    );
+                                    $segments = array_map(
+                                        'rawurlencode',
+                                        $segments,
+                                    );
+                                    $clean_path = implode('/', $segments);
+                                }
+
+                                // rebuild and encode query parameters (if any) using RFC3986
+                                $encoded_query = '';
+                                if (!empty($raw_query)) {
+                                    parse_str($raw_query, $query_params);
+                                    $encoded_query = http_build_query(
+                                        $query_params,
+                                        '',
+                                        '&',
+                                        PHP_QUERY_RFC3986,
+                                    );
+                                }
+
+                                // assemble the inner (to-be-passed) URL
+                                $inner_path =
+                                    $clean_path === ''
+                                        ? '/'
+                                        : '/' . $clean_path;
+                                $inner_url =
+                                    $scheme . '://' . $host . $inner_path;
+                                if ($encoded_query !== '') {
+                                    $inner_url .= '?' . $encoded_query;
+                                }
+
+                                // encode the inner URL so it's safe as a query parameter value
+                                $param_value = rawurlencode($inner_url);
+
+                                $barrier_found_url =
+                                    'https://onoffice.com/barriere-gefunden/?wpf23379_106=' .
+                                    $param_value;
+                                ?>
+                                <a class="c-footer-nav__link --is-top-level"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href="<?= esc_url($barrier_found_url) ?>">
+                                    <?php esc_html_e(
+                                        'Barriere gefunden?',
+                                        'oo_theme',
+                                    ); ?>
+                                </a>
+                            </li>
+                        </ul>
                     </nav>
                 </div>
                 <div class="c-footer__bottom-column --right o-col-12 o-col-lg-4 o-col-xl-2">

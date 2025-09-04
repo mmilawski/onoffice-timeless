@@ -649,87 +649,96 @@ while ($current_property = $pEstates->estateIterator()) {
                     $filtered_features
                     as $group_name => $features
                 ): ?>
+                    <?php
+                    $boolean_features = [];
+                    $regular_features = [];
+
+                    foreach ($features as $feature) {
+                        if ($feature['type'] === 'boolean') {
+                            $boolean_features[] = $feature;
+                        } else {
+                            $regular_features[] = $feature;
+                        }
+                    }
+
+                    $true_boolean_features = array_filter(
+                        $boolean_features,
+                        function ($feature) {
+                            return $feature['value'] === 'Ja';
+                        },
+                    );
+
+                    if (
+                        empty($true_boolean_features) &&
+                        empty($regular_features)
+                    ) {
+                        continue;
+                    }
+                    ?>
+
                     <div class="c-property-details__fields-group o-col-12 o-col-lg-6">
                         <h2 class="c-property-details__headline o-headline --h2">
                             <?php echo esc_html($group_name); ?>
                         </h2>
-                
-                        <?php
-                        $boolean_features = [];
-                        $regular_features = [];
 
-                        foreach ($features as $feature) {
-                            if ($feature['type'] === 'boolean') {
-                                $boolean_features[] = $feature;
-                            } else {
-                                $regular_features[] = $feature;
-                            }
-                        }
-                        ?>
-                                <?php if (!empty($boolean_features)): ?>
-                                    <div class="c-property-details__features c-item-features">
-                                        <?php foreach (
-                                            $boolean_features
-                                            as $feature
-                                        ): ?>
-                                            <span class="c-item-features__item"><?php echo $feature[
-                                                'label'
-                                            ]; ?></span>
-                                        <?php endforeach; ?>
-                                    </div>
-                                <?php endif; ?>
+                        <?php if (!empty($true_boolean_features)): ?>
+                            <div class="c-property-details__features c-item-features">
+                                <?php foreach (
+                                    $true_boolean_features
+                                    as $feature
+                                ): ?>
+                                    <span class="c-item-features__item"><?php echo esc_html(
+                                        $feature['label'],
+                                    ); ?></span>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
 
-                                <?php if (!empty($regular_features)): ?>
-                                    <div class="c-property-details__fields c-item-fields">
-                                        <?php foreach (
-                                            $regular_features
-                                            as $feature
-                                        ): ?>
-                                            <?php if (
-                                                ($raw_values->getValueRaw(
-                                                    $property_id,
-                                                )['elements'][
-                                                    'provisionsfrei'
-                                                ] ??
-                                                    null) ===
-                                                    '1' &&
-                                                in_array(
-                                                    $field,
-                                                    [
-                                                        'innen_courtage',
-                                                        'aussen_courtage',
-                                                    ],
-                                                    true,
-                                                )
-                                            ) {
-                                                continue;
-                                            } ?>
-                                            <dl class="c-item-fields__item">
-                                                <dt class="c-item-fields__label">
-                                                    <?php echo esc_html(
-                                                        $feature['label'],
-                                                    ); ?>
-                                                </dt>
-                                                <dd class="c-item-fields__value">
-                                                    <?php echo is_array(
+                        <?php if (!empty($regular_features)): ?>
+                            <div class="c-property-details__fields c-item-fields">
+                                <?php foreach (
+                                    $regular_features
+                                    as $feature
+                                ): ?>
+                                    <?php if (
+                                        ($raw_values->getValueRaw($property_id)[
+                                            'elements'
+                                        ]['provisionsfrei'] ??
+                                            null) ===
+                                            '1' &&
+                                        in_array(
+                                            $field,
+                                            [
+                                                'innen_courtage',
+                                                'aussen_courtage',
+                                            ],
+                                            true,
+                                        )
+                                    ) {
+                                        continue;
+                                    } ?>
+                                    <dl class="c-item-fields__item">
+                                        <dt class="c-item-fields__label"><?php echo esc_html(
+                                            $feature['label'],
+                                        ); ?></dt>
+                                        <dd class="c-item-fields__value">
+                                            <?php echo is_array(
+                                                $feature['value'],
+                                            )
+                                                ? esc_html(
+                                                    implode(
+                                                        ', ',
                                                         $feature['value'],
-                                                    )
-                                                        ? esc_html(
-                                                            implode(
-                                                                ', ',
-                                                                $feature[
-                                                                    'value'
-                                                                ],
-                                                            ),
-                                                        )
-                                                        : esc_html(
-                                                            $feature['value'],
-                                                        ); ?>
-                                                </dd>
-                                            </dl>
-                                        <?php endforeach; ?>
-                                    </div>
-                                <?php endif; ?>
+                                                    ),
+                                                )
+                                                : esc_html(
+                                                    $feature['value'],
+                                                ); ?>
+                                        </dd>
+                                    </dl>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 <?php endforeach; ?>
             </div>

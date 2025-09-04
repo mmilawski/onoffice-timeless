@@ -19,6 +19,7 @@
   @include media-breakpoint-up(lg) {
     min-width: 600px;
     max-width: 50vw;
+    width: auto;
   }
 
   @include focus-visible() {
@@ -61,5 +62,41 @@
 
   &__content {
     padding: 0 1rem 2rem;
+  }
+
+  &.--is-form {
+    height: 80%;
+    width: 80%;
+
+    @include media-breakpoint-up(lg) {
+      width: 60vw;
+      max-width: none;
+      height: 80vh;
+    }
+
+    #{$c-dialog}__header {
+      padding: 2.5rem 2.5rem 0 2.5rem;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    #{$c-dialog}__title {
+      color: var(
+        --oo-color-headline,
+        --oo-color-text
+      ); // Temporarily until customer area styles are not overridden
+
+      hyphens: auto;
+      text-wrap-style: balance;
+      word-break: break-word;
+
+      @include media-breakpoint-up(sm) {
+        hyphens: manual;
+      }
+    }
+
+    #{$c-dialog}__content {
+      padding: 0 2.5rem 2rem;
+    }
   }
 }

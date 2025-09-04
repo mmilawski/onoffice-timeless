@@ -1,0 +1,132 @@
+.c-selectable-card {
+  $c-selectable-card: &;
+  // Base styles
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid #00000080;
+  background-color: var(--oo-color-background);
+  color: var(--oo-color-text);
+  border-radius: $border-radius;
+  cursor: pointer;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  transition: border-color 0.25s ease-in-out, background-color 0.25s ease-in-out,
+    box-shadow 0.25s ease-in-out, opacity 0.3s, transform 0.3s, max-height 0.4s,
+    padding 0.3s, margin 0.3s, border-width 0.3s;
+  max-height: 300px; // Set a max-height larger than the card will ever be.
+  overflow: hidden;
+  outline: $outline;
+  outline-offset: $outline-offset;
+
+  @include media-breakpoint-up(lg) {
+    padding: 1rem;
+  }
+
+  // State: selected
+  &.--is-selected {
+    background-color: var(--oo-color-primary);
+    border-color: var(--oo-color-primary);
+
+    #{$c-selectable-card}__label {
+      color: var(--oo-color-contrast-primary);
+    }
+
+    #{$c-selectable-card}__icon {
+      svg {
+        color: var(--oo-color-contrast-primary);
+      }
+      svg:not([fill='none']) {
+        fill: var(--oo-color-contrast-primary);
+      }
+      svg [fill='lightblue'] {
+        fill: var(--oo-color-mix-bg-text-30);
+      }
+    }
+  }
+
+  // This class triggers the hide/show animation
+  &.is-animating-out {
+    opacity: 0;
+    transform: scale(0.9);
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    border-width: 0;
+    pointer-events: none;
+  }
+
+  // This class removes the element from the layout flow to fix the gaps
+  &.is-hidden-by-filter {
+    display: none;
+  }
+
+  &.has-error {
+    border-color: var(--oo-color-error);
+    border-width: 2px;
+
+    &:hover,
+    &:focus {
+      border-color: var(--oo-color-error);
+    }
+  }
+
+  // State: hover
+  @include hover() {
+    background-color: var(--oo-color-mix-primary-contrast-20);
+
+    #{$c-selectable-card}__label {
+      color: var(--oo-color-contrast-primary);
+    }
+
+    #{$c-selectable-card}__icon {
+      svg {
+        color: var(--oo-color-contrast-primary);
+      }
+      svg:not([fill='none']) {
+        fill: var(--oo-color-contrast-primary);
+      }
+
+      svg [fill='lightblue'] {
+        fill: var(--oo-color-mix-bg-text-30);
+      }
+    }
+  }
+
+  // State: focus
+  @include focus-visible() {
+    outline-color: var(--oo-color-primary);
+  }
+
+  &__icon {
+    height: 3.5rem;
+    width: 3.5rem;
+
+    svg {
+      height: 100%;
+      width: 100%;
+      color: var(--oo-color-text);
+    }
+    svg:not([fill='none']) {
+      fill: var(--oo-color-text);
+    }
+    svg [fill='lightblue'] {
+      fill: var(--oo-color-mix-bg-text-30);
+    }
+  }
+
+  &__label {
+    width: 100%;
+    font-weight: $font-weight-text-bold;
+    color: var(--oo-color-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
