@@ -298,7 +298,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
                         ? esc_html__('Zur Merkliste hinzufügen', 'oo_theme')
                         : esc_html__('Zu Favoriten hinzufügen', 'oo_theme');
                 $favorite_icon =
-                    $favorite_label == 'Watchlist' ? 'bookmark' : 'star';
+                    $favorite_label == 'Watchlist' ? 'bookmark' : 'heart';
                 ?>
                 <button class="c-property-card__favorite c-icon-button --small-corners"
                         data-onoffice-property-id="<?php echo $property_id; ?>"
