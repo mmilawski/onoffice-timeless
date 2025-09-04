@@ -3,15 +3,12 @@
 
   display: flex;
   flex-direction: column;
-  background-color: var(--oo-color-bg);
-  border: 1px solid var(--oo-color-mix-bg-contrast-50);
+  background-color: var(--oo-color-mix-bg-text-05);
   color: var(--oo-color-text);
-  border-radius: $border-radius;
 
   &__wrapper,
   &__link {
     position: relative;
-    border-radius: $border-radius;
     overflow: hidden;
     background-color: var(--oo-color-transparent-primary-10);
   }
