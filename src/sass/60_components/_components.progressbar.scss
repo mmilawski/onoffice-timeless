@@ -84,43 +84,38 @@
     transform: translateX(-50%);
     text-align: center;
 
-    // Mobile: wider for active label
-    width: 200px;
-    max-width: 80vw; // Prevent overflow on very small screens
+    // Mobile: flexible width but constrained by parent
+    width: auto;
+    max-width: 100%; // Will be overridden by JavaScript
 
-    #{$c-progressbar}__step[data-step='1'] & {
-      left: 0;
-      transform: none;
-      text-align: left;
+    // Only apply special positioning when NOT in modal
+    &:not(.--in-modal) {
+      #{$c-progressbar}__step[data-step='1'] & {
+        left: 0;
+        transform: none;
+        text-align: left;
+      }
+
+      // Last step: right-aligned
+      #{$c-progressbar}__step:last-of-type & {
+        left: auto;
+        right: 0;
+        transform: none;
+        text-align: right;
+      }
     }
 
-    // Last step: right-aligned
-    #{$c-progressbar}__step:last-of-type & {
-      left: auto;
-      right: 0;
-      transform: none;
-      text-align: right;
+    // When in modal, keep everything centered
+    #{$c-progressbar}.--in-modal & {
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
     }
 
     @include media-breakpoint-up(md) {
       display: block;
-      // Use viewport width for dynamic sizing
-      // This ensures labels scale with container but don't overlap
-      width: 15vw;
-      max-width: 200px;
-      min-width: 80px;
-    }
-
-    @include media-breakpoint-up(lg) {
-      width: 12vw;
-      max-width: 250px;
-      min-width: 100px;
-    }
-
-    @include media-breakpoint-up(xl) {
-      width: 10vw;
-      max-width: 300px;
-      min-width: 120px;
+      // Width will be set by JavaScript
+      // transition: width 0.3s ease, max-width 0.3s ease;
     }
 
     // Hide/show label parts based on context

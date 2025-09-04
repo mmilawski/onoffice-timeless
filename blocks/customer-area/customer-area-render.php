@@ -12,14 +12,14 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
     $block,
 ); ?> class="c-customer-area o-section --<?php echo $bg_color; ?>">
 
-    <?php 
+    <?php
     // WP-Websites and Vue Preset Bridge
-    echo "<style> ";
-        echo ":root {";
-        
-            switch ($bg_color) {
-                case 'bg-light':
-                    echo "
+    echo '<style> ';
+    echo ':root {';
+
+    switch ($bg_color) {
+        case 'bg-light':
+            echo "
                         --p-oo-background: var(--oo-color-light-bg, var(--oo-color-bg)); /* background variable from parent .o-section */
                         
                         --p-oo-primary: var(--oo-color-light-primary, var(--oo-color-primary)); /* the main color used by element */
@@ -42,10 +42,10 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
 
                         --p-oo-headline-color: var(--oo-color-light-headline, var(--oo-color-headline));
                     ";
-                    break;
-                
-                case 'bg-dark':
-                    echo "
+            break;
+
+        case 'bg-dark':
+            echo "
                         --p-oo-background: var(--oo-color-dark-bg, var(--oo-color-bg)); /* background variable from parent .o-section */
 
                         --p-oo-primary: var(--oo-color-dark-primary, var(--oo-color-primary)); /* the main color used by element */
@@ -68,10 +68,10 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
 
                         --p-oo-headline-color: var(--oo-color-dark-headline, var(--oo-color-headline));
                     ";
-                    break;
-                
-                case 'bg-primary':
-                    echo "
+            break;
+
+        case 'bg-primary':
+            echo "
                         --p-oo-background: var(--oo-color-primary-bg, var(--oo-color-bg)); /* background variable from parent .o-section */
 
                         --p-oo-primary: var(--oo-color-primary-primary, var(--oo-color-primary)); /* the main color used by element */
@@ -94,10 +94,10 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
 
                         --p-oo-headline-color: var(--oo-color-primary-headline, var(--oo-color-headline));
                     ";
-                    break;
-                
-                case 'bg-secondary':
-                    echo "
+            break;
+
+        case 'bg-secondary':
+            echo "
                         --p-oo-background: var(--oo-color-secondary-bg, var(--oo-color-bg)); /* background variable from parent .o-section */
 
                         --p-oo-primary: var(--oo-color-secondary-primary, var(--oo-color-primary)); /* the main color used by element */
@@ -120,11 +120,11 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
                         
                         --p-oo-headline-color: var(--oo-color-secondary-headline, var(--oo-color-headline));
                     ";
-                    break;
-                
-                default:
-                case 'bg-transparent':
-                    echo "
+            break;
+
+        default:
+        case 'bg-transparent':
+            echo "
                         --p-oo-background: var(--oo-color-bg, var(--oo-color-bg)); /* background variable from parent .o-section */
                         
                         --p-oo-primary: var(--oo-color-primary, var(--oo-color-primary)); /* the main color used by element */
@@ -147,12 +147,11 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
 
                         --p-oo-headline-color: var(--oo-color-headline, var(--oo-color-headline));
                     ";
-                    break;
-            }
-            
-        echo "}"; 
-    echo "</style>";
-    
+            break;
+    }
+
+    echo '}';
+    echo '</style>';
     ?>
 
     <div class="c-customer-area__container o-container">

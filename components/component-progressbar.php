@@ -28,14 +28,18 @@ if (empty($args['totalPages']) || $args['totalPages'] <= 1) {
         } ?>" data-step="<?php echo $i; ?>">
             <div class="c-progressbar__circle">
             </div>
-            <span class="c-progressbar__label">
+            <span class="c-progressbar__label  <?php echo $args['in_modal']
+                ? '--in-modal'
+                : ''; ?>">
                 <span class="c-progressbar__label-number --is-mobile --in-modal"><?php echo esc_html(
                     $i,
                 ); ?></span>
                 <?php if (!empty($args['pageTitles'][$i - 1])): ?>
-                    <span class="c-progressbar__label-title --not-in-modal"><?php echo esc_html(
+                    <span class="c-progressbar__label-title --not-in-modal" title="<?php echo esc_html(
                         $args['pageTitles'][$i - 1],
-                    ); ?></span>
+                    ); ?>"><?php echo esc_html(
+    $args['pageTitles'][$i - 1],
+); ?></span>
                 <?php endif; ?>
             </span>
         </div>

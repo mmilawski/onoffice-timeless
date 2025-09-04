@@ -1051,6 +1051,217 @@ jQuery(document).ready(function() {
   // needed to not make the scroll callback fire 50 times on each scroll.
   const debouncedScroll = debounce(handleScroll, 30);
   window.addEventListener('scroll', debouncedScroll);
+
+
+ // Progressbar dynamic label width calculation
+  function calculateProgressbarLabelWidths() {
+    const progressbars = document.querySelectorAll('.c-progressbar');
+    
+    progressbars.forEach(progressbar => {
+      const steps = progressbar.querySelectorAll('.c-progressbar__step');
+      const labels = progressbar.querySelectorAll('.c-progressbar__label');
+      
+      if (steps.length === 0) return;
+      
+      const progressbarWidth = progressbar.offsetWidth;
+      const stepCount = steps.length;
+      const viewportWidth = window.innerWidth;
+      const isInModal = progressbar.classList.contains('--in-modal'); // Check if in modal
+      
+      // Mobile: Set max-width and ensure labels don't overflow
+      if (viewportWidth < 768) {
+        // Find the form or parent container to get max width
+        const form = progressbar.closest('.c-form') || progressbar.parentElement;
+        const formWidth = form ? form.offsetWidth : progressbarWidth;
+        
+        labels.forEach((label, index) => {
+          const step = steps[index];
+          
+          // Remove desktop positioning styles
+          label.style.removeProperty('width');
+          label.style.removeProperty('min-width');
+          label.style.removeProperty('left');
+          label.style.removeProperty('right');
+          label.style.removeProperty('transform');
+          
+          // Only calculate for active step on mobile
+          if (step.classList.contains('--is-active')) {
+            // Get the position of the active step
+            const stepRect = step.getBoundingClientRect();
+            const formRect = form ? form.getBoundingClientRect() : progressbar.getBoundingClientRect();
+            
+            if (isInModal) {
+            label.style.width = 'auto';
+            label.style.maxWidth = `${formWidth - 20}px`;
+            label.style.left = '50%';
+            label.style.transform = 'translateX(-50%)';
+          } else {
+            // First, let the label size naturally to its content
+            label.style.width = 'auto';
+            label.style.maxWidth = 'none';
+            label.style.left = '50%';
+            label.style.transform = 'translateX(-50%)';
+            
+            // Give browser time to calculate natural size
+            setTimeout(() => {
+              const labelRect = label.getBoundingClientRect();
+              const naturalWidth = labelRect.width;
+              
+              const stepCenterX = stepRect.left + (stepRect.width / 2);
+              const padding = 10; // Safety padding
+              
+              // Calculate if label would overflow with natural width
+              const halfLabel = naturalWidth / 2;
+              const wouldOverflowLeft = (stepCenterX - halfLabel) < (formRect.left + padding);
+              const wouldOverflowRight = (stepCenterX + halfLabel) > (formRect.right - padding);
+              
+              if (!wouldOverflowLeft && !wouldOverflowRight) {
+                // Label fits perfectly centered - use natural width
+                label.style.width = 'auto';
+                label.style.maxWidth = `${formWidth - (padding * 2)}px`;
+                label.style.left = '50%';
+                label.style.transform = 'translateX(-50%)';
+              } else {
+                // Label would overflow - need to adjust
+                const maxWidth = formWidth - (padding * 2);
+                
+                if (index === 0 && !isInModal) {
+                  // First step: left-aligned
+                  label.style.width = 'auto';
+                  label.style.maxWidth = `${maxWidth}px`;
+                  label.style.left = '0';
+                  label.style.transform = 'none';
+                } else if (index === steps.length - 1 && !isInModal) {
+                  // Last step: right-aligned
+                  label.style.width = 'auto';
+                  label.style.maxWidth = `${maxWidth}px`;
+                  label.style.left = 'auto';
+                  label.style.right = '0';
+                  label.style.transform = 'none';
+                } else {
+                  // Middle steps: adjust positioning to keep within bounds
+                  if (wouldOverflowLeft) {
+                    // Shift to right to avoid left overflow
+                    const leftOffset = (formRect.left + padding) - stepRect.left;
+                    label.style.width = 'auto';
+                    label.style.maxWidth = `${maxWidth}px`;
+                    label.style.left = `${leftOffset}px`;
+                    label.style.transform = 'none';
+                  } else if (wouldOverflowRight) {
+                    // Shift to left to avoid right overflow
+                    const rightOffset = (formRect.right - padding) - stepRect.right;
+                    label.style.width = 'auto';
+                    label.style.maxWidth = `${maxWidth}px`;
+                    label.style.left = 'auto';
+                    label.style.right = `${-rightOffset}px`;
+                    label.style.transform = 'none';
+                  }
+                }
+              }
+            }, 10);
+          }
+          } else {
+            // Hide non-active labels on mobile (handled by CSS)
+            label.style.removeProperty('max-width');
+            label.style.removeProperty('width');
+          }
+        });
+        return; // Exit early for mobile
+      }
+      
+      // Desktop calculations for 3+ steps
+      // Calculate available width per label
+      // Account for spacing between steps
+      const spacing = 20; // Minimum space between labels
+      const availableWidth = progressbarWidth - (spacing * (stepCount - 1));
+      let labelWidth = Math.floor(availableWidth / stepCount);
+
+      // Reduce by 10px for safety margin
+      labelWidth = labelWidth - 10;
+      
+      // Set min/max based on viewport
+      let minWidth, maxWidth;
+      
+      if (viewportWidth < 1200) { // Tablet/MD
+        minWidth = 80;
+        // Formula: fewer steps = wider labels
+        maxWidth = Math.min(200, 280 - (stepCount * 20));
+      } else if (viewportWidth < 1400) { // LG
+        minWidth = 100;
+        maxWidth = Math.min(250, 370 - (stepCount * 30));
+      } else { // XL
+        minWidth = 120;
+        maxWidth = Math.min(220, 340 - (stepCount * 30));
+      }
+      
+      // Clamp the calculated width
+      labelWidth = Math.max(minWidth, Math.min(labelWidth, maxWidth));
+      
+      // Apply width to all labels
+      labels.forEach((label, index) => {
+        const step = steps[index];
+        
+        // Adjust width for first and last labels (15px narrower)
+        let adjustedLabelWidth = labelWidth;
+        if (step.dataset.step === '1' || index === steps.length - 1) {
+          adjustedLabelWidth = labelWidth - 15;
+        }
+        
+        // Apply calculated width
+        label.style.width = `${adjustedLabelWidth}px`;
+        label.style.maxWidth = `${adjustedLabelWidth}px`;
+        
+        // Adjust positioning for first and last labels
+        if (step.dataset.step === '1') {
+          // First label stays left-aligned
+        } else if (index === steps.length - 1) {
+          // Last label stays right-aligned
+        } else {
+          // Center labels might need adjustment if they overlap
+          const prevStep = steps[index - 1];
+          const nextStep = steps[index + 1];
+          
+          if (prevStep && nextStep) {
+            const currentPos = step.getBoundingClientRect();
+            const prevPos = prevStep.getBoundingClientRect();
+            const nextPos = nextStep.getBoundingClientRect();
+            
+            // Check for potential overlap and adjust if needed
+            const halfWidth = adjustedLabelWidth / 2;
+            const leftEdge = currentPos.left - halfWidth;
+            const rightEdge = currentPos.left + halfWidth;
+            
+            if (leftEdge < prevPos.right || rightEdge > nextPos.left) {
+              // Reduce width to prevent overlap
+              const reducedWidth = Math.min(
+                adjustedLabelWidth,
+                (nextPos.left - prevPos.right) - spacing
+              );
+              label.style.width = `${reducedWidth}px`;
+              label.style.maxWidth = `${reducedWidth}px`;
+            }
+          }
+        }
+      });
+    });
+  }
+  
+  // Run on load
+  if ($('.c-progressbar').length > 0) {
+    calculateProgressbarLabelWidths();
+    
+    // Recalculate on resize with debouncing
+    const debouncedCalculate = debounce(calculateProgressbarLabelWidths, 20);
+    window.addEventListener('resize', debouncedCalculate);
+
+    // Recalculate when page changes in multi-step form
+    $(document).on('oo-page-changed', function(event, currentPage) {
+      // Small delay to ensure DOM updates are complete
+      setTimeout(() => {
+        calculateProgressbarLabelWidths();
+      }, 20);
+    });
+  }
 });
 
 // Fixed Header on scroll
