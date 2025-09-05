@@ -468,7 +468,9 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   }
 
   .ts-items {
-    display: inline-block;
+    display: inline-flex;
+    flex-wrap: nowrap;
+    gap: 1rem;
     max-width: calc(100% - 3.5rem);
     height: 100%;
     white-space: nowrap;
