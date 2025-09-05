@@ -480,9 +480,6 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   .ts-item {
     width: 100%;
     height: 100%;
-    padding: unset !important;
-    margin: 0;
-    margin-right: 0.5rem;
     background: none;
     border: 0;
     cursor: default;
@@ -500,7 +497,6 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       align-items: center;
       justify-content: center;
       vertical-align: middle;
-      background: transparent;
       transition: background-color $form-duration $form-timing;
       cursor: pointer;
 
