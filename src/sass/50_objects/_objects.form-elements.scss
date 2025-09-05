@@ -596,7 +596,9 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       padding: $form-padding;
 
       input {
-        min-width: 3.5rem;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
 
         &::placeholder {
           color: transparent;
