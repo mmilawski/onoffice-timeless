@@ -15,6 +15,7 @@ $form-border-color: var(--oo-color-transparent-text-60);
 $form-radius: $border-radius; // Border radius
 $form-radius-small: $border-radius-small; // Border radius small
 $form-outline: 1px solid transparent;
+$form-outline-dropdown: 2px solid var(--oo-color-text);
 $form-focus: var(--oo-color-text);
 $form-duration: 0.25s; // Transition duration
 $form-timing: ease-in-out; // Transition timing
@@ -24,8 +25,7 @@ $form-svg-checkbox: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000
 $form-svg-calendar: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L64 64C28.7 64 0 92.7 0 128l0 16 0 48L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-256 0-48 0-16c0-35.3-28.7-64-64-64l-40 0 0-40c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L152 64l0-40zM48 192l352 0 0 256c0 8.8-7.2 16-16 16L64 464c-8.8 0-16-7.2-16-16l0-256z"/></svg>');
 $form-color: var(--oo-color-text);
 $form-bg: var(--oo-color-mix-bg-text-02);
-$form-shadow: 0 0 5px var(--oo-color-transparent-shadow-20);
-$form-dropdown: var(--oo-color-bg);
+$form-dropdown: var(--oo-color-mix-bg-text-02);
 $form-selected: var(--oo-color-transparent-primary-20);
 $form-placeholder: var(--oo-color-mix-bg-contrast-50);
 $form-primary: var(--oo-color-primary);
@@ -253,7 +253,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   color: $form-color;
   background: $form-bg;
   border: $form-border $form-border-color;
-  outline: $form-outline;
+  outline: none;
   transition: outline-color $form-duration $form-timing,
     border-color $form-duration $form-timing;
 
@@ -265,9 +265,6 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   option {
     &[value=''] {
       color: $form-placeholder;
-    }
-    &:checked {
-      background-color: $form-selected;
     }
   }
 
@@ -297,9 +294,6 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       &[value=''] {
         color: $form-light-placeholder;
       }
-      &:checked {
-        background-color: $form-light-selected;
-      }
     }
   }
 
@@ -316,9 +310,6 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     option {
       &[value=''] {
         color: $form-dark-placeholder;
-      }
-      &:checked {
-        background-color: $form-dark-selected;
       }
     }
   }
@@ -337,9 +328,6 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       &[value=''] {
         color: $form-primary-placeholder;
       }
-      &:checked {
-        background-color: $form-primary-selected;
-      }
     }
   }
 
@@ -357,9 +345,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       &[value=''] {
         color: $form-secondary-placeholder;
       }
-      &:checked {
-        background-color: $form-secondary-selected;
-      }
+     
     }
   }
 
@@ -376,9 +362,6 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     option {
       &[value=''] {
         color: $form-footer-placeholder;
-      }
-      &:checked {
-        background-color: $form-footer-selected;
       }
     }
   }
@@ -397,9 +380,6 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       &[value=''] {
         color: $form-placeholder;
       }
-      &:checked {
-        background-color: $form-selected;
-      }
     }
   }
 }
@@ -414,7 +394,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     height: 3.75rem;
     max-height: 3.75rem;
     border: $form-border $form-border-color;
-    outline: $form-outline;
+    outline: none;
     transition: outline-color $form-duration $form-timing,
       border-color $form-duration $form-timing;
   }
@@ -509,7 +489,6 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     padding: unset !important;
     margin: 0;
     margin-right: 0.5rem;
-    border-radius: $form-radius;
     background: none;
     border: 0;
     cursor: default;
@@ -522,7 +501,6 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       height: $form-remove-wrapper;
       font-size: 0;
       border: 0;
-      border-radius: $form-radius-small;
       position: relative;
       top: -0.125rem;
       display: inline-flex;
@@ -545,22 +523,14 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
         mask-position: center;
         transition: background-color $form-duration $form-timing;
       }
-
-      @include hover-focus-active() {
-        background: $form-primary;
-        &:before {
-          background: $form-primary-contrast;
-        }
-      }
     }
   }
 
   .ts-dropdown {
     color: $form-color;
     background: $form-dropdown;
-    box-shadow: $form-shadow;
-    border: 0;
-    border-radius: $form-radius;
+    outline: $form-outline-dropdown;
+    border-radius: 0;
     overflow: hidden;
     margin: 0;
     text-align: left;
@@ -576,13 +546,10 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
         margin-top: unset;
       }
 
-      &.selected {
-        background-color: $form-selected;
-      }
-
       &.active {
-        background-color: $form-primary;
-        color: $form-primary-contrast;
+        background-color: $form-bg;
+        color: $form-color;
+        text-decoration: underline;
       }
 
       &.level-0 {
@@ -662,13 +629,11 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       background: $form-light-dropdown;
 
       &__item {
-        &.selected {
-          background-color: $form-light-selected;
-        }
 
         &.active {
-          background-color: $form-light-primary;
-          color: $form-light-primary-contrast;
+          text-decoration: underline;
+          background-color: $form-bg;
+          color: $form-color;
         }
       }
     }
@@ -680,14 +645,14 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     .ts-item {
       &-remove {
         @include hover-focus-active() {
-          background: $form-light-primary;
+          // background: $form-light-primary;
           &:before {
-            background: $form-light-primary-contrast;
+            // background: $form-light-primary-contrast;
           }
         }
 
         &::before {
-          background: $form-light-primary;
+          // background: $form-light-primary;
         }
       }
     }
@@ -742,12 +707,13 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       &__item {
         &.selected {
-          background-color: $form-dark-selected;
+          // background-color: $form-dark-selected;
         }
 
         &.active {
-          background-color: $form-dark-primary;
-          color: $form-dark-primary-contrast;
+          text-decoration: underline;
+          background-color: $form-bg;
+          color: $form-color;
         }
       }
     }
@@ -757,14 +723,14 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     .ts-item {
       &-remove {
         @include hover-focus-active() {
-          background: $form-dark-primary;
+          // background: $form-dark-primary;
           &:before {
-            background: $form-dark-primary-contrast;
+            // background: $form-dark-primary-contrast;
           }
         }
 
         &::before {
-          background: $form-dark-primary;
+          // background: $form-dark-primary;
         }
       }
     }
@@ -818,12 +784,13 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       &__item {
         &.selected {
-          background-color: $form-primary-selected;
+          // background-color: $form-primary-selected;
         }
 
         &.active {
-          background-color: $form-primary-primary;
-          color: $form-primary-primary-contrast;
+          text-decoration: underline;
+          background-color: $form-bg;
+          color: $form-color;
         }
       }
     }
@@ -833,14 +800,14 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     .ts-item {
       &-remove {
         @include hover-focus-active() {
-          background: $form-primary-primary;
+          // background: $form-primary-primary;
           &:before {
-            background: $form-primary-primary-contrast;
+            // background: $form-primary-primary-contrast;
           }
         }
 
         &::before {
-          background: $form-primary-primary;
+          // background: $form-primary-primary;
         }
       }
     }
@@ -895,12 +862,13 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       &__item {
         &.selected {
-          background-color: $form-secondary-selected;
+          // background-color: $form-secondary-selected;
         }
 
         &.active {
-          background-color: $form-secondary-primary;
-          color: $form-secondary-primary-contrast;
+          text-decoration: underline;
+          background-color: $form-bg;
+          color: $form-color;
         }
       }
     }
@@ -910,15 +878,15 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     .ts-item {
       &-remove {
         @include hover-focus-active() {
-          background: $form-secondary-primary;
+          // background: $form-secondary-primary;
           &:before {
             // background: $form-secondary-contrast;
-            background: $form-secondary-primary-contrast;
+            // background: $form-secondary-primary-contrast;
           }
         }
 
         &::before {
-          background: $form-secondary-primary;
+          // background: $form-secondary-primary;
         }
       }
     }
@@ -973,12 +941,13 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       &__item {
         &.selected {
-          background-color: $form-footer-selected;
+          // background-color: $form-footer-selected;
         }
 
         &.active {
-          background-color: $form-footer-primary;
-          color: $form-footer-primary-contrast;
+          text-decoration: underline;
+          background-color: $form-bg;
+          color: $form-color;
         }
       }
     }
@@ -988,14 +957,14 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     .ts-item {
       &-remove {
         @include hover-focus-active() {
-          background: $form-footer-primary;
+          // background: $form-footer-primary;
           &:before {
-            background: $form-footer-primary-contrast;
+            // background: $form-footer-primary-contrast;
           }
         }
 
         &::before {
-          background: $form-footer-primary;
+          // background: $form-footer-primary;
         }
       }
     }
@@ -1039,7 +1008,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       .ts-control {
         &::after {
-          background: $form-primary;
+          background: $form-color;
         }
       }
     }
@@ -1050,12 +1019,13 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       &__item {
         &.selected {
-          background-color: $form-selected;
+          // background-color: $form-selected;
         }
 
         &.active {
-          background-color: $form-primary;
-          color: $form-primary-contrast;
+          text-decoration: underline;
+          background-color: $form-bg;
+          color: $form-color;
         }
       }
     }
@@ -1065,14 +1035,14 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     .ts-item {
       &-remove {
         @include hover-focus-active() {
-          background: $form-primary;
+          // background: $form-primary;
           &:before {
-            background: $form-primary-contrast;
+            // background: $form-primary-contrast;
           }
         }
 
         &::before {
-          background: $form-primary;
+          // background: $form-primary;
         }
       }
     }
@@ -1083,7 +1053,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       &::after {
         // dropdown chevron
-        background: $form-color;
+        background: $form-border-color;
       }
 
       input {
@@ -1124,7 +1094,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   color: $form-color;
   background: $form-bg;
   border: $form-border $form-border-color;
-  outline: $form-outline;
+  outline: none;
   transition: outline-color $form-duration $form-timing,
     border-color $form-duration $form-timing;
 
@@ -1332,10 +1302,10 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       height: $form-control-wrapper;
       flex-shrink: 0;
       margin-right: 1rem;
-      background: $form-bg;
+      background-color: $form-bg;
       position: relative;
       border: $form-border $form-border-color;
-      outline: $form-outline;
+      outline: none;
       transition: outline $form-duration $form-timing,
         border $form-duration $form-timing,
         background-color $form-duration $form-timing;
