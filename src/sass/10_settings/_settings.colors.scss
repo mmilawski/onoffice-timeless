@@ -204,6 +204,11 @@
     var(--oo-color-text),
     0.5
   );
+  #{--oo-color-mix-bg-text-60}: mix-colors(
+    var(--oo-color-bg),
+    var(--oo-color-text),
+    0.6
+  );
   #{--oo-color-primary-complementary}: complementary-color(
     var(--oo-color-primary)
   );
