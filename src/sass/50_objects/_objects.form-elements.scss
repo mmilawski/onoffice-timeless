@@ -11,9 +11,7 @@ $form-control-wrapper: 1.875rem; // Size of the checkbox and radio button //
 $form-control-icon: 1.875rem; // Size of the checkbox and radio button icon //
 $form-checkbox-icon: 0.875rem; // Size of the checkbox icon //
 $form-border: 2px solid;
-$form-border-color: var(--oo-color-transparent-text-60);
-$form-radius: $border-radius; // Border radius
-$form-radius-small: $border-radius-small; // Border radius small
+$form-border-color: var(--oo-color-mix-bg-text-60);
 $form-outline: 1px solid transparent;
 $form-outline-dropdown: 2px solid var(--oo-color-text);
 $form-focus: var(--oo-color-text);
@@ -102,7 +100,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   color: $form-color;
   background: $form-bg;
   border: $form-border $form-border-color;
-  outline: $form-outline;
+  outline: none;
   -moz-appearance: textfield;
   transition: outline-color $form-duration $form-timing,
     border-color $form-duration $form-timing;
