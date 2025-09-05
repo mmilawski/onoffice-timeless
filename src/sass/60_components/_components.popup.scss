@@ -86,6 +86,7 @@
     margin: auto;
     width: fit-content;
     #{$c-popup}__wrapper {
+      overflow-y: auto;
       @include media-breakpoint-up(md) {
         min-width: 450px;
         width: auto;
@@ -96,6 +97,7 @@
       width: 100%;
       padding: 2rem;
       padding-top: 3rem;
+      overflow: visible;
     }
 
     #{$c-popup}__close {
