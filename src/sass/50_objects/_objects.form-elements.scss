@@ -478,8 +478,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   }
 
   .ts-item {
-    display: inline;
-    max-width: 100%;
+    width: 100%;
     height: 100%;
     padding: unset !important;
     margin: 0;
@@ -489,8 +488,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     cursor: default;
 
     &-remove {
-      margin: 0;
-      margin-right: 0.25rem;
+      margin: 0 0.5rem 0 0;
       padding: 0;
       width: $form-remove-wrapper;
       height: $form-remove-wrapper;
