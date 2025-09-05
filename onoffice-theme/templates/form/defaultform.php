@@ -74,7 +74,7 @@ foreach ($pForm->getInputFields() as $input => $table) {
                 'oo_theme',
             ); ?></legend>
             <p class="c-form__required"><?php esc_html_e(
-                '* Pflichtfelder default',
+                '* Pflichtfelder',
                 'oo_theme',
             ); ?></p>
         </div>
