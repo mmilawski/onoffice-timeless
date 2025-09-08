@@ -165,7 +165,6 @@
     #{$c-form}__body {
       @include media-breakpoint-up(md) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        background-color: orange !important;
       }
       @include media-breakpoint-up(xl) {
         grid-template-columns: repeat(4, minmax(0, 1fr));
