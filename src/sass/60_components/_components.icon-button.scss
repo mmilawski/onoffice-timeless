@@ -45,12 +45,12 @@
   }
 
   &__icon {
-    height: $icon-size-small;
-    width: $icon-size-small;
+    height: $icon-size;
+    width: $icon-size;
 
     svg {
-      height: $icon-size-small;
-      width: $icon-size-small;
+      height: $icon-size;
+      width: $icon-size;
     }
 
     &.--filled {
@@ -217,12 +217,13 @@
   &.--on-bg-transparent,
   .--bg-transparent & {
     @include plain-visited() {
-      color: var(--oo-color-contrast-primary);
-      background-color: var(--oo-color-primary);
+      color: var(--oo-color-text);
+      background-color: var(--oo-color-header-mix-bg-contrast-5);
     }
 
     @include hover() {
       background-color: var(--oo-color-mix-primary-contrast-20);
+      color: var(--oo-color-contrast-primary);
     }
 
     @include focus-visible() {
