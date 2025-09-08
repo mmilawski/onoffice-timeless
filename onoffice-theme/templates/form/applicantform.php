@@ -95,9 +95,11 @@ foreach ($pForm->getInputFields() as $input => $table) {
                 'oo_theme',
             ); ?></p>
         </div>
-        <?php if (is_array($addressValues)) {
-            echo implode($addressValues);
-        } ?>
+        <div class="c-form__body">
+            <?php if (is_array($addressValues)) {
+                echo implode($addressValues);
+            } ?>
+        </div>
     </div>
 
     <div class="c-form__fieldset">
@@ -107,19 +109,20 @@ foreach ($pForm->getInputFields() as $input => $table) {
                 'oo_theme',
             ); ?></legend>
         </div>
-        <?php if (is_array($searchcriteriaValues)) {
-            echo implode($searchcriteriaValues);
-        } ?>
-        <?php if (is_array($otherValues)) {
-            echo implode($otherValues);
-        } ?>
-        <?php if (is_array($hiddenValues)) {
-            echo implode($hiddenValues);
-        } ?>
-        <div class="c-form__button-wrapper">
-            <?php include get_template_directory() .
-                '/onoffice-theme/templates/form/formsubmit.php'; ?>
+        <div class="c-form__body">
+            <?php if (is_array($searchcriteriaValues)) {
+                echo implode($searchcriteriaValues);
+            } ?>
+            <?php if (is_array($otherValues)) {
+                echo implode($otherValues);
+            } ?>
+            <?php if (is_array($hiddenValues)) {
+                echo implode($hiddenValues);
+            } ?>
+            <div class="c-form__button-wrapper">
+                <?php include get_template_directory() .
+                    '/onoffice-theme/templates/form/formsubmit.php'; ?>
+            </div>
         </div>
     </div>
-
 </form>
