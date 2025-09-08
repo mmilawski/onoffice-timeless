@@ -43,7 +43,7 @@
   &__favorite {
     &.c-icon-button {
       @include hover() {
-        background-color: var(--oo-color-mix-status-contrast-20);
+        background-color: var(--oo-color-mix-primary-contrast-20);
       }
 
       @include active() {
@@ -51,9 +51,9 @@
       }
 
       .c-icon-button__icon {
-        stroke: var(--oo-color-property-status-contrast-bg);
+        stroke: var(--oo-color-contrast-primary);
         &.--filled {
-          fill: var(--oo-color-property-status-contrast-bg);
+          fill: var(--oo-color-contrast-primary);
         }
       }
     }
