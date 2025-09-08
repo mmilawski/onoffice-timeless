@@ -44,7 +44,8 @@
     }
 
     @include hover() {
-      background-color: var(--oo-color-mix-bg-contrast-10);
+      background-color: var(--oo-color-mix-primary-contrast-20);
+      color: var(--oo-color-contrast-primary);
     }
 
     @include focus-visible() {
