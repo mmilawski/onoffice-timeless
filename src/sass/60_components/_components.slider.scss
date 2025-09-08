@@ -814,17 +814,24 @@
     #{$c-slider}__arrow {
       @include plain-visited() {
         color: var(--oo-color-text);
-        background-color: var(--oo-color-primary);
+        background-color: var(--oo-color-header-mix-bg-contrast-5);
+        opacity: 1;
       }
+
       @include hover() {
         background-color: var(--oo-color-mix-primary-contrast-20);
+        color: var(--oo-color-contrast-primary);
+        opacity: 1;
       }
+
       @include focus-visible() {
         outline-color: var(--oo-color-primary) !important;
       }
+
       @include active() {
         background-color: var(--oo-color-mix-primary-contrast-40);
       }
+
       @include disabled() {
         background-color: var(--oo-color-header-mix-bg-contrast-5);
         color: var(--oo-color-mix-bg-text-30);
