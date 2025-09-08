@@ -1,8 +1,8 @@
 .c-icon-button {
   $c-icon-button: &;
 
-  width: $icon-size;
-  height: $icon-size;
+  width: $icon-wrapper-size;
+  height: $icon-wrapper-size;
   display: flex;
   align-items: center;
   justify-content: center;
