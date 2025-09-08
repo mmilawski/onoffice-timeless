@@ -305,8 +305,7 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
                                                         'buttons' =>
                                                             $buttons['buttons'],
                                                         'additional_button_class' =>
-                                                            '--small-corners --on-' .
-                                                            $bg_color,
+                                                            '--on-' . $bg_color,
                                                         'additional_container_class' =>
                                                             'c-banner__buttons',
                                                     ],

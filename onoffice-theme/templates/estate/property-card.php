@@ -305,7 +305,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
                     $favorite_icon =
                         $favorite_label == 'Watchlist' ? 'bookmark' : 'heart';
                     ?>
-                    <button class="c-property-card__favorite c-icon-button --small-corners"
+                    <button class="c-property-card__favorite c-icon-button"
                             data-onoffice-property-id="<?php echo $property_id; ?>"
                             aria-label="<?php echo $favorite_text; ?>">
                         <?php oo_get_icon($favorite_icon, true, [
@@ -458,7 +458,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
             } ?>
         <?php } ?>
         <?php if ($is_visible_property_detail) { ?>
-            <a class="c-property-card__button c-button --small-corners --full-width --on-bg-transparent" href="<?php echo $property_url; ?>" aria-label="<?php echo sprintf(
+            <a class="c-property-card__button c-button --full-width --on-bg-transparent" href="<?php echo $property_url; ?>" aria-label="<?php echo sprintf(
     esc_html_x('Zur Detailansicht der Immobilie Nr. %d', 'oo_theme'),
     $property_id,
 ); ?>">

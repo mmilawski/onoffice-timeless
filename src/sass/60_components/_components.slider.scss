@@ -33,7 +33,6 @@
     width: $icon-wrapper-size;
     height: $icon-wrapper-size;
     padding: 0.25rem;
-    border-radius: $border-radius;
     pointer-events: auto;
 
     #{$c-slider}__icon {
@@ -406,7 +405,6 @@
       #{$c-slider}__slide {
         width: auto;
         height: 225px;
-        border-radius: $border-radius;
         overflow: hidden;
       }
     }
@@ -557,7 +555,6 @@
       #{$c-slider}__slide {
         width: auto;
         height: 225px;
-        border-radius: $border-radius;
         overflow: hidden;
       }
     }

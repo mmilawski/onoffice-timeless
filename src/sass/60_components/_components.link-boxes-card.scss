@@ -6,12 +6,10 @@
   color: var(--oo-color-text);
   background-color: var(--oo-color-bg);
   border: 1px solid var(--oo-color-mix-bg-contrast-50);
-  border-radius: $border-radius;
 
   &__wrapper,
   &__link {
     display: flex;
-    border-radius: $border-radius;
     overflow: hidden;
     width: 100%;
     height: auto;
@@ -71,9 +69,5 @@
 
   &__text {
     flex-grow: 1;
-  }
-
-  &__button {
-    border-radius: $border-radius-small;
   }
 }

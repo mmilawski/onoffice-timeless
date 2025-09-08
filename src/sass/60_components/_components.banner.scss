@@ -97,7 +97,6 @@
     gap: 1.5rem 0;
     padding: 1rem;
     background-color: var(--oo-color-transparent-bg-90);
-    border-radius: $border-radius;
     box-shadow: 0 0 5px var(--oo-color-transparent-shadow-15);
 
     @include media-breakpoint-up(lg) {
@@ -152,7 +151,6 @@
     outline-offset: $outline-offset !important;
     opacity: 1;
     padding: 0.25rem;
-    border-radius: $border-radius;
     pointer-events: auto;
     cursor: pointer;
     position: absolute;

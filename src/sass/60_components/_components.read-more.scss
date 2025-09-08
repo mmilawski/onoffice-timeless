@@ -10,7 +10,6 @@
   border: 2px solid transparent;
   text-decoration: underline currentColor;
   text-align: left;
-  border-radius: $border-radius;
   border: 2px solid transparent;
   outline: $outline;
   outline-offset: $outline-offset;
@@ -49,9 +48,5 @@
     text-align: center;
     justify-content: center;
     width: 100%;
-  }
-
-  &.--small-corners {
-    border-radius: $border-radius-small;
   }
 }
