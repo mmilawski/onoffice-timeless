@@ -167,24 +167,25 @@
   &.--on-bg-header,
   .--bg-header & {
     @include plain-visited() {
-      color: var(--oo-color-header-contrast-primary);
-      background-color: var(--oo-color-header-primary, var(--oo-color-primary));
+      color: var(--oo-color-text);
+      background-color: var(--oo-color-header-mix-bg-contrast-5);
     }
 
     @include hover() {
-      background-color: var(--oo-color-header-mix-primary-contrast-20);
+      background-color: var(--oo-color-mix-primary-contrast-20);
+      color: var(--oo-color-contrast-primary);
     }
 
     @include focus-visible() {
-      outline-color: var(--oo-color-header-primary, var(--oo-color-primary));
+      outline-color: var(--oo-color-primary);
     }
 
     @include active() {
-      background-color: var(--oo-color-header-mix-primary-contrast-40);
+      background-color: var(--oo-color-mix-primary-contrast-40);
     }
 
     @include disabled() {
-      background-color: var(--oo-color-header-primary);
+      background-color: var(--oo-color-primary);
       outline-color: transparent;
     }
   }
