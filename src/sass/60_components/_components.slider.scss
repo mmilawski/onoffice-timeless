@@ -287,9 +287,6 @@
       width: 100%;
       height: auto;
       aspect-ratio: 4 / 3;
-      position: absolute;
-      top: 0;
-      left: 0;
       pointer-events: none;
       @include media-breakpoint-up(lg) {
         aspect-ratio: unset;
@@ -302,9 +299,6 @@
     }
     #{$c-slider}__arrow {
       pointer-events: auto;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
 
       &.--next {
         right: 1rem;
@@ -336,9 +330,6 @@
     }
     #{$c-slider}__arrow {
       pointer-events: auto;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
 
       &.--next {
         right: 1rem;
@@ -355,9 +346,6 @@
       width: 100%;
       height: auto;
       aspect-ratio: 4 / 3;
-      position: absolute;
-      top: 0;
-      left: 0;
       pointer-events: none;
       @include media-breakpoint-up(lg) {
         aspect-ratio: unset;
@@ -370,9 +358,6 @@
     }
     #{$c-slider}__arrow {
       pointer-events: auto;
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
 
       .--is-header-style-transparent & {
         @include media-breakpoint-up(lg) {
