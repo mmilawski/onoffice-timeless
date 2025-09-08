@@ -63,6 +63,8 @@
 
   &__close {
     flex-shrink: 0;
+    width: $icon-wrapper-size;
+    height: $icon-wrapper-size;
   }
 
   &__content {
@@ -119,8 +121,8 @@
     #{$c-popup} {
       &__close {
         position: absolute;
-        right: 2px;
-        top: 2px;
+        right: 0;
+        top: 0;
         z-index: 10;
       }
 
@@ -160,7 +162,7 @@
         aspect-ratio: 4 / 3;
         width: 100%;
         height: max-content;
-        padding: 2px;
+        padding: 0;
 
         @include media-breakpoint-up(lg) {
           height: 100%;
