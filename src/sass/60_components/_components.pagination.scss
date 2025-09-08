@@ -39,7 +39,7 @@
     cursor: pointer;
 
     @include plain-visited() {
-      color: var(--oo-color-primary);
+      color: var(--oo-color-text);
       background-color: transparent;
     }
 
