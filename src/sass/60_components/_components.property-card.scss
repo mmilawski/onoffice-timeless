@@ -47,7 +47,7 @@
       }
 
       @include active() {
-        background-color: var(--oo-color-mix-status-contrast-40);
+        background-color: var(--oo-color-mix-primary-contrast-40);
       }
 
       .c-icon-button__icon {
