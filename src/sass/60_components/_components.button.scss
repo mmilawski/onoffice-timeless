@@ -1,14 +1,17 @@
 .c-button {
   $c-button: &;
 
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   font-family: $font-family-button;
   font-weight: $font-weight-button;
   @include font-size($global-font-size, $global-line-height);
   text-align: center;
   margin: 0;
-  padding: 1.125rem 4rem;
+  height: 3.75rem;
+  padding: 0 4rem;
   border: 2px solid transparent;
   outline: $outline;
   text-transform: uppercase;
