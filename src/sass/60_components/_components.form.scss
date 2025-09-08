@@ -55,9 +55,13 @@
 
   &__body {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: minmax(0, 1fr);
     gap: 1.25rem 2rem;
     align-items: flex-end;
+
+    @include media-breakpoint-up(md) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
   }
 
   &__legend {
@@ -158,9 +162,10 @@
   &.--is-newsletter-form {
   }
   &.--is-search-form {
-    #{$c-form}__fieldset {
+    #{$c-form}__body {
       @include media-breakpoint-up(md) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        background-color: orange !important;
       }
       @include media-breakpoint-up(xl) {
         grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -189,7 +194,7 @@
 
   &.--is-banner-search-form {
     width: 100%;
-    #{$c-form}__fieldset {
+    #{$c-form}__body {
       scroll-margin-top: calc(
         $mobile-header-height + $mobile-section-padding-top
       );

@@ -286,14 +286,7 @@
   }
   &.--is-banner-slider {
     #{$c-slider}__navigation {
-      width: 100%;
-      height: auto;
-      aspect-ratio: 4 / 3;
       pointer-events: none;
-      @include media-breakpoint-up(lg) {
-        aspect-ratio: unset;
-        height: 100%;
-      }
     }
 
     #{$c-slider}__arrows {
@@ -345,14 +338,7 @@
   &.--is-banner-slider {
     position: relative;
     #{$c-slider}__navigation {
-      width: 100%;
-      height: auto;
-      aspect-ratio: 4 / 3;
       pointer-events: none;
-      @include media-breakpoint-up(lg) {
-        aspect-ratio: unset;
-        height: 100%;
-      }
     }
 
     #{$c-slider}__arrows {
