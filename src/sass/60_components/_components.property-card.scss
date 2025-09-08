@@ -48,7 +48,7 @@
           background-color: var(--oo-color-primary);
         }
       }
-      
+
       @include hover() {
         background-color: var(--oo-color-mix-primary-contrast-20);
       }
