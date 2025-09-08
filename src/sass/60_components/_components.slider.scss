@@ -109,7 +109,7 @@
       outline-color 0.25s ease-in-out;
 
     @include plain-visited() {
-      background-color: var(--oo-color-bg);
+      background-color: var(--oo-color-header-mix-bg-contrast-5);
     }
 
     @include hover() {
@@ -179,13 +179,14 @@
       outline-color 0.25s ease-in-out, opacity 0.25s ease-in-out;
 
     @include plain-visited() {
-      color: var(--oo-color-contrast-primary);
+      color: var(--oo-color-text);
       background-color: var(--oo-color-header-mix-bg-contrast-5);
       opacity: 1;
     }
 
     @include hover() {
       background-color: var(--oo-color-mix-primary-contrast-20);
+      color: var(--oo-color-contrast-primary);
       opacity: 1;
     }
 
@@ -198,7 +199,8 @@
     }
 
     @include disabled() {
-      background-color: var(--oo-color-primary);
+      background-color: var(--oo-color-header-mix-bg-contrast-5);
+      color: var(--oo-color-mix-bg-text-30);
       opacity: 0.4;
       outline-color: transparent;
       cursor: default;
@@ -799,10 +801,10 @@
   &.--on-bg-transparent {
     #{$c-slider}__page {
       @include plain-visited() {
-        background-color: var(--oo-color-bg);
+        background-color: var(--oo-color-header-mix-bg-contrast-5);
       }
       @include hover() {
-        background-color: var(--oo-color-mix-primary-contrast-20);
+        background-color: var(--oo-color-contrast-primary);
       }
       @include focus-visible() {
         outline-color: var(--oo-color-primary) !important;
@@ -825,7 +827,7 @@
 
     #{$c-slider}__arrow {
       @include plain-visited() {
-        color: var(--oo-color-contrast-primary);
+        color: var(--oo-color-text);
         background-color: var(--oo-color-primary);
       }
       @include hover() {
@@ -838,7 +840,8 @@
         background-color: var(--oo-color-mix-primary-contrast-40);
       }
       @include disabled() {
-        background-color: var(--oo-color-primary);
+        background-color: var(--oo-color-header-mix-bg-contrast-5);
+        color: var(--oo-color-mix-bg-text-30);
         outline-color: transparent;
       }
     }
