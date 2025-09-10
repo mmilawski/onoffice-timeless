@@ -414,9 +414,9 @@
 
   // when slider has not enough slides
   &:not(.is-overflow) {
-    #{$c-slider}__navigation,
-    #{$c-slider}__progress,
-    #{$c-slider}__arrows {
+    > #{$c-slider}__navigation,
+    > #{$c-slider}__progress,
+    > #{$c-slider}__arrows {
       display: none;
     }
   }
