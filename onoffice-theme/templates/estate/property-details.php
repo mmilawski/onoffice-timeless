@@ -333,7 +333,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                     'Zu Favoriten hinzufügen',
                                     'oo_theme',
                                 );
-                                $favorite_icon = 'star';
+                                $favorite_icon = 'bookmark';
                             }
                             ?>
                             <button class="c-property-details__favorite c-icon-button" data-onoffice-property-id="<?php echo $property_id; ?>" aria-label="<?php echo $favorite_text; ?>">
