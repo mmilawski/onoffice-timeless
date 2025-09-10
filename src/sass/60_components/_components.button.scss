@@ -7,11 +7,10 @@
   position: relative;
   font-family: $font-family-button;
   font-weight: $font-weight-button;
-  @include font-size($global-font-size, $global-line-height);
+  @include font-size($global-font-size, $small-line-height);
   text-align: center;
   margin: 0;
-  height: 3.75rem;
-  padding: 0 4rem;
+  padding: 1rem 4rem;
   border: 2px solid transparent;
   outline: $outline;
   text-transform: uppercase;
@@ -25,10 +24,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    height: $icon-size-small;
+    width: auto;
 
     svg {
-      max-width: $icon-size-small;
       height: $icon-size-small;
+      width: auto;
     }
   }
 
@@ -63,7 +64,7 @@
 
   &.--has-icon {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     justify-content: space-between;
     align-items: center;
   }

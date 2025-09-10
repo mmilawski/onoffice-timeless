@@ -3,7 +3,7 @@ $form-margin: 0; // Margin
 $form-padding: 1rem 1rem; // Padding
 $form-padding-top: 1rem; // Padding top
 $form-padding-right: 1rem; // Padding right
-$form-line-height: $global-line-height;
+$form-line-height: $small-line-height;
 $form-remove-wrapper: 1rem; // Size of the remove background //
 $form-remove-size: 1rem; // Size of the remove icon //
 $form-select-size: 0.75rem; // Size of the select arrow icon //
@@ -104,7 +104,6 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   -moz-appearance: textfield;
   transition: outline-color $form-duration $form-timing,
     border-color $form-duration $form-timing;
-  height: 3.75rem;
 
   @include focus-all() {
     outline-color: $form-focus;
