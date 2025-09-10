@@ -1325,7 +1325,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     }
     &:after {
       mask: none;
-      background-color: $form-primary;
+      background-color: var(--oo-color-text);
       border-radius: 100%;
     }
   }
@@ -1333,6 +1333,9 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   &__input:checked + &__label {
     &:after {
       transform: scale(1);
+    }
+    &::before {
+      border-color: var(--oo-color-text);
     }
   }
 
