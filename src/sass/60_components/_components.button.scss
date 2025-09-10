@@ -11,6 +11,7 @@
   text-align: center;
   margin: 0;
   padding: 1rem 4rem;
+  width: 100%;
   border: 2px solid transparent;
   outline: $outline;
   text-transform: uppercase;
@@ -19,6 +20,10 @@
     border-color 0.25s ease-in-out, outline-color 0.25s ease-in-out,
     opacity 0.25s ease-in-out;
   cursor: pointer;
+
+  @include media-breakpoint-up(md) {
+    width: auto;
+  }
 
   &__icon {
     display: flex;
@@ -78,8 +83,8 @@
     }
 
     @include hover() {
-      background-color: var(--oo-color-light-mix-primary-contrast-20);
-      border-color: var(--oo-color-light-mix-primary-contrast-20);
+      background-color: var(--oo-color-mix-primary-contrast-20);
+      border-color: var(--oo-color-mix-primary-contrast-20);
     }
 
     @include focus-visible() {
@@ -249,7 +254,8 @@
     }
 
     @include hover() {
-      color: var(--oo-color-mix-text-contrast-20);
+      color: var(--oo-color-mix-primary-contrast-20);
+      border-color: var(--oo-color-mix-primary-contrast-20);
       background-color: transparent;
     }
 
@@ -258,7 +264,8 @@
     }
 
     @include active() {
-      color: var(--oo-color-mix-text-contrast-40);
+      color: var(--oo-color-mix-primary-contrast-40);
+      border-color: var(--oo-color-mix-primary-contrast-40);
       background-color: transparent;
     }
 
@@ -280,7 +287,8 @@
       }
 
       @include hover() {
-        color: var(--oo-color-mix-text-contrast-20);
+        color: var(--oo-color-mix-primary-contrast-20);
+        border-color: var(--oo-color-mix-primary-contrast-20);
         background-color: transparent;
       }
 
@@ -288,7 +296,8 @@
         outline-color: var(--oo-color-text);
       }
       @include active() {
-        color: var(--oo-color-mix-text-contrast-40);
+        color: var(--oo-color-mix-primary-contrast-40);
+        border-color: var(--oo-color-mix-primary-contrast-40);
         background-color: transparent;
       }
 
@@ -310,6 +319,7 @@
 
       @include hover() {
         color: var(--oo-color-dark-mix-text-contrast-20);
+        border-color: var(--oo-color-dark-mix-text-contrast-20);
         background-color: transparent;
       }
 
@@ -319,6 +329,7 @@
 
       @include active() {
         color: var(--oo-color-dark-mix-text-contrast-40);
+        border-color: var(--oo-color-dark-mix-text-contrast-40);
         background-color: transparent;
       }
 
@@ -340,6 +351,7 @@
 
       @include hover() {
         color: var(--oo-color-primary-mix-text-contrast-20);
+        border-color: var(--oo-color-primary-mix-text-contrast-20);
         background-color: transparent;
       }
 
@@ -349,6 +361,7 @@
 
       @include active() {
         color: var(--oo-color-primary-mix-text-contrast-40);
+        border-color: var(--oo-color-primary-mix-text-contrast-40);
         background-color: transparent;
       }
 
@@ -370,6 +383,7 @@
 
       @include hover() {
         color: var(--oo-color-secondary-mix-text-contrast-20);
+        border-color: var(--oo-color-secondary-mix-text-contrast-20);
         background-color: transparent;
       }
 
@@ -382,6 +396,7 @@
 
       @include active() {
         color: var(--oo-color-secondary-mix-text-contrast-40);
+        border-color: var(--oo-color-secondary-mix-text-contrast-40);
         background-color: transparent;
       }
 
@@ -403,6 +418,7 @@
 
       @include hover() {
         color: var(--oo-color-footer-mix-text-contrast-20);
+        border-color: var(--oo-color-footer-mix-text-contrast-20);
         background-color: transparent;
       }
 
@@ -412,6 +428,7 @@
 
       @include active() {
         color: var(--oo-color-footer-mix-text-contrast-40);
+        border-color: var(--oo-color-footer-mix-text-contrast-40);
         background-color: transparent;
       }
 
@@ -432,7 +449,8 @@
       }
 
       @include hover() {
-        color: var(--oo-color-mix-text-contrast-20);
+        color: var(--oo-color-mix-primary-contrast-20);
+        border-color: var(--oo-color-mix-primary-contrast-20);
         background-color: transparent;
       }
 
@@ -441,7 +459,8 @@
       }
 
       @include active() {
-        color: var(--oo-color-mix-text-contrast-40);
+        color: var(--oo-color-mix-primary-contrast-40);
+        border-color: var(--oo-color-mix-primary-contrast-40);
         background-color: transparent;
       }
 
