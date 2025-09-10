@@ -1519,7 +1519,6 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
   .--on-bg-transparent & {
     #{$o-control}__label {
-
       &:after {
         background-color: var(--oo-color-text);
       }
