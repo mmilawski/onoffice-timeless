@@ -466,13 +466,11 @@
     0.4,
     var(--oo-color-text)
   );
-  // maybe remove
   #{--oo-color-secondary-mix-bg-contrast-10}: mix-color-with-contrast(
     var(--oo-color-secondary-bg),
     0.1,
     var(--oo-color-bg)
   );
-  // maybe remove
   #{--oo-color-secondary-mix-bg-contrast-50}: mix-color-with-contrast(
     var(--oo-color-secondary-bg),
     0.5,
@@ -529,7 +527,6 @@
     var(--oo-color-header-primary),
     var(--oo-color-primary)
   );
-  // maybe remove
   #{--oo-color-header-mix-primary-contrast-20}: mix-color-with-contrast(
     var(--oo-color-header-primary),
     0.2,
