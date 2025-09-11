@@ -22,8 +22,8 @@ $form-svg-arrow: url('data:image/svg+xml,%3Csvg%20id%3D%22Layer_2%22%20data-name
 $form-svg-checkbox: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2012%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222px%22%3E%3Cpath%20d%3D%22M1%2C7l4%2C4L15%2C1%22%2F%3E%3C%2Fsvg%3E');
 $form-svg-calendar: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'><path d='M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L64 64C28.7 64 0 92.7 0 128l0 16 0 48L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-256 0-48 0-16c0-35.3-28.7-64-64-64l-40 0 0-40c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L152 64l0-40zM48 192l352 0 0 256c0 8.8-7.2 16-16 16L64 464c-8.8 0-16-7.2-16-16l0-256z'/></svg>");
 $form-color: var(--oo-color-text);
-$form-bg: var(--oo-color-mix-bg-text-02);
-$form-dropdown: var(--oo-color-mix-bg-text-02);
+$form-bg: var(--oo-color-mix-bg-text-02, var(--oo-color-bg));
+$form-dropdown: var(--oo-color-mix-bg-text-02, var(--oo-color-bg));
 $form-selected: var(--oo-color-transparent-primary-20);
 $form-placeholder: var(--oo-color-mix-bg-contrast-60);
 $form-primary: var(--oo-color-primary);
@@ -31,7 +31,7 @@ $form-primary-contrast: var(--oo-color-contrast-primary);
 
 // BG Variations
 $form-light-color: var(--oo-color-light-text, var(--oo-color-text));
-$form-light-bg: var(--oo-color-light-bg);
+$form-light-bg: var(--oo-color-light-mix-bg-text-02, var(--oo-color-light-bg, var(--oo-color-bg)));
 $form-light-border-color: var(--oo-color-light-mix-bg-contrast-60);
 $form-light-focus: var(--oo-color-light-text);
 $form-light-dropdown: var(--oo-color-light-bg);
@@ -41,7 +41,7 @@ $form-light-primary: var(--oo-color-light-primary, var(--oo-color-primary));
 $form-light-primary-contrast: var(--oo-color-light-contrast-primary);
 
 $form-dark-color: var(--oo-color-dark-text, var(--oo-color-text));
-$form-dark-bg: var(--oo-color-dark-bg, var(--oo-color-bg));
+$form-dark-bg: var(--oo-color-dark-mix-bg-text-02, var(--oo-color-dark-bg, var(--oo-color-bg)));
 $form-dark-border-color: var(--oo-color-dark-mix-bg-contrast-60);
 $form-dark-focus: var(--oo-color-dark-primary, var(--oo-color-primary));
 $form-dark-dropdown: var(--oo-color-dark-bg);
@@ -52,7 +52,7 @@ $form-dark-primary-contrast: var(--oo-color-dark-contrast-primary);
 $form-dark-outline-dropdown: 3px solid var(--oo-color-dark-primary);
 
 $form-primary-color: var(--oo-color-primary-text, var(--oo-color-text));
-$form-primary-bg: var(--oo-color-primary-bg, var(--oo-color-bg));
+$form-primary-bg: var(--oo-color-primary-mix-bg-text-02, var(--oo-color-primary-bg, var(--oo-color-bg)));
 $form-primary-border-color: var(--oo-color-primary-mix-bg-contrast-60);
 $form-primary-focus: var(--oo-color-primary-primary, var(--oo-color-primary));
 $form-primary-dropdown: var(--oo-color-primary-bg);
@@ -63,19 +63,13 @@ $form-primary-primary-contrast: var(--oo-color-primary-contrast-primary);
 $form-primary-outline-dropdown: 3px solid var(--oo-color-dark-primary);
 
 $form-secondary-color: var(--oo-color-secondary-text, var(--oo-color-text));
-$form-secondary-bg: var(--oo-color-secondary-bg, var(--oo-color-bg));
+$form-secondary-bg: var(--oo-color-secondary-mix-bg-text-02, var(--oo-color-secondary-bg, var(--oo-color-bg)));
 $form-secondary-border-color: var(--oo-color-secondary-mix-bg-contrast-60);
-$form-secondary-focus: var(
-  --oo-color-secondary-primary,
-  var(--oo-color-primary)
-);
+$form-secondary-focus: var(--oo-color-secondary-primary, var(--oo-color-primary));
 $form-secondary-dropdown: var(--oo-color-secondary-bg);
 $form-secondary-selected: var(--oo-color-secondary-transparent-primary-20);
 $form-secondary-placeholder: var(--oo-color-secondary-mix-bg-contrast-60);
-$form-secondary-primary: var(
-  --oo-color-secondary-primary,
-  var(--oo-color-primary)
-);
+$form-secondary-primary: var(--oo-color-secondary-primary, var(--oo-color-primary));
 $form-secondary-primary-contrast: var(--oo-color-secondary-contrast-primary);
 
 $form-footer-color: var(--oo-color-footer-text, var(--oo-color-text));

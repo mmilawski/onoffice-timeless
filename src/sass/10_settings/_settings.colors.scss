@@ -304,6 +304,13 @@
     0.4,
     var(--oo-color-primary)
   );
+  #{--oo-color-light-mix-bg-text-02}: mix-colors(
+    var(--oo-color-light-bg),
+    var(--oo-color-light-text),
+    0.02,
+    var(--oo-color-bg),
+    var(--oo-color-text)
+  );
   #{--oo-color-light-mix-bg-text-10}: mix-colors(
     var(--oo-color-light-bg),
     var(--oo-color-light-text),
@@ -400,6 +407,13 @@
     0.4,
     var(--oo-color-primary)
   );
+  #{--oo-color-dark-mix-bg-text-02}: mix-colors(
+    var(--oo-color-dark-bg),
+    var(--oo-color-dark-text),
+    0.02,
+    var(--oo-color-bg),
+    var(--oo-color-text)
+  );
   #{--oo-color-dark-mix-bg-text-10}: mix-colors(
     var(--oo-color-dark-bg),
     var(--oo-color-dark-text),
@@ -495,6 +509,13 @@
     var(--oo-color-primary-primary),
     0.4,
     var(--oo-color-primary)
+  );
+  #{--oo-color-primary-mix-bg-text-02}: mix-colors(
+    var(--oo-color-primary-bg),
+    var(--oo-color-primary-text),
+    0.02,
+    var(--oo-color-bg),
+    var(--oo-color-text)
   );
   #{--oo-color-primary-mix-bg-text-10}: mix-colors(
     var(--oo-color-primary-bg),
@@ -596,6 +617,13 @@
     var(--oo-color-secondary-primary),
     0.4,
     var(--oo-color-primary)
+  );
+  #{--oo-color-secondary-mix-bg-text-02}: mix-colors(
+    var(--oo-color-secondary-bg),
+    var(--oo-color-secondary-text),
+    0.02,
+    var(--oo-color-bg),
+    var(--oo-color-text)
   );
   #{--oo-color-secondary-mix-bg-text-10}: mix-colors(
     var(--oo-color-secondary-bg),
