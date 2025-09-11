@@ -293,7 +293,7 @@
   }
 
   .--bg-footer & {
-    #{$c-form}__fieldset {
+    #{$c-form}__body {
       grid-template-columns: minmax(0, 1fr);
       gap: 1rem;
 
