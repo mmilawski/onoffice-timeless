@@ -1341,6 +1341,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       position: relative;
       border: $form-border $form-border-color;
       outline: $form-outline;
+      outline-width: 2px;
       transition: outline $form-duration $form-timing,
         border $form-duration $form-timing,
         background-color $form-duration $form-timing;
@@ -1404,7 +1405,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       }
 
       &:after {
-        background-color: $form-light-primary-contrast;
+        background-color: $form-light-color;
       }
     }
 
@@ -1416,7 +1417,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
     #{$o-control}__input:checked + #{$o-control}__label {
       &:before {
-        background-color: $form-light-primary;
+        background-color: $form-light-bg;
         border-color: $form-light-bg;
         outline-color: $form-light-border-color;
       }
