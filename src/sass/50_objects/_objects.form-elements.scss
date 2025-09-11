@@ -94,7 +94,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   font-size: 100%;
   line-height: $form-line-height;
   color: $form-color;
-  background: $form-bg;
+  background-color: $form-bg;
   border: $form-border $form-border-color;
   outline: $form-outline;
   -moz-appearance: textfield;
@@ -244,7 +244,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   font-size: 100%;
   line-height: $form-line-height;
   color: $form-color;
-  background: $form-bg;
+  background-color: $form-bg;
   border: $form-border $form-border-color;
   outline: $form-outline;
   transition: outline-color $form-duration $form-timing,
@@ -403,7 +403,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
   .ts-control {
     height: 100%;
-    background: $form-bg;
+    background-color: $form-bg;
     color: $form-color;
     border: none;
     line-height: 1.5rem;
@@ -417,7 +417,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       transform: translateY(-50%);
       width: 0.75rem;
       height: 0.375rem;
-      background: $form-color;
+      background-color: $form-color;
       mask: $form-svg-arrow;
       mask-repeat: no-repeat;
       mask-size: $form-select-size;
@@ -432,7 +432,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       position: relative;
       display: inline-block;
       width: 100%;
-      background: unset;
+      background-color: unset;
       white-space: nowrap;
       padding: unset;
       margin: unset;
@@ -479,7 +479,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     height: 100%;
     padding: unset !important;
     margin: 0 1rem 0 0;
-    background: none;
+    background-color: none;
     border: 0;
     cursor: default;
 
@@ -504,7 +504,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
         display: inline-block;
         width: $form-remove-size;
         height: $form-remove-size;
-        background: $form-color;
+        background-color: $form-color;
         mask: $form-svg-close;
         mask-repeat: no-repeat;
         mask-size: $form-remove-size;
@@ -516,7 +516,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
   .ts-dropdown {
     color: $form-color;
-    background: $form-dropdown;
+    background-color: $form-dropdown;
     outline: $form-outline-dropdown;
     border-radius: 0;
     overflow: hidden;
@@ -614,14 +614,14 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       .ts-control {
         &::after {
-          background: $form-light-primary;
+          background-color: $form-light-primary;
         }
       }
     }
 
     .ts-dropdown {
       color: $form-light-color;
-      background: $form-light-dropdown;
+      background-color: $form-light-dropdown;
 
       &__item {
         &.active {
@@ -639,14 +639,14 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     .ts-item {
       &-remove {
         @include hover-focus-active() {
-          // background: $form-light-primary;
+          // background-color: $form-light-primary;
           &:before {
-            // background: $form-light-primary-contrast;
+            // background-color: $form-light-primary-contrast;
           }
         }
 
         &::before {
-          // background: $form-light-primary;
+          // background-color: $form-light-primary;
         }
       }
     }
@@ -658,7 +658,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       &::after {
         // dropdown chevron
-        background: $form-light-color;
+        background-color: $form-light-color;
       }
 
       input {
@@ -698,13 +698,13 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       .ts-control {
         &::after {
-          background: $form-dark-primary;
+          background-color: $form-dark-primary;
         }
       }
     }
     .ts-dropdown {
       color: $form-dark-color;
-      background: $form-dark-dropdown;
+      background-color: $form-dark-dropdown;
       outline: $form-dark-outline-dropdown;
 
       &__item {
@@ -742,7 +742,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       &::after {
         // dropdown chevron
-        background: $form-dark-color;
+        background-color: $form-dark-color;
       }
 
       input {
@@ -782,13 +782,13 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       .ts-control {
         &::after {
-          background: $form-primary-primary;
+          background-color: $form-primary-primary;
         }
       }
     }
     .ts-dropdown {
       color: $form-primary-color;
-      background: $form-primary-dropdown;
+      background-color: $form-primary-dropdown;
       outline: $form-primary-outline-dropdown;
 
       &__item {
@@ -826,7 +826,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       &::after {
         // dropdown chevron
-        background: $form-primary-color;
+        background-color: $form-primary-color;
       }
 
       input {
@@ -866,14 +866,14 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       .ts-control {
         &::after {
-          background: $form-secondary-primary;
+          background-color: $form-secondary-primary;
         }
       }
     }
 
     .ts-dropdown {
       color: $form-secondary-color;
-      background: $form-secondary-dropdown;
+      background-color: $form-secondary-dropdown;
 
       &__item {
         &.selected {
@@ -894,12 +894,12 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       &-remove {
         @include hover-focus-active() {
           &:before {
-            background: var(--oo-color-secondary-mix-bg-contrast-20);
+            background-color: var(--oo-color-secondary-mix-bg-contrast-20);
           }
         }
 
         &::before {
-          background: $form-secondary-color;
+          background-color: $form-secondary-color;
         }
       }
     }
@@ -910,7 +910,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       &::after {
         // dropdown chevron
-        background: $form-secondary-color;
+        background-color: $form-secondary-color;
       }
 
       input {
@@ -950,14 +950,14 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       .ts-control {
         &::after {
-          background: $form-footer-primary;
+          background-color: $form-footer-primary;
         }
       }
     }
 
     .ts-dropdown {
       color: $form-footer-color;
-      background: $form-footer-dropdown;
+      background-color: $form-footer-dropdown;
 
       &__item {
         &.selected {
@@ -977,14 +977,14 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     .ts-item {
       &-remove {
         @include hover-focus-active() {
-          // background: $form-footer-primary;
+          // background-color: $form-footer-primary;
           &:before {
-            // background: $form-footer-primary-contrast;
+            // background-color: $form-footer-primary-contrast;
           }
         }
 
         &::before {
-          // background: $form-footer-primary;
+          // background-color: $form-footer-primary;
         }
       }
     }
@@ -995,7 +995,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       &::after {
         // dropdown chevron
-        background: $form-footer-color;
+        background-color: $form-footer-color;
       }
 
       input {
@@ -1035,14 +1035,14 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       .ts-control {
         &::after {
-          background: $form-color;
+          background-color: $form-color;
         }
       }
     }
 
     .ts-dropdown {
       color: $form-color;
-      background: $form-dropdown;
+      background-color: $form-dropdown;
 
       &__item {
         &.selected {
@@ -1075,7 +1075,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       &::after {
         // dropdown chevron
-        background: $form-border-color;
+        background-color: $form-border-color;
       }
 
       input {
@@ -1121,7 +1121,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   font-size: 100%;
   line-height: $form-line-height;
   color: $form-color;
-  background: $form-bg;
+  background-color: $form-bg;
   border: $form-border $form-border-color;
   outline: $form-outline;
   transition: outline-color $form-duration $form-timing,
