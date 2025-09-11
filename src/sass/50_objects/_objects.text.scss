@@ -161,18 +161,6 @@
         }
       }
     }
-
-    blockquote {
-      padding-left: 0;
-      &:before {
-        position: relative;
-        display: inline-block;
-        margin-right: 0.5rem;
-        margin-top: 0;
-        left: unset;
-        top: 0.5rem;
-      }
-    }
   }
 
   /* Backgrounds */
@@ -202,15 +190,6 @@
       color: var(--oo-color-light-contrast-primary);
       background-color: var(--oo-color-light-primary, var(--oo-color-primary));
     }
-
-    blockquote {
-      &:before {
-        background-color: var(
-          --oo-color-light-primary,
-          var(--oo-color-primary)
-        );
-      }
-    }
   }
 
   .--bg-dark & {
@@ -238,12 +217,6 @@
     mark {
       color: var(--oo-color-dark-contrast-primary);
       background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
-    }
-
-    blockquote {
-      &:before {
-        background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
-      }
     }
   }
 
@@ -276,15 +249,6 @@
         var(--oo-color-primary)
       );
     }
-
-    blockquote {
-      &:before {
-        background-color: var(
-          --oo-color-primary-primary,
-          var(--oo-color-primary)
-        );
-      }
-    }
   }
 
   .--bg-secondary & {
@@ -316,15 +280,6 @@
         var(--oo-color-primary)
       );
     }
-
-    blockquote {
-      &:before {
-        background-color: var(
-          --oo-color-secondary-primary,
-          var(--oo-color-primary)
-        );
-      }
-    }
   }
 
   .--bg-header & {
@@ -352,15 +307,6 @@
     mark {
       color: var(--oo-color-header-contrast-primary);
       background-color: var(--oo-color-header-primary, var(--oo-color-primary));
-    }
-
-    blockquote {
-      &:before {
-        background-color: var(
-          --oo-color-header-primary,
-          var(--oo-color-primary)
-        );
-      }
     }
   }
 
@@ -390,15 +336,6 @@
       color: var(--oo-color-footer-contrast-primary);
       background-color: var(--oo-color-footer-primary, var(--oo-color-primary));
     }
-
-    blockquote {
-      &:before {
-        background-color: var(
-          --oo-color-footer-primary,
-          var(--oo-color-primary)
-        );
-      }
-    }
   }
 
   .--bg-transparent & {
@@ -426,12 +363,6 @@
     mark {
       color: var(--oo-color-contrast-primary);
       background-color: var(--oo-color-primary);
-    }
-
-    blockquote {
-      &:before {
-        background-color: var(--oo-color-primary);
-      }
     }
   }
 }
