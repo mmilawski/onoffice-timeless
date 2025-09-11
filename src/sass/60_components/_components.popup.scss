@@ -85,6 +85,8 @@
   &.--is-login {
     margin: auto;
     width: fit-content;
+    background: transparent;
+
     #{$c-popup}__wrapper {
       overflow-y: auto;
       @include media-breakpoint-up(md) {
@@ -113,7 +115,7 @@
       .c-button__icon {
         width: 2rem;
         height: 2rem;
-        color: black;
+        color: var(--oo-color-text);
       }
     }
   }

@@ -22,4 +22,11 @@
 
   &__text {
   }
+
+  &.--logged-in {
+    #{$customer-area}__content,
+    #{$customer-area}__buttons {
+      display: none;
+    }
+  }
 }
