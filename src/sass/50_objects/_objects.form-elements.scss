@@ -1535,7 +1535,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       }
 
       &:after {
-        background-color: $form-footer-primary-contrast;
+        background-color: $form-footer-color;
       }
     }
 
@@ -1547,7 +1547,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
     #{$o-control}__input:checked + #{$o-control}__label {
       &:before {
-        background-color: $form-footer-primary;
+        background-color: $form-footer-bg;
         border-color: $form-footer-bg;
         outline-color: $form-footer-border-color;
       }
