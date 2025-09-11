@@ -12,44 +12,26 @@
 
   h1 {
     margin-bottom: 2.5rem;
-    @include media-breakpoint-up(xl) {
-      margin-bottom: 2rem; // how much margin bottom in mobile?
-    }
   }
 
   h2 {
-    margin-bottom: 1.5rem;
-    @include media-breakpoint-up(xl) {
-      margin-bottom: 2rem;
-    }
+    margin-bottom: 2.5rem
   }
 
   h3 {
-    margin-bottom: 1.5rem;
-    @include media-breakpoint-up(xl) {
-      margin-bottom: 2rem;
-    }
+    margin-bottom: 2.5rem
   }
 
   h4 {
     margin-bottom: 1.5rem;
-    @include media-breakpoint-up(xl) {
-      margin-bottom: 1.75rem;
-    }
   }
 
   h5 {
-    margin-bottom: 1.5rem;
-    @include media-breakpoint-up(xl) {
-      margin-bottom: 1.75rem;
-    }
+    margin-bottom: 1rem;
   }
 
   h6 {
-    margin-bottom: 1.5rem;
-    @include media-breakpoint-up(xl) {
-      margin-bottom: 1.5rem;
-    }
+    margin-bottom: 1rem;
   }
 
   a {
