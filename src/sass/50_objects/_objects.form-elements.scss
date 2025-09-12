@@ -24,7 +24,6 @@ $form-color: var(--oo-color-text);
 $form-bg: var(--oo-color-mix-bg-text-02, var(--oo-color-bg));
 $form-placeholder: var(--oo-color-mix-bg-contrast-60);
 $form-primary: var(--oo-color-primary);
-$form-primary-contrast: var(--oo-color-contrast-primary);
 
 // BG Variations
 $form-light-color: var(--oo-color-light-text, var(--oo-color-text));
@@ -33,7 +32,7 @@ $form-light-bg: var(
   var(--oo-color-light-bg, var(--oo-color-bg))
 );
 $form-light-border-color: var(--oo-color-light-mix-bg-contrast-60);
-$form-light-focus: var(--oo-color-light-text);
+$form-light-focus: var(--oo-color-light-text, var(--oo-color-text));
 $form-light-placeholder: var(--oo-color-light-mix-bg-contrast-60);
 $form-light-primary: var(--oo-color-light-primary, var(--oo-color-primary));
 $form-light-outline-dropdown: 3px solid var(--oo-color-light-text);
@@ -44,7 +43,7 @@ $form-dark-bg: var(
   var(--oo-color-dark-bg, var(--oo-color-bg))
 );
 $form-dark-border-color: var(--oo-color-dark-mix-bg-contrast-60);
-$form-dark-focus: var(--oo-color-dark-primary, var(--oo-color-primary));
+$form-dark-focus: var(--oo-color-dark-text, var(--oo-color-text));
 $form-dark-placeholder: var(--oo-color-dark-mix-bg-contrast-60);
 $form-dark-primary: var(--oo-color-dark-primary, var(--oo-color-primary));
 $form-dark-outline-dropdown: 3px solid var(--oo-color-dark-text);
@@ -55,7 +54,7 @@ $form-primary-bg: var(
   var(--oo-color-primary-bg, var(--oo-color-bg))
 );
 $form-primary-border-color: var(--oo-color-primary-mix-bg-contrast-60);
-$form-primary-focus: var(--oo-color-primary-primary, var(--oo-color-primary));
+$form-primary-focus: var(--oo-color-primary-text, var(--oo-color-text));
 $form-primary-placeholder: var(--oo-color-primary-mix-bg-contrast-60);
 $form-primary-primary: var(--oo-color-primary-primary, var(--oo-color-primary));
 $form-primary-outline-dropdown: 3px solid var(--oo-color-primary-text);
@@ -66,10 +65,7 @@ $form-secondary-bg: var(
   var(--oo-color-secondary-bg, var(--oo-color-bg))
 );
 $form-secondary-border-color: var(--oo-color-secondary-mix-bg-contrast-60);
-$form-secondary-focus: var(
-  --oo-color-secondary-primary,
-  var(--oo-color-primary)
-);
+$form-secondary-focus: var(--oo-color-secondary-text, var(--oo-color-text));
 $form-secondary-placeholder: var(--oo-color-secondary-mix-bg-contrast-60);
 $form-secondary-primary: var(
   --oo-color-secondary-primary,
@@ -80,7 +76,7 @@ $form-secondary-outline-dropdown: 3px solid var(--oo-color-secondary-text);
 $form-footer-color: var(--oo-color-footer-text, var(--oo-color-text));
 $form-footer-bg: var(--oo-color-footer-bg, var(--oo-color-bg));
 $form-footer-border-color: var(--oo-color-footer-mix-bg-contrast-60);
-$form-footer-focus: var(--oo-color-footer-primary, var(--oo-color-primary));
+$form-footer-focus: var(--oo-color-footer-text, var(--oo-color-text));
 $form-footer-placeholder: var(--oo-color-footer-mix-bg-contrast-60);
 $form-footer-primary: var(--oo-color-footer-primary, var(--oo-color-primary));
 $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
@@ -409,6 +405,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     background-color: $form-bg;
     color: $form-color;
     border: none;
+    border-radius: 0;
     line-height: 1.5rem;
     padding: $form-padding;
 
@@ -522,6 +519,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     background-color: $form-bg;
     outline: $form-outline-dropdown;
     border-radius: 0;
+    border: none;
     overflow: hidden;
     margin: 0;
     text-align: left;
@@ -617,7 +615,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
 
       .ts-control {
         &::after {
-          background-color: $form-light-primary;
+          background-color: $form-light-color;
         }
       }
     }
@@ -661,7 +659,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
 
       &::after {
         // dropdown chevron
-        background-color: $form-light-color;
+        background-color: $form-light-border-color;
       }
 
       input {
@@ -701,7 +699,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
 
       .ts-control {
         &::after {
-          background-color: $form-dark-primary;
+          background-color: $form-dark-color;
         }
       }
     }
@@ -741,7 +739,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
 
       &::after {
         // dropdown chevron
-        background-color: $form-dark-color;
+        background-color: $form-dark-border-color;
       }
 
       input {
@@ -781,7 +779,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
 
       .ts-control {
         &::after {
-          background-color: $form-primary-primary;
+          background-color: $form-primary-color;
         }
       }
     }
@@ -821,7 +819,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
 
       &::after {
         // dropdown chevron
-        background-color: $form-primary-color;
+        background-color: $form-primary-border-color;
       }
 
       input {
@@ -861,7 +859,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
 
       .ts-control {
         &::after {
-          background-color: $form-secondary-primary;
+          background-color: $form-secondary-color;
         }
       }
     }
@@ -902,7 +900,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
 
       &::after {
         // dropdown chevron
-        background-color: $form-secondary-color;
+        background-color: $form-secondary-border-color;
       }
 
       input {
@@ -942,7 +940,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
 
       .ts-control {
         &::after {
-          background-color: $form-footer-bg;
+          background-color: $form-footer-color;
         }
       }
     }
@@ -966,7 +964,6 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     .ts-item {
       &-remove {
         @include hover-focus-active() {
-          background-color: $form-footer-bg;
           &:before {
             background-color: $form-footer-border-color;
           }
@@ -984,7 +981,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
 
       &::after {
         // dropdown chevron
-        background-color: $form-footer-color;
+        background-color: $form-footer-border-color;
       }
 
       input {
@@ -1334,7 +1331,6 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
       position: absolute;
       left: calc(($form-control-wrapper / 2) - ($form-control-icon / 2));
       top: calc(($form-control-wrapper / 2) - ($form-control-icon / 2));
-      background-color: $form-primary-contrast;
       background-size: 100%;
       background-repeat: no-repeat;
       background-position: center;
