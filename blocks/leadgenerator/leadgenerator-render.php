@@ -12,6 +12,7 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
 <section <?php oo_block_id(
     $block,
 ); ?> class="c-leadgenerator o-section --<?php echo $bg_color; ?>">
+    <?php echo color_bridge_vue($bg_color); ?>
     <div class="c-leadgenerator__container o-container">
     <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
             <div class="c-leadgenerator__content o-row --position-center">
