@@ -80,7 +80,7 @@ $formId = sanitize_key($getListName());
                             'oo_theme',
                         ); ?>"
                         aria-expanded="false" aria-controls="<?php echo $uniqid; ?>">
-                        <?php echo esc_html('Mehr anzeigen', 'oo_theme'); ?>
+                        <?php echo esc_html__('Mehr anzeigen', 'oo_theme'); ?>
                     </button>
 
                     <button class="c-form__button c-button <?php if (
