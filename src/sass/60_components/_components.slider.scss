@@ -199,9 +199,9 @@
     }
 
     @include disabled() {
-      background-color: var(--oo-color-header-mix-bg-contrast-5);
-      color: var(--oo-color-mix-bg-text-30);
-      opacity: 0.4;
+      background-color: var(--oo-color-mix-bg-contrast-05);
+      color: var(--oo-color-text);
+      opacity: 0.2;
       outline-color: transparent;
       cursor: default;
     }
@@ -833,8 +833,8 @@
       }
 
       @include disabled() {
-        background-color: var(--oo-color-header-mix-bg-contrast-5);
-        color: var(--oo-color-mix-bg-text-30);
+        background-color: var(--oo-color-mix-bg-contrast-05);
+        color: var(--oo-color-text);
         outline-color: transparent;
       }
     }
