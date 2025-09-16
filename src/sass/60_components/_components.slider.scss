@@ -109,7 +109,7 @@
       outline-color 0.25s ease-in-out;
 
     @include plain-visited() {
-      background-color: var(--oo-color-header-mix-bg-contrast-5);
+      background-color: var(--oo-color-mix-bg-contrast-05);
     }
 
     @include hover() {
@@ -180,7 +180,7 @@
 
     @include plain-visited() {
       color: var(--oo-color-text);
-      background-color: var(--oo-color-header-mix-bg-contrast-5);
+      background-color: var(--oo-color-mix-bg-contrast-05);
       opacity: 1;
     }
 
@@ -787,7 +787,7 @@
   &.--on-bg-transparent {
     #{$c-slider}__page {
       @include plain-visited() {
-        background-color: var(--oo-color-header-mix-bg-contrast-5);
+        background-color: var(--oo-color-mix-bg-contrast-05);
       }
       @include hover() {
         background-color: var(--oo-color-contrast-primary);
@@ -814,7 +814,7 @@
     #{$c-slider}__arrow {
       @include plain-visited() {
         color: var(--oo-color-text);
-        background-color: var(--oo-color-header-mix-bg-contrast-5);
+        background-color: var(--oo-color-mix-bg-contrast-05);
         opacity: 1;
       }
 

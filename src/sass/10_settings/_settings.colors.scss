@@ -142,6 +142,10 @@
     var(--oo-color-text),
     0.4
   );
+  #{--oo-color-mix-bg-contrast-05}: mix-color-with-contrast(
+    var(--oo-color-bg),
+    0.05
+  );
   #{--oo-color-mix-bg-contrast-10}: mix-color-with-contrast(
     var(--oo-color-bg),
     0.1

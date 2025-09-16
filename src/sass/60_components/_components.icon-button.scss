@@ -218,7 +218,7 @@
   .--bg-transparent & {
     @include plain-visited() {
       color: var(--oo-color-text);
-      background-color: var(--oo-color-header-mix-bg-contrast-5);
+      background-color: var(--oo-color-mix-bg-contrast-05);
     }
 
     @include hover() {
