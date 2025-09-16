@@ -69,7 +69,7 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
             <div class="c-property-list__nav o-row">
                 <p class="c-property-list__count o-col-12 o-col-md-6">
                     <?php printf(
-                        esc_html__('%d Immobilien Gefunden', 'oo_theme'),
+                        esc_html__('%d Immobilien gefunden', 'oo_theme'),
                         $property_count,
                     ); ?>
                 </p>
@@ -141,7 +141,7 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
 <?php } else { ?>
     <p class="c-property-list__count --no-properties">
         <?php printf(
-            esc_html__('%d Immobilien Gefunden', 'oo_theme'),
+            esc_html__('%d Immobilien gefunden', 'oo_theme'),
             $property_count,
         ); ?>
     </p>
