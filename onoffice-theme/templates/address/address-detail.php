@@ -364,7 +364,7 @@ foreach ($current_address_array as $address_id => $current_address) {
                                                 'oo_theme',
                                             ); ?>"
                                             aria-expanded="false" aria-controls="more-address-features">
-                                            <?php echo esc_html(
+                                            <?php echo esc_html__(
                                                 'Mehr anzeigen',
                                                 'oo_theme',
                                             ); ?>
