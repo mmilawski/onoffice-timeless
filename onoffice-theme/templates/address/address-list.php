@@ -129,7 +129,7 @@ $agent_count = method_exists($pAddressList, 'getAddressOverallCount')
 <?php } else { ?>
     <p class="c-address-list__count --no-addresses">
         <?php printf(
-            esc_html__('%d Berater Gefunden', 'oo_theme'),
+            esc_html__('%d Berater gefunden', 'oo_theme'),
             $agent_count,
         ); ?>
     </p>
