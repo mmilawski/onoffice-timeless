@@ -128,14 +128,14 @@
 
       @include disabled() {
         background-color: var(--oo-color-primary);
-        opacity: 0.4;
+        opacity: 0.2;
         outline-color: transparent;
         cursor: default;
       }
 
       &.disabled {
         background-color: var(--oo-color-primary);
-        opacity: 0.4;
+        opacity: 0.2;
         outline-color: transparent;
         cursor: default;
       }

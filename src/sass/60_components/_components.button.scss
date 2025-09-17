@@ -61,7 +61,7 @@
   @include disabled() {
     background-color: var(--oo-color-primary);
     border-color: var(--oo-color-primary);
-    opacity: 0.4;
+    opacity: 0.2;
     outline-color: transparent;
     text-decoration: line-through;
     cursor: default;
@@ -273,7 +273,7 @@
       color: var(--oo-color-text);
       background-color: transparent;
       border-color: var(--oo-color-text);
-      opacity: 0.4;
+      opacity: 0.2;
       outline-color: transparent;
       cursor: default;
     }
