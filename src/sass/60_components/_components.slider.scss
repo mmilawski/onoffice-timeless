@@ -187,7 +187,11 @@
     @include hover() {
       background-color: var(--oo-color-mix-primary-contrast-20);
       color: var(--oo-color-contrast-primary);
-      opacity: 1;
+
+        &:not(:disabled) {
+          // needed to overwrite splide hover 0.9
+          opacity: 1;
+        }
     }
 
     @include focus-visible() {
@@ -577,7 +581,7 @@
         background-color: var(--oo-color-light-primary);
       }
       @include hover() {
-        background-color: var(--oo-color-light-mix-primary-contrast-20);
+        background-color: var(--oo-color-light-primary);
       }
       @include focus-visible() {
         outline-color: var(--oo-color-light-primary) !important;
@@ -625,7 +629,7 @@
         background-color: var(--oo-color-dark-primary);
       }
       @include hover() {
-        background-color: var(--oo-color-dark-mix-primary-contrast-20);
+        background-color: var(--oo-color-dark-primary);
       }
       @include focus-visible() {
         outline-color: var(--oo-color-dark-primary) !important;
@@ -673,7 +677,7 @@
         background-color: var(--oo-color-primary-primary);
       }
       @include hover() {
-        background-color: var(--oo-color-primary-mix-primary-contrast-20);
+        background-color: var(--oo-color-primary-primary);
       }
       @include focus-visible() {
         outline-color: var(--oo-color-primary-primary) !important;
@@ -721,7 +725,7 @@
         background-color: var(--oo-color-secondary-primary);
       }
       @include hover() {
-        background-color: var(--oo-color-secondary-mix-primary-contrast-20);
+        background-color: var(--oo-color-secondary-primary);
       }
       @include focus-visible() {
         outline-color: var(--oo-color-secondary-primary) !important;
@@ -769,7 +773,7 @@
         background-color: var(--oo-color-footer-primary);
       }
       @include hover() {
-        background-color: var(--oo-color-footer-mix-primary-contrast-20);
+        background-color: var(--oo-color-footer-primary);
       }
       @include focus-visible() {
         outline-color: var(--oo-color-footer-primary) !important;
@@ -819,7 +823,7 @@
       }
 
       @include hover() {
-        background-color: var(--oo-color-mix-primary-contrast-20);
+        background-color: var(--oo-color-primary);
         color: var(--oo-color-contrast-primary);
         opacity: 1;
       }
