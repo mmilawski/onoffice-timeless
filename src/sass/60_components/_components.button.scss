@@ -9,12 +9,12 @@
   font-weight: $font-weight-button;
   @include font-size($global-font-size, $small-line-height);
   text-align: center;
+  text-transform: uppercase;
   margin: 0;
   padding: 1rem 4rem;
   width: 100%;
   border: 2px solid transparent;
   outline: $outline;
-  text-transform: uppercase;
   outline-offset: $outline-offset;
   transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
     border-color 0.25s ease-in-out, outline-color 0.25s ease-in-out,
@@ -295,6 +295,7 @@
       @include focus-visible() {
         outline-color: var(--oo-color-light-text);
       }
+
       @include active() {
         color: var(--oo-color-light-mix-primary-contrast-40, var(--oo-color-mix-primary-contrast-40));
         border-color: var(--oo-color-light-mix-primary-contrast-40, var(--oo-color-mix-primary-contrast-40));
