@@ -60,12 +60,18 @@
   &.--on-bg-light,
   .--bg-light & {
     @include plain-visited() {
-      color: var(--oo-color-light-contrast-primary, var(--oo-color-contrast-primary));
+      color: var(
+        --oo-color-light-contrast-primary,
+        var(--oo-color-contrast-primary)
+      );
       background-color: var(--oo-color-light-primary, var(--oo-color-primary));
     }
 
     @include hover() {
-      background-color: var(--oo-color-light-mix-primary-contrast-20, var(--oo-color-mix-primary-contrast-20));
+      background-color: var(
+        --oo-color-light-mix-primary-contrast-20,
+        var(--oo-color-mix-primary-contrast-20)
+      );
     }
 
     @include focus-visible() {
@@ -73,7 +79,10 @@
     }
 
     @include active() {
-      background-color: var(--oo-color-light-mix-primary-contrast-40, var(--oo-color-mix-primary-contrast-40));
+      background-color: var(
+        --oo-color-light-mix-primary-contrast-40,
+        var(--oo-color-mix-primary-contrast-40)
+      );
     }
 
     @include disabled() {
