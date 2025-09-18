@@ -548,7 +548,8 @@
     }
   }
 
-  &.--on-bg-light {
+  &.--on-bg-light,
+  .--bg-light & {
     #{$c-slider}__page {
       @include plain-visited() {
         background-color: var(--oo-color-light-bg);
@@ -596,7 +597,8 @@
     }
   }
 
-  &.--on-bg-dark {
+  &.--on-bg-dark,
+  .--bg-dark & {
     #{$c-slider}__page {
       @include plain-visited() {
         background-color: var(--oo-color-dark-bg);
@@ -644,7 +646,8 @@
     }
   }
 
-  &.--on-bg-primary {
+  &.--on-bg-primary,
+  .--bg-primary & {
     #{$c-slider}__page {
       @include plain-visited() {
         background-color: var(--oo-color-primary-bg);
@@ -692,7 +695,8 @@
     }
   }
 
-  &.--on-bg-secondary {
+  &.--on-bg-secondary,
+  .--bg-secondary & {
     #{$c-slider}__page {
       @include plain-visited() {
         background-color: var(--oo-color-secondary-bg);
@@ -740,7 +744,8 @@
     }
   }
 
-  &.--on-bg-footer {
+  &.--on-bg-footer,
+  .--bg-footer & {
     #{$c-slider}__page {
       @include plain-visited() {
         background-color: var(--oo-color-footer-bg);
@@ -788,7 +793,8 @@
     }
   }
 
-  &.--on-bg-transparent {
+  &.--on-bg-transparent,
+  .--bg-transparent & {
     #{$c-slider}__page {
       @include plain-visited() {
         background-color: var(--oo-color-mix-bg-contrast-05);
