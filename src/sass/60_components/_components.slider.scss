@@ -746,7 +746,7 @@
         background-color: var(--oo-color-footer-mix-primary-contrast-20);
       }
       @include focus-visible() {
-        outline-color: var(--oo-color-footer-primary) !important;
+        outline-color: var(--oo-color-footer-color) !important;
       }
       @include active() {
         background-color: var(--oo-color-footer-mix-primary-contrast-40);
@@ -790,7 +790,7 @@
         background-color: var(--oo-color-mix-bg-contrast-05);
       }
       @include hover() {
-        background-color: var(--oo-color-contrast-primary);
+        background-color: var(--oo-color-mix-primary-contrast-20);
       }
       @include focus-visible() {
         outline-color: var(--oo-color-text) !important;
