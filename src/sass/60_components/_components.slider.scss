@@ -552,7 +552,7 @@
   .--bg-light & {
     #{$c-slider}__page {
       @include plain-visited() {
-        background-color: var(--oo-color-light-bg);
+        background-color: var(--oo-color-light-mix-bg-contrast-05);
       }
       @include hover() {
         background-color: var(--oo-color-light-mix-primary-contrast-20);
@@ -579,7 +579,7 @@
     #{$c-slider}__arrow {
       @include plain-visited() {
         color: var(--oo-color-light-contrast-primary);
-        background-color: var(--oo-color-light-primary);
+        background-color: var(--oo-color-light-mix-bg-contrast-05);
       }
       @include hover() {
         background-color: var(--oo-color-light-primary);
@@ -601,7 +601,7 @@
   .--bg-dark & {
     #{$c-slider}__page {
       @include plain-visited() {
-        background-color: var(--oo-color-dark-bg);
+        background-color: var(--oo-color-dark-mix-bg-contrast-05);
       }
       @include hover() {
         background-color: var(--oo-color-dark-mix-primary-contrast-20);
@@ -628,7 +628,7 @@
     #{$c-slider}__arrow {
       @include plain-visited() {
         color: var(--oo-color-dark-contrast-primary);
-        background-color: var(--oo-color-dark-primary);
+        background-color: var(--oo-color-dark-mix-bg-contrast-05);
       }
       @include hover() {
         background-color: var(--oo-color-dark-primary);
@@ -650,7 +650,7 @@
   .--bg-primary & {
     #{$c-slider}__page {
       @include plain-visited() {
-        background-color: var(--oo-color-primary-bg);
+        background-color: var(--oo-color-primary-mix-bg-contrast-05);
       }
       @include hover() {
         background-color: var(--oo-color-primary-mix-primary-contrast-20);
@@ -677,7 +677,7 @@
     #{$c-slider}__arrow {
       @include plain-visited() {
         color: var(--oo-color-primary-contrast-primary);
-        background-color: var(--oo-color-primary-primary);
+        background-color: var(--oo-color-primary-mix-bg-contrast-05);
       }
       @include hover() {
         background-color: var(--oo-color-primary-primary);
@@ -699,7 +699,7 @@
   .--bg-secondary & {
     #{$c-slider}__page {
       @include plain-visited() {
-        background-color: var(--oo-color-secondary-bg);
+        background-color: var(--oo-color-secondary-mix-bg-contrast-05);
       }
       @include hover() {
         background-color: var(--oo-color-secondary-mix-primary-contrast-20);
@@ -726,7 +726,7 @@
     #{$c-slider}__arrow {
       @include plain-visited() {
         color: var(--oo-color-secondary-contrast-primary);
-        background-color: var(--oo-color-secondary-primary);
+        background-color: var(--oo-color-secondary-mix-bg-contrast-05);
       }
       @include hover() {
         background-color: var(--oo-color-secondary-primary);
