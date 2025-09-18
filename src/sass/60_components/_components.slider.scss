@@ -117,7 +117,7 @@
     }
 
     @include focus-visible() {
-      outline-color: var(--oo-color-primary) !important;
+      outline-color: var(--oo-color-text) !important;
     }
 
     @include active() {
@@ -195,7 +195,7 @@
     }
 
     @include focus-visible() {
-      outline-color: var(--oo-color-primary) !important;
+      outline-color: var(--oo-color-text) !important;
     }
 
     @include active() {
@@ -558,7 +558,7 @@
         background-color: var(--oo-color-light-mix-primary-contrast-20);
       }
       @include focus-visible() {
-        outline-color: var(--oo-color-light-primary) !important;
+        outline-color: var(--oo-color-light-text) !important;
       }
       @include active() {
         background-color: var(--oo-color-light-mix-primary-contrast-40);
@@ -585,7 +585,7 @@
         background-color: var(--oo-color-light-primary);
       }
       @include focus-visible() {
-        outline-color: var(--oo-color-light-primary) !important;
+        outline-color: var(--oo-color-light-text) !important;
       }
       @include active() {
         background-color: var(--oo-color-light-mix-primary-contrast-40);
@@ -607,7 +607,7 @@
         background-color: var(--oo-color-dark-mix-primary-contrast-20);
       }
       @include focus-visible() {
-        outline-color: var(--oo-color-dark-primary) !important;
+        outline-color: var(--oo-color-dark-text) !important;
       }
       @include active() {
         background-color: var(--oo-color-dark-mix-primary-contrast-40);
@@ -634,7 +634,7 @@
         background-color: var(--oo-color-dark-primary);
       }
       @include focus-visible() {
-        outline-color: var(--oo-color-dark-primary) !important;
+        outline-color: var(--oo-color-dark-text) !important;
       }
       @include active() {
         background-color: var(--oo-color-dark-mix-primary-contrast-40);
@@ -656,7 +656,7 @@
         background-color: var(--oo-color-primary-mix-primary-contrast-20);
       }
       @include focus-visible() {
-        outline-color: var(--oo-color-primary-primary) !important;
+        outline-color: var(--oo-color-primary-text) !important;
       }
       @include active() {
         background-color: var(--oo-color-primary-mix-primary-contrast-40);
@@ -683,7 +683,7 @@
         background-color: var(--oo-color-primary-primary);
       }
       @include focus-visible() {
-        outline-color: var(--oo-color-primary-primary) !important;
+        outline-color: var(--oo-color-primary-text) !important;
       }
       @include active() {
         background-color: var(--oo-color-primary-mix-primary-contrast-40);
@@ -705,7 +705,7 @@
         background-color: var(--oo-color-secondary-mix-primary-contrast-20);
       }
       @include focus-visible() {
-        outline-color: var(--oo-color-secondary-primary) !important;
+        outline-color: var(--oo-color-secondary-text) !important;
       }
       @include active() {
         background-color: var(--oo-color-secondary-mix-primary-contrast-40);
@@ -732,7 +732,7 @@
         background-color: var(--oo-color-secondary-primary);
       }
       @include focus-visible() {
-        outline-color: var(--oo-color-secondary-primary) !important;
+        outline-color: var(--oo-color-secondary-text) !important;
       }
       @include active() {
         background-color: var(--oo-color-secondary-mix-primary-contrast-40);
@@ -781,7 +781,7 @@
         background-color: var(--oo-color-footer-primary);
       }
       @include focus-visible() {
-        outline-color: var(--oo-color-footer-primary) !important;
+        outline-color: var(--oo-color-footer-text) !important;
       }
       @include active() {
         background-color: var(--oo-color-footer-mix-primary-contrast-40);
@@ -803,7 +803,7 @@
         background-color: var(--oo-color-contrast-primary);
       }
       @include focus-visible() {
-        outline-color: var(--oo-color-primary) !important;
+        outline-color: var(--oo-color-text) !important;
       }
       @include active() {
         background-color: var(--oo-color-mix-primary-contrast-40);
@@ -835,7 +835,7 @@
       }
 
       @include focus-visible() {
-        outline-color: var(--oo-color-primary) !important;
+        outline-color: var(--oo-color-text) !important;
       }
 
       @include active() {
