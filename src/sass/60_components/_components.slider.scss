@@ -188,10 +188,10 @@
       background-color: var(--oo-color-mix-primary-contrast-20);
       color: var(--oo-color-contrast-primary);
 
-        &:not(:disabled) {
-          // needed to overwrite splide hover 0.9
-          opacity: 1;
-        }
+      &:not(:disabled) {
+        // needed to overwrite splide hover 0.9
+        opacity: 1;
+      }
     }
 
     @include focus-visible() {
@@ -203,11 +203,11 @@
     }
 
     @include disabled() {
-      background-color: var(--oo-color-mix-bg-contrast-05);
       color: var(--oo-color-text);
-      opacity: 0.2;
+      opacity: 0.2 !important;
       outline-color: transparent;
       cursor: default;
+      pointer-events: none !important;
     }
 
     &.--prev {
@@ -591,8 +591,6 @@
         background-color: var(--oo-color-light-mix-primary-contrast-40);
       }
       @include disabled() {
-        background-color: var(--oo-color-light-primary);
-        outline-color: transparent;
       }
     }
   }
@@ -640,8 +638,6 @@
         background-color: var(--oo-color-dark-mix-primary-contrast-40);
       }
       @include disabled() {
-        background-color: var(--oo-color-dark-primary);
-        outline-color: transparent;
       }
     }
   }
@@ -689,8 +685,6 @@
         background-color: var(--oo-color-primary-mix-primary-contrast-40);
       }
       @include disabled() {
-        background-color: var(--oo-color-primary-primary);
-        outline-color: transparent;
       }
     }
   }
@@ -738,8 +732,6 @@
         background-color: var(--oo-color-secondary-mix-primary-contrast-40);
       }
       @include disabled() {
-        background-color: var(--oo-color-secondary-primary);
-        outline-color: transparent;
       }
     }
   }
@@ -787,8 +779,6 @@
         background-color: var(--oo-color-footer-mix-primary-contrast-40);
       }
       @include disabled() {
-        background-color: var(--oo-color-footer-primary);
-        outline-color: transparent;
       }
     }
   }
@@ -843,9 +833,6 @@
       }
 
       @include disabled() {
-        background-color: var(--oo-color-mix-bg-contrast-05);
-        color: var(--oo-color-text);
-        outline-color: transparent;
       }
     }
   }
