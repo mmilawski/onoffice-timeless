@@ -84,19 +84,17 @@
           }
         }
 
-        @include media-breakpoint-up(xxl) {
-          &::after {
-            content: ' ';
-            position: absolute;
-            left: 0;
-            opacity: 0;
-            background: transparent;
-            width: 100%;
-            height: 0;
-            top: 100%;
-            z-index: 10;
-            overflow: hidden;
-          }
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          opacity: 0;
+          background: transparent;
+          width: 100%;
+          height: 0;
+          top: 100%;
+          z-index: 10;
+          overflow: hidden;
         }
 
         #{$c-main-nav}__link {
