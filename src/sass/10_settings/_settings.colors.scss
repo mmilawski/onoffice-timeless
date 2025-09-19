@@ -203,6 +203,11 @@
     var(--oo-color-text),
     0.3
   );
+  #{--oo-color-mix-bg-text-40}: mix-colors(
+    var(--oo-color-bg),
+    var(--oo-color-text),
+    0.4
+  );
   #{--oo-color-mix-bg-text-50}: mix-colors(
     var(--oo-color-bg),
     var(--oo-color-text),
@@ -290,6 +295,13 @@
     var(--oo-color-bg),
     var(--oo-color-text)
   );
+  #{--oo-color-light-mix-bg-text-40}: mix-colors(
+    var(--oo-color-light-bg),
+    var(--oo-color-light-text),
+    0.4,
+    var(--oo-color-bg),
+    var(--oo-color-text)
+  );
 
   // dark
   #{--oo-color-dark-transparent-bg-25}: transparent-color(
@@ -369,6 +381,13 @@
     var(--oo-color-dark-bg),
     var(--oo-color-dark-text),
     0.2,
+    var(--oo-color-bg),
+    var(--oo-color-text)
+  );
+  #{--oo-color-dark-mix-bg-text-40}: mix-colors(
+    var(--oo-color-dark-bg),
+    var(--oo-color-dark-text),
+    0.4,
     var(--oo-color-bg),
     var(--oo-color-text)
   );
@@ -454,6 +473,13 @@
     var(--oo-color-bg),
     var(--oo-color-text)
   );
+  #{--oo-color-primary-mix-bg-text-40}: mix-colors(
+    var(--oo-color-primary-bg),
+    var(--oo-color-primary-text),
+    0.4,
+    var(--oo-color-bg),
+    var(--oo-color-text)
+  );
 
   // secondary
   #{--oo-color-secondary-transparent-bg-25}: transparent-color(
@@ -536,6 +562,13 @@
     var(--oo-color-bg),
     var(--oo-color-text)
   );
+  #{--oo-color-secondary-mix-bg-text-40}: mix-colors(
+    var(--oo-color-secondary-bg),
+    var(--oo-color-secondary-text),
+    0.4,
+    var(--oo-color-bg),
+    var(--oo-color-text)
+  );
   // header
   #{--oo-color-header-transparent-bg-80}: transparent-color(
     var(--oo-color-header-bg),
@@ -564,6 +597,13 @@
   #{--oo-color-header-mix-text-contrast-20}: mix-color-with-contrast(
     var(--oo-color-header-text),
     0.2,
+    var(--oo-color-text)
+  );
+  #{--oo-color-header-mix-bg-text-40}: mix-colors(
+    var(--oo-color-header-bg),
+    var(--oo-color-header-text),
+    0.4,
+    var(--oo-color-bg),
     var(--oo-color-text)
   );
 
@@ -601,6 +641,13 @@
     var(--oo-color-footer-primary),
     0.4,
     var(--oo-color-primary)
+  );
+  #{--oo-color-footer-mix-bg-text-40}: mix-colors(
+    var(--oo-color-footer-bg),
+    var(--oo-color-footer-text),
+    0.4,
+    var(--oo-color-bg),
+    var(--oo-color-text)
   );
 
   // property status
