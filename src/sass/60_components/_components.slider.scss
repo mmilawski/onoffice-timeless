@@ -179,13 +179,13 @@
       outline-color 0.25s ease-in-out, opacity 0.25s ease-in-out;
 
     @include plain-visited() {
-      color: var(--oo-color-text);
+      color: var(--oo-color-contrast-bg);
       background-color: var(--oo-color-mix-bg-contrast-05);
       opacity: 1;
     }
 
     @include hover() {
-      background-color: var(--oo-color-mix-primary-contrast-20);
+      background-color: var(--oo-color-primary);
       color: var(--oo-color-contrast-primary);
 
       &:not(:disabled) {
@@ -578,11 +578,12 @@
 
     #{$c-slider}__arrow {
       @include plain-visited() {
-        color: var(--oo-color-light-contrast-primary);
+        color: var(--oo-color-light-contrast-bg);
         background-color: var(--oo-color-light-mix-bg-contrast-05);
       }
       @include hover() {
         background-color: var(--oo-color-light-primary);
+        color: var(--oo-color-light-contrast-primary);
       }
       @include focus-visible() {
         outline-color: var(--oo-color-light-text) !important;
@@ -625,11 +626,12 @@
 
     #{$c-slider}__arrow {
       @include plain-visited() {
-        color: var(--oo-color-dark-contrast-primary);
+        color: var(--oo-color-dark-contrast-bg);
         background-color: var(--oo-color-dark-mix-bg-contrast-05);
       }
       @include hover() {
         background-color: var(--oo-color-dark-primary);
+        color: var(--oo-color-dark-contrast-primary);
       }
       @include focus-visible() {
         outline-color: var(--oo-color-dark-text) !important;
@@ -672,11 +674,12 @@
 
     #{$c-slider}__arrow {
       @include plain-visited() {
-        color: var(--oo-color-primary-contrast-primary);
+        color: var(--oo-color-primary-contrast-bg);
         background-color: var(--oo-color-primary-mix-bg-contrast-05);
       }
       @include hover() {
         background-color: var(--oo-color-primary-primary);
+        color: var(--oo-color-primary-contrast-primary);
       }
       @include focus-visible() {
         outline-color: var(--oo-color-primary-text) !important;
@@ -719,11 +722,12 @@
 
     #{$c-slider}__arrow {
       @include plain-visited() {
-        color: var(--oo-color-secondary-contrast-primary);
+        color: var(--oo-color-secondary-contrast-bg);
         background-color: var(--oo-color-secondary-mix-bg-contrast-05);
       }
       @include hover() {
         background-color: var(--oo-color-secondary-primary);
+        color: var(--oo-color-secondary-contrast-primary);
       }
       @include focus-visible() {
         outline-color: var(--oo-color-secondary-text) !important;
@@ -813,7 +817,7 @@
 
     #{$c-slider}__arrow {
       @include plain-visited() {
-        color: var(--oo-color-text);
+        color: var(--oo-color-contrast-bg);
         background-color: var(--oo-color-mix-bg-contrast-05);
         opacity: 1;
       }

@@ -134,6 +134,10 @@
   #{--oo-color-lighten-primary-90}: lighten-color(var(--oo-color-primary), 0.9);
   #{--oo-color-contrast-primary}: contrast-color(var(--oo-color-primary));
   #{--oo-color-contrast-text}: contrast-color(var(--oo-color-text));
+
+  #{--oo-color-contrast-bg}: contrast-color(
+    var(--oo-color-bg)
+  );
   #{--oo-color-mix-text-contrast-20}: mix-color-with-contrast(
     var(--oo-color-text),
     0.2
@@ -240,6 +244,10 @@
     var(--oo-color-light-primary),
     var(--oo-color-primary)
   );
+  #{--oo-color-light-contrast-bg}: contrast-color(
+    var(--oo-color-light-bg),
+    var(--oo-color-bg)
+  );
   #{--oo-color-light-contrast-text}: contrast-color(
     var(--oo-color-light-text),
     var(--oo-color-text)
@@ -322,6 +330,10 @@
   #{--oo-color-dark-contrast-primary}: contrast-color(
     var(--oo-color-dark-primary),
     var(--oo-color-primary)
+  );
+  #{--oo-color-dark-contrast-bg}: contrast-color(
+    var(--oo-color-dark-bg),
+    var(--oo-color-bg)
   );
   #{--oo-color-dark-mix-text-contrast-20}: mix-color-with-contrast(
     var(--oo-color-dark-text),
@@ -412,6 +424,10 @@
     var(--oo-color-primary-primary),
     var(--oo-color-primary)
   );
+  #{--oo-color-primary-contrast-bg}: contrast-color(
+    var(--oo-color-primary-bg),
+    var(--oo-color-bg)
+  );
   #{--oo-color-primary-mix-text-contrast-20}: mix-color-with-contrast(
     var(--oo-color-primary-text),
     0.2,
@@ -500,6 +516,10 @@
   #{--oo-color-secondary-contrast-primary}: contrast-color(
     var(--oo-color-secondary-primary),
     var(--oo-color-primary)
+  );
+  #{--oo-color-secondary-contrast-bg}: contrast-color(
+    var(--oo-color-secondary-bg),
+    var(--oo-color-bg)
   );
   #{--oo-color-secondary-mix-text-contrast-20}: mix-color-with-contrast(
     var(--oo-color-secondary-text),
