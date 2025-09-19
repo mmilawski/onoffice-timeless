@@ -135,9 +135,7 @@
   #{--oo-color-contrast-primary}: contrast-color(var(--oo-color-primary));
   #{--oo-color-contrast-text}: contrast-color(var(--oo-color-text));
 
-  #{--oo-color-contrast-bg}: contrast-color(
-    var(--oo-color-bg)
-  );
+  #{--oo-color-contrast-bg}: contrast-color(var(--oo-color-bg));
   #{--oo-color-mix-text-contrast-20}: mix-color-with-contrast(
     var(--oo-color-text),
     0.2
