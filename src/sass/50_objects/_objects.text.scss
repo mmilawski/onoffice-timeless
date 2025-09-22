@@ -77,7 +77,7 @@
       }
 
       ol {
-        li {
+        > li {
           &::before {
             border: none;
           }
