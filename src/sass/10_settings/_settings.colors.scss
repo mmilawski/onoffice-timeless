@@ -164,6 +164,10 @@
     var(--oo-color-primary),
     0.2
   );
+  #{--oo-color-mix-primary-contrast-30}: mix-color-with-contrast(
+    var(--oo-color-primary),
+    0.3
+  );
   #{--oo-color-mix-primary-contrast-40}: mix-color-with-contrast(
     var(--oo-color-primary),
     0.4
@@ -275,6 +279,11 @@
     0.2,
     var(--oo-color-primary)
   );
+  #{--oo-color-light-mix-primary-contrast-30}: mix-color-with-contrast(
+    var(--oo-color-light-primary),
+    0.3,
+    var(--oo-color-primary)
+  );
   #{--oo-color-light-mix-primary-contrast-40}: mix-color-with-contrast(
     var(--oo-color-light-primary),
     0.4,
@@ -336,6 +345,11 @@
   #{--oo-color-dark-mix-text-contrast-20}: mix-color-with-contrast(
     var(--oo-color-dark-text),
     0.2,
+    var(--oo-color-text)
+  );
+  #{--oo-color-dark-mix-text-contrast-30}: mix-color-with-contrast(
+    var(--oo-color-dark-text),
+    0.3,
     var(--oo-color-text)
   );
   #{--oo-color-dark-mix-text-contrast-40}: mix-color-with-contrast(
@@ -431,6 +445,11 @@
     0.2,
     var(--oo-color-text)
   );
+  #{--oo-color-primary-mix-text-contrast-30}: mix-color-with-contrast(
+    var(--oo-color-primary-text),
+    0.3,
+    var(--oo-color-text)
+  );
   #{--oo-color-primary-mix-text-contrast-40}: mix-color-with-contrast(
     var(--oo-color-primary-text),
     0.4,
@@ -522,6 +541,11 @@
   #{--oo-color-secondary-mix-text-contrast-20}: mix-color-with-contrast(
     var(--oo-color-secondary-text),
     0.2,
+    var(--oo-color-text)
+  );
+  #{--oo-color-secondary-mix-text-contrast-30}: mix-color-with-contrast(
+    var(--oo-color-secondary-text),
+    0.3,
     var(--oo-color-text)
   );
   #{--oo-color-secondary-mix-text-contrast-40}: mix-color-with-contrast(
@@ -633,6 +657,11 @@
   #{--oo-color-footer-mix-text-contrast-20}: mix-color-with-contrast(
     var(--oo-color-footer-text),
     0.2,
+    var(--oo-color-text)
+  );
+  #{--oo-color-footer-mix-text-contrast-30}: mix-color-with-contrast(
+    var(--oo-color-footer-text),
+    0.3,
     var(--oo-color-text)
   );
   #{--oo-color-footer-mix-text-contrast-40}: mix-color-with-contrast(

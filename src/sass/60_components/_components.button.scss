@@ -269,8 +269,8 @@
     }
 
     @include hover() {
-      color: var(--oo-color-mix-primary-contrast-20);
-      border-color: var(--oo-color-mix-primary-contrast-20);
+      color: var(--oo-color-mix-primary-contrast-30);
+      border-color: var(--oo-color-mix-primary-contrast-30);
       background-color: transparent;
     }
 
@@ -303,12 +303,12 @@
 
       @include hover() {
         color: var(
-          --oo-color-light-mix-primary-contrast-20,
-          var(--oo-color-mix-primary-contrast-20)
+          --oo-color-light-mix-primary-contrast-30,
+          var(--oo-color-mix-primary-contrast-30)
         );
         border-color: var(
-          --oo-color-light-mix-primary-contrast-20,
-          var(--oo-color-mix-primary-contrast-20)
+          --oo-color-light-mix-primary-contrast-30,
+          var(--oo-color-mix-primary-contrast-30)
         );
         background-color: transparent;
       }
@@ -346,8 +346,8 @@
       }
 
       @include hover() {
-        color: var(--oo-color-dark-mix-text-contrast-20);
-        border-color: var(--oo-color-dark-mix-text-contrast-20);
+        color: var(--oo-color-dark-mix-text-contrast-30);
+        border-color: var(--oo-color-dark-mix-text-contrast-30);
         background-color: transparent;
       }
 
@@ -378,8 +378,8 @@
       }
 
       @include hover() {
-        color: var(--oo-color-primary-mix-text-contrast-20);
-        border-color: var(--oo-color-primary-mix-text-contrast-20);
+        color: var(--oo-color-primary-mix-text-contrast-30);
+        border-color: var(--oo-color-primary-mix-text-contrast-30);
         background-color: transparent;
       }
 
@@ -410,8 +410,8 @@
       }
 
       @include hover() {
-        color: var(--oo-color-secondary-mix-text-contrast-20);
-        border-color: var(--oo-color-secondary-mix-text-contrast-20);
+        color: var(--oo-color-secondary-mix-text-contrast-30);
+        border-color: var(--oo-color-secondary-mix-text-contrast-30);
         background-color: transparent;
       }
 
@@ -445,8 +445,8 @@
       }
 
       @include hover() {
-        color: var(--oo-color-footer-mix-text-contrast-20);
-        border-color: var(--oo-color-footer-mix-text-contrast-20);
+        color: var(--oo-color-footer-mix-text-contrast-30);
+        border-color: var(--oo-color-footer-mix-text-contrast-30);
         background-color: transparent;
       }
 
@@ -477,8 +477,8 @@
       }
 
       @include hover() {
-        color: var(--oo-color-mix-primary-contrast-20);
-        border-color: var(--oo-color-mix-primary-contrast-20);
+        color: var(--oo-color-mix-primary-contrast-30);
+        border-color: var(--oo-color-mix-primary-contrast-30);
         background-color: transparent;
       }
 
