@@ -75,6 +75,14 @@
           background-color: transparent;
         }
       }
+
+      ol {
+        li {
+          &::before {
+            border: none;
+          }
+        }
+      }
     }
   }
 
