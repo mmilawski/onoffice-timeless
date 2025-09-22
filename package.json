@@ -1,7 +1,7 @@
 {
-	"name": "onoffice-classic",
-	"description": "Package for WP-Websites Classic Clear.",
-	"version": "1.7.2",
+	"name": "onoffice-timeless",
+	"description": "Package for WP-Websites Timeless Touch.",
+	"version": "1.6.0",
 	"browserslist": "last 5 versions",
 	"engines": {
 		"node": ">= 18.13.0"
@@ -19,11 +19,11 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/onOffice-Web-Org/onoffice-classic.git"
+		"url": "git+https://github.com/onOffice-Web-Org/onoffice-timeless.git"
 	},
 	"author": "onOffice-web",
 	"bugs": {
-		"url": "https://github.com/onOffice-Web-Org/onoffice-classic/issues"
+		"url": "https://github.com/onOffice-Web-Org/onoffice-timeless/issues"
 	},
 	"dependencies": {
 		"dotenv": "^16.3.1",
