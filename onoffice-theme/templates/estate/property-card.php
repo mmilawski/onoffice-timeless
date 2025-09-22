@@ -34,7 +34,13 @@ $dont_echo = [
     'sonstige_angaben',
 ];
 $location_fields = ['plz', 'ort', 'land'];
-$price_fields = ['kaufpreis', 'kaltmiete', 'nettokaltmiete'];
+$price_fields = [
+    'kaufpreis',
+    'kaltmiete',
+    'nettokaltmiete',
+    'miete_pauschal',
+    'warmmiete',
+];
 
 $pEstatesClone = clone $pEstates;
 $pEstatesClone->resetEstateIterator();

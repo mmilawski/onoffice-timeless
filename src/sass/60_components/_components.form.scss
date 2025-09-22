@@ -161,6 +161,95 @@
   }
   &.--is-newsletter-form {
   }
+
+  &.--is-owner-leadgenerator-form {
+    #{$c-form}__header {
+      // Hide this element on large screens and up (desktop).
+      &.--is-mobile-only {
+        @include media-breakpoint-up(md) {
+          display: none;
+        }
+      }
+
+      #{$c-form}__legend {
+      }
+    }
+
+    #{$c-form}__wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+
+      .leadform-forward,
+      .leadform-submit {
+        margin-left: auto;
+      }
+
+      @include media-breakpoint-up(md) {
+        gap: 5rem;
+      }
+    }
+
+    #{$c-form}__button-wrapper {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    #{$c-form}__fieldset {
+      .c-form__field-group:has(
+          .o-label[data-icon-button-group]:not([style*='display: none']):not(
+              [style*='display:none']
+            )
+        ) {
+        // Force these specific groups to span all columns of the parent grid.
+        grid-column: 1 / -1;
+
+        &:not(:last-child) {
+          margin-bottom: 5rem;
+        }
+      }
+
+      .c-form__field-group:has(.o-label.--is-textarea) {
+        // Force textarea groups to span all columns of the parent grid.
+        grid-column: 1 / -1;
+      }
+
+      .c-form__field-group:has(.o-label.--is-boolean) {
+        // Force boolean groups to span all columns of the parent grid.
+        grid-column: 1 / -1;
+      }
+
+      .c-form__field-group .o-control {
+        margin-top: 0;
+      }
+    }
+
+    .o-label[data-icon-button-group] {
+      display: grid;
+      gap: 1rem; // Space between label and cards
+      position: relative;
+
+      .c-selectable-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(192px, 1fr));
+        gap: 1rem;
+
+        // Increase the gap on larger screens
+        @include media-breakpoint-up(lg) {
+          gap: 3.5rem 2rem;
+        }
+
+        &.--has-selection .c-selectable-card:not(.--is-selected) {
+          opacity: 0.5;
+        }
+      }
+    }
+    #{$c-form}__required {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
   &.--is-search-form {
     #{$c-form}__body {
       @include media-breakpoint-up(md) {

@@ -134,5 +134,11 @@
       height: revert-layer;
       min-height: 630px;
     }
+
+    &.--is-eTracker {
+      padding: 0;
+      justify-self: center;
+      aspect-ratio: auto;
+    }
   }
 }

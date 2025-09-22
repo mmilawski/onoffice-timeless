@@ -6,7 +6,9 @@
  */
 
 $location = $args['location'] ?? 'header';
-$internalUrl = '';
+$internalUrl = '/';
+
+wp_enqueue_script('oo-customerarea-script');
 
 if (function_exists('oo_is_customer_area_available')) {
     if (!oo_is_customer_area_available()) {
@@ -22,43 +24,48 @@ if (
 ) {
     $authService = new OnOfficeVueAddons\Service\AuthService();
     $isLoggedIn = $authService->isUserLoggedIn();
+
+    // Get customer area URL if logged in
+    if (
+        $isLoggedIn &&
+        class_exists(OnOfficeVueAddons\Service\BlockService::class)
+    ) {
+        $blockService = new OnOfficeVueAddons\Service\BlockService();
+        $moduleUrls = $blockService->getVueModulesUrls();
+        $internalUrl = !empty($moduleUrls['customerArea'])
+            ? $moduleUrls['customerArea'][0]
+            : '/';
+    }
 }
+
+// Prepare translations for JavaScript
+$translations = [
+    'login' => esc_html__('Login', 'oo_theme'),
+    'myAccount' => esc_html__('Mein Konto', 'oo_theme'),
+];
+
+// Escape for HTML attribute after JSON encoding
+$translationsJson = esc_attr(json_encode($translations));
 ?>
 
 <dl class="c-module-login__list --underlined <?php echo '--on-bg-' .
-    $location; ?>" tabindex="0" role="button" aria-label="<?php if (
-    $isLoggedIn
-) {
-    esc_html_e('Mein Konto', 'oo_theme');
-} else {
-    esc_html_e('Login', 'oo_theme');
-} ?>">
+    $location; ?>" 
+    tabindex="0" 
+    role="button" 
+    data-translations="<?php echo $translationsJson; ?>"
+    aria-label="<?php echo $isLoggedIn
+        ? $translations['myAccount']
+        : $translations['login']; ?>">
     <dt class="c-module-login__label"><?php oo_get_icon('user'); ?></dt>
     <dd class="c-module-login__value">
         <?php if ($isLoggedIn): ?>
-            <a href="<?php echo $internalUrl; ?>" class="c-module-login__link c-link --underlined --on-bg-header"><?php esc_html_e(
-    'Mein Konto',
-    'oo_theme',
-); ?></a>
+            <a href="<?php echo $internalUrl; ?>" class="c-module-login__link c-link --underlined --on-bg-header"><?php echo $translations[
+    'myAccount'
+]; ?></a>
         <?php else: ?>
-            <span class="c-module-login__link c-link --underlined --on-bg-header --open-popup" data-popup="customer-login"><?php esc_html_e(
-                'Login',
-                'oo_theme',
-            ); ?></span>
+            <span class="c-module-login__link c-link --underlined --on-bg-header --open-popup" data-popup="customer-login"><?php echo $translations[
+                'login'
+            ]; ?></span>
         <?php endif; ?>
     </dd>
 </dl>
-
-<script>
-    const loginModuleButton = document.querySelector('.c-module-login__link.--open-popup');
-    // Add keydown listener to parent dl element if it exists
-    const parentDl = loginModuleButton.closest('.c-module-login__list[role="button"]');
-    if (parentDl) {
-        parentDl.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                loginModuleButton.click();
-            }
-        });
-    }
-</script>
