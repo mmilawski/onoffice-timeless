@@ -230,9 +230,9 @@ if (is_plugin_active('oo-vue-addons/on-office-vue-addons.php')) {
 
 // UPDATE SYSTEM
 add_filter('oo_theme_updates_data', function ($data) {
-    $data['slug'] = 'onoffice-classic';
+    $data['slug'] = 'onoffice-timeless';
     $data['json'] =
-        'https://onoffice-wp-updates.de/releases/themes/onoffice-classic/updater.json';
+        'https://onoffice-wp-updates.de/releases/themes/onoffice-timeless/updater.json';
 
     return $data;
 });
