@@ -25,8 +25,9 @@ $form-bg: var(--oo-color-mix-bg-text-02, var(--oo-color-bg));
 $form-placeholder: var(--oo-color-mix-bg-contrast-60);
 $form-primary: var(--oo-color-primary);
 $form-primary-contrast: var(--oo-color-contrast-primary);
-$form-invalid-color: #e53935; // A strong red for errors
-$form-valid-color: #43a047; // A clear green for success
+$form-invalid-color: #e53935;
+$form-invalid-color-encoded: str-replace('#{$form-invalid-color}', '#', '%23');
+$form-valid-color: #43a047;
 
 // BG Variations
 $form-light-color: var(--oo-color-light-text, var(--oo-color-text));
@@ -238,7 +239,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
   .o-input:invalid {
     padding-right: 2.5rem;
     border-color: $form-invalid-color;
-    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M1 21h22L12 2 1 21z' fill='none' stroke='#{str-replace("#{$form-invalid-color}", "#", "%23")}' stroke-width='2'/><line x1='12' y1='8' x2='12' y2='14' stroke='#{str-replace("#{$form-invalid-color}", "#", "%23")}' stroke-width='2'/><circle cx='12' cy='17' r='1.5' fill='#{str-replace("#{$form-invalid-color}", "#", "%23")}'/></svg>");
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M1 21h22L12 2 1 21z' fill='none' stroke='#{$form-invalid-color-encoded}' stroke-width='2'/><line x1='12' y1='8' x2='12' y2='14' stroke='#{$form-invalid-color-encoded}' stroke-width='2'/><circle cx='12' cy='17' r='1.5' fill='#{$form-invalid-color-encoded}'/></svg>");
     background-repeat: no-repeat;
     background-position: right 0.75rem center;
     background-size: 1.25rem;
@@ -260,7 +261,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
 .o-select.is-invalid.invalid.ts-wrapper {
   padding-right: 2.5rem;
   border-color: $form-invalid-color;
-  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M1 21h22L12 2 1 21z' fill='none' stroke='#{str-replace("#{$form-invalid-color}", "#", "%23")}' stroke-width='2'/><line x1='12' y1='8' x2='12' y2='14' stroke='#{str-replace("#{$form-invalid-color}", "#", "%23")}' stroke-width='2'/><circle cx='12' cy='17' r='1.5' fill='#{str-replace("#{$form-invalid-color}", "#", "%23")}'/></svg>");
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M1 21h22L12 2 1 21z' fill='none' stroke='#{$form-invalid-color-encoded}' stroke-width='2'/><line x1='12' y1='8' x2='12' y2='14' stroke='#{$form-invalid-color-encoded}' stroke-width='2'/><circle cx='12' cy='17' r='1.5' fill='#{$form-invalid-color-encoded}'/></svg>");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   background-size: 1.25rem;
