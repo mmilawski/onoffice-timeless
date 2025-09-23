@@ -1509,7 +1509,104 @@ function sanitizeClonedYouTubeIframes(root) {
       }
     });
 }
+document.addEventListener('DOMContentLoaded', function() {
+  const forms = document.querySelectorAll('.c-form');
 
+  forms.forEach(function(form) {
+    form.setAttribute('novalidate', '');
+    const inputs = form.querySelectorAll('input, textarea');
+    const selects = form.querySelectorAll('select');
+
+    const showError = (input, message) => {
+      const errorDiv = input.closest('label, div')?.querySelector('.c-form__error-message');
+      if (errorDiv) {
+        errorDiv.textContent = message;
+        errorDiv.classList.add('is-visible');
+        errorDiv.setAttribute('aria-live', 'polite');
+      }
+    };
+
+    const hideError = (input) => {
+      const errorDiv = input.closest('label, div')?.querySelector('.c-form__error-message');
+      if (errorDiv) {
+        errorDiv.textContent = '';
+        errorDiv.classList.remove('is-visible');
+        errorDiv.removeAttribute('aria-live');
+      }
+    };
+
+    const inputHandleBlur = (input) => {
+      if (!input.checkValidity()) {
+        let errorMessage = 'This field is invalid.';
+        if (input.type === 'email' && input.validity.typeMismatch) {
+          errorMessage = window.wpAppTranslations.invalidEmail || 'Please enter a valid email address.';
+        } else if (input.validity.valueMissing) {
+          errorMessage = window.wpAppTranslations.requiredField || 'Please fill in the required field.';
+          if(input.type === 'checkbox'){
+            errorMessage = window.wpAppTranslations.requiredCheckbox || 'Please accept.';
+          }
+        }
+
+        showError(input, errorMessage);
+      } else {
+        hideError(input);
+      }
+    }
+
+    inputs.forEach(function(input) {
+      input.addEventListener('blur', function() {
+        inputHandleBlur(input)
+      });
+
+      input.addEventListener('input', function() {
+        if (input.checkValidity()) {
+          hideError(input);
+        }
+      });
+    });
+
+    const selectHandleChange = (select) => {
+      const tomSelectControl = select.nextElementSibling;
+      const errorMessage = window.wpAppTranslations.requiredField || 'Please fill in the required field.';
+      if (!select.checkValidity()) {
+        tomSelectControl.classList.add('is-invalid');
+        showError(select, errorMessage);
+      } else {
+        tomSelectControl.classList.remove('is-invalid');
+        hideError(select);
+      }
+    }
+
+    selects.forEach(select => {
+      select.addEventListener('change', function() {
+        selectHandleChange(select)
+      });
+    });
+
+    const jumpToFirstInvalidInput = (form) => {
+      const firstInvalid = form.querySelector(':invalid');
+      if (firstInvalid) {
+        firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        firstInvalid.focus({ preventScroll: true });
+      }
+    }
+
+    form.addEventListener('submit', function(event) {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+        inputs.forEach(input => {
+          inputHandleBlur(input)
+        });
+        selects.forEach(select => {
+          selectHandleChange(select)
+        })
+        jumpToFirstInvalidInput(form);
+      }
+      form.classList.add('--validated');
+    });
+  });
+});
 jQuery(window).on('load', function () {
   initVideoToggle();
   initVimeoPlayers();

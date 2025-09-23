@@ -78,6 +78,26 @@ if (function_exists('oo_setup_parent_theme')) {
                 'previous' => __('Vorheriger', 'oo_theme'),
                 'next' => __('Nächster', 'oo_theme'),
                 'close' => __('Schließen', 'oo_theme'),
+                'invalidEmail' => __(
+                    'Bitte geben Sie eine gültige E-Mail-Adresse ein',
+                    'oo_theme',
+                ),
+                'invalidDate' => __(
+                    'Bitte füllen Sie das Feld im korrekten Format aus. ',
+                    'oo_theme',
+                ),
+                'requiredField' => __(
+                    'Bitte füllen Sie das Pflichtfeld aus',
+                    'oo_theme',
+                ),
+                'requiredSelect' => __(
+                    'Bitte wählen Sie einen Wert aus',
+                    'oo_theme',
+                ),
+                'requiredCheckbox' => __(
+                    'Bitte bestätigen Sie das Feld',
+                    'oo_theme',
+                ),
             ]);
         },
         20,
