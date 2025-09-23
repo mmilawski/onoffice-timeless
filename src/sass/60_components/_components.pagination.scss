@@ -7,6 +7,10 @@
     align-items: center;
     justify-content: center;
     list-style: none;
+    width: min-content;
+    margin: 0 auto;
+    padding: 0.625rem;
+    background-color: var(--oo-color-mix-bg-contrast-05);
     @include media-breakpoint-up(xl) {
       gap: 0.5rem;
     }
@@ -18,15 +22,16 @@
   }
 
   &__link {
-    min-width: $icon-wrapper-size;
-    height: $icon-wrapper-size;
+    width: $icon-size;
+    height: $icon-size;
+    aspect-ratio: 1/1;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     margin: 0;
     padding: 0 0.5rem;
-    border-radius: $border-radius;
+    border-radius: 50%;
     outline: $outline;
     outline-offset: $outline-offset;
     transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
@@ -34,12 +39,13 @@
     cursor: pointer;
 
     @include plain-visited() {
-      color: var(--oo-color-primary);
+      color: var(--oo-color-text);
       background-color: transparent;
     }
 
     @include hover() {
-      background-color: var(--oo-color-mix-bg-contrast-10);
+      background-color: var(--oo-color-mix-primary-contrast-20);
+      color: var(--oo-color-contrast-primary);
     }
 
     @include focus-visible() {
@@ -63,6 +69,10 @@
     &.--is-current {
       color: var(--oo-color-contrast-primary);
       background-color: var(--oo-color-primary);
+
+      @include hover() {
+        background-color: var(--oo-color-mix-primary-contrast-20);
+      }
     }
   }
 

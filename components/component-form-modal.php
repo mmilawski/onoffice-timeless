@@ -54,14 +54,14 @@ $additional_dialog_class = $args['additional_dialog_class'] ?? '';
                 ); ?>-title" class="c-dialog__title">
                     <?php echo esc_html($modal_title); ?>
                 </h2>
-                <button class="c-dialog__close --close-popup c-button --is-small --only-icon" 
-                        aria-label="<?php esc_attr_e(
-                            'Fenster schließen',
-                            'oo_theme',
-                        ); ?>">
-                    <span class="c-button__icon --close"><?php oo_get_icon(
-                        'close',
-                    ); ?></span>
+                <button class="c-dialog__close --close-popup c-icon-button" 
+                    aria-label="<?php esc_attr_e(
+                        'Fenster schließen',
+                        'oo_theme',
+                    ); ?>">
+                    <?php echo oo_get_icon('close', true, [
+                        'class' => 'c-icon-button__icon --close',
+                    ]); ?>
                 </button>
             </div>
         <?php endif; ?>

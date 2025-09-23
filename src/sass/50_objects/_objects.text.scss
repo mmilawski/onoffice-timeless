@@ -1,7 +1,7 @@
 .o-text {
   &.--is-wysiwyg {
     > *:not(:last-child) {
-      margin-bottom: $global-line-height;
+      margin-bottom: 2.5rem;
     }
   }
 
@@ -11,45 +11,27 @@
   }
 
   h1 {
-    margin-bottom: 1.5rem;
-    @include media-breakpoint-up(xl) {
-      margin-bottom: 2rem;
-    }
+    margin-bottom: 2.5rem;
   }
 
   h2 {
-    margin-bottom: 1.5rem;
-    @include media-breakpoint-up(xl) {
-      margin-bottom: 2rem;
-    }
+    margin-bottom: 2.5rem;
   }
 
   h3 {
-    margin-bottom: 1.5rem;
-    @include media-breakpoint-up(xl) {
-      margin-bottom: 2rem;
-    }
+    margin-bottom: 2.5rem;
   }
 
   h4 {
     margin-bottom: 1.5rem;
-    @include media-breakpoint-up(xl) {
-      margin-bottom: 1.75rem;
-    }
   }
 
   h5 {
-    margin-bottom: 1.5rem;
-    @include media-breakpoint-up(xl) {
-      margin-bottom: 1.75rem;
-    }
+    margin-bottom: 1rem;
   }
 
   h6 {
-    margin-bottom: 1.5rem;
-    @include media-breakpoint-up(xl) {
-      margin-bottom: 1.5rem;
-    }
+    margin-bottom: 1rem;
   }
 
   a {
@@ -84,13 +66,21 @@
         top: calc(($global-line-height / 2) - (0.5rem / 2));
         width: 0.5rem;
         height: 0.5rem;
-        color: var(--oo-color-primary);
-        background: currentColor;
+        color: var(--oo-color-mix-bg-text-40);
+        background-color: currentColor;
       }
-      > li {
+      li {
         &:before {
           border: 2px solid currentColor;
-          background: transparent;
+          background-color: transparent;
+        }
+      }
+
+      ol {
+        > li {
+          &::before {
+            border: none;
+          }
         }
       }
     }
@@ -116,8 +106,6 @@
         align-items: center;
         position: absolute;
         color: var(--oo-color-primary);
-        font-family: $font-family-text-bold;
-        font-weight: $font-weight-text-bold;
         left: 0;
       }
     }
@@ -179,18 +167,6 @@
         }
       }
     }
-
-    blockquote {
-      padding-left: 0;
-      &:before {
-        position: relative;
-        display: inline-block;
-        margin-right: 0.5rem;
-        margin-top: 0;
-        left: unset;
-        top: 0.5rem;
-      }
-    }
   }
 
   /* Backgrounds */
@@ -211,7 +187,7 @@
       li {
         &:before,
         &::marker {
-          color: var(--oo-color-light-primary);
+          color: var(--oo-color-light-mix-bg-text-40);
         }
       }
     }
@@ -219,15 +195,6 @@
     mark {
       color: var(--oo-color-light-contrast-primary);
       background-color: var(--oo-color-light-primary, var(--oo-color-primary));
-    }
-
-    blockquote {
-      &:before {
-        background-color: var(
-          --oo-color-light-primary,
-          var(--oo-color-primary)
-        );
-      }
     }
   }
 
@@ -248,7 +215,7 @@
       li {
         &:before,
         &::marker {
-          color: var(--oo-color-dark-primary);
+          color: var(--oo-color-dark-mix-bg-text-40);
         }
       }
     }
@@ -256,12 +223,6 @@
     mark {
       color: var(--oo-color-dark-contrast-primary);
       background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
-    }
-
-    blockquote {
-      &:before {
-        background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
-      }
     }
   }
 
@@ -282,7 +243,7 @@
       li {
         &:before,
         &::marker {
-          color: var(--oo-color-primary-primary);
+          color: var(--oo-color-primary-mix-bg-text-40);
         }
       }
     }
@@ -293,15 +254,6 @@
         --oo-color-primary-primary,
         var(--oo-color-primary)
       );
-    }
-
-    blockquote {
-      &:before {
-        background-color: var(
-          --oo-color-primary-primary,
-          var(--oo-color-primary)
-        );
-      }
     }
   }
 
@@ -322,7 +274,7 @@
       li {
         &:before,
         &::marker {
-          color: var(--oo-color-secondary-primary);
+          color: var(--oo-color-secondary-mix-bg-text-40);
         }
       }
     }
@@ -333,15 +285,6 @@
         --oo-color-secondary-primary,
         var(--oo-color-primary)
       );
-    }
-
-    blockquote {
-      &:before {
-        background-color: var(
-          --oo-color-secondary-primary,
-          var(--oo-color-primary)
-        );
-      }
     }
   }
 
@@ -362,7 +305,7 @@
       li {
         &:before,
         &::marker {
-          color: var(--oo-color-header-primary);
+          color: var(--oo-color-header-mix-bg-text-40);
         }
       }
     }
@@ -370,15 +313,6 @@
     mark {
       color: var(--oo-color-header-contrast-primary);
       background-color: var(--oo-color-header-primary, var(--oo-color-primary));
-    }
-
-    blockquote {
-      &:before {
-        background-color: var(
-          --oo-color-header-primary,
-          var(--oo-color-primary)
-        );
-      }
     }
   }
 
@@ -399,7 +333,7 @@
       li {
         &:before,
         &::marker {
-          color: var(--oo-color-footer-primary);
+          color: var(--oo-color-footer-mix-bg-text-40);
         }
       }
     }
@@ -407,15 +341,6 @@
     mark {
       color: var(--oo-color-footer-contrast-primary);
       background-color: var(--oo-color-footer-primary, var(--oo-color-primary));
-    }
-
-    blockquote {
-      &:before {
-        background-color: var(
-          --oo-color-footer-primary,
-          var(--oo-color-primary)
-        );
-      }
     }
   }
 
@@ -436,7 +361,7 @@
       li {
         &:before,
         &::marker {
-          color: var(--oo-color-primary);
+          color: var(--oo-color-mix-bg-text-40);
         }
       }
     }
@@ -444,12 +369,6 @@
     mark {
       color: var(--oo-color-contrast-primary);
       background-color: var(--oo-color-primary);
-    }
-
-    blockquote {
-      &:before {
-        background-color: var(--oo-color-primary);
-      }
     }
   }
 }

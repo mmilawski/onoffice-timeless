@@ -6,7 +6,6 @@ a {
   border: 0;
   outline: $outline;
   outline-offset: $outline-offset;
-  border-radius: $outline-border-radius;
   transition: border-color 0.25s ease-in-out, color 0.25s ease-in-out,
     background-color 0.25s ease-in-out, outline-color 0.25s ease-in-out;
 

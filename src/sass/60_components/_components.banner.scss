@@ -97,7 +97,6 @@
     gap: 1.5rem 0;
     padding: 1rem;
     background-color: var(--oo-color-transparent-bg-90);
-    border-radius: $border-radius;
     box-shadow: 0 0 5px var(--oo-color-transparent-shadow-15);
 
     @include media-breakpoint-up(lg) {
@@ -152,7 +151,6 @@
     outline-offset: $outline-offset !important;
     opacity: 1;
     padding: 0.25rem;
-    border-radius: $border-radius;
     pointer-events: auto;
     cursor: pointer;
     position: absolute;
@@ -219,23 +217,27 @@
 
   &.--bg-light {
     #{$c-banner}__content {
+      background-color: var(--oo-color-light-bg);
       background-color: var(--oo-color-light-transparent-bg-90);
       color: var(--oo-color-light-text, var(--oo-color-text));
     }
   }
   &.--bg-dark {
+    background-color: var(--oo-color-dark-bg);
     #{$c-banner}__content {
       background-color: var(--oo-color-dark-transparent-bg-90);
       color: var(--oo-color-dark-text, var(--oo-color-text));
     }
   }
   &.--bg-primary {
+    background-color: var(--oo-color-primary-bg);
     #{$c-banner}__content {
       background-color: var(--oo-color-primary-transparent-bg-90);
       color: var(--oo-color-primary-text, var(--oo-color-text));
     }
   }
   &.--bg-secondary {
+    background-color: var(--oo-color-secondary-bg);
     #{$c-banner}__content {
       background-color: var(--oo-color-secondary-transparent-bg-90);
       color: var(--oo-color-secondary-text, var(--oo-color-text));

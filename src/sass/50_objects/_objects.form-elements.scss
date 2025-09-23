@@ -1,92 +1,89 @@
 $form-height: 2.375rem;
 $form-margin: 0; // Margin
-$form-padding: 0.25rem 0.75rem; // Padding
-$form-padding-top: 0.25rem; // Padding top
-$form-padding-right: 0.75rem; // Padding right
-$form-line-height: $global-line-height;
-$form-remove-wrapper: 1.5rem; // Size of the remove background //
-$form-remove-size: 1.25rem; // Size of the remove icon //
-$form-select-size: 1.25rem; // Size of the select arrow icon //
-$form-control-wrapper: 1.25rem; // Size of the checkbox and radio button //
-$form-control-icon: 1rem; // Size of the checkbox and radio button icon //
-$form-checkbox-icon: 0.875rem; // Size of the checkbox icon //
-$form-border: 1px solid;
-$form-border-color: var(--oo-color-mix-bg-contrast-50);
-$form-radius: $border-radius; // Border radius
-$form-radius-small: $border-radius-small; // Border radius small
-$form-outline: 1px solid transparent;
-$form-focus: var(--oo-color-primary);
+$form-padding: 1rem 1rem; // Padding
+$form-padding-top: 1rem; // Padding top
+$form-padding-right: 1rem; // Padding right
+$form-line-height: $small-line-height;
+$form-remove-wrapper: 1rem; // Size of the remove background
+$form-remove-size: 1rem; // Size of the remove icon
+$form-select-size: 0.75rem; // Size of the select arrow icon
+$form-control-wrapper: 1.875rem; // Size of the checkbox and radio button
+$form-control-icon: 0.875rem; // Size of the checkbox and radio button icon
+$form-checkbox-icon: 0.875rem; // Size of the checkbox icon
+$form-border: 2px solid;
+$form-border-color: var(--oo-color-mix-bg-contrast-60);
+$form-outline: 0.5px solid transparent;
+$form-outline-dropdown: 3px solid var(--oo-color-text);
+$form-focus: var(--oo-color-text);
 $form-duration: 0.25s; // Transition duration
 $form-timing: ease-in-out; // Transition timing
-$form-svg-close: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 6 6 18'/%3E%3Cpath d='m6 6 12 12'/%3E%3C/svg%3E");
-$form-svg-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-$form-svg-checkbox: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
-$form-svg-calendar: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L64 64C28.7 64 0 92.7 0 128l0 16 0 48L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-256 0-48 0-16c0-35.3-28.7-64-64-64l-40 0 0-40c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L152 64l0-40zM48 192l352 0 0 256c0 8.8-7.2 16-16 16L64 464c-8.8 0-16-7.2-16-16l0-256z"/></svg>');
+$form-svg-close: url('data:image/svg+xml,%3Csvg%20id%3D%22Ebene_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20viewBox%3D%220%200%2016%2016%22%3E%3C!--%20Generator%3A%20Adobe%20Illustrator%2029.4.0%2C%20SVG%20Export%20Plug-In%20.%20SVG%20Version%3A%202.1.0%20Build%20152)%20%20--%3E%3Cdefs%3E%3Cstyle%3E%20%20%20%20%20%20.st0%20%7B%20%20%20%20%20%20%20%20fill-rule%3A%20evenodd%3B%20%20%20%20%20%20%7D%20%20%20%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cpath%20id%3D%22Pfad_14899%22%20class%3D%22st0%22%20d%3D%22M8%2C0C3.58%2C0%2C0%2C3.58%2C0%2C8s3.58%2C8%2C8%2C8%2C8-3.58%2C8-8S12.42%2C0%2C8%2C0ZM6.29%2C5.5c-.21-.22-.57-.23-.79-.01-.22.21-.23.57-.01.79%2C0%2C0%2C0%2C0%2C.01.01l1.71%2C1.71-1.71%2C1.71c-.22.21-.23.57-.01.79.21.22.57.23.79.01%2C0%2C0%2C0%2C0%2C.01-.01l1.71-1.71%2C1.71%2C1.71c.21.22.57.23.79.01.22-.21.23-.57.01-.79%2C0%2C0%2C0%2C0-.01-.01l-1.71-1.71%2C1.71-1.71c.21-.22.21-.58-.01-.79-.22-.21-.56-.21-.77%2C0l-1.71%2C1.71-1.71-1.71Z%22%2F%3E%3C%2Fsvg%3E');
+$form-svg-arrow: url('data:image/svg+xml,%3Csvg%20id%3D%22Layer_2%22%20data-name%3D%22Layer%202%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2014%208%22%3E%3Cdefs%3E%3Cstyle%3E%20%20%20%20%20%20.cls-1%20%7B%20%20%20%20%20%20%20%20fill%3A%20none%3B%20%20%20%20%20%20%20%20stroke%3A%20%23737373%3B%20%20%20%20%20%20%20%20stroke-linecap%3A%20round%3B%20%20%20%20%20%20%20%20stroke-linejoin%3A%20round%3B%20%20%20%20%20%20%20%20vector-effect%3D%22non-scaling-stroke%22%3B%20%20%20%20%20%20%20%20stroke-width%3A%202px%3B%20%20%20%20%20%20%7D%20%20%20%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22Layer_1-2%22%20data-name%3D%22Layer%201%22%3E%3Cpath%20id%3D%22Path_14873%22%20data-name%3D%22Path%2014873%22%20class%3D%22cls-1%22%20d%3D%22M1%2C1l6%2C6L13%2C1%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E');
+$form-svg-checkbox: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2016%2012%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222px%22%3E%3Cpath%20d%3D%22M1%2C7l4%2C4L15%2C1%22%2F%3E%3C%2Fsvg%3E');
 $form-color: var(--oo-color-text);
-$form-bg: var(--oo-color-bg);
-$form-shadow: 0 0 5px var(--oo-color-transparent-shadow-20);
-$form-dropdown: var(--oo-color-bg);
-$form-selected: var(--oo-color-transparent-primary-20);
-$form-placeholder: var(--oo-color-mix-bg-contrast-50);
+$form-bg: var(--oo-color-mix-bg-text-02, var(--oo-color-bg));
+$form-placeholder: var(--oo-color-mix-bg-contrast-60);
 $form-primary: var(--oo-color-primary);
 $form-primary-contrast: var(--oo-color-contrast-primary);
+$form-invalid-color: #e53935;
+$form-invalid-color-encoded: str-replace('#{$form-invalid-color}', '#', '%23');
+$form-valid-color: #43a047;
 
 // BG Variations
 $form-light-color: var(--oo-color-light-text, var(--oo-color-text));
-$form-light-bg: var(--oo-color-light-bg, var(--oo-color-bg));
-$form-light-border-color: var(--oo-color-light-mix-bg-contrast-50);
-$form-light-focus: var(--oo-color-light-primary, var(--oo-color-primary));
-$form-light-dropdown: var(--oo-color-light-bg);
-$form-light-selected: var(--oo-color-light-transparent-primary-20);
-$form-light-placeholder: var(--oo-color-light-mix-bg-contrast-50);
+$form-light-bg: var(
+  --oo-color-light-mix-bg-text-02,
+  var(--oo-color-light-bg, var(--oo-color-bg))
+);
+$form-light-border-color: var(--oo-color-light-mix-bg-contrast-60);
+$form-light-focus: var(--oo-color-light-text, var(--oo-color-text));
+$form-light-placeholder: var(--oo-color-light-mix-bg-contrast-60);
 $form-light-primary: var(--oo-color-light-primary, var(--oo-color-primary));
-$form-light-primary-contrast: var(--oo-color-light-contrast-primary);
+$form-light-outline-dropdown: 3px solid var(--oo-color-light-text);
 
 $form-dark-color: var(--oo-color-dark-text, var(--oo-color-text));
-$form-dark-bg: var(--oo-color-dark-bg, var(--oo-color-bg));
-$form-dark-border-color: var(--oo-color-dark-mix-bg-contrast-50);
-$form-dark-focus: var(--oo-color-dark-primary, var(--oo-color-primary));
-$form-dark-dropdown: var(--oo-color-dark-bg);
-$form-dark-selected: var(--oo-color-dark-transparent-primary-20);
-$form-dark-placeholder: var(--oo-color-dark-mix-bg-contrast-50);
+$form-dark-bg: var(
+  --oo-color-dark-mix-bg-text-02,
+  var(--oo-color-dark-bg, var(--oo-color-bg))
+);
+$form-dark-border-color: var(--oo-color-dark-mix-bg-contrast-60);
+$form-dark-focus: var(--oo-color-dark-text, var(--oo-color-text));
+$form-dark-placeholder: var(--oo-color-dark-mix-bg-contrast-60);
 $form-dark-primary: var(--oo-color-dark-primary, var(--oo-color-primary));
-$form-dark-primary-contrast: var(--oo-color-dark-contrast-primary);
+$form-dark-outline-dropdown: 3px solid var(--oo-color-dark-text);
 
 $form-primary-color: var(--oo-color-primary-text, var(--oo-color-text));
-$form-primary-bg: var(--oo-color-primary-bg, var(--oo-color-bg));
-$form-primary-border-color: var(--oo-color-primary-mix-bg-contrast-50);
-$form-primary-focus: var(--oo-color-primary-primary, var(--oo-color-primary));
-$form-primary-dropdown: var(--oo-color-primary-bg);
-$form-primary-selected: var(--oo-color-primary-transparent-primary-20);
-$form-primary-placeholder: var(--oo-color-primary-mix-bg-contrast-50);
+$form-primary-bg: var(
+  --oo-color-primary-mix-bg-text-02,
+  var(--oo-color-primary-bg, var(--oo-color-bg))
+);
+$form-primary-border-color: var(--oo-color-primary-mix-bg-contrast-60);
+$form-primary-focus: var(--oo-color-primary-text, var(--oo-color-text));
+$form-primary-placeholder: var(--oo-color-primary-mix-bg-contrast-60);
 $form-primary-primary: var(--oo-color-primary-primary, var(--oo-color-primary));
-$form-primary-primary-contrast: var(--oo-color-primary-contrast-primary);
+$form-primary-outline-dropdown: 3px solid var(--oo-color-primary-text);
 
 $form-secondary-color: var(--oo-color-secondary-text, var(--oo-color-text));
-$form-secondary-bg: var(--oo-color-secondary-bg, var(--oo-color-bg));
-$form-secondary-border-color: var(--oo-color-secondary-mix-bg-contrast-50);
-$form-secondary-focus: var(
-  --oo-color-secondary-primary,
-  var(--oo-color-primary)
+$form-secondary-bg: var(
+  --oo-color-secondary-mix-bg-text-02,
+  var(--oo-color-secondary-bg, var(--oo-color-bg))
 );
-$form-secondary-dropdown: var(--oo-color-secondary-bg);
-$form-secondary-selected: var(--oo-color-secondary-transparent-primary-20);
-$form-secondary-placeholder: var(--oo-color-secondary-mix-bg-contrast-50);
+$form-secondary-border-color: var(--oo-color-secondary-mix-bg-contrast-60);
+$form-secondary-focus: var(--oo-color-secondary-text, var(--oo-color-text));
+$form-secondary-placeholder: var(--oo-color-secondary-mix-bg-contrast-60);
 $form-secondary-primary: var(
   --oo-color-secondary-primary,
   var(--oo-color-primary)
 );
-$form-secondary-primary-contrast: var(--oo-color-secondary-contrast-primary);
+$form-secondary-outline-dropdown: 3px solid var(--oo-color-secondary-text);
 
 $form-footer-color: var(--oo-color-footer-text, var(--oo-color-text));
 $form-footer-bg: var(--oo-color-footer-bg, var(--oo-color-bg));
-$form-footer-border-color: var(--oo-color-footer-mix-bg-contrast-50);
-$form-footer-focus: var(--oo-color-footer-primary, var(--oo-color-primary));
-$form-footer-dropdown: var(--oo-color-footer-bg);
-$form-footer-selected: var(--oo-color-footer-transparent-primary-20);
-$form-footer-placeholder: var(--oo-color-footer-mix-bg-contrast-50);
+$form-footer-border-color: var(--oo-color-footer-mix-bg-contrast-60);
+$form-footer-focus: var(--oo-color-footer-text, var(--oo-color-text));
+$form-footer-placeholder: var(--oo-color-footer-mix-bg-contrast-60);
 $form-footer-primary: var(--oo-color-footer-primary, var(--oo-color-primary));
-$form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
+$form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
 
 /* Input */
 .o-input {
@@ -100,14 +97,12 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   font-size: 100%;
   line-height: $form-line-height;
   color: $form-color;
-  background: $form-bg;
+  background-color: $form-bg;
   border: $form-border $form-border-color;
-  border-radius: $form-radius;
   outline: $form-outline;
   -moz-appearance: textfield;
   transition: outline-color $form-duration $form-timing,
     border-color $form-duration $form-timing;
-  height: 2.375rem;
 
   @include focus-all() {
     outline-color: $form-focus;
@@ -239,6 +234,81 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   }
 }
 
+.c-form.--validated {
+  .o-textarea:invalid,
+  .o-input:invalid {
+    padding-right: 2.5rem;
+    border-color: $form-invalid-color;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M1 21h22L12 2 1 21z' fill='none' stroke='#{$form-invalid-color-encoded}' stroke-width='2'/><line x1='12' y1='8' x2='12' y2='14' stroke='#{$form-invalid-color-encoded}' stroke-width='2'/><circle cx='12' cy='17' r='1.5' fill='#{$form-invalid-color-encoded}'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1.25rem;
+    outline: none;
+  }
+
+  .o-textarea:required:valid,
+  .o-input:required:valid {
+    padding-right: 2.5rem;
+    border-color: $form-valid-color; /* Use a variable for your success/valid color */
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%2328a745' d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1.25rem;
+    outline: none;
+  }
+}
+
+.o-select.is-invalid.invalid.ts-wrapper {
+  padding-right: 2.5rem;
+  border-color: $form-invalid-color;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M1 21h22L12 2 1 21z' fill='none' stroke='#{$form-invalid-color-encoded}' stroke-width='2'/><line x1='12' y1='8' x2='12' y2='14' stroke='#{$form-invalid-color-encoded}' stroke-width='2'/><circle cx='12' cy='17' r='1.5' fill='#{$form-invalid-color-encoded}'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1.25rem;
+  outline: none;
+}
+
+.c-form.--validated {
+  .o-select.required.has-items.ts-wrapper {
+    padding-right: 2.5rem;
+    border-color: $form-valid-color;
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%2328a745' d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1.25rem;
+    outline: none;
+  }
+}
+
+.c-form__error-message {
+  position: absolute;
+  bottom: -1.5rem; /* Adjust this value as needed */
+  right: 0;
+  color: $form-invalid-color;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+.o-control {
+  .c-form__error-message {
+    right: unset;
+    left: 0;
+  }
+}
+
+.c-form.--validated {
+  .c-form__error-message.is-visible {
+    opacity: 1;
+  }
+}
+
+.c-form .o-label {
+  position: relative;
+}
+
 /* Select */
 .o-select,
 .c-property-list__sort select {
@@ -252,9 +322,8 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   font-size: 100%;
   line-height: $form-line-height;
   color: $form-color;
-  background: $form-bg;
+  background-color: $form-bg;
   border: $form-border $form-border-color;
-  border-radius: $form-radius;
   outline: $form-outline;
   transition: outline-color $form-duration $form-timing,
     border-color $form-duration $form-timing;
@@ -267,9 +336,6 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   option {
     &[value=''] {
       color: $form-placeholder;
-    }
-    &:checked {
-      background-color: $form-selected;
     }
   }
 
@@ -299,9 +365,6 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       &[value=''] {
         color: $form-light-placeholder;
       }
-      &:checked {
-        background-color: $form-light-selected;
-      }
     }
   }
 
@@ -318,9 +381,6 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     option {
       &[value=''] {
         color: $form-dark-placeholder;
-      }
-      &:checked {
-        background-color: $form-dark-selected;
       }
     }
   }
@@ -339,9 +399,6 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       &[value=''] {
         color: $form-primary-placeholder;
       }
-      &:checked {
-        background-color: $form-primary-selected;
-      }
     }
   }
 
@@ -358,9 +415,6 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     option {
       &[value=''] {
         color: $form-secondary-placeholder;
-      }
-      &:checked {
-        background-color: $form-secondary-selected;
       }
     }
   }
@@ -379,9 +433,6 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       &[value=''] {
         color: $form-footer-placeholder;
       }
-      &:checked {
-        background-color: $form-footer-selected;
-      }
     }
   }
 
@@ -399,9 +450,6 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       &[value=''] {
         color: $form-placeholder;
       }
-      &:checked {
-        background-color: $form-selected;
-      }
     }
   }
 }
@@ -413,10 +461,8 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   &.o-select {
     position: relative;
     padding: unset;
-    height: 2.5rem;
-    max-height: 2.5rem;
-
-    border-radius: $form-radius;
+    height: 3.75rem;
+    max-height: 3.75rem;
     border: $form-border $form-border-color;
     outline: $form-outline;
     transition: outline-color $form-duration $form-timing,
@@ -435,22 +481,22 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
   .ts-control {
     height: 100%;
-    background: $form-bg;
+    background-color: $form-bg;
     color: $form-color;
     border: none;
+    border-radius: 0;
     line-height: 1.5rem;
     padding: $form-padding;
-    border-radius: $form-radius;
 
     &::after {
       content: '';
       position: absolute;
-      right: 0.5rem;
+      right: 1rem;
       top: 50%;
       transform: translateY(-50%);
-      width: 14px;
-      height: 100%;
-      background: $form-color;
+      width: 0.75rem;
+      height: 0.375rem;
+      background-color: $form-color;
       mask: $form-svg-arrow;
       mask-repeat: no-repeat;
       mask-size: $form-select-size;
@@ -464,9 +510,8 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     > .ts-control-inner {
       position: relative;
       display: inline-block;
-      height: 100%;
       width: 100%;
-      background: unset;
+      background-color: unset;
       white-space: nowrap;
       padding: unset;
       margin: unset;
@@ -497,7 +542,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
   .ts-items {
     display: inline-block;
-    max-width: calc(100% - 3.5rem);
+    max-width: calc(100% - 2.75rem);
     height: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -512,29 +557,24 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     max-width: 100%;
     height: 100%;
     padding: unset !important;
-    margin: 0;
-    margin-right: 0.5rem;
-    border-radius: $form-radius;
-    background: none;
+    margin: 0 1rem 0 0;
+    background-color: none;
     border: 0;
     cursor: default;
 
     &-remove {
-      margin: 0;
-      margin-right: 0.25rem;
+      margin: 0 0.5rem 0 0;
       padding: 0;
       width: $form-remove-wrapper;
       height: $form-remove-wrapper;
       font-size: 0;
       border: 0;
-      border-radius: $form-radius-small;
       position: relative;
       top: -0.125rem;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       vertical-align: middle;
-      background: transparent;
       transition: background-color $form-duration $form-timing;
       cursor: pointer;
 
@@ -543,29 +583,22 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
         display: inline-block;
         width: $form-remove-size;
         height: $form-remove-size;
-        background: $form-primary;
+        background-color: $form-color;
         mask: $form-svg-close;
         mask-repeat: no-repeat;
         mask-size: $form-remove-size;
         mask-position: center;
         transition: background-color $form-duration $form-timing;
       }
-
-      @include hover-focus-active() {
-        background: $form-primary;
-        &:before {
-          background: $form-primary-contrast;
-        }
-      }
     }
   }
 
   .ts-dropdown {
     color: $form-color;
-    background: $form-dropdown;
-    box-shadow: $form-shadow;
-    border: 0;
-    border-radius: $form-radius;
+    background-color: $form-bg;
+    outline: $form-outline-dropdown;
+    border-radius: 0;
+    border: none;
     overflow: hidden;
     margin: 0;
     text-align: left;
@@ -581,13 +614,10 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
         margin-top: unset;
       }
 
-      &.selected {
-        background-color: $form-selected;
-      }
-
       &.active {
-        background-color: $form-primary;
-        color: $form-primary-contrast;
+        background-color: $form-bg;
+        color: $form-color;
+        text-decoration: underline;
       }
 
       &.level-0 {
@@ -645,6 +675,13 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
           color: transparent;
         }
       }
+
+      .ts-control-inner {
+        .ts-items {
+          width: 100%;
+          max-width: none;
+        }
+      }
     }
   }
 
@@ -657,23 +694,21 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       .ts-control {
         &::after {
-          background: $form-light-primary;
+          background-color: $form-light-color;
         }
       }
     }
 
     .ts-dropdown {
       color: $form-light-color;
-      background: $form-light-dropdown;
+      background-color: $form-light-bg;
+      outline: $form-light-outline-dropdown;
 
       &__item {
-        &.selected {
-          background-color: $form-light-selected;
-        }
-
         &.active {
-          background-color: $form-light-primary;
-          color: $form-light-primary-contrast;
+          text-decoration: underline;
+          background-color: $form-light-bg;
+          color: $form-light-color;
         }
       }
     }
@@ -685,14 +720,13 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     .ts-item {
       &-remove {
         @include hover-focus-active() {
-          background: $form-light-primary;
           &:before {
-            background: $form-light-primary-contrast;
+            background-color: $form-light-border-color;
           }
         }
 
         &::before {
-          background: $form-light-primary;
+          background-color: $form-light-color;
         }
       }
     }
@@ -704,7 +738,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       &::after {
         // dropdown chevron
-        background: $form-light-color;
+        background-color: $form-light-border-color;
       }
 
       input {
@@ -724,6 +758,13 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
             color: transparent;
           }
         }
+
+        .ts-control-inner {
+          .ts-items {
+            width: 100%;
+            max-width: none;
+          }
+        }
       }
     }
   }
@@ -737,22 +778,20 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       .ts-control {
         &::after {
-          background: $form-dark-primary;
+          background-color: $form-dark-color;
         }
       }
     }
     .ts-dropdown {
       color: $form-dark-color;
-      background: $form-dark-dropdown;
+      background-color: $form-dark-bg;
+      outline: $form-dark-outline-dropdown;
 
       &__item {
-        &.selected {
-          background-color: $form-dark-selected;
-        }
-
         &.active {
-          background-color: $form-dark-primary;
-          color: $form-dark-primary-contrast;
+          text-decoration: underline;
+          background-color: $form-dark-bg;
+          color: $form-dark-color;
         }
       }
     }
@@ -762,14 +801,13 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     .ts-item {
       &-remove {
         @include hover-focus-active() {
-          background: $form-dark-primary;
           &:before {
-            background: $form-dark-primary-contrast;
+            background-color: $form-dark-border-color;
           }
         }
 
         &::before {
-          background: $form-dark-primary;
+          background-color: $form-dark-color;
         }
       }
     }
@@ -780,7 +818,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       &::after {
         // dropdown chevron
-        background: $form-dark-color;
+        background-color: $form-dark-border-color;
       }
 
       input {
@@ -800,6 +838,13 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
             color: transparent;
           }
         }
+
+        .ts-control-inner {
+          .ts-items {
+            width: 100%;
+            max-width: none;
+          }
+        }
       }
     }
   }
@@ -813,22 +858,20 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       .ts-control {
         &::after {
-          background: $form-primary-primary;
+          background-color: $form-primary-color;
         }
       }
     }
     .ts-dropdown {
       color: $form-primary-color;
-      background: $form-primary-dropdown;
+      background-color: $form-primary-bg;
+      outline: $form-primary-outline-dropdown;
 
       &__item {
-        &.selected {
-          background-color: $form-primary-selected;
-        }
-
         &.active {
-          background-color: $form-primary-primary;
-          color: $form-primary-primary-contrast;
+          text-decoration: underline;
+          background-color: $form-primary-bg;
+          color: $form-primary-color;
         }
       }
     }
@@ -838,14 +881,13 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     .ts-item {
       &-remove {
         @include hover-focus-active() {
-          background: $form-primary-primary;
           &:before {
-            background: $form-primary-primary-contrast;
+            background-color: $form-primary-border-color;
           }
         }
 
         &::before {
-          background: $form-primary-primary;
+          background-color: $form-primary-color;
         }
       }
     }
@@ -856,7 +898,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       &::after {
         // dropdown chevron
-        background: $form-primary-color;
+        background-color: $form-primary-border-color;
       }
 
       input {
@@ -876,6 +918,13 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
             color: transparent;
           }
         }
+
+        .ts-control-inner {
+          .ts-items {
+            width: 100%;
+            max-width: none;
+          }
+        }
       }
     }
   }
@@ -889,23 +938,21 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       .ts-control {
         &::after {
-          background: $form-secondary-primary;
+          background-color: $form-secondary-color;
         }
       }
     }
 
     .ts-dropdown {
       color: $form-secondary-color;
-      background: $form-secondary-dropdown;
+      background-color: $form-secondary-bg;
+      outline: $form-secondary-outline-dropdown;
 
       &__item {
-        &.selected {
-          background-color: $form-secondary-selected;
-        }
-
         &.active {
-          background-color: $form-secondary-primary;
-          color: $form-secondary-primary-contrast;
+          text-decoration: underline;
+          background-color: $form-secondary-bg;
+          color: $form-secondary-color;
         }
       }
     }
@@ -915,15 +962,13 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     .ts-item {
       &-remove {
         @include hover-focus-active() {
-          background: $form-secondary-primary;
           &:before {
-            // background: $form-secondary-contrast;
-            background: $form-secondary-primary-contrast;
+            background-color: $form-secondary-border-color;
           }
         }
 
         &::before {
-          background: $form-secondary-primary;
+          background-color: $form-secondary-color;
         }
       }
     }
@@ -934,7 +979,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       &::after {
         // dropdown chevron
-        background: $form-secondary-color;
+        background-color: $form-secondary-border-color;
       }
 
       input {
@@ -954,6 +999,13 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
             color: transparent;
           }
         }
+
+        .ts-control-inner {
+          .ts-items {
+            width: 100%;
+            max-width: none;
+          }
+        }
       }
     }
   }
@@ -967,23 +1019,21 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       .ts-control {
         &::after {
-          background: $form-footer-primary;
+          background-color: $form-footer-color;
         }
       }
     }
 
     .ts-dropdown {
       color: $form-footer-color;
-      background: $form-footer-dropdown;
+      background-color: $form-footer-bg;
+      outline: $form-footer-outline-dropdown;
 
       &__item {
-        &.selected {
-          background-color: $form-footer-selected;
-        }
-
         &.active {
-          background-color: $form-footer-primary;
-          color: $form-footer-primary-contrast;
+          text-decoration: underline;
+          background-color: $form-footer-bg;
+          color: $form-footer-color;
         }
       }
     }
@@ -993,14 +1043,13 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     .ts-item {
       &-remove {
         @include hover-focus-active() {
-          background: $form-footer-primary;
           &:before {
-            background: $form-footer-primary-contrast;
+            background-color: $form-footer-border-color;
           }
         }
 
         &::before {
-          background: $form-footer-primary;
+          background-color: $form-footer-color;
         }
       }
     }
@@ -1011,7 +1060,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       &::after {
         // dropdown chevron
-        background: $form-footer-color;
+        background-color: $form-footer-border-color;
       }
 
       input {
@@ -1031,6 +1080,13 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
             color: transparent;
           }
         }
+
+        .ts-control-inner {
+          .ts-items {
+            width: 100%;
+            max-width: none;
+          }
+        }
       }
     }
   }
@@ -1044,23 +1100,20 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       .ts-control {
         &::after {
-          background: $form-primary;
+          background-color: $form-color;
         }
       }
     }
 
     .ts-dropdown {
       color: $form-color;
-      background: $form-dropdown;
+      background-color: $form-bg;
 
       &__item {
-        &.selected {
-          background-color: $form-selected;
-        }
-
         &.active {
-          background-color: $form-primary;
-          color: $form-primary-contrast;
+          text-decoration: underline;
+          background-color: $form-bg;
+          color: $form-color;
         }
       }
     }
@@ -1070,14 +1123,9 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     .ts-item {
       &-remove {
         @include hover-focus-active() {
-          background: $form-primary;
           &:before {
-            background: $form-primary-contrast;
+            background-color: $form-border-color;
           }
-        }
-
-        &::before {
-          background: $form-primary;
         }
       }
     }
@@ -1088,7 +1136,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
       &::after {
         // dropdown chevron
-        background: $form-color;
+        background-color: $form-border-color;
       }
 
       input {
@@ -1106,6 +1154,13 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
         input {
           &::placeholder {
             color: transparent;
+          }
+        }
+
+        .ts-control-inner {
+          .ts-items {
+            width: 100%;
+            max-width: none;
           }
         }
       }
@@ -1127,9 +1182,8 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
   font-size: 100%;
   line-height: $form-line-height;
   color: $form-color;
-  background: $form-bg;
+  background-color: $form-bg;
   border: $form-border $form-border-color;
-  border-radius: $form-radius;
   outline: $form-outline;
   transition: outline-color $form-duration $form-timing,
     border-color $form-duration $form-timing;
@@ -1334,17 +1388,15 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
     &:before {
       content: '';
-      display: block;
       width: $form-control-wrapper;
       height: $form-control-wrapper;
-      border-radius: $border-radius-small;
       flex-shrink: 0;
-      margin-right: 0.5rem;
-      background: $form-bg;
+      margin-right: 1rem;
+      background-color: $form-bg;
       position: relative;
-      top: 0.125rem;
       border: $form-border $form-border-color;
       outline: $form-outline;
+      outline-width: 2px;
       transition: outline $form-duration $form-timing,
         border $form-duration $form-timing,
         background-color $form-duration $form-timing;
@@ -1355,11 +1407,9 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       display: block;
       width: $form-control-icon;
       height: $form-control-icon;
-      border-radius: $border-radius-small;
       position: absolute;
-      top: 0.25rem;
-      left: 0.125rem;
-      background-color: $form-primary-contrast;
+      left: calc(($form-control-wrapper / 2) - ($form-control-icon / 2));
+      top: calc(($form-control-wrapper / 2) - ($form-control-icon / 2));
       background-size: 100%;
       background-repeat: no-repeat;
       background-position: center;
@@ -1379,20 +1429,17 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
     }
     &:after {
       mask: none;
-      background-color: $form-primary;
+      background-color: $form-color;
       border-radius: 100%;
     }
   }
 
   &__input:checked + &__label {
-    &:before {
-      background-color: $form-primary;
-      border: 2px solid $form-bg;
-      outline: 1px solid $form-border-color;
-    }
-
     &:after {
       transform: scale(1);
+    }
+    &::before {
+      border-color: $form-color;
     }
   }
 
@@ -1412,7 +1459,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       }
 
       &:after {
-        background-color: $form-light-primary-contrast;
+        background-color: $form-light-color;
       }
     }
 
@@ -1424,9 +1471,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
     #{$o-control}__input:checked + #{$o-control}__label {
       &:before {
-        background-color: $form-light-primary;
-        border-color: $form-light-bg;
-        outline-color: $form-light-border-color;
+        border-color: $form-light-color;
       }
     }
 
@@ -1446,7 +1491,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       }
 
       &:after {
-        background-color: $form-dark-primary-contrast;
+        background-color: $form-dark-color;
       }
     }
 
@@ -1458,9 +1503,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
     #{$o-control}__input:checked + #{$o-control}__label {
       &:before {
-        background-color: $form-dark-primary;
-        border-color: $form-dark-bg;
-        outline-color: $form-dark-border-color;
+        border-color: $form-dark-color;
       }
     }
 
@@ -1480,7 +1523,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       }
 
       &:after {
-        background-color: $form-primary-primary-contrast;
+        background-color: $form-primary-color;
       }
     }
 
@@ -1492,9 +1535,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
     #{$o-control}__input:checked + #{$o-control}__label {
       &:before {
-        background-color: $form-primary-primary;
-        border-color: $form-primary-bg;
-        outline-color: $form-primary-border-color;
+        border-color: $form-primary-color;
       }
     }
 
@@ -1514,7 +1555,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       }
 
       &:after {
-        background-color: $form-secondary-primary-contrast;
+        background-color: $form-secondary-color;
       }
     }
 
@@ -1526,9 +1567,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
     #{$o-control}__input:checked + #{$o-control}__label {
       &:before {
-        background-color: $form-secondary-primary;
-        border-color: $form-secondary-bg;
-        outline-color: $form-secondary-border-color;
+        border-color: $form-secondary-color;
       }
     }
 
@@ -1548,7 +1587,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
       }
 
       &:after {
-        background-color: $form-footer-primary-contrast;
+        background-color: $form-footer-color;
       }
     }
 
@@ -1560,9 +1599,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
     #{$o-control}__input:checked + #{$o-control}__label {
       &:before {
-        background-color: $form-footer-primary;
-        border-color: $form-footer-bg;
-        outline-color: $form-footer-border-color;
+        border-color: $form-footer-color;
       }
     }
 
@@ -1576,13 +1613,8 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
   .--on-bg-transparent & {
     #{$o-control}__label {
-      &:before {
-        background-color: $form-bg;
-        border-color: $form-border-color;
-      }
-
       &:after {
-        background-color: $form-primary-contrast;
+        background-color: $form-color;
       }
     }
 
@@ -1594,9 +1626,7 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 
     #{$o-control}__input:checked + #{$o-control}__label {
       &:before {
-        background-color: $form-primary;
-        border-color: $form-bg;
-        outline-color: $form-border-color;
+        border-color: $form-color;
       }
     }
 
@@ -1605,6 +1635,14 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
         outline-color: $form-focus;
         border-color: $form-focus;
       }
+    }
+  }
+}
+
+.c-form.--validated {
+  & .o-control__input:invalid + .o-control__label {
+    &:before {
+      border-color: $form-invalid-color;
     }
   }
 }
@@ -1629,23 +1667,4 @@ $form-footer-primary-contrast: var(--oo-color-footer-contrast-primary);
 }
 
 .o-legend {
-}
-
-.--small-corners {
-  .o-input,
-  .o-select,
-  .o-textarea {
-    border-radius: $form-radius-small;
-  }
-
-  .ts-wrapper.o-select,
-  .ts-wrapper.multi.o-select {
-    border-radius: $form-radius-small;
-    .ts-control {
-      border-radius: $form-radius-small;
-    }
-    .ts-dropdown {
-      border-radius: $form-radius-small;
-    }
-  }
 }

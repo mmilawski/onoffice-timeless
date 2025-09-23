@@ -1,7 +1,11 @@
 .c-buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.5rem;
+
+  @include media-breakpoint-up(lg) {
+    gap: 2rem;
+  }
 
   &.--is-column {
     flex-direction: column;

@@ -181,7 +181,7 @@ if (empty($header_modules_left) && empty($header_modules_right)) {
                         </a>
                     </div>
 
-                    <button class="c-main-nav__button c-icon-button --small-corners" data-open-text="<?php esc_html_e(
+                    <button class="c-main-nav__button c-icon-button" data-open-text="<?php esc_html_e(
                         'Menü öffnen',
                         'oo_theme',
                     ); ?>" data-close-text="<?php esc_html_e(

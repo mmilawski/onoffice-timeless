@@ -49,7 +49,6 @@
       overflow: hidden;
 
       img {
-        border-radius: $border-radius;
         max-width: 100dvw;
         max-height: calc(100dvh - $global-line-height - 2rem - 0.5rem);
         width: auto;
@@ -103,7 +102,6 @@
       margin: 0;
       padding: 0;
       border: 0;
-      border-radius: $border-radius;
       outline: $outline;
       outline-offset: $outline-offset;
       opacity: 1;
@@ -130,14 +128,14 @@
 
       @include disabled() {
         background-color: var(--oo-color-primary);
-        opacity: 0.4;
+        opacity: 0.2;
         outline-color: transparent;
         cursor: default;
       }
 
       &.disabled {
         background-color: var(--oo-color-primary);
-        opacity: 0.4;
+        opacity: 0.2;
         outline-color: transparent;
         cursor: default;
       }

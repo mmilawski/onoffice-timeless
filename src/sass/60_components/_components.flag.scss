@@ -6,13 +6,11 @@
   font-family: $font-family-button;
   font-weight: $font-weight-button;
   display: flex;
-  padding: 0.375rem 0.75rem;
-  border-radius: $border-radius-small;
+  padding: 0.5rem 1rem;
   line-height: $small-line-height;
-  min-height: $icon-wrapper-size;
 
   &.--property-status {
-    color: var(--oo-color-property-status-contrast-bg);
-    background: var(--oo-color-property-status-bg);
+    color: var(--oo-color-contrast-primary);
+    background-color: var(--oo-color-primary);
   }
 }

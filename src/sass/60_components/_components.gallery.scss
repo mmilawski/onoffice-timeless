@@ -40,11 +40,9 @@
     max-height: inherit;
     height: auto;
     object-fit: contain;
-    border-radius: $border-radius;
   }
 
   &__placeholder {
-    border-radius: $border-radius;
     aspect-ratio: 1 / 1;
   }
 
@@ -103,7 +101,6 @@
   &__link {
     display: flex;
     width: 100%;
-    border-radius: $border-radius;
     outline: $outline;
     outline-offset: $outline-offset;
     box-shadow: 0px 0px 0px $outline-offset transparent;

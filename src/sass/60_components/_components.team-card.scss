@@ -3,7 +3,6 @@
 
   display: flex;
   flex-direction: column;
-  border-radius: $border-radius;
   scroll-margin-top: calc($mobile-header-height + $mobile-section-padding-top);
   scroll-snap-align: start;
   gap: 2rem;
@@ -22,7 +21,6 @@
     background-color: var(--oo-color-mix-bg-text-10);
     width: 100%;
     height: auto;
-    border-radius: $border-radius;
     overflow: hidden;
     aspect-ratio: 1 / 1;
   }
