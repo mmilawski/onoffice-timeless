@@ -769,8 +769,7 @@ if (!function_exists('renderFormField')) {
                 $inputType = 'type="number" step="1"';
                 $inputClass = 'o-input --number';
             } elseif ($fieldName == 'Email') {
-                $inputType =
-                    'type="email"';
+                $inputType = 'type="email"';
 
                 $inputClass = 'o-input --email';
             }
