@@ -149,25 +149,10 @@
     }
 
     @include media-breakpoint-down(xl) {
-      @include hover-focus() {
-        color: var(--oo-color-header-contrast-primary);
-        background-color: var(
-          --oo-color-header-primary,
-          var(--oo-color-primary)
-        );
-      }
     }
 
     @include media-breakpoint-up(xxl) {
       padding: 0.5rem;
-
-      @include hover-focus() {
-        text-decoration-color: var(
-          --oo-color-header-text,
-          var(--oo-color-text)
-        );
-        color: var(--oo-color-header-text, var(--oo-color-text));
-      }
     }
 
     &.--is-active {
@@ -177,24 +162,6 @@
 
     @include media-breakpoint-down(xl) {
       &.--is-active {
-        text-decoration-color: transparent;
-        color: var(--oo-color-header-text, var(--oo-color-text));
-        background-color: var(--oo-color-header-transparent-primary-20);
-      }
-    }
-
-    &.--is-ancestor {
-      text-decoration: underline;
-      text-decoration-color: var(--oo-color-header-text, var(--oo-color-text));
-      text-underline-offset: $link-underline-offset;
-      @include media-breakpoint-down(xl) {
-        @include hover-focus() {
-          color: var(--oo-color-header-contrast-primary);
-          background-color: var(
-            --oo-color-header-primary,
-            var(--oo-color-primary)
-          );
-        }
       }
     }
   }
@@ -251,8 +218,6 @@
       }
 
       &.--is-active {
-        color: var(--oo-color-header-text, var(--oo-color-text));
-        background-color: var(--oo-color-header-transparent-primary-20);
         cursor: default;
 
         @include visited-active() {
