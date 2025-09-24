@@ -28,24 +28,49 @@ $company_name = $company['name'] ?? (get_bloginfo('name') ?? null);
     <?php if (is_array($footer_content_rows)) { ?>
         <div class="c-footer__top --bg-footer">
             <div class="c-footer__top-container o-container">
-            <?php foreach ($footer_content_rows as $row) { ?>
-                    <div class="c-footer__top-row o-row">
-                    <?php foreach ($row as $key => $column) {
-                        $column_modules = $column['modules'] ?? []; ?>
-                                <div class="c-footer__top-column --<?php echo $key; ?> <?php if (
+                <?php foreach ($footer_content_rows as $row) {
+                    $other_columns_open = false; ?>
+                <div class="c-footer__top-row o-row">
+
+                    <?php //foreach columns
+
+                    foreach ($row as $key => $column) {
+                        $column_modules = $column['modules'] ?? [];
+                        if ($key === 'left') { ?>
+                        <div class="c-footer__top-column --<?php echo $key; ?> <?php if (
      empty($column_modules)
  ) {
      echo '--is-empty';
- } ?> c-modules --is-footer o-col-xl-4 o-col-md-6 o-col-12">
-                                    <?php oo_load_modules_flexible_content(
-                                        $column,
-                                        'footer',
-                                    ); ?>
-                                </div>
-                        <?php
+ } ?> c-modules --is-footer o-col-xl-4 o-col-12">
+                            <?php oo_load_modules_flexible_content(
+                                $column,
+                                'footer',
+                            ); ?>
+                        </div>
+
+                    <?php } else {if (!$other_columns_open) {
+                                $other_columns_open = true; ?>
+                    <div class="o-col-xl-8 o-col-12">
+                        <div class="o-row">
+                                <?php
+                            } ?>
+                            <div class="c-footer__top-column --<?php echo $key; ?> <?php if (
+     empty($column_modules)
+ ) {
+     echo '--is-empty';
+ } ?> c-modules --is-footer o-col-xl-6 o-col-12">
+                                <?php oo_load_modules_flexible_content(
+                                    $column,
+                                    'footer',
+                                ); ?>
+                            </div>
+                                <?php }
                     } ?>
+                        </div>
                     </div>
-            <?php } ?>
+                </div>
+                <?php
+                } ?>
             </div>
         </div>
     <?php } ?>
