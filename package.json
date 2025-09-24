@@ -12,10 +12,11 @@
 		"dev": "grunt dev",
 		"setup": "grunt",
 		"format": "prettier --write \"**/*.{js,scss,php}\"",
-		"build": "grunt && npm run format && prettier --check \"**/*.{js,scss,php}\" && echo \"Build wurde erfolgreich erstellt.\"",
+		"build": "grunt && npm run format && npm run shared-build && prettier --check \"**/*.{js,scss,php}\" && echo \"Build wurde erfolgreich erstellt.\"",
 		"release": "npm run format && npm run build && grunt compress && echo \"Build & ZIP wurden erfolgreich erstellt und stehen zum Release bereit.\"",
 		"deploy": "npm run format && npm run build && grunt clean",
-		"i18n": "echo 'Install WPCLI if you havent yet: https://make.wordpress.org/cli/handbook/guides/installing/' && wp i18n make-pot . shared/languages/oo_theme.pot --merge=\"shared/languages/oo_theme.pot\" && wp i18n make-pot . shared/languages/oo_theme.pot --include=\"onoffice-theme/*\" --merge=\"shared/languages/oo_theme.pot\" && wp i18n update-po shared/languages/oo_theme.pot && wp i18n make-mo shared/languages && echo '\nDont forget to push changes from shared!!!'"
+		"i18n": "echo 'Install WPCLI if you havent yet: https://make.wordpress.org/cli/handbook/guides/installing/' && wp i18n make-pot . shared/languages/oo_theme.pot --merge=\"shared/languages/oo_theme.pot\" && wp i18n make-pot . shared/languages/oo_theme.pot --include=\"onoffice-theme/*\" --merge=\"shared/languages/oo_theme.pot\" && wp i18n update-po shared/languages/oo_theme.pot && wp i18n make-mo shared/languages && echo '\nDont forget to push changes from shared!!!'",
+		"shared-build": "[ -f shared/build.sh ] && sh shared/build.sh || echo 'shared/build.sh nicht gefunden, überspringe shared-build.'"
 	},
 	"repository": {
 		"type": "git",
