@@ -696,6 +696,8 @@
     var(--oo-color-bg),
     var(--oo-color-text)
   );
+  #{--oo-color-footer-bg-bottom}: var(--oo-color-bg);
+  #{--oo-color-footer-text-bottom}: var(--oo-color-text);
 
   // property status
   #{--oo-color-property-status-contrast-bg}: contrast-color(
