@@ -62,6 +62,11 @@
       position: relative;
 
       @include media-breakpoint-up(xxl) {
+        &:hover > #{$c-main-nav}__link.--is-top-level::after,
+        &:focus-within > #{$c-main-nav}__link.--is-top-level::after {
+          transform: rotate(180deg);
+        }
+
         &:focus-within {
           > #{$c-main-nav}__sub-menu {
             visibility: visible;
@@ -87,10 +92,10 @@
         &::after {
           content: '';
           position: absolute;
-          left: 0;
+          left: -1.5rem;
           opacity: 0;
           background: transparent;
-          width: 100%;
+          width: calc(100% + 3rem);
           height: 0;
           top: 100%;
           z-index: 10;
@@ -106,7 +111,10 @@
             &::after {
               content: '';
               display: inline-block;
-              background-color: var(--oo-color-header-text);
+              background-color: var(
+                --oo-color-header-text,
+                var(--oo-color-text)
+              );
               mask: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20viewBox%3D%220%200%2012%206%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M0%2C0l6%2C6L12%2C0%22%2F%3E%3C%2Fsvg%3E');
               mask-repeat: no-repeat;
               mask-size: $icon-width-dropdown;
@@ -114,6 +122,7 @@
               margin-left: 0.25rem;
               height: $icon-height-dropdown;
               width: $icon-width-dropdown;
+              transition: transform 0.1s ease-in-out;
             }
           }
         }
@@ -148,11 +157,20 @@
       color: var(--oo-color-header-text, var(--oo-color-text));
     }
 
+    &:hover,
+    &:focus {
+    }
+
+    @include hover-focus() {
+      text-decoration-color: var(--oo-color-header-text, var(--oo-color-text));
+      color: var(--oo-color-header-text, var(--oo-color-text));
+    }
+
     @include media-breakpoint-down(xl) {
     }
 
     @include media-breakpoint-up(xxl) {
-      padding: 0.5rem;
+      padding: 0 0.5rem;
     }
 
     &.--is-active {
@@ -184,6 +202,9 @@
       width: 100%;
       background-color: var(--oo-color-header-bg, var(--oo-color-bg));
       padding: 0;
+      border-left: 1px solid var(--oo-color-header-text, var(--oo-color-text));
+      border-right: 1px solid var(--oo-color-header-text, var(--oo-color-text));
+      border-bottom: 1px solid var(--oo-color-header-text, var(--oo-color-text));
       transition: text-decoration 0.25s ease-in-out,
         visibility 0.25s ease-in-out, opacity 0.25s ease-in-out;
     }
@@ -198,13 +219,11 @@
 
     #{$c-main-nav}__link {
       text-decoration: none;
+      padding: 0.5rem 1.5rem;
 
       @include hover-focus() {
-        color: var(--oo-color-header-contrast-primary);
-        background-color: var(
-          --oo-color-header-primary,
-          var(--oo-color-primary)
-        );
+        text-decoration: underline;
+        color: var(--oo-color-header-text, var(--oo-color-text));
       }
 
       @include media-breakpoint-down(xl) {
