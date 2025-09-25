@@ -118,17 +118,27 @@
 
   // meta
   &__meta-wrapper {
-    color: var(--oo-color-header-mix-text-contrast-20);
+    color: var(--oo-color-header-text, var(--oo-color-text));
     position: relative;
     display: flex;
     width: 100%;
     padding: 0;
     margin-top: auto;
-    background-color: var(--oo-color-header-mix-bg-contrast-5);
+    background-color: var(--oo-color-header-bg, var(--oo-color-bg));
     transition: 0.25s;
     z-index: 9991;
     order: 2;
     display: none;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: var(--oo-color-header-text, var(--oo-color-text));
+    }
 
     .--main-nav-open & {
       display: flex;
@@ -205,7 +215,6 @@
       flex-direction: unset;
       align-items: center;
       display: inline;
-      line-height: 2rem;
     }
 
     &.--left {
