@@ -38,7 +38,7 @@
 
   &__item {
     font-size: $global-font-size;
-    line-height: $global-line-height;
+    line-height: $small-line-height;
     @include media-breakpoint-up(xxl) {
       display: flex;
       justify-content: center;
@@ -86,6 +86,16 @@
 
           &::after {
             height: 500%;
+          }
+
+          &::before {
+            content: '';
+            position: absolute;
+            right: 0.5rem;
+            width: calc(0.75rem + 1.5rem);
+            height: 1px;
+            bottom: -1px;
+            background-color: var(--oo-color-header-text, var(--oo-color-text));
           }
         }
 
@@ -176,6 +186,17 @@
     &.--is-active {
       text-decoration-color: var(--oo-color-header-text, var(--oo-color-text));
       color: var(--oo-color-header-text, var(--oo-color-text));
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        right: 0.5rem;
+        width: calc(0.75rem + 1.5rem);
+        height: 1px;
+        bottom: -1px;
+        background-color: var(--oo-color-header-text, var(--oo-color-text));
+      }
     }
 
     @include media-breakpoint-down(xl) {
