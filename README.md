@@ -14,14 +14,21 @@
 ```
 npm install
 ```
+3. Change into the `shared` directory and run `composer install` to install PHP libraries (e.g. PHP Font Lib):
 
-3. Create `.env` file in the root directory (this will be ignored by Git).
+```
+cd shared
+composer install
+cd ..
+```
+
+4. Create `.env` file in the root directory (this will be ignored by Git).
 
 ```
 cp .env
 ```
 
-4. Set your local WordPress URL in the `.env` file in the following variable
+5. Set your local WordPress URL in the `.env` file in the following variable
 
 
 `LOCAL_DEV_URI='http://localhost/your-local-wordpress-project-folder-path'` save and close this file. For instance:
@@ -30,13 +37,13 @@ cp .env
 LOCAL_DEV_URI='http://localhost/wordpress'
 ```
 
-5. run `npm run setup` in the console. Before you start your development, you need to build all files. 
+6. run `npm run setup` in the console. Before you start your development, you need to build all files. 
 
 ```bash
 npm run setup
 ```
 
-6. run `npm start` in the console. Now you can start to work! Open your Browser with the Port number in your console and use Browsersync. 
+7. run `npm start` in the console. Now you can start to work! Open your Browser with the Port number in your console and use Browsersync. 
 
 ```bash
 npm start
