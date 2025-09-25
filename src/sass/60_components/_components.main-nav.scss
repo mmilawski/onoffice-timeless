@@ -52,6 +52,25 @@
         flex-basis: content;
         max-width: 25%;
         position: relative;
+
+        &.--has-children {
+          #{$c-main-nav}__link {
+            &.--is-top-level {
+              &:hover,
+              &:focus {
+                &::before {
+                  content: '';
+                  position: absolute;
+                  right: 0.5rem;
+                  width: calc(0.75rem + 1.5rem);
+                  height: 1px;
+                  bottom: -1px;
+                  background-color: var(--oo-color-header-text, var(--oo-color-text));
+                }
+              }
+            }
+          }
+        }
       }
     }
 
@@ -86,16 +105,6 @@
 
           &::after {
             height: 500%;
-          }
-
-          &::before {
-            content: '';
-            position: absolute;
-            right: 0.5rem;
-            width: calc(0.75rem + 1.5rem);
-            height: 1px;
-            bottom: -1px;
-            background-color: var(--oo-color-header-text, var(--oo-color-text));
           }
         }
 
@@ -187,15 +196,18 @@
       text-decoration-color: var(--oo-color-header-text, var(--oo-color-text));
       color: var(--oo-color-header-text, var(--oo-color-text));
       position: relative;
+      text-decoration: underline;
 
-      &::before {
-        content: '';
-        position: absolute;
-        right: 0.5rem;
-        width: calc(0.75rem + 1.5rem);
-        height: 1px;
-        bottom: -1px;
-        background-color: var(--oo-color-header-text, var(--oo-color-text));
+      &.--is-top-level {
+        &::before {
+          content: '';
+          position: absolute;
+          right: 0.5rem;
+          width: calc(0.75rem + 1.5rem);
+          height: 1px;
+          bottom: -1px;
+          background-color: var(--oo-color-header-text, var(--oo-color-text));
+        }
       }
     }
 
@@ -259,6 +271,7 @@
 
       &.--is-active {
         cursor: default;
+        text-decoration: underline;
 
         @include visited-active() {
           color: var(--oo-color-header-text, var(--oo-color-text));
