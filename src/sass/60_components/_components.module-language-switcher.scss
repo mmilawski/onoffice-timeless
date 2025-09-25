@@ -61,6 +61,27 @@
     .wpml-ls-legacy-dropdown-click {
       width: auto;
 
+      .wpml-ls-item-toggle {
+        &::after {
+          content: '';
+          display: inline-block;
+          position: static;
+          margin-left: 0.5rem;
+          background-color: var(
+            --oo-color-header-text,
+            var(--oo-color-text)
+          );
+          mask: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20viewBox%3D%220%200%2012%206%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M0%2C0l6%2C6L12%2C0%22%2F%3E%3C%2Fsvg%3E');
+          mask-repeat: no-repeat;
+          mask-size: $icon-width-dropdown;
+          mask-position: center;
+          margin-left: 0.25rem;
+          height: $icon-height-dropdown;
+          width: $icon-width-dropdown;
+          transition: transform 0.1s ease-in-out;
+        }
+      }
+
       .wpml-ls-item {
         width: max-content;
         min-width: 100%;
@@ -75,7 +96,10 @@
         top: auto;
         display: flex;
         flex-direction: column-reverse;
-        padding-bottom: 0.5rem;
+        margin-top: 0.5rem;
+        border-left: 1px solid var(--oo-color-header-text, var(--oo-color-text));
+        border-right: 1px solid var(--oo-color-header-text, var(--oo-color-text));
+        border-bottom: 1px solid var(--oo-color-header-text, var(--oo-color-text));
 
         @include media-breakpoint-up(xl) {
           li:last-of-type {
@@ -91,24 +115,24 @@
           bottom: auto;
           display: block;
           padding-bottom: 0rem;
-          padding-top: 0.5rem;
         }
         a {
-          padding: 0.25rem 0.5rem;
+          padding: 0.5rem 1rem;
           text-align: center;
           border-radius: inherit;
 
           @include plain-visited() {
             color: var(--oo-color-header-text, var(--oo-color-text));
-            background: var(--oo-color-header-mix-bg-contrast-5);
+            background-color: var(--oo-color-header-bg, var(--oo-color-bg));
           }
 
           @include hover() {
-            color: var(--oo-color-header-contrast-primary);
-            background-color: var(
-              --oo-color-header-primary,
-              var(--oo-color-primary)
-            );
+            color: var(--oo-color-header-text, var(--oo-color-text));
+
+            span {
+              text-decoration: underline;
+              text-underline-offset: $link-underline-offset;
+            }
           }
         }
       }
