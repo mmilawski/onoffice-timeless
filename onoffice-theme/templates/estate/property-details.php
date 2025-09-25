@@ -1388,7 +1388,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                     }
                                 }
 
-                                foreach ($energy_fields_ordered  as $field) {
+                                foreach ($energy_fields_ordered as $field) {
                                     if (isset($current_property[$field])) {
                                         $value = $current_property[$field];
                                         if (
