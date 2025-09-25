@@ -112,6 +112,7 @@ while ($current_property = $pEstates->estateIterator()) {
     // fields
     $property_features = [];
     $property_free_texts = [];
+    $energy_fields_ordered = [];
     $energy_fields_available = false;
     $price_fields_available = false;
 
@@ -135,6 +136,7 @@ while ($current_property = $pEstates->estateIterator()) {
 
         if (in_array($field, $energy_fields)) {
             $energy_fields_available = true;
+            $energy_fields_ordered[] = $field;
             continue;
         }
 
@@ -1386,7 +1388,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                     }
                                 }
 
-                                foreach ($energy_fields as $field) {
+                                foreach ($energy_fields_ordered  as $field) {
                                     if (isset($current_property[$field])) {
                                         $value = $current_property[$field];
                                         if (
