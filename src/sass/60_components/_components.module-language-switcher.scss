@@ -13,7 +13,7 @@
         border: 0;
         line-height: $small-line-height;
         text-align: left;
-        padding: 0 1.5rem 0 0.5rem;
+        padding: 0 1rem; 
 
         @include plain-visited() {
           color: var(--oo-color-header-mix-text-contrast-20);
