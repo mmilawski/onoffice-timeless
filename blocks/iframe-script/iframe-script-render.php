@@ -43,6 +43,10 @@ $iframe_name = match ($type) {
     'timum' => 'timum',
     'trustlocal' => 'trustlocal',
     'vcita' => 'vcita',
+    'hype' => 'hype',
+    'provenexpert' => 'provenexpert',
+    'stmate' => 'stmate',
+    'leadmarkt' => 'leadmarkt',
     default => '',
 };
 
