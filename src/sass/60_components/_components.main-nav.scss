@@ -63,11 +63,10 @@
               right: 50%;
               height: 1px;
               background-color: var(
-                  --oo-color-header-text,
-                  var(--oo-color-text)
-                );
+                --oo-color-header-text,
+                var(--oo-color-text)
+              );
               transition: all 0.25s ease-in-out;
-
             }
             &:hover,
             &:focus {
@@ -235,7 +234,7 @@
       visibility: hidden;
       opacity: 0;
       transform: translateX(-50%);
-      min-width: 200px;
+      min-width: 18.75rem;
       width: 100%;
       background-color: var(--oo-color-header-bg, var(--oo-color-bg));
       padding: 0;
