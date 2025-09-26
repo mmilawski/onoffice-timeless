@@ -13,7 +13,7 @@
         border: 0;
         line-height: $small-line-height;
         text-align: left;
-        padding: 0 1rem; 
+        padding: 0 1rem;
 
         @include plain-visited() {
           color: var(--oo-color-header-mix-text-contrast-20);
@@ -35,7 +35,6 @@
         &:not(.wpml-ls-link) {
           transition: text-decoration-color 0.25s ease-in-out,
             text-decoration 0.25s ease-in-out;
-          text-decoration: underline currentColor;
           text-underline-offset: $link-underline-offset;
 
           @include hover() {
@@ -62,6 +61,8 @@
       width: auto;
 
       .wpml-ls-item-toggle {
+        position: relative;
+
         &::after {
           content: '';
           display: inline-block;
@@ -76,6 +77,16 @@
           height: $icon-height-dropdown;
           width: $icon-width-dropdown;
           transition: transform 0.1s ease-in-out;
+        }
+
+        &::before {
+          content: '';
+          position: absolute;
+          left: 1rem;
+          right: 1rem;
+          height: 1px;
+          bottom: 0;
+          background-color: var(--oo-color-header-text, var(--oo-color-text));
         }
       }
 
