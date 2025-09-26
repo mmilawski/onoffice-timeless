@@ -256,10 +256,16 @@
     #{$c-main-nav}__link {
       text-decoration: none;
       padding: 0.5rem 1.5rem;
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      transition: text-decoration 0.25s ease-in-out;
 
       @include hover-focus() {
-        text-decoration: underline;
         color: var(--oo-color-header-text, var(--oo-color-text));
+        text-decoration-color: var(
+          --oo-color-header-text,
+          var(--oo-color-text)
+        );
       }
 
       @include media-breakpoint-down(xl) {
