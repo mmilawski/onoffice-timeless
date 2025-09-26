@@ -21,6 +21,9 @@
 
         @include hover-focus() {
           color: var(--oo-color-header-primary, var(--oo-color-primary));
+          &::before {
+            background-color: transparent;
+          }
         }
 
         @include focus-visible() {
@@ -85,8 +88,15 @@
           left: 1rem;
           right: 1rem;
           height: 1px;
-          bottom: 0;
+          bottom: 1px;
           background-color: var(--oo-color-header-text, var(--oo-color-text));
+          transition: background-color 0.25s ease-in-out;
+        }
+
+        &.--is-open {
+          &::after {
+            transform: rotate(-180deg);
+          }
         }
       }
 
