@@ -1,3 +1,11 @@
+@mixin footer-gradient($direction) {
+  background: linear-gradient(
+    $direction,
+    var(--oo-color-footer-bg, var(--oo-color-bg)) 0% 33.33%,
+    var(--oo-color-footer-mix-bg-contrast-10, var(--oo-color-bg)) 33.33% 100%
+  );
+}
+
 .c-footer {
   $c-footer: &;
 
@@ -5,25 +13,45 @@
 
   &__top {
     position: relative;
-    background-color: var(--oo-color-footer-bg, var(--oo-color-bg));
+    @include footer-gradient(to bottom);
     color: var(--oo-color-footer-text, var(--oo-color-text));
+    padding-top: 3.75rem;
+    padding-bottom: 3.75rem;
+
+    @include media-breakpoint-up(lg) {
+      @include footer-gradient(to right);
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      left: 50%;
+      width: min(100%, 1476px);
+      transform: translateX(-50%);
+      @include footer-gradient(to bottom);
+      @include media-breakpoint-up(lg) {
+        @include footer-gradient(to right);
+      }
+      z-index: 0;
+    }
 
     &-container {
       display: flex;
       flex-direction: column;
-      gap: 2.5rem 0;
+      gap: 3.75rem 0;
     }
 
     &-row {
-      gap: 2.5rem 0;
+      gap: 3.75rem 0;
     }
 
     &-column {
       display: flex;
       flex-direction: column;
-      gap: 2.5rem 0;
-      padding-top: 5rem;
-      padding-bottom: 5rem;
+      gap: 3.75rem 0;
       &.--is-empty {
         display: none;
         @include media-breakpoint-up(xl) {
@@ -31,26 +59,17 @@
         }
       }
       &.--left {
-        background-color: var(--oo-color-footer-bg, var(--oo-color-bg));
-        padding-right: 2rem;
+        @include media-breakpoint-up(lg) {
+          padding-right: 2rem;
+        }
       }
       &.--middle {
-        background-color: var(--oo-color-footer-mix-bg-contrast-10);
-        padding-left: 2rem;
+        @include media-breakpoint-up(lg) {
+          padding-left: 2rem;
+        }
       }
       &.--right {
-        background-color: var(--oo-color-footer-mix-bg-contrast-10);
       }
-    }
-
-    @include media-breakpoint-up(lg) {
-      background: linear-gradient(
-        to right,
-        var(--oo-color-footer-bg, var(--oo-color-bg)) 0%,
-        var(--oo-color-footer-bg, var(--oo-color-bg)) 33.33%,
-        var(--oo-color-footer-mix-bg-contrast-10, var(--oo-color-bg)) 33.33%,
-        var(--oo-color-footer-mix-bg-contrast-10, var(--oo-color-bg)) 100%
-      );
     }
   }
 

@@ -51,7 +51,7 @@ $company_name = $company['name'] ?? (get_bloginfo('name') ?? null);
                     <?php } else {if (!$other_columns_open) {
                                 $other_columns_open = true; ?>
                     <div class="o-col-xl-8 o-col-12">
-                        <div class="o-row">
+                        <div class="o-row c-footer__top-row --right-block">
                                 <?php
                             } ?>
                             <div class="c-footer__top-column --<?php echo $key; ?> <?php if (
