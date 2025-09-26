@@ -24,6 +24,10 @@
           &::before {
             background-color: transparent;
           }
+
+          &::after {
+            color: var(--oo-color-header-text, var(--oo-color-text));
+          }
         }
 
         @include focus-visible() {
@@ -141,6 +145,13 @@
           text-align: center;
           border-radius: inherit;
 
+          span {
+            text-decoration: underline;
+            text-underline-offset: $link-underline-offset;
+            text-decoration-color: transparent;
+            transition: text-decoration 0.1s ease-in-out;
+          }
+
           @include plain-visited() {
             color: var(--oo-color-header-text, var(--oo-color-text));
             background-color: var(--oo-color-header-bg, var(--oo-color-bg));
@@ -150,8 +161,10 @@
             color: var(--oo-color-header-text, var(--oo-color-text));
 
             span {
-              text-decoration: underline;
-              text-underline-offset: $link-underline-offset;
+              text-decoration-color: var(
+                --oo-color-header-text,
+                var(--oo-color-text)
+              );
             }
           }
         }
