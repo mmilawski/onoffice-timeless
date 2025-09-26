@@ -4,10 +4,10 @@
   font-family: $font-family-navigation;
   font-weight: $font-weight-navigation;
   overflow: hidden;
-  padding-top: 0.25rem;
+  padding: 0.25rem 0 0 0;
   @include media-breakpoint-up(xxl) {
     overflow: inherit;
-    padding-top: 0;
+    padding: 0;
   }
 
   &__button {
@@ -47,6 +47,21 @@
     }
 
     &.--is-top-level {
+      #{$c-main-nav}__link {
+        text-decoration: underline;
+        text-decoration-color: transparent;
+        transition: text-decoration 0.1s ease-in-out;
+
+        &:hover,
+        &:focus,
+        &.--is-active {
+          text-decoration-color: var(
+            --oo-color-header-text,
+            var(--oo-color-text)
+          );
+        }
+      }
+
       @include media-breakpoint-up(xxl) {
         border: 0;
         flex-basis: content;
@@ -55,6 +70,8 @@
 
         #{$c-main-nav}__link {
           &.--is-top-level {
+            text-decoration: none;
+
             &::before {
               content: '';
               position: absolute;
@@ -68,8 +85,10 @@
               );
               transition: all 0.25s ease-in-out;
             }
+
             &:hover,
-            &:focus {
+            &:focus,
+            &.--is-active {
               &::before {
                 left: 0.5rem;
                 right: 0.5rem;
@@ -78,9 +97,6 @@
           }
         }
       }
-    }
-
-    &.--is-active {
     }
 
     &.--has-children {
@@ -166,7 +182,7 @@
 
   &__link {
     hyphens: auto;
-    padding: 0.75rem 0 0.75rem 1rem;
+    padding: 0.75rem 0rem 0.75rem 0rem;
     width: 100%;
     font-family: var(--oo-font-navigation, var(--oo-font-text));
     font-size: 1rem;
@@ -200,18 +216,6 @@
       text-decoration-color: var(--oo-color-header-text, var(--oo-color-text));
       color: var(--oo-color-header-text, var(--oo-color-text));
       position: relative;
-
-      &.--is-top-level {
-        &::before {
-          content: '';
-          position: absolute;
-          left: 0.5rem;
-          right: 0.5rem;
-          height: 1px;
-          bottom: 0;
-          background-color: var(--oo-color-header-text, var(--oo-color-text));
-        }
-      }
     }
 
     @include media-breakpoint-down(xl) {
@@ -254,11 +258,14 @@
     }
 
     #{$c-main-nav}__link {
-      text-decoration: none;
-      padding: 0.5rem 1.5rem;
       text-decoration: underline;
+      padding: 0.75rem 0 0.75rem 2rem;
       text-decoration-color: transparent;
-      transition: text-decoration 0.25s ease-in-out;
+      transition: text-decoration 0.1s ease-in-out;
+
+      @include media-breakpoint-up(xl) {
+        padding: 0.5rem 1.5rem;
+      }
 
       @include hover-focus() {
         color: var(--oo-color-header-text, var(--oo-color-text));
@@ -266,16 +273,6 @@
           --oo-color-header-text,
           var(--oo-color-text)
         );
-      }
-
-      @include media-breakpoint-down(xl) {
-        padding-inline: 2rem;
-      }
-
-      &:last-of-type {
-        @include media-breakpoint-up(xxl) {
-          border-radius: inherit;
-        }
       }
 
       &.--is-active {
