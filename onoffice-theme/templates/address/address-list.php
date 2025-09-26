@@ -64,13 +64,10 @@ $agent_count = method_exists($pAddressList, 'getAddressOverallCount')
 
             <div class="c-address-list__nav o-row">
                 <p class="c-address-list__count o-col-12 o-col-md-6">
-                    <?php esc_html_e(
-                        'Gefundene Berater:',
-                        'oo_theme',
-                    ); ?> <span class="c-address-list__number"><?php echo sprintf(
-     '%d',
-     $agent_count,
- ); ?></span>
+                    <?php printf(
+                        esc_html__('%d Berater gefunden', 'oo_theme'),
+                        $agent_count,
+                    ); ?>
                 </p>
             </div>
 
@@ -131,12 +128,9 @@ $agent_count = method_exists($pAddressList, 'getAddressOverallCount')
     <?php } ?>
 <?php } else { ?>
     <p class="c-address-list__count --no-addresses">
-        <?php esc_html_e(
-            'Gefundene Berater:',
-            'oo_theme',
-        ); ?> <span class="c-address-list__number"><?php echo sprintf(
-     '%d',
-     $agent_count,
- ); ?></span>
+        <?php printf(
+            esc_html__('%d Berater gefunden', 'oo_theme'),
+            $agent_count,
+        ); ?>
     </p>
 <?php } ?>

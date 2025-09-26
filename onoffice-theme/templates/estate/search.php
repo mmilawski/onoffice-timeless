@@ -50,67 +50,72 @@ $formId = sanitize_key($getListName());
 <form <?php if (!empty($result)) {
     echo 'action="' . get_permalink($result) . '"';
 } ?> method="get" class="c-form <?php if ($is_banner) {
-     echo '--is-banner-search-form  --small-corners';
+     echo '--is-banner-search-form';
  } else {
      echo '--is-search-form ';
  } ?> <?php if (!empty($bg_color)) {
      echo ' --on-' . $bg_color;
  } ?>" data-estate-search-name="<?php echo esc_attr($getListName()); ?>">
     <div class="c-form__fieldset">
-        <?php
-        $number = 0;
-        $fields_counter = is_array($visible) ? count($visible) : 0;
-        foreach ($visible as $inputName => $properties) {
-            if ($fields_counter > 12) {
-
-                if ($number === 12) { ?>
-                    <div class="c-form__field-wrapper" id="<?php echo $uniqid; ?>">
-                <?php }
-                renderFieldEstateSearch($inputName, $properties, $formId);
-                if ($number == $fields_counter - 1) { ?>
-                    </div>
-
-                    <button class="c-form__more c-read-more --text-align-center --small-corners" 
-                        data-open-text="<?php esc_html_e(
-                            'Mehr anzeigen',
-                            'oo_theme',
-                        ); ?>"
-                        data-close-text="<?php esc_html_e(
-                            'Weniger anzeigen',
-                            'oo_theme',
-                        ); ?>"
-                        aria-expanded="false" aria-controls="<?php echo $uniqid; ?>">
-                        <?php echo esc_html__('Mehr anzeigen', 'oo_theme'); ?>
-                    </button>
-
-                    <button class="c-form__button c-button <?php if (
-                        $is_banner
-                    ) {
-                        echo '--small-corners';
-                    } ?> <?php if (!empty($bg_color)) {
-     echo '--on-' . $bg_color;
- } ?>">
-                        <?php echo esc_attr__('Suchen', 'oo_theme'); ?>
-                    </button>
-                <?php }
-                ?>
+        <div class="c-form__body">
             <?php
-            } else {
-                renderFieldEstateSearch($inputName, $properties, $formId); ?>
-                <?php if ($number == $fields_counter - 1) { ?>
-                    <button class="c-form__button c-button <?php if (
-                        $is_banner
-                    ) {
-                        echo '--small-corners';
-                    } ?> <?php if (!empty($bg_color)) {
-     echo '--on-' . $bg_color;
- } ?>">
-                        <?php echo esc_attr__('Suchen', 'oo_theme'); ?>
-                    </button>
-                <?php }
+            $number = 0;
+            $fields_counter = is_array($visible) ? count($visible) : 0;
+            foreach ($visible as $inputName => $properties) {
+                if ($fields_counter > 12) {
+
+                    if ($number === 12) { ?>
+                        <div class="c-form__field-wrapper" id="<?php echo $uniqid; ?>">
+                    <?php }
+                    renderFieldEstateSearch($inputName, $properties, $formId);
+                    if ($number == $fields_counter - 1) { ?>
+                        </div>
+
+                        <button class="c-form__more c-read-more --text-align-center"
+                            data-open-text="<?php esc_html_e(
+                                'Mehr anzeigen',
+                                'oo_theme',
+                            ); ?>"
+                            data-close-text="<?php esc_html_e(
+                                'Weniger anzeigen',
+                                'oo_theme',
+                            ); ?>"
+                            aria-expanded="false" aria-controls="<?php echo $uniqid; ?>">
+                            <?php echo esc_html__(
+                                'Mehr anzeigen',
+                                'oo_theme',
+                            ); ?>
+                        </button>
+
+                        <button class="c-form__button c-button <?php if (
+                            !empty($bg_color)
+                        ) {
+                            echo '--on-' . $bg_color;
+                        } ?>">
+                            <?php echo esc_attr__('Suchen', 'oo_theme'); ?>
+                        </button>
+                    <?php }
+                    ?>
+                <?php
+                } else {
+                    renderFieldEstateSearch(
+                        $inputName,
+                        $properties,
+                        $formId,
+                    ); ?>
+                    <?php if ($number == $fields_counter - 1) { ?>
+                        <button class="c-form__button c-button <?php if (
+                            !empty($bg_color)
+                        ) {
+                            echo '--on-' . $bg_color;
+                        } ?>">
+                            <?php echo esc_attr__('Suchen', 'oo_theme'); ?>
+                        </button>
+                    <?php }
+                }
+                $number++;
             }
-            $number++;
-        }
-        ?>
+            ?>
+        </div>
     </div>
 </form>

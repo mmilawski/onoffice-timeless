@@ -279,47 +279,48 @@ while ($current_property = $pEstatesClone->estateIterator()):
         </div>
     <?php endif; ?>
 
-    <?php if (
-        $property_status ||
-        (Favorites::isFavorizationEnabled() &&
-            !$is_reference &&
-            !$iframe_display)
-    ): ?>
-        <div class="c-property-card__flags c-flags --space-between">
-            <?php if ($property_status): ?>
-                <span class="c-property-card__status c-flag --property-status">
-                    <?php echo ucfirst($property_status); ?>
-                </span>
-            <?php endif; ?>
-
-            <?php if (
-                Favorites::isFavorizationEnabled() &&
-                !$is_reference &&
-                !$iframe_display
-            ): ?>
-                <?php
-                $favorite_label = Favorites::getFavorizationLabel();
-                $favorite_text =
-                    $favorite_label == 'Watchlist'
-                        ? esc_html__('Zur Merkliste hinzufügen', 'oo_theme')
-                        : esc_html__('Zu Favoriten hinzufügen', 'oo_theme');
-                $favorite_icon =
-                    $favorite_label == 'Watchlist' ? 'bookmark' : 'star';
-                ?>
-                <button class="c-property-card__favorite c-icon-button --small-corners"
-                        data-onoffice-property-id="<?php echo $property_id; ?>"
-                        aria-label="<?php echo $favorite_text; ?>">
-                    <?php oo_get_icon($favorite_icon, true, [
-                        'class' => 'c-icon-button__icon --favorite',
-                    ]); ?>
-                </button>
-            <?php endif; ?>
-        </div>
-    <?php endif; ?>
+    
 </div>
 
     <div class="c-property-card__content">
     <div class="c-property-card__main-content-group">
+        <?php if (
+            $property_status ||
+            (Favorites::isFavorizationEnabled() &&
+                !$is_reference &&
+                !$iframe_display)
+        ): ?>
+            <div class="c-property-card__flags c-flags">
+                <?php if ($property_status): ?>
+                    <span class="c-property-card__status c-flag --property-status">
+                        <?php echo ucfirst($property_status); ?>
+                    </span>
+                <?php endif; ?>
+
+                <?php if (
+                    Favorites::isFavorizationEnabled() &&
+                    !$is_reference &&
+                    !$iframe_display
+                ): ?>
+                    <?php
+                    $favorite_label = Favorites::getFavorizationLabel();
+                    $favorite_text =
+                        $favorite_label == 'Watchlist'
+                            ? esc_html__('Zur Merkliste hinzufügen', 'oo_theme')
+                            : esc_html__('Zu Favoriten hinzufügen', 'oo_theme');
+                    $favorite_icon =
+                        $favorite_label == 'Watchlist' ? 'bookmark' : 'heart';
+                    ?>
+                    <button class="c-property-card__favorite c-icon-button"
+                            data-onoffice-property-id="<?php echo $property_id; ?>"
+                            aria-label="<?php echo $favorite_text; ?>">
+                        <?php oo_get_icon($favorite_icon, true, [
+                            'class' => 'c-icon-button__icon --favorite',
+                        ]); ?>
+                    </button>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
         <?php if ($current_property['objekttitel']) { ?>
             <span class="c-property-card__title o-headline --h3">
                 <?php echo $current_property['objekttitel']; ?>
@@ -463,7 +464,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
             } ?>
         <?php } ?>
         <?php if ($is_visible_property_detail) { ?>
-            <a class="c-property-card__button c-button --small-corners --full-width --on-bg-transparent" href="<?php echo $property_url; ?>" aria-label="<?php echo sprintf(
+            <a class="c-property-card__button c-button --full-width --on-bg-transparent" href="<?php echo $property_url; ?>" aria-label="<?php echo sprintf(
     esc_html_x('Zur Detailansicht der Immobilie Nr. %d', 'oo_theme'),
     $property_id,
 ); ?>">

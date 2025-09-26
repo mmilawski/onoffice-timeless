@@ -191,7 +191,7 @@ return function (EstateList $pEstatesClone) {
                             'additional_container_class' =>
                                 'c-map__button-wrapper',
                             'additional_button_class' =>
-                                'c-map__button --small-corners --full-width --on-bg-transparent',
+                                'c-map__button --full-width --on-bg-transparent',
                         ]);
                     }
                     ?>

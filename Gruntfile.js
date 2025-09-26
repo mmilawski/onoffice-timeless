@@ -110,6 +110,7 @@ const releaseFiles = [
   'shared/modules/**',
   'shared/templates/**',
   'shared/languages/**',
+  'shared/vendor/**',
   'template-parts/**',
   '*.css',
   '*.png',

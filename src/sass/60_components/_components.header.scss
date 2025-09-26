@@ -13,10 +13,6 @@
   flex-direction: column;
   background-color: var(--oo-color-header-bg, var(--oo-color-bg));
 
-  &.--scrolled {
-    box-shadow: 1px 1px 5px 2px var(--oo-color-transparent-shadow-20);
-  }
-
   &.--logo-transparent {
     background-color: var(--oo-color-header-transparent-bg-80);
     position: fixed;
@@ -64,7 +60,6 @@
       bottom: 0;
       z-index: 9999;
       width: 100%;
-      box-shadow: 0px 1px 4px var(--oo-color-transparent-shadow-10);
     }
   }
 

@@ -13,7 +13,6 @@
       line-height: $global-line-height !important;
       padding: 1rem !important;
       background-color: var(--oo-color-transparent-bg-90) !important;
-      border-radius: $border-radius !important;
       box-shadow: 0 0 5px var(--oo-color-transparent-shadow-15) !important;
       width: 50%;
       gap: 1rem;
@@ -70,7 +69,6 @@
         text-align: center;
         margin: 0;
         padding: 0.5rem 2rem;
-        border-radius: $border-radius-small;
         border: 2px solid transparent;
         outline: $outline;
         outline-offset: $outline-offset;

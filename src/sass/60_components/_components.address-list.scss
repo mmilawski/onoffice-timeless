@@ -41,50 +41,10 @@
   }
 
   &__count {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 1rem;
+    font-size: 1.5rem;
+    text-transform: uppercase;
 
     &.--no-addresses {
-    }
-  }
-
-  &__number {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border-radius: $border-radius;
-    background-color: var(--oo-color-primary);
-    color: var(--oo-color-contrast-primary);
-    font-family: $font-family-button;
-    font-weight: $font-weight-button;
-    min-width: $icon-wrapper-size;
-    height: $icon-wrapper-size;
-    padding: 0 0.5rem;
-
-    .--bg-light & {
-      background-color: var(--oo-color-light-primary, var(--oo-color-primary));
-      color: var(--oo-color-light-contrast-primary);
-    }
-    .--bg-dark & {
-      background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
-      color: var(--oo-color-dark-contrast-primary);
-    }
-    .--bg-primary & {
-      background-color: var(
-        --oo-color-primary-primary,
-        var(--oo-color-primary)
-      );
-      color: var(--oo-color-primary-contrast-primary);
-    }
-    .--bg-secondary & {
-      background-color: var(
-        --oo-color-secondary-primary,
-        var(--oo-color-primary)
-      );
-      color: var(--oo-color-secondary-contrast-primary);
     }
   }
 

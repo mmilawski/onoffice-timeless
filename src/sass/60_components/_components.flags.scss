@@ -3,9 +3,5 @@
 
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-
-  &.--space-between {
-    justify-content: space-between;
-  }
+  gap: 0.5rem;
 }

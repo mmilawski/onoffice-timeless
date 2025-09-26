@@ -49,7 +49,7 @@ $uniqid = 'address-search-' . uniqid();
 <form <?php if (!empty($result)) {
     echo 'action="' . get_permalink($result) . '"';
 } ?> method="get" class="c-form <?php if ($is_banner) {
-     echo '--is-banner-search-form  --small-corners';
+     echo '--is-banner-search-form';
  } else {
      echo '--is-search-form ';
  } ?> <?php if (!empty($bg_color)) {
@@ -94,7 +94,7 @@ $uniqid = 'address-search-' . uniqid();
                     } ?>
                     </div>
 
-                    <button class="c-form__more c-read-more --full-width --small-corners" 
+                    <button class="c-form__more c-read-more --full-width" 
                         data-open-text="<?php esc_html_e(
                             'Mehr anzeigen',
                             'oo_theme',
@@ -108,12 +108,10 @@ $uniqid = 'address-search-' . uniqid();
                     </button>
 
                     <button class="c-form__button c-button <?php if (
-                        $is_banner
+                        !empty($bg_color)
                     ) {
-                        echo '--small-corners';
-                    } ?> <?php if (!empty($bg_color)) {
-     echo '--on-' . $bg_color;
- } ?>">
+                        echo '--on-' . $bg_color;
+                    } ?>">
                         <?php echo esc_attr__('Suchen', 'oo_theme'); ?>
                     </button>
                 <?php
@@ -149,12 +147,10 @@ $uniqid = 'address-search-' . uniqid();
                         );
                     } ?>
                     <button class="c-form__button c-button <?php if (
-                        $is_banner
+                        !empty($bg_color)
                     ) {
-                        echo '--small-corners';
-                    } ?> <?php if (!empty($bg_color)) {
-     echo '--on-' . $bg_color;
- } ?>">
+                        echo '--on-' . $bg_color;
+                    } ?>">
                         <?php echo esc_attr__('Suchen', 'oo_theme'); ?>
                     </button>
                 <?php

@@ -13,6 +13,7 @@ h5,
 h6 {
   font-family: $font-family-headline;
   font-weight: $font-weight-headline;
+  text-transform: uppercase;
   color: var(--oo-color-headline, --oo-color-text);
   hyphens: auto;
   @include media-breakpoint-up(sm) {

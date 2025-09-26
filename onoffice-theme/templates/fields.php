@@ -624,7 +624,7 @@ if (!function_exists('renderFormField')) {
                 $requiredAttribute .
                 '>' .
                 $selectedValue .
-                '</textarea>';
+                '</textarea><div class="c-form__error-message"></div>';
             $output .= '</label>';
         } elseif (
             \onOffice\WPlugin\Types\FieldTypes::FIELD_TYPE_SINGLESELECT ==
@@ -672,7 +672,7 @@ if (!function_exists('renderFormField')) {
                     esc_html($value) .
                     '</option>';
             }
-            $output .= '</select>';
+            $output .= '</select><div class="c-form__error-message"></div>';
             $output .= '</div>';
         } elseif (
             \onOffice\WPlugin\Types\FieldTypes::FIELD_TYPE_MULTISELECT ===
@@ -717,7 +717,7 @@ if (!function_exists('renderFormField')) {
                 esc_html__('Bitte wählen', 'oo_theme') .
                 '">';
             $output .= $htmlOptions;
-            $output .= '</select>';
+            $output .= '</select><div class="c-form__error-message"></div>';
             $output .= '</div>';
         } elseif (
             \onOffice\WPlugin\Types\FieldTypes::FIELD_TYPE_BOOLEAN ===
@@ -746,7 +746,7 @@ if (!function_exists('renderFormField')) {
                 $pForm->getFormNo() .
                 '</span>' .
                 '</span>';
-            $output .= '</span>';
+            $output .= '</span><div class="c-form__error-message"></div>';
             $output .= '</label>';
         } else {
             $inputType = 'type="text"';
@@ -769,8 +769,7 @@ if (!function_exists('renderFormField')) {
                 $inputType = 'type="number" step="1"';
                 $inputClass = 'o-input --number';
             } elseif ($fieldName == 'Email') {
-                $inputType =
-                    'type="email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}"';
+                $inputType = 'type="email"';
 
                 $inputClass = 'o-input --email';
             }
@@ -839,7 +838,7 @@ if (!function_exists('renderFormField')) {
                         renderAutocomplete($fieldName) .
                         ' aria-label="' .
                         $uniqueLabel .
-                        '">';
+                        '"><div class="c-form__error-message"></div>';
                 }
                 $output .= '</div>';
                 $output .= '</div>';
@@ -866,7 +865,7 @@ if (!function_exists('renderFormField')) {
                     '" ' .
                     $requiredAttribute .
                     renderAutocomplete($fieldName) .
-                    '>';
+                    '><div class="c-form__error-message"></div>';
                 $output .= '</label>';
             }
         }
@@ -918,7 +917,7 @@ if (!function_exists('renderRegionalAddition')) {
             printRegion($pRegion, $selectedValue ?? []);
         }
         $output .= ob_get_clean();
-        $output .= '</select>';
+        $output .= '</select><div class="c-form__error-message"></div>';
         return $output;
     }
 }
@@ -962,7 +961,7 @@ if (!function_exists('renderCityField')) {
                     '</option>';
             }
         }
-        $htmlSelect .= '</select>';
+        $htmlSelect .= '</select><div class="c-form__error-message"></div>';
 
         return $htmlSelect;
     }
