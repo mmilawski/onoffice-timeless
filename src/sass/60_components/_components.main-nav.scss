@@ -61,8 +61,8 @@
                 &::before {
                   content: '';
                   position: absolute;
+                  left: 0.5rem;
                   right: 0.5rem;
-                  width: calc(0.75rem + 1.5rem);
                   height: 1px;
                   bottom: -1px;
                   background-color: var(--oo-color-header-text, var(--oo-color-text));
@@ -166,9 +166,7 @@
     font-size: 1rem;
     color: var(--oo-color-header-text, var(--oo-color-text));
     display: block;
-    text-decoration: underline;
     text-transform: uppercase;
-    text-decoration-color: transparent;
     text-underline-offset: $link-underline-offset;
     letter-spacing: 1.5px;
 
@@ -178,6 +176,17 @@
 
     &:hover,
     &:focus {
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0.5rem;
+        right: 0.5rem;
+        height: 1px;
+        bottom: -1px;
+        background-color: var(--oo-color-header-text, var(--oo-color-text));
+      }
     }
 
     @include hover-focus() {
@@ -196,14 +205,13 @@
       text-decoration-color: var(--oo-color-header-text, var(--oo-color-text));
       color: var(--oo-color-header-text, var(--oo-color-text));
       position: relative;
-      text-decoration: underline;
 
       &.--is-top-level {
         &::before {
           content: '';
           position: absolute;
+          left: 0.5rem;
           right: 0.5rem;
-          width: calc(0.75rem + 1.5rem);
           height: 1px;
           bottom: -1px;
           background-color: var(--oo-color-header-text, var(--oo-color-text));
