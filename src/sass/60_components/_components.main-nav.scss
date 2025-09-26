@@ -53,20 +53,21 @@
         max-width: 25%;
         position: relative;
 
-        &.--has-children {
-          #{$c-main-nav}__link {
-            &.--is-top-level {
-              &:hover,
-              &:focus {
-                &::before {
-                  content: '';
-                  position: absolute;
-                  left: 0.5rem;
-                  right: 0.5rem;
-                  height: 1px;
-                  bottom: -1px;
-                  background-color: var(--oo-color-header-text, var(--oo-color-text));
-                }
+        #{$c-main-nav}__link {
+          &.--is-top-level {
+            &:hover,
+            &:focus {
+              &::before {
+                content: '';
+                position: absolute;
+                left: 0.5rem;
+                right: 0.5rem;
+                height: 1px;
+                bottom: 0;
+                background-color: var(
+                  --oo-color-header-text,
+                  var(--oo-color-text)
+                );
               }
             }
           }
@@ -176,17 +177,6 @@
 
     &:hover,
     &:focus {
-      position: relative;
-
-      &::before {
-        content: '';
-        position: absolute;
-        left: 0.5rem;
-        right: 0.5rem;
-        height: 1px;
-        bottom: -1px;
-        background-color: var(--oo-color-header-text, var(--oo-color-text));
-      }
     }
 
     @include hover-focus() {
@@ -213,7 +203,7 @@
           left: 0.5rem;
           right: 0.5rem;
           height: 1px;
-          bottom: -1px;
+          bottom: 0;
           background-color: var(--oo-color-header-text, var(--oo-color-text));
         }
       }
