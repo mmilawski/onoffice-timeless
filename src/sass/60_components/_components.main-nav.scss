@@ -55,19 +55,25 @@
 
         #{$c-main-nav}__link {
           &.--is-top-level {
-            &:hover,
-            &:focus {
-              &::before {
-                content: '';
-                position: absolute;
-                left: 0.5rem;
-                right: 0.5rem;
-                height: 1px;
-                bottom: 0;
-                background-color: var(
+            &::before {
+              content: '';
+              position: absolute;
+              bottom: 0;
+              left: 50%;
+              right: 50%;
+              height: 1px;
+              background-color: var(
                   --oo-color-header-text,
                   var(--oo-color-text)
                 );
+              transition: all 0.25s ease-in-out;
+
+            }
+            &:hover,
+            &:focus {
+              &::before {
+                left: 0.5rem;
+                right: 0.5rem;
               }
             }
           }
@@ -84,7 +90,7 @@
       @include media-breakpoint-up(xxl) {
         &:hover > #{$c-main-nav}__link.--is-top-level::after,
         &:focus-within > #{$c-main-nav}__link.--is-top-level::after {
-          transform: rotate(180deg);
+          transform: rotate(-180deg);
         }
 
         &:focus-within {
@@ -142,7 +148,7 @@
               margin-left: 0.25rem;
               height: $icon-height-dropdown;
               width: $icon-width-dropdown;
-              transition: transform 0.1s ease-in-out;
+              transition: transform 0.2s 0.1s ease-out;
             }
           }
         }
