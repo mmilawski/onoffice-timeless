@@ -43,7 +43,7 @@ jQuery(document).ready(function() {
   });
 
   // This function is needed to rotate the caret when the language menu is open
-  // This is because the wpmp language switcher has no useful state modifiers by default
+  // This is because the wpml language switcher has no useful state modifiers by default
   function setWpmlLanguageSwitcherStateModifier() {
     const $languageSwitcher = $('.c-module-language-switcher');
     if ($languageSwitcher.length === 0) return;
