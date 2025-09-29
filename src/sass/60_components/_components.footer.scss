@@ -1,6 +1,6 @@
-@mixin footer-gradient($direction) {
+@mixin footer-gradient() {
   background: linear-gradient(
-    $direction,
+    to right,
     var(--oo-color-footer-bg, var(--oo-color-bg)) 0% 33.33%,
     var(--oo-color-footer-mix-bg-contrast-10, var(--oo-color-bg)) 33.33% 100%
   );
@@ -13,35 +13,24 @@
 
   &__top {
     position: relative;
-    @include footer-gradient(to bottom);
+    background: var(--oo-color-footer-mix-bg-contrast-10, var(--oo-color-bg));
     color: var(--oo-color-footer-text, var(--oo-color-text));
-    padding-top: 3.75rem;
-    padding-bottom: 3.75rem;
 
-    @include media-breakpoint-up(lg) {
-      @include footer-gradient(to right);
-      padding-top: 5rem;
-      padding-bottom: 5rem;
-    }
+    @include media-breakpoint-up(xl) {
+      @include footer-gradient(
 
-    &::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      left: 50%;
-      width: min(100%, 1476px);
-      transform: translateX(-50%);
-      @include footer-gradient(to bottom);
-      @include media-breakpoint-up(lg) {
-        @include footer-gradient(to right);
-      }
-      z-index: 0;
+      ); //cover color of left and right area outside of the container
     }
 
     &-container {
       display: flex;
       flex-direction: column;
       gap: 3.75rem 0;
+      padding-bottom: 3.75rem;
+      @include media-breakpoint-up(xl) {
+        @include footer-gradient(); //cover color of gap inside the container
+        padding-bottom: 5rem;
+      }
     }
 
     &-row {
@@ -59,16 +48,36 @@
         }
       }
       &.--left {
-        @include media-breakpoint-up(lg) {
+        padding-top: 3.75rem;
+        padding-bottom: 3.75rem;
+        background: var(--oo-color-footer-bg, var(--oo-color-bg));
+
+        @include media-breakpoint-down(lg) {
+          //cover color of left and right area outside of the container on mobile devices
+          box-shadow: 0 0 0 100vmax
+            var(--oo-color-footer-bg, var(--oo-color-bg));
+          clip-path: inset(0 -100vmax);
+        }
+        @include media-breakpoint-up(xl) {
+          padding-top: 5rem;
+          padding-bottom: 5rem;
           padding-right: 2rem;
         }
       }
       &.--middle {
-        @include media-breakpoint-up(lg) {
+        background: var(
+          --oo-color-footer-mix-bg-contrast-10,
+          var(--oo-color-bg)
+        );
+        @include media-breakpoint-up(xl) {
           padding-left: 2rem;
         }
       }
       &.--right {
+        background: var(
+          --oo-color-footer-mix-bg-contrast-10,
+          var(--oo-color-bg)
+        );
       }
     }
   }
@@ -78,7 +87,7 @@
     background-color: var(--oo-color-footer-bg-bottom);
     padding: 1rem 0 0.5rem 0;
 
-    @include media-breakpoint-up(lg) {
+    @include media-breakpoint-up(xl) {
       gap: 0;
       padding: 0.5rem 0;
     }
@@ -92,7 +101,7 @@
       align-items: center;
       gap: 1rem 0;
 
-      @include media-breakpoint-up(lg) {
+      @include media-breakpoint-up(xl) {
         gap: 0;
       }
     }
@@ -113,7 +122,7 @@
         display: flex;
         justify-content: center;
 
-        @include media-breakpoint-up(lg) {
+        @include media-breakpoint-up(xl) {
           justify-content: flex-end;
         }
       }
