@@ -5,13 +5,13 @@
     .--is-header & {
       display: flex;
       gap: 1.5rem;
+      width: 100%;
+      padding: 0.5rem 0.75rem;
 
       @include media-breakpoint-up(xxl) {
         display: inline-block;
-        margin-right: 1.5rem;
-        &:last-child {
-          margin-right: 0;
-        }
+        width: auto;
+        padding: 0;
       }
     }
 

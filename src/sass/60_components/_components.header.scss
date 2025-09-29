@@ -213,16 +213,16 @@
   }
   &__meta-column {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     flex-wrap: wrap;
-    gap: 2rem;
+    gap: 2rem 0;
 
     @include media-breakpoint-up(xxl) {
-      gap: 0.5rem;
+      display: inline-flex;
+      gap: 1.5rem;
       flex-direction: unset;
       align-items: center;
-      display: inline;
     }
 
     &.--left {
@@ -235,12 +235,7 @@
       @include media-breakpoint-up(xxl) {
         flex-basis: 50%;
         text-align: right;
-        margin-left: auto;
-
-        .c-modules__item {
-          margin-right: 0;
-          margin-left: 1.5rem;
-        }
+        justify-content: flex-end;
       }
     }
   }
