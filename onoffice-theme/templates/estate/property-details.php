@@ -112,6 +112,7 @@ while ($current_property = $pEstates->estateIterator()) {
     // fields
     $property_features = [];
     $property_free_texts = [];
+    $energy_fields_ordered = [];
     $energy_fields_available = false;
     $price_fields_available = false;
 
@@ -135,6 +136,7 @@ while ($current_property = $pEstates->estateIterator()) {
 
         if (in_array($field, $energy_fields)) {
             $energy_fields_available = true;
+            $energy_fields_ordered[] = $field;
             continue;
         }
 
@@ -1266,6 +1268,7 @@ while ($current_property = $pEstates->estateIterator()) {
                     <?php } ?>
                     <?php if ($energy_fields_available) {
 
+                        // Fetch required values
                         $energy_class =
                             $raw_values->getValueRaw($property_id)['elements'][
                                 'energyClass'
@@ -1277,165 +1280,97 @@ while ($current_property = $pEstates->estateIterator()) {
                             $raw_values->getValueRaw($property_id)['elements'][
                                 'energieausweistyp'
                             ] ?? '';
-                        $energy_certificate_values = oo_get_energy_certificate_values();
-                        $energy_certificate_value_range =
-                            $energy_certificate_values['value_ranges'];
+                        $labels = oo_get_energy_certificate_values()[
+                            'value_ranges'
+                        ]['energy_certificate'];
                         ?>
-                        <div class="c-property-details__energy">
-                            <h2 class="c-property-details__headline o-headline --h2"><?php echo esc_html(
-                                $pEstates->getFieldLabel('energieausweistyp'),
-                            ); ?></h2>
-                            <?php
-                            function renderEnergyCertificate(
-                                string $energy_certificate_type,
-                                array $energy_class_permitted_values,
-                                string $selectedEnergyClass,
-                                string $type,
-                                array $labels,
-                            ) {
-                                if ($energy_certificate_type === $type) { ?>
-                                    <div class="c-property-details__energy-certificate c-energy-certificate">
-                                        <?php
-                                        $index = 0;
-                                        foreach (
-                                            $energy_class_permitted_values
-                                            as $key => $label
-                                        ) {
-                                            $labelIndex = array_keys(
-                                                $energy_class_permitted_values,
-                                            )[$key]; ?>
-                                            <div class="c-energy-certificate__class --<?php echo strtolower(
-                                                $label,
-                                            ); ?> <?php echo $selectedEnergyClass ==
- $label
-     ? ' --is-active'
-     : ''; ?>">
-                                                <div class="c-energy-certificate__label"><?php echo $label; ?></div>
-                                                <div class="c-energy-certificate__value">
-                                                    <?php
-                                                    echo $labels[$labelIndex];
-                                                    if (
-                                                        array_key_exists(
-                                                            $labelIndex + 1,
-                                                            $labels,
-                                                        )
-                                                    ) {
-                                                        echo ' - ' .
-                                                            $labels[
-                                                                $labelIndex + 1
-                                                            ];
-                                                    } else {
-                                                        echo '+';
-                                                    }
-                                                    ?>
-                                                </div>
-                                            </div>
-                                        <?php $index++;
-                                        }
-                                        ?>
-                                    </div>
-                            <?php }
-                            }
 
-                            if (
+                        <div class="c-property-details__energy">
+                            <h2 class="c-property-details__headline o-headline --h2">
+                                <?= esc_html(
+                                    $pEstates->getFieldLabel(
+                                        'energieausweistyp',
+                                    ),
+                                ) ?>
+                            </h2>
+
+                            <?php if (
                                 !empty($energy_class_permitted_values) &&
                                 !empty($energy_class) &&
-                                !empty($energy_certificate_type) &&
                                 $pEstates->getShowEnergyCertificate()
-                            ) {
-                                foreach (
-                                    $energy_certificate_value_range
-                                    as $type => $labels
-                                ) {
-                                    renderEnergyCertificate(
-                                        $energy_certificate_type,
-                                        $energy_class_permitted_values,
-                                        $energy_class,
-                                        $type,
-                                        $labels,
-                                    );
-                                }
-                            }
-                            ?>
+                            ): ?>
+                                <?php oo_render_energy_certificate(
+                                    $energy_class_permitted_values,
+                                    $energy_class,
+                                    $labels,
+                                ); ?>
+                            <?php endif; ?>
+
                             <div class="c-item-fields">
                                 <?php
+                                // Ensure required field is present depending on type
                                 if (
                                     $energy_certificate_type ===
-                                    'Endenergiebedarf'
+                                        'Endenergiebedarf' &&
+                                    !in_array(
+                                        'endenergiebedarf',
+                                        $energy_fields,
+                                        true,
+                                    )
                                 ) {
-                                    if (
-                                        !in_array(
-                                            'endenergiebedarf',
-                                            $energy_fields,
-                                        )
-                                    ) {
-                                        $energy_fields[] = 'endenergiebedarf';
-                                    }
+                                    $energy_fields[] = 'endenergiebedarf';
                                 } elseif (
                                     $energy_certificate_type ===
-                                    'Energieverbrauchskennwert'
+                                        'Energieverbrauchskennwert' &&
+                                    !in_array(
+                                        'energieverbrauchskennwert',
+                                        $energy_fields,
+                                        true,
+                                    )
                                 ) {
+                                    $energy_fields[] =
+                                        'energieverbrauchskennwert';
+                                }
+
+                                foreach ($energy_fields_ordered as $field):
+
+                                    if (!isset($current_property[$field])) {
+                                        continue;
+                                    }
+
+                                    $value = $current_property[$field];
                                     if (
-                                        !in_array(
-                                            'energieverbrauchskennwert',
-                                            $energy_fields,
+                                        oo_is_invalid_energy_value(
+                                            $value,
+                                            $field,
+                                            $property_id,
+                                            $raw_values,
                                         )
                                     ) {
-                                        $energy_fields[] =
-                                            'energieverbrauchskennwert';
+                                        continue;
                                     }
-                                }
-
-                                foreach ($energy_fields as $field) {
-                                    if (isset($current_property[$field])) {
-                                        $value = $current_property[$field];
-                                        if (
-                                            (is_numeric($value) &&
-                                                0 == $value) ||
-                                            $value == '0000-00-00' ||
-                                            $value == '0.00' ||
-                                            (is_string($value) &&
-                                                $value !== '' &&
-                                                !is_numeric($value) &&
-                                                ($raw_values->getValueRaw(
-                                                    $property_id,
-                                                )['elements'][$field] ??
-                                                    null) ===
-                                                    '0') || // skip negative boolean fields
-                                            $value == '' ||
-                                            empty($value)
-                                        ) {
-                                            continue;
-                                        }
-
-                                        echo '<dl class="c-item-fields__item">';
-
-                                        echo '<dt class="c-item-fields__label">' .
-                                            esc_html(
-                                                $pEstates->getFieldLabel(
-                                                    $field,
-                                                ),
-                                            ) .
-                                            '</dt>' .
-                                            "\n" .
-                                            '<dd class="c-item-fields__value">' .
-                                            (is_array($value)
-                                                ? esc_html(
+                                    ?>
+                                    <dl class="c-item-fields__item">
+                                        <dt class="c-item-fields__label"><?= esc_html(
+                                            $pEstates->getFieldLabel($field),
+                                        ) ?></dt>
+                                        <dd class="c-item-fields__value">
+                                            <?php if (is_array($value)): ?>
+                                                <?= esc_html(
                                                     implode(', ', $value),
-                                                )
-                                                : esc_html($value)) .
-                                            '</dd>' .
-                                            "\n";
-                                        echo '</dl>';
-                                    }
-                                }
+                                                ) ?>
+                                            <?php else: ?>
+                                                <?= esc_html($value) ?>
+                                            <?php endif; ?>
+                                        </dd>
+                                    </dl>
+                                <?php
+                                endforeach;
                                 ?>
                             </div>
                         </div>
                     <?php
                     } ?>
-
-
 
                     <?php if (!empty($pEstates->getEstateUnits())) { ?>
                         <div class="c-property-details__units">
