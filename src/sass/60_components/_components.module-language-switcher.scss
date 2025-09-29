@@ -6,6 +6,7 @@
     background: transparent;
     border: 0;
     padding: 0;
+    width: auto;
     .wpml-ls-statics-shortcode_actions {
       margin: 0;
       a {
@@ -13,7 +14,14 @@
         border: 0;
         line-height: $small-line-height;
         text-align: left;
-        padding: 0 1rem;
+        // text-decoration: underline;
+        // text-underline-offset: $link-underline-ofset;
+        // padding: 0 1rem;
+        padding: 0.5rem 0.75rem;
+        
+        @include media-breakpoint-up(xxl) {
+          padding: 0 1rem; // centers with dropdown
+        }
 
         @include plain-visited() {
           color: var(--oo-color-header-mix-text-contrast-20);
@@ -86,16 +94,16 @@
           transition: transform 0.1s ease-in-out;
         }
 
-        &::before {
-          content: '';
-          position: absolute;
-          left: 1rem;
-          right: 1rem;
-          height: 1px;
-          bottom: 1px;
-          background-color: var(--oo-color-header-text, var(--oo-color-text));
-          transition: background-color 0.25s ease-in-out;
-        }
+        // &::before {
+        //   content: '';
+        //   position: absolute;
+        //   left: 1rem;
+        //   right: 1rem;
+        //   height: 1px;
+        //   bottom: 1px;
+        //   background-color: var(--oo-color-header-text, var(--oo-color-text));
+        //   transition: background-color 0.25s ease-in-out;
+        // }
 
         &.--is-open {
           &::after {
@@ -119,13 +127,10 @@
         display: flex;
         flex-direction: column-reverse;
         margin-top: 0.5rem;
-        border-left: 1px solid var(--oo-color-header-text, var(--oo-color-text));
-        border-right: 1px solid
-          var(--oo-color-header-text, var(--oo-color-text));
-        border-bottom: 1px solid
-          var(--oo-color-header-text, var(--oo-color-text));
+        border: 1px solid var(--oo-color-header-text, var(--oo-color-text));
 
         @include media-breakpoint-up(xl) {
+          border-top: none;
           li:last-of-type {
             border-radius: inherit;
             a {
@@ -145,12 +150,12 @@
           text-align: center;
           border-radius: inherit;
 
-          span {
-            text-decoration: underline;
-            text-underline-offset: $link-underline-offset;
-            text-decoration-color: transparent;
-            transition: text-decoration 0.1s ease-in-out;
-          }
+          // span {
+          //   text-decoration: underline;
+          //   text-underline-offset: $link-underline-offset;
+          //   text-decoration-color: transparent;
+          //   transition: text-decoration 0.1s ease-in-out;
+          // }
 
           @include plain-visited() {
             color: var(--oo-color-header-text, var(--oo-color-text));
@@ -160,12 +165,12 @@
           @include hover() {
             color: var(--oo-color-header-text, var(--oo-color-text));
 
-            span {
-              text-decoration-color: var(
-                --oo-color-header-text,
-                var(--oo-color-text)
-              );
-            }
+            // span {
+            //   text-decoration-color: var(
+            //     --oo-color-header-text,
+            //     var(--oo-color-text)
+            //   );
+            // }
           }
         }
       }
