@@ -1285,16 +1285,32 @@ jQuery(window).on('scroll', function(e) {
 jQuery(window).on('load', function(){
 });
 
-jQuery(window).on('resize', function(){
-  // Menu close on resize
-  if ( $('.o-body.--main-nav-open').length ) {
-      menuOpenClose();
-  };
+// Initialize last known viewport dimensions
+let ooLastHeight = window.innerHeight;
+let ooLastWidth = window.innerWidth;
+let ooResizeTimeout;
 
-  // Correct padding for first element in main if header
-  correctFirstElementPadding();
-  // Function to apply text shortening, read-more button and visibility adjustments based on word count and screen size
-  applyResponsiveTextShortening();
+jQuery(window).on('resize', function() {
+  clearTimeout(ooResizeTimeout);
+
+  ooResizeTimeout = setTimeout(function() {
+    const heightChange = Math.abs(window.innerHeight - ooLastHeight);
+    const widthChange = Math.abs(window.innerWidth - ooLastWidth);
+    ooLastHeight = window.innerHeight;
+    ooLastWidth = window.innerWidth;
+    // Only proceed if a significant change occurred
+    if (heightChange > 100 || widthChange > 50) {
+      if ($('.o-body.--main-nav-open').length) {
+        menuOpenClose();
+      }
+
+      // Correct padding for first element in main if header
+      correctFirstElementPadding();
+      // Function to apply text shortening, read-more button and visibility adjustments based on word count and screen size
+      applyResponsiveTextShortening();
+    }
+
+  }, 200); // 200ms debounce
 });
 
 // Global variables
