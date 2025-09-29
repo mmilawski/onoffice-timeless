@@ -1,6 +1,7 @@
 .o-headline {
   font-family: $font-family-headline;
   font-weight: $font-weight-headline;
+  text-transform: uppercase;
   hyphens: auto;
   text-wrap-style: balance;
   @include media-breakpoint-up(sm) {
