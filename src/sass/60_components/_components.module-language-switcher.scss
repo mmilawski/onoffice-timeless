@@ -14,13 +14,10 @@
         border: 0;
         line-height: $small-line-height;
         text-align: left;
-        // text-decoration: underline;
-        // text-underline-offset: $link-underline-ofset;
-        // padding: 0 1rem;
         padding: 0.5rem 0.75rem;
-        
+
         @include media-breakpoint-up(xxl) {
-          padding: 0 1rem; // centers with dropdown
+          padding: 0;
         }
 
         @include plain-visited() {
@@ -50,6 +47,7 @@
         &:not(.wpml-ls-link) {
           transition: text-decoration-color 0.25s ease-in-out,
             text-decoration 0.25s ease-in-out;
+          text-decoration: underline currentColor;
           text-underline-offset: $link-underline-offset;
 
           @include hover() {
@@ -144,18 +142,19 @@
           bottom: auto;
           display: block;
           padding-bottom: 0rem;
+          left: -1rem;
         }
         a {
           padding: 0.5rem 1rem;
           text-align: center;
           border-radius: inherit;
 
-          // span {
-          //   text-decoration: underline;
-          //   text-underline-offset: $link-underline-offset;
-          //   text-decoration-color: transparent;
-          //   transition: text-decoration 0.1s ease-in-out;
-          // }
+          span {
+            text-decoration: underline;
+            text-underline-offset: $link-underline-offset;
+            text-decoration-color: transparent;
+            transition: text-decoration 0.1s ease-in-out;
+          }
 
           @include plain-visited() {
             color: var(--oo-color-header-text, var(--oo-color-text));
@@ -165,12 +164,12 @@
           @include hover() {
             color: var(--oo-color-header-text, var(--oo-color-text));
 
-            // span {
-            //   text-decoration-color: var(
-            //     --oo-color-header-text,
-            //     var(--oo-color-text)
-            //   );
-            // }
+            span {
+              text-decoration-color: var(
+                --oo-color-header-text,
+                var(--oo-color-text)
+              );
+            }
           }
         }
       }
