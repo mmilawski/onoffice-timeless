@@ -1,5 +1,9 @@
-.c-module-login {
-  $c-module-login: &;
+.c-module-customer-login {
+  $c-module-customer-login: &;
+
+  &.--is-header {
+    width: auto;
+  }
 
   &__list {
     display: flex;
@@ -19,7 +23,7 @@
     }
 
     @include focus-visible() {
-      #{$c-module-login}__link {
+      #{$c-module-customer-login}__link {
         outline-color: var(--oo-color-header-primary, var(--oo-color-primary));
         text-decoration-color: transparent;
         color: var(--oo-color-header-primary, var(--oo-color-primary));
