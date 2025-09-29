@@ -4,10 +4,9 @@
   font-family: $font-family-navigation;
   font-weight: $font-weight-navigation;
   overflow: hidden;
-  padding: 0.25rem 0 0 0;
+  padding: 0;
   @include media-breakpoint-up(xxl) {
     overflow: inherit;
-    padding: 0;
   }
 
   &__button {
