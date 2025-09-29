@@ -52,24 +52,14 @@
       z-index: 1;
     }
 
-    &::before {
+    .--main-nav-open &::after {
       content: '';
       position: absolute;
-      bottom: 0;
       left: 0;
-      width: 100%;
+      bottom: 0;
       height: 1px;
-      background-color: var(--oo-color-header-text, var(--oo-color-text));
-    }
-
-    .--main-nav-open &::after {
-      content: ' ';
-      position: absolute;
-      left: 0;
-      height: 2px;
-      bottom: 0;
-      z-index: 9999;
       width: 100%;
+      background-color: var(--oo-color-header-mix-bg-text-50);
     }
   }
 

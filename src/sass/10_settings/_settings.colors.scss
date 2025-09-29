@@ -648,6 +648,13 @@
     var(--oo-color-bg),
     var(--oo-color-text)
   );
+  #{--oo-color-header-mix-bg-text-50}: mix-colors(
+    var(--oo-color-header-bg),
+    var(--oo-color-header-text),
+    0.5,
+    var(--oo-color-bg),
+    var(--oo-color-text)
+  );
 
   // footer
   #{--oo-color-footer-contrast-primary}: contrast-color(
