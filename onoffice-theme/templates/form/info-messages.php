@@ -54,8 +54,7 @@ if ($pForm->getFormStatus() === onOffice\WPlugin\FormPost::MESSAGE_SUCCESS) {
     echo '</div>';
 }
 
-if ($pForm->getFormStatus()) {
-    ?>
+if ($pForm->getFormStatus()) { ?>
     <script>
       window.addEventListener("load", function () {
         const message = document.querySelector(".c-info-messages");
@@ -74,7 +73,6 @@ if ($pForm->getFormStatus()) {
         }
       });
     </script>
-    <?php
-}
+    <?php }
 
 ?>
