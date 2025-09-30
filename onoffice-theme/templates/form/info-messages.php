@@ -54,4 +54,27 @@ if ($pForm->getFormStatus() === onOffice\WPlugin\FormPost::MESSAGE_SUCCESS) {
     echo '</div>';
 }
 
+if ($pForm->getFormStatus()) {
+    ?>
+    <script>
+      window.addEventListener("load", function () {
+        const message = document.querySelector(".c-info-messages");
+        if (message) {
+          message.scrollIntoView({ behavior: "smooth", block: "center" });
+          const form = message.parentElement
+          if(form && form.classList.contains('c-form')){
+            form.reset()
+            form.querySelectorAll('input, textarea').forEach(el => {
+              el.value = ''
+            })
+            document.querySelectorAll('select.tomselected').forEach(sel => {
+              sel.tomselect.clear()
+            })
+          }
+        }
+      });
+    </script>
+    <?php
+}
+
 ?>
