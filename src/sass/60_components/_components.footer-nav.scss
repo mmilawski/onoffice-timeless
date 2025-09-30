@@ -28,7 +28,7 @@
 
   &__link {
     padding: 0.5em;
-    color: var(--oo-color-footer-text, var(--oo-color-text));
+    color: var(--oo-color-footer-text-bottom, var(--oo-color-text));
     text-decoration: underline transparent;
     outline-offset: 0;
     @include media-breakpoint-up(lg) {

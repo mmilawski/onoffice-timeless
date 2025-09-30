@@ -90,12 +90,12 @@
 
     @include media-breakpoint-up(xl) {
       gap: 0;
-      padding: 0.5rem 0;
+      padding: 1.5rem 0;
     }
 
     * {
-      font-size: $small-font-size;
-      line-height: $small-line-height;
+      font-size: $global-font-size;
+      line-height: $global-line-height;
     }
 
     &-row {
