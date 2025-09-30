@@ -111,9 +111,9 @@
     var(--oo-color-shadow),
     0.2
   );
-  #{--oo-color-transparent-shadow-50}: transparent-color(
+  #{--oo-color-transparent-shadow-25}: transparent-color(
     var(--oo-color-shadow),
-    0.5
+    0.25
   );
   #{--oo-color-transparent-shadow-80}: transparent-color(
     var(--oo-color-shadow),
