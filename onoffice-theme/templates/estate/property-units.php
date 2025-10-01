@@ -5,14 +5,6 @@ $dont_echo = ['vermarktungsstatus'];
 $pEstatesClone = clone $pEstates;
 $pEstatesClone->resetEstateIterator();
 $raw_values = $pEstates->getRawValues();
-
-$price_fields = [
-    'kaufpreis',
-    'kaltmiete',
-    'nettokaltmiete',
-    'miete_pauschal',
-    'warmmiete',
-];
 ?>
 
 <?php if (

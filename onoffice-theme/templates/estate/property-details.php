@@ -229,7 +229,7 @@ while ($current_property = $pEstates->estateIterator()) {
     ?>
 
     <section class="c-property-details o-section --bg-transparent <?php echo $show_secret_sale_block
-        ? '--is-secret-sale'
+        ? '--blurry'
         : ''; ?>">
 
     <?php if ($iframe_display) { ?>

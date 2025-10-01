@@ -516,7 +516,7 @@
     }
   }
 
-  &.--is-secret-sale {
+  &.--blurry {
     filter: blur(8px);
     -webkit-filter: blur(8px);
     pointer-events: none;
