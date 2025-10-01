@@ -552,13 +552,19 @@ while ($current_property = $pEstatesClone->estateIterator()):
             <a class="c-property-card__button c-button --full-width --on-bg-transparent <?php if (
                 oo_should_show_secret_sale_placeholder($is_secret_sale)
             ) {
-                echo '--open-popup" data-popup="customer-login" data-forceurl="' .
-                    esc_url($property_url) .
-                    '"';
-            } ?>" href="<?php echo $property_url; ?>" aria-label="<?php echo sprintf(
-    esc_html_x('Zur Detailansicht der Immobilie Nr. %d', 'oo_theme'),
-    $property_id,
-); ?>">
+                echo '--open-popup';
+            } ?>"
+                href="<?php echo $property_url; ?>"
+                <?php if (
+                    oo_should_show_secret_sale_placeholder($is_secret_sale)
+                ): ?>
+                data-popup="customer-login" 
+                data-forceurl="<?php echo esc_url($property_url); ?>"
+                <?php endif; ?>
+                aria-label="<?php echo sprintf(
+                    esc_html_x('Zur Detailansicht der Immobilie Nr. %d', 'oo_theme'),
+                    $property_id,
+                ); ?>">
                 <?php esc_html_e('Zur Detailansicht', 'oo_theme'); ?>
             </a>
         <?php } ?>
