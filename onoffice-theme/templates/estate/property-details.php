@@ -102,6 +102,15 @@ while ($current_property = $pEstates->estateIterator()) {
 
     // status
     $property_status = $current_property['vermarktungsstatus'];
+    $is_secret_sale = filter_var(
+        $raw_values->getValueRaw($property_id)['elements']['secret_sale'] ??
+            null,
+        FILTER_VALIDATE_BOOLEAN,
+    );
+
+    $show_secret_sale_block = oo_should_show_secret_sale_placeholder(
+        $is_secret_sale,
+    );
 
     // link
     $property_link = esc_url($pEstates->getEstateLink());
@@ -219,7 +228,9 @@ while ($current_property = $pEstates->estateIterator()) {
     }
     ?>
 
-    <section class="c-property-details o-section --bg-transparent">
+    <section class="c-property-details o-section --bg-transparent <?php echo $show_secret_sale_block
+        ? '--is-secret-sale'
+        : ''; ?>">
 
     <?php if ($iframe_display) { ?>
         <a class="c-button c-property-details__back-button" href="javascript:history.back();"><?php esc_html_e(
@@ -229,7 +240,28 @@ while ($current_property = $pEstates->estateIterator()) {
     <?php } ?>
 
         <div class="c-property-details__banner">
-            <?php if (
+            <?php if ($show_secret_sale_block) { ?>
+                <?php
+                // --- SECRET SALE: PLACEHOLDER IMAGE ---
+
+                $placeholder_image_url = oo_get_secret_sale_placeholder();
+                if (!empty($placeholder_image_url)) {
+                    oo_get_template('components', '', 'component-image', [
+                        'image' => [
+                            'url' => $placeholder_image_url,
+                            'alt' => esc_html__('Platzhalterbild', 'oo_theme'),
+                        ],
+                        'picture_class' =>
+                            'c-property-details__banner-picture o-picture',
+                        'image_class' =>
+                            'c-property-details__banner-image o-image',
+                        'loading' => 'eager',
+                    ]);
+                } else {
+                    echo '<div class="c-property-details__banner-picture --is-placeholder"></div>';
+                }
+                ?>
+            <?php } elseif (
                 !empty($property_pictures) &&
                 is_array($property_pictures)
             ) {
@@ -297,7 +329,23 @@ while ($current_property = $pEstates->estateIterator()) {
             } ?>
             <div class="c-property-details__banner-wrapper o-container">
                 <div class="c-property-details__banner-content o-col-12 o-col-lg-10 o-col-xl-8">
-
+                    <?php if ($show_secret_sale_block): ?>
+                        <?php
+                        // --- SECRET SALE: PLACEHOLDER TITLE & PRICE ---
+                        ?>
+                        <h1 class="c-property-details__title o-headline --h2">
+                            <?php esc_html_e(
+                                'Exklusives Objekt',
+                                'oo_theme',
+                            ); ?>
+                        </h1>
+                        <p class="c-property-details__price">
+                            <?php esc_html_e(
+                                'Kaufpreis',
+                                'oo_theme',
+                            ); ?>: xxx.xxx
+                        </p>
+                    <?php else: ?>
                     <?php if (
                         $property_status ||
                         (Favorites::isFavorizationEnabled() &&
@@ -396,13 +444,13 @@ while ($current_property = $pEstates->estateIterator()) {
                         <?php
                         } ?>
                     <?php } ?>
-
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
 
         <div class="c-property-details__container o-container">
-            <?php if ($photos) {
+            <?php if ($photos && !$show_secret_sale_block) {
 
                 // Load Lightbox
                 wp_enqueue_script('oo-glightbox-script');
@@ -1196,7 +1244,9 @@ while ($current_property = $pEstates->estateIterator()) {
                                             $field_toggle_id,
                                         ); ?>">
                                             <?php echo nl2br(
-                                                esc_html($content),
+                                                $show_secret_sale_block
+                                                    ? '...'
+                                                    : esc_html($content),
                                             ); ?>
                                         </div>
                                         <button class="c-property-details__more c-read-more"
@@ -1399,6 +1449,15 @@ while ($current_property = $pEstates->estateIterator()) {
     </section>
 <?php
 }
+
+if ($show_secret_sale_block): ?>
+    <a id="secret-sale-trigger" href="#" style="display: none;" class="--open-popup" data-popup="customer-login" data-forceurl="<?php echo $property_link; ?>"></a>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        triggerSecretSalePopup();
+    });
+    </script>
+<?php endif;
 
 if (Favorites::isFavorizationEnabled()) { ?>
     <?php wp_enqueue_script('oo-favorites-script'); ?>

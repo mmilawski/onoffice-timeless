@@ -5,6 +5,14 @@ $dont_echo = ['vermarktungsstatus'];
 $pEstatesClone = clone $pEstates;
 $pEstatesClone->resetEstateIterator();
 $raw_values = $pEstates->getRawValues();
+
+$price_fields = [
+    'kaufpreis',
+    'kaltmiete',
+    'nettokaltmiete',
+    'miete_pauschal',
+    'warmmiete',
+];
 ?>
 
 <?php if (
@@ -89,6 +97,14 @@ $raw_values = $pEstates->getRawValues();
                 $pEstates->resetEstateIterator();
                 while ($current_property = $pEstates->estateIterator()) {
                     $property_id = $pEstates->getCurrentMultiLangEstateMainId();
+
+                    $is_secret_sale = filter_var(
+                        $raw_values->getValueRaw($property_id)['elements'][
+                            'secret_sale'
+                        ] ?? null,
+                        FILTER_VALIDATE_BOOLEAN,
+                    );
+
                     echo '<tr class="c-table__row --is-body">';
                     foreach ($current_property as $field => $value):
                         if (
@@ -131,6 +147,16 @@ $raw_values = $pEstates->getRawValues();
                             $class = '';
                         }
 
+                        if (
+                            $masking_attributes = oo_apply_secret_sale_masking(
+                                $field,
+                                $is_secret_sale,
+                            )
+                        ) {
+                            $value = $masking_attributes['value'];
+                            $class .= $masking_attributes['class'];
+                        }
+
                         echo '<td class="c-table__data ' .
                             $class .
                             '" data-label="' .
@@ -144,7 +170,15 @@ $raw_values = $pEstates->getRawValues();
                         esc_html__('Details', 'oo_theme') .
                         '">';
                     if (!empty($pEstates->getEstateLink())) {
-                        echo '<a class="c-link --underlined --on-bg-transparent" href="' .
+                        echo '<a class="c-link --underlined --on-bg-transparent.--attach-popup';
+                        echo oo_should_show_secret_sale_placeholder(
+                            $is_secret_sale,
+                        )
+                            ? '--open-popup" data-popup="customer-login" data-forceurl="' .
+                                esc_url($pEstatesClone->getEstateLink()) .
+                                '"'
+                            : '"';
+                        echo ' href="' .
                             esc_url($pEstates->getEstateLink()) .
                             '">';
                     }

@@ -665,6 +665,13 @@ jQuery(document).ready(function() {
           }
 
           function closePopup() {
+            if (popupElement.dataset.unclosable === 'true') {
+                // ...instead of trapping the user, redirect them to the homepage or a login page.
+                // This fulfills the "paywall" goal without violating accessibility laws.
+                window.location.href = '/'; // Redirect to homepage
+                return; // Stop further execution
+            }
+
             popupElement.classList.remove('--is-open');
             if (popupElement instanceof HTMLDialogElement && typeof popupElement.close === 'function') {
               popupElement.close();
