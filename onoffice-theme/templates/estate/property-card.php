@@ -562,7 +562,10 @@ while ($current_property = $pEstatesClone->estateIterator()):
                 data-forceurl="<?php echo esc_url($property_url); ?>"
                 <?php endif; ?>
                 aria-label="<?php echo sprintf(
-                    esc_html_x('Zur Detailansicht der Immobilie Nr. %d', 'oo_theme'),
+                    esc_html_x(
+                        'Zur Detailansicht der Immobilie Nr. %d',
+                        'oo_theme',
+                    ),
                     $property_id,
                 ); ?>">
                 <?php esc_html_e('Zur Detailansicht', 'oo_theme'); ?>
