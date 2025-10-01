@@ -8,6 +8,7 @@
 
 .c-footer {
   $c-footer: &;
+  border-top: 1px solid var(--oo-color-footer-mix-border-50);
 
   &__top {
     position: relative;
@@ -86,7 +87,7 @@
   &__bottom {
     color: var(--oo-color-footer-text-bottom, var(--oo-color-text));
     background-color: var(--oo-color-footer-bg-bottom);
-    padding: 1rem 0 0.5rem 0;
+    padding: 1.25rem 0 0.5rem 0;
 
     @include media-breakpoint-up(xl) {
       gap: 0;
@@ -162,6 +163,7 @@
       display: flex;
       align-items: center;
       color: currentColor;
+      opacity: 50%;
 
       &__svg {
         height: 2.25rem;
