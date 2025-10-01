@@ -654,11 +654,6 @@
     var(--oo-color-footer-primary),
     var(--oo-color-primary)
   );
-  #{--oo-color-footer-mix-text-contrast-20}: mix-color-with-contrast(
-    var(--oo-color-footer-text),
-    0.2,
-    var(--oo-color-text)
-  );
   #{--oo-color-footer-mix-text-contrast-30}: mix-color-with-contrast(
     var(--oo-color-footer-text),
     0.3,
@@ -698,6 +693,13 @@
   );
   #{--oo-color-footer-bg-bottom}: var(--oo-color-bg);
   #{--oo-color-footer-text-bottom}: var(--oo-color-text);
+  #{--oo-color-footer-mix-border-50}: mix-colors(
+    var(--oo-color-footer-bg),
+    var(--oo-color-footer-text),
+    0.5,
+    var(--oo-color-bg),
+    var(--oo-color-text)
+  );
 
   // property status
   #{--oo-color-property-status-contrast-bg}: contrast-color(
