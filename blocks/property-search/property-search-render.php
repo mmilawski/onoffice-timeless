@@ -37,7 +37,7 @@ if (!empty(get_field('property_search_result'))) {
             </div>
         <?php } ?>
         <div class="c-property-search__content o-row --position-center">
-            <div class="c-property-search__shortcode o-col-12 o-col-lg-10 o-col-xl-8">
+            <div class="c-property-search__shortcode o-col-12 o-col-lg-10 o-col-xl-8 --<?php echo $bg_color; ?>">
                 <?php if (!empty($shortcode)) {
                     echo do_shortcode($shortcode);
                 } ?>

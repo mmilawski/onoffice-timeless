@@ -25,7 +25,7 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
                 } ?>
 
                 <?php if (!empty($text['wysiwyg'])) { ?>
-                    <div class="c-forms__text o-text --is-wysiwyg o-col-12 o-col-lg-10 o-col-xl-8">
+                    <div class="c-forms__text o-text --is-wysiwyg">
                         <?php echo $text['wysiwyg']; ?>
                     </div>
                 <?php } ?>

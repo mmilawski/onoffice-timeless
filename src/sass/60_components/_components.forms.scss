@@ -3,27 +3,59 @@
 
   &__container {
     display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    @include media-breakpoint-up(xl) {
-      gap: 2rem;
+    flex-direction: row;
+    gap: 2rem;
+    @include media-breakpoint-down(sm) {
+      gap: 1.5rem;
+      flex-direction: column;
+      padding: 0;
     }
   }
 
   &__content {
     gap: 1.5rem;
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-up(md) {
       gap: 2rem;
     }
   }
 
   &__headline {
+    @include media-breakpoint-up(md) {
+      padding-top: 5rem;
+    }
+    hyphens: auto;
   }
 
   &__text {
+    @include media-breakpoint-down(sm) {
+      padding-bottom: 2.5rem;
+    }
   }
 
   &__wrapper {
+    padding-top: 2rem;
+    padding-bottom: 1.5rem;
+    @include media-breakpoint-up(md) {
+      padding: 1.5rem;
+    }
+
+    background-color: var(--oo-color-bg);
+
+    &.--bg-light {
+      background-color: var(--oo-color-light-bg, var(--oo-color-bg));
+    }
+
+    &.--bg-dark {
+      background-color: var(--oo-color-dark-bg, var(--oo-color-bg));
+    }
+
+    &.--bg-primary {
+      background-color: var(--oo-color-primary-bg, var(--oo-color-bg));
+    }
+
+    &.--bg-secondary {
+      background-color: var(--oo-color-secondary-bg, var(--oo-color-bg));
+    }
   }
 
   &__form {
