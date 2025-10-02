@@ -66,7 +66,7 @@ if ($pForm->getFormStatus()) { ?>
             form.querySelectorAll('input, textarea').forEach(el => {
               el.value = ''
             })
-            document.querySelectorAll('select.tomselected').forEach(sel => {
+            form.querySelectorAll('select.tomselected').forEach(sel => {
               sel.tomselect.clear()
             })
           }
