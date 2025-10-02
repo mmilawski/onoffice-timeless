@@ -1653,6 +1653,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
   flex-direction: column;
   gap: 0;
   width: 100%;
+  grid-column: 1 / -1;
 
   .--is-range & {
     display: grid;
