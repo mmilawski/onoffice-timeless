@@ -12,10 +12,10 @@ $headline_class = 'c-text__headline o-col-12 o-col-xl-10';
 if (!empty($texts[0]['text']['wysiwyg'])) {
     $text_count = is_array($texts) ? count($texts) : 1;
     $text_class =
-        'c-text__content o-col-12 o-col-xl-' . ($text_count === 1 ? '8' : '4');
+        'c-text__content o-col-12 o-col-xl-' . ($text_count === 1 ? '8' : '4') . (($text_count === 1  && $align_text !=='center') ? ' u-offset-md-1' : '');
     $headline_class =
         'c-text__headline o-col-12 o-col-xl-' .
-        ($text_count === 3 ? '12' : '8');
+        ($text_count === 3 ? '12' : '8') . ((($text_count === 1 || $text_count === 2) && $align_text !=='center') ? ' u-offset-md-1' : '');
 }
 ?>
 
@@ -39,12 +39,14 @@ if (!empty($texts[0]['text']['wysiwyg'])) {
         ) { ?>
             <div class="c-text__columns o-row">
                 <?php if (is_array($texts)) {
+                    $i = 0;
                     foreach ($texts as $text_column):
 
                         $text = $text_column['text'];
                         $buttons = $text_column['buttons'];
+                        $offset_class = ($i === 0 && $text_count !== 3 && $align_text !=='center') ? ' u-offset-md-1' : '';
                         ?>
-                        <div class="<?php echo $text_class; ?>">
+                        <div class="<?php echo $text_class . $offset_class; ?>">
                             <?php if (!empty($text['wysiwyg'])) { ?>
                                 <div class="c-text__text o-text --is-wysiwyg">
                                     <?php echo $text['wysiwyg']; ?>
@@ -68,6 +70,7 @@ if (!empty($texts[0]['text']['wysiwyg'])) {
                             } ?>
                         </div>
                     <?php
+                    $i++;
                     endforeach; ?>
                 <?php
                 } ?>
