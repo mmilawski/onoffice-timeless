@@ -12,14 +12,14 @@ $headline_class = 'c-text__headline o-col-12 o-col-xl-10';
 if (!empty($texts[0]['text']['wysiwyg'])) {
     $text_count = is_array($texts) ? count($texts) : 1;
     $text_class =
-        'c-text__content o-col-12 o-col-xl-' .
+        'c-text__content o-col-12 o-col-lg-10 o-col-xl-' .
         ($text_count === 1 ? '8' : '4') .
-        ($text_count === 1 && $align_text !== 'center' ? ' u-offset-md-1' : '');
+        ($text_count === 1 && $align_text !== 'center' ? ' u-offset-lg-1' : '');
     $headline_class =
-        'c-text__headline o-col-12 o-col-xl-' .
+        'c-text__headline o-col-12 o-col-lg-10 o-col-xl-' .
         ($text_count === 3 ? '12' : '8') .
         (($text_count === 1 || $text_count === 2) && $align_text !== 'center'
-            ? ' u-offset-md-1'
+            ? ' u-offset-lg-1'
             : '');
 }
 ?>
@@ -54,7 +54,7 @@ if (!empty($texts[0]['text']['wysiwyg'])) {
                             $i === 0 &&
                             $text_count !== 3 &&
                             $align_text !== 'center'
-                                ? ' u-offset-md-1'
+                                ? ' u-offset-lg-1'
                                 : '';
                         ?>
                         <div class="<?php echo $text_class . $offset_class; ?>">
