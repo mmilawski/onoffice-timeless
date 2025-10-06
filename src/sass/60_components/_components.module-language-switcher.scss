@@ -56,20 +56,6 @@
         }
       }
     }
-    .wpml-ls-legacy-dropdown {
-      a {
-        span {
-          vertical-align: unset;
-        }
-      }
-
-      .wpml-ls-current-language > a {
-        white-space: nowrap;
-        display: inline-block;
-        min-width: fit-content;
-      }
-    }
-    .wpml-ls-legacy-dropdown,
     .wpml-ls-legacy-dropdown-click {
       width: auto;
 
@@ -92,21 +78,17 @@
           transition: transform 0.1s ease-in-out;
         }
 
-        // &::before {
-        //   content: '';
-        //   position: absolute;
-        //   left: 1rem;
-        //   right: 1rem;
-        //   height: 1px;
-        //   bottom: 1px;
-        //   background-color: var(--oo-color-header-text, var(--oo-color-text));
-        //   transition: background-color 0.25s ease-in-out;
-        // }
-
-        &.--is-open {
-          &::after {
-            transform: rotate(-180deg);
-          }
+        &::before {
+          content: '';
+          position: absolute;
+          top: 100%;
+          left: -1rem;
+          right: -1rem;
+          height: 0;
+          opacity: 0;
+          background: rgba(0, 0, 0, 0);
+          z-index: 10;
+          overflow: hidden;
         }
       }
 
@@ -144,33 +126,64 @@
           padding-bottom: 0rem;
           left: -1rem;
         }
-        a {
-          padding: 0.5rem 1rem;
-          text-align: center;
-          border-radius: inherit;
 
-          span {
-            text-decoration: underline;
-            text-underline-offset: $link-underline-offset;
-            text-decoration-color: transparent;
-            transition: text-decoration 0.1s ease-in-out;
-          }
-
-          @include plain-visited() {
-            color: var(--oo-color-header-text, var(--oo-color-text));
-            background-color: var(--oo-color-header-bg, var(--oo-color-bg));
-          }
-
-          @include hover() {
-            color: var(--oo-color-header-text, var(--oo-color-text));
-
-            span {
-              text-decoration-color: var(
-                --oo-color-header-text,
-                var(--oo-color-text)
-              );
+        .wpml-ls-item {
+          &:first-of-type {
+            .wpml-ls-link {
+              padding: 0.5rem 1rem;
             }
           }
+
+          &:last-of-type {
+            .wpml-ls-link {
+              padding: 0.5rem 1rem;
+            }
+          }
+
+          .wpml-ls-link {
+            padding: 0.25rem 1rem;
+            text-align: center;
+            border-radius: inherit;
+
+            .wpml-ls-display {
+              text-decoration: underline;
+              text-underline-offset: $link-underline-offset;
+              text-decoration-color: transparent;
+              transition: text-decoration 0.1s ease-in-out;
+            }
+
+            @include plain-visited() {
+              color: var(--oo-color-header-text, var(--oo-color-text));
+              background-color: var(--oo-color-header-bg, var(--oo-color-bg));
+            }
+
+            @include hover() {
+              color: var(--oo-color-header-text, var(--oo-color-text));
+
+              .wpml-ls-display {
+                text-decoration-color: var(
+                  --oo-color-header-text,
+                  var(--oo-color-text)
+                );
+              }
+            }
+          }
+        }
+      }
+
+      &:hover {
+        .wpml-ls-item-toggle {
+          &::before {
+            height: 1rem;
+          }
+
+          &::after {
+            transform: rotate(-180deg);
+          }
+        }
+
+        .wpml-ls-sub-menu {
+          visibility: visible;
         }
       }
     }
