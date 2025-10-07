@@ -1459,6 +1459,8 @@ if ($show_secret_sale_block): ?>
     </script>
 <?php endif;
 
+do_action('oo_secretsale_logactivity', $property_id, $is_secret_sale);
+
 if (Favorites::isFavorizationEnabled()) { ?>
     <?php wp_enqueue_script('oo-favorites-script'); ?>
 
