@@ -16,17 +16,6 @@
     height: 100dvh;
     overflow: hidden;
     inset: 0;
-
-    &::after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background-color: var(--oo-color-transparent-bg-90);
-    }
   }
 
   &__image {
@@ -35,22 +24,28 @@
   &__container {
     position: relative;
     display: flex;
-    display: -ms-flexbox;
-    display: -webkit-box;
     flex-direction: column;
     gap: 1.5rem;
+    padding-right: 0;
+    padding-left: 0;
     @include media-breakpoint-up(xl) {
-      gap: 2rem;
+      gap: 3.75rem;
+      padding-right: 1rem;
+      padding-left: 1rem;
     }
   }
 
   &__content {
     gap: 1.5rem;
-    margin-bottom: 1rem;
     @include media-breakpoint-up(xl) {
-      gap: 2rem;
-      margin-bottom: 3rem;
+      gap: 2.625rem;
+      display: flex;
+      flex-direction: column;
     }
+  }
+
+  &__wrapper {
+    margin-bottom: 1.25rem;
   }
 
   &__boxes {
@@ -75,6 +70,15 @@
   }
 
   &.--has-bg-image {
+    #{$c-link-boxes}__content {
+      background-color: var(--oo-color-mix-bg-contrast-05);
+      padding: 1.5rem;
+      border: 2px solid var(--oo-color-bg);
+    }
+
+    #{$c-link-boxes}-card {
+      border: 2px solid var(--oo-color-bg);
+    }
   }
 
   &.--bg-light {
