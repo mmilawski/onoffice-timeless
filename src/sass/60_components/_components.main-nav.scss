@@ -215,7 +215,8 @@
       right: auto;
       visibility: hidden;
       opacity: 0;
-      width: 18.75rem;
+      min-width: 9.375rem;
+      max-width: 18.75rem;
       background-color: var(--oo-color-header-bg, var(--oo-color-bg));
       padding: 0;
       border-left: 1px solid var(--oo-color-header-text, var(--oo-color-text));
