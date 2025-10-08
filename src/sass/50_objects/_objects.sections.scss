@@ -41,13 +41,28 @@
   }
 
   // remove padding if sections with the same color are underneath each other
-  &.--bg-transparent:not(.--has-bg-image)
-    + &.--bg-transparent:not(.--has-bg-image),
-  &.--bg-light:not(.--has-bg-image) + &.--bg-light:not(.--has-bg-image),
-  &.--bg-dark:not(.--has-bg-image) + &.--bg-dark:not(.--has-bg-image),
-  &.--bg-primary:not(.--has-bg-image) + &.--bg-primary:not(.--has-bg-image),
-  &.--bg-secondary:not(.--has-bg-image)
-    + &.--bg-secondary:not(.--has-bg-image) {
+  // apply only if both are forms
+  &.--bg-transparent.c-forms:not(.--has-bg-image)
+    + &.--bg-transparent.c-forms:not(.--has-bg-image),
+  &.--bg-light.c-forms:not(.--has-bg-image)
+    + &.--bg-light.c-forms:not(.--has-bg-image),
+  &.--bg-dark.c-forms:not(.--has-bg-image)
+    + &.--bg-dark.c-forms:not(.--has-bg-image),
+  &.--bg-primary.c-forms:not(.--has-bg-image)
+    + &.--bg-primary.c-forms:not(.--has-bg-image),
+  &.--bg-secondary.c-forms:not(.--has-bg-image)
+    + &.--bg-secondary.c-forms:not(.--has-bg-image),
+  // apply only if neither if a form
+  &.--bg-transparent:not(.c-forms):not(.--has-bg-image)
+    + &.--bg-transparent:not(.c-forms):not(.--has-bg-image),
+  &.--bg-light:not(.c-forms):not(.--has-bg-image)
+    + &.--bg-light:not(.c-forms):not(.--has-bg-image),
+  &.--bg-dark:not(.c-forms):not(.--has-bg-image)
+    + &.--bg-dark:not(.c-forms):not(.--has-bg-image),
+  &.--bg-primary:not(.c-forms):not(.--has-bg-image)
+    + &.--bg-primary:not(.c-forms):not(.--has-bg-image),
+  &.--bg-secondary:not(.c-forms):not(.--has-bg-image)
+    + &.--bg-secondary:not(.c-forms):not(.--has-bg-image) {
     padding-top: 0;
   }
 }

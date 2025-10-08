@@ -64,10 +64,7 @@
   }
 
   &.--bg-transparent {
-    background-color: var(
-      --oo-color-mix-bg-contrast-05,
-      var(--oo-color-bg)
-    );
+    background-color: var(--oo-color-mix-bg-contrast-05, var(--oo-color-bg));
   }
 
   &.--bg-light {
