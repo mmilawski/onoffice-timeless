@@ -22,34 +22,22 @@
 
   &.--bg-light {
     color: var(--oo-color-light-text, var(--oo-color-text));
-    background-color: var(
-      --oo-color-light-transparent-bg-95,
-      var(--oo-color-bg)
-    );
+    background-color: var(--oo-color-light-bg, var(--oo-color-bg));
   }
 
   &.--bg-dark {
     color: var(--oo-color-dark-text, var(--oo-color-text));
-    background-color: var(
-      --oo-color-dark-transparent-bg-95,
-      var(--oo-color-bg)
-    );
+    background-color: var(--oo-color-dark-bg, var(--oo-color-bg));
   }
 
   &.--bg-primary {
     color: var(--oo-color-primary-text, var(--oo-color-text));
-    background-color: var(
-      --oo-color-primary-transparent-bg-95,
-      var(--oo-color-bg)
-    );
+    background-color: var(--oo-color-primary-bg, var(--oo-color-bg));
   }
 
   &.--bg-secondary {
     color: var(--oo-color-secondary-text, var(--oo-color-text));
-    background-color: var(
-      --oo-color-secondary-transparent-bg-95,
-      var(--oo-color-bg)
-    );
+    background-color: var(--oo-color-secondary-bg, var(--oo-color-bg));
   }
 
   // remove padding if sections with the same color are underneath each other
