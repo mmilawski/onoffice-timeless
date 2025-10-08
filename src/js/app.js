@@ -1607,7 +1607,13 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
-    form.addEventListener('submit', function(event) {
+    // use a capture phase form click listener on submit button instead of simple submit event.
+    // It is needed to prevent recaptcha code to call form.reportValidity and display the browsers error messages.
+    // If the form is valid the recaptcha code still gets executed.
+    form.addEventListener('click', function(event) {
+      if (!event.target?.matches('.c-form__button')) {
+        return
+      }
       if (!form.checkValidity()) {
         event.preventDefault();
         event.stopPropagation();
