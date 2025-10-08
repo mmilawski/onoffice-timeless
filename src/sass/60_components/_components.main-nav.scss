@@ -226,13 +226,6 @@
         visibility 0.25s ease-in-out, opacity 0.25s ease-in-out;
     }
 
-    #{$c-main-nav}__item {
-      &:last-of-type {
-        @include media-breakpoint-up(xxl) {
-          border-radius: inherit;
-        }
-      }
-    }
 
     #{$c-main-nav}__link {
       text-decoration: underline;
