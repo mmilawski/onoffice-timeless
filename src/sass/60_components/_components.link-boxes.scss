@@ -24,6 +24,8 @@
   &__container {
     position: relative;
     display: flex;
+    display: -ms-flexbox;
+    display: -webkit-box;
     flex-direction: column;
     gap: 1.5rem;
     padding-right: 0;
@@ -78,6 +80,22 @@
 
     #{$c-link-boxes}-card {
       border: 2px solid var(--oo-color-bg);
+    }
+
+    & .c-button {
+      &.--ghost {
+        @include plain-visited() {
+          background-color: var(--oo-color-bg);
+        }
+
+        @include hover() {
+          background-color: var(--oo-color-bg);
+        }
+
+        @include disabled() {
+          background-color: var(--oo-color-bg);
+        }
+      }
     }
   }
 
