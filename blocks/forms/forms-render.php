@@ -15,7 +15,7 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
 ); ?> class="c-forms --is-<?php echo $type; ?>-form o-section --<?php echo $bg_color; ?>">
     <div class="c-forms__container o-container">
         <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
-            <div class="c-forms__content pt-5 o-col-md-5">
+            <div class="c-forms__content o-col-md-5">
                 <?php if (!empty($headline['text'])) {
                     oo_get_template('components', '', 'component-headline', [
                         'headline' => $headline,
