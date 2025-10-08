@@ -111,4 +111,33 @@
       color: var(--oo-color-text);
     }
   }
+
+  &.--blurry {
+    color: transparent !important;
+    text-shadow: 0 0 10px var(--oo-color-text);
+
+    .--bg-light & {
+      text-shadow: 0 0 10px var(--oo-color-light-text);
+    }
+
+    .--bg-dark & {
+      text-shadow: 0 0 10px var(--oo-color-dark-text);
+    }
+
+    .--bg-primary & {
+      text-shadow: 0 0 10px var(--oo-color-primary-text);
+    }
+
+    .--bg-secondary & {
+      text-shadow: 0 0 10px var(--oo-color-secondary-text);
+    }
+
+    .--bg-footer & {
+      text-shadow: 0 0 10px var(--oo-color-footer-text);
+    }
+
+    .--bg-transparent & {
+      text-shadow: 0 0 10px var(--oo-color-text);
+    }
+  }
 }

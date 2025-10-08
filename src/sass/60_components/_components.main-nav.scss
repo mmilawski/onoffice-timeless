@@ -169,12 +169,11 @@
       @media (hover: hover) and (pointer: fine) {
         &:hover,
         &:focus-visible {
-            text-decoration-color: var(
-              --oo-color-header-text,
-              var(--oo-color-text)
-            );
-            color: var(--oo-color-header-text, var(--oo-color-text));
-
+          text-decoration-color: var(
+            --oo-color-header-text,
+            var(--oo-color-text)
+          );
+          color: var(--oo-color-header-text, var(--oo-color-text));
         }
       }
     }
@@ -200,12 +199,11 @@
         @media (hover: hover) and (pointer: fine) {
           &:hover,
           &:focus-visible {
-                color: var(--oo-color-header-contrast-primary);
-                background-color: var(
-                  --oo-color-header-primary,
-                  var(--oo-color-primary)
-                );
-
+            color: var(--oo-color-header-contrast-primary);
+            background-color: var(
+              --oo-color-header-primary,
+              var(--oo-color-primary)
+            );
           }
         }
       }
@@ -248,12 +246,11 @@
       @media (hover: hover) and (pointer: fine) {
         &:hover,
         &:focus-visible {
-            color: var(--oo-color-header-contrast-primary);
-            background-color: var(
-              --oo-color-header-primary,
-              var(--oo-color-primary)
-            );
-
+          color: var(--oo-color-header-contrast-primary);
+          background-color: var(
+            --oo-color-header-primary,
+            var(--oo-color-primary)
+          );
         }
       }
 
