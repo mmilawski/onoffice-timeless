@@ -1623,7 +1623,6 @@ document.addEventListener('DOMContentLoaded', function() {
           })
           jumpToFirstInvalidInput(form);
         }
-        console.log('add class')
         form.classList.add('--validated');
       }, true);
     });
