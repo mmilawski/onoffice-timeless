@@ -106,42 +106,22 @@
         display: flex;
         flex-direction: column-reverse;
         margin-top: 0.5rem;
-        border: 1px solid var(--oo-color-header-text, var(--oo-color-text));
-
-        @include media-breakpoint-up(xl) {
-          li:last-of-type {
-            border-radius: inherit;
-            a {
-              border-radius: inherit;
-            }
-          }
-        }
+        border: 1px solid
+          var(--oo-color-header-mix-bg-text-50, var(--oo-color-header-text));
+        background-color: var(--oo-color-header-bg, var(--oo-color-bg));
+        padding: 0.25rem 0;
 
         @include media-breakpoint-up(xxl) {
           top: 100%;
           bottom: auto;
           display: block;
-          padding-bottom: 0rem;
           left: -1rem;
         }
 
         .wpml-ls-item {
-          &:first-of-type {
-            .wpml-ls-link {
-              padding: 0.5rem 1rem;
-            }
-          }
-
-          &:last-of-type {
-            .wpml-ls-link {
-              padding: 0.5rem 1rem;
-            }
-          }
-
           .wpml-ls-link {
             padding: 0.25rem 1rem;
             text-align: center;
-            border-radius: inherit;
 
             .wpml-ls-display {
               text-decoration: underline;

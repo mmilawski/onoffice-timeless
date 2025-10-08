@@ -218,14 +218,13 @@
       min-width: 9.375rem;
       max-width: 18.75rem;
       background-color: var(--oo-color-header-bg, var(--oo-color-bg));
-      padding: 0;
+      padding: 0.5rem 0;
       border-left: 1px solid var(--oo-color-header-text, var(--oo-color-text));
       border-right: 1px solid var(--oo-color-header-text, var(--oo-color-text));
       border-bottom: 1px solid var(--oo-color-header-text, var(--oo-color-text));
       transition: text-decoration 0.25s ease-in-out,
         visibility 0.25s ease-in-out, opacity 0.25s ease-in-out;
     }
-
 
     #{$c-main-nav}__link {
       text-decoration: underline;
