@@ -5,6 +5,13 @@
   flex-direction: column;
   color: var(--oo-color-text);
   background-color: var(--oo-color-mix-bg-contrast-05);
+  margin-right: -1rem;
+  margin-left: -1rem;
+
+  @include media-breakpoint-up(xl) {
+    margin-right: 0;
+    margin-left: 0;
+  }
 
   &__wrapper,
   &__link {

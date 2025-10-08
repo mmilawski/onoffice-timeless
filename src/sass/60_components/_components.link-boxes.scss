@@ -28,12 +28,8 @@
     display: -webkit-box;
     flex-direction: column;
     gap: 1.5rem;
-    padding-right: 0;
-    padding-left: 0;
     @include media-breakpoint-up(xl) {
       gap: 3.75rem;
-      padding-right: 1rem;
-      padding-left: 1rem;
     }
   }
 
@@ -52,13 +48,12 @@
 
   &__boxes {
     display: grid;
-    gap: 1.5rem;
+    gap: 2rem;
     @include media-breakpoint-up(md) {
       grid-template-columns: repeat(2, 1fr);
     }
     @include media-breakpoint-up(xl) {
       grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
     }
   }
 

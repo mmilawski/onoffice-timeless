@@ -141,7 +141,7 @@ $background_width_xxxl = '1920';
                         ? '--on-' . $bg_color
                         : '',
                     'additional_container_class' =>
-                        'c-link-boxes__buttons o-col-12 u-offset-lg-1',
+                        'c-link-boxes__buttons o-col-12 o-col-lg-10 o-col-xl-8 u-offset-lg-1',
                 ]); ?>
             </div>
         <?php } ?>
