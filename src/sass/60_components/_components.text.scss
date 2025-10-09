@@ -17,11 +17,17 @@
 
   &__row {
     justify-content: center;
+    gap: 1.5rem;
+
     .--text-align-left & {
     }
     .--text-align-center & {
       justify-content: center;
       text-align: center;
+    }
+
+    @include media-breakpoint-up(lg) {
+      gap: 0;
     }
   }
 
