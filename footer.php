@@ -15,7 +15,7 @@ $company = get_field('company', 'option') ?? [];
 $company_name = $company['name'] ?? (get_bloginfo('name') ?? null);
 ?>
 
-<footer class="c-footer">
+<footer id="footer" class="c-footer">
     <button class="c-back-to-top" aria-label="<?php echo __(
         'Zurück zum Anfang',
         'oo_theme',
@@ -144,8 +144,10 @@ $company_name = $company['name'] ?? (get_bloginfo('name') ?? null);
                                     $param_value;
                                 ?>
                                 <a class="c-footer-nav__link --is-top-level"
+                                role="button"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                aria-label="Link opens in a new tab"
                                 href="<?= esc_url($barrier_found_url) ?>">
                                     <?php esc_html_e(
                                         'Barriere gefunden?',
