@@ -10,8 +10,9 @@
   @include font-size($global-font-size, $small-line-height);
   text-align: center;
   text-transform: uppercase;
+  letter-spacing: 2px;
   margin: 0;
-  padding: 1rem 4rem;
+  padding: 1rem 3rem;
   width: 100%;
   border: 2px solid transparent;
   outline: $outline;
