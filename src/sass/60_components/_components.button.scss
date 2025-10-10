@@ -7,12 +7,12 @@
   position: relative;
   font-family: $font-family-button;
   font-weight: $font-weight-button;
-  @include font-size($global-font-size, 1.125rem);
+  @include font-size($global-font-size, $global-line-height);
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 2px;
   margin: 0;
-  padding: 1rem 3rem;
+  padding: 0.6875rem 3rem;
   width: 100%;
   border: 2px solid transparent;
   outline: $outline;

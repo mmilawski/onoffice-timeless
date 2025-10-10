@@ -1,9 +1,9 @@
 $form-height: 2.375rem;
 $form-margin: 0; // Margin
-$form-padding: 0.875rem 1rem; // Padding
+$form-padding: 0.6875rem 1rem; // Padding
 $form-padding-top: 1rem; // Padding top
 $form-padding-right: 1rem; // Padding right
-$form-line-height: 1.125rem;
+$form-line-height: $global-line-height;
 $form-remove-wrapper: 1rem; // Size of the remove background
 $form-remove-size: 1rem; // Size of the remove icon
 $form-select-size: 0.75rem; // Size of the select arrow icon
