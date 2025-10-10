@@ -87,14 +87,14 @@
   &.--bg-primary {
     background-color: var(
       --oo-color-primary-mix-bg-contrast-05,
-      var(--oo-color-primary-text)
+      var(--oo-color-primary-bg)
     );
   }
 
   &.--bg-secondary {
     background-color: var(
       --oo-color-secondary-mix-bg-contrast-05,
-      var(--oo-color-secondary-text)
+      var(--oo-color-secondary-bg)
     );
   }
 }
