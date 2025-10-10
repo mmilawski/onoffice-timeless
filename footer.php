@@ -28,24 +28,47 @@ $company_name = $company['name'] ?? (get_bloginfo('name') ?? null);
     <?php if (is_array($footer_content_rows)) { ?>
         <div class="c-footer__top --bg-footer">
             <div class="c-footer__top-container o-container">
-            <?php foreach ($footer_content_rows as $row) { ?>
+                <?php foreach ($footer_content_rows as $row) { ?>
                     <div class="c-footer__top-row o-row">
-                    <?php foreach ($row as $key => $column) {
-                        $column_modules = $column['modules'] ?? []; ?>
-                                <div class="c-footer__top-column --<?php echo $key; ?> <?php if (
-     empty($column_modules)
- ) {
-     echo '--is-empty';
- } ?> c-modules --is-footer o-col-xl-4 o-col-12">
-                                    <?php oo_load_modules_flexible_content(
-                                        $column,
-                                        'footer',
-                                    ); ?>
+                        <?php foreach ($row as $key => $column) { ?>
+                            <?php
+                            $column_modules = $column['modules'] ?? [];
+                            $is_first_column = $key === 'left';
+                            $is_middle_column = $key === 'middle';
+                            $is_empty = empty($column_modules)
+                                ? '--is-empty'
+                                : '';
+
+                            $column_classes = [
+                                'c-footer__top-column',
+                                "--{$key}",
+                                $is_empty,
+                                'c-modules',
+                                '--is-footer',
+                                $is_first_column
+                                    ? 'o-col-12 o-col-xl-4'
+                                    : 'o-col-12 o-col-lg-6',
+                            ];
+                            ?>
+
+                            <?php if ($is_middle_column) { ?>
+                                <div class="c-footer__top-column --middle-right o-col-12 o-col-xl-8">
+                                <div class="c-footer__top-row o-row">
+                            <?php } ?>
+
+                            <div class="<?= implode(
+                                ' ',
+                                array_filter($column_classes),
+                            ) ?>">
+                                <?php oo_load_modules_flexible_content(
+                                    $column,
+                                ); ?>
                                 </div>
-                        <?php
-                    } ?>
+                        <?php } ?>
+                            </div>
+                        </div>
                     </div>
-            <?php } ?>
+                <?php } ?>
             </div>
         </div>
     <?php } ?>
