@@ -159,7 +159,7 @@
 
   &__link {
     hyphens: auto;
-    padding: 0.75rem 0rem 0.75rem 0rem;
+    padding: 0.5rem 0rem 0.5rem 0rem;
     width: 100%;
     font-family: var(--oo-font-navigation, var(--oo-font-text));
     font-size: 1rem;
@@ -228,7 +228,7 @@
 
     #{$c-main-nav}__link {
       text-decoration: underline;
-      padding: 0.75rem 0 0.75rem 2rem;
+      padding: 0.5rem 0 0.5rem 2rem;
       text-decoration-color: transparent;
       transition: text-decoration 0.1s ease-in-out;
 
