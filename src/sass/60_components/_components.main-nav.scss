@@ -150,12 +150,18 @@
             }
 
             &:hover,
-            &:focus,
-            &.--is-active {
+            &:focus {
               &::before {
                 left: 0.5rem;
                 right: 0.5rem;
                 height: 500%;
+              }
+            }
+
+            &.--is-active {
+              &::before {
+                left: 0.5rem;
+                right: 0.5rem;
               }
             }
           }
