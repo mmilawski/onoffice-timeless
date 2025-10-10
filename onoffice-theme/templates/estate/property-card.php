@@ -73,6 +73,9 @@ if (
     $image_position_horizontal = '';
 }
 
+// get header level from parent block
+$header_level = get_current_header_level() + 1;
+
 $property_counter = 0;
 while ($current_property = $pEstatesClone->estateIterator()):
 
@@ -394,9 +397,10 @@ while ($current_property = $pEstatesClone->estateIterator()):
             </div>
         <?php endif; ?>
         <?php if ($current_property['objekttitel']) { ?>
-            <span class="c-property-card__title o-headline --h3">
-                <?php echo $current_property['objekttitel']; ?>
-            </span>
+            <?php echo "<h{$header_level} "
+                . 'class="c-accordion-card__headline o-headline --h3 --span">'
+                . $current_property['objekttitel']
+                . "</h{$header_level}>"; ?>
         <?php } ?>
         <?php if ($is_fields) { ?>
             <div class="c-property-card__features c-item-features">

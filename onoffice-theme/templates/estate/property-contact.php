@@ -295,9 +295,9 @@ if (!empty($pEstates->getEstateContacts())) {
         }
 
         if ($name_output) {
-            echo '<p class="c-contact-person__name o-headline --h3">';
+            echo '<h3 class="c-contact-person__name o-headline --h3">';
             echo esc_html($name_output);
-            echo '</p>';
+            echo '</h3>';
         }
 
         // Output all other configured fields.

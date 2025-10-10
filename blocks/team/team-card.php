@@ -45,6 +45,9 @@ $proven_expert_username = $card['proven_expert_username'] ?? null;
 $proven_expert_password = $card['proven_expert_password'] ?? null;
 $proven_expert_url = '';
 
+// get header level from parent block
+$header_level = get_current_header_level() + 1;
+
 if ($rating_provider === 'google') {
     if ($google_api_key && $place_id) {
         $rating = floatval(
@@ -118,7 +121,10 @@ $uniqid = 'team-' . uniqid();
             <div class="c-team-card__picture"></div>
         <?php } ?>
         <?php if ($name) { ?>
-            <p class="c-team-card__name o-headline --h3"><?php echo $name; ?></p>
+            <?php echo "<h{$header_level} "
+                . 'class="c-team-card__name o-headline --h3">'
+                . $name
+                . "</h{$header_level}>"?>
         <?php } ?>
         <?php if ($job) { ?>
             <p class="c-team-card__job"><?php echo $job; ?></p>

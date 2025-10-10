@@ -6,7 +6,11 @@ $dontEcho = [
     'lage',
     'ausstatt_beschr',
     'sonstige_angaben',
-]; ?>
+];
+
+// set header level for submodule
+set_current_header_level(2);
+?>
 
 <?php if (
     (bool) $pEstates->estateIterator() == true &&
