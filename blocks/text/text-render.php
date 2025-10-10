@@ -12,9 +12,7 @@ $headline_class = 'c-text__headline o-col-12 o-col-xl-10';
 if (!empty($texts[0]['text']['wysiwyg'])) {
     $text_count = is_array($texts) ? count($texts) : 1;
     $offset_class =
-        $text_count !== 3 && $align_text !== 'center'
-                ? ' u-offset-lg-1'
-                   : '';
+        $text_count !== 3 && $align_text !== 'center' ? ' u-offset-lg-1' : '';
 
     $text_class_base =
         'c-text__content o-col-12 o-col-lg-10 o-col-xl-' .
