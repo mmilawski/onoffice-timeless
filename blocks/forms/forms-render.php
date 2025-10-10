@@ -18,10 +18,16 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
             <div class="c-forms__row o-row">
                 <div class="c-forms__content o-col-12">
                     <?php if (!empty($headline['text'])) {
-                        oo_get_template('components', '', 'component-headline', [
-                            'headline' => $headline,
-                            'additional_headline_class' => 'c-forms__headline',
-                        ]);
+                        oo_get_template(
+                            'components',
+                            '',
+                            'component-headline',
+                            [
+                                'headline' => $headline,
+                                'additional_headline_class' =>
+                                    'c-forms__headline',
+                            ],
+                        );
                     } ?>
 
                     <?php if (!empty($text['wysiwyg'])) { ?>
