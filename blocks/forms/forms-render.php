@@ -15,19 +15,21 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
 ); ?> class="c-forms --is-<?php echo $type; ?>-form o-section --<?php echo $bg_color; ?>">
     <div class="c-forms__container o-container">
         <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
-            <div class="c-forms__content o-col-md-5">
-                <?php if (!empty($headline['text'])) {
-                    oo_get_template('components', '', 'component-headline', [
-                        'headline' => $headline,
-                        'additional_headline_class' => 'c-forms__headline',
-                    ]);
-                } ?>
+            <div class="c-forms__row o-row">
+                <div class="c-forms__content o-col-12">
+                    <?php if (!empty($headline['text'])) {
+                        oo_get_template('components', '', 'component-headline', [
+                            'headline' => $headline,
+                            'additional_headline_class' => 'c-forms__headline',
+                        ]);
+                    } ?>
 
-                <?php if (!empty($text['wysiwyg'])) { ?>
-                    <div class="c-forms__text o-text --is-wysiwyg">
-                        <?php echo $text['wysiwyg']; ?>
-                    </div>
-                <?php } ?>
+                    <?php if (!empty($text['wysiwyg'])) { ?>
+                        <div class="c-forms__text o-text --is-wysiwyg">
+                            <?php echo $text['wysiwyg']; ?>
+                        </div>
+                    <?php } ?>
+                </div>
             </div>
         <?php } ?>
         <?php if (!empty($shortcode)) { ?>
