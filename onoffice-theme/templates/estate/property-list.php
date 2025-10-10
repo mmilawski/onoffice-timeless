@@ -67,12 +67,6 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
         <div class="c-property-list__wrapper">
 
             <div class="c-property-list__nav o-row">
-                <p class="c-property-list__count o-col-12 o-col-md-6">
-                    <?php printf(
-                        esc_html__('%d Immobilien gefunden', 'oo_theme'),
-                        $property_count,
-                    ); ?>
-                </p>
                 <?php if ($generateSortDropDown()) { ?>
                         <?php if ($generateSortDropDown()) { ?>
                             <div class="c-property-list__sort-wrapper o-col-12 o-col-md-6">
@@ -81,15 +75,20 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
                                 ); ?>
                                 <label class="c-property-list__sort o-label" for="onofficeSortListSelector">
                                     <?php esc_html_e(
-                                        'Sortieren',
+                                        'Immobilien sortiert nach:',
                                         'oo_theme',
                                     ); ?>
                                     <?php echo $generateSortDropDown(); ?>
                                 </label>
                             </div>
                         <?php } ?>
-                    
                 <?php } ?>
+                <p class="c-property-list__count o-col-12 o-col-md-6">
+                    <?php printf(
+                        esc_html__('%d Immobilien gefunden', 'oo_theme'),
+                        $property_count,
+                    ); ?>
+                </p>
             </div>
 
             <div class="c-property-list__properties">

@@ -19,9 +19,8 @@
     }
   }
 
-  &__value {
-    font-size: 1rem;
-
+  &__label {
+    font-size: 0.875rem;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -29,9 +28,9 @@
     -webkit-line-clamp: 1;
     line-clamp: 1;
   }
-  &__value {
-    font-size: 0.875rem;
 
+  &__value {
+    font-size: 1rem;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;

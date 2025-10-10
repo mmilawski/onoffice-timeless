@@ -558,7 +558,9 @@ while ($current_property = $pEstatesClone->estateIterator()):
                           
                                 <?php echo esc_html($value); ?>
                         </dt>
-                        <dd class="c-item-features__label">
+                        <dd class="c-item-features__label" title="  <?php echo esc_html(
+                                $pEstates->getFieldLabel($field),
+                            ); ?>">
                             <?php echo esc_html(
                                 $pEstates->getFieldLabel($field),
                             ); ?>
