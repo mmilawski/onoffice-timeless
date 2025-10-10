@@ -60,7 +60,12 @@ if (!empty($texts[0]['text']['wysiwyg'])) {
                         $text_class =
                             $i === 0
                                 ? $text_class_base . $offset_class
-                                : $text_class_base;
+                                : ($i === 1 &&
+                                $text_count !== 3 &&
+                                $align_text !== 'center'
+                                    ? $text_class_base .
+                                        ' u-offset-lg-1 u-offset-xl-0'
+                                    : $text_class_base);
                         ?>
 
                        
