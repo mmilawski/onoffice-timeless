@@ -398,8 +398,111 @@ while ($current_property = $pEstatesClone->estateIterator()):
                 <?php echo $current_property['objekttitel']; ?>
             </span>
         <?php } ?>
+
+
+        <div class="c-property-card__top <?php if (
+            !$current_property['plz'] &&
+            !$current_property['ort'] &&
+            !$current_property['land']
+        ) {
+            echo '--empty';
+        } ?>">
+
+        <div class="c-property-card__location"> 
+            <span class="c-property-card__location-label">
+                <?php if (
+                    $current_property['ort'] &&
+                    $current_property['ort'] !== ''
+                ) {
+                    echo $current_property['ort'];
+                } ?> 
+        </span>
+
+        <span class="c-property-card__location-value"> 
+            <?php
+            if ($current_property['plz']) {
+                echo $current_property['plz'];
+            }
+            if (
+                ($current_property['plz'] || $current_property['ort']) &&
+                $current_property['land']
+            ) {
+                echo ', ';
+            }
+            if ($current_property['land']) {
+                echo $current_property['land'];
+            }
+            ?>
+        </span>
+</div>
+
+
+
+
+
+
+
+        <?php if ($is_price_fields) { ?>
+            <?php foreach ($price_fields as $price_field) {
+
+                $price_value = $current_property[$price_field];
+                if (
+                    (is_numeric($price_value) && 0 == $price_value) ||
+                    $price_value == '0000-00-00' ||
+                    $price_value == '0.00' ||
+                    (is_string($price_value) &&
+                        $price_value !== '' &&
+                        !is_numeric($price_value) &&
+                        ($raw_values->getValueRaw($property_id)['elements'][
+                            $price_field
+                        ] ??
+                            null) ===
+                            '0') || // skip negative boolean fields
+                    $price_value == '' ||
+                    empty($price_value)
+                ) {
+                    continue;
+                }
+
+                $class = '--text-color';
+                if (
+                    $masking_attributes = oo_apply_secret_sale_masking(
+                        $price_field,
+                        $is_secret_sale,
+                    )
+                ) {
+                    $price_value = $masking_attributes['value'];
+                    $class = $masking_attributes['class'];
+                }
+                ?>
+                <div class="c-property-card__price">
+                    <span class="c-property-card__price-label <?php echo esc_attr(
+                        $class,
+                    ); ?>">
+
+                    <?php if (is_array($price_value)) {
+                        esc_html_e(implode(', ', $price_value));
+                    } else {
+                        echo esc_html($price_value);
+                    } ?>
+
+                   
+                        </span>
+                        <span class="c-property-card__price-value">
+                        <?php esc_html_e(
+                            $pEstates->getFieldLabel($price_field),
+                        ); ?>
+                       
+                    </span>
+                </div>
+            <?php
+            } ?>
+        <?php } ?>
+        </div>
+
+<div class="c-property-card__features c-item-features">
         <?php if ($is_fields) { ?>
-            <div class="c-property-card__features c-item-features">
+            
                 <?php foreach ($current_property as $field => $value) {
 
                     if (
@@ -437,119 +540,39 @@ while ($current_property = $pEstatesClone->estateIterator()):
                         continue;
                     }
                     ?>
-                    <span class="c-item-features__item">
                         <?php
-                        $dont_echo_label = [
-                            'objektart',
-                            'objekttyp',
-                            'vermarktungsart',
-                        ];
-                        if (!in_array($field, $dont_echo_label)) {
-                            esc_html_e($pEstates->getFieldLabel($field) . ': ');
-                        }
-
-                        if (is_array($value)) {
-                            esc_html_e(implode(', ', $value));
-                        } else {
-                            echo esc_html($value);
+                        $class = '';
+                        if (
+                            $masking_attributes = oo_apply_secret_sale_masking(
+                                $field,
+                                $is_secret_sale,
+                            )
+                        ) {
+                            $value = $masking_attributes['value'];
+                            $class = $masking_attributes['class'];
                         }
                         ?>
-                    </span>
+                        <dl class="c-item-features__item">
+                      
+                        <dt class="c-item-features__value<?php echo $class; ?>">
+                          
+                                <?php echo esc_html($value); ?>
+                        </dt>
+                        <dd class="c-item-features__label">
+                            <?php echo esc_html(
+                                $pEstates->getFieldLabel($field),
+                            ); ?>
+                        </dd>
+                    </dl>
+
                 <?php
                 } ?>
-                <span class="c-item-features__item <?php if (
-                    !$current_property['plz'] &&
-                    !$current_property['ort'] &&
-                    !$current_property['land']
-                ) {
-                    echo '--empty';
-                } ?>"><?php if ($current_property['plz']) {
-    echo $current_property['plz'];
-} ?> <?php
- if ($current_property['ort'] && $current_property['ort'] !== '') {
-     echo $current_property['ort'];
- }
- if (
-     ($current_property['plz'] || $current_property['ort']) &&
-     $current_property['land']
- ) {
-     echo ', ';
- }
- if ($current_property['land']) {
-     echo $current_property['land'];
- }
- ?></span>
-            </div>
-        <?php } ?>
-        <?php if (!empty($current_property['objektbeschreibung'])) { ?>
-            <div class="c-property-card__description">
-                <h4 class="c-property-card__description-headline">
-                    <?php esc_html_e(
-                        $pEstates->getFieldLabel('objektbeschreibung'),
-                    ); ?>:
-                </h4>
-                <p class="c-property-card__description-text">
-                    <?php echo nl2br(
-                        $current_property['objektbeschreibung'],
-                    ); ?>
-                </p>
-            </div>
-        <?php } ?>
-    </div>
-    <div class="c-property-card__footer">
-    <?php if ($is_price_fields) { ?>
-            <?php foreach ($price_fields as $price_field) {
+       
+           
+        <?php } ?> 
 
-                $price_value = $current_property[$price_field];
-                if (
-                    (is_numeric($price_value) && 0 == $price_value) ||
-                    $price_value == '0000-00-00' ||
-                    $price_value == '0.00' ||
-                    (is_string($price_value) &&
-                        $price_value !== '' &&
-                        !is_numeric($price_value) &&
-                        ($raw_values->getValueRaw($property_id)['elements'][
-                            $price_field
-                        ] ??
-                            null) ===
-                            '0') || // skip negative boolean fields
-                    $price_value == '' ||
-                    empty($price_value)
-                ) {
-                    continue;
-                }
-
-                $class = '--text-color';
-                if (
-                    $masking_attributes = oo_apply_secret_sale_masking(
-                        $price_field,
-                        $is_secret_sale,
-                    )
-                ) {
-                    $price_value = $masking_attributes['value'];
-                    $class = $masking_attributes['class'];
-                }
-                ?>
-                <div class="c-property-card__price">
-                    <span class="o-headline --h4 <?php echo esc_attr(
-                        $class,
-                    ); ?>">
-                        <?php
-                        esc_html_e($pEstates->getFieldLabel($price_field));
-                        echo ':';
-                        ?>
-                        <?php if (is_array($price_value)) {
-                            esc_html_e(implode(', ', $price_value));
-                        } else {
-                            echo esc_html($price_value);
-                        } ?>
-                    </span>
-                </div>
-            <?php
-            } ?>
-        <?php } ?>
         <?php if ($is_visible_property_detail) { ?>
-            <a class="c-property-card__button c-button --full-width --on-bg-transparent <?php if (
+            <a class="c-property-card__button c-button --on-bg-transparent <?php if (
                 oo_should_show_secret_sale_placeholder($is_secret_sale)
             ) {
                 echo '--open-popup';
@@ -571,7 +594,27 @@ while ($current_property = $pEstatesClone->estateIterator()):
                 <?php esc_html_e('Zur Detailansicht', 'oo_theme'); ?>
             </a>
         <?php } ?>
+
     </div>
+  
+
+
+        <?php if (!empty($current_property['objektbeschreibung'])) { ?>
+            <div class="c-property-card__description">
+                <h4 class="c-property-card__description-headline">
+                    <?php esc_html_e(
+                        $pEstates->getFieldLabel('objektbeschreibung'),
+                    ); ?>:
+                </h4>
+                <p class="c-property-card__description-text">
+                    <?php echo nl2br(
+                        $current_property['objektbeschreibung'],
+                    ); ?>
+                </p>
+            </div>
+        <?php } ?>
+    </div>
+  
 </div>
 </article>
 

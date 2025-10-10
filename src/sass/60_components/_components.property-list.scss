@@ -35,9 +35,9 @@
   &__wrapper {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2.5rem;
     @include media-breakpoint-up(lg) {
-      gap: 2rem;
+      gap: 5rem;
     }
   }
 
@@ -83,7 +83,7 @@
 
     @include media-breakpoint-up(lg) {
       grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
+      gap: 1rem;
     }
 
     @include media-breakpoint-up(xxl) {
