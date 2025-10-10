@@ -1,9 +1,9 @@
 $form-height: 2.375rem;
 $form-margin: 0; // Margin
-$form-padding: 1rem 1rem; // Padding
+$form-padding: 0.875rem 1rem; // Padding
 $form-padding-top: 1rem; // Padding top
 $form-padding-right: 1rem; // Padding right
-$form-line-height: $small-line-height;
+$form-line-height: 1.125rem;
 $form-remove-wrapper: 1rem; // Size of the remove background
 $form-remove-size: 1rem; // Size of the remove icon
 $form-select-size: 0.75rem; // Size of the select arrow icon
@@ -94,7 +94,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
   padding: $form-padding;
   resize: vertical;
   font-family: inherit;
-  font-size: 100%;
+  font-size: 1rem;
   line-height: $form-line-height;
   color: $form-color;
   background-color: $form-bg;
@@ -461,8 +461,8 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
   &.o-select {
     position: relative;
     padding: unset;
-    height: 3.75rem;
-    max-height: 3.75rem;
+    height: 3.375rem;
+    max-height: 3.375rem;
     border: $form-border $form-border-color;
     outline: $form-outline;
     transition: outline-color $form-duration $form-timing,

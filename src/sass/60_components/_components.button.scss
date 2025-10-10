@@ -7,7 +7,7 @@
   position: relative;
   font-family: $font-family-button;
   font-weight: $font-weight-button;
-  @include font-size($global-font-size, $small-line-height);
+  @include font-size($global-font-size, 1.125rem);
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 2px;
