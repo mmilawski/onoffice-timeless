@@ -52,6 +52,7 @@ return function (AddressList $pAddressClone) {
                 'company' => $current_address['Zusatz1'],
                 'link' =>
                     esc_url($pAddressClone->getAddressLink($address_id)) ?? '',
+                'id' => $current_address['id'],
             ];
         }
     }
@@ -85,6 +86,7 @@ return function (AddressList $pAddressClone) {
             $title = $address['title'] ?? null;
             $company = $address['company'] ?? null;
             $link = $address['link'] ?? null;
+            $id = $property['id'] ?? null;
 
             if (empty($lat) || empty($lng)) {
                 continue;
@@ -101,7 +103,7 @@ return function (AddressList $pAddressClone) {
                 <div class="c-map__info --bg-transparent">
                     <?php
                     if (!empty($title)) {
-                        echo '<h3 class="c-map__headline o-headline --h3">' .
+                        echo '<h3 class="c-map__headline o-headline --h5">' .
                             $title .
                             '</h3>';
                     }
@@ -109,24 +111,27 @@ return function (AddressList $pAddressClone) {
                         echo '<p class="c-map__text">' . $company . '</p>';
                     }
                     if (!empty($link)) {
-                        $button = [
-                            [
-                                'link' => [
-                                    'title' => esc_html__(
-                                        'Zur Detailansicht',
-                                        'oo_theme',
-                                    ),
-                                    'url' => $link,
-                                ],
-                            ],
-                        ];
-                        oo_get_template('components', '', 'component-buttons', [
-                            'buttons' => $button,
-                            'additional_container_class' =>
-                                'c-map__button-wrapper',
-                            'additional_button_class' =>
-                                'c-map__button --full-width --on-bg-transparent',
-                        ]);
+                        $attr = oo_set_link_attr($link);
+
+                        $aria_label = sprintf(
+                            __(
+                                'Zur Detailansicht der Immobilie Nr. %s',
+                                'oo_theme',
+                            ),
+                            $id,
+                        );
+
+                        echo '<a href="' .
+                            esc_url($link) .
+                            '" class="c-map__link c-link --underlined --on-bg-' .
+                            esc_attr($attr) .
+                            '" aria-label="' .
+                            esc_attr($aria_label) .
+                            '">';
+
+                        esc_html_e('Zur Detailansicht', 'oo_theme');
+
+                        echo '</a>';
                     }
                     ?>
                 </div>
