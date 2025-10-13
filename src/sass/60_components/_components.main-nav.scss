@@ -94,10 +94,27 @@
               }
             }
 
-            &.--is-active {
+            &.--is-active,
+            &.--is-ancestor {
               &::before {
                 left: 0;
                 right: 0;
+              }
+            }
+
+            &.--is-ancestor:not(.--is-active) {
+              &::before {
+                border-color: var(--oo-color-header-mix-bg-text-50);
+              }
+
+              &:hover,
+              &:focus {
+                &::before {
+                  border-color: var(
+                    --oo-color-header-text,
+                    var(--oo-color-text)
+                  );
+                }
               }
             }
           }
