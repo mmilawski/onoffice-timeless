@@ -37,7 +37,7 @@
 
   &__item {
     font-size: $global-font-size;
-    line-height: $small-line-height;
+    line-height: $global-line-height;
     @include media-breakpoint-up(xxl) {
       display: flex;
       justify-content: center;
@@ -199,7 +199,7 @@
 
   &__link {
     hyphens: auto;
-    padding: 0.5rem 0rem 0.5rem 0rem;
+    padding: 0.5rem 0 0.5rem 0;
     width: 100%;
     font-family: var(--oo-font-navigation, var(--oo-font-text));
     font-size: 1rem;
@@ -207,7 +207,7 @@
     display: block;
     text-transform: uppercase;
     text-underline-offset: $link-underline-offset;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
 
     @include visited-active() {
       color: var(--oo-color-header-text, var(--oo-color-text));
