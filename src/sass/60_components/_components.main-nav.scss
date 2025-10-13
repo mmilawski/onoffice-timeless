@@ -227,16 +227,6 @@
       color: var(--oo-color-header-text, var(--oo-color-text));
       position: relative;
     }
-
-    &.--is-ancestor {
-      @include media-breakpoint-down(xl) {
-        @media (hover: hover) and (pointer: fine) {
-          &:hover,
-          &:focus-visible {
-          }
-        }
-      }
-    }
   }
 
   &__sub-menu {
@@ -283,10 +273,6 @@
             var(--oo-color-text)
           );
         }
-      }
-
-      @include media-breakpoint-down(xl) {
-        padding-inline: 2rem;
       }
 
       &:last-of-type {
