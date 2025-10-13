@@ -22,11 +22,9 @@
   }
 
   &__icon {
-    width: $icon-wrapper-size;
-    height: $icon-wrapper-size;
-    outline: calc(($icon-wrapper-size - 1.5rem) / 2) solid
-      var(--oo-color-primary);
-    outline-offset: -2px;
+    width: $icon-size;
+    height: $icon-size;
+    outline: calc(($icon-size - 1.5rem) / 2) solid var(--oo-color-primary);
     background-color: var(--oo-color-primary);
     color: var(--oo-color-contrast-primary);
 
