@@ -9,7 +9,6 @@
     display: flex;
     line-height: 1.5rem;
     align-items: center;
-    gap: 0.5rem;
     outline: $outline;
     outline-offset: $outline-offset;
     color: var(--oo-color-header-text, var(--oo-color-text));
@@ -28,6 +27,10 @@
         text-decoration-color: transparent;
         color: var(--oo-color-header-primary, var(--oo-color-primary));
       }
+    }
+
+    @include media-breakpoint-up(xxl) {
+      gap: 0.5rem;
     }
   }
 
@@ -51,5 +54,10 @@
     cursor: pointer;
     outline: $outline;
     outline-offset: $outline-offset;
+    padding: 0.5rem 0.75rem;
+
+    @include media-breakpoint-up(xxl) {
+      padding: 0;
+    }
   }
 }
