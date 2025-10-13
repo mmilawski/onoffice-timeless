@@ -59,17 +59,21 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
 <?php if ($property_count > 0) { ?>
     <?php if (!$is_slider) { ?>
         <?php if ($map) { ?>
-            <div class="c-property-list__map-wrapper">
+            <div class="c-property-list__map-wrapper o-container">
+            <div class="u-offset-lg-1">
                 <?php echo $map; ?>
+                </div>
             </div>
         <?php } ?>
 
         <div class="c-property-list__wrapper">
 
-            <div class="c-property-list__nav o-row">
+            
                 <?php if ($generateSortDropDown()) { ?>
+                    <div class="c-property-list__nav o-container">
+                    
                         <?php if ($generateSortDropDown()) { ?>
-                            <div class="c-property-list__sort-wrapper o-col-12 o-col-md-6">
+                            <div class="c-property-list__sort-wrapper o-col-12 o-col-xl-6 u-offset-lg-1">
                                 <?php wp_enqueue_script(
                                     'oo-sort-list-script',
                                 ); ?>
@@ -80,10 +84,11 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
                                     ); ?>
                                     <?php echo $generateSortDropDown(); ?>
                                 </label>
-                            </div>
+                           
                         <?php } ?>
+                        </div>
                 <?php } ?>
-                <p class="c-property-list__count o-col-12 o-col-md-6">
+                <p class="c-property-list__count o-col-12 o-col-xl-5">
                     <?php printf(
                         esc_html__('%d Immobilien gefunden', 'oo_theme'),
                         $property_count,
@@ -91,7 +96,7 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
                 </p>
             </div>
 
-            <div class="c-property-list__properties">
+            <div class="c-property-list__properties o-container-fluid">
                 <?php require 'property-card.php'; ?>
             </div>
 

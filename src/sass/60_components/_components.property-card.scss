@@ -99,6 +99,11 @@
     -webkit-box-orient: vertical;
     hyphens: manual;
     text-transform: uppercase;
+
+    @include media-breakpoint-up(lg) {
+      min-height: 5rem;
+
+    }
   }
 
   &__top {

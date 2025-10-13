@@ -8,7 +8,7 @@
     flex-direction: column;
     gap: 1.5rem;
     @include media-breakpoint-up(xxl) {
-      gap: 2rem;
+      gap: 5rem;
     }
   }
 
@@ -43,7 +43,7 @@
 
   &__nav {
     display: flex;
-    align-items: flex-end;
+    justify-content: flex-start;
     gap: 1.5rem 0;
 
     @include media-breakpoint-up(lg) {
@@ -54,6 +54,13 @@
   &__count {
     font-size: 1.5rem;
     text-transform: uppercase;
+    display: flex;
+    justify-content: flex-start;
+
+    @include media-breakpoint-up(lg) {
+      justify-content: flex-end;
+      align-items: flex-end;
+    }
 
     &.--no-properties {
     }
@@ -61,10 +68,8 @@
 
   &__sort-wrapper {
     display: flex;
-    justify-content: flex-start;
 
     @include media-breakpoint-up(lg) {
-      justify-content: flex-end;
     }
   }
 
@@ -84,6 +89,7 @@
     @include media-breakpoint-up(lg) {
       grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
+      padding: 0;
     }
 
     @include media-breakpoint-up(xxl) {
