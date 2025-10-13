@@ -279,7 +279,6 @@
       }
 
       &.--is-active {
-        cursor: default;
         text-decoration: underline;
 
         @include visited-active() {
