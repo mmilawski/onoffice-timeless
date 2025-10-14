@@ -87,7 +87,11 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 1rem;
-    padding: 1.5rem;
+    padding: 1rem;
+
+    @include media-breakpoint-up(lg) {
+      padding: 1.5rem;
+    }
   }
 
   &__main-content-group {
@@ -109,6 +113,14 @@
 
     @include media-breakpoint-up(lg) {
       min-height: 5rem;
+    }
+
+    &.o-headline {
+      @include font-size($mobile-h5-font-size, $mobile-h5-line-height);
+
+      @include media-breakpoint-up(lg) {
+        @include font-size($desktop-h3-font-size, $desktop-h3-line-height);
+      }
     }
   }
 
