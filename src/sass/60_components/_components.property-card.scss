@@ -125,11 +125,9 @@
   }
 
   &__top {
-    display: flex;
+    display: grid;
     gap: 0.5rem;
-    justify-content: space-between;
-    align-items: center;
-    justify-items: stretch;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   &__price {
@@ -138,8 +136,8 @@
     flex-direction: column;
     text-align: right;
 
-    &-label {
-      font-weight: 500;
+    &-value {
+      font-weight: 600;
       font-size: 1.125rem;
 
       &.--blurry {
@@ -152,7 +150,7 @@
       }
     }
 
-    &-price {
+    &-label {
       font-size: 0.875rem;
     }
   }
@@ -163,12 +161,22 @@
     flex-direction: column;
 
     &-label {
-      font-weight: 500;
+      font-weight: 600;
       font-size: 1.125rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
     }
 
-    &-price {
+    &-value {
       font-size: 0.875rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
     }
   }
 }

@@ -476,7 +476,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
                 }
                 ?>
                 <div class="c-property-card__price">
-                    <span class="c-property-card__price-label <?php echo esc_attr(
+                    <span class="c-property-card__price-value <?php echo esc_attr(
                         $class,
                     ); ?>">
 
@@ -488,7 +488,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
 
                    
                         </span>
-                        <span class="c-property-card__price-value">
+                        <span class="c-property-card__price-label">
                         <?php esc_html_e(
                             $pEstates->getFieldLabel($price_field),
                         ); ?>
