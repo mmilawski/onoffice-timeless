@@ -49,8 +49,10 @@
     text-transform: uppercase;
     display: flex;
     justify-content: flex-start;
+    padding-top: 1.5rem;
 
     @include media-breakpoint-up(lg) {
+      padding-top: 0;
       justify-content: flex-end;
       align-items: flex-end;
     }
@@ -71,6 +73,14 @@
 
     @include media-breakpoint-up(lg) {
       width: auto;
+    }
+
+    & .onofficeSortListSelector {
+      border: 2px solid var(--oo-color-mix-bg-contrast-60);
+    }
+
+    & .onofficeSortListSelector {
+      background: transparent;
     }
   }
 
