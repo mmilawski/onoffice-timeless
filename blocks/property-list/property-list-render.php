@@ -44,8 +44,9 @@ $position_center = !empty($text['wysiwyg']) ? ' --position-center' : '';
             echo do_shortcode($shortcode);
             echo '</div>';
         } ?>
- <div class="c-property-list__container o-container">
+
         <?php if (!empty($buttons['buttons'][0]['link'])) { ?>
+            <div class="c-property-list__container o-container">
             <div class="c-property-list__buttons-wrapper o-row --position-center">
                 <?php oo_get_template('components', '', 'component-buttons', [
                     'buttons' => $buttons['buttons'],
@@ -55,7 +56,8 @@ $position_center = !empty($text['wysiwyg']) ? ' --position-center' : '';
                     'additional_container_class' =>
                         'c-property-list__buttons --position-center o-col-12 o-col-lg-10 o-col-xl-8',
                 ]); ?>
-            </div>
+           
         <?php } ?>
+        </div>
     </div>
 </section>

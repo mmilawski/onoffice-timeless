@@ -68,6 +68,7 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
 
         <div class="c-property-list__wrapper">
             <div class="c-property-list__nav o-container">
+                <div class="o-row">
                         <?php if ($generateSortDropDown()) { ?>
                             <div class="c-property-list__sort-wrapper o-col-12 o-col-xl-6 u-offset-lg-1">
                                 <?php wp_enqueue_script(
@@ -91,7 +92,7 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
                                 $property_count,
                             ); ?>
                         </p>
-                
+                </div>
             </div>
         </div>
 

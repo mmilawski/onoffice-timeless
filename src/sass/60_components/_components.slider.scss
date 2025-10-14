@@ -3,7 +3,7 @@
 
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.5rem;
 
   &__track {
   }
@@ -133,7 +133,7 @@
   &__navigation {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1.5rem;
 
     &.--is-properties-images-slider {
       &.--empty {
