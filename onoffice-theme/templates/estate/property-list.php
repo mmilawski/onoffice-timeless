@@ -67,11 +67,7 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
         <?php } ?>
 
         <div class="c-property-list__wrapper">
-
-            
-                <?php if ($generateSortDropDown()) { ?>
-                    <div class="c-property-list__nav o-container">
-                    
+            <div class="c-property-list__nav o-container">
                         <?php if ($generateSortDropDown()) { ?>
                             <div class="c-property-list__sort-wrapper o-col-12 o-col-xl-6 u-offset-lg-1">
                                 <?php wp_enqueue_script(
@@ -84,17 +80,20 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
                                     ); ?>
                                     <?php echo $generateSortDropDown(); ?>
                                 </label>
-                           
+                            </div>
                         <?php } ?>
-                        </div>
-                <?php } ?>
-                <p class="c-property-list__count o-col-12 o-col-xl-5">
-                    <?php printf(
-                        esc_html__('%d Immobilien gefunden', 'oo_theme'),
-                        $property_count,
-                    ); ?>
-                </p>
+                        <p class="c-property-list__count o-col-12 o-col-xl-5">
+                            <?php printf(
+                                esc_html__(
+                                    '%d Immobilien gefunden',
+                                    'oo_theme',
+                                ),
+                                $property_count,
+                            ); ?>
+                        </p>
+                
             </div>
+        </div>
 
             <div class="c-property-list__properties o-container-fluid">
                 <?php require 'property-card.php'; ?>
