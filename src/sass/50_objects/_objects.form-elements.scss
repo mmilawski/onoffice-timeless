@@ -1659,7 +1659,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     grid-template-columns: 1fr;
     gap: 1rem 0;
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(lg) {
       grid-template-columns: repeat(2, 1fr);
       gap: 0 2rem;
     }

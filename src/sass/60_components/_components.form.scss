@@ -160,7 +160,7 @@
       grid-column: span 2;
     }
   }
-  .--is-range {
+  .--is-range:has(*:nth-child(2)) {
     @include media-breakpoint-up(md) {
       grid-column: span 2;
     }
