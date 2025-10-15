@@ -91,42 +91,32 @@
         }
       }
     }
-  }
 
-  .--bg-transparent & {
-    &.--has-bg-image {
+    &.--bg-transparent {
       #{$c-link-boxes}__content {
         background-color: var(--oo-color-mix-bg-contrast-05);
       }
     }
-  }
 
-  .--bg-light & {
-    &.--has-bg-image {
+    &.--bg-light {
       #{$c-link-boxes}__content {
         background-color: var(--oo-color-light-mix-bg-contrast-05);
       }
     }
-  }
 
-  .--bg-dark & {
-    &.--has-bg-image {
+    &.--bg-dark {
       #{$c-link-boxes}__content {
         background-color: var(--oo-color-dark-mix-bg-contrast-05);
       }
     }
-  }
 
-  .--bg-primary & {
-    &.--has-bg-image {
+    &.--bg-primary {
       #{$c-link-boxes}__content {
         background-color: var(--oo-color-primary-mix-bg-contrast-05);
       }
     }
-  }
 
-  .--bg-secondary & {
-    &.--has-bg-image {
+    &.--bg-secondary {
       #{$c-link-boxes}__content {
         background-color: var(--oo-color-secondary-mix-bg-contrast-05);
       }
