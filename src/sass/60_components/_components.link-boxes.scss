@@ -35,10 +35,10 @@
 
   &__content {
     gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
     @include media-breakpoint-up(xl) {
       gap: 2.625rem;
-      display: flex;
-      flex-direction: column;
     }
   }
 
@@ -68,7 +68,6 @@
 
   &.--has-bg-image {
     #{$c-link-boxes}__content {
-      background-color: var(--oo-color-mix-bg-contrast-05);
       padding: 1.5rem;
       border: 2px solid var(--oo-color-bg);
     }
@@ -94,34 +93,42 @@
     }
   }
 
-  &.--bg-light {
-    #{$c-link-boxes}__picture {
-      &::after {
-        background-color: var(--oo-color-light-transparent-bg-80);
+  .--bg-transparent & {
+    &.--has-bg-image {
+      #{$c-link-boxes}__content {
+        background-color: var(--oo-color-mix-bg-contrast-05);
       }
     }
   }
 
-  &.--bg-dark {
-    #{$c-link-boxes}__picture {
-      &::after {
-        background-color: var(--oo-color-dark-transparent-bg-80);
+  .--bg-light & {
+    &.--has-bg-image {
+      #{$c-link-boxes}__content {
+        background-color: var(--oo-color-light-mix-bg-contrast-05);
       }
     }
   }
 
-  &.--bg-primary {
-    #{$c-link-boxes}__picture {
-      &::after {
-        background-color: var(--oo-color-primary-transparent-bg-80);
+  .--bg-dark & {
+    &.--has-bg-image {
+      #{$c-link-boxes}__content {
+        background-color: var(--oo-color-dark-mix-bg-contrast-05);
       }
     }
   }
 
-  &.--bg-secondary {
-    #{$c-link-boxes}__picture {
-      &::after {
-        background-color: var(--oo-color-secondary-transparent-bg-80);
+  .--bg-primary & {
+    &.--has-bg-image {
+      #{$c-link-boxes}__content {
+        background-color: var(--oo-color-primary-mix-bg-contrast-05);
+      }
+    }
+  }
+
+  .--bg-secondary & {
+    &.--has-bg-image {
+      #{$c-link-boxes}__content {
+        background-color: var(--oo-color-secondary-mix-bg-contrast-05);
       }
     }
   }

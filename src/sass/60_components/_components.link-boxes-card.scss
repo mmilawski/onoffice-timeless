@@ -4,11 +4,10 @@
   display: flex;
   flex-direction: column;
   color: var(--oo-color-text);
-  background-color: var(--oo-color-mix-bg-contrast-05);
   margin-right: -1rem;
   margin-left: -1rem;
 
-  @include media-breakpoint-up(xl) {
+  @include media-breakpoint-up(lg) {
     margin-right: 0;
     margin-left: 0;
   }
@@ -61,12 +60,16 @@
 
   &__content {
     width: 100%;
-    padding: 2.5rem 1.5rem 1.5rem;
+    padding: 1.5rem 1rem 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     flex-grow: 1;
     gap: 1.5rem;
+
+    @include media-breakpoint-up(xl) {
+      padding: 2.5rem 1.5rem 1.5rem;
+    }
   }
 
   &__title {
@@ -74,6 +77,29 @@
 
   &__text {
     flex-grow: 1;
-    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  &__button {
+    @include media-breakpoint-up(xl) {
+      width: fit-content;
+    }
+  }
+
+  .--bg-transparent & {
+    background-color: var(--oo-color-mix-bg-contrast-05);
+  }
+
+  .--bg-light & {
+    background-color: var(--oo-color-light-mix-bg-contrast-05);
+  }
+  .--bg-dark & {
+    background-color: var(--oo-color-dark-mix-bg-contrast-05);
+  }
+  .--bg-primary & {
+    background-color: var(--oo-color-primary-mix-bg-contrast-05);
+  }
+  .--bg-secondary & {
+    background-color: var(--oo-color-secondary-mix-bg-contrast-05);
   }
 }

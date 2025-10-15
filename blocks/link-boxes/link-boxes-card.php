@@ -41,7 +41,7 @@ $is_slider = filter_var($slider['slider'], FILTER_VALIDATE_BOOLEAN);
     $icon_width_xxl = '350';
     $icon_width_xxxl = '394';
     ?>
-    <article class="c-link-boxes-card --bg-transparent <?php if ($is_slider) {
+    <article class="c-link-boxes-card <?php if ($is_slider) {
         echo '--on-slider c-slider__slide splide__slide';
     } ?>">
         <?php if (!empty($image) || !empty($icon)) { ?>
@@ -189,7 +189,7 @@ $is_slider = filter_var($slider['slider'], FILTER_VALIDATE_BOOLEAN);
                         ? sprintf('%s zu %s', $button_text, $headline)
                         : $button_text;
 
-                    echo '<a class="c-link-boxes-card__button c-button --full-width --on-bg-transparent" aria-label="' .
+                    echo '<a class="c-link-boxes-card__button c-button" aria-label="' .
                         esc_attr($aria_label) .
                         '" ' .
                         oo_set_link_attr($link) .
