@@ -63,17 +63,6 @@
 
   &__date {
   }
-  &__stars {
-    display: flex;
-    margin-top: 0.25rem;
-    font-size: small;
-
-    .c-stars__star {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
   &__content {
     width: 100%;
     display: flex;
