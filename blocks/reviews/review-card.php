@@ -52,39 +52,38 @@ echo $is_image;
                     'dimensions' => [
                         '575' => [
                             'w' => $image_width_xs,
-                            'h' => round(($image_width_xs * 3) / 4),
+                            'h' => $image_width_xs,
                         ],
                         '1600' => [
                             'w' => $image_width_xxxl,
-                            'h' => round(($image_width_xxxl * 3) / 4),
+                            'h' => $image_width_xxxl,
                         ],
                         '1400' => [
                             'w' => $image_width_xxl,
-                            'h' => round(($image_width_xxl * 3) / 4),
+                            'h' => $image_width_xxl,
                         ],
                         '1200' => [
                             'w' => $image_width_xl,
-                            'h' => round(($image_width_xl * 3) / 4),
+                            'h' => $image_width_xl,
                         ],
                         '992' => [
                             'w' => $image_width_lg,
-                            'h' => round(($image_width_lg * 3) / 4),
+                            'h' => $image_width_lg ,
                         ],
                         '768' => [
                             'w' => $image_width_md,
-                            'h' => round(($image_width_md * 3) / 4),
+                            'h' => $image_width_md,
                         ],
                         '576' => [
                             'w' => $image_width_sm,
-                            'h' => round(($image_width_sm * 3) / 4),
+                            'h' => $image_width_sm,
                         ],
                     ],
                 ]); ?>
             </div>
         <?php } ?>
 
-        <div class="c-review-card__header-right <?php if ($show_images !== 'images') {
-    echo '--hide-images';?>">
+        <div class="c-review-card__header-right">
             <?php if ($date && $show_date) { ?>
                 <div class="c-review-card__date"><?php echo $date; ?></div>
             <?php } ?>
@@ -147,10 +146,10 @@ echo $is_image;
             <?php } ?>
 
             <button class="c-review-card__more c-read-more"
-                data-open-text="<?php esc_html_e('Mehr anzeigen', 'oo_theme'); ?>"
+                data-open-text="<?php esc_html_e('weiterlesen...', 'oo_theme'); ?>"
                 data-close-text="<?php esc_html_e('Weniger anzeigen', 'oo_theme'); ?>"
                 aria-expanded="false" aria-controls="<?php echo $uniqid; ?>">
-                <?php echo esc_html__('Mehr anzeigen', 'oo_theme'); ?>
+                <?php echo esc_html__('weiterlesen...', 'oo_theme'); ?>
             </button>
         </div>
     </div>
