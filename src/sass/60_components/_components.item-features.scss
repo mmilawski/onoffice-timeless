@@ -6,8 +6,6 @@
   line-height: normal;
 
   &__item {
-    color: var(--oo-color-transparent-primary-20-contrast);
-    background-color: #ffffff;
     border: 0px;
     padding: 0.625rem;
     gap: 0.25rem;
@@ -16,6 +14,22 @@
 
     &.--empty {
       display: none;
+    }
+
+    .--bg-transparent & {
+      background-color: var(--oo-color-bg);
+    }
+    .--bg-light & {
+      background-color: var(--oo-color-light-bg);
+    }
+    .--bg-dark & {
+      background-color: var(--oo-color-dark-bg);
+    }
+    .--bg-primary & {
+      background-color: var(--oo-color-primary-bg);
+    }
+    .--bg-secondary & {
+      background-color: var(--oo-color-secondary-bg);
     }
   }
 

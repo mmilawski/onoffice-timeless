@@ -148,7 +148,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
     $image_width_xxxl = '458';
     ?>
 
-<article class="c-property-card --bg-transparent <?php if ($is_slider) {
+<article class="c-property-card <?php if ($is_slider) {
     echo '--on-slider c-slider__slide splide__slide';
 } ?>">
 
