@@ -31,7 +31,6 @@ $image_width_xxl = '414';
 $image_width_xxxl = '458';
 
 $uniqid = 'review-' . uniqid();
-
 ?>
 
 <article class="c-review-card --bg-transparent <?php
@@ -41,7 +40,9 @@ if ($is_slider) {
 echo $is_image;
 ?>">
     <!-- HEADER: Picture left, Date & Stars right -->
-    <div class="c-review-card__header<?php echo $show_images !== 'images' ? ' --hide-images' : ''; ?>">
+    <div class="c-review-card__header<?php echo $show_images !== 'images'
+        ? ' --hide-images'
+        : ''; ?>">
         <?php if (!empty($image) && $show_images === 'images') { ?>
             <div class="c-review-card__image-wrapper">
                 <?php oo_get_template('components', '', 'component-image', [
@@ -68,7 +69,7 @@ echo $is_image;
                         ],
                         '992' => [
                             'w' => $image_width_lg,
-                            'h' => $image_width_lg ,
+                            'h' => $image_width_lg,
                         ],
                         '768' => [
                             'w' => $image_width_md,
@@ -83,9 +84,10 @@ echo $is_image;
             </div>
         <?php } ?>
 
-        <div class="c-review-card__header-right  <?php echo $show_images !== 'images'
-        ? '--hide-images'
-        : ''; ?>">
+        <div class="c-review-card__header-right  <?php echo $show_images !==
+        'images'
+            ? '--hide-images'
+            : ''; ?>">
             <?php if ($date && $show_date) { ?>
                 <div class="c-review-card__date"><?php echo $date; ?></div>
             <?php } ?>
@@ -148,8 +150,14 @@ echo $is_image;
             <?php } ?>
 
             <button class="c-review-card__more c-read-more"
-                data-open-text="<?php esc_html_e('weiterlesen...', 'oo_theme'); ?>"
-                data-close-text="<?php esc_html_e('Weniger anzeigen', 'oo_theme'); ?>"
+                data-open-text="<?php esc_html_e(
+                    'weiterlesen...',
+                    'oo_theme',
+                ); ?>"
+                data-close-text="<?php esc_html_e(
+                    'Weniger anzeigen',
+                    'oo_theme',
+                ); ?>"
                 aria-expanded="false" aria-controls="<?php echo $uniqid; ?>">
                 <?php echo esc_html__('weiterlesen...', 'oo_theme'); ?>
             </button>
