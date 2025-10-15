@@ -10,7 +10,32 @@
   line-height: $small-line-height;
 
   &.--property-status {
-    color: var(--oo-color-contrast-primary);
-    background-color: var(--oo-color-primary);
+    .--bg-light & {
+      background-color: var(--oo-color-light-primary, var(--oo-color-primary));
+      color: var(
+        --oo-color-light-contrast-primary,
+        var(--oo-color-contrast-primary)
+      );
+    }
+    .--bg-dark & {
+      background-color: var(--oo-color-dark-primary, var(--oo-color-dark-bg));
+      color: var(--oo-color-dark-contrast-primary);
+    }
+
+    .--bg-primary & {
+      color: var(--oo-color-primary-contrast-primary);
+      background-color: var(
+        --oo-color-primary-primary,
+        var(--oo-color-primary)
+      );
+    }
+
+    .--bg-secondary & {
+      color: var(--oo-color-secondary-contrast-primary);
+      background-color: var(
+        --oo-color-secondary-primary,
+        var(--oo-color-primary)
+      );
+    }
   }
 }

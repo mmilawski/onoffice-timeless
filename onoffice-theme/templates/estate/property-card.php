@@ -160,7 +160,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
  $is_visible_property_detail = !$is_reference || !$is_restricted_view;
  ?>
 
-<div class="c-property-card__inner --on-bg-transparent --is-properties-images-slider --on-slider <?php echo $pictures_count >
+<div class="c-property-card__inner --is-properties-images-slider --on-slider <?php echo $pictures_count >
 0
     ? 'c-slider splide'
     : ''; ?>"
@@ -574,7 +574,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
         <?php } ?> 
 
         <?php if ($is_visible_property_detail) { ?>
-            <a class="c-property-card__button c-button --on-bg-transparent <?php if (
+            <a class="c-property-card__button c-button <?php if (
                 oo_should_show_secret_sale_placeholder($is_secret_sale)
             ) {
                 echo '--open-popup';

@@ -44,25 +44,10 @@
     &.c-icon-button {
       width: $icon-size;
       height: $icon-size;
-      &.--on-bg-transparent,
-      .--bg-transparent & {
-        @include plain-visited() {
-          background-color: var(--oo-color-primary);
-        }
-      }
-
-      @include hover() {
-        background-color: var(--oo-color-mix-primary-contrast-20);
-      }
-
-      @include active() {
-        background-color: var(--oo-color-mix-primary-contrast-40);
-      }
 
       .c-icon-button__icon {
         width: $icon-size-small;
         height: $icon-size-small;
-        stroke: var(--oo-color-contrast-primary);
         &.--filled {
           fill: var(--oo-color-contrast-primary);
         }
