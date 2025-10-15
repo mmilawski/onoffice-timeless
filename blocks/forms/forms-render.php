@@ -15,8 +15,8 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
 ); ?> class="c-forms --is-<?php echo $type; ?>-form o-section --<?php echo $bg_color; ?>">
     <div class="c-forms__container o-container">
         <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
-            <div class="c-forms__row o-row">
-                <div class="c-forms__content o-col-12">
+            <div class="c-forms__row o-row o-col-12 o-col-lg-5">
+                <div class="c-forms__content">
                     <?php if (!empty($headline['text'])) {
                         oo_get_template(
                             'components',
@@ -39,7 +39,7 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
             </div>
         <?php } ?>
         <?php if (!empty($shortcode)) { ?>
-            <div class="c-forms__wrapper u-offset-md-1 o-col-md-6 --<?php echo $bg_color; ?>">
+            <div class="c-forms__wrapper u-offset-lg-1 o-col-lg-6 --<?php echo $bg_color; ?>">
                 <div class="c-forms__form">
                     <?php echo do_shortcode($shortcode); ?>
                 </div>

@@ -116,7 +116,7 @@ require 'info-messages.php'; ?>
             </div>
                 <?php foreach ($estateValues as $pageNumber => $fields): ?>
                     <div class="lead-lightbox lead-page-<?php echo $pageNumber; ?>">
-                        <div class="c-form__fieldset">
+                        <div class="c-form__fieldset --<?php echo $bg_color; ?>">
                             <?php echo implode($fields); ?>
                         </div>
                     </div>

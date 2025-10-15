@@ -16,7 +16,7 @@
     scroll-margin-top: calc(
       $desktop-header-height + $desktop-section-padding-top
     );
-    gap: 5rem;
+    gap: 2rem;
   }
 
   &__property-context {
@@ -26,6 +26,7 @@
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
+    padding: 1.5rem;
 
     @include media-breakpoint-up(xl) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -39,6 +40,26 @@
           margin-top: 1rem;
         }
       }
+    }
+
+    &.--bg-transparent {
+      background-color: var(--oo-color-bg);
+    }
+
+    &.--bg-light {
+      background-color: var(--oo-color-light-bg, var(--oo-color-bg));
+    }
+
+    &.--bg-dark {
+      background-color: var(--oo-color-dark-bg, var(--oo-color-bg));
+    }
+
+    &.--bg-primary {
+      background-color: var(--oo-color-primary-bg, var(--oo-color-bg));
+    }
+
+    &.--bg-secondary {
+      background-color: var(--oo-color-secondary-bg, var(--oo-color-bg));
     }
   }
 

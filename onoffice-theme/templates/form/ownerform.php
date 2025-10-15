@@ -89,7 +89,7 @@ foreach ($pForm->getInputFields() as $input => $table) {
         '</p>';
 } ?>
 
-    <div class="c-form__fieldset">
+    <div class="c-form__fieldset --<?php echo $bg_color; ?>">
         <div class="c-form__header">
             <legend class="c-form__legend"><?php esc_html_e(
                 'Ihre Kontaktdaten',
@@ -107,7 +107,7 @@ foreach ($pForm->getInputFields() as $input => $table) {
         </div>
     </div>
 
-    <div class="c-form__fieldset">
+    <div class="c-form__fieldset --<?php echo $bg_color; ?>">
         <div class="c-form__header">
             <legend class="c-form__legend"><?php esc_html_e(
                 'Angaben zu Ihrem Eigentum',

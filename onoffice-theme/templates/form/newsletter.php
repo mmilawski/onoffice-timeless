@@ -62,7 +62,7 @@ foreach ($pForm->getInputFields() as $input => $table) {
         '</p>';
 } ?>
 
-    <div class="c-form__fieldset">
+    <div class="c-form__fieldset --<?php echo $bg_color; ?>">
         <div class="c-form__header">
             <p class="c-form__required"><?php esc_html_e(
                 '* Pflichtfelder',
