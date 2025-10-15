@@ -12,13 +12,10 @@
   &.--property-status {
     .--bg-light & {
       background-color: var(--oo-color-light-primary, var(--oo-color-primary));
-      color: var(
-        --oo-color-light-contrast-primary,
-        var(--oo-color-contrast-primary)
-      );
+      color: var(--oo-color-light-contrast-primary);
     }
     .--bg-dark & {
-      background-color: var(--oo-color-dark-primary, var(--oo-color-dark-bg));
+      background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
       color: var(--oo-color-dark-contrast-primary);
     }
 

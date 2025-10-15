@@ -165,19 +165,34 @@
   }
 
   .--bg-transparent & {
-    background-color: var(--oo-color-mix-bg-contrast-05);
+    background-color: var(
+      --oo-color-mix-bg-contrast-05,
+      var(--oo-color-primary)
+    );
   }
 
   .--bg-light & {
-    background-color: var(--oo-color-light-mix-bg-contrast-05);
+    background-color: var(
+      --oo-color-light-mix-bg-contrast-05,
+      var(--oo-color-primary)
+    );
   }
   .--bg-dark & {
-    background-color: var(--oo-color-dark-mix-bg-contrast-05);
+    background-color: var(
+      --oo-color-dark-mix-bg-contrast-05,
+      var(--oo-color-primary)
+    );
   }
   .--bg-primary & {
-    background-color: var(--oo-color-primary-mix-bg-contrast-05);
+    background-color: var(
+      --oo-color-primary-mix-bg-contrast-05,
+      var(--oo-color-primary)
+    );
   }
   .--bg-secondary & {
-    background-color: var(--oo-color-secondary-mix-bg-contrast-05);
+    background-color: var(
+      --oo-color-secondary-mix-bg-contrast-05,
+      var(---oo-color-primary)
+    );
   }
 }

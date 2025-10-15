@@ -74,14 +74,6 @@
     @include media-breakpoint-up(lg) {
       width: auto;
     }
-
-    & .onofficeSortListSelector {
-      border: 2px solid var(--oo-color-mix-bg-contrast-60);
-    }
-
-    & .onofficeSortListSelector {
-      background: transparent;
-    }
   }
 
   &__properties {
