@@ -1,6 +1,5 @@
 .c-property-card {
   $c-property-card: &;
-  background-color: var(--oo-color-mix-bg-contrast-05);
 
   @include media-breakpoint-up(lg) {
     display: grid;
@@ -163,5 +162,22 @@
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 1;
     }
+  }
+
+  .--bg-transparent & {
+    background-color: var(--oo-color-mix-bg-contrast-05);
+  }
+
+  .--bg-light & {
+    background-color: var(--oo-color-light-mix-bg-contrast-05);
+  }
+  .--bg-dark & {
+    background-color: var(--oo-color-dark-mix-bg-contrast-05);
+  }
+  .--bg-primary & {
+    background-color: var(--oo-color-primary-mix-bg-contrast-05);
+  }
+  .--bg-secondary & {
+    background-color: var(--oo-color-secondary-mix-bg-contrast-05);
   }
 }
