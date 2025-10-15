@@ -239,6 +239,128 @@ while ($current_property = $pEstates->estateIterator()) {
         ); ?></a>
     <?php } ?>
 
+        <div class="c-property-details__header o-container">
+            <div class="c-property-details__header-content offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
+                <?php if ($show_secret_sale_block): ?>
+                    <?php
+                    // --- SECRET SALE: PLACEHOLDER TITLE & PRICE ---
+                    ?>
+                    <h1 class="c-property-details__title o-headline --h2">
+                        <?php esc_html_e(
+                            'Exklusives Objekt',
+                            'oo_theme',
+                        ); ?>
+                    </h1>
+                    <p class="c-property-details__price">
+                        <?php esc_html_e(
+                            'Kaufpreis',
+                            'oo_theme',
+                        ); ?>: xxx.xxx
+                    </p>
+                <?php else: ?>
+                <?php if (
+                    $property_status ||
+                    (Favorites::isFavorizationEnabled() &&
+                        !$is_reference &&
+                        !$iframe_display)
+                ) { ?>
+                    <div class="c-property-details__banner-flags c-flags <?= !$property_status &&
+                    Favorites::isFavorizationEnabled()
+                        ? '--only-favorite'
+                        : '' ?>">
+                    <?php } ?>
+
+                    <?php if ($property_status) { ?>
+                        <span class="c-property-details__status c-flag --property-status">
+                            <?php echo ucfirst($property_status); ?>
+                        </span>
+                    <?php } ?>
+
+                    <?php
+                    if (
+                        Favorites::isFavorizationEnabled() &&
+                        !$is_reference &&
+                        !$iframe_display
+                    ) {
+
+                        $favorite_label = Favorites::getFavorizationLabel();
+                        if ($favorite_label == 'Watchlist') {
+                            $favorite_text = esc_html__(
+                                'Zur Merkliste hinzufügen',
+                                'oo_theme',
+                            );
+                            $favorite_icon = 'bookmark';
+                        } else {
+                            $favorite_text = esc_html__(
+                                'Zu Favoriten hinzufügen',
+                                'oo_theme',
+                            );
+                            $favorite_icon =
+                                $favorite_label == 'Watchlist'
+                                    ? 'bookmark'
+                                    : 'heart';
+                        }
+                        ?>
+                        <button class="c-property-details__favorite c-icon-button" data-onoffice-property-id="<?php echo $property_id; ?>" aria-label="<?php echo $favorite_text; ?>">
+                            <?php oo_get_icon($favorite_icon, true, [
+                                'class' => 'c-icon-button__icon --favorite',
+                            ]); ?>
+                        </button>
+                    <?php
+                    }
+
+                    if (
+                        $property_status ||
+                        (Favorites::isFavorizationEnabled() &&
+                            !$is_reference &&
+                            !$iframe_display)
+                    ) { ?>
+                    </div>
+                <?php }
+
+                    if ($current_property['objekttitel']) { ?>
+                    <h1 class="c-property-details__title o-headline --h2">
+                        <?php echo $current_property['objekttitel']; ?>
+                    </h1>
+                <?php }
+                    ?>
+                <?php if ($price_fields_available) { ?>
+                    <?php foreach ($price_fields as $price_field) {
+
+                        $price_value = $current_property[$price_field];
+                        if (
+                            (is_numeric($price_value) &&
+                                0 == $price_value) ||
+                            $price_value == '0000-00-00' ||
+                            $price_value == '0.00' ||
+                            $price_value == '' ||
+                            empty($price_value)
+                        ) {
+                            continue;
+                        }
+                        ?>
+                        <p class="c-property-details__price">
+                            <?php
+                            esc_html_e(
+                                $pEstates->getFieldLabel($price_field),
+                            );
+
+                            echo ':';
+                            ?>
+                            <?php if (is_array($price_value)) {
+                                esc_html_e(implode(', ', $price_value));
+                            } else {
+                                echo esc_html($price_value);
+                            } ?>
+                        </p>
+                    <?php
+                    } ?>
+                <?php } ?>
+                <?php endif; ?>
+            </div>
+        </div>
+            
+
         <div class="c-property-details__banner">
             <?php if ($show_secret_sale_block) { ?>
                 <?php
