@@ -41,7 +41,7 @@ if ($is_slider) {
 echo $is_image;
 ?>">
     <!-- HEADER: Picture left, Date & Stars right -->
-    <div class="c-review-card__header">
+    <div class="c-review-card__header<?php echo $show_images !== 'images' ? ' --hide-images' : ''; ?>">
         <?php if (!empty($image) && $show_images === 'images') { ?>
             <div class="c-review-card__image-wrapper">
                 <?php oo_get_template('components', '', 'component-image', [
@@ -83,7 +83,9 @@ echo $is_image;
             </div>
         <?php } ?>
 
-        <div class="c-review-card__header-right">
+        <div class="c-review-card__header-right  <?php echo $show_images !== 'images'
+        ? '--hide-images'
+        : ''; ?>">
             <?php if ($date && $show_date) { ?>
                 <div class="c-review-card__date"><?php echo $date; ?></div>
             <?php } ?>
