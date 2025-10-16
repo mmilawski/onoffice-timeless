@@ -1640,3 +1640,109 @@ jQuery(window).on('load', function () {
   initVimeoPlayers();
   sanitizeClonedYouTubeIframes(document);
 });
+
+// Initialize news card navigation on load
+function initNewsCardNavigation() {
+  var container = document.querySelector('.c-news__news');
+  console.log('11')
+  if (!container) return;
+  console.log('22')
+  var focusableElements = [];
+  var isDesktop = window.matchMedia('(min-width: 768px)').matches;
+  
+  function buildFocusableList() {
+    focusableElements = [];
+    var newsCards = container.querySelectorAll('.c-news-card');
+    
+    newsCards.forEach(function(card, index) {
+      var picture = card.querySelector('.c-news-card__link');
+      var button = card.querySelector('.c-news-card__button');
+      
+      // Build array based on desktop/mobile layout
+      if (isDesktop) {
+        if (index % 2 === 0) {
+          // Even cards: Picture -> Content -> Button
+          if (picture) focusableElements.push(picture);
+          if (button) focusableElements.push(button);
+        } else {
+          // Odd cards: Content -> Button -> Picture
+          if (button) focusableElements.push(button);
+          if (picture) focusableElements.push(picture);
+        }
+      } else {
+        // Mobile: Natural order for all cards
+        if (picture) focusableElements.push(picture);
+        if (button) focusableElements.push(button);
+      }
+    });
+  }
+
+  function handleKeyDown(event) {
+    // Only handle tab navigation
+    if (event.key !== 'Tab') return;
+ 
+    // Find the currently focused element
+    var currentElement = document.activeElement;
+    var currentIndex = focusableElements.indexOf(currentElement);
+    
+    // Only handle focus if we're within our container
+    if (currentIndex === -1) return;
+    
+    // Prevent default tab behavior
+    event.preventDefault();
+    
+    var nextIndex;
+    if (event.shiftKey) {
+      // Shift+Tab: Move backwards
+      nextIndex = currentIndex - 1;
+      if (nextIndex < 0) {
+        // Exit container at the start
+        var prevFocusable = findPreviousFocusable(container);
+        if (prevFocusable) prevFocusable.focus();
+        return;
+      }
+    } else {
+      // Tab: Move forwards
+      nextIndex = currentIndex + 1;
+      if (nextIndex >= focusableElements.length) {
+        // Exit container at the end
+        var nextFocusable = findNextFocusable(container);
+        if (nextFocusable) nextFocusable.focus();
+        return;
+      }
+    }
+    
+    // Focus the next element in our sequence
+    focusableElements[nextIndex].focus();
+  }
+
+  function findNextFocusable(element) {
+    var focusable = 'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    var all = Array.from(document.querySelectorAll(focusable));
+    var index = all.indexOf(element);
+    return all[index + 1] || null;
+  }
+
+  function findPreviousFocusable(element) {
+    var focusable = 'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    var all = Array.from(document.querySelectorAll(focusable));
+    var index = all.indexOf(element);
+    return all[index - 1] || null;
+  }
+
+  // Build initial focus list
+  buildFocusableList();
+
+  // Listen for Tab key events
+  container.addEventListener('keydown', handleKeyDown);
+
+  // Rebuild focus list on resize
+  var mediaQuery = window.matchMedia('(min-width: 768px)');
+  mediaQuery.addListener(function(e) {
+    isDesktop = e.matches;
+    buildFocusableList();
+  });
+}
+
+// Usage (don't include this part, just for reference):
+jQuery(window).on('load', initNewsCardNavigation);
