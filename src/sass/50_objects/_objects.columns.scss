@@ -6,7 +6,10 @@
   .o-row {
     @include make-row();
     &.--reverse {
-      flex-direction: row-reverse;
+      flex-direction: column-reverse;
+      @include media-breakpoint-up(lg) {
+        flex-direction: row-reverse;
+      }
     }
     &.--position-left {
       justify-content: flex-start;

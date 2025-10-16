@@ -76,7 +76,11 @@ $media_width_xxxl = '460';
                 <?php oo_get_template('components', '', 'component-image', [
                     'image' => $image,
                     'picture_class' =>
-                        'c-media-text__picture o-picture o-col-12 o-col-lg-6 o-col-xl-4',
+                        'c-media-text__picture o-picture ' .
+                        ($position_media_text == 'right'
+                            ? 'u-offset-lg-1'
+                            : '') .
+                        ' o-col-12 o-col-lg-5',
                     'image_class' => 'c-media-text__image o-image',
                     'dimensions' => [
                         '575' => [
@@ -110,14 +114,20 @@ $media_width_xxxl = '460';
                     ],
                 ]); ?>
             <?php } elseif (empty($image) && $type == 'image') {
-                echo '<div class="c-media-text__placeholder c-placeholder o-col-12 o-col-lg-6 o-col-xl-4"></div>';
+                echo '<div class="c-media-text__placeholder c-placeholder ' .
+                    ($position_media_text == 'right' ? 'u-offset-lg-1' : '') .
+                    ' o-col-12 o-col-lg-5"></div>';
             } ?>
 
             <?php if (!empty($icon) && $type == 'icon') { ?>
                 <?php oo_get_template('components', '', 'component-image', [
                     'image' => $icon,
                     'picture_class' =>
-                        'c-media-text__picture o-col-12 o-col-lg-6 o-col-xl-4',
+                        'c-media-text__picture ' .
+                        ($position_media_text == 'right'
+                            ? 'u-offset-lg-1'
+                            : '') .
+                        ' o-col-12 o-col-lg-5',
                     'image_class' => 'c-media-text__image',
                     'additional_cloudimg_params' => '&func=bound&org_if_sml=1',
                     'dimensions' => [
@@ -152,11 +162,16 @@ $media_width_xxxl = '460';
                     ],
                 ]); ?>
             <?php } elseif (empty($icon) && $type == 'icon') {
-                echo '<div class="c-media-text__placeholder c-placeholder o-col-12 o-col-lg-6 o-col-xl-4"></div>';
+                echo '<div class="c-media-text__placeholder c-placeholder ' .
+                    ($position_media_text == 'right' ? 'u-offset-lg-1' : '') .
+                    ' o-col-12 o-col-lg-5"></div>';
             } ?>
 
             <?php if (!empty($video) && $type == 'video') { ?>
-                <div class="c-media-text__video o-col-12 o-col-lg-6 o-col-xl-4">
+                <div class="c-media-text__video <?php echo $position_media_text ==
+                'right'
+                    ? 'u-offset-lg-1'
+                    : ''; ?> o-col-12 o-col-lg-5">
                     <?php if (!empty($thumbnail)) { ?>
                         <div class="c-media-text__thumbnail-wrapper <?php echo $video_class; ?>">
                             <?php oo_get_template(
@@ -235,7 +250,10 @@ $media_width_xxxl = '460';
                 </div>
             <?php } ?>
 
-            <div class="c-media-text__content o-col-12 o-col-lg-6 o-col-xl-8">
+            <div class="c-media-text__content <?php echo $position_media_text ==
+            'left'
+                ? 'u-offset-lg-1'
+                : ''; ?> o-col-12 o-col-lg-6">
                 <?php if (!empty($headline['text'])) { ?>
                     <?php oo_get_template(
                         'components',
