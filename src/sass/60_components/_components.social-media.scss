@@ -13,17 +13,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--oo-social-media-color, var(--oo-color-primary));
+    color: var(--oo-social-media-color, var(--oo-color-text));
 
     @include visited-active() {
-      color: var(--oo-social-media-color, var(--oo-color-primary));
+      color: var(--oo-social-media-color, var(--oo-color-text));
     }
 
     @include hover-focus() {
-      color: var(
-        --oo-social-media-color-hover,
-        var(--oo-color-mix-primary-contrast-20)
-      );
+      color: var(--oo-social-media-color-hover, var(--oo-color-mix-primary));
     }
   }
 
@@ -73,12 +70,10 @@
   }
 
   .--bg-header & {
-    --oo-social-media-color: var(
+    --oo-social-media-color: var(--oo-color-header-text, var(--oo-color-text));
+    --oo-social-media-color-hover: var(
       --oo-color-header-primary,
       var(--oo-color-primary)
-    );
-    --oo-social-media-color-hover: var(
-      --oo-color-header-mix-primary-contrast-20
     );
   }
 

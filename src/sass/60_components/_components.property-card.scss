@@ -42,8 +42,8 @@
 
   &__favorite {
     &.c-icon-button {
-      width: $icon-size;
-      height: $icon-size;
+      width: 2.5rem;
+      height: 2.5rem;
       &.--on-bg-transparent,
       .--bg-transparent & {
         @include plain-visited() {
