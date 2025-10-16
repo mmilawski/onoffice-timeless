@@ -22,10 +22,8 @@
       }
 
       &.--content-none {
-        background-color: steelblue;
-        
         & #{$c-banner}__media {
-          width: 100%; 
+          width: 100%;
         }
       }
     }
