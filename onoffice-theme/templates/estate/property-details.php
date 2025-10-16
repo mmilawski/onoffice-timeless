@@ -251,7 +251,7 @@ while ($current_property = $pEstates->estateIterator()) {
                             'oo_theme',
                         ); ?>
                     </h1>
-                    <p class="c-property-details__price">
+                    <p class="c-property-details__price o-headline --h3">
                         <?php esc_html_e(
                             'Kaufpreis',
                             'oo_theme',
@@ -339,7 +339,7 @@ while ($current_property = $pEstates->estateIterator()) {
                             continue;
                         }
                         ?>
-                        <p class="c-property-details__price">
+                        <p class="c-property-details__price o-headline --h3">
                             <?php
                             esc_html_e(
                                 $pEstates->getFieldLabel($price_field),
@@ -368,188 +368,278 @@ while ($current_property = $pEstates->estateIterator()) {
                 wp_enqueue_style('oo-glightbox-style');
                 ?>
 
-                <div class="c-property-details__gallery">
+                <div class="c-property-details__gallery c-slider splide --is-property-details-slider" data-splide='{"perPage":1,"gap":0,"lazyLoad":"nearby","snap":true}'>
+                    <div class="c-slider__track splide__track">
+                    
+                        <div class="c-slider__list splide__list">
+                            <?php foreach ($sorted_pictures as $id) {
 
-                    <?php
-                    $i = 1;
+                                $picture_values = $pEstates->getEstatePictureValues(
+                                    $id,
+                                );
+                                // Image alt text
+                                if ($picture_values['title'] == true) {
+                                    $image_alt = esc_html(
+                                        $picture_values['title'],
+                                    );
+                                } else {
+                                    $image_alt = esc_html__(
+                                        'Immobilienbild',
+                                        'oo_theme',
+                                    );
+                                }
 
-                    foreach ($sorted_pictures as $id) {
+                                // Image width
+                                $image_width_xs = '543';
+                                $image_width_sm = '512';
+                                $image_width_md = '694';
+                                $image_width_lg = '608';
+                                $image_width_xl = '736';
+                                $image_width_xxl = '864';
+                                $image_width_xxxl = '952';
 
-                        $picture_values = $pEstates->getEstatePictureValues(
-                            $id,
-                        );
-                        if ($picture_values['title'] == true) {
-                            $image_alt = esc_html($picture_values['title']);
-                        } else {
-                            $image_alt = esc_html__(
-                                'Immobilienbild',
-                                'oo_theme',
-                            );
-                        }
+                                $image = [
+                                    'url' => $pEstates->getEstatePictureUrl(
+                                        $id,
+                                    ),
+                                    'alt' => $image_alt,
+                                ];
 
-                        $image = [
-                            'url' => $pEstates->getEstatePictureUrl($id),
-                            'alt' => $image_alt,
-                        ];
+                                //  Lightbox Cloud Image
+                                $lightbox_image_options =
+                                    '?force_format=webp&org_if_sml=1';
+                                $lightbox_url =
+                                    'https://acnaayzuen.cloudimg.io/v7/' .
+                                    $image['url'] .
+                                    $lightbox_image_options;
 
-                        //  Lightbox Cloud Image
-                        $lightbox_image_options =
-                            '?force_format=webp&org_if_sml=1';
-                        $lightbox_url =
-                            'https://acnaayzuen.cloudimg.io/v7/' .
-                            $image['url'] .
-                            $lightbox_image_options;
+                                $lightbox_image_size_list =
+                                    [
+                                        [
+                                            'id' => 'mobile',
+                                            'breakpoint' => '767',
+                                            'image_size' => '767',
+                                        ],
+                                        [
+                                            'id' => 'tablet',
+                                            'breakpoint' => '768',
+                                            'image_size' => '1200',
+                                        ],
+                                        [
+                                            'id' => 'desktop',
+                                            'breakpoint' => '1200',
+                                            'image_size' => '1920',
+                                        ],
+                                    ] ?? [];
 
-                        $lightbox_image_size_list =
-                            [
-                                [
-                                    'id' => 'mobile',
-                                    'breakpoint' => '767',
-                                    'image_size' => '767',
-                                ],
-                                [
-                                    'id' => 'tablet',
-                                    'breakpoint' => '768',
-                                    'image_size' => '1200',
-                                ],
-                                [
-                                    'id' => 'desktop',
-                                    'breakpoint' => '1200',
-                                    'image_size' => '1920',
-                                ],
-                            ] ?? [];
+                                // Helpers
+                                $lightbox_mobile_breakpoint = '';
+                                $lightbox_image_breakpoints = '';
+                                $lightbox_image_full_size = '';
+                                $lightbox_image_sizes = '';
 
-                        // Helpers
-                        $lightbox_mobile_breakpoint = '';
-                        $lightbox_image_breakpoints = '';
-                        $lightbox_image_full_size = '';
-                        $lightbox_image_sizes = '';
+                                if (
+                                    is_array($lightbox_image_size_list)
+                                ) {
+                                    foreach (
+                                        $lightbox_image_size_list
+                                        as $key => $size
+                                    ) {
+                                        $is_first =
+                                            $key ==
+                                            array_key_first(
+                                                $lightbox_image_size_list,
+                                            );
+                                        $is_last =
+                                            $key ==
+                                            array_key_last(
+                                                $lightbox_image_size_list,
+                                            );
+                                        $separator = !$is_last
+                                            ? ','
+                                            : '';
+                                        $is_last_image_size = $is_last
+                                            ? ',' .
+                                                end(
+                                                    $lightbox_image_size_list,
+                                                )['image_size'] .
+                                                'w'
+                                            : $separator;
 
-                        if (is_array($lightbox_image_size_list)) {
-                            foreach (
-                                $lightbox_image_size_list
-                                as $key => $size
-                            ) {
-                                $is_first =
-                                    $key ==
-                                    array_key_first($lightbox_image_size_list);
-                                $is_last =
-                                    $key ==
-                                    array_key_last($lightbox_image_size_list);
-                                $separator = !$is_last ? ',' : '';
-                                $is_last_image_size = $is_last
-                                    ? ',' .
+                                        // Change breakpoints for mobile
+                                        if ($is_first) {
+                                            $lightbox_image_breakpoints .=
+                                                '(max-width: ' .
+                                                $size['breakpoint'] .
+                                                'px) ' .
+                                                $size['image_size'] .
+                                                'px,';
+                                            $lightbox_image_sizes .=
+                                                $lightbox_url .
+                                                '&w=' .
+                                                $size['image_size'] .
+                                                ' ' .
+                                                $size['breakpoint'] .
+                                                'w,';
+                                        }
+
+                                        // Skip first Item
+                                        if ($key === 0) {
+                                            continue;
+                                        }
+
+                                        // Breakpoints
+                                        $lightbox_image_breakpoints .=
+                                            '(min-width:' .
+                                            $size['breakpoint'] .
+                                            'px) ' .
+                                            $size['image_size'] .
+                                            'px' .
+                                            $separator;
+
+                                        // Sources
+                                        $lightbox_image_sizes .=
+                                            $lightbox_url .
+                                            '&w=' .
+                                            $size['image_size'] .
+                                            ' ' .
+                                            $size['breakpoint'] .
+                                            'w' .
+                                            $is_last_image_size;
+                                    }
+                                }
+                                ?>
+                                <a class="c-property-details__gallery-link glightbox c-slider__slide splide__slide"
+                                    data-gallery="gallery" href="<?php echo esc_url(
+                                        $lightbox_url,
+                                    ) .
+                                        '&w=' .
                                         end($lightbox_image_size_list)[
                                             'image_size'
-                                        ] .
-                                        'w'
-                                    : $separator;
+                                        ]; ?>"
+                                    data-sizes="<?php echo $lightbox_image_breakpoints; ?>"
+                                    data-srcset="<?php echo $lightbox_image_sizes; ?>" data-caption="<?php echo $image[
+'alt'
+]; ?>" title="<?php echo $image['alt']; ?>"
+                                    aria-label="<?php echo sprintf(
+                                        esc_attr_x(
+                                            'Bild %s vergrößert anzeigen',
+                                            'oo_theme',
+                                        ),
+                                        $image['alt'],
+                                    ); ?>">
+                                    <?php oo_get_template(
+                                        'components',
+                                        '',
+                                        'component-image',
+                                        [
+                                            'image' => $image,
+                                            'picture_class' =>
+                                                'c-property-details__gallery-picture o-picture',
+                                            'image_class' =>
+                                                'c-property-details__gallery-image o-image',
+                                            'dimensions' => [
+                                                '575' => [
+                                                    'w' => $image_width_xs,
+                                                    'h' => round(
+                                                        ($image_width_xs *
+                                                            2) /
+                                                            3,
+                                                    ),
+                                                ],
+                                                '1600' => [
+                                                    'w' => $image_width_xxxl,
+                                                    'h' => $image_width_xxxl,
+                                                ],
+                                                '1400' => [
+                                                    'w' => $image_width_xxl,
+                                                    'h' => $image_width_xxl,
+                                                ],
+                                                '1200' => [
+                                                    'w' => $image_width_xl,
+                                                    'h' => $image_width_xl,
+                                                ],
+                                                '992' => [
+                                                    'w' => $image_width_lg,
+                                                    'h' => $image_width_lg,
+                                                ],
+                                                '768' => [
+                                                    'w' => $image_width_md,
+                                                    'h' => round(
+                                                        ($image_width_md *
+                                                            2) /
+                                                            3,
+                                                    ),
+                                                ],
+                                                '576' => [
+                                                    'w' => $image_width_sm,
+                                                    'h' => round(
+                                                        ($image_width_sm *
+                                                            2) /
+                                                            3,
+                                                    ),
+                                                ],
+                                            ],
+                                        ],
+                                    ); ?>
+                                </a>
+                            <?php
+                            } ?>
+                        </div>
 
-                                // Change breakpoints for mobile
-                                if ($is_first) {
-                                    $lightbox_image_breakpoints .=
-                                        '(max-width: ' .
-                                        $size['breakpoint'] .
-                                        'px) ' .
-                                        $size['image_size'] .
-                                        'px,';
-                                    $lightbox_image_sizes .=
-                                        $lightbox_url .
-                                        '&w=' .
-                                        $size['image_size'] .
-                                        ' ' .
-                                        $size['breakpoint'] .
-                                        'w,';
-                                }
-
-                                // Skip first Item
-                                if ($key === 0) {
-                                    continue;
-                                }
-
-                                // Breakpoints
-                                $lightbox_image_breakpoints .=
-                                    '(min-width:' .
-                                    $size['breakpoint'] .
-                                    'px) ' .
-                                    $size['image_size'] .
-                                    'px' .
-                                    $separator;
-
-                                // Sources
-                                $lightbox_image_sizes .=
-                                    $lightbox_url .
-                                    '&w=' .
-                                    $size['image_size'] .
-                                    ' ' .
-                                    $size['breakpoint'] .
-                                    'w' .
-                                    $is_last_image_size;
-                            }
-                        }
-                        ?>
-                        <a class="c-property-details__gallery-link glightbox" data-gallery="gallery"
-                            href="<?php echo $lightbox_url .
-                                '&w=' .
-                                end($lightbox_image_size_list)[
-                                    'image_size'
-                                ]; ?>"
-                            data-sizes="<?php echo $lightbox_image_breakpoints; ?>"
-                            data-srcset="<?php echo $lightbox_image_sizes; ?>"
-                            data-caption="<?php echo $image['alt']; ?>"
-                            title="<?php echo $image['alt']; ?>"
-                            aria-label="<?php echo sprintf(
-                                esc_attr_x(
-                                    'Bild %s vergrößert anzeigen',
-                                    'oo_theme',
-                                ),
-                                $image['alt'],
+                        <div class="c-property-details__all-images --open-lightbox">
+                            <button class="c-button --has-icon --desktop">
+                                <span class="c-button__text">
+                                    <?php echo sprintf(
+                                        __(
+                                            '%d Fotos ansehen',
+                                            'oo_theme',
+                                        ),
+                                        $picture_count,
+                                    ); ?>
+                                </span>
+                                <span class="c-button__icon --arrow-right">
+                                    <?php echo oo_get_icon(
+                                        'arrow-right',
+                                    ); ?>
+                                </span>
+                            </button>
+                            <button class="c-button --only-icon --large --mobile" aria-label="<?php echo sprintf(
+                                __('%d Fotos ansehen', 'oo_theme'),
+                                $picture_count,
                             ); ?>">
-                            <?php oo_get_template(
-                                'components',
-                                '',
-                                'component-image',
-                                [
-                                    'image' => $image,
-                                    'picture_class' =>
-                                        'c-property-details__gallery-picture o-picture',
-                                    'image_class' =>
-                                        'c-property-details__gallery-image o-image',
-                                    'dimensions' => [
-                                        '575' => [
-                                            'h' => round((575 * 2) / 3),
-                                        ],
-                                        '1600' => [
-                                            'h' => round((369 * 2) / 3),
-                                        ],
-                                        '1400' => [
-                                            'h' => round((336 * 2) / 3),
-                                        ],
-                                        '1200' => [
-                                            'h' => round((288 * 2) / 3),
-                                        ],
-                                        '992' => [
-                                            'h' => round((480 * 2) / 3),
-                                        ],
-                                        '768' => [
-                                            'h' => round((726 * 2) / 3),
-                                        ],
-                                        '576' => [
-                                            'h' => round((544 * 2) / 3),
-                                        ],
-                                    ],
-                                ],
-                            ); ?>
-                            <span class="c-property-details__open-lightbox">
-                                <?php oo_get_icon('plus', true, [
-                                    'class' =>
-                                        'c-property-details__open-lightbox-icon',
-                                ]); ?>
-                            </span>
-                        </a>
-                    <?php $i++;
-                    }
-                    ?>
+                                <span class="c-button__icon --arrow-right">
+                                    <?php echo oo_get_icon(
+                                        'arrow-right',
+                                    ); ?>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="c-slider__navigation splide__navigation">
+                        <div class="c-slider__arrows splide__arrows">
+                            <button class="c-slider__arrow --prev c-button --only-icon --square splide__arrow splide__arrow--prev">
+                                <span class="u-screen-reader-only"><?php esc_html_e(
+                                    'Vorheriges',
+                                    'oo_theme',
+                                ); ?></span>
+                                <span class="c-button__icon --chevron-left"><?php oo_get_icon(
+                                    'chevron-left',
+                                ); ?></span>
+                            </button>
+                            <button class="c-slider__arrow --next c-button --only-icon --square splide__arrow splide__arrow--next">
+                                <span class="u-screen-reader-only"><?php esc_html_e(
+                                    'Nächstes',
+                                    'oo_theme',
+                                ); ?></span>
+                                <span class="c-button__icon --chevron-right"><?php oo_get_icon(
+                                    'chevron-right',
+                                ); ?></span>
+                            </button>
+                        </div>
+                        <ul class="c-slider__pagination splide__pagination"></ul>
+                    </div>
                 </div>
             <?php
             } ?>
