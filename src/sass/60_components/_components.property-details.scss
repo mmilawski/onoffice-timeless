@@ -19,7 +19,12 @@
   }
 
   &__header {
-    // padding-top: 10rem;
+
+    &-content{
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
   }
 
   &__headline {
@@ -43,6 +48,7 @@
     font-family: $font-family-headline;
     font-weight: $font-weight-headline;
     color: var(--oo-color-primary);
+    padding-top: 1.5rem;
     @include font-size($mobile-h4-font-size, $mobile-h4-line-height);
 
     @include media-breakpoint-up(xl) {
@@ -196,6 +202,7 @@
   }
 
   &__status {
+    text-transform: uppercase;
   }
 
   &__favorite {

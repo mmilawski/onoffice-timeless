@@ -1,8 +1,8 @@
 .c-icon-button {
   $c-icon-button: &;
 
-  width: $icon-wrapper-size;
-  height: $icon-wrapper-size;
+  width: $icon-size;
+  height: $icon-size;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,12 +44,12 @@
   }
 
   &__icon {
-    height: $icon-size;
-    width: $icon-size;
+    height: $icon-size-small;
+    width: $icon-size-small;
 
     svg {
-      height: $icon-size;
-      width: $icon-size;
+      height: $icon-size-small;
+      width: $icon-size-small;
     }
 
     &.--filled {

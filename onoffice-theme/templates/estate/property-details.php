@@ -240,7 +240,7 @@ while ($current_property = $pEstates->estateIterator()) {
     <?php } ?>
 
         <div class="c-property-details__header o-container">
-            <div class="c-property-details__header-content offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
+            <div class="c-property-details__header-content u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
                 <?php if ($show_secret_sale_block): ?>
                     <?php
                     // --- SECRET SALE: PLACEHOLDER TITLE & PRICE ---
@@ -289,7 +289,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                 'Zur Merkliste hinzufügen',
                                 'oo_theme',
                             );
-                            $favorite_icon = 'bookmark';
+                            $favorite_icon = 'heart';
                         } else {
                             $favorite_text = esc_html__(
                                 'Zu Favoriten hinzufügen',
@@ -297,7 +297,7 @@ while ($current_property = $pEstates->estateIterator()) {
                             );
                             $favorite_icon =
                                 $favorite_label == 'Watchlist'
-                                    ? 'bookmark'
+                                    ? 'heart'
                                     : 'heart';
                         }
                         ?>
@@ -357,217 +357,6 @@ while ($current_property = $pEstates->estateIterator()) {
                     } ?>
                 <?php } ?>
                 <?php endif; ?>
-            </div>
-        </div>
-            
-
-        <div class="c-property-details__banner">
-            <?php if ($show_secret_sale_block) { ?>
-                <?php
-                // --- SECRET SALE: PLACEHOLDER IMAGE ---
-
-                $placeholder_image_url = oo_get_secret_sale_placeholder();
-                if (!empty($placeholder_image_url)) {
-                    oo_get_template('components', '', 'component-image', [
-                        'image' => [
-                            'url' => $placeholder_image_url,
-                            'alt' => esc_html__('Platzhalterbild', 'oo_theme'),
-                        ],
-                        'picture_class' =>
-                            'c-property-details__banner-picture o-picture',
-                        'image_class' =>
-                            'c-property-details__banner-image o-image',
-                        'loading' => 'eager',
-                    ]);
-                } else {
-                    echo '<div class="c-property-details__banner-picture --is-placeholder"></div>';
-                }
-                ?>
-            <?php } elseif (
-                !empty($property_pictures) &&
-                is_array($property_pictures)
-            ) {
-                foreach ($sorted_pictures as $id) {
-                    $picture_values = $pEstates->getEstatePictureValues($id);
-                    if ($first_picture === true) {
-                        if ($picture_values['title'] == true) {
-                            $image_alt = esc_html($picture_values['title']);
-                        } else {
-                            $image_alt = esc_html__(
-                                'Immobilienbild',
-                                'oo_theme',
-                            );
-                        }
-                        $image = [
-                            'url' => $pEstates->getEstatePictureUrl($id),
-                            'alt' => $image_alt,
-                        ];
-
-                        oo_get_template('components', '', 'component-image', [
-                            'image' => $image,
-                            'picture_class' =>
-                                'c-property-details__banner-picture o-picture',
-                            'image_class' =>
-                                'c-property-details__banner-image o-image',
-                            'loading' => 'eager',
-                            'decoding' => 'auto',
-                            'dimensions' => [
-                                '575' => [
-                                    'w' => '400',
-                                    'h' => '400',
-                                ],
-                                '1600' => [
-                                    'w' => '1920',
-                                    'h' => round((1920 * 9) / 16),
-                                ],
-                                '1400' => [
-                                    'w' => '1600',
-                                    'h' => round((1600 * 9) / 16),
-                                ],
-                                '1200' => [
-                                    'w' => '1400',
-                                    'h' => round((1400 * 9) / 16),
-                                ],
-                                '992' => [
-                                    'w' => '1200',
-                                    'h' => round((1200 * 9) / 16),
-                                ],
-                                '768' => [
-                                    'w' => '992',
-                                    'h' => '992',
-                                ],
-                                '576' => [
-                                    'w' => '768',
-                                    'h' => '768',
-                                ],
-                            ],
-                        ]);
-                    }
-
-                    $first_picture = false;
-                }
-            } else {
-                echo '<div class="c-property-details__banner-picture --is-placeholder"></div>';
-            } ?>
-            <div class="c-property-details__banner-wrapper o-container">
-                <div class="c-property-details__banner-content o-col-12 o-col-lg-10 o-col-xl-8">
-                    <?php if ($show_secret_sale_block): ?>
-                        <?php
-                        // --- SECRET SALE: PLACEHOLDER TITLE & PRICE ---
-                        ?>
-                        <h1 class="c-property-details__title o-headline --h2">
-                            <?php esc_html_e(
-                                'Exklusives Objekt',
-                                'oo_theme',
-                            ); ?>
-                        </h1>
-                        <p class="c-property-details__price">
-                            <?php esc_html_e(
-                                'Kaufpreis',
-                                'oo_theme',
-                            ); ?>: xxx.xxx
-                        </p>
-                    <?php else: ?>
-                    <?php if (
-                        $property_status ||
-                        (Favorites::isFavorizationEnabled() &&
-                            !$is_reference &&
-                            !$iframe_display)
-                    ) { ?>
-                        <div class="c-property-details__banner-flags c-flags <?= !$property_status &&
-                        Favorites::isFavorizationEnabled()
-                            ? '--only-favorite'
-                            : '' ?>">
-                        <?php } ?>
-
-                        <?php if ($property_status) { ?>
-                            <span class="c-property-details__status c-flag --property-status">
-                                <?php echo ucfirst($property_status); ?>
-                            </span>
-                        <?php } ?>
-
-                        <?php
-                        if (
-                            Favorites::isFavorizationEnabled() &&
-                            !$is_reference &&
-                            !$iframe_display
-                        ) {
-
-                            $favorite_label = Favorites::getFavorizationLabel();
-                            if ($favorite_label == 'Watchlist') {
-                                $favorite_text = esc_html__(
-                                    'Zur Merkliste hinzufügen',
-                                    'oo_theme',
-                                );
-                                $favorite_icon = 'bookmark';
-                            } else {
-                                $favorite_text = esc_html__(
-                                    'Zu Favoriten hinzufügen',
-                                    'oo_theme',
-                                );
-                                $favorite_icon =
-                                    $favorite_label == 'Watchlist'
-                                        ? 'bookmark'
-                                        : 'heart';
-                            }
-                            ?>
-                            <button class="c-property-details__favorite c-icon-button" data-onoffice-property-id="<?php echo $property_id; ?>" aria-label="<?php echo $favorite_text; ?>">
-                                <?php oo_get_icon($favorite_icon, true, [
-                                    'class' => 'c-icon-button__icon --favorite',
-                                ]); ?>
-                            </button>
-                        <?php
-                        }
-
-                        if (
-                            $property_status ||
-                            (Favorites::isFavorizationEnabled() &&
-                                !$is_reference &&
-                                !$iframe_display)
-                        ) { ?>
-                        </div>
-                    <?php }
-
-                        if ($current_property['objekttitel']) { ?>
-                        <h1 class="c-property-details__title o-headline --h2">
-                            <?php echo $current_property['objekttitel']; ?>
-                        </h1>
-                    <?php }
-                        ?>
-                    <?php if ($price_fields_available) { ?>
-                        <?php foreach ($price_fields as $price_field) {
-
-                            $price_value = $current_property[$price_field];
-                            if (
-                                (is_numeric($price_value) &&
-                                    0 == $price_value) ||
-                                $price_value == '0000-00-00' ||
-                                $price_value == '0.00' ||
-                                $price_value == '' ||
-                                empty($price_value)
-                            ) {
-                                continue;
-                            }
-                            ?>
-                            <p class="c-property-details__price">
-                                <?php
-                                esc_html_e(
-                                    $pEstates->getFieldLabel($price_field),
-                                );
-
-                                echo ':';
-                                ?>
-                                <?php if (is_array($price_value)) {
-                                    esc_html_e(implode(', ', $price_value));
-                                } else {
-                                    echo esc_html($price_value);
-                                } ?>
-                            </p>
-                        <?php
-                        } ?>
-                    <?php } ?>
-                    <?php endif; ?>
-                </div>
             </div>
         </div>
 
