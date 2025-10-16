@@ -2,6 +2,9 @@
 // Post ID
 $post_id = get_the_ID() ?? null;
 
+// Get categories for this post
+$categories = get_the_category($post_id);
+
 // Get data from news-details block
 $details = [];
 $post_content = get_post_field('post_content', $post_id);
@@ -149,6 +152,14 @@ $link_title_more = sprintf(
     <?php } ?>
     <?php if (!empty($title) || !empty($excerpt) || !empty($link)) { ?>
 	    <div class="c-news-card__content">
+            <?php if (!empty($categories)) { ?>
+                <div class="c-news-card__categories">
+                    <?php foreach($categories as $category) { ?>
+                        <span class="c-news-card__category c-pill"><?php echo esc_html($category->name); ?></span>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+            
             <?php if (!empty($title)) { ?>
                 <span class="c-news-card__title o-headline --h3"><?php echo $title; ?></span>
             <?php } ?>
