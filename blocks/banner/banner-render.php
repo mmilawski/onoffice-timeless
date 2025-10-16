@@ -42,7 +42,7 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
     }'>
         <div class="c-slider__track splide__track">
             <div class="c-slider__list splide__list">
-<?php } ?>
+                <?php } ?>
                 <?php foreach ($slider as $slide) {
 
                     // Content slide
@@ -253,7 +253,7 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
                                     ]); ?>
                                 </button>
                             <?php endif; ?>
-                        </div>
+                        </div> <!-- end of c-banner__background -->
 
                         <?php if ($type != 'none'): ?>
                             <div class="c-banner__container o-container">
@@ -323,15 +323,16 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
                                                 ); ?>
                                             <?php } ?>
                                         <?php endif; ?>
-                                    </div>
-                                </div>
-                            </div>
+                                    </div> <!-- end of c-banner__content -->
+                                </div><!-- end of c-banner__row -->
+                            </div> <!-- end of c-banner__container -->
                         <?php endif; ?>
-                    </div>
+                    </div> <!-- end c-banner__slide -->
                 <?php $first_slide = false;
                 } ?>
-<?php if ($slide_count > 1) { ?>
-            </div>
+            </div> <!-- end of c-slider__list-->
+
+        <?php if ($slide_count > 1) { ?>
             <div class="c-slider__navigation splide__navigation">
                 <div class="c-slider__arrows splide__arrows">
                     <button class="c-slider__arrow c-slider__arrow--prev splide__arrow splide__arrow--prev">
@@ -352,7 +353,7 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
                             'class' => 'c-slider__icon splide__icon',
                         ]); ?>
                     </button>
-                </div>
+                </div> <!-- end of splide arrows -->
             </div> <!-- end of slider navigation -->
             <div class="c-slider__controls splide__controls">
                 <ul class="c-slider__pagination splide__pagination"></ul>
@@ -375,7 +376,7 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
                     </button>
                 <?php } ?> <!-- end of if autoslide-->
             </div> <!-- end of slider controls -->
-        </div>
-    </div>
+        </div> <!-- end of c-slider__track -->
+    </div> <!-- end c-banner__slider -->
 <?php } ?> <!-- end of > 1 slide condition -->
 </div> <!-- end of banner -->
