@@ -20,9 +20,14 @@
       .--is-header-style-transparent & {
         min-height: calc(70vh + var(--header-height));
       }
-    }
 
-    &.--content-none {
+      &.--content-none {
+        background-color: steelblue;
+        
+        & #{$c-banner}__media {
+          width: 100%; 
+        }
+      }
     }
     &.--content-property-search {
     }
@@ -76,7 +81,7 @@
     }
   }
 
-  &__content-container {
+  &__container {
     padding-block: $mobile-section-padding-top $mobile-section-padding-bottom;
     @include media-breakpoint-up(lg) {
       padding-block: 0;
@@ -93,15 +98,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-align: center;
+    padding: 0;
     gap: 1.5rem 0;
-    padding: 1rem;
-    background-color: var(--oo-color-transparent-bg-90);
-    box-shadow: 0 0 5px var(--oo-color-transparent-shadow-15);
 
     @include media-breakpoint-up(lg) {
       gap: 2rem 0;
-      padding: 2rem;
     }
 
     &.--content-none {
@@ -119,6 +120,7 @@
   }
 
   &__headline {
+    width: 100%;
   }
 
   &__text {

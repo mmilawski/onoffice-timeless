@@ -131,11 +131,11 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
  ) { ?>c-slider__slide splide__slide<?php } ?>">
                         <!-- -->
                         <?php if ($type != 'none'): ?>
-                            <div class="c-banner__content-container o-container">
+                            <div class="c-banner__container o-container">
                                 <div class="c-banner__row o-row --position-<?php echo $slide_settings[
                                     'position_content'
                                 ]; ?>">
-                                    <div class="c-banner__content --content-<?php echo $type; ?> o-col-12 o-col-lg-6">
+                                    <div class="c-banner__content --content-<?php echo $type; ?> o-col-12 o-col-lg-5">
                                         <?php if (!empty($headline['text'])) {
                                             $headline_size =
                                                 $headline['size'] == 'span'
