@@ -4,10 +4,9 @@
   font-family: $font-family-navigation;
   font-weight: $font-weight-navigation;
   overflow: hidden;
-  padding-top: 0.25rem;
+  padding: 0;
   @include media-breakpoint-up(xxl) {
     overflow: inherit;
-    padding-top: 0;
   }
 
   &__button {
@@ -32,7 +31,7 @@
       flex-direction: row;
       justify-content: flex-end;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 1.5rem 2rem;
     }
   }
 
@@ -47,29 +46,93 @@
     }
 
     &.--is-top-level {
+      #{$c-main-nav}__link {
+        text-decoration: underline;
+        text-decoration-color: transparent;
+        transition: text-decoration 0.1s ease-in-out;
+
+        &:hover,
+        &:focus,
+        &.--is-active {
+          text-decoration-color: var(
+            --oo-color-header-text,
+            var(--oo-color-text)
+          );
+        }
+      }
+
       @include media-breakpoint-up(xxl) {
         border: 0;
         flex-basis: content;
         max-width: 25%;
-        position: relative;
+
+        #{$c-main-nav}__link {
+          &.--is-top-level {
+            text-decoration: none;
+            position: relative;
+
+            &::before {
+              content: '';
+              position: absolute;
+              top: 100%;
+              left: 50%;
+              right: 50%;
+              height: 0%;
+              background-color: transparent;
+              border-top: 1px solid
+                var(--oo-color-header-text, var(--oo-color-text));
+              transition: left 0.25s ease-in-out, right 0.25s ease-in-out;
+              z-index: 1;
+            }
+
+            &:hover,
+            &:focus {
+              &::before {
+                left: 0;
+                right: 0;
+                height: 500%;
+              }
+            }
+
+            &.--is-active,
+            &.--is-ancestor {
+              &::before {
+                left: 0;
+                right: 0;
+              }
+            }
+
+            &.--is-ancestor:not(.--is-active) {
+              &::before {
+                border-color: var(--oo-color-header-mix-bg-text-50);
+              }
+
+              &:hover,
+              &:focus {
+                &::before {
+                  border-color: var(
+                    --oo-color-header-text,
+                    var(--oo-color-text)
+                  );
+                }
+              }
+            }
+          }
+        }
       }
     }
 
-    &.--is-active {
-    }
-
     &.--has-children {
-      position: relative;
-
       @include media-breakpoint-up(xxl) {
+        &:hover > #{$c-main-nav}__link.--is-top-level::after,
+        &:focus-within > #{$c-main-nav}__link.--is-top-level::after {
+          transform: rotate(-180deg);
+        }
+
         &:focus-within {
           > #{$c-main-nav}__sub-menu {
             visibility: visible;
             opacity: 1;
-          }
-
-          &::after {
-            height: 500%;
           }
         }
 
@@ -79,10 +142,6 @@
             > #{$c-main-nav}__sub-menu {
               visibility: visible;
               opacity: 1;
-            }
-
-            &::after {
-              height: 500%;
             }
           }
         }
@@ -105,18 +164,23 @@
             display: flex;
             gap: 1rem;
             align-items: center;
+            padding-right: calc(0.5rem + $icon-width-dropdown);
 
             &::after {
               content: '';
-              display: inline-block;
-              background-color: var(--oo-color-header-text);
+              position: absolute;
+              right: 0;
+              background-color: var(
+                --oo-color-header-text,
+                var(--oo-color-text)
+              );
               mask: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20viewBox%3D%220%200%2012%206%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M0%2C0l6%2C6L12%2C0%22%2F%3E%3C%2Fsvg%3E');
               mask-repeat: no-repeat;
               mask-size: $icon-width-dropdown;
               mask-position: center;
-              margin-left: 0.25rem;
               height: $icon-height-dropdown;
               width: $icon-width-dropdown;
+              transition: transform 0.2s 0.1s ease-out;
             }
           }
         }
@@ -135,78 +199,33 @@
 
   &__link {
     hyphens: auto;
-    padding: 0.75rem 0 0.75rem 1rem;
+    padding: 0.5rem 0 0.5rem 0;
     width: 100%;
     font-family: var(--oo-font-navigation, var(--oo-font-text));
+    font-size: 1rem;
     color: var(--oo-color-header-text, var(--oo-color-text));
     display: block;
-    text-decoration: underline;
     text-transform: uppercase;
-    text-decoration-color: transparent;
     text-underline-offset: $link-underline-offset;
-    letter-spacing: 1.5px;
+    letter-spacing: 2px;
 
     @include visited-active() {
       color: var(--oo-color-header-text, var(--oo-color-text));
     }
 
-    @include media-breakpoint-down(xl) {
-      @media (hover: hover) and (pointer: fine) {
-        &:hover,
-        &:focus-visible {
-          color: var(--oo-color-header-contrast-primary);
-          background-color: var(
-            --oo-color-header-primary,
-            var(--oo-color-primary)
-          );
-        }
-      }
+    &:hover,
+    &:focus {
     }
 
-    @include media-breakpoint-up(xxl) {
-      padding: 0.5rem;
-
-      @media (hover: hover) and (pointer: fine) {
-        &:hover,
-        &:focus-visible {
-          text-decoration-color: var(
-            --oo-color-header-text,
-            var(--oo-color-text)
-          );
-          color: var(--oo-color-header-text, var(--oo-color-text));
-        }
-      }
+    @include hover-focus() {
+      text-decoration-color: var(--oo-color-header-text, var(--oo-color-text));
+      color: var(--oo-color-header-text, var(--oo-color-text));
     }
 
     &.--is-active {
       text-decoration-color: var(--oo-color-header-text, var(--oo-color-text));
       color: var(--oo-color-header-text, var(--oo-color-text));
-    }
-
-    @include media-breakpoint-down(xl) {
-      &.--is-active {
-        text-decoration-color: transparent;
-        color: var(--oo-color-header-text, var(--oo-color-text));
-        background-color: var(--oo-color-header-transparent-primary-20);
-      }
-    }
-
-    &.--is-ancestor {
-      text-decoration: underline;
-      text-decoration-color: var(--oo-color-header-text, var(--oo-color-text));
-      text-underline-offset: $link-underline-offset;
-      @include media-breakpoint-down(xl) {
-        @media (hover: hover) and (pointer: fine) {
-          &:hover,
-          &:focus-visible {
-            color: var(--oo-color-header-contrast-primary);
-            background-color: var(
-              --oo-color-header-primary,
-              var(--oo-color-primary)
-            );
-          }
-        }
-      }
+      position: relative;
     }
   }
 
@@ -216,46 +235,54 @@
     display: flex;
     flex-direction: column;
 
+    &::after {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: var(--oo-color-header-bg, var(--oo-color-bg));
+    }
+
     @include media-breakpoint-up(xxl) {
       z-index: 100;
       position: absolute;
       top: 100%;
-      left: 50%;
+      left: auto;
+      right: auto;
       visibility: hidden;
       opacity: 0;
-      transform: translateX(-50%);
-      min-width: 200px;
-      width: 100%;
+      min-width: 9.375rem;
+      max-width: 18.75rem;
       background-color: var(--oo-color-header-bg, var(--oo-color-bg));
-      padding: 0;
+      padding: 0.5rem 0;
+      border-left: 1px solid var(--oo-color-header-text, var(--oo-color-text));
+      border-right: 1px solid var(--oo-color-header-text, var(--oo-color-text));
+      border-bottom: 1px solid var(--oo-color-header-text, var(--oo-color-text));
       transition: text-decoration 0.25s ease-in-out,
         visibility 0.25s ease-in-out, opacity 0.25s ease-in-out;
     }
 
-    #{$c-main-nav}__item {
-      &:last-of-type {
-        @include media-breakpoint-up(xxl) {
-          border-radius: inherit;
-        }
-      }
-    }
-
     #{$c-main-nav}__link {
-      text-decoration: none;
+      text-decoration: underline;
+      padding: 0.5rem 0 0.5rem 2rem;
+      text-decoration-color: transparent;
+      transition: text-decoration 0.1s ease-in-out;
+
+      @include media-breakpoint-up(xl) {
+        padding: 0.5rem 1.5rem;
+      }
 
       @media (hover: hover) and (pointer: fine) {
         &:hover,
         &:focus-visible {
-          color: var(--oo-color-header-contrast-primary);
-          background-color: var(
-            --oo-color-header-primary,
-            var(--oo-color-primary)
+          color: var(--oo-color-header-text, var(--oo-color-text));
+          text-decoration-color: var(
+            --oo-color-header-text,
+            var(--oo-color-text)
           );
         }
-      }
-
-      @include media-breakpoint-down(xl) {
-        padding-inline: 2rem;
       }
 
       &:last-of-type {
@@ -265,9 +292,7 @@
       }
 
       &.--is-active {
-        color: var(--oo-color-header-text, var(--oo-color-text));
-        background-color: var(--oo-color-header-transparent-primary-20);
-        cursor: default;
+        text-decoration: underline;
 
         @include visited-active() {
           color: var(--oo-color-header-text, var(--oo-color-text));

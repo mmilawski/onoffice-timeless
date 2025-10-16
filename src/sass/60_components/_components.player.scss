@@ -28,6 +28,27 @@
     background-color: var(--oo-color-primary);
     color: var(--oo-color-contrast-primary);
 
+    .--on-bg-light & {
+      outline-color: var(--oo-color-light-primary);
+      background-color: var(--oo-color-light-primary);
+      color: var(--oo-color-light-contrast-primary);
+    }
+    .--on-bg-dark & {
+      outline-color: var(--oo-color-dark-primary);
+      background-color: var(--oo-color-dark-primary);
+      color: var(--oo-color-dark-contrast-primary);
+    }
+    .--on-bg-primary & {
+      outline-color: var(--oo-color-primary-primary);
+      background-color: var(--oo-color-primary-primary);
+      color: var(--oo-color-primary-contrast-primary);
+    }
+    .--on-bg-secondary & {
+      outline-color: var(--oo-color-secondary-primary);
+      background-color: var(--oo-color-secondary-primary);
+      color: var(--oo-color-secondary-contrast-primary);
+    }
+
     svg {
       width: 1.5rem;
       height: 1.5rem;
