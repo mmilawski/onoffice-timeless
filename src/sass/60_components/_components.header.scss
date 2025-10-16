@@ -170,11 +170,6 @@
     * {
       font-size: $global-font-size;
       line-height: $global-line-height;
-
-      @include media-breakpoint-up(xxl) {
-        font-size: $small-font-size;
-        line-height: $small-line-height;
-      }
     }
 
     &.--collapsed {
