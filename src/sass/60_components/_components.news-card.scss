@@ -4,20 +4,33 @@
   color: var(--oo-color-text);
   background-color: var(--oo-color-bg);
   border: 1px solid var(--oo-color-mix-bg-contrast-50);
-  display: flex;
-  flex-direction: row;
   min-height: 280px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  @include media-breakpoint-up(md) {
+    flex-direction: row;
+    width: calc(100% - 8.333333%); // 11/12 columns
+    margin-left: 8.333333%; // Gap on left side
+
+    &:nth-child(even) {
+      flex-direction: row-reverse;
+      margin-left: 0;
+      margin-right: 8.333333%; // Gap on right side
+    }
+  }
 
   &__wrapper,
   &__link {
     position: relative;
     display: flex;
     background-color: var(--oo-color-transparent-primary-10);
-    width: 40%;
-    flex-shrink: 0;
+    width: 100%;
 
-    @include media-breakpoint-down(md) {
-      width: 100%;
+    @include media-breakpoint-up(md) {
+      width: 41.666667%; // 5/12 columns
+      flex-shrink: 0;
     }
   }
 
@@ -51,21 +64,30 @@
   }
 
   &__content {
-    width: 60%;
+    width: 100%;
     padding: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     gap: 1.5rem;
 
-    @include media-breakpoint-down(md) {
-      width: 100%;
+    @include media-breakpoint-up(md) {
+      width: 50%; // 6/12 columns
+      padding: 2rem;
+
+      #{$c-news-card}:nth-child(even) & {
+        padding-right: 0;
+      }
+      #{$c-news-card}:nth-child(odd) & {
+        padding-left: 0;
+      }
     }
   }
 
   @include media-breakpoint-down(md) {
     flex-direction: column;
     min-height: auto;
+    width: 100%; // On mobile, take full width
   }
 
   &__title {
