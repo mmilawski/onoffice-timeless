@@ -30,7 +30,7 @@
     }
   }
 
-  &__background {
+  &__media {
     width: 100%;
     height: auto;
     aspect-ratio: 4 / 3;
@@ -76,7 +76,7 @@
     }
   }
 
-  &__container {
+  &__content-container {
     padding-block: $mobile-section-padding-top $mobile-section-padding-bottom;
     @include media-breakpoint-up(lg) {
       padding-block: 0;

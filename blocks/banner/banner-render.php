@@ -129,7 +129,81 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
                     <div class="c-banner__slide --content-<?php echo $type; ?> --background-<?php echo $background; ?> <?php if (
      $slide_count > 1
  ) { ?>c-slider__slide splide__slide<?php } ?>">
-                        <div class="c-banner__background">
+                        <!-- -->
+                        <?php if ($type != 'none'): ?>
+                            <div class="c-banner__content-container o-container">
+                                <div class="c-banner__row o-row --position-<?php echo $slide_settings[
+                                    'position_content'
+                                ]; ?>">
+                                    <div class="c-banner__content --content-<?php echo $type; ?> o-col-12 o-col-lg-6">
+                                        <?php if (!empty($headline['text'])) {
+                                            $headline_size =
+                                                $headline['size'] == 'span'
+                                                    ? '--h1'
+                                                    : '';
+                                            oo_get_template(
+                                                'components',
+                                                '',
+                                                'component-headline',
+                                                [
+                                                    'headline' => $headline,
+                                                    'additional_headline_class' =>
+                                                        'c-banner__headline ' .
+                                                        $headline_size,
+                                                ],
+                                            );
+                                        } ?>
+
+                                        <?php if ($type == 'text'): ?>
+                                            <?php if (
+                                                !empty($text['wysiwyg'])
+                                            ) { ?>
+                                                <div class="c-banner__text o-text --is-wysiwyg">
+                                                    <?php echo $text[
+                                                        'wysiwyg'
+                                                    ]; ?>
+                                                </div>
+                                            <?php } ?>
+
+                                            <?php if (
+                                                !empty(
+                                                    $buttons['buttons'][0][
+                                                        'link'
+                                                    ]
+                                                )
+                                            ) {
+                                                oo_get_template(
+                                                    'components',
+                                                    '',
+                                                    'component-buttons',
+                                                    [
+                                                        'buttons' =>
+                                                            $buttons['buttons'],
+                                                        'additional_button_class' =>
+                                                            '--on-' . $bg_color,
+                                                        'additional_container_class' =>
+                                                            'c-banner__buttons',
+                                                    ],
+                                                );
+                                            } ?>
+                                        <?php endif; ?>
+
+                                        <?php if (
+                                            $type == 'property-search' ||
+                                            $type == 'address-search'
+                                        ): ?>
+                                            <?php if (!empty($shortcode)) { ?>
+                                                <?php echo do_shortcode(
+                                                    $shortcode,
+                                                ); ?>
+                                            <?php } ?>
+                                        <?php endif; ?>
+                                    </div> <!-- end of c-banner__content -->
+                                </div><!-- end of c-banner__row -->
+                            </div> <!-- end of c-banner__container -->
+                        <?php endif; ?>
+                        <!-- -->
+                        <div class="c-banner__media">
                             <?php if (
                                 !empty($image) &&
                                 $background == 'image'
@@ -253,80 +327,11 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
                                     ]); ?>
                                 </button>
                             <?php endif; ?>
-                        </div> <!-- end of c-banner__background -->
+                        </div> <!-- end of c-banner__media -->
+                        <!-- -->
 
-                        <?php if ($type != 'none'): ?>
-                            <div class="c-banner__container o-container">
-                                <div class="c-banner__row o-row --position-<?php echo $slide_settings[
-                                    'position_content'
-                                ]; ?>">
-                                    <div class="c-banner__content --content-<?php echo $type; ?> o-col-12 o-col-lg-10 o-col-xl-8">
-                                        <?php if (!empty($headline['text'])) {
-                                            $headline_size =
-                                                $headline['size'] == 'span'
-                                                    ? '--h1'
-                                                    : '';
-                                            oo_get_template(
-                                                'components',
-                                                '',
-                                                'component-headline',
-                                                [
-                                                    'headline' => $headline,
-                                                    'additional_headline_class' =>
-                                                        'c-banner__headline ' .
-                                                        $headline_size,
-                                                ],
-                                            );
-                                        } ?>
 
-                                        <?php if ($type == 'text'): ?>
-                                            <?php if (
-                                                !empty($text['wysiwyg'])
-                                            ) { ?>
-                                                <div class="c-banner__text o-text --is-wysiwyg">
-                                                    <?php echo $text[
-                                                        'wysiwyg'
-                                                    ]; ?>
-                                                </div>
-                                            <?php } ?>
-
-                                            <?php if (
-                                                !empty(
-                                                    $buttons['buttons'][0][
-                                                        'link'
-                                                    ]
-                                                )
-                                            ) {
-                                                oo_get_template(
-                                                    'components',
-                                                    '',
-                                                    'component-buttons',
-                                                    [
-                                                        'buttons' =>
-                                                            $buttons['buttons'],
-                                                        'additional_button_class' =>
-                                                            '--on-' . $bg_color,
-                                                        'additional_container_class' =>
-                                                            'c-banner__buttons',
-                                                    ],
-                                                );
-                                            } ?>
-                                        <?php endif; ?>
-
-                                        <?php if (
-                                            $type == 'property-search' ||
-                                            $type == 'address-search'
-                                        ): ?>
-                                            <?php if (!empty($shortcode)) { ?>
-                                                <?php echo do_shortcode(
-                                                    $shortcode,
-                                                ); ?>
-                                            <?php } ?>
-                                        <?php endif; ?>
-                                    </div> <!-- end of c-banner__content -->
-                                </div><!-- end of c-banner__row -->
-                            </div> <!-- end of c-banner__container -->
-                        <?php endif; ?>
+                        
                     </div> <!-- end c-banner__slide -->
                 <?php $first_slide = false;
                 } ?>
