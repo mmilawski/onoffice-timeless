@@ -353,9 +353,9 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
                         ]); ?>
                     </button>
                 </div>
-            </div>
+            </div> <!-- end of slider navigation -->
             <div class="c-slider__controls splide__controls">
-            <ul class="c-slider__pagination splide__pagination"></ul>
+                <ul class="c-slider__pagination splide__pagination"></ul>
                 <?php if ($autoslide) { ?>
                     <button class="c-slider__autoslide-toggle splide__toggle" type="button">
                         <span class="u-screen-reader-only">
@@ -373,9 +373,9 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
                                 'c-slider__icon splide__icon splide__toggle --pause',
                         ]); ?>
                     </button>
-                <?php } ?>
-            </div>
+                <?php } ?> <!-- end of if autoslide-->
+            </div> <!-- end of slider controls -->
         </div>
     </div>
-<?php } ?>
-</div>
+<?php } ?> <!-- end of > 1 slide condition -->
+</div> <!-- end of banner -->
