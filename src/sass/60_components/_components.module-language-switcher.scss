@@ -56,6 +56,20 @@
         }
       }
     }
+    .wpml-ls-legacy-dropdown {
+      a {
+        span {
+          vertical-align: unset;
+        }
+      }
+
+      .wpml-ls-current-language > a {
+        white-space: nowrap;
+        display: inline-block;
+        min-width: fit-content;
+      }
+    }
+    .wpml-ls-legacy-dropdown,
     .wpml-ls-legacy-dropdown-click {
       width: auto;
 
