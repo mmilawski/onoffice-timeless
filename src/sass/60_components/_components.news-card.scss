@@ -33,7 +33,7 @@
     border-color: var(--oo-color-secondary-mix-bg-contrast-50, var(--oo-color-mix-bg-contrast-50));
   }
 
-  @include media-breakpoint-up(md) {
+  @include media-breakpoint-up(lg) {
     flex-direction: row;
     width: 91.666667%; // 11/12 columns
     margin-left: 0; // No gap on picture side
@@ -53,7 +53,7 @@
     background-color: var(--oo-color-transparent-primary-10);
     width: 100%;
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(lg) {
       width: 45.454545%; // 5/11 columns of the card's width (11 columns)
       flex-shrink: 0;
     }
@@ -152,7 +152,7 @@
       background-color: var(--oo-color-secondary-mix-bg-contrast-05, var(--oo-color-mix-bg-contrast-05));
     }
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(lg) {
       width: 54.545455%; // 6/11 columns of the card's width (11 columns)
       padding: 1.5rem;
     }
