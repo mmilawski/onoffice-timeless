@@ -95,27 +95,23 @@
     position: absolute;
     top: $flag-offset;
     right: $flag-offset;
-    background-color: var(--oo-color-primary);
-    color: var(--oo-color-contrast-primary);
+    background-color: transparent;
+    color: var(--oo-color-text);
 
     .--bg-light & {
-      background-color: var(--oo-color-light-primary, var(--oo-color-primary));
-      color: var(--oo-color-light-contrast-primary, var(--oo-color-contrast-primary));
+      color: var(--oo-color-light-text, var(--oo-color-text));
     }
 
     .--bg-dark & {
-      background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
-      color: var(--oo-color-dark-contrast-primary, var(--oo-color-contrast-primary));
+      color: var(--oo-color-dark-text, var(--oo-color-text));
     }
 
     .--bg-primary & {
-      background-color: var(--oo-color-primary-primary, var(--oo-color-primary));
-      color: var(--oo-color-primary-contrast-primary, var(--oo-color-contrast-primary));
+      color: var(--oo-color-primary-text, var(--oo-color-text));
     }
 
     .--bg-secondary & {
-      background-color: var(--oo-color-secondary-primary, var(--oo-color-primary));
-      color: var(--oo-color-secondary-contrast-primary, var(--oo-color-contrast-primary));
+      color: var(--oo-color-secondary-text, var(--oo-color-text));
     }
   }
 
@@ -132,7 +128,7 @@
 
   &__content {
     width: 100%;
-    padding: 2rem 2.5rem;
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -158,7 +154,7 @@
 
     @include media-breakpoint-up(md) {
       width: 54.545455%; // 6/11 columns of the card's width (11 columns)
-      padding: 2.5rem;
+      padding: 1.5rem;
     }
   }
 
@@ -176,10 +172,12 @@
 
   &__category.c-tag {
     display: inline-flex;
-    padding: 0.125rem 0.5rem;
+    align-items: center;
+    padding: 0.25rem 0.75rem; // 3 12px
     background-color: #ffffff;
     color: var(--oo-color-text);
-    font-size: 0.875rem;
+    font-size: 1rem; // 16px
+    line-height: 1.75; // 28px
 
     .--bg-light & {
       color: var(--oo-color-light-text, var(--oo-color-text));
@@ -198,9 +196,11 @@
     }
   }
 
-  &__title {
+  &__title.o-headline {
     margin-top: 0.5rem;
     color: var(--oo-color-headline);
+    font-size: 1.5rem; // 24px
+    line-height: 2.125rem; // 34px
 
     .--bg-light & {
       color: var(--oo-color-light-headline, var(--oo-color-headline));
@@ -224,6 +224,8 @@
 
     p {
       color: var(--oo-color-text);
+      font-size: 1rem; // 16px
+      line-height: 1.75; // 22px
 
       .--bg-light & {
         color: var(--oo-color-light-text, var(--oo-color-text));
