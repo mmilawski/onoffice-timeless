@@ -346,7 +346,7 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
                             'oo_theme',
                         ); ?></span>
                         <?php echo oo_get_icon('chevron-left', true, [
-                            'class' => 'c-slider__icon splide__icon',
+                            'class' => 'c-slider__icon c-icon-button__icon splide__icon',
                         ]); ?>
                     </button>
                 </div>
@@ -364,7 +364,7 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
                             </span>
                             <?php echo oo_get_icon('play', true, [
                                 'class' =>
-                                    'c-slider__icon splide__icon splide__toggle --play',
+                                    'c-slider__icon c-icon-button__icon splide__icon splide__toggle --play',
                             ]); ?>
                             <span class="u-screen-reader-only">
                                 <?php esc_html_e(
@@ -374,7 +374,7 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
                             </span>
                             <?php echo oo_get_icon('pause', true, [
                                 'class' =>
-                                    'c-slider__icon splide__icon splide__toggle --pause',
+                                    'c-slider__icon c-icon-button__icon splide__icon splide__toggle --pause',
                             ]); ?>
                         </button>
                     <?php } ?> <!-- end of if autoslide-->
@@ -386,7 +386,7 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
                             'oo_theme',
                         ); ?></span>
                         <?php echo oo_get_icon('chevron-right', true, [
-                            'class' => 'c-slider__icon splide__icon',
+                            'class' => 'c-slider__icon c-icon-button__icon splide__icon',
                         ]); ?>
                     </button>
                 </div>

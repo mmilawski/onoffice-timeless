@@ -21,48 +21,6 @@
   }
 
   &__autoslide-toggle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--oo-color-contrast-primary);
-    background-color: var(--oo-color-primary);
-    border: 0;
-    outline: $outline !important;
-    outline-offset: $outline-offset !important;
-    opacity: 1;
-    width: $icon-wrapper-size;
-    height: $icon-wrapper-size;
-    padding: 0.25rem;
-    pointer-events: auto;
-
-    #{$c-slider}__icon {
-      width: $icon-size;
-      height: $icon-size;
-
-      @include media-breakpoint-up(xl) {
-        width: $icon-size;
-        height: $icon-size;
-      }
-    }
-
-    @include plain-visited() {
-      color: var(--oo-color-contrast-primary);
-      background-color: var(--oo-color-primary);
-      opacity: 1;
-    }
-
-    @include hover() {
-      background-color: var(--oo-color-mix-primary-contrast-20);
-      opacity: 1;
-    }
-
-    @include focus-visible() {
-      outline-color: var(--oo-color-primary) !important;
-    }
-
-    @include active() {
-      background-color: var(--oo-color-mix-primary-contrast-40);
-    }
   }
 
   &__controls {
