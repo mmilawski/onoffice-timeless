@@ -246,16 +246,10 @@ while ($current_property = $pEstates->estateIterator()) {
                     // --- SECRET SALE: PLACEHOLDER TITLE & PRICE ---
                     ?>
                     <h1 class="c-property-details__title o-headline --h2">
-                        <?php esc_html_e(
-                            'Exklusives Objekt',
-                            'oo_theme',
-                        ); ?>
+                        <?php esc_html_e('Exklusives Objekt', 'oo_theme'); ?>
                     </h1>
                     <p class="c-property-details__price o-headline --h3">
-                        <?php esc_html_e(
-                            'Kaufpreis',
-                            'oo_theme',
-                        ); ?>: xxx.xxx
+                        <?php esc_html_e('Kaufpreis', 'oo_theme'); ?>: xxx.xxx
                     </p>
                 <?php else: ?>
                 <?php if (
@@ -329,8 +323,7 @@ while ($current_property = $pEstates->estateIterator()) {
 
                         $price_value = $current_property[$price_field];
                         if (
-                            (is_numeric($price_value) &&
-                                0 == $price_value) ||
+                            (is_numeric($price_value) && 0 == $price_value) ||
                             $price_value == '0000-00-00' ||
                             $price_value == '0.00' ||
                             $price_value == '' ||
@@ -341,9 +334,7 @@ while ($current_property = $pEstates->estateIterator()) {
                         ?>
                         <p class="c-property-details__price o-headline --h3">
                             <?php
-                            esc_html_e(
-                                $pEstates->getFieldLabel($price_field),
-                            );
+                            esc_html_e($pEstates->getFieldLabel($price_field));
 
                             echo ':';
                             ?>
@@ -360,289 +351,142 @@ while ($current_property = $pEstates->estateIterator()) {
             </div>
         </div>
 
-        <div class="c-property-details__container o-container">
-            <?php if ($photos && !$show_secret_sale_block) {
+        <div class="c-property-details__container o-container-fluid">
+    <?php if ($photos && !$show_secret_sale_block) {
 
-                // Load Lightbox
-                wp_enqueue_script('oo-glightbox-script');
-                wp_enqueue_style('oo-glightbox-style');
-                ?>
+        // Load Lightbox
+        wp_enqueue_script('oo-glightbox-script');
+        wp_enqueue_style('oo-glightbox-style');
+        ?>
 
-                <div class="c-property-details__gallery c-slider splide --is-property-details-slider" data-splide='{"perPage":1,"gap":0,"lazyLoad":"nearby","snap":true}'>
-                    <div class="c-slider__track splide__track">
-                    
-                        <div class="c-slider__list splide__list">
-                            <?php foreach ($sorted_pictures as $id) {
+        <div 
+            class="c-property-details__gallery c-slider splide --auto-height --is-property-details-slider"
+            data-splide='{
+    "type":"loop",
+    "perPage":1,
+    "padding":"25rem",
+    "gap":16,
+    "arrows":true,
+    "snap":true,
+    "lazyLoad":"nearby",
+    "pagination":true,
+    "updateOnMove":true,
+    "focus":"center",
+    "classes":{"page":"c-slider__page splide__pagination__page"}
+}'
+        >
+            <div class="c-slider__track splide__track">
+                <div class="c-slider__list splide__list">
+                    <?php foreach ($sorted_pictures as $id) {
 
-                                $picture_values = $pEstates->getEstatePictureValues(
-                                    $id,
-                                );
-                                // Image alt text
-                                if ($picture_values['title'] == true) {
-                                    $image_alt = esc_html(
-                                        $picture_values['title'],
-                                    );
-                                } else {
-                                    $image_alt = esc_html__(
-                                        'Immobilienbild',
-                                        'oo_theme',
-                                    );
-                                }
+                        $picture_values = $pEstates->getEstatePictureValues($id);
 
-                                // Image width
-                                $image_width_xs = '543';
-                                $image_width_sm = '512';
-                                $image_width_md = '694';
-                                $image_width_lg = '608';
-                                $image_width_xl = '736';
-                                $image_width_xxl = '864';
-                                $image_width_xxxl = '952';
+                        // Image alt text
+                        $image_alt = $picture_values['title']
+                            ? esc_html($picture_values['title'])
+                            : esc_html__('Immobilienbild', 'oo_theme');
 
-                                $image = [
-                                    'url' => $pEstates->getEstatePictureUrl(
-                                        $id,
-                                    ),
-                                    'alt' => $image_alt,
-                                ];
+                        // Image width variants
+                        $image_widths = [
+                            'xs' => 543,
+                            'sm' => 512,
+                            'md' => 694,
+                            'lg' => 608,
+                            'xl' => 736,
+                            'xxl' => 864,
+                            'xxxl' => 952,
+                        ];
 
-                                //  Lightbox Cloud Image
-                                $lightbox_image_options =
-                                    '?force_format=webp&org_if_sml=1';
-                                $lightbox_url =
-                                    'https://acnaayzuen.cloudimg.io/v7/' .
-                                    $image['url'] .
-                                    $lightbox_image_options;
+                        $image = [
+                            'url' => $pEstates->getEstatePictureUrl($id),
+                            'alt' => $image_alt,
+                        ];
 
-                                $lightbox_image_size_list =
-                                    [
-                                        [
-                                            'id' => 'mobile',
-                                            'breakpoint' => '767',
-                                            'image_size' => '767',
-                                        ],
-                                        [
-                                            'id' => 'tablet',
-                                            'breakpoint' => '768',
-                                            'image_size' => '1200',
-                                        ],
-                                        [
-                                            'id' => 'desktop',
-                                            'breakpoint' => '1200',
-                                            'image_size' => '1920',
-                                        ],
-                                    ] ?? [];
+                        // Lightbox Cloud Image
+                        $lightbox_url = 'https://acnaayzuen.cloudimg.io/v7/' . $image['url'] . '?force_format=webp&org_if_sml=1';
 
-                                // Helpers
-                                $lightbox_mobile_breakpoint = '';
-                                $lightbox_image_breakpoints = '';
-                                $lightbox_image_full_size = '';
-                                $lightbox_image_sizes = '';
+                        $lightbox_image_size_list = [
+                            ['id' => 'mobile', 'breakpoint' => 767, 'image_size' => 767],
+                            ['id' => 'tablet', 'breakpoint' => 768, 'image_size' => 1200],
+                            ['id' => 'desktop', 'breakpoint' => 1200, 'image_size' => 1920],
+                        ];
 
-                                if (
-                                    is_array($lightbox_image_size_list)
-                                ) {
-                                    foreach (
-                                        $lightbox_image_size_list
-                                        as $key => $size
-                                    ) {
-                                        $is_first =
-                                            $key ==
-                                            array_key_first(
-                                                $lightbox_image_size_list,
-                                            );
-                                        $is_last =
-                                            $key ==
-                                            array_key_last(
-                                                $lightbox_image_size_list,
-                                            );
-                                        $separator = !$is_last
-                                            ? ','
-                                            : '';
-                                        $is_last_image_size = $is_last
-                                            ? ',' .
-                                                end(
-                                                    $lightbox_image_size_list,
-                                                )['image_size'] .
-                                                'w'
-                                            : $separator;
+                        // Responsive image helpers
+                        $lightbox_image_breakpoints = '';
+                        $lightbox_image_sizes = '';
 
-                                        // Change breakpoints for mobile
-                                        if ($is_first) {
-                                            $lightbox_image_breakpoints .=
-                                                '(max-width: ' .
-                                                $size['breakpoint'] .
-                                                'px) ' .
-                                                $size['image_size'] .
-                                                'px,';
-                                            $lightbox_image_sizes .=
-                                                $lightbox_url .
-                                                '&w=' .
-                                                $size['image_size'] .
-                                                ' ' .
-                                                $size['breakpoint'] .
-                                                'w,';
-                                        }
+                        foreach ($lightbox_image_size_list as $key => $size) {
+                            $is_first = ($key === 0);
+                            $is_last = ($key === array_key_last($lightbox_image_size_list));
+                            $separator = $is_last ? '' : ',';
 
-                                        // Skip first Item
-                                        if ($key === 0) {
-                                            continue;
-                                        }
+                            if ($is_first) {
+                                $lightbox_image_breakpoints .= "(max-width: {$size['breakpoint']}px) {$size['image_size']}px,";
+                                $lightbox_image_sizes .= "{$lightbox_url}&w={$size['image_size']} {$size['breakpoint']}w,";
+                                continue;
+                            }
 
-                                        // Breakpoints
-                                        $lightbox_image_breakpoints .=
-                                            '(min-width:' .
-                                            $size['breakpoint'] .
-                                            'px) ' .
-                                            $size['image_size'] .
-                                            'px' .
-                                            $separator;
+                            $lightbox_image_breakpoints .= "(min-width:{$size['breakpoint']}px) {$size['image_size']}px{$separator}";
+                            $lightbox_image_sizes .= "{$lightbox_url}&w={$size['image_size']} {$size['breakpoint']}w{$separator}";
+                        }
+                        ?>
+                        
+                        <a class="c-property-details__gallery-link glightbox c-slider__slide splide__slide"
+                           data-gallery="gallery"
+                           href="<?php echo esc_url($lightbox_url) . '&w=' . end($lightbox_image_size_list)['image_size']; ?>"
+                           data-sizes="<?php echo esc_attr($lightbox_image_breakpoints); ?>"
+                           data-srcset="<?php echo esc_attr($lightbox_image_sizes); ?>"
+                           data-caption="<?php echo esc_attr($image['alt']); ?>"
+                           title="<?php echo esc_attr($image['alt']); ?>"
+                           aria-label="<?php echo sprintf(esc_attr_x('Bild %s vergrößert anzeigen', 'oo_theme'), $image['alt']); ?>">
 
-                                        // Sources
-                                        $lightbox_image_sizes .=
-                                            $lightbox_url .
-                                            '&w=' .
-                                            $size['image_size'] .
-                                            ' ' .
-                                            $size['breakpoint'] .
-                                            'w' .
-                                            $is_last_image_size;
-                                    }
-                                }
-                                ?>
-                                <a class="c-property-details__gallery-link glightbox c-slider__slide splide__slide"
-                                    data-gallery="gallery" href="<?php echo esc_url(
-                                        $lightbox_url,
-                                    ) .
-                                        '&w=' .
-                                        end($lightbox_image_size_list)[
-                                            'image_size'
-                                        ]; ?>"
-                                    data-sizes="<?php echo $lightbox_image_breakpoints; ?>"
-                                    data-srcset="<?php echo $lightbox_image_sizes; ?>" data-caption="<?php echo $image[
-'alt'
-]; ?>" title="<?php echo $image['alt']; ?>"
-                                    aria-label="<?php echo sprintf(
-                                        esc_attr_x(
-                                            'Bild %s vergrößert anzeigen',
-                                            'oo_theme',
-                                        ),
-                                        $image['alt'],
-                                    ); ?>">
-                                    <?php oo_get_template(
-                                        'components',
-                                        '',
-                                        'component-image',
-                                        [
-                                            'image' => $image,
-                                            'picture_class' =>
-                                                'c-property-details__gallery-picture o-picture',
-                                            'image_class' =>
-                                                'c-property-details__gallery-image o-image',
-                                            'dimensions' => [
-                                                '575' => [
-                                                    'w' => $image_width_xs,
-                                                    'h' => round(
-                                                        ($image_width_xs *
-                                                            2) /
-                                                            3,
-                                                    ),
-                                                ],
-                                                '1600' => [
-                                                    'w' => $image_width_xxxl,
-                                                    'h' => $image_width_xxxl,
-                                                ],
-                                                '1400' => [
-                                                    'w' => $image_width_xxl,
-                                                    'h' => $image_width_xxl,
-                                                ],
-                                                '1200' => [
-                                                    'w' => $image_width_xl,
-                                                    'h' => $image_width_xl,
-                                                ],
-                                                '992' => [
-                                                    'w' => $image_width_lg,
-                                                    'h' => $image_width_lg,
-                                                ],
-                                                '768' => [
-                                                    'w' => $image_width_md,
-                                                    'h' => round(
-                                                        ($image_width_md *
-                                                            2) /
-                                                            3,
-                                                    ),
-                                                ],
-                                                '576' => [
-                                                    'w' => $image_width_sm,
-                                                    'h' => round(
-                                                        ($image_width_sm *
-                                                            2) /
-                                                            3,
-                                                    ),
-                                                ],
-                                            ],
-                                        ],
-                                    ); ?>
-                                </a>
-                            <?php
-                            } ?>
-                        </div>
-
-                        <div class="c-property-details__all-images --open-lightbox">
-                            <button class="c-button --has-icon --desktop">
-                                <span class="c-button__text">
-                                    <?php echo sprintf(
-                                        __(
-                                            '%d Fotos ansehen',
-                                            'oo_theme',
-                                        ),
-                                        $picture_count,
-                                    ); ?>
-                                </span>
-                                <span class="c-button__icon --arrow-right">
-                                    <?php echo oo_get_icon(
-                                        'arrow-right',
-                                    ); ?>
-                                </span>
-                            </button>
-                            <button class="c-button --only-icon --large --mobile" aria-label="<?php echo sprintf(
-                                __('%d Fotos ansehen', 'oo_theme'),
-                                $picture_count,
-                            ); ?>">
-                                <span class="c-button__icon --arrow-right">
-                                    <?php echo oo_get_icon(
-                                        'arrow-right',
-                                    ); ?>
-                                </span>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="c-slider__navigation splide__navigation">
-                        <div class="c-slider__arrows splide__arrows">
-                            <button class="c-slider__arrow --prev c-button --only-icon --square splide__arrow splide__arrow--prev">
-                                <span class="u-screen-reader-only"><?php esc_html_e(
-                                    'Vorheriges',
-                                    'oo_theme',
-                                ); ?></span>
-                                <span class="c-button__icon --chevron-left"><?php oo_get_icon(
-                                    'chevron-left',
-                                ); ?></span>
-                            </button>
-                            <button class="c-slider__arrow --next c-button --only-icon --square splide__arrow splide__arrow--next">
-                                <span class="u-screen-reader-only"><?php esc_html_e(
-                                    'Nächstes',
-                                    'oo_theme',
-                                ); ?></span>
-                                <span class="c-button__icon --chevron-right"><?php oo_get_icon(
-                                    'chevron-right',
-                                ); ?></span>
-                            </button>
-                        </div>
-                        <ul class="c-slider__pagination splide__pagination"></ul>
-                    </div>
+                            <?php oo_get_template(
+                                'components',
+                                '',
+                                'component-image',
+                                [
+                                    'image' => $image,
+                                    'picture_class' => 'c-property-details__gallery-picture o-picture',
+                                    'image_class' => 'c-property-details__gallery-image o-image',
+                                    'dimensions' => [
+                                        '575' => ['w' => $image_widths['xs'], 'h' => round(($image_widths['xs'] * 2) / 3)],
+                                        '1600' => ['w' => $image_widths['xxxl'], 'h' => $image_widths['xxxl']],
+                                        '1400' => ['w' => $image_widths['xxl'], 'h' => $image_widths['xxl']],
+                                        '1200' => ['w' => $image_widths['xl'], 'h' => $image_widths['xl']],
+                                        '992'  => ['w' => $image_widths['lg'], 'h' => $image_widths['lg']],
+                                        '768'  => ['w' => $image_widths['md'], 'h' => round(($image_widths['md'] * 2) / 3)],
+                                        '576'  => ['w' => $image_widths['sm'], 'h' => round(($image_widths['sm'] * 2) / 3)],
+                                    ],
+                                ]
+                            ); ?>
+                        </a>
+                    <?php } ?>
                 </div>
-            <?php
-            } ?>
+            </div>
+
+            <div class="c-slider__navigation splide__navigation">
+                <div class="c-slider__arrows splide__arrows">
+                    <button class="c-slider__arrow c-slider__arrow--prev splide__arrow splide__arrow--prev">
+                        <span class="u-screen-reader-only"><?php esc_html_e('Vorheriges', 'oo_theme'); ?></span>
+                        <?php echo oo_get_icon('chevron-left', true, ['class' => 'c-slider__icon splide__icon']); ?>
+                    </button>
+                    <button class="c-slider__arrow c-slider__arrow--next splide__arrow splide__arrow--next">
+                        <span class="u-screen-reader-only"><?php esc_html_e('Nächstes', 'oo_theme'); ?></span>
+                        <?php echo oo_get_icon('chevron-right', true, ['class' => 'c-slider__icon splide__icon']); ?>
+                    </button>
+                </div>
+            </div>
+
+            <div class="c-slider__controls splide__controls">
+                <ul class="c-slider__pagination splide__pagination"></ul>
+            </div>
+        </div>
+
+    <?php } ?>
+</div>
+
+
+        <div class="c-property-details__container o-container">
 
             <div class="c-property-details__buttons-wrapper c-buttons">
                 <?php

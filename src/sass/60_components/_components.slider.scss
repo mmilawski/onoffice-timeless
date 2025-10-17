@@ -339,6 +339,35 @@
     }
   }
 
+  &.--is-property-details-slider {
+    position: relative;
+    #{$c-slider}__navigation {
+      width: 100%;
+      height: auto;
+    }
+
+    #{$c-slider}__arrows {
+      height: 100%;
+    }
+    #{$c-slider}__arrow {
+      pointer-events: auto;
+
+      &.--next {
+        right: 1rem;
+      }
+      &.--prev {
+        left: 1rem;
+      }
+    }
+    &:not(.is-overflow) {
+    > #{$c-slider}__navigation,
+    > #{$c-slider}__progress,
+    > #{$c-slider}__arrows {
+      display: flex;
+    }
+  }
+  }
+
   &.--is-banner-slider {
     position: relative;
     #{$c-slider}__navigation {

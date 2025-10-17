@@ -19,8 +19,7 @@
   }
 
   &__header {
-
-    &-content{
+    &-content {
       display: flex;
       flex-direction: column;
       gap: 1rem;
@@ -273,7 +272,6 @@
       display: flex;
       justify-content: center;
       width: 100%;
-      aspect-ratio: 3 / 2;
 
       @include media-breakpoint-up(xl) {
         aspect-ratio: unset;
@@ -308,15 +306,6 @@
       box-shadow: 0px 0px 0px $outline-offset transparent;
       transition: outline-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
 
-      &::after {
-        content: none;
-        position: absolute;
-        inset: 0;
-        z-index: 1;
-        background: var(--oo-color-transparent-bg-90);
-        height: 100%;
-      }
-
       &:nth-child(n + 3) {
         display: none;
         content-visibility: hidden;
@@ -341,14 +330,9 @@
           display: flex;
           content-visibility: visible;
           margin: 0;
-          max-width: calc((100% - 6rem) / 4);
 
           #{$c-property-details}__open-lightbox {
             display: none;
-          }
-
-          &::after {
-            content: none;
           }
         }
 
@@ -370,15 +354,6 @@
 
       &:nth-child(4) {
         position: relative;
-
-        &::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          z-index: 1;
-          background: var(--oo-color-transparent-bg-90);
-          height: 100%;
-        }
       }
     }
 
