@@ -17,12 +17,13 @@
   cursor: pointer;
 
   @include plain-visited() {
-    color: var(--oo-color-contrast-primary);
-    background-color: var(--oo-color-primary);
+    color: var(--oo-color-contrast-bg);
+    background-color: var(--oo-color-mix-bg-contrast-05);
   }
 
   @include hover() {
-    background-color: var(--oo-color-mix-primary-contrast-20);
+    color: var(--oo-color-contrast-primary);
+    background-color: var(--oo-color-primary);
   }
 
   @include focus-visible() {
@@ -60,18 +61,13 @@
   &.--on-bg-light,
   .--bg-light & {
     @include plain-visited() {
-      color: var(
-        --oo-color-light-contrast-primary,
-        var(--oo-color-contrast-primary)
-      );
-      background-color: var(--oo-color-light-primary, var(--oo-color-primary));
+      color: var(--oo-color-light-contrast-bg);
+      background-color: var(--oo-color-light-mix-bg-contrast-05);
     }
 
     @include hover() {
-      background-color: var(
-        --oo-color-light-mix-primary-contrast-20,
-        var(--oo-color-mix-primary-contrast-20)
-      );
+      color: var(--oo-color-light-contrast-primary);
+      background-color: var(--oo-color-light-primary);
     }
 
     @include focus-visible() {
@@ -94,12 +90,13 @@
   &.--on-bg-dark,
   .--bg-dark & {
     @include plain-visited() {
-      color: var(--oo-color-dark-contrast-primary);
-      background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+      color: var(--oo-color-dark-contrast-bg);
+      background-color: var(--oo-color-dark-mix-bg-contrast-05);
     }
 
     @include hover() {
-      background-color: var(--oo-color-dark-mix-primary-contrast-20);
+      color: var(--oo-color-dark-contrast-primary);
+      background-color: var(--oo-color-dark-primary);
     }
 
     @include focus-visible() {
@@ -119,15 +116,13 @@
   &.--on-bg-primary,
   .--bg-primary & {
     @include plain-visited() {
-      color: var(--oo-color-primary-contrast-primary);
-      background-color: var(
-        --oo-color-primary-primary,
-        var(--oo-color-primary)
-      );
+      color: var(--oo-color-primary-contrast-bg);
+      background-color: var(--oo-color-primary-mix-bg-contrast-05);
     }
 
     @include hover() {
-      background-color: var(--oo-color-primary-mix-primary-contrast-20);
+      color: var(--oo-color-primary-contrast-primary);
+      background-color: var(--oo-color-primary-primary);
     }
 
     @include focus-visible() {
@@ -147,15 +142,13 @@
   &.--on-bg-secondary,
   .--bg-secondary & {
     @include plain-visited() {
-      color: var(--oo-color-secondary-contrast-primary);
-      background-color: var(
-        --oo-color-secondary-primary,
-        var(--oo-color-primary)
-      );
+      color: var(--oo-color-secondary-contrast-bg);
+      background-color: var(--oo-color-secondary-mix-bg-contrast-05);
     }
 
     @include hover() {
-      background-color: var(--oo-color-secondary-mix-primary-contrast-20);
+      color: var(--oo-color-secondary-contrast-primary);
+      background-color: var(--oo-color-secondary-primary);
     }
 
     @include focus-visible() {
@@ -175,12 +168,13 @@
   &.--on-bg-header,
   .--bg-header & {
     @include plain-visited() {
-      color: var(--oo-color-header-bg-contrast);
-      background-color: transparent;
+      color: var(--oo-color-header-contrast-bg);
+      background-color: var(--oo-color-header-mix-bg-contrast-05);
     }
 
     @include hover() {
-      color: var(--oo-color-header-primary, var(--oo-color-primary));
+      color: var(--oo-color-header-contrast-primary);
+      background-color: var(--oo-color-header-primary);
     }
 
     @include focus-visible() {
@@ -199,12 +193,13 @@
   &.--on-bg-footer,
   .--bg-footer & {
     @include plain-visited() {
-      color: var(--oo-color-footer-contrast-primary);
-      background-color: var(--oo-color-footer-primary, var(--oo-color-primary));
+      color: var(--oo-color-footer-contrast-bg);
+      background-color: var(--oo-color-header-mix-bg-contrast-05);
     }
 
     @include hover() {
-      background-color: var(--oo-color-footer-mix-primary-contrast-20);
+      color: var(--oo-color-footer-contrast-primary);
+      background-color: var(--oo-color-footer-primary);
     }
 
     @include focus-visible() {
@@ -224,13 +219,13 @@
   &.--on-bg-transparent,
   .--bg-transparent & {
     @include plain-visited() {
-      color: var(--oo-color-contrast-primary);
-      background-color: var(--oo-color-primary);
+      color: var(--oo-color-contrast-bg);
+      background-color: var(--oo-color-mix-bg-contrast-05);
     }
 
     @include hover() {
-      background-color: var(--oo-color-mix-primary-contrast-20);
       color: var(--oo-color-contrast-primary);
+      background-color: var(--oo-color-primary);
     }
 
     @include focus-visible() {
