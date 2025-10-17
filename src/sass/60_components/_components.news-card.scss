@@ -3,7 +3,7 @@
 
   color: var(--oo-color-text);
   background-color: var(--oo-color-bg);
-  border: 1px solid var(--oo-color-mix-bg-contrast-50);
+
   min-height: 280px;
   width: 100%;
   display: flex;
@@ -255,6 +255,7 @@
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.25em;
+    font-size: 1rem;
 
     // When parent has --bg-light class
     .--bg-light & {
