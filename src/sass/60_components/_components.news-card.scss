@@ -4,10 +4,13 @@
   color: var(--oo-color-text);
   background-color: var(--oo-color-bg);
 
-  min-height: 280px;
   width: 100%;
   display: flex;
   flex-direction: column;
+
+  @include media-breakpoint-up(lg) {
+    aspect-ratio: calc(11 / ((2/3) * 5)); // width:height ratio based on image being 5/11 wide with 3:2 ratio
+  }
 
   .--bg-light & {
     color: var(--oo-color-light-text, var(--oo-color-text));
@@ -52,6 +55,7 @@
     display: flex;
     background-color: var(--oo-color-transparent-primary-10);
     width: 100%;
+    aspect-ratio: 3/2;
 
     @include media-breakpoint-up(lg) {
       width: 45.454545%; // 5/11 columns of the card's width (11 columns)
