@@ -9,7 +9,12 @@
   flex-direction: column;
 
   @include media-breakpoint-up(lg) {
+    aspect-ratio: calc(12 / ((2/3) * 5)); // width:height ratio based on image being 5/11 wide with 3:2 ratio
+  }
+
+  @include media-breakpoint-up(xl) {
     aspect-ratio: calc(11 / ((2/3) * 5)); // width:height ratio based on image being 5/11 wide with 3:2 ratio
+    min-height: 0; // Ensure aspect ratio is enforced
   }
 
   .--bg-light & {
@@ -38,13 +43,19 @@
 
   @include media-breakpoint-up(lg) {
     flex-direction: row;
-    width: 91.666667%; // 11/12 columns
+    width: 100%;
     margin-left: 0; // No gap on picture side
-    margin-right: 8.333333%; // Gap only on content side
 
     &:nth-child(even) {
       flex-direction: row-reverse;
       margin-right: 0; // No gap on picture side
+    }
+  }
+
+  @include media-breakpoint-up(xl) {
+    width: 91.666667%; // 11/12 columns
+    margin-right: 8.333333%; // Gap only on content side
+    &:nth-child(even) {
       margin-left: 8.333333%; // Gap only on content side when reversed
     }
   }
@@ -58,8 +69,12 @@
     aspect-ratio: 3/2;
 
     @include media-breakpoint-up(lg) {
-      width: 45.454545%; // 5/11 columns of the card's width (11 columns)
+      width: 41.666666%; // 5/12 columns of the card's width (11 columns)
       flex-shrink: 0;
+    }
+
+    @include media-breakpoint-up(xl) {
+      width: 45.454545%; // 5/11 columns of the card's width (11 columns)
     }
   }
 
@@ -168,8 +183,15 @@
     }
 
     @include media-breakpoint-up(lg) {
+      width: 58.33333%; // 7/12 columns of the card's width (11 columns)
+      padding: 1.5rem;
+      gap: 1rem;
+    }
+
+    @include media-breakpoint-up(xl) {
       width: 54.545455%; // 6/11 columns of the card's width (11 columns)
       padding: 1.5rem;
+      gap: 1.5rem;
     }
   }
 
@@ -217,6 +239,9 @@
     color: var(--oo-color-headline);
     font-size: 1.5rem; // 24px
     line-height: 2.125rem; // 34px
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     .--bg-light & {
       color: var(--oo-color-light-headline, var(--oo-color-headline));
@@ -237,6 +262,20 @@
 
   &__text {
     flex-grow: 1;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+
+    
+    @include media-breakpoint-up(lg) {
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+    }
+
+    @include media-breakpoint-up(xl) {
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+    }
 
     p {
       color: var(--oo-color-text);
