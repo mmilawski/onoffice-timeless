@@ -65,17 +65,20 @@
     }
   }
 
-  &__controls-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2.5rem;
-    margin-bottom: 2.5rem;
-  }
-
   &__controls {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: fit-content;
+
+    @include media-breakpoint-up(xl) {
+      height: auto;
+      bottom: 2rem;
+    }
   }
 
   &__pagination {
@@ -128,6 +131,10 @@
   }
 
   &__navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
     &.--is-properties-images-slider {
       &.--empty {
         display: none;
@@ -144,6 +151,11 @@
     height: 2px;
     transition: width 400ms ease; // same slider as speed and easing
     width: 0;
+  }
+
+  &__arrows {
+    display: flex;
+    justify-content: space-between;
   }
 
   &__arrow {
@@ -276,56 +288,69 @@
 
   &.--is-google-review {
   }
+
   &.--is-banner-slider {
+    position: static;
+
     #{$c-slider}__navigation {
       pointer-events: none;
     }
-    #{$c-slider}__arrow {
-      pointer-events: auto;
 
-      &.--next {
-        right: 1rem;
-      }
-      &.--prev {
-        left: 1rem;
+    #{$c-slider}__controls-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2.5rem;
+      margin-bottom: 2.5rem;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    #{$c-slider}__controls {
+      position: static;
+      top: unset;
+      left: unset;
+      right: unset;
+      bottom: unset;
+      height: unset;
+      margin: 0;
+      padding: 0;
+
+      @include media-breakpoint-up(sm) {
+        position: static;
+        top: unset;
+        left: unset;
+        right: unset;
+        bottom: unset;
+        height: unset;
+        margin: 0;
+        padding: 0;
       }
     }
   }
+
   &.--is-properties-images-slider {
     gap: 0;
     position: relative;
     #{$c-slider}__navigation {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
+      position: absolute;
+      top: 0;
+      left: 0;
       pointer-events: none;
+      @include media-breakpoint-up(lg) {
+        aspect-ratio: unset;
+        height: 100%;
+      }
+    }
+
+    #{$c-slider}__arrows {
+      height: 100%;
     }
     #{$c-slider}__arrow {
       pointer-events: auto;
-
-      &.--next {
-        right: 1rem;
-      }
-      &.--prev {
-        left: 1rem;
-      }
-    }
-  }
-
-  &.--is-banner-slider {
-    position: relative;
-    #{$c-slider}__navigation {
-      pointer-events: none;
-    }
-    #{$c-slider}__arrow {
-      pointer-events: auto;
-
-      .--is-header-style-transparent & {
-        @include media-breakpoint-up(lg) {
-          transform: translateY(calc(-50% + 3rem));
-        }
-
-        @include media-breakpoint-up(xxl) {
-          transform: translateY(calc(-50% + 7rem));
-        }
-      }
 
       &.--next {
         right: 1rem;
