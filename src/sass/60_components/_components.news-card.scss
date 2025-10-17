@@ -94,18 +94,20 @@
   &__meta {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1.5rem;
 
     @include media-breakpoint-up(lg) {
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
+      gap: 2rem;
     }
   }
 
   &__date {
     background-color: transparent;
     color: var(--oo-color-text);
+    padding: 0;
 
     .--bg-light & {
       color: var(--oo-color-light-text, var(--oo-color-text));
@@ -206,7 +208,6 @@
   }
 
   &__title.o-headline {
-    margin-top: 0.5rem;
     color: var(--oo-color-headline);
     font-size: 1.5rem; // 24px
     line-height: 2.125rem; // 34px
@@ -225,6 +226,10 @@
 
     .--bg-secondary & {
       color: var(--oo-color-secondary-headline, var(--oo-color-headline));
+    }
+
+    @include media-breakpoint-up(lg) {
+      margin-top: 0.5rem;
     }
   }
 
