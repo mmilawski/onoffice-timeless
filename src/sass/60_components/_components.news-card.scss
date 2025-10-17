@@ -11,13 +11,14 @@
 
   @include media-breakpoint-up(md) {
     flex-direction: row;
-    width: calc(100% - 8.333333%); // 11/12 columns
-    margin-left: 8.333333%; // Gap on left side
+    width: 91.666667%; // 11/12 columns
+    margin-left: 0; // No gap on picture side
+    margin-right: 8.333333%; // Gap only on content side
 
     &:nth-child(even) {
       flex-direction: row-reverse;
-      margin-left: 0;
-      margin-right: 8.333333%; // Gap on right side
+      margin-right: 0; // No gap on picture side
+      margin-left: 8.333333%; // Gap only on content side when reversed
     }
   }
 
@@ -29,7 +30,7 @@
     width: 100%;
 
     @include media-breakpoint-up(md) {
-      width: 41.666667%; // 5/12 columns
+      width: 50%; // 6/12 columns
       flex-shrink: 0;
     }
   }
@@ -73,7 +74,7 @@
     background-color: var(--oo-color-mix-bg-contrast-05);
 
     @include media-breakpoint-up(md) {
-      width: 50%; // 6/12 columns
+      width: 58.333333%; // 7/12 columns
       padding: 2.5rem;
     }
   }
@@ -84,19 +85,18 @@
     width: 100%; // On mobile, take full width
   }
 
-  &__categories {
+  &__tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
   }
 
-  &__category.c-pill {
+  &__category.c-tag {
     display: inline-flex;
-    padding: 0.25rem 0.75rem;
+    padding: 0.125rem 0.5rem;
     background-color: var(--oo-color-primary);
     color: #ffffff;
     font-size: 0.875rem;
-    border-radius: 1rem;
   }
 
   &__title {

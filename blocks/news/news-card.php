@@ -154,8 +154,10 @@ $link_title_more = sprintf(
 	    <div class="c-news-card__content">
             <?php if (!empty($categories)) { ?>
                 <div class="c-news-card__categories">
-                    <?php foreach($categories as $category) { ?>
-                        <span class="c-news-card__category c-pill"><?php echo esc_html($category->name); ?></span>
+                    <?php foreach ($categories as $category) { ?>
+                        <span class="c-news-card__category c-tag"><?php echo esc_html(
+                            $category->name,
+                        ); ?></span>
                     <?php } ?>
                 </div>
             <?php } ?>
