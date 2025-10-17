@@ -142,9 +142,6 @@ $link_title_more = sprintf(
        ],
    ]); ?>
 
-        <?php if ($is_date && !empty($date)) { ?>
-            <time class="c-news-card__date c-flag" datetime="<?php echo $dateYMD; ?>"><?php echo $date; ?></time>
-        <?php } ?>
     <?php if (!empty($link)) { ?>
         </a>
     <?php } else { ?>
@@ -152,6 +149,9 @@ $link_title_more = sprintf(
     <?php } ?>
     <?php if (!empty($title) || !empty($excerpt) || !empty($link)) { ?>
 	    <div class="c-news-card__content">
+            <?php if ($is_date && !empty($date)) { ?>
+                <time class="c-news-card__date c-flag" datetime="<?php echo $dateYMD; ?>"><?php echo $date; ?></time>
+            <?php } ?>
             <?php if (!empty($categories)) { ?>
                 <div class="c-news-card__categories">
                     <?php foreach ($categories as $category) { ?>
@@ -176,13 +176,13 @@ $link_title_more = sprintf(
 			<?php } ?>
 
 			<?php if (!empty($link)) {
-       echo '<a class="c-news-card__button c-button --full-width --on-bg-transparent"  
+       echo '<a class="c-news-card__more-link"  
                 aria-label="' .
            $link_title_more .
            '" href="' .
            $link .
            '">';
-       echo esc_html__('Mehr erfahren', 'oo_theme');
+       echo esc_html__('Weiterlesen', 'oo_theme').'...';
        echo '</a>';
    } ?>
 		</div> 

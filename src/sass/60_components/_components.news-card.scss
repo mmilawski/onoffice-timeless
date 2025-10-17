@@ -9,6 +9,30 @@
   display: flex;
   flex-direction: column;
 
+  .--bg-light & {
+    color: var(--oo-color-light-text, var(--oo-color-text));
+    background-color: var(--oo-color-light-bg, var(--oo-color-bg));
+    border-color: var(--oo-color-light-mix-bg-contrast-50, var(--oo-color-mix-bg-contrast-50));
+  }
+
+  .--bg-dark & {
+    color: var(--oo-color-dark-text, var(--oo-color-text));
+    background-color: var(--oo-color-dark-bg, var(--oo-color-bg));
+    border-color: var(--oo-color-dark-mix-bg-contrast-50, var(--oo-color-mix-bg-contrast-50));
+  }
+
+  .--bg-primary & {
+    color: var(--oo-color-primary-text, var(--oo-color-text));
+    background-color: var(--oo-color-primary-bg, var(--oo-color-bg));
+    border-color: var(--oo-color-primary-mix-bg-contrast-50, var(--oo-color-mix-bg-contrast-50));
+  }
+
+  .--bg-secondary & {
+    color: var(--oo-color-secondary-text, var(--oo-color-text));
+    background-color: var(--oo-color-secondary-bg, var(--oo-color-bg));
+    border-color: var(--oo-color-secondary-mix-bg-contrast-50, var(--oo-color-mix-bg-contrast-50));
+  }
+
   @include media-breakpoint-up(md) {
     flex-direction: row;
     width: 91.666667%; // 11/12 columns
@@ -44,13 +68,55 @@
     @include focus-visible() {
       outline-color: var(--oo-color-primary);
       box-shadow: 0 0 0 $outline-offset var(--oo-color-contrast-primary);
+
+      .--bg-light & {
+        outline-color: var(--oo-color-light-primary, var(--oo-color-primary));
+        box-shadow: 0 0 0 $outline-offset var(--oo-color-light-contrast-primary, var(--oo-color-contrast-primary));
+      }
+
+      .--bg-dark & {
+        outline-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+        box-shadow: 0 0 0 $outline-offset var(--oo-color-dark-contrast-primary, var(--oo-color-contrast-primary));
+      }
+
+      .--bg-primary & {
+        outline-color: var(--oo-color-primary-primary, var(--oo-color-primary));
+        box-shadow: 0 0 0 $outline-offset var(--oo-color-primary-contrast-primary, var(--oo-color-contrast-primary));
+      }
+
+      .--bg-secondary & {
+        outline-color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+        box-shadow: 0 0 0 $outline-offset var(--oo-color-secondary-contrast-primary, var(--oo-color-contrast-primary));
+      }
     }
   }
 
   &__date {
     position: absolute;
     top: $flag-offset;
-    left: $flag-offset;
+    right: $flag-offset;
+    background-color: var(--oo-color-primary);
+    color: var(--oo-color-contrast-primary);
+
+    .--bg-light & {
+      background-color: var(--oo-color-light-primary, var(--oo-color-primary));
+      color: var(--oo-color-light-contrast-primary, var(--oo-color-contrast-primary));
+    }
+
+    .--bg-dark & {
+      background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+      color: var(--oo-color-dark-contrast-primary, var(--oo-color-contrast-primary));
+    }
+
+    .--bg-primary & {
+      background-color: var(--oo-color-primary-primary, var(--oo-color-primary));
+      color: var(--oo-color-primary-contrast-primary, var(--oo-color-contrast-primary));
+    }
+
+    .--bg-secondary & {
+      background-color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+      color: var(--oo-color-secondary-contrast-primary, var(--oo-color-contrast-primary));
+    }
   }
 
   &__picture {
@@ -72,6 +138,23 @@
     justify-content: flex-start;
     gap: 1.5rem;
     background-color: var(--oo-color-mix-bg-contrast-05);
+    position: relative;
+
+    .--bg-light & {
+      background-color: var(--oo-color-light-mix-bg-contrast-05, var(--oo-color-mix-bg-contrast-05));
+    }
+
+    .--bg-dark & {
+      background-color: var(--oo-color-dark-mix-bg-contrast-05, var(--oo-color-mix-bg-contrast-05));
+    }
+
+    .--bg-primary & {
+      background-color: var(--oo-color-primary-mix-bg-contrast-05, var(--oo-color-mix-bg-contrast-05));
+    }
+
+    .--bg-secondary & {
+      background-color: var(--oo-color-secondary-mix-bg-contrast-05, var(--oo-color-mix-bg-contrast-05));
+    }
 
     @include media-breakpoint-up(md) {
       width: 54.545455%; // 6/11 columns of the card's width (11 columns)
@@ -94,21 +177,107 @@
   &__category.c-tag {
     display: inline-flex;
     padding: 0.125rem 0.5rem;
-    background-color: var(--oo-color-primary);
-    color: #ffffff;
+    background-color: #ffffff;
+    color: var(--oo-color-text);
     font-size: 0.875rem;
+
+    .--bg-light & {
+      color: var(--oo-color-light-text, var(--oo-color-text));
+    }
+
+    .--bg-dark & {
+      color: var(--oo-color-dark-text, var(--oo-color-text));
+    }
+
+    .--bg-primary & {
+      color: var(--oo-color-primary-text, var(--oo-color-text));
+    }
+
+    .--bg-secondary & {
+      color: var(--oo-color-secondary-text, var(--oo-color-text));
+    }
   }
 
   &__title {
     margin-top: 0.5rem;
+    color: var(--oo-color-headline);
+
+    .--bg-light & {
+      color: var(--oo-color-light-headline, var(--oo-color-headline));
+    }
+
+    .--bg-dark & {
+      color: var(--oo-color-dark-headline, var(--oo-color-headline));
+    }
+
+    .--bg-primary & {
+      color: var(--oo-color-primary-headline, var(--oo-color-headline));
+    }
+
+    .--bg-secondary & {
+      color: var(--oo-color-secondary-headline, var(--oo-color-headline));
+    }
   }
 
   &__text {
     flex-grow: 1;
+
+    p {
+      color: var(--oo-color-text);
+
+      .--bg-light & {
+        color: var(--oo-color-light-text, var(--oo-color-text));
+      }
+
+      .--bg-dark & {
+        color: var(--oo-color-dark-text, var(--oo-color-text));
+      }
+
+      .--bg-primary & {
+        color: var(--oo-color-primary-text, var(--oo-color-text));
+      }
+
+      .--bg-secondary & {
+        color: var(--oo-color-secondary-text, var(--oo-color-text));
+      }
+    }
   }
 
-  &__button {
+  &__more-link {
     margin-top: auto;
     width: fit-content;
+    padding: 0;
+    background: none;
+    border: none;
+    color: var(--oo-color-primary);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+
+    // When parent has --bg-light class
+    .--bg-light & {
+      color: var(--oo-color-light-primary, var(--oo-color-primary));
+    }
+
+    // When parent has --bg-dark class
+    .--bg-dark & {
+      color: var(--oo-color-dark-primary, var(--oo-color-primary));
+    }
+
+    // When parent has --bg-primary class
+    .--bg-primary & {
+      color: var(--oo-color-primary-primary, var(--oo-color-primary));
+    }
+
+    // When parent has --bg-secondary class
+    .--bg-secondary & {
+      color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+    }
+
+    &:hover,
+    &:focus {
+      background: none;
+      opacity: 0.8;
+    }
   }
 }
