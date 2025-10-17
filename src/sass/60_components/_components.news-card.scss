@@ -30,7 +30,7 @@
     width: 100%;
 
     @include media-breakpoint-up(md) {
-      width: 50%; // 6/12 columns
+      width: 45.454545%; // 5/11 columns of the card's width (11 columns)
       flex-shrink: 0;
     }
   }
@@ -74,7 +74,7 @@
     background-color: var(--oo-color-mix-bg-contrast-05);
 
     @include media-breakpoint-up(md) {
-      width: 58.333333%; // 7/12 columns
+      width: 54.545455%; // 6/11 columns of the card's width (11 columns)
       padding: 2.5rem;
     }
   }
