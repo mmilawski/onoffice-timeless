@@ -203,7 +203,9 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
                             </div> <!-- end of c-banner__container -->
                         <?php endif; ?>
                         <!-- -->
-                        <div class="c-banner__media">
+                        <div class="c-banner__media --content-is-<?php echo $slide_settings[
+                                    'position_content'
+                                ]; ?>">
                             <?php if (
                                 !empty($image) &&
                                 $background == 'image'
