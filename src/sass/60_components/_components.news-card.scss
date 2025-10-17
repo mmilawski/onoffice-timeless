@@ -229,10 +229,6 @@
     .--bg-secondary & {
       color: var(--oo-color-secondary-headline, var(--oo-color-headline));
     }
-
-    @include media-breakpoint-up(lg) {
-      margin-top: 0.5rem;
-    }
   }
 
   &__text {

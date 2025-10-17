@@ -1656,7 +1656,7 @@ function initNewsCardNavigation() {
     
     newsCards.forEach(function(card, index) {
       var picture = card.querySelector('.c-news-card__link');
-      var button = card.querySelector('.c-news-card__button');
+      var button = card.querySelector('.c-news-card__more-link');
       
       // Build array based on desktop/mobile layout
       if (isDesktop) {
