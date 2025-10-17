@@ -91,10 +91,19 @@
     }
   }
 
+  &__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    @include media-breakpoint-up(lg) {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
   &__date {
-    position: absolute;
-    top: $flag-offset;
-    right: $flag-offset;
     background-color: transparent;
     color: var(--oo-color-text);
 
@@ -164,7 +173,7 @@
     width: 100%; // On mobile, take full width
   }
 
-  &__tags {
+  &__categories {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;

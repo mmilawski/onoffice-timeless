@@ -149,18 +149,20 @@ $link_title_more = sprintf(
     <?php } ?>
     <?php if (!empty($title) || !empty($excerpt) || !empty($link)) { ?>
 	    <div class="c-news-card__content">
-            <?php if ($is_date && !empty($date)) { ?>
-                <time class="c-news-card__date c-flag" datetime="<?php echo $dateYMD; ?>"><?php echo $date; ?></time>
-            <?php } ?>
-            <?php if (!empty($categories)) { ?>
-                <div class="c-news-card__categories">
-                    <?php foreach ($categories as $category) { ?>
-                        <span class="c-news-card__category c-tag"><?php echo esc_html(
-                            $category->name,
-                        ); ?></span>
-                    <?php } ?>
-                </div>
-            <?php } ?>
+            <div class="c-news-card__meta">
+                <?php if (!empty($categories)) { ?>
+                    <div class="c-news-card__categories">
+                        <?php foreach ($categories as $category) { ?>
+                            <span class="c-news-card__category c-tag"><?php echo esc_html(
+                                $category->name,
+                            ); ?></span>
+                        <?php } ?>
+                    </div>
+                <?php } ?>
+                <?php if ($is_date && !empty($date)) { ?>
+                    <time class="c-news-card__date c-flag" datetime="<?php echo $dateYMD; ?>"><?php echo $date; ?></time>
+                <?php } ?>
+            </div>
             
             <?php if (!empty($title)) { ?>
                 <span class="c-news-card__title o-headline --h3"><?php echo $title; ?></span>
