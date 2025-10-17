@@ -184,7 +184,7 @@ $link_title_more = sprintf(
            '" href="' .
            $link .
            '">';
-       echo esc_html__('Weiterlesen', 'oo_theme').'...';
+       echo esc_html__('Weiterlesen', 'oo_theme') . '...';
        echo '</a>';
    } ?>
 		</div> 

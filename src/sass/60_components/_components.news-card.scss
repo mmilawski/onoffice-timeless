@@ -9,36 +9,52 @@
   flex-direction: column;
 
   @include media-breakpoint-up(lg) {
-    aspect-ratio: calc(12 / ((2/3) * 5)); // width:height ratio based on image being 5/11 wide with 3:2 ratio
+    aspect-ratio: calc(
+      12 / ((2 / 3) * 5)
+    ); // width:height ratio based on image being 5/11 wide with 3:2 ratio
   }
 
   @include media-breakpoint-up(xl) {
-    aspect-ratio: calc(11 / ((2/3) * 5)); // width:height ratio based on image being 5/11 wide with 3:2 ratio
+    aspect-ratio: calc(
+      11 / ((2 / 3) * 5)
+    ); // width:height ratio based on image being 5/11 wide with 3:2 ratio
     min-height: 0; // Ensure aspect ratio is enforced
   }
 
   .--bg-light & {
     color: var(--oo-color-light-text, var(--oo-color-text));
     background-color: var(--oo-color-light-bg, var(--oo-color-bg));
-    border-color: var(--oo-color-light-mix-bg-contrast-50, var(--oo-color-mix-bg-contrast-50));
+    border-color: var(
+      --oo-color-light-mix-bg-contrast-50,
+      var(--oo-color-mix-bg-contrast-50)
+    );
   }
 
   .--bg-dark & {
     color: var(--oo-color-dark-text, var(--oo-color-text));
     background-color: var(--oo-color-dark-bg, var(--oo-color-bg));
-    border-color: var(--oo-color-dark-mix-bg-contrast-50, var(--oo-color-mix-bg-contrast-50));
+    border-color: var(
+      --oo-color-dark-mix-bg-contrast-50,
+      var(--oo-color-mix-bg-contrast-50)
+    );
   }
 
   .--bg-primary & {
     color: var(--oo-color-primary-text, var(--oo-color-text));
     background-color: var(--oo-color-primary-bg, var(--oo-color-bg));
-    border-color: var(--oo-color-primary-mix-bg-contrast-50, var(--oo-color-mix-bg-contrast-50));
+    border-color: var(
+      --oo-color-primary-mix-bg-contrast-50,
+      var(--oo-color-mix-bg-contrast-50)
+    );
   }
 
   .--bg-secondary & {
     color: var(--oo-color-secondary-text, var(--oo-color-text));
     background-color: var(--oo-color-secondary-bg, var(--oo-color-bg));
-    border-color: var(--oo-color-secondary-mix-bg-contrast-50, var(--oo-color-mix-bg-contrast-50));
+    border-color: var(
+      --oo-color-secondary-mix-bg-contrast-50,
+      var(--oo-color-mix-bg-contrast-50)
+    );
   }
 
   @include media-breakpoint-up(lg) {
@@ -90,22 +106,41 @@
 
       .--bg-light & {
         outline-color: var(--oo-color-light-primary, var(--oo-color-primary));
-        box-shadow: 0 0 0 $outline-offset var(--oo-color-light-contrast-primary, var(--oo-color-contrast-primary));
+        box-shadow: 0 0 0 $outline-offset
+          var(
+            --oo-color-light-contrast-primary,
+            var(--oo-color-contrast-primary)
+          );
       }
 
       .--bg-dark & {
         outline-color: var(--oo-color-dark-primary, var(--oo-color-primary));
-        box-shadow: 0 0 0 $outline-offset var(--oo-color-dark-contrast-primary, var(--oo-color-contrast-primary));
+        box-shadow: 0 0 0 $outline-offset
+          var(
+            --oo-color-dark-contrast-primary,
+            var(--oo-color-contrast-primary)
+          );
       }
 
       .--bg-primary & {
         outline-color: var(--oo-color-primary-primary, var(--oo-color-primary));
-        box-shadow: 0 0 0 $outline-offset var(--oo-color-primary-contrast-primary, var(--oo-color-contrast-primary));
+        box-shadow: 0 0 0 $outline-offset
+          var(
+            --oo-color-primary-contrast-primary,
+            var(--oo-color-contrast-primary)
+          );
       }
 
       .--bg-secondary & {
-        outline-color: var(--oo-color-secondary-primary, var(--oo-color-primary));
-        box-shadow: 0 0 0 $outline-offset var(--oo-color-secondary-contrast-primary, var(--oo-color-contrast-primary));
+        outline-color: var(
+          --oo-color-secondary-primary,
+          var(--oo-color-primary)
+        );
+        box-shadow: 0 0 0 $outline-offset
+          var(
+            --oo-color-secondary-contrast-primary,
+            var(--oo-color-contrast-primary)
+          );
       }
     }
   }
@@ -167,19 +202,31 @@
     position: relative;
 
     .--bg-light & {
-      background-color: var(--oo-color-light-mix-bg-contrast-05, var(--oo-color-mix-bg-contrast-05));
+      background-color: var(
+        --oo-color-light-mix-bg-contrast-05,
+        var(--oo-color-mix-bg-contrast-05)
+      );
     }
 
     .--bg-dark & {
-      background-color: var(--oo-color-dark-mix-bg-contrast-05, var(--oo-color-mix-bg-contrast-05));
+      background-color: var(
+        --oo-color-dark-mix-bg-contrast-05,
+        var(--oo-color-mix-bg-contrast-05)
+      );
     }
 
     .--bg-primary & {
-      background-color: var(--oo-color-primary-mix-bg-contrast-05, var(--oo-color-mix-bg-contrast-05));
+      background-color: var(
+        --oo-color-primary-mix-bg-contrast-05,
+        var(--oo-color-mix-bg-contrast-05)
+      );
     }
 
     .--bg-secondary & {
-      background-color: var(--oo-color-secondary-mix-bg-contrast-05, var(--oo-color-mix-bg-contrast-05));
+      background-color: var(
+        --oo-color-secondary-mix-bg-contrast-05,
+        var(--oo-color-mix-bg-contrast-05)
+      );
     }
 
     @include media-breakpoint-up(lg) {
@@ -239,9 +286,19 @@
     color: var(--oo-color-headline);
     font-size: 1.5rem; // 24px
     line-height: 2.125rem; // 34px
-    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+
+    @include media-breakpoint-up(lg) {
+      -webkit-line-clamp: 1;
+      line-clamp: 1;
+    }
+
+    @include media-breakpoint-up(xxl) {
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+    }
 
     .--bg-light & {
       color: var(--oo-color-light-headline, var(--oo-color-headline));
@@ -266,7 +323,6 @@
     display: -webkit-box;
     -webkit-box-orient: vertical;
 
-    
     @include media-breakpoint-up(lg) {
       -webkit-line-clamp: 2;
       line-clamp: 2;
