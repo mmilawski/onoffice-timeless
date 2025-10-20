@@ -3,17 +3,39 @@
   
   &__container {
     display: flex;
-    flex-direction: row; // Standard row direction
+    
+    @include media-breakpoint-down(md) {
+      flex-direction: column;
+    }
+
+    @include media-breakpoint-up(lg) {
+      flex-direction: row;
+    }
   }
 
   &__content {
-    flex: 1; // Take remaining space
-    padding-right: 2rem; // Add some space between content and image
+    @include media-breakpoint-down(md) {
+      width: 100%;
+      padding-right: 0;
+      margin-bottom: 1.5rem; // 24px gap between content and image on mobile
+    }
+
+    @include media-breakpoint-up(lg) {
+      flex: 1;
+      padding-right: 2rem;
+    }
   }
 
   &__media {
-    width: 50%; // Fixed width for the image section
-    order: 2; // Force to the right side
+    @include media-breakpoint-down(md) {
+      width: 100%;
+      order: 2; // Move below content on mobile
+    }
+
+    @include media-breakpoint-up(lg) {
+      width: 50%;
+      order: 2; // Keep on right side for desktop
+    }
   }
 
   &__picture {
