@@ -200,6 +200,7 @@
     gap: 1.5rem;
     background-color: var(--oo-color-mix-bg-contrast-05);
     position: relative;
+    min-height: 0; // Enable proper flex shrinking
 
     .--bg-light & {
       background-color: var(
@@ -303,7 +304,6 @@
       -webkit-line-clamp: 2;
       max-height: 4.25rem; // Two lines
     }
-
     .--bg-light & {
       color: var(--oo-color-light-headline, var(--oo-color-headline));
     }
@@ -322,15 +322,15 @@
   }
 
   &__text {
-    flex-grow: 1;
+    flex: 1 1 0;
+    min-height: 0; // Enable proper flex shrinking
     width: calc(100% - 1px); // Force width calculation to enable text-overflow
 
     @include media-breakpoint-up(lg) {
       overflow: hidden;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 4; // Show 4 lines by default on desktop
       text-overflow: ellipsis;
+      display: block; // Reset display for proper overflow handling
+      position: relative; // For potential future fade-out effect if needed
     }
 
     p {
