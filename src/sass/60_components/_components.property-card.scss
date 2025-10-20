@@ -14,20 +14,35 @@
     overflow: hidden;
 
     .--bg-transparent & {
-      background-color: var(--oo-color-transparent-primary-10);
+      background-color: var(
+        --oo-color-transparent-primary-10,
+        var(---oo-color-primary)
+      );
     }
 
     .--bg-light & {
-      background-color: var(--oo-color-light-transparent-primary-10);
+      background-color: var(
+        --oo-color-light-transparent-primary-10,
+        var(---oo-color-primary)
+      );
     }
     .--bg-dark & {
-      background-color: var(--oo-color-dark-transparent-primary-10);
+      background-color: var(
+        --oo-color-dark-transparent-primary-10,
+        var(---oo-color-primary)
+      );
     }
     .--bg-primary & {
-      background-color: var(--oo-color-primary-transparent-primary-10);
+      background-color: var(
+        --oo-color-primary-transparent-primary-10,
+        var(---oo-color-primary)
+      );
     }
     .--bg-secondary & {
-      background-color: var(--oo-color-secondary-transparent-primary-10);
+      background-color: var(
+        --oo-color-secondary-transparent-primary-10,
+        var(---oo-color-primary)
+      );
     }
   }
 
@@ -201,7 +216,7 @@
   }
   .--bg-primary & {
     background-color: var(
-      --oo-color-primary-mix-primary-contrast-10,
+      --oo-color-primary-mix-bg-contrast-10,
       var(--oo-color-primary)
     );
   }
