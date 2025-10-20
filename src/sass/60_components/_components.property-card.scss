@@ -12,7 +12,23 @@
   &__inner {
     position: relative;
     overflow: hidden;
-    background-color: var(--oo-color-transparent-primary-10);
+
+    .--bg-transparent & {
+      background-color: var(--oo-color-transparent-primary-10);
+    }
+
+    .--bg-light & {
+      background-color: var(--oo-color-light-transparent-primary-10);
+    }
+    .--bg-dark & {
+      background-color: var(--oo-color-dark-transparent-primary-10);
+    }
+    .--bg-primary & {
+      background-color: var(--oo-color-primary-transparent-primary-10);
+    }
+    .--bg-secondary & {
+      background-color: var(--oo-color-secondary-transparent-primary-10);
+    }
   }
 
   &__picture {
@@ -166,32 +182,32 @@
 
   .--bg-transparent & {
     background-color: var(
-      --oo-color-mix-bg-contrast-05,
+      --oo-color-mix-bg-contrast-10,
       var(--oo-color-primary)
     );
   }
 
   .--bg-light & {
     background-color: var(
-      --oo-color-light-mix-bg-contrast-05,
+      --oo-color-light-mix-bg-contrast-10,
       var(--oo-color-primary)
     );
   }
   .--bg-dark & {
     background-color: var(
-      --oo-color-dark-mix-bg-contrast-05,
+      --oo-color-dark-mix-bg-contrast-10,
       var(--oo-color-primary)
     );
   }
   .--bg-primary & {
     background-color: var(
-      --oo-color-primary-mix-bg-contrast-05,
+      --oo-color-primary-mix-primary-contrast-10,
       var(--oo-color-primary)
     );
   }
   .--bg-secondary & {
     background-color: var(
-      --oo-color-secondary-mix-bg-contrast-05,
+      --oo-color-secondary-mix-bg-contrast-10,
       var(---oo-color-primary)
     );
   }
