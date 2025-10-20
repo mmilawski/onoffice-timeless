@@ -1,28 +1,48 @@
+@mixin footer-gradient() {
+  background: linear-gradient(
+    to right,
+    var(--oo-color-footer-bg, var(--oo-color-bg)) 0% 33.33%,
+    var(--oo-color-footer-mix-bg-contrast-10, var(--oo-color-bg)) 33.33% 100%
+  );
+}
+
 .c-footer {
   $c-footer: &;
-
-  box-shadow: 2px 2px 10px var(--oo-color-transparent-shadow-15);
+  border-top: 1px solid var(--oo-color-footer-mix-border-50);
 
   &__top {
     position: relative;
-    background-color: var(--oo-color-footer-bg, var(--oo-color-bg));
+    background: var(--oo-color-footer-mix-bg-contrast-10, var(--oo-color-bg));
     color: var(--oo-color-footer-text, var(--oo-color-text));
-    padding: 2.5rem 0;
+    box-shadow: 0 4px 4px var(--oo-color-transparent-shadow-25);
+
+    @include media-breakpoint-up(xl) {
+      @include footer-gradient(
+
+      ); //Paints the background color for the side areas outside the container
+    }
 
     &-container {
       display: flex;
       flex-direction: column;
-      gap: 2.5rem 0;
+      gap: 3.75rem 0;
+      padding-bottom: 3.75rem;
+      @include media-breakpoint-up(xl) {
+        @include footer-gradient(); //Colors the row gaps inside the container
+        gap: 5rem 0;
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
     }
 
     &-row {
-      gap: 2.5rem 0;
+      gap: 3.75rem 0;
     }
 
     &-column {
       display: flex;
       flex-direction: column;
-      gap: 2.5rem 0;
+      gap: 3.75rem 0;
       &.--is-empty {
         display: none;
         @include media-breakpoint-up(xl) {
@@ -30,6 +50,30 @@
         }
       }
       &.--left {
+        padding-top: 3.75rem;
+        padding-bottom: 3.75rem;
+        background: var(--oo-color-footer-bg, var(--oo-color-bg));
+
+        @include media-breakpoint-down(lg) {
+          //Paints the side areas outside the container on mobile
+          box-shadow: 0 0 0 100vmax
+            var(--oo-color-footer-bg, var(--oo-color-bg));
+          clip-path: inset(0 -100vmax);
+        }
+        @include media-breakpoint-up(xl) {
+          padding-top: 0;
+          padding-bottom: 0;
+          padding-right: 2rem;
+        }
+      }
+      &.--middle-right {
+        background: var(
+          --oo-color-footer-mix-bg-contrast-10,
+          var(--oo-color-bg)
+        );
+        @include media-breakpoint-up(xl) {
+          padding-left: 2rem;
+        }
       }
       &.--middle {
       }
@@ -39,25 +83,24 @@
   }
 
   &__bottom {
-    color: var(--oo-color-footer-text, var(--oo-color-text));
-    background-color: var(--oo-color-footer-mix-bg-contrast-10);
-    padding: 1rem 0 0.5rem 0;
+    color: var(--oo-color-footer-text-bottom, var(--oo-color-text));
+    background-color: var(--oo-color-footer-bg-bottom);
+    padding: 1.25rem 0 0.5rem 0;
 
-    @include media-breakpoint-up(lg) {
-      gap: 0;
-      padding: 0.5rem 0;
+    @include media-breakpoint-up(xl) {
+      padding: 1.5rem 0;
     }
 
     * {
-      font-size: $small-font-size;
-      line-height: $small-line-height;
+      font-size: $global-font-size;
+      line-height: $global-line-height;
     }
 
     &-row {
       align-items: center;
-      gap: 1rem 0;
+      gap: 1.75rem 0;
 
-      @include media-breakpoint-up(lg) {
+      @include media-breakpoint-up(xl) {
         gap: 0;
       }
     }
@@ -67,6 +110,7 @@
         display: flex;
         flex-wrap: wrap;
         flex-direction: column;
+        gap: 0.75rem;
 
         @include media-breakpoint-up(xl) {
           flex-direction: row;
@@ -76,25 +120,18 @@
 
       &.--right {
         display: flex;
-        justify-content: center;
-
-        @include media-breakpoint-up(lg) {
-          justify-content: flex-end;
-        }
+        justify-content: flex-end;
       }
     }
 
     &-copyright {
       display: flex;
       align-items: center;
-      justify-content: center;
       flex-wrap: wrap;
       gap: 0.25rem;
-      width: 100%;
 
       @include media-breakpoint-up(lg) {
         justify-content: flex-start;
-        width: auto;
       }
     }
 
@@ -102,7 +139,7 @@
       display: flex;
 
       @include plain-visited-hover-focus-active() {
-        color: var(--oo-color-footer-text, var(--oo-color-text));
+        color: var(--oo-color-footer-text-bottom, var(--oo-color-text));
         outline: $outline;
         outline-offset: $outline-offset;
         transition: color 0.25s ease-in-out, outline-color 0.25s ease-in-out;
@@ -114,12 +151,11 @@
     }
 
     .onoffice-logo {
-      display: flex;
-      align-items: center;
       color: currentColor;
+      opacity: 50%;
 
       &__svg {
-        height: 2.25rem;
+        height: 1.875rem;
       }
     }
 

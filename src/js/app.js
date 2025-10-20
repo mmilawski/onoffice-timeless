@@ -2,46 +2,6 @@ $ = jQuery;
 
 jQuery(document).ready(function() {
 
-  // Function to calculate and set the position of dropdown menus
-  function adjustDropdownMenuPosition() {
-    const headerContainer = document.querySelector('.c-header__container');
-    const headerMenuItems = document.querySelectorAll('.c-main-nav__list .c-main-nav__item.--has-children.--is-top-level');
-
-    if (!headerContainer) {
-      return;
-    }
-
-    if (headerMenuItems.length === 0) {
-      return;
-    }
-
-    const containerBottom = headerContainer.getBoundingClientRect().bottom;
-
-    headerMenuItems.forEach((li) => {
-      const subMenu = li.querySelector('.c-main-nav__sub-menu');
-
-      if (!subMenu) {
-        return;
-      }
-
-      const { bottom: liBottom, height: liHeight } = li.getBoundingClientRect();
-      const distanceFromContainer = containerBottom - liBottom;
-      const subMenuPosition = liHeight + distanceFromContainer;
-
-      subMenu.style.top = `${subMenuPosition}px`;
-    });
-  } 
-
-  if (window.innerWidth >= 1400) {
-    adjustDropdownMenuPosition();
-  }
-
-  window.addEventListener('resize', () => {
-    if (window.innerWidth >= 1400) {
-      adjustDropdownMenuPosition();
-    }
-  });
- 
   if( $('.c-table').length > 0  ) {
     $('.c-table').each(function( index, element) {
 
@@ -102,7 +62,7 @@ jQuery(document).ready(function() {
 
       const options = Object.assign({
           label: '&times;',
-          title: window.wpAppTranslations.removeThisItem || 'Remove this item',
+          title: window.ooTimelessTheme.translations.removeThisItem || 'Remove this item',
           className: 'remove',
           append: true,
           position: 'before',
@@ -308,7 +268,7 @@ jQuery(document).ready(function() {
       var plugins = {
           'oo_remove_button': {
               'className': 'ts-item-remove',
-              'title': window.wpAppTranslations.removeThisItem || 'Remove this item',
+              'title': window.ooTimelessTheme.translations.removeThisItem || 'Remove this item',
               'label': '',
               'position': 'before'
           },
@@ -402,7 +362,7 @@ jQuery(document).ready(function() {
 
           },
           no_results:function(data,escape){
-            return `<div class="no-results">${window.wpAppTranslations.noResults || 'No results'}</div>`;
+            return `<div class="no-results">${window.ooTimelessTheme.translations.noResults || 'No results'}</div>`;
           },
         }
       });
@@ -665,6 +625,18 @@ jQuery(document).ready(function() {
           }
 
           function closePopup() {
+            if (popupElement.dataset.unclosable === 'true') {
+                const propertyListUrl = window.ooTimelessTheme?.urls?.propertyList || '/';
+                const referrer = document.referrer;
+                
+                if (referrer && referrer !== window.location.href) {
+                    window.location.href = referrer;
+                } else {
+                    window.location.href = propertyListUrl;
+                }
+                return; // Stop further execution
+            }
+
             popupElement.classList.remove('--is-open');
             if (popupElement instanceof HTMLDialogElement && typeof popupElement.close === 'function') {
               popupElement.close();
@@ -704,10 +676,10 @@ jQuery(document).ready(function() {
       <div class="goverlay c-lightbox__overlay"></div>
       <div class="gcontainer c-lightbox__container">
         <div id="glightbox-slider" class="gslider c-lightbox__slider"></div>
-        <button class="gprev gbtn c-lightbox__icon-wrapper --arrow --prev" tabindex="0" aria-label="${window.wpAppTranslations.previous || 'Previous'}">
+        <button class="gprev gbtn c-lightbox__icon-wrapper --arrow --prev" tabindex="0" aria-label="${window.ooTimelessTheme.translations.previous || 'Previous'}">
           <svg class="c-lightbox__icon --arrow" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" role="img" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
         </button>
-        <button class="gnext gbtn c-lightbox__icon-wrapper --arrow --next" tabindex="1" aria-label="${window.wpAppTranslations.next || 'Next'}">
+        <button class="gnext gbtn c-lightbox__icon-wrapper --arrow --next" tabindex="1" aria-label="${window.ooTimelessTheme.translations.next || 'Next'}">
           <svg class="c-lightbox__icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" role="img" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
         </button>
       </div>
@@ -718,7 +690,7 @@ jQuery(document).ready(function() {
       <div class="gslide-inner-content c-lightbox__wrapper">
         <div class="ginner-container c-lightbox__content">
           <div class="gslide-media c-lightbox__media">
-            <button class="gclose gbtn c-lightbox__icon-wrapper --close" tabindex="2" aria-label="${window.wpAppTranslations.close || 'Close'}">
+            <button class="gclose gbtn c-lightbox__icon-wrapper --close" tabindex="2" aria-label="${window.ooTimelessTheme.translations.close || 'Close'}">
               <svg class="c-lightbox__icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" role="img" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
             </button>
           </div>
@@ -1555,11 +1527,11 @@ document.addEventListener('DOMContentLoaded', function() {
       if (!input.checkValidity()) {
         let errorMessage = 'This field is invalid.';
         if (input.type === 'email' && input.validity.typeMismatch) {
-          errorMessage = window.wpAppTranslations.invalidEmail || 'Please enter a valid email address.';
+          errorMessage = window.ooTimelessTheme.translations.invalidEmail || 'Please enter a valid email address.';
         } else if (input.validity.valueMissing) {
-          errorMessage = window.wpAppTranslations.requiredField || 'Please fill in the required field.';
+          errorMessage = window.ooTimelessTheme.translations.requiredField || 'Please fill in the required field.';
           if(input.type === 'checkbox'){
-            errorMessage = window.wpAppTranslations.requiredCheckbox || 'Please accept.';
+            errorMessage = window.ooTimelessTheme.translations.requiredCheckbox || 'Please accept.';
           }
         }
 
@@ -1583,7 +1555,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const selectHandleChange = (select) => {
       const tomSelectControl = select.nextElementSibling;
-      const errorMessage = window.wpAppTranslations.requiredField || 'Please fill in the required field.';
+      const errorMessage = window.ooTimelessTheme.translations.requiredField || 'Please fill in the required field.';
       if (!select.checkValidity()) {
         tomSelectControl.classList.add('is-invalid');
         showError(select, errorMessage);
@@ -1607,19 +1579,24 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
-    form.addEventListener('submit', function(event) {
-      if (!form.checkValidity()) {
-        event.preventDefault();
-        event.stopPropagation();
-        inputs.forEach(input => {
-          inputHandleBlur(input)
-        });
-        selects.forEach(select => {
-          selectHandleChange(select)
-        })
-        jumpToFirstInvalidInput(form);
-      }
-      form.classList.add('--validated');
+    // use a capture phase click listener on submit button instead of simple submit event.
+    // It is needed to prevent recaptcha code to call form.reportValidity and display the browsers error messages.
+    // If the form is valid the recaptcha code still gets executed.
+    form.querySelectorAll('.c-form__button').forEach(button => {
+      button.addEventListener('click', function(event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          inputs.forEach(input => {
+            inputHandleBlur(input)
+          });
+          selects.forEach(select => {
+            selectHandleChange(select)
+          })
+          jumpToFirstInvalidInput(form);
+        }
+        form.classList.add('--validated');
+      }, true);
     });
   });
 });

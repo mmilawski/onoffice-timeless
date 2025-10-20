@@ -175,13 +175,12 @@
   &.--on-bg-header,
   .--bg-header & {
     @include plain-visited() {
-      color: var(--oo-color-text);
-      background-color: var(--oo-color-header-mix-bg-contrast-5);
+      color: var(--oo-color-header-bg-contrast);
+      background-color: transparent;
     }
 
     @include hover() {
-      background-color: var(--oo-color-mix-primary-contrast-20);
-      color: var(--oo-color-contrast-primary);
+      color: var(--oo-color-header-primary, var(--oo-color-primary));
     }
 
     @include focus-visible() {
@@ -189,7 +188,6 @@
     }
 
     @include active() {
-      background-color: var(--oo-color-mix-primary-contrast-40);
     }
 
     @include disabled() {

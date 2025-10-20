@@ -6,6 +6,7 @@
     background: transparent;
     border: 0;
     padding: 0;
+    width: auto;
     .wpml-ls-statics-shortcode_actions {
       margin: 0;
       a {
@@ -13,7 +14,11 @@
         border: 0;
         line-height: $small-line-height;
         text-align: left;
-        padding: 0 1.5rem 0 0.5rem;
+        padding: 0.5rem 0.75rem;
+
+        @include media-breakpoint-up(xxl) {
+          padding: 0;
+        }
 
         @include plain-visited() {
           color: var(--oo-color-header-mix-text-contrast-20);
@@ -21,6 +26,13 @@
 
         @include hover-focus() {
           color: var(--oo-color-header-primary, var(--oo-color-primary));
+          &::before {
+            background-color: transparent;
+          }
+
+          &::after {
+            color: var(--oo-color-header-text, var(--oo-color-text));
+          }
         }
 
         @include focus-visible() {
@@ -61,6 +73,39 @@
     .wpml-ls-legacy-dropdown-click {
       width: auto;
 
+      .wpml-ls-item-toggle {
+        position: relative;
+
+        &::after {
+          content: '';
+          display: inline-block;
+          position: static;
+          margin-left: 0.5rem;
+          background-color: var(--oo-color-header-text, var(--oo-color-text));
+          mask: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20viewBox%3D%220%200%2012%206%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M0%2C0l6%2C6L12%2C0%22%2F%3E%3C%2Fsvg%3E');
+          mask-repeat: no-repeat;
+          mask-size: $icon-width-dropdown;
+          mask-position: center;
+          margin-left: 0.25rem;
+          height: $icon-height-dropdown;
+          width: $icon-width-dropdown;
+          transition: transform 0.1s ease-in-out;
+        }
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 100%;
+          left: -1rem;
+          right: -1rem;
+          height: 0;
+          opacity: 0;
+          background: rgba(0, 0, 0, 0);
+          z-index: 10;
+          overflow: hidden;
+        }
+      }
+
       .wpml-ls-item {
         width: max-content;
         min-width: 100%;
@@ -70,46 +115,67 @@
         width: max-content;
         min-width: 100%;
         z-index: 9991;
-        border-top: 0;
         bottom: 100%;
         top: auto;
         display: flex;
         flex-direction: column-reverse;
-        padding-bottom: 0.5rem;
-
-        @include media-breakpoint-up(xl) {
-          li:last-of-type {
-            border-radius: inherit;
-            a {
-              border-radius: inherit;
-            }
-          }
-        }
+        margin-top: 0.5rem;
+        border: 1px solid
+          var(--oo-color-header-mix-bg-text-50, var(--oo-color-header-text));
+        background-color: var(--oo-color-header-bg, var(--oo-color-bg));
+        padding: 0.25rem 0;
 
         @include media-breakpoint-up(xxl) {
           top: 100%;
           bottom: auto;
           display: block;
-          padding-bottom: 0rem;
-          padding-top: 0.5rem;
+          left: -1rem;
         }
-        a {
-          padding: 0.25rem 0.5rem;
-          text-align: center;
-          border-radius: inherit;
 
-          @include plain-visited() {
-            color: var(--oo-color-header-text, var(--oo-color-text));
-            background: var(--oo-color-header-mix-bg-contrast-5);
+        .wpml-ls-item {
+          .wpml-ls-link {
+            padding: 0.25rem 1rem;
+            text-align: center;
+
+            .wpml-ls-display {
+              text-decoration: underline;
+              text-underline-offset: $link-underline-offset;
+              text-decoration-color: transparent;
+              transition: text-decoration 0.1s ease-in-out;
+            }
+
+            @include plain-visited() {
+              color: var(--oo-color-header-text, var(--oo-color-text));
+              background-color: var(--oo-color-header-bg, var(--oo-color-bg));
+            }
+
+            @include hover() {
+              color: var(--oo-color-header-text, var(--oo-color-text));
+
+              .wpml-ls-display {
+                text-decoration-color: var(
+                  --oo-color-header-text,
+                  var(--oo-color-text)
+                );
+              }
+            }
+          }
+        }
+      }
+
+      &:hover {
+        .wpml-ls-item-toggle {
+          &::before {
+            height: 1rem;
           }
 
-          @include hover() {
-            color: var(--oo-color-header-contrast-primary);
-            background-color: var(
-              --oo-color-header-primary,
-              var(--oo-color-primary)
-            );
+          &::after {
+            transform: rotate(-180deg);
           }
+        }
+
+        .wpml-ls-sub-menu {
+          visibility: visible;
         }
       }
     }
