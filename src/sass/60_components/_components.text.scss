@@ -16,7 +16,7 @@
   }
 
   &__row {
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1.5rem;
 
     .--text-align-left & {

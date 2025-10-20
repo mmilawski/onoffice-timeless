@@ -16,11 +16,13 @@ if (!empty($texts[0]['text']['wysiwyg'])) {
 
     $text_class_base =
         'c-text__content o-col-12 o-col-lg-10 o-col-xl-' .
-        ($text_count === 1 ? '8' : '4') . $offset_class;
+        ($text_count === 1 ? '8' : '4') .
+        $offset_class;
 
     $headline_class =
         'c-text__headline o-col-12 o-col-lg-10 o-col-xl-' .
-        ($text_count === 3 ? '12' : '8') . $offset_class;
+        ($text_count === 3 ? '12' : '8') .
+        $offset_class;
 }
 ?>
 
@@ -47,9 +49,12 @@ if (!empty($texts[0]['text']['wysiwyg'])) {
 
                     $i = 0;
                     foreach ($texts as $text_column):
+
                         $text = $text_column['text'];
                         $buttons = $text_column['buttons'];
-                        $text_class = $text_class_base . ($i === 1 ? ' u-offset-xl-0' : '');
+                        $text_class =
+                            $text_class_base .
+                            ($i === 1 ? ' u-offset-xl-0' : '');
                         ?>
 
                        
