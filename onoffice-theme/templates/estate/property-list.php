@@ -70,7 +70,7 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
             <div class="c-property-list__nav o-container">
                 <div class="o-row">
                         <?php if ($generateSortDropDown()) { ?>
-                            <div class="c-property-list__sort-wrapper o-col-12 o-col-xl-6 u-offset-lg-1 --<?php echo $bg_color; ?>">
+                            <div class="c-property-list__sort-wrapper o-col-12 o-col-lg-6 u-offset-lg-1 --<?php echo $bg_color; ?>">
                                 <?php wp_enqueue_script(
                                     'oo-sort-list-script',
                                 ); ?>
@@ -83,7 +83,7 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
                                 </label>
                             </div>
                         <?php } ?>
-                        <p class="c-property-list__count o-col-12 o-col-xl-5">
+                        <p class="c-property-list__count o-col-12 o-col-lg-5">
                             <?php printf(
                                 esc_html__(
                                     '%d Immobilien gefunden',

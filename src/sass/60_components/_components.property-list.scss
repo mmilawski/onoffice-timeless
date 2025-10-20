@@ -74,6 +74,14 @@
     @include media-breakpoint-up(lg) {
       width: auto;
     }
+
+    & .onofficeSortListSelector {
+      width: 100%;
+
+      @include media-breakpoint-up(lg) {
+        width: auto;
+      }
+    }
   }
 
   &__properties {
@@ -81,10 +89,16 @@
     grid-template-rows: 1fr;
     gap: 1.5rem;
 
-    @include media-breakpoint-up(lg) {
-      grid-template-columns: repeat(2, 1fr);
+    @include media-breakpoint-up(xs) {
+      grid-template-columns: repeat(1, 1fr);
       gap: 1rem;
       padding: 0;
+    }
+
+    @include media-breakpoint-up(lg) {
+      grid-template-columns: repeat(2, 1fr);
+      padding-right: 1rem;
+      padding-left: 1rem;
     }
 
     @include media-breakpoint-up(xxl) {
