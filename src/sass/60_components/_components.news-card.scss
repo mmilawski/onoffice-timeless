@@ -246,7 +246,9 @@
   @include media-breakpoint-down(md) {
     flex-direction: column;
     min-height: auto;
+    height: auto; // Let height be determined by content
     width: 100%; // On mobile, take full width
+    aspect-ratio: unset; // Remove aspect ratio constraint on mobile
   }
 
   &__categories {
@@ -325,6 +327,12 @@
     flex: 1 1 0;
     min-height: 0; // Enable proper flex shrinking
     width: calc(100% - 1px); // Force width calculation to enable text-overflow
+
+    @include media-breakpoint-down(md) {
+      flex: 0 0 auto; // Don't flex or shrink on mobile
+      height: auto; // Let height be determined by content
+      overflow: visible; // Show all content
+    }
 
     @include media-breakpoint-up(lg) {
       overflow: hidden;
