@@ -90,10 +90,11 @@
     align-self: end;
     align-content: center;
     flex-wrap: wrap;
-    padding: 1rem 2rem;
+    padding: 0.5rem 1rem;
 
     @include media-breakpoint-up(lg) {
       height: 100%;
+      padding: 1rem 2rem;
     }
   }
 
