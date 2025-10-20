@@ -262,26 +262,30 @@
   &__category.c-tag {
     display: inline-flex;
     align-items: center;
-    padding: 0.25rem 0.75rem; // 3 12px
-    background-color: #ffffff;
-    color: var(--oo-color-text);
+    padding: 3px 12px;
     font-size: 1rem; // 16px
     line-height: 1.75; // 28px
+    background-color: var(--oo-color-bg);
+    color: var(--oo-color-contrast-bg);
 
     .--bg-light & {
-      color: var(--oo-color-light-text, var(--oo-color-text));
+      background-color: var(--oo-color-light-bg, var(--oo-color-bg));
+      color: var(--oo-color-light-contrast-bg, var(--oo-color-contrast-bg));
     }
 
     .--bg-dark & {
-      color: var(--oo-color-dark-text, var(--oo-color-text));
+      background-color: var(--oo-color-dark-bg, var(--oo-color-bg));
+      color: var(--oo-color-dark-contrast-bg, var(--oo-color-contrast-bg));
     }
 
     .--bg-primary & {
-      color: var(--oo-color-primary-text, var(--oo-color-text));
+      background-color: var(--oo-color-primary-bg, var(--oo-color-bg));
+      color: var(--oo-color-primary-contrast-bg, var(--oo-color-contrast-bg));
     }
 
     .--bg-secondary & {
-      color: var(--oo-color-secondary-text, var(--oo-color-text));
+      background-color: var(--oo-color-secondary-bg, var(--oo-color-bg));
+      color: var(--oo-color-secondary-contrast-bg, var(--oo-color-contrast-bg));
     }
   }
 

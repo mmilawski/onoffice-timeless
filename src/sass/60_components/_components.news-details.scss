@@ -61,11 +61,31 @@
     display: inline-flex;
     align-items: center;
     padding: 0.25rem 0.75rem;
-    background-color: var(--oo-color-mix-bg-contrast-05);
-    color: var(--oo-color-text);
     font-size: 1rem;
     line-height: 1.75;
     border-radius: 4px;
+    background-color: var(--oo-color-mix-bg-contrast-05);
+    color: var(--oo-color-text);
+
+    .--bg-light & {
+      background-color: var(--oo-color-light-mix-bg-contrast-05, var(--oo-color-mix-bg-contrast-05));
+      color: var(--oo-color-light-text, var(--oo-color-text));
+    }
+
+    .--bg-dark & {
+      background-color: var(--oo-color-dark-mix-bg-contrast-05, var(--oo-color-mix-bg-contrast-05));
+      color: var(--oo-color-dark-text, var(--oo-color-text));
+    }
+
+    .--bg-primary & {
+      background-color: var(--oo-color-primary-mix-bg-contrast-05, var(--oo-color-mix-bg-contrast-05));
+      color: var(--oo-color-primary-text, var(--oo-color-text));
+    }
+
+    .--bg-secondary & {
+      background-color: var(--oo-color-secondary-mix-bg-contrast-05, var(--oo-color-mix-bg-contrast-05));
+      color: var(--oo-color-secondary-text, var(--oo-color-text));
+    }
   }
 
   &__date {
