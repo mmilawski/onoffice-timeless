@@ -204,8 +204,8 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
                         <?php endif; ?>
                         <!-- -->
                         <div class="c-banner__media --content-is-<?php echo $slide_settings[
-                                    'position_content'
-                                ]; ?>">
+                            'position_content'
+                        ]; ?>">
                             <?php if (
                                 !empty($image) &&
                                 $background == 'image'
@@ -348,7 +348,8 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
                             'oo_theme',
                         ); ?></span>
                         <?php echo oo_get_icon('chevron-left', true, [
-                            'class' => 'c-slider__icon c-icon-button__icon splide__icon',
+                            'class' =>
+                                'c-slider__icon c-icon-button__icon splide__icon',
                         ]); ?>
                     </button>
                 </div>
@@ -388,7 +389,8 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
                             'oo_theme',
                         ); ?></span>
                         <?php echo oo_get_icon('chevron-right', true, [
-                            'class' => 'c-slider__icon c-icon-button__icon splide__icon',
+                            'class' =>
+                                'c-slider__icon c-icon-button__icon splide__icon',
                         ]); ?>
                     </button>
                 </div>

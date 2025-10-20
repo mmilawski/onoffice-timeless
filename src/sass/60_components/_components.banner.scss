@@ -222,27 +222,25 @@
   }
 
   &.--bg-light {
-    #{$c-banner}__content {
-      color: var(--oo-color-light-text, var(--oo-color-text));
-    }
+    color: var(--oo-color-light-text, var(--oo-color-text));
+    background-color: var(--oo-color-light-bg, var(--oo-color-bg));
   }
   &.--bg-dark {
-    background-color: var(--oo-color-dark-bg);
-    #{$c-banner}__content {
-      color: var(--oo-color-dark-text, var(--oo-color-text));
-    }
+    color: var(--oo-color-dark-text, var(--oo-color-text));
+    background-color: var(--oo-color-dark-bg, var(--oo-color-bg));
   }
   &.--bg-primary {
-    background-color: var(--oo-color-primary-bg);
-    #{$c-banner}__content {
-      color: var(--oo-color-primary-text, var(--oo-color-text));
-    }
+    color: var(--oo-color-primary-text, var(--oo-color-text));
+    background-color: var(--oo-color-primary-bg, var(--oo-color-bg));
   }
   &.--bg-secondary {
-    background-color: var(--oo-color-secondary-bg);
-    #{$c-banner}__content {
-      color: var(--oo-color-secondary-text, var(--oo-color-text));
-    }
+    color: var(--oo-color-secondary-text, var(--oo-color-text));
+    background-color: var(--oo-color-secondary-bg, var(--oo-color-bg));
+  }
+
+  &.--bg-transparent {
+    color: var(--oo-color-transparent-text);
+    background-color: var(--oo-color-transparent-bg);
   }
 
   & + *:not(&) {
