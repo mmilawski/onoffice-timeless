@@ -144,9 +144,11 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
                     ?>
 
                     <div class="c-banner__slide --content-<?php echo $type; ?> --background-<?php echo $background; ?> <?php if (
-     $slide_count > 1
- ) { ?>c-slider__slide splide__slide<?php } ?>">
-                        <!-- -->
+                        $slide_count > 1
+                    ) { ?>c-slider__slide splide__slide<?php } ?><?php if ($type != 'none') {
+                        echo ' --content-is-' .
+                            $slide_settings['position_content'];
+                    } ?>">
                         <?php if ($type != 'none'): ?>
                             <div class="c-banner__container o-container">
                                 <div class="c-banner__row o-row --position-<?php echo $slide_settings[
