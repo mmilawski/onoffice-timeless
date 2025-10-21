@@ -120,6 +120,10 @@ if ($rating_provider === 'google') {
     <?php } ?>
     <div class="c-team-card__overlay">
         <div class="c-team-card__header">
+            <?php if (!empty($name)) { ?>
+                <p id="name-<?php echo $post_id; ?>" class="c-team-card__name"><?php echo $name; ?></p>
+            <?php } ?>
+
             <?php if (
                 !empty($job) ||
                 !empty($contact['phone']) ||
@@ -142,10 +146,6 @@ if ($rating_provider === 'google') {
                         <?php oo_get_icon('minus'); ?>
                     </span>
                 </div>
-            <?php } ?>
-
-            <?php if (!empty($name)) { ?>
-                <p id="name-<?php echo $post_id; ?>" class="c-team-card__name o-headline --h3"><?php echo $name; ?></p>
             <?php } ?>
         </div>
 
