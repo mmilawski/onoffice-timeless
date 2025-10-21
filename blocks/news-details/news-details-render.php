@@ -36,18 +36,19 @@ $image['alt'] = $image['alt'] ?? $title;
         <div class="c-news-details__container o-container">
             <div class="c-news-details__row o-row">
                 <div class="c-news-details__content o-col-12 o-col-lg-6">
-                    <?php 
+                    <?php
                     // Get post categories
                     $categories = get_the_category($post_id);
-                    if (!empty($categories)) : ?>
+                    if (!empty($categories)): ?>
                     <div class="c-news-details__categories">
-                        <?php foreach($categories as $category) : ?>
+                        <?php foreach ($categories as $category): ?>
                             <span class="c-news-details__category">
                                 <?php echo esc_html($category->name); ?>
                             </span>
                         <?php endforeach; ?>
                     </div>
-                    <?php endif; ?>
+                    <?php endif;
+                    ?>
 
                     <?php if ($is_date && !empty($date)) { ?>
                         <span class="c-news-details__date">
