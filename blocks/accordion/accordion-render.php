@@ -39,9 +39,9 @@ $settings = get_field('settings') ?? null;
                                 <span class="c-accordion-card__headline o-headline --h3 --span">
                                     <?php echo $accordion_headline; ?>
                                 </span>
-                                <span class="c-accordion-card__icon-wrapper c-icon-button">
+                                <span class="c-accordion-card__icon-wrapper >
                                     <?php echo oo_get_icon(
-                                        'chevron-down',
+                                        'chevron-right',
                                         true,
                                         [
                                             'class' =>
