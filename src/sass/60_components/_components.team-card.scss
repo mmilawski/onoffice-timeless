@@ -7,24 +7,7 @@
   overflow: hidden;
   background-color: var(--oo-color-primary);
 
-  @include hover-focus-active() {
-    @include media-breakpoint-up(xl) {
-      #{$c-team-card}__overlay {
-        transform: translateY(0);
-      }
-      #{$c-team-card}__header {
-        padding-bottom: 0.25rem;
-      }
-      #{$c-team-card}__icon {
-        &.--less {
-          display: flex;
-        }
-        &.--more {
-          display: none;
-        }
-      }
-    }
-  }
+  // Removed hover state
 
   &__picture {
     height: auto;
@@ -36,54 +19,21 @@
 
   &__overlay {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: var(--oo-color-transparent-bg-80);
-
-    @include media-breakpoint-up(xl) {
-      transform: translateY(100%);
-      transition: transform 0.25s ease-in-out;
-    }
-
-    &:not(:has(#{$c-team-card}__job)) {
-      #{$c-team-card}__header {
-        padding-bottom: 1rem;
-      }
-    }
-  }
-
-  &__header {
-    position: absolute;
-    top: 0;
-    width: calc(100% - 3rem); // 100% - 48px for left and right margin
-    margin: 0 1.5rem; // 24px margin left and right
-    margin-bottom: 1.5rem;
-    padding: 1rem 1.5rem; // 16px vertical, 24px horizontal padding
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    background-color: var(--oo-color-transparent-bg-80);
-    transform: translateY(-100%);
-    transition: transform 0.25s ease-in-out;
-
-    @include media-breakpoint-up(xl) {
-      min-height: 7.5rem;
-    }
-  }
-
-  &__content {
+    bottom: 1.5rem; // 24px from bottom
+    left: 1.5rem; // 24px from left
+    right: 1.5rem; // 24px from right
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-    padding: 0 1.5rem 1rem;
+    gap: 1rem;
+    background-color: var(--oo-color-transparent-bg-80);
+    padding: 1.5rem;
   }
 
   &__icon {
-    display: none;
-    margin-left: 1rem;
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 1;
     transition: all 0.25s ease-in-out;
 
     &.c-button {
@@ -121,36 +71,69 @@
       }
     }
 
-    &.--more,
+    &.--more {
+      display: flex;
+    }
     &.--less {
       display: none;
     }
+  }
 
-    @include media-breakpoint-up(xl) {
-      display: flex;
-
-      &.--more {
-        display: flex;
-
-        &.--visible {
-          display: flex;
-        }
-      }
+  @include hover-focus-active() {
+    #{$c-team-card}__icon {
       &.--less {
-        &.--visible {
-          display: flex;
-        }
+        display: flex;
+      }
+      &.--more {
         display: none;
       }
     }
+  }
 
-    @include hover-focus-active() {
-      .c-button {
-        background-color: var(--oo-color-text);
-        color: var(--oo-color-bg);
+  &__row {
+    color: var(--oo-color-text);
+
+    &.--job {
+      font-family: $font-family-text-bold;
+      font-weight: $font-weight-text-bold;
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+      
+      @include media-breakpoint-up(xl) {
+        font-size: 1.5rem;
+        line-height: 2rem;
       }
     }
+
+    &.--name {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    &.--rating {
+      text-align: center;
+    }
+
+    &.--contact {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    &.--social {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    &.--action {
+      display: flex;
+      justify-content: flex-start;
+    }
   }
+
+  // Removed icon styles as they're no longer needed
 
   &__name {
     color: var(--oo-color-text);
@@ -205,7 +188,17 @@
   }
 
   &__button {
-    margin-top: 1rem;
+    padding: 0;
+    background: none !important;
+    border: none;
+    color: var(--oo-color-text);
+    text-decoration: underline;
+    font-size: inherit;
+    line-height: inherit;
+    
+    &:hover {
+      opacity: 0.8;
+    }
   }
 
   &.--on-bg-light {

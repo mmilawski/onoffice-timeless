@@ -119,52 +119,53 @@ if ($rating_provider === 'google') {
         <div class="c-team-card__picture"></div>
     <?php } ?>
     <div class="c-team-card__overlay">
-        <div class="c-team-card__header">
+        <div class="c-team-card__icon c-button --only-icon --more">
+            <span class="c-button__icon --plus">
+                <?php oo_get_icon('plus'); ?>
+            </span>
+        </div>
+        <div class="c-team-card__icon c-button --only-icon --less">
+            <span class="c-button__icon --minus">    
+                <?php oo_get_icon('minus'); ?>
+            </span>
+        </div>
+
+        <?php if (!empty($job)) { ?>
+            <div class="c-team-card__row --job">
+                <p id="desc-<?php echo $post_id; ?>" class="c-team-card__job"><?php echo $job; ?></p>
+            </div>
+        <?php } ?>
+
+        <div class="c-team-card__row --name">
             <?php if (!empty($name)) { ?>
                 <p id="name-<?php echo $post_id; ?>" class="c-team-card__name"><?php echo $name; ?></p>
             <?php } ?>
-
-            <?php if (
-                !empty($job) ||
-                !empty($contact['phone']) ||
-                !empty($contact['mobile']) ||
-                !empty($contact['fax']) ||
-                !empty($contact['email']) ||
-                !empty($card['languages']) ||
-                !empty($networks) ||
-                (!empty($card['rating_provider']) &&
-                    $card['rating_provider'] !== 'none') ||
-                (!empty($wysiwyg) && $is_description)
-            ) { ?>
-                <div class="c-team-card__icon c-button --only-icon --more">
-                    <span class="c-button__icon --plus">
-                        <?php oo_get_icon('plus'); ?>
-                    </span>
-                </div>
-                <div class="c-team-card__icon c-button --only-icon --less">
-                    <span class="c-button__icon --minus">    
-                        <?php oo_get_icon('minus'); ?>
-                    </span>
-                </div>
-            <?php } ?>
         </div>
 
+        <?php if (!empty($card['rating_provider']) && $card['rating_provider'] !== 'none'): ?>
+            <div class="c-team-card__row --rating">
+                <?php oo_get_template('components', '', 'component-stars', [
+                    'rating' => $rating,
+                    'size' => 'small',
+                    'light_empty_stars' => true,
+                ]); ?>
+                <?php if ($rating_provider === 'google' || ($rating_provider === 'proven_expert' && $proven_expert_url)): ?>
+                    <a href="<?php echo esc_url($rating_provider === 'google' ? $place_id_url : $proven_expert_url); ?>" 
+                       target="_blank" class="--text-color">
+                        <?php esc_html_e('Zu den Bewertungen', 'oo_theme'); ?>
+                    </a>
+                <?php endif; ?>
+            </div>
+        <?php endif; ?>
+
         <?php if (
-            !empty($job) ||
             !empty($contact['phone']) ||
             !empty($contact['mobile']) ||
             !empty($contact['fax']) ||
             !empty($contact['email']) ||
-            !empty($card['languages']) ||
-            !empty($networks) ||
-            (!empty($card['rating_provider']) &&
-                $card['rating_provider'] !== 'none') ||
-            (!empty($wysiwyg) && $is_description)
+            !empty($card['languages'])
         ) { ?>
-            <div class="c-team-card__content">
-                <?php if (!empty($job)) { ?>
-                    <p id="desc-<?php echo $post_id; ?>" class="c-team-card__job"><?php echo $job; ?></p>
-                <?php } ?>
+            <div class="c-team-card__row --contact">
                 <?php if (
                     !empty($card['rating_provider']) &&
                     $card['rating_provider'] !== 'none'
@@ -306,34 +307,38 @@ if ($rating_provider === 'google') {
                                 ); ?>
                             </p>
                         <?php endif; ?>
-                        <?php if (!empty($networks)): ?>
-                            <?php oo_get_template(
-                                'components',
-                                '',
-                                'component-social-media',
-                                [
-                                    'networks' => $networks,
-                                    'additional_container_class' =>
-                                        'c-team-card__contact --is-networks',
-                                ],
-                            ); ?>
-                        <?php endif; ?>
-                    </div>
+                            </div>
                 <?php } ?>
+            </div>
+        <?php } ?>
 
-                <?php if (!empty($wysiwyg) && $is_description) { ?>
-                    <button class="c-team-card__button c-button --ghost --has-icon <?php echo $bg_color
-                        ? '--on-' . $bg_color
-                        : ''; ?> --open-popup" data-popup="team-<?php echo $post_id; ?>" aria-haspopup="dialog" aria-controls="team-<?php echo $post_id; ?>">
-                        <span class="c-button__text"><?php esc_html_e(
-                            'Mehr erfahren',
-                            'oo_theme',
-                        ); ?></span>
-                        <span class="c-button__icon --arrow-right"><?php oo_get_icon(
-                            'arrow-right',
-                        ); ?></span>
-                    </button>
-                <?php } ?>
+        <?php if (!empty($networks)): ?>
+            <div class="c-team-card__row --social">
+                <?php oo_get_template(
+                    'components',
+                    '',
+                    'component-social-media',
+                    [
+                        'networks' => $networks,
+                        'additional_container_class' => 'c-team-card__social-links',
+                    ],
+                ); ?>
+            </div>
+        <?php endif; ?>
+
+        <?php if (!empty($wysiwyg) && $is_description) { ?>
+            <div class="c-team-card__row --action">
+                <button class="c-team-card__button c-button --ghost --has-icon <?php echo $bg_color
+                    ? '--on-' . $bg_color
+                    : ''; ?> --open-popup" data-popup="team-<?php echo $post_id; ?>" aria-haspopup="dialog" aria-controls="team-<?php echo $post_id; ?>">
+                    <span class="c-button__text"><?php esc_html_e(
+                        'Mehr erfahren',
+                        'oo_theme',
+                    ); ?></span>
+                    <span class="c-button__icon --arrow-right"><?php oo_get_icon(
+                        'arrow-right',
+                    ); ?></span>
+                </button>
             </div>
         <?php } ?>
     </div>
