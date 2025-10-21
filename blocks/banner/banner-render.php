@@ -220,9 +220,10 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
                             </div> <!-- end of c-banner__container -->
                         <?php endif; ?>
                         <!-- -->
-                        <div class="c-banner__media --content-is-<?php echo $slide_settings[
-                            'position_content'
-                        ]; ?>">
+                        <div class="c-banner__media<?php if ($type != 'none') {
+                            echo ' --content-is-' .
+                                $slide_settings['position_content'];
+                        } ?>">
                             <?php if (
                                 !empty($image) &&
                                 $background == 'image'
