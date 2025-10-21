@@ -341,20 +341,6 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
 
         <?php if ($slide_count > 1) { ?>
             <div class="c-slider__controls-container o-container">
-                <div class="splide__arrows">
-                    <button class="c-slider__arrow c-icon-button c-slider__arrow--prev splide__arrow splide__arrow--prev">
-                        <span class="u-screen-reader-only"><?php esc_html_e(
-                            'Vorheriges',
-                            'oo_theme',
-                        ); ?></span>
-                        <?php echo oo_get_icon('chevron-left', true, [
-                            'class' =>
-                                'c-slider__icon c-icon-button__icon splide__icon',
-                        ]); ?>
-                    </button>
-                </div>
-            
-                
                 <div class="c-slider__controls splide__controls">
                     <ul class="c-slider__pagination splide__pagination"></ul>
                     <?php if ($autoslide) { ?>
@@ -382,7 +368,17 @@ $slide_speed = intval(get_field('slide_speed') ?? 1000);
                         </button>
                     <?php } ?> <!-- end of if autoslide-->
                 </div> <!-- end of slider controls -->
-                <div class="splide__arrows">
+                <div class="c-slider__arrows splide__arrows">
+                    <button class="c-slider__arrow c-icon-button c-slider__arrow--prev splide__arrow splide__arrow--prev">
+                        <span class="u-screen-reader-only"><?php esc_html_e(
+                            'Vorheriges',
+                            'oo_theme',
+                        ); ?></span>
+                        <?php echo oo_get_icon('chevron-left', true, [
+                            'class' =>
+                                'c-slider__icon c-icon-button__icon splide__icon',
+                        ]); ?>
+                    </button>
                     <button class="c-slider__arrow c-icon-button c-slider__arrow--next splide__arrow splide__arrow--next">
                         <span class="u-screen-reader-only"><?php esc_html_e(
                             'Nächstes',
