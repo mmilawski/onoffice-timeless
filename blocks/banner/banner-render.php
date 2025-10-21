@@ -20,9 +20,26 @@ $pause_on_hover = filter_var(
     FILTER_VALIDATE_BOOLEAN,
 );
 $slide_speed = intval(get_field('slide_speed') ?? 1000);
+
+// --- NEW LOGIC START ---
+// Check if all slides have content type 'none'
+$all_slides_are_none = true; // Assume all slides are 'none' by default
+if ($slide_count > 0) {
+    foreach ($slider as $slide) {
+        $type = $slide['type'] ?? null;
+        if ($type !== 'none') {
+            $all_slides_are_none = false; // Found a slide with content
+            break; // No need to check the rest
+        }
+    }
+}
+
+// Prepare the class string to be added to the banner
+$banner_content_class = $all_slides_are_none ? ' --content-none' : '';
+// --- NEW LOGIC END ---
 ?>
 
-<div <?php oo_block_id($block); ?> class="c-banner --<?php echo $bg_color; ?>">
+<div <?php oo_block_id($block); ?> class="c-banner --<?php echo $bg_color; ?><?php echo $banner_content_class; ?>">
 
 <?php if ($slide_count > 1) { ?>
     <div class="c-banner__slider c-slider splide --auto-height --is-banner-slider" data-splide='{

@@ -4,6 +4,14 @@
   position: relative;
   background-color: var(--oo-color-bg);
 
+  // none of the slides have content
+  &.--content-none {
+    #{$c-banner}__media,
+    #{$c-banner}__slide {
+      max-height: 60vh;
+    }
+  }
+
   &__slide {
     position: relative;
     display: flex;
@@ -12,13 +20,15 @@
     width: 100%;
 
     @include media-breakpoint-up(lg) {
-      min-height: 70vh;
+      min-height: 60vh;
       justify-content: center;
-      padding-block: $desktop-section-padding-top
-        $desktop-section-padding-bottom;
+      &:not(.--content-none) {
+        padding-block: $desktop-section-padding-top
+          $desktop-section-padding-bottom;
+      }
 
       .--is-header-style-transparent & {
-        min-height: calc(70vh + var(--header-height));
+        min-height: calc(60vh + var(--header-height));
       }
 
       &.--content-none {
@@ -245,14 +255,6 @@
     padding-top: $mobile-section-padding-top;
     @include media-breakpoint-up(xl) {
       padding-top: $desktop-section-padding-top;
-    }
-  }
-
-  & + & {
-    #{$c-banner}__slide {
-      @include media-breakpoint-up(xl) {
-        padding-top: $desktop-section-padding-top;
-      }
     }
   }
 }
