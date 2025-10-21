@@ -2,11 +2,11 @@
   $accordion: &;
   width: 100%;
 
-  [class^="o-col-"],
-  [class*=" o-col-"],
+  [class^='o-col-'],
+  [class*=' o-col-'],
   .o-col {
-    padding-left: 0 ;
-    padding-right: 0 ;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   &__container {

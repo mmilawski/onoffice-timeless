@@ -6,7 +6,6 @@
   flex-direction: column;
   padding: 1.5rem;
 
-
   &__icon-wrapper {
     display: grid;
     margin-right: 0;
@@ -78,55 +77,30 @@
   }
   background-color: var(--oo-color-mix-bg-contrast-05);
   .--bg-light & {
-      color: var(--oo-color-light-text, var(--oo-color-text));
-      background-color: var(
-        --oo-color-light-mix-bg-contrast-05,
-        var(--oo-color-mix-bg-contrast-05)
-      );
-    }
+    background-color: var(
+      --oo-color-light-mix-bg-contrast-05,
+      var(--oo-color-mix-bg-contrast-05)
+    );
+  }
 
-    .--bg-dark & {
-       color: var(--oo-color-dark-text, var(--oo-color-text));
-      background-color: var(
-        --oo-color-dark-mix-bg-contrast-05,
-        var(--oo-color-mix-bg-contrast-05)
-      );
-    }
+  .--bg-dark & {
+    background-color: var(
+      --oo-color-dark-mix-bg-contrast-05,
+      var(--oo-color-mix-bg-contrast-05)
+    );
+  }
 
-    .--bg-primary & {
-      color: var(--oo-color-primary-text, var(--oo-color-text));
-      background-color: var(
-        --oo-color-primary-mix-bg-contrast-05,
-        var(--oo-color-mix-bg-contrast-05)
-      );
-    }
+  .--bg-primary & {
+    background-color: var(
+      --oo-color-primary-mix-bg-contrast-05,
+      var(--oo-color-mix-bg-contrast-05)
+    );
+  }
 
-    .--bg-secondary & {
-      color: var(--oo-color-secondary-text, var(--oo-color-text));
-      background-color: var(
-        --oo-color-secondary-mix-bg-contrast-05,
-        var(--oo-color-mix-bg-contrast-05)
-      );
-    }
-  /*--bg-secondary & {
-    border-color: var(--oo-color-secondary-mix-bg-contrast-50);
-    #{$c-accordion-card}__title {
-      @include visited-active() {
-        #{$c-accordion-card}__headline {
-          color: var(--oo-color-secondary-primary, var(--oo-color-primary));
-        }
-      }
-      @include hover-focus() {
-        #{$c-accordion-card}__headline {
-          color: var(--oo-color-secondary-primary, var(--oo-color-primary));
-        }
-      }
-      @include focus-visible() {
-        outline-color: var(
-          --oo-color-secondary-primary,
-          var(--oo-color-primary)
-        );
-      }
-    }
-  }*/
+  .--bg-secondary & {
+    background-color: var(
+      --oo-color-secondary-mix-bg-contrast-05,
+      var(--oo-color-mix-bg-contrast-05)
+    );
+  }
 }
