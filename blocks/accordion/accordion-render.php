@@ -40,10 +40,10 @@ $header_level = !empty($headline['text'])
                         $accordion_headline = $card['headline'] ?? ''; ?>
                         <details class="c-accordion-card">
                             <summary class="c-accordion-card__title">
-                                <?php echo "<h{$header_level} "
-                                    . 'class="c-accordion-card__headline o-headline --h3 --span">'
-                                    . esc_html($accordion_headline)
-                                    . "</h{$header_level}>"; ?>
+                                <?php echo "<h{$header_level} " .
+                                    'class="c-accordion-card__headline o-headline --h3 --span">' .
+                                    esc_html($accordion_headline) .
+                                    "</h{$header_level}>"; ?>
                                 <span class="c-accordion-card__icon-wrapper c-icon-button">
                                     <?php echo oo_get_icon(
                                         'chevron-down',

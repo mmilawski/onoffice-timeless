@@ -121,10 +121,10 @@ $uniqid = 'team-' . uniqid();
             <div class="c-team-card__picture"></div>
         <?php } ?>
         <?php if ($name) { ?>
-            <?php echo "<h{$header_level} "
-                . 'class="c-team-card__name o-headline --h3">'
-                . $name
-                . "</h{$header_level}>"?>
+            <?php echo "<h{$header_level} " .
+                'class="c-team-card__name o-headline --h3">' .
+                $name .
+                "</h{$header_level}>"; ?>
         <?php } ?>
         <?php if ($job) { ?>
             <p class="c-team-card__job"><?php echo $job; ?></p>
@@ -141,7 +141,10 @@ $uniqid = 'team-' . uniqid();
                 <?php if ($rating_provider === 'google') { ?>
                             <a class="c-team-card__rating-link" href="<?php echo esc_url(
                                 $place_id_url,
-                            ); ?>" target="_blank">
+                            ); ?>" rel="noopener noreferrer" aria-label="<?php esc_attr_e(
+    'Bewertungen ansehen (Öffnet in neuem Tab)',
+    'oo_theme',
+); ?>" target="_blank">
                             <span class="c-team-card__rating-text --desktop"><?php esc_html_e(
                                 'Bewertungen ansehen',
                                 'oo_theme',
@@ -158,7 +161,10 @@ $uniqid = 'team-' . uniqid();
                         ) { ?>
                             <a class="c-team-card__rating-link" href="<?php echo esc_url(
                                 $proven_expert_url,
-                            ); ?>" target="_blank">
+                            ); ?>" rel="noopener noreferrer" aria-label="<?php esc_attr_e(
+    'Bewertungen ansehen (Öffnet in neuem Tab)',
+    'oo_theme',
+); ?>" target="_blank">
                             <span class="c-team-card__rating-text --desktop"><?php esc_html_e(
                                 'Bewertungen ansehen',
                                 'oo_theme',

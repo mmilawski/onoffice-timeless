@@ -397,10 +397,10 @@ while ($current_property = $pEstatesClone->estateIterator()):
             </div>
         <?php endif; ?>
         <?php if ($current_property['objekttitel']) { ?>
-            <?php echo "<h{$header_level} "
-                . 'class="c-accordion-card__headline o-headline --h3 --span">'
-                . $current_property['objekttitel']
-                . "</h{$header_level}>"; ?>
+            <?php echo "<h{$header_level} " .
+                'class="c-accordion-card__headline o-headline --h3 --span">' .
+                $current_property['objekttitel'] .
+                "</h{$header_level}>"; ?>
         <?php } ?>
         <?php if ($is_fields) { ?>
             <div class="c-property-card__features c-item-features">

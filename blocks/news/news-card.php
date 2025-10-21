@@ -153,10 +153,10 @@ $link_title_more = sprintf(
     <?php if (!empty($title) || !empty($excerpt) || !empty($link)) { ?>
 	    <div class="c-news-card__content">
             <?php if (!empty($title)) { ?>
-                <?php echo "<h{$header_level} "
-                    . 'class="c-news-card__title o-headline --h3">'
-                    . $title
-                    . "</h{$header_level}>"?>
+                <?php echo "<h{$header_level} " .
+                    'class="c-news-card__title o-headline --h3">' .
+                    $title .
+                    "</h{$header_level}>"; ?>
             <?php } ?>
 			<?php if (!empty($excerpt)) { ?>
 				<div class="c-news-card__text o-text --is-wysiwyg">

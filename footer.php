@@ -170,7 +170,10 @@ $company_name = $company['name'] ?? (get_bloginfo('name') ?? null);
                                 role="button"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                aria-label="<?php esc_attr_e('Barriere gefunden? (Öffnet in neuem Tab)', 'oo_theme'); ?>"
+                                aria-label="<?php esc_attr_e(
+                                    'Barriere gefunden? (Öffnet in neuem Tab)',
+                                    'oo_theme',
+                                ); ?>"
                                 href="<?= esc_url($barrier_found_url) ?>">
                                     <?php esc_html_e(
                                         'Barriere gefunden?',
