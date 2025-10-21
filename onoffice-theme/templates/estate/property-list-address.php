@@ -50,7 +50,7 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
 // set header level for submodule
 $headline = get_field('headline');
 if(!empty($headline['text'])) {
-    $size = (int)mb_substr($headline['size'], 1, 2) ?? 1;
+    $size = sanitize_header_level($headline['size']);
     set_current_header_level($size);
 }
 ?>

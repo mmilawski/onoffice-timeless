@@ -53,7 +53,7 @@ $team_query = new WP_Query($query_args);
 
 // set header level for submodule
 if(!empty($headline['text'])) {
-    $size = (int)mb_substr($headline['size'], 1, 2) ?? 1;
+    $size = sanitize_header_level($headline['size']);
     set_current_header_level($size);
 }
 ?>

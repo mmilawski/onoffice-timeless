@@ -8,7 +8,7 @@ $accordion = get_field('accordion') ?? null;
 $settings = get_field('settings') ?? null;
 
 $header_level = !empty($headline['text'])
-    ? (int)mb_substr($headline['size'], 1, 2) + 1 ?? 2
+    ? sanitize_header_level($headline['size'])
     : 2;
 ?>
 
