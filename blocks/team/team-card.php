@@ -3,13 +3,13 @@
 $post_id = get_the_ID() ?? null;
 
 // Content
-$card = get_field('team', $post_id) ?? null;
-$image = $card['image'] ?? null;
+$card = get_field('team', $post_id) ?? [];
+$image = $card['image'] ?? [];
 $name = $card['name'] ?? null;
 $job = $card['job'] ?? null;
 $description = $card['description'] ?? [];
 $wysiwyg = $description['wysiwyg'] ?? null;
-$contact = $card['contact'] ?? null;
+$contact = $card['contact'] ?? [];
 $networks = $card['networks'] ?? [];
 
 // From team block
@@ -28,13 +28,13 @@ $slider = get_field('slider') ?? [];
 $is_slider = filter_var($slider['slider'] ?? null, FILTER_VALIDATE_BOOLEAN);
 
 // Image width
-$image_width_xs = '544';
+$image_width_xs = '543';
 $image_width_sm = '512';
 $image_width_md = '330';
 $image_width_lg = '448';
-$image_width_xl = '352';
-$image_width_xxl = '416';
-$image_width_xxxl = '460';
+$image_width_xl = '450';
+$image_width_xxl = '343';
+$image_width_xxxl = '378';
 
 $rating_provider = $card['rating_provider'] ?? null;
 $rating = 0.0;
@@ -69,255 +69,272 @@ if ($rating_provider === 'google') {
         }
     }
 }
-
-$uniqid = 'team-' . uniqid();
 ?>
 
-<div class="c-team-card --on-<?php echo $bg_color; ?> <?php if ($is_slider) {
+<article role="group" <?php if (!empty($name)) {
+    echo 'aria-labelledby="name-' . $post_id . '"';
+} ?> <?php if (!empty($job)) {
+     echo 'aria-describedby="desc-' . $post_id . '"';
+ } ?> class="c-team-card --on-<?php echo $bg_color; ?> <?php if ($is_slider) {
      echo '--on-slider c-slider__slide splide__slide';
  } ?>">
-    <div class="c-team-card__content">
-        <?php if (!empty($image)) { ?>
-            <?php oo_get_template('components', '', 'component-image', [
-                'image' => $image,
-                'picture_class' => 'c-team-card__picture o-picture',
-                'image_class' => 'c-team-card__image o-image',
-                'additional_cloudimg_params' => '&func=crop&gravity=face',
-                'dimensions' => [
-                    '575' => [
-                        'w' => $image_width_xs,
-                        'h' => $image_width_xs,
-                    ],
-                    '1600' => [
-                        'w' => $image_width_xxxl,
-                        'h' => $image_width_xxxl,
-                    ],
-                    '1400' => [
-                        'w' => $image_width_xxl,
-                        'h' => $image_width_xxl,
-                    ],
-                    '1200' => [
-                        'w' => $image_width_xl,
-                        'h' => $image_width_xl,
-                    ],
-                    '992' => [
-                        'w' => $image_width_lg,
-                        'h' => $image_width_lg,
-                    ],
-                    '768' => [
-                        'w' => $image_width_md,
-                        'h' => $image_width_md,
-                    ],
-                    '576' => [
-                        'w' => $image_width_sm,
-                        'h' => $image_width_sm,
-                    ],
+    <?php if (!empty($image)) { ?>
+        <?php oo_get_template('components', '', 'component-image', [
+            'image' => $image,
+            'picture_class' => 'c-team-card__picture o-picture',
+            'image_class' => 'c-team-card__image o-image',
+            'additional_cloudimg_params' => '&func=crop&gravity=face',
+            'dimensions' => [
+                '575' => [
+                    'w' => $image_width_xs,
+                    'h' => round(($image_width_xs * 4) / 3),
                 ],
-            ]); ?>
-        <?php } else { ?>
-            <div class="c-team-card__picture"></div>
-        <?php } ?>
-        <?php if ($name) { ?>
-            <p class="c-team-card__name o-headline --h3"><?php echo $name; ?></p>
-        <?php } ?>
-        <?php if ($job) { ?>
-            <p class="c-team-card__job"><?php echo $job; ?></p>
-        <?php } ?>
+                '1600' => [
+                    'w' => $image_width_xxxl,
+                    'h' => round(($image_width_xxxl * 4) / 3),
+                ],
+                '1400' => [
+                    'w' => $image_width_xxl,
+                    'h' => round(($image_width_xxl * 4) / 3),
+                ],
+                '1200' => [
+                    'w' => $image_width_xl,
+                    'h' => round(($image_width_xl * 4) / 3),
+                ],
+                '992' => [
+                    'w' => $image_width_lg,
+                    'h' => round(($image_width_lg * 4) / 3),
+                ],
+                '768' => [
+                    'w' => $image_width_md,
+                    'h' => round(($image_width_md * 4) / 3),
+                ],
+                '576' => [
+                    'w' => $image_width_sm,
+                    'h' => round(($image_width_sm * 4) / 3),
+                ],
+            ],
+        ]); ?>
+    <?php } else { ?>
+        <div class="c-team-card__picture"></div>
+    <?php } ?>
+    <div class="c-team-card__overlay">
+        <div class="c-team-card__header">
+            <?php if (
+                !empty($job) ||
+                !empty($contact['phone']) ||
+                !empty($contact['mobile']) ||
+                !empty($contact['fax']) ||
+                !empty($contact['email']) ||
+                !empty($card['languages']) ||
+                !empty($networks) ||
+                (!empty($card['rating_provider']) &&
+                    $card['rating_provider'] !== 'none') ||
+                (!empty($wysiwyg) && $is_description)
+            ) { ?>
+                <div class="c-team-card__icon c-button --only-icon --more">
+                    <span class="c-button__icon --plus">
+                        <?php oo_get_icon('plus'); ?>
+                    </span>
+                </div>
+                <div class="c-team-card__icon c-button --only-icon --less">
+                    <span class="c-button__icon --minus">    
+                        <?php oo_get_icon('minus'); ?>
+                    </span>
+                </div>
+            <?php } ?>
+
+            <?php if (!empty($name)) { ?>
+                <p id="name-<?php echo $post_id; ?>" class="c-team-card__name o-headline --h3"><?php echo $name; ?></p>
+            <?php } ?>
+        </div>
+
         <?php if (
-            !empty($card['rating_provider']) &&
-            $card['rating_provider'] !== 'none'
-        ): ?>
-            <div class="c-team-card__rating">
-                  <?php oo_get_template('components', '', 'component-stars', [
-                      'rating' => $rating,
-                      'light_empty_stars' => true,
-                  ]); ?>
-                <?php if ($rating_provider === 'google') { ?>
-                            <a class="c-team-card__rating-link" href="<?php echo esc_url(
+            !empty($job) ||
+            !empty($contact['phone']) ||
+            !empty($contact['mobile']) ||
+            !empty($contact['fax']) ||
+            !empty($contact['email']) ||
+            !empty($card['languages']) ||
+            !empty($networks) ||
+            (!empty($card['rating_provider']) &&
+                $card['rating_provider'] !== 'none') ||
+            (!empty($wysiwyg) && $is_description)
+        ) { ?>
+            <div class="c-team-card__content">
+                <?php if (!empty($job)) { ?>
+                    <p id="desc-<?php echo $post_id; ?>" class="c-team-card__job"><?php echo $job; ?></p>
+                <?php } ?>
+                <?php if (
+                    !empty($card['rating_provider']) &&
+                    $card['rating_provider'] !== 'none'
+                ): ?>
+                    <p class="c-team-card__contact --is-stars">
+                        <?php oo_get_template(
+                            'components',
+                            '',
+                            'component-stars',
+                            [
+                                'rating' => $rating,
+                                'size' => 'small',
+                                'light_empty_stars' => true,
+                            ],
+                        ); ?>
+                        <?php if ($rating_provider === 'google') { ?>
+                            <a href="<?php echo esc_url(
                                 $place_id_url,
-                            ); ?>" target="_blank">
-                            <span class="c-team-card__rating-text --desktop"><?php esc_html_e(
-                                'Bewertungen ansehen',
-                                'oo_theme',
-                            ); ?></span>
-                            <span class="c-team-card__rating-text --mobile"><?php esc_html_e(
-                                'Bewertungen',
-                                'oo_theme',
-                            ); ?></span>    
-                        </a>
+                            ); ?>" target="_blank"><?php esc_html_e(
+    'Zu den Bewertungen',
+    'oo_theme',
+); ?></a>
                         <?php } ?>
                         <?php if (
                             $rating_provider === 'proven_expert' &&
                             $proven_expert_url
                         ) { ?>
-                            <a class="c-team-card__rating-link" href="<?php echo esc_url(
+                            <a href="<?php echo esc_url(
                                 $proven_expert_url,
-                            ); ?>" target="_blank">
-                            <span class="c-team-card__rating-text --desktop"><?php esc_html_e(
-                                'Bewertungen ansehen',
-                                'oo_theme',
-                            ); ?></span>
-                            <span class="c-team-card__rating-text --mobile"><?php esc_html_e(
-                                'Bewertungen',
-                                'oo_theme',
-                            ); ?></span>    
-                            </a>
+                            ); ?>" target="_blank"><?php esc_html_e(
+    'Zu den Bewertungen',
+    'oo_theme',
+); ?></a>
                         <?php } ?>
-            </div>
-        <?php endif; ?>
-        <?php if (
-            !empty($card['languages']) ||
-            !empty($contact['phone']) ||
-            !empty($contact['mobile']) ||
-            !empty($contact['fax']) ||
-            !empty($networks) ||
-            !empty($contact['email'])
-        ) { ?>
-            <div class="c-team-card__contact-wrapper">
-                <?php if (!empty($card['languages'])) { ?>
-                    <p class="c-team-card__languages">
-                        <?php esc_html_e('Sprachen:', 'oo_theme'); ?> 
-                        <?php echo $card['languages']; ?>
                     </p>
+                <?php endif; ?>
+                <?php if (!empty($card['languages'])) { ?>
+                    <p class="c-team-card__languages"><?php echo $card[
+                        'languages'
+                    ]; ?></p>
                 <?php } ?>
-                <?php if ($contact['phone']): ?>
-                    <dl class="c-team-card__contact --is-phone">
-                        <dt class="c-team-card__contact-label"><?php esc_html_e(
-                            'Tel.:',
-                            'oo_theme',
-                        ); ?></dt>
-                        <dd class="c-team-card__contact-value"><?php oo_get_template(
-                            'components',
-                            '',
-                            'component-contact-numbers',
-                            [
-                                'number' => $contact['phone'],
-                                'country_code' => $contact['phone-country'],
-                                'additional_link_class' => $bg_color
-                                    ? '--text-color --on-' . $bg_color
-                                    : '--text-color',
-                                'aria-label' => esc_attr__(
-                                    'Telefonnummer %s anrufen',
-                                    'oo_theme',
-                                ),
-                            ],
-                        ); ?>
-                        </dd>
-                    </dl>
-                <?php endif; ?>
+                
+                <?php if (
+                    !empty($contact['phone']) ||
+                    !empty($contact['mobile']) ||
+                    !empty($contact['fax']) ||
+                    !empty($contact['email']) ||
+                    !empty($networks)
+                ) { ?>
+                    <div class="c-team-card__contact-wrapper">
+                        <?php if (!empty($contact['email'])): ?>
+                            <p class="c-team-card__contact --is-email">
+                                <?php oo_get_template(
+                                    'components',
+                                    '',
+                                    'component-email',
+                                    [
+                                        'email' => $contact['email'],
+                                        'additional_link_class' => $bg_color
+                                            ? '--is-underlined --text-color --on-' .
+                                                $bg_color
+                                            : '--is-underlined --text-color',
+                                        'aria-label' => sprintf(
+                                            esc_attr__(
+                                                'E-Mail senden an %s',
+                                                'oo_theme',
+                                            ),
+                                            $contact['email'],
+                                        ),
+                                    ],
+                                ); ?>
+                            </p>
+                        <?php endif; ?>
+                        <?php if (!empty($contact['phone'])): ?>
+                            <p class="c-team-card__contact --is-phone">
+                                <?php oo_get_template(
+                                    'components',
+                                    '',
+                                    'component-contact-numbers',
+                                    [
+                                        'number' => $contact['phone'],
+                                        'country_code' =>
+                                            $contact['phone-country'],
+                                        'additional_link_class' => $bg_color
+                                            ? '--is-underlined --text-color --on-' .
+                                                $bg_color
+                                            : '--is-underlined --text-color',
+                                        'aria-label' => esc_attr__(
+                                            'Telefonnummer %s anrufen',
+                                            'oo_theme',
+                                        ),
+                                    ],
+                                ); ?>
+                            </p>
+                        <?php endif; ?>
 
-                <?php if ($contact['mobile']): ?>
-                    <dl class="c-team-card__contact --is-mobile">
-                        <dt class="c-team-card__contact-label"><?php esc_html_e(
-                            'Mobile:',
-                            'oo_theme',
-                        ); ?></dt>
-                        <dd class="c-team-card__contact-value"><?php oo_get_template(
-                            'components',
-                            '',
-                            'component-contact-numbers',
-                            [
-                                'number' => $contact['mobile'],
-                                'country_code' => $contact['mobile-country'],
-                                'additional_link_class' => $bg_color
-                                    ? '--text-color --on-' . $bg_color
-                                    : '--text-color',
-                                'aria-label' => esc_attr__(
-                                    'Mobilnummer %s anrufen',
-                                    'oo_theme',
-                                ),
-                            ],
-                        ); ?>
-                        </dd>
-                    </dl>
-                <?php endif; ?>
+                        <?php if (!empty($contact['mobile'])): ?>
+                            <p class="c-team-card__contact --is-mobile">
+                                <?php oo_get_template(
+                                    'components',
+                                    '',
+                                    'component-contact-numbers',
+                                    [
+                                        'number' => $contact['mobile'],
+                                        'country_code' =>
+                                            $contact['mobile-country'],
+                                        'additional_link_class' => $bg_color
+                                            ? '--is-underlined --text-color --on-' .
+                                                $bg_color
+                                            : '--is-underlined --text-color',
+                                        'aria-label' => esc_attr__(
+                                            'Mobilnummer %s anrufen',
+                                            'oo_theme',
+                                        ),
+                                    ],
+                                ); ?>
+                            </p>
+                        <?php endif; ?>
 
-                <?php if ($contact['fax']): ?>
-                    <dl class="c-team-card__contact --is-fax">
-                        <dt class="c-team-card__contact-label"><?php esc_html_e(
-                            'Fax:',
-                            'oo_theme',
-                        ); ?></dt>
-                        <dd class="c-team-card__contact-value"><?php oo_get_template(
-                            'components',
-                            '',
-                            'component-contact-numbers',
-                            [
-                                'number' => $contact['fax'],
-                                'country_code' => $contact['fax-country'],
-                                'additional_link_class' => $bg_color
-                                    ? '--text-color --on-' . $bg_color
-                                    : '--text-color',
-                                'aria-label' => esc_attr__(
-                                    'Fax an %s senden',
-                                    'oo_theme',
-                                ),
-                            ],
-                        ); ?>
-                        </dd>
-                    </dl>
-                <?php endif; ?>
+                        <?php if (!empty($contact['fax'])): ?>
+                            <p class="c-team-card__contact --is-fax">
+                                <?php oo_get_template(
+                                    'components',
+                                    '',
+                                    'component-contact-numbers',
+                                    [
+                                        'number' => $contact['fax'],
+                                        'country_code' =>
+                                            $contact['fax-country'],
+                                        'additional_link_class' => $bg_color
+                                            ? '--is-underlined --text-color --on-' .
+                                                $bg_color
+                                            : '--is-underlined --text-color',
+                                        'aria-label' => esc_attr__(
+                                            'Fax an %s senden',
+                                            'oo_theme',
+                                        ),
+                                    ],
+                                ); ?>
+                            </p>
+                        <?php endif; ?>
+                        <?php if (!empty($networks)): ?>
+                            <?php oo_get_template(
+                                'components',
+                                '',
+                                'component-social-media',
+                                [
+                                    'networks' => $networks,
+                                    'additional_container_class' =>
+                                        'c-team-card__contact --is-networks',
+                                ],
+                            ); ?>
+                        <?php endif; ?>
+                    </div>
+                <?php } ?>
 
-                <?php if ($contact['email']): ?>
-                    <dl class="c-team-card__contact --is-email">
-                        <dt class="c-team-card__contact-label"><?php esc_html_e(
-                            'E-Mail:',
+                <?php if (!empty($wysiwyg) && $is_description) { ?>
+                    <button class="c-team-card__button c-button --ghost --has-icon <?php echo $bg_color
+                        ? '--on-' . $bg_color
+                        : ''; ?> --open-popup" data-popup="team-<?php echo $post_id; ?>" aria-haspopup="dialog" aria-controls="team-<?php echo $post_id; ?>">
+                        <span class="c-button__text"><?php esc_html_e(
+                            'Mehr erfahren',
                             'oo_theme',
-                        ); ?>
-                        <dd class="c-team-card__contact-value"><?php oo_get_template(
-                            'components',
-                            '',
-                            'component-email',
-                            [
-                                'email' => $contact['email'],
-                                'additional_link_class' => $bg_color
-                                    ? '--text-color --on-' . $bg_color
-                                    : '--text-color',
-                                'aria-label' => sprintf(
-                                    esc_attr__(
-                                        'E-Mail senden an %s',
-                                        'oo_theme',
-                                    ),
-                                    esc_html($contact['email']),
-                                ),
-                            ],
-                        ); ?>
-                        </dd>
-                    </dl>
-                <?php endif; ?>
+                        ); ?></span>
+                        <span class="c-button__icon --arrow-right"><?php oo_get_icon(
+                            'arrow-right',
+                        ); ?></span>
+                    </button>
+                <?php } ?>
             </div>
         <?php } ?>
-        <?php if (!empty($networks && count(array_filter($networks)) !== 0)): ?>
-                <div class="c-team-card__contact --is-networks">
-                    <?php oo_get_template(
-                        'components',
-                        '',
-                        'component-social-media',
-                        [
-                            'networks' => $networks,
-                        ],
-                    ); ?>
-                </div>
-        <?php endif; ?>
     </div>
-    <?php if (!empty($description['wysiwyg']) && $is_description) { ?>
-        <div class="c-team-card__description-wrapper">
-            <div class="c-team-card__description o-text --is-wysiwyg" id="<?php echo $uniqid; ?>">
-                <?php echo $description['wysiwyg']; ?>
-            </div>
-
-            <button class="c-team-card__more c-read-more" 
-                data-open-text="<?php esc_html_e(
-                    'Mehr anzeigen',
-                    'oo_theme',
-                ); ?>"
-                data-close-text="<?php esc_html_e(
-                    'Weniger anzeigen',
-                    'oo_theme',
-                ); ?>"
-                aria-expanded="false" aria-controls="<?php echo $uniqid; ?>">
-                <?php echo esc_html__('Mehr anzeigen', 'oo_theme'); ?>
-            </button>
-        </div>
-    <?php } ?>
-</div>
+</article>
