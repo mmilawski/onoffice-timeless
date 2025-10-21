@@ -88,13 +88,13 @@ if ($width_container == 'content-width') {
                         [
                             'headline' => $headline,
                             'additional_headline_class' =>
-                                'c-media__headline o-col-12 o-col-xl-8',
+                                'c-media__headline u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8',
                         ],
                     ); ?>
                 <?php } ?>
 
                 <?php if (!empty($text['wysiwyg'])) { ?>
-                    <div class="c-media__text o-text --is-wysiwyg o-col-12 o-col-xl-8">
+                    <div class="c-media__text o-text --is-wysiwyg u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">
                         <?php echo $text['wysiwyg']; ?>
                     </div>
                 <?php } ?>
@@ -110,7 +110,7 @@ if ($width_container == 'content-width') {
                                 ? '--on-' . $bg_color
                                 : '',
                             'additional_container_class' =>
-                                'c-media__buttons o-col-12 o-col-xl-8',
+                                'c-media__buttons u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8',
                         ],
                     ); ?>
                 <?php } ?>
@@ -120,7 +120,7 @@ if ($width_container == 'content-width') {
                     <?php oo_get_template('components', '', 'component-image', [
                         'image' => $image,
                         'picture_class' =>
-                            'c-media__picture o-picture o-col-12 o-col-xl-8',
+                            'c-media__picture o-picture u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8',
                         'image_class' =>
                             'c-media__image o-image --' . $image_crop,
                         'additional_cloudimg_params' =>
@@ -150,11 +150,11 @@ if ($width_container == 'content-width') {
                         ],
                     ]); ?>
                 <?php } elseif ($type == 'image') {
-                    echo '<div class="c-media__placeholder c-placeholder o-col-12 o-col-xl-8"></div>';
+                    echo '<div class="c-media__placeholder c-placeholder u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8"></div>';
                 }
 
                 if (!empty($video) && $type == 'video') { ?>
-                    <div class="c-media__video <?php echo $video_class; ?> o-col-12 o-col-xl-8">
+                    <div class="c-media__video <?php echo $video_class; ?> u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">
                         <?php if (!empty($thumbnail)): ?>
                             <div class="c-media__thumbnail-wrapper">
                                 <?php oo_get_template(
@@ -254,13 +254,13 @@ if ($width_container == 'content-width') {
                         [
                             'headline' => $headline,
                             'additional_headline_class' =>
-                                'c-media__headline o-col-12 o-col-xl-8',
+                                'c-media__headline u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8',
                         ],
                     ); ?>
                 <?php } ?>
 
                 <?php if (!empty($text['wysiwyg'])) { ?>
-                    <div class="c-media__text o-text --is-wysiwyg o-col-12 o-col-xl-8">
+                    <div class="c-media__text o-text --is-wysiwyg u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">
                         <?php echo $text['wysiwyg']; ?>
                     </div>
                 <?php } ?>
@@ -279,7 +279,7 @@ if ($width_container == 'content-width') {
                                         ? '--on-' . $bg_color
                                         : '',
                                     'additional_container_class' =>
-                                        'c-media__buttons o-col-12 o-col-xl-8',
+                                        'c-media__buttons u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8',
                                 ],
                             ); ?>
                         </div>
