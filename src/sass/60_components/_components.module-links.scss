@@ -15,18 +15,23 @@
 
   &__link {
     .--is-header & {
+      padding: 0.5rem 0.75rem;
       @include media-breakpoint-up(xxl) {
         display: inline;
-        margin-right: 1.5rem;
-
-        &:last-child {
-          margin-right: 0;
-        }
+        padding: 0;
       }
     }
   }
 
   &.--is-header {
+    display: inline-flex;
+    gap: 0;
+    width: auto;
+    padding: 0;
+
+    @include media-breakpoint-up(xxl) {
+      gap: 1.5rem;
+    }
   }
   &.--is-footer {
   }

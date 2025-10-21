@@ -16,9 +16,9 @@
   &__content {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    @include media-breakpoint-up(xl) {
-      gap: 2rem;
+    gap: 2.5rem;
+    @include media-breakpoint-up(lg) {
+      padding-top: 5rem;
     }
   }
 
@@ -29,12 +29,6 @@
   }
 
   &__picture {
-    order: -1;
-
-    @include media-breakpoint-up(xl) {
-      order: unset;
-    }
-
     .--is-icon & {
       text-align: center;
     }
@@ -48,6 +42,7 @@
     width: 100%;
     height: auto;
     aspect-ratio: 4 / 3;
+    border: 2px solid var(--oo-color-bg);
 
     .--is-icon & {
       width: auto;
@@ -58,12 +53,7 @@
   }
 
   &__video {
-    order: -1;
     width: 100%;
-
-    @include media-breakpoint-up(xl) {
-      order: unset;
-    }
   }
 
   &__thumbnail-wrapper {
@@ -79,6 +69,7 @@
 
   &__thumbnail-picture {
     overflow: hidden;
+    border: 2px solid var(--oo-color-bg);
   }
 
   &__thumbnail-image {

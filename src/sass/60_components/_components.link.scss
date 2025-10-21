@@ -44,12 +44,6 @@
   }
 
   &.--on-bg-header {
-    @include media-breakpoint-down(xxl) {
-      &:first-of-type {
-        padding-left: 0;
-      }
-      padding: 0.5rem;
-    }
     color: var(--oo-color-header-mix-text-contrast-20);
 
     @include hover-focus-active() {

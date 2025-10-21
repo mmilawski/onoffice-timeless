@@ -16,12 +16,18 @@
   }
 
   &__row {
-    justify-content: center;
+    justify-content: flex-start;
+    gap: 1.5rem;
+
     .--text-align-left & {
     }
     .--text-align-center & {
       justify-content: center;
       text-align: center;
+    }
+
+    @include media-breakpoint-up(xl) {
+      gap: 0;
     }
   }
 
