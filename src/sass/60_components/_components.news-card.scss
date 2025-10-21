@@ -99,10 +99,13 @@
     outline-offset: $outline-offset;
     box-shadow: 0 0 0 $outline-offset transparent;
     transition: outline-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+    position: relative;
+    z-index: 1;
 
     @include focus-visible() {
       outline-color: var(--oo-color-primary);
       box-shadow: 0 0 0 $outline-offset var(--oo-color-contrast-primary);
+      z-index: 2;
 
       .--bg-light & {
         outline-color: var(--oo-color-light-primary, var(--oo-color-primary));
@@ -330,25 +333,35 @@
   &__text {
     flex: 1 1 0;
     min-height: 0; // Enable proper flex shrinking
-    width: calc(100% - 1px); // Force width calculation to enable text-overflow
+    width: 100%;
 
     @include media-breakpoint-down(md) {
       flex: 0 0 auto; // Don't flex or shrink on mobile
       height: auto; // Let height be determined by content
-      overflow: visible; // Show all content
     }
 
     @include media-breakpoint-up(lg) {
       overflow: hidden;
-      text-overflow: ellipsis;
-      display: block; // Reset display for proper overflow handling
-      position: relative; // For potential future fade-out effect if needed
     }
 
     p {
       color: var(--oo-color-text);
       font-size: 1rem; // 16px
       line-height: 1.75; // 22px
+      margin: 0;
+
+      @include media-breakpoint-up(lg) {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2; // 2 lines for lg
+        line-clamp: 2;
+        overflow: hidden;
+      }
+
+      @include media-breakpoint-up(xl) {
+        -webkit-line-clamp: 3; // 3 lines for xl and up
+        line-clamp: 3;
+      }
 
       .--bg-light & {
         color: var(--oo-color-light-text, var(--oo-color-text));
