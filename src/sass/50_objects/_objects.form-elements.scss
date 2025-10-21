@@ -1,15 +1,15 @@
 $form-height: 2.375rem;
 $form-margin: 0; // Margin
-$form-padding: 1rem 1rem; // Padding
+$form-padding: 0.6875rem 1rem; // Padding
 $form-padding-top: 1rem; // Padding top
 $form-padding-right: 1rem; // Padding right
-$form-line-height: $small-line-height;
+$form-line-height: $global-line-height;
 $form-remove-wrapper: 1rem; // Size of the remove background
 $form-remove-size: 1rem; // Size of the remove icon
 $form-select-size: 0.75rem; // Size of the select arrow icon
-$form-control-wrapper: 1.875rem; // Size of the checkbox and radio button
-$form-control-icon: 0.875rem; // Size of the checkbox and radio button icon
-$form-checkbox-icon: 0.875rem; // Size of the checkbox icon
+$form-control-wrapper: 1.5rem; // Size of the checkbox and radio button
+$form-control-icon: 0.75rem; // Size of the checkbox and radio button icon
+$form-checkbox-icon: 0.75rem; // Size of the checkbox icon
 $form-border: 2px solid;
 $form-border-color: var(--oo-color-mix-bg-contrast-60);
 $form-outline: 0.5px solid transparent;
@@ -94,7 +94,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
   padding: $form-padding;
   resize: vertical;
   font-family: inherit;
-  font-size: 100%;
+  font-size: 1rem;
   line-height: $form-line-height;
   color: $form-color;
   background-color: $form-bg;
@@ -461,8 +461,8 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
   &.o-select {
     position: relative;
     padding: unset;
-    height: 3.75rem;
-    max-height: 3.75rem;
+    height: 3.375rem;
+    max-height: 3.375rem;
     border: $form-border $form-border-color;
     outline: $form-outline;
     transition: outline-color $form-duration $form-timing,
@@ -557,8 +557,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     max-width: 100%;
     height: 100%;
     padding: unset !important;
-    margin: 0 1rem 0 0;
-    background-color: none;
+    margin: 0 1.5rem 0 0;
     border: 0;
     cursor: default;
 

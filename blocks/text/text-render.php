@@ -11,11 +11,18 @@ $headline_class = 'c-text__headline o-col-12 o-col-xl-10';
 
 if (!empty($texts[0]['text']['wysiwyg'])) {
     $text_count = is_array($texts) ? count($texts) : 1;
-    $text_class =
-        'c-text__content o-col-12 o-col-xl-' . ($text_count === 1 ? '8' : '4');
+    $offset_class =
+        $text_count !== 3 && $align_text !== 'center' ? ' u-offset-lg-1' : '';
+
+    $text_class_base =
+        'c-text__content o-col-12 o-col-lg-10 o-col-xl-' .
+        ($text_count === 1 ? '8' : '4') .
+        $offset_class;
+
     $headline_class =
-        'c-text__headline o-col-12 o-col-xl-' .
-        ($text_count === 3 ? '12' : '8');
+        'c-text__headline o-col-12 o-col-lg-10 o-col-xl-' .
+        ($text_count === 3 ? '12' : '8') .
+        $offset_class;
 }
 ?>
 
@@ -37,14 +44,24 @@ if (!empty($texts[0]['text']['wysiwyg'])) {
             !empty($texts[0]['text']['wysiwyg']) ||
             !empty($texts[0]['buttons']['buttons'][0]['link'])
         ) { ?>
-            <div class="c-text__columns o-row">
+            <div class="c-text__row o-row">
                 <?php if (is_array($texts)) {
+
+                    $i = 0;
                     foreach ($texts as $text_column):
 
                         $text = $text_column['text'];
                         $buttons = $text_column['buttons'];
+                        $text_class =
+                            $text_class_base .
+                            ($i === 1 ? ' u-offset-xl-0' : '');
                         ?>
+
+                       
                         <div class="<?php echo $text_class; ?>">
+
+                       
+                     
                             <?php if (!empty($text['wysiwyg'])) { ?>
                                 <div class="c-text__text o-text --is-wysiwyg">
                                     <?php echo $text['wysiwyg']; ?>
@@ -67,8 +84,9 @@ if (!empty($texts[0]['text']['wysiwyg'])) {
                                 );
                             } ?>
                         </div>
-                    <?php
-                    endforeach; ?>
+                    <?php $i++;
+                    endforeach;
+                    ?>
                 <?php
                 } ?>
             </div>
