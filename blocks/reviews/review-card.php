@@ -39,7 +39,6 @@ if ($is_slider) {
 }
 echo $is_image;
 ?>">
-    <!-- HEADER: Picture left, Date & Stars right -->
     <div class="c-review-card__header<?php echo $show_images !== 'images'
         ? ' --hide-images'
         : ''; ?>">
@@ -85,10 +84,8 @@ echo $is_image;
         <?php } ?>
 
         <div class="c-review-card__header-right  <?php echo $show_images !==
-        'images'
-            ? '--hide-images'
-            : ''; ?>">
-            <?php if ($date && $show_date) { ?>
+        'images' ? '--hide-images' : ''; ?>">
+            <?php if ($date) { ?>
                 <div class="c-review-card__date"><?php echo $date; ?></div>
             <?php } ?>
 
@@ -134,13 +131,12 @@ echo $is_image;
         </div>
     </div>
 
-    <!-- CONTENT: Name, Text, Button -->
     <div class="c-review-card__content <?php echo $show_images !== 'images'
         ? '--hide-images'
         : ''; ?> <?php echo !$show_date ? '--hide-date' : ''; ?>">
         <div class="c-review-card__content-group">
             <?php if ($title) { ?>
-                <h3 class="c-review-card__name o-headline --h3"><?php echo $title; ?></h3>
+                <h3 class="c-review-card__name o-headline --h4"><?php echo $title; ?></h3>
             <?php } ?>
 
             <?php if (!empty($text['wysiwyg'])) { ?>
