@@ -10,9 +10,12 @@
       flex-direction: column;
       align-items: flex-start;
       flex-wrap: wrap;
-      gap: 0 1.5rem;
+      gap: 1.5rem;
       @include media-breakpoint-up(xxl) {
-        display: inline;
+        display: inline-flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 1.5rem;
       }
     }
     .--is-footer & {
@@ -43,11 +46,7 @@
       gap: 0.25rem;
       @include media-breakpoint-up(xxl) {
         display: inline-flex;
-        margin-right: 1.5rem;
-
-        &:last-child {
-          margin-right: 0;
-        }
+        gap: 0.5rem;
       }
     }
   }
@@ -71,28 +70,15 @@
       #{$c-module-contact}__headline {
         @include media-breakpoint-up(xxl) {
           display: inline;
-          margin-right: 0.75rem;
         }
       }
       #{$c-module-contact}__contact {
         @include media-breakpoint-up(xxl) {
           display: inline-flex;
-          margin-right: 0.75rem;
-          &:last-child {
-            margin-right: 0;
-          }
         }
       }
     }
     .--right {
-      #{$c-module-contact}__headline {
-        margin-right: 0;
-        margin-left: 0;
-      }
-      #{$c-module-contact}__list {
-        margin-right: 0;
-        margin-left: 1.5rem;
-      }
     }
   }
 
