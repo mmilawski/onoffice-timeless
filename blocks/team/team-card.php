@@ -36,8 +36,9 @@ $image_width_xl = '450';
 $image_width_xxl = '343';
 $image_width_xxxl = '378';
 
+$card['rating_provider'] = 'dfg';
 $rating_provider = $card['rating_provider'] ?? null;
-$rating = 0.0;
+$rating = 3.4;
 $google_api_key = $card['google_api_key'] ?? null;
 $place_id = $card['place_id'] ?? null;
 $place_id_url = "https://www.google.com/maps/place/?q=place_id:$place_id";
@@ -182,42 +183,7 @@ if ($rating_provider === 'google') {
             !empty($card['languages'])
         ) { ?>
             <div class="c-team-card__row --contact">
-                <?php if (
-                    !empty($card['rating_provider']) &&
-                    $card['rating_provider'] !== 'none'
-                ): ?>
-                    <p class="c-team-card__contact --is-stars">
-                        <?php oo_get_template(
-                            'components',
-                            '',
-                            'component-stars',
-                            [
-                                'rating' => $rating,
-                                'size' => 'small',
-                                'light_empty_stars' => true,
-                            ],
-                        ); ?>
-                        <?php if ($rating_provider === 'google') { ?>
-                            <a href="<?php echo esc_url(
-                                $place_id_url,
-                            ); ?>" target="_blank"><?php esc_html_e(
-    'Zu den Bewertungen',
-    'oo_theme',
-); ?></a>
-                        <?php } ?>
-                        <?php if (
-                            $rating_provider === 'proven_expert' &&
-                            $proven_expert_url
-                        ) { ?>
-                            <a href="<?php echo esc_url(
-                                $proven_expert_url,
-                            ); ?>" target="_blank"><?php esc_html_e(
-    'Zu den Bewertungen',
-    'oo_theme',
-); ?></a>
-                        <?php } ?>
-                    </p>
-                <?php endif; ?>
+
                 <?php if (!empty($card['languages'])) { ?>
                     <p class="c-team-card__languages"><?php echo $card[
                         'languages'
@@ -328,7 +294,7 @@ if ($rating_provider === 'google') {
             </div>
         <?php } ?>
 
-        <?php if (!empty($networks)): ?>
+        <?php if ($networks && array_filter($networks)): ?>
             <div class="c-team-card__row --social">
                 <?php oo_get_template(
                     'components',
