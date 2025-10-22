@@ -1608,20 +1608,18 @@ jQuery(window).on('load', function () {
 
 // Initialize news card navigation on load
 function initNewsCardNavigation() {
-  var container = document.querySelector('.c-news__news');
-  console.log('11')
+  const container = document.querySelector('.c-news__news');
   if (!container) return;
-  console.log('22')
-  var focusableElements = [];
-  var isDesktop = window.matchMedia('(min-width: 768px)').matches;
+  let focusableElements = [];
+  let isDesktop = window.matchMedia('(min-width: 768px)').matches;
   
   function buildFocusableList() {
     focusableElements = [];
-    var newsCards = container.querySelectorAll('.c-news-card');
+    const newsCards = container.querySelectorAll('.c-news-card');
     
     newsCards.forEach(function(card, index) {
-      var picture = card.querySelector('.c-news-card__link');
-      var button = card.querySelector('.c-news-card__more-link');
+      const picture = card.querySelector('.c-news-card__link');
+      const button = card.querySelector('.c-news-card__more-link');
       
       // Build array based on desktop/mobile layout
       if (isDesktop) {
@@ -1647,8 +1645,8 @@ function initNewsCardNavigation() {
     if (event.key !== 'Tab') return;
  
     // Find the currently focused element
-    var currentElement = document.activeElement;
-    var currentIndex = focusableElements.indexOf(currentElement);
+    const currentElement = document.activeElement;
+    const currentIndex = focusableElements.indexOf(currentElement);
     
     // Only handle focus if we're within our container
     if (currentIndex === -1) return;
@@ -1656,13 +1654,14 @@ function initNewsCardNavigation() {
     // Prevent default tab behavior
     event.preventDefault();
     
-    var nextIndex;
+    let nextIndex;
     if (event.shiftKey) {
       // Shift+Tab: Move backwards
       nextIndex = currentIndex - 1;
+      console.log(nextIndex)
       if (nextIndex < 0) {
         // Exit container at the start
-        var prevFocusable = findPreviousFocusable(container);
+        const prevFocusable = findPreviousFocusable(currentElement);
         if (prevFocusable) prevFocusable.focus();
         return;
       }
@@ -1671,7 +1670,7 @@ function initNewsCardNavigation() {
       nextIndex = currentIndex + 1;
       if (nextIndex >= focusableElements.length) {
         // Exit container at the end
-        var nextFocusable = findNextFocusable(container);
+        const nextFocusable = findNextFocusable(currentElement);
         if (nextFocusable) nextFocusable.focus();
         return;
       }
@@ -1682,17 +1681,37 @@ function initNewsCardNavigation() {
   }
 
   function findNextFocusable(element) {
-    var focusable = 'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])';
-    var all = Array.from(document.querySelectorAll(focusable));
-    var index = all.indexOf(element);
-    return all[index + 1] || null;
+    const focusable = 'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    const all = Array.from(document.querySelectorAll(focusable));
+    let index = all.indexOf(element);
+    
+    // Keep looking for the next focusable element that's not a news card link or button
+    while (index < all.length - 1) {
+      index++;
+      const nextElement = all[index];
+      if (!nextElement.classList.contains('c-news-card__link') && 
+          !nextElement.classList.contains('c-news-card__more-link')) {
+        return nextElement;
+      }
+    }
+    return null;
   }
 
   function findPreviousFocusable(element) {
-    var focusable = 'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])';
-    var all = Array.from(document.querySelectorAll(focusable));
-    var index = all.indexOf(element);
-    return all[index - 1] || null;
+    const focusable = 'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    const all = Array.from(document.querySelectorAll(focusable));
+    let index = all.indexOf(element);
+    
+    // Keep looking for the previous focusable element that's not a news card link or button
+    while (index > 0) {
+      index--;
+      const prevElement = all[index];
+      if (!prevElement.classList.contains('c-news-card__link') && 
+          !prevElement.classList.contains('c-news-card__more-link')) {
+        return prevElement;
+      }
+    }
+    return null;
   }
 
   // Build initial focus list
@@ -1702,7 +1721,7 @@ function initNewsCardNavigation() {
   container.addEventListener('keydown', handleKeyDown);
 
   // Rebuild focus list on resize
-  var mediaQuery = window.matchMedia('(min-width: 768px)');
+  const mediaQuery = window.matchMedia('(min-width: 768px)');
   mediaQuery.addListener(function(e) {
     isDesktop = e.matches;
     buildFocusableList();
