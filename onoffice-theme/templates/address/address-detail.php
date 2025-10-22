@@ -323,12 +323,14 @@ foreach ($current_address_array as $address_id => $current_address) {
                                         : '';
                                     $target =
                                         'rel="noopener noreferrer" aria-label="' .
-                                        sprintf(
-                                            esc_attr__(
-                                                'Webseite von %s besuchen (Öffnet in neuem Tab)',
-                                                'oo_theme',
+                                        esc_attr(
+                                            sprintf(
+                                                __(
+                                                    'Webseite von %s besuchen (Öffnet in neuem Tab)',
+                                                    'oo_theme',
+                                                ),
+                                                $full_name,
                                             ),
-                                            $full_name,
                                         ) .
                                         '" target="_blank"';
                                 } else {
@@ -457,12 +459,14 @@ foreach ($current_address_array as $address_id => $current_address) {
                                 echo '<a class="c-social-media__link" href="' .
                                     esc_url($value) .
                                     '" rel="noopener noreferrer" aria-label="' .
-                                    sprintf(
-                                        esc_attr__(
-                                            'Webseite von %s besuchen (Öffnet in neuem Tab)',
-                                            'oo_theme',
+                                    esc_attr(
+                                        sprintf(
+                                            __(
+                                                'Webseite von %s besuchen (Öffnet in neuem Tab)',
+                                                'oo_theme',
+                                            ),
+                                            $label,
                                         ),
-                                        $label,
                                     ) .
                                     '" target="_blank">';
                                 oo_get_icon($icon);

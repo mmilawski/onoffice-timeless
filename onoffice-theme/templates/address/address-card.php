@@ -319,12 +319,14 @@ foreach ($current_address as $field => $value) {
                             : '';
                         $target =
                             'rel="noopener noreferrer" aria-label="' .
-                            sprintf(
-                                esc_attr__(
-                                    'Webseite von %s besuchen (Öffnet in neuem Tab)',
-                                    'oo_theme',
+                            esc_attr(
+                                sprintf(
+                                    __(
+                                        'Webseite von %s besuchen (Öffnet in neuem Tab)',
+                                        'oo_theme',
+                                    ),
+                                    $full_name,
                                 ),
-                                $full_name,
                             ) .
                             '" target="_blank"';
                     } else {
@@ -361,12 +363,14 @@ foreach ($current_address as $field => $value) {
                     echo '<a class="c-link --underlined --text-color --on-bg-transparent" href="' .
                         $reviews .
                         '" rel="noopener noreferrer" aria-label="' .
-                        sprintf(
-                            esc_attr__(
-                                'Bewertungen für %s ansehen (Öffnet in neuem Tab)',
-                                'oo_theme',
+                        esc_attr(
+                            sprintf(
+                                __(
+                                    'Bewertungen für %s ansehen (Öffnet in neuem Tab)',
+                                    'oo_theme',
+                                ),
+                                $full_name,
                             ),
-                            $full_name,
                         ) .
                         '" target="_blank">' .
                         __('Bewertungen ansehen', 'oo_theme') .
