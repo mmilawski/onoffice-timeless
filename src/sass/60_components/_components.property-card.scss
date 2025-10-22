@@ -72,8 +72,22 @@
 
   &__favorite {
     &.c-icon-button {
-      width: $icon-size;
-      height: $icon-size;
+      width: 2.5rem;
+      height: 2.5rem;
+      &.--on-bg-transparent,
+      .--bg-transparent & {
+        @include plain-visited() {
+          background-color: var(--oo-color-primary);
+        }
+      }
+
+      @include hover() {
+        background-color: var(--oo-color-mix-primary-contrast-20);
+      }
+
+      @include active() {
+        background-color: var(--oo-color-mix-primary-contrast-40);
+      }
 
       .c-icon-button__icon {
         width: $icon-size-small;

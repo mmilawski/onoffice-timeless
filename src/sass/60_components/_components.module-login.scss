@@ -1,11 +1,14 @@
-.c-module-login {
-  $c-module-login: &;
+.c-module-customer-login {
+  $c-module-customer-login: &;
+
+  &.--is-header {
+    width: auto;
+  }
 
   &__list {
     display: flex;
     line-height: 1.5rem;
     align-items: center;
-    gap: 0.5rem;
     outline: $outline;
     outline-offset: $outline-offset;
     color: var(--oo-color-header-text, var(--oo-color-text));
@@ -19,11 +22,15 @@
     }
 
     @include focus-visible() {
-      #{$c-module-login}__link {
+      #{$c-module-customer-login}__link {
         outline-color: var(--oo-color-header-primary, var(--oo-color-primary));
         text-decoration-color: transparent;
         color: var(--oo-color-header-primary, var(--oo-color-primary));
       }
+    }
+
+    @include media-breakpoint-up(xxl) {
+      gap: 0.5rem;
     }
   }
 
@@ -47,5 +54,10 @@
     cursor: pointer;
     outline: $outline;
     outline-offset: $outline-offset;
+    padding: 0.5rem 0.75rem;
+
+    @include media-breakpoint-up(xxl) {
+      padding: 0;
+    }
   }
 }
