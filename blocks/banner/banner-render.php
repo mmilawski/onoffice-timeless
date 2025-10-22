@@ -36,10 +36,14 @@ if ($slide_count > 0) {
 
 // Prepare the class string to be added to the banner
 $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
+
 // --- NEW LOGIC END ---
 ?>
 
-<div <?php oo_block_id($block); ?> class="c-banner --<?php echo $bg_color; ?><?php echo $banner_content_class; ?>">
+<div <?php oo_block_id($block); ?> class="c-banner --<?php
+ echo $bg_color;
+ echo $banner_content_class;
+ ?>">
 
 <?php if ($slide_count > 1) { ?>
     <div class="c-banner__slider c-slider splide --auto-height --is-banner-slider" data-splide='{
@@ -143,12 +147,12 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
                     $background_width_xxxl = '1920';
                     ?>
 
-                    <div class="c-banner__slide --content-<?php echo $type; ?> --background-<?php echo $background; ?> <?php if (
-                        $slide_count > 1
-                    ) { ?>c-slider__slide splide__slide<?php } ?><?php if ($type != 'none') {
-                        echo ' --content-is-' .
-                            $slide_settings['position_content'];
-                    } ?>">
+                    <div class="c-banner__slide --content-<?php echo $type; ?> --background-<?php echo $background; ?> <?php
+ if ($slide_count > 1) { ?>c-slider__slide splide__slide<?php }
+ if ($type != 'none') {
+     echo ' --content-is-' . $slide_settings['position_content'];
+ }
+ ?>">
                         <?php if ($type != 'none'): ?>
                             <div class="c-banner__container o-container">
                                 <div class="c-banner__row o-row --position-<?php echo $slide_settings[
