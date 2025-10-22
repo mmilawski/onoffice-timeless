@@ -142,15 +142,25 @@ if ($rating_provider === 'google') {
             <?php } ?>
         </div>
 
-        <?php if (!empty($card['rating_provider']) && $card['rating_provider'] !== 'none'): ?>
+        <?php if (
+            !empty($card['rating_provider']) &&
+            $card['rating_provider'] !== 'none'
+        ): ?>
             <div class="c-team-card__row --rating">
                 <?php oo_get_template('components', '', 'component-stars', [
                     'rating' => $rating,
                     'size' => 'small',
                     'light_empty_stars' => true,
                 ]); ?>
-                <?php if ($rating_provider === 'google' || ($rating_provider === 'proven_expert' && $proven_expert_url)): ?>
-                    <a href="<?php echo esc_url($rating_provider === 'google' ? $place_id_url : $proven_expert_url); ?>" 
+                <?php if (
+                    $rating_provider === 'google' ||
+                    ($rating_provider === 'proven_expert' && $proven_expert_url)
+                ): ?>
+                    <a href="<?php echo esc_url(
+                        $rating_provider === 'google'
+                            ? $place_id_url
+                            : $proven_expert_url,
+                    ); ?>" 
                        target="_blank" class="--text-color">
                         <?php esc_html_e('Zu den Bewertungen', 'oo_theme'); ?>
                     </a>
@@ -320,7 +330,8 @@ if ($rating_provider === 'google') {
                     'component-social-media',
                     [
                         'networks' => $networks,
-                        'additional_container_class' => 'c-team-card__social-links',
+                        'additional_container_class' =>
+                            'c-team-card__social-links',
                     ],
                 ); ?>
             </div>

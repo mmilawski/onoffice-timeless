@@ -24,9 +24,14 @@
     right: 1.5rem; // 24px from right
     display: flex;
     flex-direction: column;
-    gap: 1rem;
     background-color: var(--oo-color-transparent-bg-80);
     padding: 1.5rem;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    max-height: 82px; // Fixed height for name + padding
+    
+    &:hover {
+      gap: 1rem; // Only add gap when hovering
+    }
   }
 
   &__icon {
@@ -80,6 +85,10 @@
   }
 
   @include hover-focus-active() {
+    #{$c-team-card}__overlay {
+      max-height: 40rem;
+    }
+
     #{$c-team-card}__icon {
       &.--less {
         display: flex;
@@ -88,17 +97,44 @@
         display: none;
       }
     }
+
+    #{$c-team-card}__row:not(.--name) {
+      transform: scaleY(1);
+      opacity: 1;
+      max-height: 20rem;
+      margin: 0.5rem 0;
+      pointer-events: auto;
+    }
   }
 
   &__row {
     color: var(--oo-color-text);
+    transform-origin: top;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &.--name {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 1.625rem; // Match the line-height of the name
+    }
+
+    &:not(.--name) {
+      opacity: 0;
+      transform: scaleY(0);
+      max-height: 0;
+      margin: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
 
     &.--job {
       font-family: $font-family-text-bold;
       font-weight: $font-weight-text-bold;
       font-size: 1.25rem;
       line-height: 1.75rem;
-      
+      display: block;
+
       @include media-breakpoint-up(xl) {
         font-size: 1.5rem;
         line-height: 2rem;
@@ -109,27 +145,40 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      transform: none; // Exclude from transform animation
     }
 
     &.--rating {
       text-align: center;
+      display: block;
     }
 
     &.--contact {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+      display: block;
+
+      .c-team-card__contact-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
     }
 
     &.--social {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
+      display: block;
+
+      .c-team-card__social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+      }
     }
 
     &.--action {
-      display: flex;
-      justify-content: flex-start;
+      display: block;
+
+      .c-team-card__button {
+        display: inline-flex;
+      }
     }
   }
 
@@ -195,7 +244,7 @@
     text-decoration: underline;
     font-size: inherit;
     line-height: inherit;
-    
+
     &:hover {
       opacity: 0.8;
     }
