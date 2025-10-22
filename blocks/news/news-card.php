@@ -180,12 +180,11 @@ $link_title_more = sprintf(
 			<?php if (!empty($link)) {
        echo '<a class="c-news-card__more-link"  
                 aria-label="' .
-           esc_html__('Weiterlesen', 'oo_theme') .
-           '...' .
+           esc_html__('Weiterlesen...', 'oo_theme') .
            '" href="' .
            $link .
            '">';
-       echo esc_html__('Weiterlesen', 'oo_theme') . '...';
+       echo esc_html__('Weiterlesen...', 'oo_theme');
        echo '</a>';
    } ?>
 		</div> 
