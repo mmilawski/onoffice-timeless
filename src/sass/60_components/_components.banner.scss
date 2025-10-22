@@ -48,8 +48,9 @@
     }
   }
   &__media {
-    width: 100%;
     height: auto;
+    width: calc(100% - 2rem);
+    margin-left: 1rem;
     aspect-ratio: 4 / 3;
     background-color: var(--oo-color-transparent-primary-10);
 
@@ -58,6 +59,7 @@
       top: 0;
       width: 50%;
       height: 100%;
+      margin: 0;
       aspect-ratio: unset;
 
       &.--content-is-left {
