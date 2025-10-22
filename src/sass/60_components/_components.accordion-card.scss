@@ -21,6 +21,21 @@
     outline: $outline;
     outline-offset: $outline-offset;
     color: var(--oo-color-headline);
+    @include visited-active() {
+      #{$c-accordion-card}__headline {
+        color: var(--oo-color-primary);
+      }
+    }
+
+    @include hover-focus() {
+      #{$c-accordion-card}__headline {
+        color: var(--oo-color-primary);
+      }
+    }
+
+    @include focus-visible() {
+      outline-color: var(--oo-color-primary);
+    }
     .--bg-light & {
       color: var(--oo-color-light-headline, var(--oo-color-headline));
     }
@@ -76,11 +91,27 @@
     }
   }
   background-color: var(--oo-color-mix-bg-contrast-05);
+
   .--bg-light & {
     background-color: var(
       --oo-color-light-mix-bg-contrast-05,
       var(--oo-color-mix-bg-contrast-05)
     );
+    #{$c-accordion-card}__title {
+      @include visited-active() {
+        #{$c-accordion-card}__headline {
+          color: var(--oo-color-light-primary, var(--oo-color-primary));
+        }
+      }
+      @include hover-focus() {
+        #{$c-accordion-card}__headline {
+          color: var(--oo-color-light-primary, var(--oo-color-primary));
+        }
+      }
+      @include focus-visible() {
+        outline-color: var(--oo-color-light-primary, var(--oo-color-primary));
+      }
+    }
   }
 
   .--bg-dark & {
@@ -88,19 +119,61 @@
       --oo-color-dark-mix-bg-contrast-05,
       var(--oo-color-mix-bg-contrast-05)
     );
+    #{$c-accordion-card}__title {
+      @include visited-active() {
+        #{$c-accordion-card}__headline {
+          color: var(--oo-color-dark-primary, var(--oo-color-primary));
+        }
+      }
+      @include hover-focus() {
+        #{$c-accordion-card}__headline {
+          color: var(--oo-color-dark-primary, var(--oo-color-primary));
+        }
+      }
+      @include focus-visible() {
+        outline-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+      }
+    }
   }
-
   .--bg-primary & {
     background-color: var(
       --oo-color-primary-mix-bg-contrast-05,
       var(--oo-color-mix-bg-contrast-05)
     );
+    #{$c-accordion-card}__title {
+      @include visited-active() {
+        #{$c-accordion-card}__headline {
+          color: var(--oo-color-primary-primary, var(--oo-color-primary));
+        }
+      }
+      @include hover-focus() {
+        #{$c-accordion-card}__headline {
+          color: var(--oo-color-primary-primary, var(--oo-color-primary));
+        }
+      }
+      @include focus-visible() {
+        outline-color: var(--oo-color-primary-primary, var(--oo-color-primary));
+      }
+    }
   }
-
   .--bg-secondary & {
-    background-color: var(
-      --oo-color-secondary-mix-bg-contrast-05,
-      var(--oo-color-mix-bg-contrast-05)
-    );
+    #{$c-accordion-card}__title {
+      @include visited-active() {
+        #{$c-accordion-card}__headline {
+          color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+        }
+      }
+      @include hover-focus() {
+        #{$c-accordion-card}__headline {
+          color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+        }
+      }
+      @include focus-visible() {
+        outline-color: var(
+          --oo-color-secondary-primary,
+          var(--oo-color-primary)
+        );
+      }
+    }
   }
 }

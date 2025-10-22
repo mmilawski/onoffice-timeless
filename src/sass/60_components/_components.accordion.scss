@@ -5,6 +5,13 @@
   [class^='o-col-'],
   [class*=' o-col-'],
   .o-col {
+    &.c-accordion__text{
+      padding: 1.5rem 1rem 1rem 1rem;
+    }
+    &.c-accordion__headline{
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
     padding-left: 0;
     padding-right: 0;
   }
