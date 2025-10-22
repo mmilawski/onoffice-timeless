@@ -7,7 +7,6 @@
   overflow: hidden;
   background-color: var(--oo-color-primary);
 
-  // Removed hover state
 
   &__picture {
     height: auto;
@@ -26,17 +25,36 @@
     flex-direction: column;
     background-color: var(--oo-color-transparent-bg-80);
     padding: 1.5rem;
-    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     max-height: 82px; // Fixed height for name + padding
+    gap: 0;
     
     &:hover {
-      gap: 1rem; // Only add gap when hovering
+      gap: 1rem;
+      max-height: 40rem;
+
+      ~ .c-team-card__icon {
+        &.--less {
+          display: flex;
+        }
+        &.--more {
+          display: none;
+        }
+      }
+
+      .c-team-card__row:not(.--name) {
+        transform: scaleY(1);
+        opacity: 1;
+        max-height: 20rem;
+        margin: 0.5rem 0;
+        pointer-events: auto;
+      }
     }
   }
 
   &__icon {
     position: absolute;
-    bottom: 1.5rem;
+    bottom: 21px;
     right: 1.5rem;
     z-index: 1;
     transition: all 0.25s ease-in-out;
@@ -84,28 +102,7 @@
     }
   }
 
-  @include hover-focus-active() {
-    #{$c-team-card}__overlay {
-      max-height: 40rem;
-    }
 
-    #{$c-team-card}__icon {
-      &.--less {
-        display: flex;
-      }
-      &.--more {
-        display: none;
-      }
-    }
-
-    #{$c-team-card}__row:not(.--name) {
-      transform: scaleY(1);
-      opacity: 1;
-      max-height: 20rem;
-      margin: 0.5rem 0;
-      pointer-events: auto;
-    }
-  }
 
   &__row {
     color: var(--oo-color-text);
