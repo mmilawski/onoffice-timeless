@@ -13,9 +13,6 @@
     aspect-ratio: 3 / 4;
   }
 
-  &__image {
-  }
-
   &__overlay {
     position: absolute;
     bottom: 1.5rem; // 24px from bottom
@@ -110,8 +107,8 @@
 
     &.--name {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       min-height: 1.625rem; // Match the line-height of the name
     }
 
@@ -130,7 +127,6 @@
       font-weight: $font-weight-text-bold;
       font-size: 1.25rem;
       line-height: 1.75rem;
-      display: block;
 
       @include media-breakpoint-up(xl) {
         font-size: 1.5rem;
@@ -138,48 +134,18 @@
       }
     }
 
-    &.--name {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transform: none; // Exclude from transform animation
-    }
-
     &.--rating {
       text-align: center;
-      display: block;
-    }
-
-    &.--contact {
-      display: block;
-
-      .c-team-card__contact-wrapper {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
     }
 
     &.--social {
-      display: block;
-
       .c-team-card__social-links {
         display: flex;
         justify-content: center;
         gap: 1rem;
       }
     }
-
-    &.--action {
-      display: block;
-
-      .c-team-card__button {
-        display: inline-flex;
-      }
-    }
   }
-
-  // Removed icon styles as they're no longer needed
 
   &__name {
     color: var(--oo-color-text);
@@ -207,30 +173,9 @@
     }
   }
 
-  &__job {
-    font-family: $font-family-text-bold;
-    font-weight: $font-weight-text-bold;
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    @include media-breakpoint-up(xl) {
-      font-size: 1.5rem;
-      line-height: 2rem;
-    }
-  }
-
-  &__contact-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
   &__contact {
     hyphens: auto;
     word-break: break-word;
-
-    &.--is-networks {
-      margin-top: 1rem;
-    }
   }
 
   &__button {
