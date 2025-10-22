@@ -21,7 +21,6 @@
 
   &__row {
     display: flex;
-    justify-content: center;
     align-items: flex-start;
     gap: 1.5rem;
 
@@ -37,12 +36,19 @@
   }
 
   &__picture {
+    @include media-breakpoint-up(lg) {
+      #{$c-media}__headline + &,
+      #{$c-media}__text + &,
+      #{$c-media}__headline ~ &,
+      #{$c-media}__text ~ & {
+        padding-top: 3rem;
+      }
+    }
   }
 
   &__image {
     width: 100%;
     height: auto;
-    max-height: 60vh;
 
     .--is-full-width & {
       max-height: 70vh;
@@ -55,6 +61,14 @@
   }
 
   &__video {
+    @include media-breakpoint-up(lg) {
+      #{$c-media}__headline + &,
+      #{$c-media}__text + &,
+      #{$c-media}__headline ~ &,
+      #{$c-media}__text ~ & {
+        padding-top: 3rem;
+      }
+    }
   }
 
   &__thumbnail-wrapper {

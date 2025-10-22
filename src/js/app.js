@@ -2,46 +2,6 @@ $ = jQuery;
 
 jQuery(document).ready(function() {
 
-  // Function to calculate and set the position of dropdown menus
-  function adjustDropdownMenuPosition() {
-    const headerContainer = document.querySelector('.c-header__container');
-    const headerMenuItems = document.querySelectorAll('.c-main-nav__list .c-main-nav__item.--has-children.--is-top-level');
-
-    if (!headerContainer) {
-      return;
-    }
-
-    if (headerMenuItems.length === 0) {
-      return;
-    }
-
-    const containerBottom = headerContainer.getBoundingClientRect().bottom;
-
-    headerMenuItems.forEach((li) => {
-      const subMenu = li.querySelector('.c-main-nav__sub-menu');
-
-      if (!subMenu) {
-        return;
-      }
-
-      const { bottom: liBottom, height: liHeight } = li.getBoundingClientRect();
-      const distanceFromContainer = containerBottom - liBottom;
-      const subMenuPosition = liHeight + distanceFromContainer;
-
-      subMenu.style.top = `${subMenuPosition}px`;
-    });
-  } 
-
-  if (window.innerWidth >= 1400) {
-    adjustDropdownMenuPosition();
-  }
-
-  window.addEventListener('resize', () => {
-    if (window.innerWidth >= 1400) {
-      adjustDropdownMenuPosition();
-    }
-  });
- 
   if( $('.c-table').length > 0  ) {
     $('.c-table').each(function( index, element) {
 
@@ -1619,19 +1579,24 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
-    form.addEventListener('submit', function(event) {
-      if (!form.checkValidity()) {
-        event.preventDefault();
-        event.stopPropagation();
-        inputs.forEach(input => {
-          inputHandleBlur(input)
-        });
-        selects.forEach(select => {
-          selectHandleChange(select)
-        })
-        jumpToFirstInvalidInput(form);
-      }
-      form.classList.add('--validated');
+    // use a capture phase click listener on submit button instead of simple submit event.
+    // It is needed to prevent recaptcha code to call form.reportValidity and display the browsers error messages.
+    // If the form is valid the recaptcha code still gets executed.
+    form.querySelectorAll('.c-form__button').forEach(button => {
+      button.addEventListener('click', function(event) {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          inputs.forEach(input => {
+            inputHandleBlur(input)
+          });
+          selects.forEach(select => {
+            selectHandleChange(select)
+          })
+          jumpToFirstInvalidInput(form);
+        }
+        form.classList.add('--validated');
+      }, true);
     });
   });
 });
