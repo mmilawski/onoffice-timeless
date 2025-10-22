@@ -97,8 +97,6 @@
 
     @include media-breakpoint-up(lg) {
       grid-template-columns: repeat(2, 1fr);
-      padding-right: 1rem;
-      padding-left: 1rem;
     }
 
     @include media-breakpoint-up(xxl) {
