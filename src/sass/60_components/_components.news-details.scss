@@ -1,9 +1,9 @@
 .c-news-details {
   $c-news-details: &;
-  
+
   &__container {
     display: flex;
-    
+
     @include media-breakpoint-down(md) {
       flex-direction: column;
     }
@@ -68,22 +68,34 @@
     color: var(--oo-color-text);
 
     .--bg-light & {
-      background-color: var(--oo-color-light-mix-bg-contrast-05, var(--oo-color-mix-bg-contrast-05));
+      background-color: var(
+        --oo-color-light-mix-bg-contrast-05,
+        var(--oo-color-mix-bg-contrast-05)
+      );
       color: var(--oo-color-light-text, var(--oo-color-text));
     }
 
     .--bg-dark & {
-      background-color: var(--oo-color-dark-mix-bg-contrast-05, var(--oo-color-mix-bg-contrast-05));
+      background-color: var(
+        --oo-color-dark-mix-bg-contrast-05,
+        var(--oo-color-mix-bg-contrast-05)
+      );
       color: var(--oo-color-dark-text, var(--oo-color-text));
     }
 
     .--bg-primary & {
-      background-color: var(--oo-color-primary-mix-bg-contrast-05, var(--oo-color-mix-bg-contrast-05));
+      background-color: var(
+        --oo-color-primary-mix-bg-contrast-05,
+        var(--oo-color-mix-bg-contrast-05)
+      );
       color: var(--oo-color-primary-text, var(--oo-color-text));
     }
 
     .--bg-secondary & {
-      background-color: var(--oo-color-secondary-mix-bg-contrast-05, var(--oo-color-mix-bg-contrast-05));
+      background-color: var(
+        --oo-color-secondary-mix-bg-contrast-05,
+        var(--oo-color-mix-bg-contrast-05)
+      );
       color: var(--oo-color-secondary-text, var(--oo-color-text));
     }
   }
@@ -110,7 +122,7 @@
 
     p {
       margin-bottom: 1.5rem;
-      
+
       &:last-child {
         margin-bottom: 0;
       }
