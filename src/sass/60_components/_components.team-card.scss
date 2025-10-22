@@ -30,7 +30,7 @@
       gap: 1rem;
       max-height: 40rem;
 
-      ~ .c-team-card__icon {
+      .c-team-card__icon {
         &.--less {
           display: flex;
         }

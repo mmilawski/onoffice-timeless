@@ -339,15 +339,12 @@ if ($rating_provider === 'google') {
 
         <?php if (!empty($wysiwyg) && $is_description) { ?>
             <div class="c-team-card__row --action">
-                <button class="c-team-card__button c-button --ghost --has-icon <?php echo $bg_color
+                <button class="c-team-card__button c-button --ghost <?php echo $bg_color
                     ? '--on-' . $bg_color
                     : ''; ?> --open-popup" data-popup="team-<?php echo $post_id; ?>" aria-haspopup="dialog" aria-controls="team-<?php echo $post_id; ?>">
                     <span class="c-button__text"><?php esc_html_e(
                         'Mehr erfahren',
                         'oo_theme',
-                    ); ?></span>
-                    <span class="c-button__icon --arrow-right"><?php oo_get_icon(
-                        'arrow-right',
                     ); ?></span>
                 </button>
             </div>
