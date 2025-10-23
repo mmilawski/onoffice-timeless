@@ -3,7 +3,7 @@
 
   display: flex;
   flex-direction: column;
-  gap: 5rem;
+  gap: 2.5rem;
   padding-top: 10rem;
 
   @include media-breakpoint-up(xl) {
@@ -98,9 +98,6 @@
   }
 
   &__contacts-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
   }
 
   &__banner {
@@ -275,13 +272,13 @@
 
       @include media-breakpoint-up(xl) {
         aspect-ratio: unset;
-        width: auto;
+        width: 100%;
         max-width: 100%;
       }
     }
 
     &-image {
-      width: auto;
+      width: 100%;
       max-width: unset;
       height: 100%;
       object-fit: contain;
@@ -414,40 +411,44 @@
   }
 
   &__text-content {
-    &.--shorten {
-      max-height: calc($global-line-height * 7);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 7;
-      line-clamp: 7;
-      -webkit-box-orient: vertical;
-      transition: max-height 0.25s ease-in-out;
-
-      @include media-breakpoint-up(xl) {
-        max-height: calc($global-line-height * 10);
-        -webkit-line-clamp: 10;
-        line-clamp: 10;
-      }
-
-      &.--is-open {
-        max-height: none;
-        -webkit-line-clamp: unset;
-        line-clamp: unset;
-        overflow: visible;
-      }
-    }
+ 
   }
 
   &__features {
+  }
+
+  &__fields-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    margin: 5rem 0;
+
+    .--bg-light & {
+        background-color: var(--oo-color-light-mix-bg-contrast-05);
+    }
+    .--bg-dark & {
+        background-color: var(--oo-color-dark-mix-bg-contrast-05);
+    }
+    .--bg-primary & {
+        background-color: var(--oo-color-primary-mix-bg-contrast-05);
+    }
+    .--bg-secondary & {
+        background-color: var(--oo-color-secondary-mix-bg-contrast-05);
+    }
+    .--bg-transparent & {
+        background-color: var(--oo-color-mix-bg-contrast-05);
+    }
+  }
+  
+  &__fields-main {
+    row-gap: 2.5rem;
   }
 
   &__fields-row {
     gap: 2.5rem;
 
     @include media-breakpoint-up(xl) {
-      gap: 0;
-      row-gap: 5rem;
+      row-gap: 2.5rem;
     }
   }
 
@@ -457,7 +458,7 @@
     grid-template-rows: auto 1fr;
 
     @include media-breakpoint-up(xl) {
-      gap: 2rem;
+      gap: 1rem;
     }
   }
 
@@ -486,10 +487,21 @@
   &__form {
     scroll-margin-top: $mobile-header-height;
     scroll-snap-align: start;
-    padding-bottom: 2.5rem;
-
+    
     @include media-breakpoint-up(xxl) {
       scroll-margin-top: $desktop-header-height;
+    }
+    
+    .--is-contact-form {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 9rem;
+      margin: 10rem 0;
+      align-items: center;
+
+      @include media-breakpoint-up(md) {
+        grid-template-columns: 1fr 1fr;
+      }
     }
   }
 

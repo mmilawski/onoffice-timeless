@@ -107,7 +107,7 @@ function oo_property_field_type($field, $item)
 }
 
 if (!empty($pEstates->getEstateContacts())) {
-    echo '<div class="c-property-details__contacts">';
+    echo '<div class="c-property-details__contacts u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl">';
 
     $configured_address_fields = $pEstates->getAddressFields();
 
@@ -138,20 +138,18 @@ if (!empty($pEstates->getEstateContacts())) {
     $headline = oo_get_contacts_headline($contacts);
     $contact_count = is_array($contacts) ? count($contacts) : 0;
 
-    echo '<h2 class="c-property-details__headline o-headline">';
-    echo $headline;
-    echo '</h2>';
-
-    if ($contact_count > 1) {
-        echo '<div class="c-property-details__contacts-wrapper">';
-    }
 
     foreach ($pEstates->getEstateContacts() as $contact_data) {
         if (!isset($contact_data['id'])) {
             continue;
         }
 
-        echo '<div class="c-property-details__contact c-contact-person">';
+        //  if ($contact_count > 1) {
+        //     echo '<div class="c-property-details__contacts-wrapper">';
+        // }
+
+        echo '<div class="c-property-details__contacts-row o-row">';
+
 
         if ($contact_data['imageUrl']) {
             $image = '';
@@ -185,6 +183,7 @@ if (!empty($pEstates->getEstateContacts())) {
             $contact_image_width_xxxl = '460';
 
             if (!empty($image)) {
+                echo '<div class="c-property-details__contact c-contact-person o-col-12 o-col-md-6">';
                 $contact_link = isset($contact_data['id'])
                     ? $pEstates->getAddressLink($contact_data['id'])
                     : '';
@@ -239,9 +238,10 @@ if (!empty($pEstates->getEstateContacts())) {
                 if (!empty($contact_link)) {
                     echo '</a>';
                 }
+                echo '</div>';
             }
         }
-
+        
         $salutation = $contact_data['Anrede'];
         $title = $contact_data['Titel'];
         $first_name = $contact_data['Vorname'];
@@ -291,11 +291,23 @@ if (!empty($pEstates->getEstateContacts())) {
             !empty($street_output) ||
             !empty($city_output)
         ) {
-            echo '<div class="c-contact-person__content">';
+            echo '<div class="c-contact-person__content o-col-12 o-col-md-6">';
         }
 
+        echo '<h2 class="c-contact-person__headline o-headline">';
+        echo $headline;
+        echo '</h2>';
+
+        echo '<div class="c-contact-person__data-wrapper">';
+
+        if ($job_title) {
+            echo '<p class="c-contact-person__jobtitle">';
+            echo esc_html($job_title);
+            echo '</p>';
+        }
+        
         if ($name_output) {
-            echo '<p class="c-contact-person__name o-headline --h3">';
+            echo '<p class="c-contact-person__name o-headline --h4">';
             echo esc_html($name_output);
             echo '</p>';
         }
@@ -349,6 +361,8 @@ if (!empty($pEstates->getEstateContacts())) {
                 '</p>';
         }
 
+        echo '</div>';
+
         if (
             !empty($name_output) ||
             !empty($address_fields) ||
@@ -359,11 +373,10 @@ if (!empty($pEstates->getEstateContacts())) {
         }
 
         echo '</div>';
+        // if ($contact_count > 1) {
+        //     echo '</div>';
+        // }
     }
-
-    if ($contact_count > 1 == true) {
-        echo '</div>';
-    }
-
     echo '</div>';
+
 } ?>

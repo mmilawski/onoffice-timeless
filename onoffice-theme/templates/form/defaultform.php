@@ -33,7 +33,7 @@ $bg_color = $settings['bg_color'] ?? null;
 } ?>">
 
     <?php if (!empty($pForm->getEstateContextLabel())) {
-        echo '<h2 class="c-form__property-context o-headline">';
+        echo '<h2 class="c-form__property-context o-headline --h1">';
         echo $pForm->getEstateContextLabel();
         echo '</h2>';
     } ?>

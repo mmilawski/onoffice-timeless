@@ -27,10 +27,22 @@
     overflow: hidden;
   }
 
+  &__content {
+    padding-top: 5rem;
+  }
+
+  &__data-wrapper {
+    padding-top: 2.5rem;
+  }
+
+  &__jobtitle {
+    paddding-bottom: .5rem;
+  }
+  
   &__name {
     margin: 0;
     &:not(:last-child) {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
   }
 
