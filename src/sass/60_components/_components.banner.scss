@@ -128,6 +128,12 @@
     }
     &.--content-text & {
     }
+    &.--text-align-center {
+      #{$c-banner}__headline,
+      #{$c-banner}__text {
+        text-align: center;
+      }
+    }
   }
 
   &__form {

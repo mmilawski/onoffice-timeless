@@ -75,6 +75,7 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
                     $text = $slide['text'] ?? null;
                     $buttons = $slide['buttons'] ?? null;
                     $shortcode = $slide['shortcode'] ?? null;
+                    $align_text = $slide['settings']['align_text'] ?? 'left';
 
                     // Settings slide
                     $slide_settings = $slide['settings'] ?? null;
@@ -158,7 +159,7 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
                                 <div class="c-banner__row o-row --position-<?php echo $slide_settings[
                                     'position_content'
                                 ]; ?>">
-                                    <div class="c-banner__content --content-<?php echo $type; ?> o-col-12 o-col-lg-5">
+                                    <div class="c-banner__content --content-<?php echo $type; ?>  --text-align-<?php echo $align_text; ?> o-col-12 o-col-lg-5">
                                         <?php if (!empty($headline['text'])) {
                                             $headline_size =
                                                 $headline['size'] == 'span'
