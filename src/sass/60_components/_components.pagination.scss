@@ -58,6 +58,10 @@
 
     &.--has-icon {
       padding: 0;
+      @include hover() {
+        color: var(--oo-color-mix-primary-contrast-20);
+        background: transparent;
+      }
     }
 
     &.--first,
