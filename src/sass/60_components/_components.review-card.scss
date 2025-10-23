@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   color: var(--oo-color-text);
-  background-color: var(--oo-color-mix-bg-contrast-05);
   overflow: hidden;
 
   &__header {
@@ -80,8 +79,6 @@
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
-      -webkit-line-clamp: 7;
-      line-clamp: 7;
       -webkit-box-orient: vertical;
       transition: max-height 0.25s ease-in-out;
 
@@ -107,18 +104,30 @@
 
   &__title {
   }
+  &__date {
+    color: var(--oo-color-text);
+    .--bg-light & {
+      color: var(--oo-color-light-text, var(--oo-color-text));
+    }
+
+    .--bg-dark & {
+      color: var(--oo-color-dark-text, var(--oo-color-text));
+    }
+
+    .--bg-primary & {
+      color: var(--oo-color-primary-text, var(--oo-color-text));
+    }
+
+    .--bg-secondary & {
+      color: var(--oo-color-secondary-text, var(--oo-color-text));
+    }
+  }
 
   &__stars {
     .c-stars__star {
-    height: 1.25rem;
+      height: 1.25rem;
+    }
   }
-  }
-
-.--bg-transparent {
-  .c-review-card__name {
-    color: var(--oo-color-text);
-  }
-}
   background-color: var(--oo-color-mix-bg-contrast-05);
   .--bg-light & {
     background-color: var(

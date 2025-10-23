@@ -84,7 +84,9 @@ echo $is_image;
         <?php } ?>
 
         <div class="c-review-card__header-right  <?php echo $show_images !==
-        'images' ? '--hide-images' : ''; ?>">
+        'images'
+            ? '--hide-images'
+            : ''; ?>">
             <?php if ($date) { ?>
                 <div class="c-review-card__date"><?php echo $date; ?></div>
             <?php } ?>
