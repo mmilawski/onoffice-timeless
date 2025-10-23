@@ -16,17 +16,6 @@
     height: 100dvh;
     overflow: hidden;
     inset: 0;
-
-    &::after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      background-color: var(--oo-color-transparent-bg-90);
-    }
   }
 
   &__image {
@@ -34,34 +23,37 @@
 
   &__container {
     position: relative;
-    display: flex;
     display: -ms-flexbox;
     display: -webkit-box;
+    display: flex;
     flex-direction: column;
     gap: 1.5rem;
     @include media-breakpoint-up(xl) {
-      gap: 2rem;
+      gap: 3.75rem;
     }
   }
 
   &__content {
     gap: 1.5rem;
-    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
     @include media-breakpoint-up(xl) {
-      gap: 2rem;
-      margin-bottom: 3rem;
+      gap: 2.625rem;
     }
+  }
+
+  &__wrapper {
+    margin-bottom: 1.25rem;
   }
 
   &__boxes {
     display: grid;
-    gap: 1.5rem;
+    gap: 2rem;
     @include media-breakpoint-up(md) {
       grid-template-columns: repeat(2, 1fr);
     }
     @include media-breakpoint-up(xl) {
       grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
     }
   }
 
@@ -74,37 +66,210 @@
   &__buttons {
   }
 
+  &__slider {
+    margin-right: -1rem;
+    margin-left: -1rem;
+
+    @include media-breakpoint-up(md) {
+      margin-right: 0;
+      margin-left: 0;
+    }
+  }
+
   &.--has-bg-image {
-  }
+    #{$c-link-boxes}__content {
+      padding: 1.5rem;
+      border: 2px solid var(--oo-color-bg);
+    }
 
-  &.--bg-light {
-    #{$c-link-boxes}__picture {
-      &::after {
-        background-color: var(--oo-color-light-transparent-bg-80);
+    #{$c-link-boxes}-card {
+      border: 2px solid var(--oo-color-bg);
+    }
+
+    & .c-button {
+      &.--ghost {
+        @include plain-visited() {
+          background-color: var(--oo-color-bg);
+        }
+
+        @include hover() {
+          background-color: var(--oo-color-bg);
+        }
+
+        @include disabled() {
+          background-color: var(--oo-color-bg);
+        }
+
+        &.--on-bg-transparent {
+        }
+
+        &.--on-bg-light {
+          @include plain-visited() {
+            color: var(--oo-color-light-primary, var(--oo-color-primary));
+            border-color: var(
+              --oo-color-light-primary,
+              var(--oo-color-primary)
+            );
+          }
+
+          @include hover() {
+            color: var(--oo-color-light-mix-primary-contrast-40);
+            border-color: var(--oo-color-light-mix-primary-contrast-40);
+          }
+
+          @include focus-visible() {
+            outline-color: var(
+              --oo-color-light-primary,
+              var(--oo-color-primary)
+            );
+          }
+
+          @include active() {
+            color: var(--oo-color-light-primary, var(--oo-color-primary));
+            border-color: var(
+              --oo-color-light-primary,
+              var(--oo-color-primary)
+            );
+          }
+
+          @include disabled() {
+            background-color: var(--oo-color-light-primary);
+            border-color: var(--oo-color-light-primary);
+            outline-color: transparent;
+          }
+        }
+
+        &.--on-bg-dark {
+          @include plain-visited() {
+            color: var(--oo-color-dark-primary, var(--oo-color-primary));
+            border-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+          }
+
+          @include hover() {
+            color: var(--oo-color-dark-mix-primary-contrast-40);
+            border-color: var(--oo-color-dark-mix-primary-contrast-40);
+          }
+
+          @include focus-visible() {
+            outline-color: var(
+              --oo-color-dark-primary,
+              var(--oo-color-primary)
+            );
+          }
+
+          @include active() {
+            color: var(--oo-color-dark-primary, var(--oo-color-primary));
+            border-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+          }
+
+          @include disabled() {
+            background-color: var(--oo-color-dark-primary);
+            border-color: var(--oo-color-dark-primary);
+            outline-color: transparent;
+          }
+        }
+
+        &.--on-bg-primary {
+          @include plain-visited() {
+            color: var(--oo-color-primary-primary, var(--oo-color-primary));
+            border-color: var(
+              --oo-color-primary-primary,
+              var(--oo-color-primary)
+            );
+          }
+
+          @include hover() {
+            color: var(--oo-color-primary-mix-primary-contrast-40);
+            border-color: var(--oo-color-primary-mix-primary-contrast-40);
+          }
+
+          @include focus-visible() {
+            outline-color: var(
+              --oo-color-primary-primary,
+              var(--oo-color-primary)
+            );
+          }
+
+          @include active() {
+            color: var(--oo-color-primary-primary, var(--oo-color-primary));
+            border-color: var(
+              --oo-color-primary-primary,
+              var(--oo-color-primary)
+            );
+          }
+
+          @include disabled() {
+            background-color: var(--oo-color-primary-primary);
+            border-color: var(--oo-color-primary-primary);
+            outline-color: transparent;
+          }
+        }
+
+        &.--on-bg-secondary {
+          @include plain-visited() {
+            color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+            border-color: var(
+              --oo-color-secondary-primary,
+              var(--oo-color-primary)
+            );
+          }
+
+          @include hover() {
+            color: var(--oo-color-secondary-mix-primary-contrast-40);
+            border-color: var(--oo-color-secondary-mix-primary-contrast-40);
+          }
+
+          @include focus-visible() {
+            outline-color: var(
+              --oo-color-secondary-primary,
+              var(--oo-color-primary)
+            );
+          }
+
+          @include active() {
+            color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+            border-color: var(
+              --oo-color-secondary-primary,
+              var(--oo-color-primary)
+            );
+          }
+
+          @include disabled() {
+            background-color: var(--oo-color-secondary-primary);
+            border-color: var(--oo-color-secondary-primary);
+            outline-color: transparent;
+          }
+        }
       }
     }
-  }
 
-  &.--bg-dark {
-    #{$c-link-boxes}__picture {
-      &::after {
-        background-color: var(--oo-color-dark-transparent-bg-80);
+    &.--bg-transparent {
+      #{$c-link-boxes}__content {
+        background-color: var(--oo-color-mix-bg-contrast-05);
       }
     }
-  }
 
-  &.--bg-primary {
-    #{$c-link-boxes}__picture {
-      &::after {
-        background-color: var(--oo-color-primary-transparent-bg-80);
+    &.--bg-light {
+      #{$c-link-boxes}__content {
+        background-color: var(--oo-color-light-mix-bg-contrast-05);
       }
     }
-  }
 
-  &.--bg-secondary {
-    #{$c-link-boxes}__picture {
-      &::after {
-        background-color: var(--oo-color-secondary-transparent-bg-80);
+    &.--bg-dark {
+      #{$c-link-boxes}__content {
+        background-color: var(--oo-color-dark-mix-bg-contrast-05);
+      }
+    }
+
+    &.--bg-primary {
+      #{$c-link-boxes}__content {
+        background-color: var(--oo-color-primary-mix-bg-contrast-05);
+      }
+    }
+
+    &.--bg-secondary {
+      #{$c-link-boxes}__content {
+        background-color: var(--oo-color-secondary-mix-bg-contrast-05);
       }
     }
   }
