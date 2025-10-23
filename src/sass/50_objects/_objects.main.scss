@@ -59,16 +59,12 @@
         }
       }
 
-      .c-banner__media {
-        &:not(.--content-is-left) {
-          margin-top: 3.75rem;
-          height: calc(100% - 3.75rem);
-        }
+      &:not(.--content-is-left) {
+        margin-top: 3.75rem;
+      }
 
-        @include media-breakpoint-up(lg) {
-          margin-top: 2.5rem;
-          height: calc(100% - 2.5rem);
-        }
+      @include media-breakpoint-up(lg) {
+        margin-top: 2.5rem;
       }
     }
   }
