@@ -48,7 +48,7 @@ $translations = [
 $translationsJson = esc_attr(json_encode($translations));
 ?>
 
-<dl class="c-module-login__list --underlined <?php echo '--on-bg-' .
+<dl class="c-module-customer-login__list --underlined <?php echo '--on-bg-' .
     $location; ?>" 
     tabindex="0" 
     role="button" 
@@ -56,14 +56,16 @@ $translationsJson = esc_attr(json_encode($translations));
     aria-label="<?php echo $isLoggedIn
         ? $translations['myAccount']
         : $translations['login']; ?>">
-    <dt class="c-module-login__label"><?php oo_get_icon('user'); ?></dt>
-    <dd class="c-module-login__value">
+    <dt class="c-module-customer-login__label"><?php oo_get_icon(
+        'user',
+    ); ?></dt>
+    <dd class="c-module-customer-login__value">
         <?php if ($isLoggedIn): ?>
-            <a href="<?php echo $internalUrl; ?>" class="c-module-login__link c-link --underlined --on-bg-header"><?php echo $translations[
+            <a href="<?php echo $internalUrl; ?>" class="c-module-customer-login__link c-link --underlined --on-bg-header"><?php echo $translations[
     'myAccount'
 ]; ?></a>
         <?php else: ?>
-            <span class="c-module-login__link c-link --underlined --on-bg-header --open-popup" data-popup="customer-login"><?php echo $translations[
+            <span class="c-module-customer-login__link c-link --underlined --on-bg-header --open-popup" data-popup="customer-login"><?php echo $translations[
                 'login'
             ]; ?></span>
         <?php endif; ?>

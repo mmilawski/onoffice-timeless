@@ -626,16 +626,24 @@
     var(--oo-color-header-primary),
     var(--oo-color-primary)
   );
+
+  #{--oo-color-header-bg-contrast}: contrast-color(
+    var(--oo-color-header-bg),
+    var(--oo-color-bg)
+  );
+
+  #{--oo-color-header-mix-bg-contrast-05}: mix-color-with-contrast(
+    var(--oo-color-header-bg),
+    0.05,
+    var(--oo-color-bg)
+  );
+
   #{--oo-color-header-mix-primary-contrast-20}: mix-color-with-contrast(
     var(--oo-color-header-primary),
     0.2,
     var(--oo-color-primary)
   );
-  #{--oo-color-header-mix-bg-contrast-5}: mix-color-with-contrast(
-    var(--oo-color-header-bg),
-    0.05,
-    var(--oo-color-bg)
-  );
+
   #{--oo-color-header-mix-text-contrast-20}: mix-color-with-contrast(
     var(--oo-color-header-text),
     0.2,
@@ -645,6 +653,13 @@
     var(--oo-color-header-bg),
     var(--oo-color-header-text),
     0.4,
+    var(--oo-color-bg),
+    var(--oo-color-text)
+  );
+  #{--oo-color-header-mix-bg-text-50}: mix-colors(
+    var(--oo-color-header-bg),
+    var(--oo-color-header-text),
+    0.5,
     var(--oo-color-bg),
     var(--oo-color-text)
   );
