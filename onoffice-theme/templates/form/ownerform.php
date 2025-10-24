@@ -23,14 +23,9 @@ include get_template_directory() . '/onoffice-theme/templates/fields.php';
 // ACF
 // Settings
 $settings = get_field('settings') ?? [];
-$bg_color = $settings['bg_color'] ?? null;
 ?>
 
-<form method="post" action="#onoffice-form" id="onoffice-form-<?php echo $pForm->getFormNo(); ?>" class="c-form --is-owner-form <?php if (
-    !empty($bg_color)
-) {
-    echo '--on-' . $bg_color;
-} ?>">
+<form method="post" action="#onoffice-form" id="onoffice-form-<?php echo $pForm->getFormNo(); ?>" class="c-form --is-owner-form">
 
     <input type="hidden" name="oo_formid" value="<?php echo $pForm->getFormId(); ?>">
     <input type="hidden" name="oo_formno" value="<?php echo $pForm->getFormNo(); ?>">
@@ -89,7 +84,7 @@ foreach ($pForm->getInputFields() as $input => $table) {
         '</p>';
 } ?>
 
-    <div class="c-form__fieldset --<?php echo $bg_color; ?>">
+    <div class="c-form__fieldset">
         <div class="c-form__header">
             <legend class="c-form__legend"><?php esc_html_e(
                 'Ihre Kontaktdaten',
@@ -107,7 +102,7 @@ foreach ($pForm->getInputFields() as $input => $table) {
         </div>
     </div>
 
-    <div class="c-form__fieldset --<?php echo $bg_color; ?>">
+    <div class="c-form__fieldset">
         <div class="c-form__header">
             <legend class="c-form__legend"><?php esc_html_e(
                 'Angaben zu Ihrem Eigentum',

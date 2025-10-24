@@ -23,14 +23,9 @@ include get_template_directory() . '/onoffice-theme/templates/fields.php';
 // ACF
 // Settings
 $settings = get_field('settings') ?? [];
-$bg_color = $settings['bg_color'] ?? null;
 ?>
 
-<form method="post" action="#onoffice-form" id="onoffice-form-<?php echo $pForm->getFormNo(); ?>" class="c-form --is-contact-form <?php if (
-    !empty($bg_color)
-) {
-    echo '--on-' . $bg_color;
-} ?>">
+<form method="post" action="#onoffice-form" id="onoffice-form-<?php echo $pForm->getFormNo(); ?>" class="c-form --is-contact-form">
 
     <?php if (!empty($pForm->getEstateContextLabel())) {
         echo '<h2 class="c-form__property-context o-headline">';
@@ -67,7 +62,7 @@ foreach ($pForm->getInputFields() as $input => $table) {
         '</p>';
 } ?>
 
-    <div class="c-form__fieldset --<?php echo $bg_color; ?>">
+    <div class="c-form__fieldset">
         <div class="c-form__header">
             <legend class="c-form__legend"><?php esc_html_e(
                 'Ihre Kontaktdaten',
