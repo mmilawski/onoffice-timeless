@@ -21,6 +21,12 @@
   }
 
   &__autoslide-toggle {
+    outline: $outline !important;
+    outline-offset: $outline-offset !important;
+
+    @include focus-visible() {
+      outline-color: var(--oo-color-primary) !important;
+    }
   }
 
   &__controls {
@@ -511,9 +517,14 @@
         outline-color: var(--oo-color-light-text) !important;
       }
     }
+
+    #{$c-slider}__autoslide-toggle {
+      @include focus-visible() {
+        outline-color: var(--oo-color-light-text) !important;
+      }
+    }
   }
 
-  &.--on-bg-dark,
   .--bg-dark & {
     #{$c-slider}__page {
       @include plain-visited() {
@@ -546,9 +557,14 @@
         outline-color: var(--oo-color-dark-text) !important;
       }
     }
+
+    #{$c-slider}__autoslide-toggle {
+      @include focus-visible() {
+        outline-color: var(--oo-color-dark-text) !important;
+      }
+    }
   }
 
-  &.--on-bg-primary,
   .--bg-primary & {
     #{$c-slider}__page {
       @include plain-visited() {
@@ -581,9 +597,14 @@
         outline-color: var(--oo-color-primary-text) !important;
       }
     }
+
+    #{$c-slider}__autoslide-toggle {
+      @include focus-visible() {
+        outline-color: var(--oo-color-primary-text) !important;
+      }
+    }
   }
 
-  &.--on-bg-secondary,
   .--bg-secondary & {
     #{$c-slider}__page {
       @include plain-visited() {
@@ -616,9 +637,14 @@
         outline-color: var(--oo-color-secondary-text) !important;
       }
     }
+
+    #{$c-slider}__autoslide-toggle {
+      @include focus-visible() {
+        outline-color: var(--oo-color-primary-text) !important;
+      }
+    }
   }
 
-  &.--on-bg-footer,
   .--bg-footer & {
     #{$c-slider}__page {
       @include plain-visited() {
@@ -651,9 +677,14 @@
         outline-color: var(--oo-color-footer-text) !important;
       }
     }
+
+    #{$c-slider}__autoslide-toggle {
+      @include focus-visible() {
+        outline-color: var(--oo-color-secondary-text) !important;
+      }
+    }
   }
 
-  &.--on-bg-transparent,
   .--bg-transparent & {
     #{$c-slider}__page {
       @include plain-visited() {
@@ -682,6 +713,12 @@
     }
 
     #{$c-slider}__arrow {
+      @include focus-visible() {
+        outline-color: var(--oo-color-text) !important;
+      }
+    }
+
+    #{$c-slider}__autoslide-toggle {
       @include focus-visible() {
         outline-color: var(--oo-color-text) !important;
       }

@@ -170,11 +170,17 @@
   }
 
   &__video-playback-toggle {
+    outline: $outline !important;
+    outline-offset: $outline-offset !important;
     position: absolute;
     bottom: 1rem;
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
+
+    @include focus-visible() {
+      outline-color: var(--oo-color-text) !important;
+    }
 
     &[aria-pressed='false'] {
       #{$c-banner}__icon.--play {
@@ -198,23 +204,53 @@
   &.--bg-light {
     color: var(--oo-color-light-text, var(--oo-color-text));
     background-color: var(--oo-color-light-bg, var(--oo-color-bg));
+
+    #{$c-banner}__video-playback-toggle {
+      @include focus-visible() {
+        outline-color: var(--oo-color-light-text) !important;
+      }
+    }
   }
   &.--bg-dark {
     color: var(--oo-color-dark-text, var(--oo-color-text));
     background-color: var(--oo-color-dark-bg, var(--oo-color-bg));
+
+    #{$c-banner}__video-playback-toggle {
+      @include focus-visible() {
+        outline-color: var(--oo-color-dark-text) !important;
+      }
+    }
   }
   &.--bg-primary {
     color: var(--oo-color-primary-text, var(--oo-color-text));
     background-color: var(--oo-color-primary-bg, var(--oo-color-bg));
+
+    #{$c-banner}__video-playback-toggle {
+      @include focus-visible() {
+        outline-color: var(--oo-color-primary-text) !important;
+      }
+    }
   }
   &.--bg-secondary {
     color: var(--oo-color-secondary-text, var(--oo-color-text));
     background-color: var(--oo-color-secondary-bg, var(--oo-color-bg));
+
+    #{$c-banner}__video-playback-toggle {
+      @include focus-visible() {
+        outline-color: var(--oo-color-secondary-text) !important;
+      }
+    }
   }
 
   &.--bg-transparent {
     color: var(--oo-color-transparent-text);
     background-color: var(--oo-color-transparent-bg);
+
+    #{$c-banner}__video-playback-toggle {
+      @include focus-visible() {
+        outline-color: var(--oo-color-text) !important;
+      }
+    }
   }
 
   & + *:not(&) {
