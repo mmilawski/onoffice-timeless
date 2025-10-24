@@ -33,7 +33,6 @@ $is_banner = !empty($slider);
 
 // Settings
 $settings = get_field('settings') ?? [];
-$bg_color = $settings['bg_color'] ?? 'bg-transparent';
 
 if (get_field('property_search_result')) {
     $result = get_field('property_search_result') ?? null;
@@ -53,8 +52,6 @@ $formId = sanitize_key($getListName());
      echo '--is-banner-search-form';
  } else {
      echo '--is-search-form ';
- } ?> <?php if (!empty($bg_color)) {
-     echo ' --on-' . $bg_color;
  } ?>" data-estate-search-name="<?php echo esc_attr($getListName()); ?>">
     <div class="c-form__fieldset">
         <div class="c-form__body">
@@ -87,11 +84,7 @@ $formId = sanitize_key($getListName());
                             ); ?>
                         </button>
 
-                        <button class="c-form__button c-button <?php if (
-                            !empty($bg_color)
-                        ) {
-                            echo '--on-' . $bg_color;
-                        } ?>">
+                        <button class="c-form__button c-button">
                             <?php echo esc_attr__('Suchen', 'oo_theme'); ?>
                         </button>
                     <?php }
@@ -104,11 +97,7 @@ $formId = sanitize_key($getListName());
                         $formId,
                     ); ?>
                     <?php if ($number == $fields_counter - 1) { ?>
-                        <button class="c-form__button c-button <?php if (
-                            !empty($bg_color)
-                        ) {
-                            echo '--on-' . $bg_color;
-                        } ?>">
+                        <button class="c-form__button c-button">
                             <?php echo esc_attr__('Suchen', 'oo_theme'); ?>
                         </button>
                     <?php }
