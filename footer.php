@@ -164,20 +164,24 @@ $company_name = $company['name'] ?? (get_bloginfo('name') ?? null);
 
                                 $locale = get_locale() ?: '';
                                 $lang = substr($locale, 0, 2);
-                                
+
                                 $barrier_urls = [
-                                    'de' => 'https://onoffice.com/barriere-gefunden/?wpf23379_106=',
-                                    'en' => 'https://onoffice.com/en/barrier-found/?wpf24395_106=',
-                                    'it' => 'https://it.onoffice.com/barriera-riscontrata/?wpf7104_23=',
-                                    'es' => 'https://es.onoffice.com/encontrado-barrera/?wpf10467_10=',
-                                    'hr' => 'https://hr.onoffice.com/pronadena-prepreka/?wpf2917_10=',
+                                    'de' =>
+                                        'https://onoffice.com/barriere-gefunden/?wpf23379_106=',
+                                    'en' =>
+                                        'https://onoffice.com/en/barrier-found/?wpf24395_106=',
+                                    'it' =>
+                                        'https://it.onoffice.com/barriera-riscontrata/?wpf7104_23=',
+                                    'es' =>
+                                        'https://es.onoffice.com/encontrado-barrera/?wpf10467_10=',
+                                    'hr' =>
+                                        'https://hr.onoffice.com/pronadena-prepreka/?wpf2917_10=',
                                 ];
 
-                                if (array_key_exists($lang, $barrier_urls)) {
-                                    $barrier_found_url = $barrier_urls[$lang] . $param_value;
-                                } else {
-                                    $barrier_found_url = $barrier_urls['de'] . $param_value;
-                                }
+                                $barrier_found_url =
+                                    ($barrier_urls[$lang] ??
+                                        $barrier_urls['de']) .
+                                    $param_value;
                                 ?>
                                 <a class="c-footer-nav__link --is-top-level"
                                 target="_blank"
