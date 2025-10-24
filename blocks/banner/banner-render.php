@@ -199,8 +199,6 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
                                                     [
                                                         'buttons' =>
                                                             $buttons['buttons'],
-                                                        'additional_button_class' =>
-                                                            '--on-' . $bg_color,
                                                         'additional_container_class' =>
                                                             'c-banner__buttons',
                                                     ],

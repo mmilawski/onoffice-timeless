@@ -484,7 +484,6 @@
     }
   }
 
-  &.--on-bg-light,
   .--bg-light & {
     #{$c-slider}__page {
       @include plain-visited() {
