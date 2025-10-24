@@ -21,23 +21,19 @@ $pause_on_hover = filter_var(
 );
 $slide_speed = intval(get_field('slide_speed') ?? 1000);
 
-// --- NEW LOGIC START ---
 // Check if all slides have content type 'none'
-$all_slides_are_none = true; // Assume all slides are 'none' by default
+$all_slides_are_none = true;
 if ($slide_count > 0) {
     foreach ($slider as $slide) {
         $type = $slide['type'] ?? null;
         if ($type !== 'none') {
-            $all_slides_are_none = false; // Found a slide with content
-            break; // No need to check the rest
+            $all_slides_are_none = false;
+            break;
         }
     }
 }
 
-// Prepare the class string to be added to the banner
 $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
-
-// --- NEW LOGIC END ---
 ?>
 
 <div <?php oo_block_id($block); ?> class="c-banner --<?php
@@ -222,11 +218,10 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
                                                 ); ?>
                                             <?php } ?>
                                         <?php endif; ?>
-                                    </div> <!-- end of c-banner__content -->
-                                </div><!-- end of c-banner__row -->
-                            </div> <!-- end of c-banner__container -->
+                                    </div>
+                                </div>
+                            </div>
                         <?php endif; ?>
-                        <!-- -->
                         <div class="c-banner__media o-container<?php if (
                             $type != 'none'
                         ) {
@@ -346,25 +341,23 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
                                     </span>
 
                                     <?php echo oo_get_icon('play', true, [
-                                        'class' => 'c-banner__icon --play',
+                                        'class' =>
+                                            'c-banner__icon c-icon-button__icon --play',
                                         'aria-hidden' => 'true',
                                     ]); ?>
 
                                     <?php echo oo_get_icon('pause', true, [
-                                        'class' => 'c-banner__icon --pause',
+                                        'class' =>
+                                            'c-banner__icon c-icon-button__icon --pause',
                                         'aria-hidden' => 'true',
                                     ]); ?>
                                 </button>
                             <?php endif; ?>
-                        </div> <!-- end of c-banner__media -->
-                        <!-- -->
-
-
-                        
-                    </div> <!-- end c-banner__slide -->
+                        </div>
+                    </div>
                 <?php $first_slide = false;
                 } ?>
-            </div> <!-- end of c-slider__list-->
+            </div>
 
         <?php if ($slide_count > 1) { ?>
             <div class="c-slider__controls-container o-container">
@@ -393,8 +386,8 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
                                     'c-slider__icon c-icon-button__icon splide__icon splide__toggle --pause',
                             ]); ?>
                         </button>
-                    <?php } ?> <!-- end of if autoslide-->
-                </div> <!-- end of slider controls -->
+                    <?php } ?>
+                </div>
                 <div class="c-slider__arrows splide__arrows">
                     <button class="c-slider__arrow c-icon-button c-slider__arrow--prev splide__arrow splide__arrow--prev">
                         <span class="u-screen-reader-only"><?php esc_html_e(
@@ -417,8 +410,8 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
                         ]); ?>
                     </button>
                 </div>
-            </div> <!-- end of new slider-controls-container -->
-        </div> <!-- end of c-slider__track -->
-    </div> <!-- end c-banner__slider -->
-<?php } ?> <!-- end of > 1 slide condition -->
-</div> <!-- end of banner -->
+            </div>
+        </div>
+    </div>
+<?php } ?>
+</div>

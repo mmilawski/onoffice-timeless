@@ -35,7 +35,6 @@
   }
 
   @include disabled() {
-    background-color: var(--oo-color-primary);
     opacity: 0.2;
     outline-color: transparent;
     cursor: default;
@@ -82,7 +81,6 @@
     }
 
     @include disabled() {
-      background-color: var(--oo-color-light-primary, var(--oo-color-primary));
       outline-color: transparent;
     }
   }
@@ -108,7 +106,6 @@
     }
 
     @include disabled() {
-      background-color: var(--oo-color-dark-primary);
       outline-color: transparent;
     }
   }
@@ -134,7 +131,6 @@
     }
 
     @include disabled() {
-      background-color: var(--oo-color-primary-primary);
       outline-color: transparent;
     }
   }
@@ -160,7 +156,6 @@
     }
 
     @include disabled() {
-      background-color: var(--oo-color-secondary-primary);
       outline-color: transparent;
     }
   }
@@ -185,7 +180,6 @@
     }
 
     @include disabled() {
-      background-color: var(--oo-color-primary);
       outline-color: transparent;
     }
   }
@@ -194,7 +188,7 @@
   .--bg-footer & {
     @include plain-visited() {
       color: var(--oo-color-footer-contrast-bg);
-      background-color: var(--oo-color-header-mix-bg-contrast-05);
+      background-color: var(--oo-color-footer-mix-bg-contrast-05);
     }
 
     @include hover() {
@@ -211,7 +205,6 @@
     }
 
     @include disabled() {
-      background-color: var(--oo-color-footer-primary);
       outline-color: transparent;
     }
   }
@@ -237,7 +230,6 @@
     }
 
     @include disabled() {
-      background-color: var(--oo-color-primary);
       outline-color: transparent;
     }
   }

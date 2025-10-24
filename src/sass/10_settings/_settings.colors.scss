@@ -675,6 +675,13 @@
     var(--oo-color-footer-primary),
     var(--oo-color-primary)
   );
+
+  #{--oo-color-footer-mix-bg-contrast-05}: mix-color-with-contrast(
+    var(--oo-color-footer-bg),
+    0.05,
+    var(--oo-color-bg)
+  );
+
   #{--oo-color-footer-mix-text-contrast-30}: mix-color-with-contrast(
     var(--oo-color-footer-text),
     0.3,
