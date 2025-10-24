@@ -29,7 +29,9 @@ $paged = is_home() || is_front_page() ? 'page' : 'paged';
 $no_found_rows = false;
 
 // Posiiton
-$posiiton_center = !empty($text['wysiwyg']) ? ' u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8' : '';
+$posiiton_center = !empty($text['wysiwyg'])
+    ? ' u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8'
+    : '';
 
 $query_args = [
     'post_type' => 'oo_reviews',
