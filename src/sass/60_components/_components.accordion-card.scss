@@ -98,15 +98,11 @@
     margin-top: 1rem;
     margin-right: 0;
     transition: max-height 0.25s ease-in-out;
-
-    @include media-breakpoint-up(xl) {
-      max-width: 75%;
-    }
-
-    .--is-open & {
+      .--is-open & {
       max-height: 100rem;
     }
   }
+
   background-color: var(--oo-color-mix-bg-contrast-05);
 
   .--bg-light & {
