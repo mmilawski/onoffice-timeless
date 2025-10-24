@@ -33,7 +33,7 @@ $image_width_xxxl = '458';
 $uniqid = 'review-' . uniqid();
 ?>
 
-<article class="c-review-card --bg-transparent <?php
+<article class="c-review-card <?php
 if ($is_slider) {
     echo '--on-slider c-slider__slide splide__slide';
 }

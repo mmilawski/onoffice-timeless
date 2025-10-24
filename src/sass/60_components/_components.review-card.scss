@@ -2,7 +2,6 @@
   $c-review-card: &;
   display: flex;
   flex-direction: column;
-  color: var(--oo-color-text);
   overflow: hidden;
 
   &__header {
@@ -105,22 +104,6 @@
   &__title {
   }
   &__date {
-    color: var(--oo-color-text);
-    .--bg-light & {
-      color: var(--oo-color-light-text, var(--oo-color-text));
-    }
-
-    .--bg-dark & {
-      color: var(--oo-color-dark-text, var(--oo-color-text));
-    }
-
-    .--bg-primary & {
-      color: var(--oo-color-primary-text, var(--oo-color-text));
-    }
-
-    .--bg-secondary & {
-      color: var(--oo-color-secondary-text, var(--oo-color-text));
-    }
   }
 
   &__stars {
