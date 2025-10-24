@@ -5,12 +5,20 @@
   [class^='o-col-'],
   [class*=' o-col-'],
   .o-col {
-    &.c-accordion__text{
+    &.c-accordion__text {
       padding: 1.5rem 1rem 1rem 1rem;
+      @include media-breakpoint-up(lg) {
+        padding-left: 0;
+        padding-right: 0;
+      }
     }
-    &.c-accordion__headline{
+    &.c-accordion__headline {
       padding-left: 1rem;
       padding-right: 1rem;
+      @include media-breakpoint-up(lg) {
+        padding-left: 0;
+        padding-right: 0;
+      }
     }
     padding-left: 0;
     padding-right: 0;
