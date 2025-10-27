@@ -22,9 +22,6 @@ $background_width_lg = '1200';
 $background_width_xl = '1400';
 $background_width_xxl = '1600';
 $background_width_xxxl = '1920';
-
-// Position
-$position_center = !empty($text['wysiwyg']) ? ' --position-center' : '';
 ?>
 
 <section <?php oo_block_id(
@@ -70,7 +67,8 @@ $position_center = !empty($text['wysiwyg']) ? ' --position-center' : '';
  
     <div class="c-link-boxes__container o-container">
         <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
-            <div class="c-link-boxes__content o-row <?php echo $position_center; ?>">
+            <div class="c-link-boxes__wrapper o-row">
+                <div class="c-link-boxes__content o-col-12 o-col-lg-10 o-col-xl-8 u-offset-lg-1">
                 <?php if (!empty($headline['text'])) { ?>
                     <?php oo_get_template(
                         'components',
@@ -79,16 +77,17 @@ $position_center = !empty($text['wysiwyg']) ? ' --position-center' : '';
                         [
                             'headline' => $headline,
                             'additional_headline_class' =>
-                                'c-link-boxes__headline o-col-12 o-col-lg-10 o-col-xl-8',
+                                'c-link-boxes__headline',
                         ],
                     ); ?>
             <?php } ?>
 
             <?php if (!empty($text['wysiwyg'])) { ?>
-                    <div class="c-link-boxes__text o-text o-col-12 o-col-lg-10 o-col-xl-8 --is-wysiwyg">
+                    <div class="c-link-boxes__text o-text --is-wysiwyg">
                         <?php echo $text['wysiwyg']; ?>
                     </div>
                 <?php } ?>
+            </div>
             </div>
         <?php } ?>
     
@@ -135,14 +134,14 @@ $position_center = !empty($text['wysiwyg']) ? ' --position-center' : '';
         <?php } ?>
 
         <?php if (!empty($buttons['buttons'][0]['link'])) { ?>
-            <div class="c-link-boxes__buttons-wrapper o-row --position-center">
+            <div class="c-link-boxes__buttons-wrapper o-row">
                 <?php oo_get_template('components', '', 'component-buttons', [
                     'buttons' => $buttons['buttons'],
                     'additional_button_class' => $bg_color
                         ? '--on-' . $bg_color
                         : '',
                     'additional_container_class' =>
-                        'c-link-boxes__buttons --position-center o-col-12',
+                        'c-link-boxes__buttons o-col-12 o-col-lg-10 o-col-xl-8 u-offset-lg-1',
                 ]); ?>
             </div>
         <?php } ?>
