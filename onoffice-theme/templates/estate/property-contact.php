@@ -138,18 +138,12 @@ if (!empty($pEstates->getEstateContacts())) {
     $headline = oo_get_contacts_headline($contacts);
     $contact_count = is_array($contacts) ? count($contacts) : 0;
 
-
     foreach ($pEstates->getEstateContacts() as $contact_data) {
         if (!isset($contact_data['id'])) {
             continue;
         }
 
-        //  if ($contact_count > 1) {
-        //     echo '<div class="c-property-details__contacts-wrapper">';
-        // }
-
         echo '<div class="c-property-details__contacts-row o-row">';
-
 
         if ($contact_data['imageUrl']) {
             $image = '';
@@ -241,7 +235,7 @@ if (!empty($pEstates->getEstateContacts())) {
                 echo '</div>';
             }
         }
-        
+
         $salutation = $contact_data['Anrede'];
         $title = $contact_data['Titel'];
         $first_name = $contact_data['Vorname'];
@@ -305,7 +299,7 @@ if (!empty($pEstates->getEstateContacts())) {
             echo esc_html($job_title);
             echo '</p>';
         }
-        
+
         if ($name_output) {
             echo '<p class="c-contact-person__name o-headline --h4">';
             echo esc_html($name_output);
@@ -373,10 +367,6 @@ if (!empty($pEstates->getEstateContacts())) {
         }
 
         echo '</div>';
-        // if ($contact_count > 1) {
-        //     echo '</div>';
-        // }
     }
     echo '</div>';
-
 } ?>

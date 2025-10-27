@@ -360,12 +360,12 @@
       }
     }
     &:not(.is-overflow) {
-    > #{$c-slider}__navigation,
-    > #{$c-slider}__progress,
-    > #{$c-slider}__arrows {
-      display: flex;
+      > #{$c-slider}__navigation,
+      > #{$c-slider}__progress,
+      > #{$c-slider}__arrows {
+        display: flex;
+      }
     }
-  }
   }
 
   &.--is-banner-slider {

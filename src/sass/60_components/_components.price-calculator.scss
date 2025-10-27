@@ -10,12 +10,10 @@
     gap: 5rem;
   }
 
-
   &__overview {
     width: 100%;
     display: grid;
     gap: 0.5rem;
-
 
     @include media-breakpoint-up(md) {
       order: 1;
@@ -30,7 +28,7 @@
 
     &.--is-total-cost {
       font-weight: $font-weight-text-bold;
-      margin-top: .5rem;
+      margin-top: 0.5rem;
     }
   }
 
@@ -53,7 +51,6 @@
     @include media-breakpoint-up(xl) {
       gap: 10rem;
     }
-
   }
 
   &__value {

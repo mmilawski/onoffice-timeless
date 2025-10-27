@@ -248,10 +248,16 @@ while ($current_property = $pEstates->estateIterator()) {
                             // --- SECRET SALE: PLACEHOLDER TITLE & PRICE ---
                             ?>
                             <h1 class="c-property-details__title o-headline --h2">
-                                <?php esc_html_e('Exklusives Objekt', 'oo_theme'); ?>
+                                <?php esc_html_e(
+                                    'Exklusives Objekt',
+                                    'oo_theme',
+                                ); ?>
                             </h1>
                             <p class="c-property-details__price o-headline --h3">
-                                <?php esc_html_e('Kaufpreis', 'oo_theme'); ?>: xxx.xxx
+                                <?php esc_html_e(
+                                    'Kaufpreis',
+                                    'oo_theme',
+                                ); ?>: xxx.xxx
                             </p>
                         <?php else: ?>
                         <?php if (
@@ -299,7 +305,8 @@ while ($current_property = $pEstates->estateIterator()) {
                                 ?>
                                 <button class="c-property-details__favorite c-icon-button" data-onoffice-property-id="<?php echo $property_id; ?>" aria-label="<?php echo $favorite_text; ?>">
                                     <?php oo_get_icon($favorite_icon, true, [
-                                        'class' => 'c-icon-button__icon --favorite',
+                                        'class' =>
+                                            'c-icon-button__icon --favorite',
                                     ]); ?>
                                 </button>
                             <?php
@@ -325,7 +332,8 @@ while ($current_property = $pEstates->estateIterator()) {
 
                                 $price_value = $current_property[$price_field];
                                 if (
-                                    (is_numeric($price_value) && 0 == $price_value) ||
+                                    (is_numeric($price_value) &&
+                                        0 == $price_value) ||
                                     $price_value == '0000-00-00' ||
                                     $price_value == '0.00' ||
                                     $price_value == '' ||
@@ -336,7 +344,9 @@ while ($current_property = $pEstates->estateIterator()) {
                                 ?>
                                 <p class="c-property-details__price o-headline --h3">
                                     <?php
-                                    esc_html_e($pEstates->getFieldLabel($price_field));
+                                    esc_html_e(
+                                        $pEstates->getFieldLabel($price_field),
+                                    );
 
                                     echo ':';
                                     ?>
@@ -384,15 +394,22 @@ while ($current_property = $pEstates->estateIterator()) {
                             <div class="c-slider__list splide__list">
                                 <?php foreach ($sorted_pictures as $id) {
 
-                                    $picture_values = $pEstates->getEstatePictureValues($id);
+                                    $picture_values = $pEstates->getEstatePictureValues(
+                                        $id,
+                                    );
 
-                                    if ($picture_values['type'] === 'Grundriss') {
+                                    if (
+                                        $picture_values['type'] === 'Grundriss'
+                                    ) {
                                         continue;
                                     }
                                     // Image alt text
                                     $image_alt = $picture_values['title']
                                         ? esc_html($picture_values['title'])
-                                        : esc_html__('Immobilienbild', 'oo_theme');
+                                        : esc_html__(
+                                            'Immobilienbild',
+                                            'oo_theme',
+                                        );
 
                                     // Image width variants
                                     $image_widths = [
@@ -406,26 +423,50 @@ while ($current_property = $pEstates->estateIterator()) {
                                     ];
 
                                     $image = [
-                                        'url' => $pEstates->getEstatePictureUrl($id),
+                                        'url' => $pEstates->getEstatePictureUrl(
+                                            $id,
+                                        ),
                                         'alt' => $image_alt,
                                     ];
 
                                     // Lightbox Cloud Image
-                                    $lightbox_url = 'https://acnaayzuen.cloudimg.io/v7/' . $image['url'] . '?force_format=webp&org_if_sml=1';
+                                    $lightbox_url =
+                                        'https://acnaayzuen.cloudimg.io/v7/' .
+                                        $image['url'] .
+                                        '?force_format=webp&org_if_sml=1';
 
                                     $lightbox_image_size_list = [
-                                        ['id' => 'mobile', 'breakpoint' => 767, 'image_size' => 767],
-                                        ['id' => 'tablet', 'breakpoint' => 768, 'image_size' => 1200],
-                                        ['id' => 'desktop', 'breakpoint' => 1200, 'image_size' => 1920],
+                                        [
+                                            'id' => 'mobile',
+                                            'breakpoint' => 767,
+                                            'image_size' => 767,
+                                        ],
+                                        [
+                                            'id' => 'tablet',
+                                            'breakpoint' => 768,
+                                            'image_size' => 1200,
+                                        ],
+                                        [
+                                            'id' => 'desktop',
+                                            'breakpoint' => 1200,
+                                            'image_size' => 1920,
+                                        ],
                                     ];
 
                                     // Responsive image helpers
                                     $lightbox_image_breakpoints = '';
                                     $lightbox_image_sizes = '';
 
-                                    foreach ($lightbox_image_size_list as $key => $size) {
-                                        $is_first = ($key === 0);
-                                        $is_last = ($key === array_key_last($lightbox_image_size_list));
+                                    foreach (
+                                        $lightbox_image_size_list
+                                        as $key => $size
+                                    ) {
+                                        $is_first = $key === 0;
+                                        $is_last =
+                                            $key ===
+                                            array_key_last(
+                                                $lightbox_image_size_list,
+                                            );
                                         $separator = $is_last ? '' : ',';
 
                                         if ($is_first) {
@@ -441,12 +482,30 @@ while ($current_property = $pEstates->estateIterator()) {
                                     
                                     <a class="c-property-details__gallery-link glightbox c-slider__slide splide__slide"
                                     data-gallery="gallery"
-                                    href="<?php echo esc_url($lightbox_url) . '&w=' . end($lightbox_image_size_list)['image_size']; ?>"
-                                    data-sizes="<?php echo esc_attr($lightbox_image_breakpoints); ?>"
-                                    data-srcset="<?php echo esc_attr($lightbox_image_sizes); ?>"
-                                    data-caption="<?php echo esc_attr($image['alt']); ?>"
-                                    title="<?php echo esc_attr($image['alt']); ?>"
-                                    aria-label="<?php echo sprintf(esc_attr_x('Bild %s vergrößert anzeigen', 'oo_theme'), $image['alt']); ?>">
+                                    href="<?php echo esc_url($lightbox_url) .
+                                        '&w=' .
+                                        end($lightbox_image_size_list)[
+                                            'image_size'
+                                        ]; ?>"
+                                    data-sizes="<?php echo esc_attr(
+                                        $lightbox_image_breakpoints,
+                                    ); ?>"
+                                    data-srcset="<?php echo esc_attr(
+                                        $lightbox_image_sizes,
+                                    ); ?>"
+                                    data-caption="<?php echo esc_attr(
+                                        $image['alt'],
+                                    ); ?>"
+                                    title="<?php echo esc_attr(
+                                        $image['alt'],
+                                    ); ?>"
+                                    aria-label="<?php echo sprintf(
+                                        esc_attr_x(
+                                            'Bild %s vergrößert anzeigen',
+                                            'oo_theme',
+                                        ),
+                                        $image['alt'],
+                                    ); ?>">
 
                                         <?php oo_get_template(
                                             'components',
@@ -454,33 +513,114 @@ while ($current_property = $pEstates->estateIterator()) {
                                             'component-image',
                                             [
                                                 'image' => $image,
-                                                'picture_class' => 'c-property-details__gallery-picture o-picture',
-                                                'image_class' => 'c-property-details__gallery-image o-image',
+                                                'picture_class' =>
+                                                    'c-property-details__gallery-picture o-picture',
+                                                'image_class' =>
+                                                    'c-property-details__gallery-image o-image',
                                                 'dimensions' => [
-                                                    '575' => ['w' => $image_widths['xs'], 'h' => round(($image_widths['xs'] * 2) / 3)],
-                                                    '1600' => ['w' => $image_widths['xxxl'], 'h' => $image_widths['xxxl']],
-                                                    '1400' => ['w' => $image_widths['xxl'], 'h' => $image_widths['xxl']],
-                                                    '1200' => ['w' => $image_widths['xl'], 'h' => $image_widths['xl']],
-                                                    '992'  => ['w' => $image_widths['lg'], 'h' => $image_widths['lg']],
-                                                    '768'  => ['w' => $image_widths['md'], 'h' => round(($image_widths['md'] * 2) / 3)],
-                                                    '576'  => ['w' => $image_widths['sm'], 'h' => round(($image_widths['sm'] * 2) / 3)],
+                                                    '575' => [
+                                                        'w' =>
+                                                            $image_widths['xs'],
+                                                        'h' => round(
+                                                            ($image_widths[
+                                                                'xs'
+                                                            ] *
+                                                                2) /
+                                                                3,
+                                                        ),
+                                                    ],
+                                                    '1600' => [
+                                                        'w' =>
+                                                            $image_widths[
+                                                                'xxxl'
+                                                            ],
+                                                        'h' =>
+                                                            $image_widths[
+                                                                'xxxl'
+                                                            ],
+                                                    ],
+                                                    '1400' => [
+                                                        'w' =>
+                                                            $image_widths[
+                                                                'xxl'
+                                                            ],
+                                                        'h' =>
+                                                            $image_widths[
+                                                                'xxl'
+                                                            ],
+                                                    ],
+                                                    '1200' => [
+                                                        'w' =>
+                                                            $image_widths['xl'],
+                                                        'h' =>
+                                                            $image_widths['xl'],
+                                                    ],
+                                                    '992' => [
+                                                        'w' =>
+                                                            $image_widths['lg'],
+                                                        'h' =>
+                                                            $image_widths['lg'],
+                                                    ],
+                                                    '768' => [
+                                                        'w' =>
+                                                            $image_widths['md'],
+                                                        'h' => round(
+                                                            ($image_widths[
+                                                                'md'
+                                                            ] *
+                                                                2) /
+                                                                3,
+                                                        ),
+                                                    ],
+                                                    '576' => [
+                                                        'w' =>
+                                                            $image_widths['sm'],
+                                                        'h' => round(
+                                                            ($image_widths[
+                                                                'sm'
+                                                            ] *
+                                                                2) /
+                                                                3,
+                                                        ),
+                                                    ],
                                                 ],
-                                            ]
+                                            ],
                                         ); ?>
                                     </a>
-                                <?php } ?>
+                                <?php
+                                } ?>
                             </div>
                         </div>
 
                         <div class="c-slider__navigation splide__navigation">
                             <div class="c-slider__arrows splide__arrows">
                                 <button class="c-slider__arrow c-slider__arrow--prev splide__arrow splide__arrow--prev">
-                                    <span class="u-screen-reader-only"><?php esc_html_e('Vorheriges', 'oo_theme'); ?></span>
-                                    <?php echo oo_get_icon('chevron-left', true, ['class' => 'c-slider__icon splide__icon']); ?>
+                                    <span class="u-screen-reader-only"><?php esc_html_e(
+                                        'Vorheriges',
+                                        'oo_theme',
+                                    ); ?></span>
+                                    <?php echo oo_get_icon(
+                                        'chevron-left',
+                                        true,
+                                        [
+                                            'class' =>
+                                                'c-slider__icon splide__icon',
+                                        ],
+                                    ); ?>
                                 </button>
                                 <button class="c-slider__arrow c-slider__arrow--next splide__arrow splide__arrow--next">
-                                    <span class="u-screen-reader-only"><?php esc_html_e('Nächstes', 'oo_theme'); ?></span>
-                                    <?php echo oo_get_icon('chevron-right', true, ['class' => 'c-slider__icon splide__icon']); ?>
+                                    <span class="u-screen-reader-only"><?php esc_html_e(
+                                        'Nächstes',
+                                        'oo_theme',
+                                    ); ?></span>
+                                    <?php echo oo_get_icon(
+                                        'chevron-right',
+                                        true,
+                                        [
+                                            'class' =>
+                                                'c-slider__icon splide__icon',
+                                        ],
+                                    ); ?>
                                 </button>
                             </div>
                         </div>
@@ -490,7 +630,8 @@ while ($current_property = $pEstates->estateIterator()) {
                         </div>
                     </div>
 
-                <?php } ?>
+                <?php
+                } ?>
             </div>
         </div>
 
@@ -507,21 +648,19 @@ while ($current_property = $pEstates->estateIterator()) {
                 <div class="c-property-details__fields-row o-row">
                     <div class="c-property-details__fields-content u-offset-md-1 o-col-12 o-col-lg-10">
 
-                        <?php
-                        echo '<h2 class="c-property-details__headline o-headline --h2">' .
-                                esc_html__('Immobiliendetails', 'oo_theme') .
-                                '</h2>';
-                                ?>
+                        <?php echo '<h2 class="c-property-details__headline o-headline --h2">' .
+                            esc_html__('Immobiliendetails', 'oo_theme') .
+                            '</h2>'; ?>
                         <div class="c-property-details__fields-main o-row">
 
                             <?php foreach (
                                 $filtered_features
                                 as $group_name => $features
-                                ): ?>
+                            ): ?>
                                 <?php
                                 $boolean_features = [];
                                 $regular_features = [];
-                                
+
                                 foreach ($features as $feature) {
                                     if ($feature['type'] === 'boolean') {
                                         $boolean_features[] = $feature;
@@ -529,21 +668,21 @@ while ($current_property = $pEstates->estateIterator()) {
                                         $regular_features[] = $feature;
                                     }
                                 }
-                                
+
                                 $true_boolean_features = array_filter(
                                     $boolean_features,
                                     function ($feature) {
                                         return $feature['value'] === 'Ja';
                                     },
                                 );
-                                
+
                                 if (
                                     empty($true_boolean_features) &&
                                     empty($regular_features)
-                                    ) {
-                                        continue;
-                                    }
-                                    ?>
+                                ) {
+                                    continue;
+                                }
+                                ?>
 
 
                                 <div class="c-property-details__fields-group o-col-md-6">
@@ -551,7 +690,9 @@ while ($current_property = $pEstates->estateIterator()) {
                                         <?php echo esc_html($group_name); ?>
                                     </span>
 
-                                    <?php if (!empty($true_boolean_features)): ?>
+                                    <?php if (
+                                        !empty($true_boolean_features)
+                                    ): ?>
                                         <div class="c-property-details__features c-item-features">
                                             <?php foreach (
                                                 $true_boolean_features
@@ -571,9 +712,11 @@ while ($current_property = $pEstates->estateIterator()) {
                                                 as $feature
                                             ): ?>
                                                 <?php if (
-                                                    ($raw_values->getValueRaw($property_id)[
-                                                        'elements'
-                                                    ]['provisionsfrei'] ??
+                                                    ($raw_values->getValueRaw(
+                                                        $property_id,
+                                                    )['elements'][
+                                                        'provisionsfrei'
+                                                    ] ??
                                                         null) ===
                                                         '1' &&
                                                     in_array(
@@ -595,11 +738,15 @@ while ($current_property = $pEstates->estateIterator()) {
                                                             ? esc_html(
                                                                 implode(
                                                                     ', ',
-                                                                    $feature['value'],
+                                                                    $feature[
+                                                                        'value'
+                                                                    ],
                                                                 ),
                                                             )
                                                             : esc_html(
-                                                                $feature['value'],
+                                                                $feature[
+                                                                    'value'
+                                                                ],
                                                             ); ?>
                                                     </dd>
                                                     <dt class="c-item-fields__label"><?php echo esc_html(
@@ -633,7 +780,10 @@ while ($current_property = $pEstates->estateIterator()) {
                             if ($pEstates->getDocument() != '') { ?>
                                 <a class="c-property-details__expose-button c-button --has-icon --ghost" href="<?php echo $pEstates->getDocument(); ?>">
                                     <span class="c-button__text">
-                                        <?php esc_html_e('Details als PDF', 'oo_theme'); ?>
+                                        <?php esc_html_e(
+                                            'Details als PDF',
+                                            'oo_theme',
+                                        ); ?>
                                     </span>
                                     <span class="c-button__icon"><?php oo_get_icon(
                                         'download',
@@ -648,23 +798,33 @@ while ($current_property = $pEstates->estateIterator()) {
                                 global $wp;
 
                                 $property_detail_page =
-                                    get_field('general', 'option')['property_detail'] ?? [];
+                                    get_field('general', 'option')[
+                                        'property_detail'
+                                    ] ?? [];
                                 $property_share_button =
                                     filter_var(
-                                        $property_detail_page['property_share_button'],
+                                        $property_detail_page[
+                                            'property_share_button'
+                                        ],
                                         FILTER_VALIDATE_BOOLEAN,
                                     ) ?? false;
 
                                 if ($property_share_button) {
-                                    oo_get_template('components', '', 'component-share', [
-                                        'button_class' =>
-                                            'c-property-details__share-button c-button --ghost',
-                                        'button_icon' => 'share',
-                                        'popup_id' => 'property-detail-share',
-                                        'share_link' => home_url(
-                                            add_query_arg([], $wp->request),
-                                        ),
-                                    ]);
+                                    oo_get_template(
+                                        'components',
+                                        '',
+                                        'component-share',
+                                        [
+                                            'button_class' =>
+                                                'c-property-details__share-button c-button --ghost',
+                                            'button_icon' => 'share',
+                                            'popup_id' =>
+                                                'property-detail-share',
+                                            'share_link' => home_url(
+                                                add_query_arg([], $wp->request),
+                                            ),
+                                        ],
+                                    );
                                 }
                                 ?>
                             </div>
@@ -700,67 +860,55 @@ while ($current_property = $pEstates->estateIterator()) {
 
             <?php // Ogulo
 
-                if (!empty($property_ogulo_embeds) || !empty($property_ogulo_links)) {
-                    echo '<div class="c-property-details__row o-row">';
-                    echo '<div class="c-property-details__media u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">';
-                    echo '<h2 class="c-property-details__headline o-headline --h2">' .
-                        esc_html__('360° Rundgänge', 'oo_theme') .
-                        '</h2>';
+    if (!empty($property_ogulo_embeds) || !empty($property_ogulo_links)) {
+                echo '<div class="c-property-details__row o-row">';
+                echo '<div class="c-property-details__media u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">';
+                echo '<h2 class="c-property-details__headline o-headline --h2">' .
+                    esc_html__('360° Rundgänge', 'oo_theme') .
+                    '</h2>';
 
-                    if (
-                        !empty($property_ogulo_embeds) &&
-                        is_array($property_ogulo_embeds)
-                    ) {
-                        echo '<div class="c-property-details__embeds">';
+                if (
+                    !empty($property_ogulo_embeds) &&
+                    is_array($property_ogulo_embeds)
+                ) {
+                    echo '<div class="c-property-details__embeds">';
 
-                        foreach (
-                            $property_ogulo_embeds
-                            as $property_ogulo_embed
-                        ) {
-                            echo '<div class="c-property-details__iframe --is-' .
-                                oo_get_service_domain_without_tld(
-                                    $property_ogulo_embed['url'],
-                                ) .
-                                '">';
-                            echo $property_ogulo_embed['player'];
-                            echo '</div>';
-                        }
-                        echo '</div>';
-                    }
-
-                    if (
-                        !empty($property_ogulo_links) &&
-                        is_array($property_ogulo_links)
-                    ) {
-                        echo '<div class="c-property-details__buttons c-buttons">';
-                        foreach (
-                            $property_ogulo_links
-                            as $property_ogulo_link
-                        ) {
-                            // Button Text
-                            $button_title = !empty(
-                                $property_ogulo_link['title']
-                            )
-                                ? esc_attr($property_ogulo_link['title'])
-                                : esc_attr__(
-                                    '360°-Rundgang starten',
-                                    'oo_theme',
-                                );
-
-                            echo '<a class="c-button --ghost" href="' .
-                                esc_attr($property_ogulo_link['url']) .
-                                '" target="_blank" title="' .
-                                $button_title .
-                                '">' .
-                                $button_title .
-                                '</a>';
-                        }
+                    foreach ($property_ogulo_embeds as $property_ogulo_embed) {
+                        echo '<div class="c-property-details__iframe --is-' .
+                            oo_get_service_domain_without_tld(
+                                $property_ogulo_embed['url'],
+                            ) .
+                            '">';
+                        echo $property_ogulo_embed['player'];
                         echo '</div>';
                     }
                     echo '</div>';
+                }
+
+                if (
+                    !empty($property_ogulo_links) &&
+                    is_array($property_ogulo_links)
+                ) {
+                    echo '<div class="c-property-details__buttons c-buttons">';
+                    foreach ($property_ogulo_links as $property_ogulo_link) {
+                        // Button Text
+                        $button_title = !empty($property_ogulo_link['title'])
+                            ? esc_attr($property_ogulo_link['title'])
+                            : esc_attr__('360°-Rundgang starten', 'oo_theme');
+
+                        echo '<a class="c-button --ghost" href="' .
+                            esc_attr($property_ogulo_link['url']) .
+                            '" target="_blank" title="' .
+                            $button_title .
+                            '">' .
+                            $button_title .
+                            '</a>';
+                    }
                     echo '</div>';
-                } 
-            ?>
+                }
+                echo '</div>';
+                echo '</div>';
+            } ?>
 
             <?php
             // Movie
@@ -792,10 +940,8 @@ while ($current_property = $pEstates->estateIterator()) {
                             '">';
                         if (
                             isset($property_movie_player['player']) &&
-                            strpos(
-                                $property_movie_player['player'],
-                                '<a',
-                            ) !== false
+                            strpos($property_movie_player['player'], '<a') !==
+                                false
                         ) {
                             echo '<iframe class="c-property-details__iframe" src="' .
                                 $property_movie_player['url'] .
@@ -819,14 +965,9 @@ while ($current_property = $pEstates->estateIterator()) {
                     is_array($property_movie_links)
                 ) {
                     echo '<div class="c-property-details__buttons c-buttons">';
-                    foreach (
-                        $property_movie_links
-                        as $property_movie_link
-                    ) {
+                    foreach ($property_movie_links as $property_movie_link) {
                         // Button Text
-                        $button_title = !empty(
-                            $property_movie_link['title']
-                        )
+                        $button_title = !empty($property_movie_link['title'])
                             ? esc_attr($property_movie_link['title'])
                             : esc_html__('Video starten', 'oo_theme');
 
@@ -845,10 +986,7 @@ while ($current_property = $pEstates->estateIterator()) {
             }
 
             // Links
-            if (
-                !empty($property_links) ||
-                !empty($property_link_embeds)
-            ) {
+            if (!empty($property_links) || !empty($property_link_embeds)) {
                 echo '<div class="c-property-details__row o-row">';
                 echo '<div class="c-property-details__media u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">';
                 echo '<h2 class="c-property-details__headline o-headline --h2">' .
@@ -861,10 +999,7 @@ while ($current_property = $pEstates->estateIterator()) {
                 ) {
                     echo '<div class="c-property-details__embeds">';
 
-                    foreach (
-                        $property_link_embeds
-                        as $property_link_embed
-                    ) {
+                    foreach ($property_link_embeds as $property_link_embed) {
                         echo '<div class="c-property-details__iframe --is-' .
                             oo_get_service_domain_without_tld(
                                 $property_link_embed['url'],
@@ -877,10 +1012,7 @@ while ($current_property = $pEstates->estateIterator()) {
                     echo '</div>';
                 }
 
-                if (
-                    !empty($property_links) &&
-                    is_array($property_links)
-                ) {
+                if (!empty($property_links) && is_array($property_links)) {
                     echo '<div class="c-property-details__buttons c-buttons">';
                     foreach ($property_links as $property_link) {
                         // Button Text
@@ -904,75 +1036,62 @@ while ($current_property = $pEstates->estateIterator()) {
             }
             ?>
 
-            <?php
-                // Objects
+            <?php // Objects
+
+    if (!empty($property_object_embeds) || !empty($property_object_links)) {
+                echo '<div class="c-property-details__row o-row">';
+                echo '<div class="c-property-details__media u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">';
+                echo '<h2 class="c-property-details__headline o-headline --h2">' .
+                    esc_html__('Objekte', 'oo_theme') .
+                    '</h2>';
+
                 if (
-                    !empty($property_object_embeds) ||
-                    !empty($property_object_links)
+                    !empty($property_object_embeds) &&
+                    is_array($property_object_embeds)
                 ) {
-                    echo '<div class="c-property-details__row o-row">';
-                    echo '<div class="c-property-details__media u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">';
-                    echo '<h2 class="c-property-details__headline o-headline --h2">' .
-                        esc_html__('Objekte', 'oo_theme') .
-                        '</h2>';
+                    echo '<div class="c-property-details__embeds">';
 
-                    if (
-                        !empty($property_object_embeds) &&
-                        is_array($property_object_embeds)
+                    foreach (
+                        $property_object_embeds
+                        as $property_object_embed
                     ) {
-                        echo '<div class="c-property-details__embeds">';
-
-                        foreach (
-                            $property_object_embeds
-                            as $property_object_embed
-                        ) {
-                            echo '<div class="c-property-details__iframe --is-' .
-                                oo_get_service_domain_without_tld(
-                                    $property_object_embed['url'],
-                                ) .
-                                '">';
-                            echo $property_object_embed['player'];
-                            echo '</div>';
-                        }
-
+                        echo '<div class="c-property-details__iframe --is-' .
+                            oo_get_service_domain_without_tld(
+                                $property_object_embed['url'],
+                            ) .
+                            '">';
+                        echo $property_object_embed['player'];
                         echo '</div>';
                     }
 
-                    if (
-                        !empty($property_object_links) &&
-                        is_array($property_object_links)
-                    ) {
-                        echo '<div class="c-property-details__buttons c-buttons">';
-                        foreach (
-                            $property_object_links
-                            as $property_object_link
-                        ) {
-                            // Button Text
-                            $button_title = !empty(
-                                $property_object_link['title']
-                            )
-                                ? esc_attr($property_object_link['title'])
-                                : esc_attr__(
-                                    'Objekt-Link öffnen',
-                                    'oo_theme',
-                                );
-
-                            echo '<a class="c-button --ghost" href="' .
-                                esc_attr($property_object_link['url']) .
-                                '" target="_blank" title="' .
-                                $button_title .
-                                '">' .
-                                $button_title .
-                                '</a>';
-                        }
-                        echo '</div>';
-                    }
-
-                    echo '</div>';
                     echo '</div>';
                 }
 
-            ?>
+                if (
+                    !empty($property_object_links) &&
+                    is_array($property_object_links)
+                ) {
+                    echo '<div class="c-property-details__buttons c-buttons">';
+                    foreach ($property_object_links as $property_object_link) {
+                        // Button Text
+                        $button_title = !empty($property_object_link['title'])
+                            ? esc_attr($property_object_link['title'])
+                            : esc_attr__('Objekt-Link öffnen', 'oo_theme');
+
+                        echo '<a class="c-button --ghost" href="' .
+                            esc_attr($property_object_link['url']) .
+                            '" target="_blank" title="' .
+                            $button_title .
+                            '">' .
+                            $button_title .
+                            '</a>';
+                    }
+                    echo '</div>';
+                }
+
+                echo '</div>';
+                echo '</div>';
+            } ?>
             </div>
         </div>
 
@@ -981,18 +1100,19 @@ while ($current_property = $pEstates->estateIterator()) {
             <div class="c-property-details__texts o-container">
                 <div class="c-property-details__texts-row o-row">
 
-                <?php
-
-                if (!empty($property_free_texts)) {
+                <?php if (!empty($property_free_texts)) {
                     foreach ($property_free_texts as $field) {
-                        if ($field['field'] === 'objektbeschreibung' && $field['has_value']) {
+                        if (
+                            $field['field'] === 'objektbeschreibung' &&
+                            $field['has_value']
+                        ) {
 
                             $content = $field['value'];
                             $field_toggle_id =
                                 'more-property-features' .
                                 '-' .
                                 $field['field'];
-                        ?>
+                            ?>
                         <div class="c-property-details__text u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
                             <h2 class="c-property-details__headline o-headline --h2">
                                 <?php esc_html_e(
@@ -1013,8 +1133,7 @@ while ($current_property = $pEstates->estateIterator()) {
                 <?php
                         }
                     }
-                }
-                ?>
+                } ?>
                 </div>
             </div>
         </div>
@@ -1047,15 +1166,23 @@ while ($current_property = $pEstates->estateIterator()) {
                         <div class="c-slider__track splide__track">
                             <div class="c-slider__list splide__list">
                                 <?php foreach ($sorted_pictures as $id) {
-                                    $picture_values = $pEstates->getEstatePictureValues($id);
 
-                                    if ($picture_values['type'] !== 'Grundriss') {
+                                    $picture_values = $pEstates->getEstatePictureValues(
+                                        $id,
+                                    );
+
+                                    if (
+                                        $picture_values['type'] !== 'Grundriss'
+                                    ) {
                                         continue;
                                     }
                                     // Image alt text
                                     $image_alt = $picture_values['title']
                                         ? esc_html($picture_values['title'])
-                                        : esc_html__('Immobilienbild', 'oo_theme');
+                                        : esc_html__(
+                                            'Immobilienbild',
+                                            'oo_theme',
+                                        );
 
                                     // Image width variants
                                     $image_widths = [
@@ -1069,26 +1196,50 @@ while ($current_property = $pEstates->estateIterator()) {
                                     ];
 
                                     $image = [
-                                        'url' => $pEstates->getEstatePictureUrl($id),
+                                        'url' => $pEstates->getEstatePictureUrl(
+                                            $id,
+                                        ),
                                         'alt' => $image_alt,
                                     ];
 
                                     // Lightbox Cloud Image
-                                    $lightbox_url = 'https://acnaayzuen.cloudimg.io/v7/' . $image['url'] . '?force_format=webp&org_if_sml=1';
+                                    $lightbox_url =
+                                        'https://acnaayzuen.cloudimg.io/v7/' .
+                                        $image['url'] .
+                                        '?force_format=webp&org_if_sml=1';
 
                                     $lightbox_image_size_list = [
-                                        ['id' => 'mobile', 'breakpoint' => 767, 'image_size' => 767],
-                                        ['id' => 'tablet', 'breakpoint' => 768, 'image_size' => 1200],
-                                        ['id' => 'desktop', 'breakpoint' => 1200, 'image_size' => 1920],
+                                        [
+                                            'id' => 'mobile',
+                                            'breakpoint' => 767,
+                                            'image_size' => 767,
+                                        ],
+                                        [
+                                            'id' => 'tablet',
+                                            'breakpoint' => 768,
+                                            'image_size' => 1200,
+                                        ],
+                                        [
+                                            'id' => 'desktop',
+                                            'breakpoint' => 1200,
+                                            'image_size' => 1920,
+                                        ],
                                     ];
 
                                     // Responsive image helpers
                                     $lightbox_image_breakpoints = '';
                                     $lightbox_image_sizes = '';
 
-                                    foreach ($lightbox_image_size_list as $key => $size) {
-                                        $is_first = ($key === 0);
-                                        $is_last = ($key === array_key_last($lightbox_image_size_list));
+                                    foreach (
+                                        $lightbox_image_size_list
+                                        as $key => $size
+                                    ) {
+                                        $is_first = $key === 0;
+                                        $is_last =
+                                            $key ===
+                                            array_key_last(
+                                                $lightbox_image_size_list,
+                                            );
                                         $separator = $is_last ? '' : ',';
 
                                         if ($is_first) {
@@ -1104,12 +1255,30 @@ while ($current_property = $pEstates->estateIterator()) {
                                     
                                     <a class="c-property-details__gallery-link glightbox c-slider__slide splide__slide"
                                     data-gallery="gallery"
-                                    href="<?php echo esc_url($lightbox_url) . '&w=' . end($lightbox_image_size_list)['image_size']; ?>"
-                                    data-sizes="<?php echo esc_attr($lightbox_image_breakpoints); ?>"
-                                    data-srcset="<?php echo esc_attr($lightbox_image_sizes); ?>"
-                                    data-caption="<?php echo esc_attr($image['alt']); ?>"
-                                    title="<?php echo esc_attr($image['alt']); ?>"
-                                    aria-label="<?php echo sprintf(esc_attr_x('Bild %s vergrößert anzeigen', 'oo_theme'), $image['alt']); ?>">
+                                    href="<?php echo esc_url($lightbox_url) .
+                                        '&w=' .
+                                        end($lightbox_image_size_list)[
+                                            'image_size'
+                                        ]; ?>"
+                                    data-sizes="<?php echo esc_attr(
+                                        $lightbox_image_breakpoints,
+                                    ); ?>"
+                                    data-srcset="<?php echo esc_attr(
+                                        $lightbox_image_sizes,
+                                    ); ?>"
+                                    data-caption="<?php echo esc_attr(
+                                        $image['alt'],
+                                    ); ?>"
+                                    title="<?php echo esc_attr(
+                                        $image['alt'],
+                                    ); ?>"
+                                    aria-label="<?php echo sprintf(
+                                        esc_attr_x(
+                                            'Bild %s vergrößert anzeigen',
+                                            'oo_theme',
+                                        ),
+                                        $image['alt'],
+                                    ); ?>">
 
                                         <?php oo_get_template(
                                             'components',
@@ -1117,33 +1286,114 @@ while ($current_property = $pEstates->estateIterator()) {
                                             'component-image',
                                             [
                                                 'image' => $image,
-                                                'picture_class' => 'c-property-details__gallery-picture o-picture',
-                                                'image_class' => 'c-property-details__gallery-image o-image',
+                                                'picture_class' =>
+                                                    'c-property-details__gallery-picture o-picture',
+                                                'image_class' =>
+                                                    'c-property-details__gallery-image o-image',
                                                 'dimensions' => [
-                                                    '575' => ['w' => $image_widths['xs'], 'h' => round(($image_widths['xs'] * 2) / 3)],
-                                                    '1600' => ['w' => $image_widths['xxxl'], 'h' => $image_widths['xxxl']],
-                                                    '1400' => ['w' => $image_widths['xxl'], 'h' => $image_widths['xxl']],
-                                                    '1200' => ['w' => $image_widths['xl'], 'h' => $image_widths['xl']],
-                                                    '992'  => ['w' => $image_widths['lg'], 'h' => $image_widths['lg']],
-                                                    '768'  => ['w' => $image_widths['md'], 'h' => round(($image_widths['md'] * 2) / 3)],
-                                                    '576'  => ['w' => $image_widths['sm'], 'h' => round(($image_widths['sm'] * 2) / 3)],
+                                                    '575' => [
+                                                        'w' =>
+                                                            $image_widths['xs'],
+                                                        'h' => round(
+                                                            ($image_widths[
+                                                                'xs'
+                                                            ] *
+                                                                2) /
+                                                                3,
+                                                        ),
+                                                    ],
+                                                    '1600' => [
+                                                        'w' =>
+                                                            $image_widths[
+                                                                'xxxl'
+                                                            ],
+                                                        'h' =>
+                                                            $image_widths[
+                                                                'xxxl'
+                                                            ],
+                                                    ],
+                                                    '1400' => [
+                                                        'w' =>
+                                                            $image_widths[
+                                                                'xxl'
+                                                            ],
+                                                        'h' =>
+                                                            $image_widths[
+                                                                'xxl'
+                                                            ],
+                                                    ],
+                                                    '1200' => [
+                                                        'w' =>
+                                                            $image_widths['xl'],
+                                                        'h' =>
+                                                            $image_widths['xl'],
+                                                    ],
+                                                    '992' => [
+                                                        'w' =>
+                                                            $image_widths['lg'],
+                                                        'h' =>
+                                                            $image_widths['lg'],
+                                                    ],
+                                                    '768' => [
+                                                        'w' =>
+                                                            $image_widths['md'],
+                                                        'h' => round(
+                                                            ($image_widths[
+                                                                'md'
+                                                            ] *
+                                                                2) /
+                                                                3,
+                                                        ),
+                                                    ],
+                                                    '576' => [
+                                                        'w' =>
+                                                            $image_widths['sm'],
+                                                        'h' => round(
+                                                            ($image_widths[
+                                                                'sm'
+                                                            ] *
+                                                                2) /
+                                                                3,
+                                                        ),
+                                                    ],
                                                 ],
-                                            ]
+                                            ],
                                         ); ?>
                                     </a>
-                                <?php } ?>
+                                <?php
+                                } ?>
                             </div>
                         </div>
 
                         <div class="c-slider__navigation splide__navigation">
                             <div class="c-slider__arrows splide__arrows">
                                 <button class="c-slider__arrow c-slider__arrow--prev splide__arrow splide__arrow--prev">
-                                    <span class="u-screen-reader-only"><?php esc_html_e('Vorheriges', 'oo_theme'); ?></span>
-                                    <?php echo oo_get_icon('chevron-left', true, ['class' => 'c-slider__icon splide__icon']); ?>
+                                    <span class="u-screen-reader-only"><?php esc_html_e(
+                                        'Vorheriges',
+                                        'oo_theme',
+                                    ); ?></span>
+                                    <?php echo oo_get_icon(
+                                        'chevron-left',
+                                        true,
+                                        [
+                                            'class' =>
+                                                'c-slider__icon splide__icon',
+                                        ],
+                                    ); ?>
                                 </button>
                                 <button class="c-slider__arrow c-slider__arrow--next splide__arrow splide__arrow--next">
-                                    <span class="u-screen-reader-only"><?php esc_html_e('Nächstes', 'oo_theme'); ?></span>
-                                    <?php echo oo_get_icon('chevron-right', true, ['class' => 'c-slider__icon splide__icon']); ?>
+                                    <span class="u-screen-reader-only"><?php esc_html_e(
+                                        'Nächstes',
+                                        'oo_theme',
+                                    ); ?></span>
+                                    <?php echo oo_get_icon(
+                                        'chevron-right',
+                                        true,
+                                        [
+                                            'class' =>
+                                                'c-slider__icon splide__icon',
+                                        ],
+                                    ); ?>
                                 </button>
                             </div>
                         </div>
@@ -1153,17 +1403,21 @@ while ($current_property = $pEstates->estateIterator()) {
                         </div>
                     </div>
 
-                <?php } ?>
+                <?php
+                } ?>
             </div>
         </div>
         
         <div class="c-property-details__texts-wrapper">
             <div class="c-property-details__texts o-container">
                 <div class="c-property-details__texts-row o-row">
-                    <?php
-                    if (!empty($property_free_texts)) {
+                    <?php if (!empty($property_free_texts)) {
                         foreach ($property_free_texts as $field) {
-                            if ($field['field'] !== 'objektbeschreibung' && $field['field'] !== 'sonstige_angaben' && $field['has_value']) {
+                            if (
+                                $field['field'] !== 'objektbeschreibung' &&
+                                $field['field'] !== 'sonstige_angaben' &&
+                                $field['has_value']
+                            ) {
 
                                 $content = $field['value'];
                                 $field_toggle_id =
@@ -1199,13 +1453,10 @@ while ($current_property = $pEstates->estateIterator()) {
                             <?php
                             }
                         }
-                    }
-                    ?>
+                    } ?>
 
-                     <?php
-
-                        if (!empty($pEstates->getTotalCostsData())) {
-                            $totalCostsData = $pEstates->getTotalCostsData(); ?>
+                     <?php if (!empty($pEstates->getTotalCostsData())) {
+                         $totalCostsData = $pEstates->getTotalCostsData(); ?>
                              <div class="c-property-details__calculator-content u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
                                 <h2 class="c-property-details__headline o-headline --h2">
                                     <?php echo __(
@@ -1218,13 +1469,15 @@ while ($current_property = $pEstates->estateIterator()) {
                                         <div class="c-price-calculator__chart">
                                             <?php
                                             $values = [
-                                                $totalCostsData['kaufpreis']['raw'],
+                                                $totalCostsData['kaufpreis'][
+                                                    'raw'
+                                                ],
                                                 $totalCostsData['bundesland'][
                                                     'raw'
                                                 ],
-                                                $totalCostsData['aussen_courtage'][
-                                                    'raw'
-                                                ],
+                                                $totalCostsData[
+                                                    'aussen_courtage'
+                                                ]['raw'],
                                                 $totalCostsData['notary_fees'][
                                                     'raw'
                                                 ],
@@ -1239,9 +1492,9 @@ while ($current_property = $pEstates->estateIterator()) {
                                                 $totalCostsData['bundesland'][
                                                     'default'
                                                 ],
-                                                $totalCostsData['aussen_courtage'][
-                                                    'default'
-                                                ],
+                                                $totalCostsData[
+                                                    'aussen_courtage'
+                                                ]['default'],
                                                 $totalCostsData['notary_fees'][
                                                     'default'
                                                 ],
@@ -1355,7 +1608,8 @@ while ($current_property = $pEstates->estateIterator()) {
                                     </div>
                                 </div>
                             </div>
-                    <?php } ?>
+                    <?php
+                     } ?>
 
                     <?php if (!empty($area_butler_url)) { ?>
                         <div class="c-property-details__text-content u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
@@ -1406,10 +1660,12 @@ while ($current_property = $pEstates->estateIterator()) {
         <div class="c-property-details__texts-wrapper">
             <div class="c-property-details__texts o-container">
                 <div class="c-property-details__texts-row o-row">
-                    <?php
-                    if (!empty($property_free_texts)) {
+                    <?php if (!empty($property_free_texts)) {
                         foreach ($property_free_texts as $field) {
-                            if ($field['field'] === 'sonstige_angaben' && $field['has_value']) {
+                            if (
+                                $field['field'] === 'sonstige_angaben' &&
+                                $field['has_value']
+                            ) {
 
                                 $content = $field['value'];
                                 $field_toggle_id =
@@ -1437,8 +1693,7 @@ while ($current_property = $pEstates->estateIterator()) {
                             <?php
                             }
                         }
-                    }
-                    ?>
+                    } ?>
 
                     <?php if ($energy_fields_available) {
 
@@ -1530,13 +1785,15 @@ while ($current_property = $pEstates->estateIterator()) {
                                                 <?php if (is_array($value)): ?>
                                                     <?= esc_html(
                                                         implode(', ', $value),
-                                                        ) ?>
+                                                    ) ?>
                                                 <?php else: ?>
                                                     <?= esc_html($value) ?>
                                                 <?php endif; ?>
                                             </dd>
                                             <dt class="c-item-fields__label"><?= esc_html(
-                                                $pEstates->getFieldLabel($field),
+                                                $pEstates->getFieldLabel(
+                                                    $field,
+                                                ),
                                             ) ?></dt>
                                         </dl>
                                     <?php
@@ -1545,7 +1802,8 @@ while ($current_property = $pEstates->estateIterator()) {
                                 </div>
                             </div>
                         </div>
-                    <?php } ?>
+                    <?php
+                    } ?>
                 </div>
             </div>
         </div>

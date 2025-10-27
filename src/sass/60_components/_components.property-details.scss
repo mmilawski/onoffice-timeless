@@ -422,7 +422,6 @@
   }
 
   &__text-content {
- 
   }
 
   &__features {
@@ -436,27 +435,27 @@
     margin-top: -120px;
 
     .--bg-light & {
-        background-color: var(--oo-color-light-mix-bg-contrast-05);
+      background-color: var(--oo-color-light-mix-bg-contrast-05);
     }
     .--bg-dark & {
-        background-color: var(--oo-color-dark-mix-bg-contrast-05);
+      background-color: var(--oo-color-dark-mix-bg-contrast-05);
     }
     .--bg-primary & {
-        background-color: var(--oo-color-primary-mix-bg-contrast-05);
+      background-color: var(--oo-color-primary-mix-bg-contrast-05);
     }
     .--bg-secondary & {
-        background-color: var(--oo-color-secondary-mix-bg-contrast-05);
+      background-color: var(--oo-color-secondary-mix-bg-contrast-05);
     }
     .--bg-transparent & {
-        background-color: var(--oo-color-mix-bg-contrast-05);
+      background-color: var(--oo-color-mix-bg-contrast-05);
     }
   }
-  
+
   &__fields-content {
     display: grid;
     row-gap: 2.5rem;
   }
-  
+
   &__fields-main {
     row-gap: 2.5rem;
   }
@@ -485,7 +484,7 @@
   &__calculator-content {
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    gap: 0.5rem;
 
     @include media-breakpoint-up(xl) {
       gap: 1rem;
@@ -498,33 +497,33 @@
     padding: 1.5rem;
 
     .--bg-light & {
-        background-color: var(--oo-color-light-mix-bg-contrast-05);
+      background-color: var(--oo-color-light-mix-bg-contrast-05);
     }
     .--bg-dark & {
-        background-color: var(--oo-color-dark-mix-bg-contrast-05);
+      background-color: var(--oo-color-dark-mix-bg-contrast-05);
     }
     .--bg-primary & {
-        background-color: var(--oo-color-primary-mix-bg-contrast-05);
+      background-color: var(--oo-color-primary-mix-bg-contrast-05);
     }
     .--bg-secondary & {
-        background-color: var(--oo-color-secondary-mix-bg-contrast-05);
+      background-color: var(--oo-color-secondary-mix-bg-contrast-05);
     }
     .--bg-transparent & {
-        background-color: var(--oo-color-mix-bg-contrast-05);
+      background-color: var(--oo-color-mix-bg-contrast-05);
     }
   }
 
   &__energy {
     position: relative;
     height: auto;
-    gap: .5rem;
+    gap: 0.5rem;
     display: grid;
 
     @include media-breakpoint-up(xl) {
       gap: 1rem;
     }
   }
-  
+
   &__energy-content {
     position: relative;
     height: auto;
@@ -535,57 +534,57 @@
     @include media-breakpoint-up(xl) {
       gap: 1.5rem;
 
-       .c-item-fields {
+      .c-item-fields {
         grid-template-columns: repeat(3, 1fr);
       }
     }
 
     .--bg-light & {
-        background-color: var(--oo-color-light-mix-bg-contrast-05);
+      background-color: var(--oo-color-light-mix-bg-contrast-05);
     }
     .--bg-dark & {
-        background-color: var(--oo-color-dark-mix-bg-contrast-05);
+      background-color: var(--oo-color-dark-mix-bg-contrast-05);
     }
     .--bg-primary & {
-        background-color: var(--oo-color-primary-mix-bg-contrast-05);
+      background-color: var(--oo-color-primary-mix-bg-contrast-05);
     }
     .--bg-secondary & {
-        background-color: var(--oo-color-secondary-mix-bg-contrast-05);
+      background-color: var(--oo-color-secondary-mix-bg-contrast-05);
     }
     .--bg-transparent & {
-        background-color: var(--oo-color-mix-bg-contrast-05);
+      background-color: var(--oo-color-mix-bg-contrast-05);
     }
   }
 
   &__energy-certificate {
   }
-  
+
   &__form-wrapper {
     .--bg-light & {
-        background-color: var(--oo-color-light-mix-bg-contrast-05);
+      background-color: var(--oo-color-light-mix-bg-contrast-05);
     }
     .--bg-dark & {
-        background-color: var(--oo-color-dark-mix-bg-contrast-05);
+      background-color: var(--oo-color-dark-mix-bg-contrast-05);
     }
     .--bg-primary & {
-        background-color: var(--oo-color-primary-mix-bg-contrast-05);
+      background-color: var(--oo-color-primary-mix-bg-contrast-05);
     }
     .--bg-secondary & {
-        background-color: var(--oo-color-secondary-mix-bg-contrast-05);
+      background-color: var(--oo-color-secondary-mix-bg-contrast-05);
     }
     .--bg-transparent & {
-        background-color: var(--oo-color-mix-bg-contrast-05);
+      background-color: var(--oo-color-mix-bg-contrast-05);
     }
   }
 
   &__form {
     scroll-margin-top: $mobile-header-height;
     scroll-snap-align: start;
-    
+
     @include media-breakpoint-up(xxl) {
       scroll-margin-top: $desktop-header-height;
     }
-    
+
     .--is-contact-form {
       display: grid;
       grid-template-columns: 1fr;
