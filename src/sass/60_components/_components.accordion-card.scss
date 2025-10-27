@@ -8,7 +8,6 @@
 
   &__icon-wrapper {
     display: grid;
-    margin-right: 0;
   }
 
   &__title {
@@ -96,7 +95,6 @@
 
   &__content {
     margin-top: 1rem;
-    margin-right: 0;
     transition: max-height 0.25s ease-in-out;
     .--is-open & {
       max-height: 100rem;

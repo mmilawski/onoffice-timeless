@@ -28,6 +28,9 @@
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
+    @include media-breakpoint-up(lg) {
+      gap: 5rem;
+    }
   }
 
   &__content {
@@ -44,9 +47,6 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    @include media-breakpoint-up(xl) {
-      gap: 2rem;
-    }
   }
 
   &__headline {
