@@ -59,7 +59,7 @@ if ($pForm->needsReCaptcha() && $key !== '') {
   ); ?>" data-size="invisible">
 	</div>
     <script>
-        // Script needs to run on every from even on the same page.
+        // Script needs to run on every form even on the same page.
         (() => {
             // Define the Usercentrics template IDs for Google Recaptcha and the desired consent state.
             const serviceConsents = [
@@ -147,7 +147,7 @@ if ($pForm->needsReCaptcha() && $key !== '') {
                                         // Update and save the consent state.
                                         __ucCmp.updateServicesConsents(serviceConsents);
                                         window.__ucCmp.saveConsents();
-                                        // Enable all submit buttons after consent is given.
+                                        // Enable all submit buttons on forms with reCAPTCHA once consent is given.
                                         document.querySelectorAll('form[id^="onoffice-form"]').forEach(form => {
                                             const recaptcha = form.querySelector('div.g-recaptcha');
                                             const button = form.querySelector('.c-form__button');
