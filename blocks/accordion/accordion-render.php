@@ -13,16 +13,16 @@ $settings = get_field('settings') ?? null;
 ); ?> class="c-accordion o-section --<?php echo $settings['bg_color']; ?>">
     <div class="c-accordion__container o-container">
         <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
-            <div class="c-accordion__content o-row u-offset-lg-1 col-xl-8 col-l-10 col-12 ">
+            <div class="c-accordion__content o-row">
                 <?php if (!empty($headline['text'])) { ?>
 										<?php oo_get_template('components', '', 'component-headline', [
               'headline' => $headline,
               'additional_headline_class' =>
-                  'c-accordion__headline o-col-12 o-col-xl-8',
+                  'c-accordion__headline o-col-12 o-col-lg-10 o-col-xl-8 u-offset-lg-1',
           ]);} ?>
 
                 <?php if (!empty($text['wysiwyg'])) { ?>
-                    <div class="c-accordion__text o-text --is-wysiwyg o-col-12 o-col-xl-8">
+                    <div class="c-accordion__text o-text --is-wysiwyg o-col-12 o-col-lg-10 o-col-xl-8 u-offset-lg-1">
                         <?php echo $text['wysiwyg']; ?>
                     </div>
                 <?php } ?>
@@ -30,8 +30,8 @@ $settings = get_field('settings') ?? null;
         <?php } ?>
 
         <?php if (!empty($accordion)) { ?>
-            <div class="c-accordion__accordions-wrapper o-row u-offset-lg-1 col-xl-8 col-l-10 col-12 ">
-                <div class="c-accordion__accordions o-col-12 o-col-xl-8">
+            <div class="c-accordion__accordions-wrapper o-row">
+                <div class="c-accordion__accordions o-col-12 o-col-lg-10 o-col-xl-8 u-offset-lg-1">
                     <?php foreach ($accordion as $key => $card) {
                         $accordion_headline = $card['headline'] ?? ''; ?>
                         <details class="c-accordion-card">

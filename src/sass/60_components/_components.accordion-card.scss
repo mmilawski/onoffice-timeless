@@ -98,7 +98,7 @@
     margin-top: 1rem;
     margin-right: 0;
     transition: max-height 0.25s ease-in-out;
-      .--is-open & {
+    .--is-open & {
       max-height: 100rem;
     }
   }
