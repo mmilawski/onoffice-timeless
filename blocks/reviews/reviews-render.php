@@ -28,10 +28,8 @@ $is_slider = filter_var($slider['slider'] ?? null, FILTER_VALIDATE_BOOLEAN);
 $paged = is_home() || is_front_page() ? 'page' : 'paged';
 $no_found_rows = false;
 
-// Posiiton
-$posiiton_center = !empty($text['wysiwyg'])
-    ? ' u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8'
-    : '';
+// Position
+$posiiton_center = !empty($text['wysiwyg']) ? ' u-offset-lg-1' : '';
 
 $query_args = [
     'post_type' => 'oo_reviews',
@@ -115,7 +113,6 @@ if ($filter == 'all') {
 }
 
 $reviews_query = new WP_Query($query_args);
-
 $max_num_pages = $reviews_query->max_num_pages ?? null;
 ?>
 
@@ -124,31 +121,35 @@ $max_num_pages = $reviews_query->max_num_pages ?? null;
      '-reviews'; ?> o-section --<?php echo $bg_color; ?>">
     <div class="c-reviews__container o-container">
 
-        <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
-            <div class="c-reviews__content o-row <?php echo '--is-' .
-                $type .
-                '-reviews' .
-                $posiiton_center; ?> ">
+        <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])): ?>
+            <div class="c-reviews__content o-row --is-<?php echo $type; ?>-reviews">
 
-                <?php if (!empty($headline['text'])) { ?>
-        	<?php oo_get_template('components', '', 'component-headline', [
-             'headline' => $headline,
-             'additional_headline_class' =>
-                 'c-reviews__headline o-col-12 o-col-lg-10 o-col-xl-8',
-         ]); ?>
-                <?php } ?>
+                <?php if (!empty($headline['text'])): ?>
+                    <?php oo_get_template(
+                        'components',
+                        '',
+                        'component-headline',
+                        [
+                            'headline' => $headline,
+                            'additional_headline_class' =>
+                                'c-reviews__headline o-col-12 o-col-lg-10 o-col-xl-8' .
+                                $posiiton_center,
+                        ],
+                    ); ?>
+                <?php endif; ?>
 
-            <?php if (!empty($text['wysiwyg'])) { ?>
-                <div class="c-reviews__text o-text --is-wysiwyg o-col-12 o-col-lg-10 o-col-xl-8">
-                    <?php echo $text['wysiwyg']; ?>
-                </div>
-            <?php } ?>
-            	</div>
-        <?php } ?>
+                <?php if (!empty($text['wysiwyg'])): ?>
+                    <div class="c-reviews__text o-text --is-wysiwyg o-col-12 o-col-lg-10 o-col-xl-8<?php echo $posiiton_center; ?>">
+                        <?php echo $text['wysiwyg']; ?>
+                    </div>
+                <?php endif; ?>
+
+            </div>
+        <?php endif; ?>
 
         <?php if ($reviews_query->have_posts() && $type != 'google'): ?>
-            <?php if ($is_slider) { ?>
-                <div class="c-reviews__slider --on-<?php echo $bg_color; ?> c-slider --is-reviews-slider splide" 
+            <?php if ($is_slider): ?>
+                <div class="c-reviews__slider --on-<?php echo $bg_color; ?> c-slider --is-reviews-slider splide"
                     data-splide='{
                         "perPage":1,
                         "perMove":1,
@@ -158,27 +159,19 @@ $max_num_pages = $reviews_query->max_num_pages ?? null;
                         "lazyLoad":"nearby",
                         "mediaQuery":"min",
                         "breakpoints":{
-                            "768":{
-                                "perPage":2
-                            },
-                            "1280":{
-                                "perPage":3
-                            }
+                            "768":{"perPage":2},
+                            "1280":{"perPage":3}
                         }
                     }'>
-                	<div class="c-slider__track splide__track">
+                    <div class="c-slider__track splide__track">
                         <div class="c-slider__list splide__list">
-                        <?php } else { ?>
-                            <div class="c-reviews__reviews --on-<?php echo $bg_color; ?> ">
-                        <?php } ?>
                             <?php while ($reviews_query->have_posts()):
                                 $reviews_query->the_post();
                                 setup_postdata($reviews_query);
                                 require 'review-card.php';
                             endwhile; ?>
-                        <?php if ($is_slider) { ?>
-                            </div>
                         </div>
+                    </div>
                     <div class="c-slider__navigation splide__navigation">
                         <div class="c-slider__progress splide__progress">
                             <div class="c-slider__progress-bar splide__progress-bar"></div>
@@ -205,7 +198,13 @@ $max_num_pages = $reviews_query->max_num_pages ?? null;
                         </div>
                     </div>
                 </div>
-            <?php } else { ?>
+            <?php else: ?>
+                <div class="c-reviews__reviews --on-<?php echo $bg_color; ?>">
+                    <?php while ($reviews_query->have_posts()):
+                        $reviews_query->the_post();
+                        setup_postdata($reviews_query);
+                        require 'review-card.php';
+                    endwhile; ?>
                 </div>
                 <?php oo_get_template(
                     'components',
@@ -216,80 +215,80 @@ $max_num_pages = $reviews_query->max_num_pages ?? null;
                         'class' => 'c-reviews__pagination --on-' . $bg_color,
                     ],
                 ); ?>
-            <?php } ?>
-        <?php wp_reset_postdata();endif; ?>
+            <?php endif; ?>
+            <?php wp_reset_postdata(); ?>
+        <?php endif; ?>
 
-        <?php if ($type == 'google' && !$is_slider) { ?>
+        <?php if ($type == 'google' && !$is_slider): ?>
             <div class="c-reviews__google-reviews o-row --position-center">
                 <div class="c-reviews__col --is-grid o-col-12">
-                	<?php require 'google-review-card.php'; ?>
+                    <?php require 'google-review-card.php'; ?>
                 </div>
             </div>
-        <?php } ?>
+        <?php endif; ?>
 
-        <?php if ($type == 'google' && $is_slider) { ?>
-    <div class="c-reviews__google-reviews o-row --position-center">
-        <div class="c-reviews__col o-col-12">
-            <div class="c-reviews__slider --on-<?php echo $bg_color; ?> c-slider --is-reviews-slider splide" 
-                data-splide='{
-                    "perPage":1,
-                    "perMove":1,
-                    "gap":32,
-                    "pagination":false,
-                    "snap":true,
-                    "lazyLoad":"nearby",
-                    "mediaQuery":"min",
-                    "breakpoints": {
-                        "768":{
-                            "perPage":2
-                        }, 
-                        "1280":{
-                            "perPage":3
-                        }
-                    }
-                }'>
-                <div class="c-slider__track splide__track">
-                    <div class="c-slider__list splide__list">
-                        <?php require 'google-review-card.php'; ?>
-                    </div>
-                </div>
-                <div class="c-slider__navigation splide__navigation">
-                    <div class="c-slider__progress splide__progress">
-                        <div class="c-slider__progress-bar splide__progress-bar"></div>
-                    </div>
-                    <div class="c-slider__arrows splide__arrows">
-                        <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
-                            <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
-                                'Vorheriges',
-                                'oo_theme',
-                            ); ?></span>
-                            <span class="c-slider__arrow-icon --chevron-left"><?php oo_get_icon(
-                                'chevron-left',
-                            ); ?></span>
-                        </button>
-                        <button class="c-slider__arrow --next splide__arrow splide__arrow--next">
-                            <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
-                                'Nächstes',
-                                'oo_theme',
-                            ); ?></span>
-                            <span class="c-slider__arrow-icon --chevron-right"><?php oo_get_icon(
-                                'chevron-right',
-                            ); ?></span>
-                        </button>
+        <?php if ($type == 'google' && $is_slider): ?>
+            <div class="c-reviews__google-reviews o-row --position-center">
+                <div class="c-reviews__col o-col-12">
+                    <div class="c-reviews__slider --on-<?php echo $bg_color; ?> c-slider --is-reviews-slider splide"
+                        data-splide='{
+                            "perPage":1,
+                            "perMove":1,
+                            "gap":32,
+                            "pagination":false,
+                            "snap":true,
+                            "lazyLoad":"nearby",
+                            "mediaQuery":"min",
+                            "breakpoints":{
+                                "768":{"perPage":2},
+                                "1280":{"perPage":3}
+                            }
+                        }'>
+                        <div class="c-slider__track splide__track">
+                            <div class="c-slider__list splide__list">
+                                <?php require 'google-review-card.php'; ?>
+                            </div>
+                        </div>
+                        <div class="c-slider__navigation splide__navigation">
+                            <div class="c-slider__progress splide__progress">
+                                <div class="c-slider__progress-bar splide__progress-bar"></div>
+                            </div>
+                            <div class="c-slider__arrows splide__arrows">
+                                <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
+                                    <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
+                                        'Vorheriges',
+                                        'oo_theme',
+                                    ); ?></span>
+                                    <span class="c-slider__arrow-icon --chevron-left"><?php oo_get_icon(
+                                        'chevron-left',
+                                    ); ?></span>
+                                </button>
+                                <button class="c-slider__arrow --next splide__arrow splide__arrow--next">
+                                    <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
+                                        'Nächstes',
+                                        'oo_theme',
+                                    ); ?></span>
+                                    <span class="c-slider__arrow-icon --chevron-right"><?php oo_get_icon(
+                                        'chevron-right',
+                                    ); ?></span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <?php } ?>
+        <?php endif; ?>
 
-    <?php if (!empty($buttons['buttons'][0]['link'])) {
-        oo_get_template('components', '', 'component-buttons', [
-            'buttons' => $buttons['buttons'],
-            'additional_button_class' => $bg_color ? '--on-' . $bg_color : '',
-            'additional_container_class' =>
-                'c-reviews__buttons --position-center o-col-12',
-        ]);
-    } ?>
+        <?php if (!empty($buttons['buttons'][0]['link'])): ?>
+            <?php oo_get_template('components', '', 'component-buttons', [
+                'buttons' => $buttons['buttons'],
+                'additional_button_class' => $bg_color
+                    ? '--on-' . $bg_color
+                    : '',
+                'additional_container_class' =>
+                    'c-reviews__buttons --position-center o-col-12',
+            ]); ?>
+        <?php endif; ?>
+
     </div>
 </section>
