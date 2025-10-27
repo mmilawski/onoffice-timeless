@@ -147,8 +147,14 @@ if ($pForm->needsReCaptcha() && $key !== '') {
                                         // Update and save the consent state.
                                         __ucCmp.updateServicesConsents(serviceConsents);
                                         window.__ucCmp.saveConsents();
-                                        // Enable the submit button after consent is given.
-                                        submitButtonElement.disabled = false;
+                                        // Enable all submit buttons after consent is given.
+                                        document.querySelectorAll('form[id^="onoffice-form"]').forEach(form => {
+                                            const recaptcha = form.querySelector('div.g-recaptcha');
+                                            const button = form.querySelector('.c-form__button');
+                                            if (recaptcha && button) {
+                                                button.disabled = false;
+                                            }
+                                        });
                                     } catch (error) {
                                         console.error('Failed to update consents:', error);
                                     }
