@@ -3,12 +3,19 @@
 
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: 2fr 1fr;
   gap: 2rem;
 
+  @include media-breakpoint-up(lg) {
+    gap: 5rem;
+  }
+
+
   &__overview {
-    grid-column: span 2;
     width: 100%;
+    display: grid;
+    gap: 0.5rem;
+
 
     @include media-breakpoint-up(md) {
       order: 1;
@@ -19,16 +26,11 @@
     display: flex;
     align-items: center;
     line-height: $small-line-height;
-    border-top: 1px solid var(--oo-color-mix-bg-contrast-50);
-    padding: 0.275rem 0;
     gap: 0.5rem;
-
-    &:first-child {
-      border-top: none;
-    }
 
     &.--is-total-cost {
       font-weight: $font-weight-text-bold;
+      margin-top: .5rem;
     }
   }
 
@@ -41,9 +43,17 @@
 
   &__criteria {
     display: flex;
-    align-items: center;
+    gap: 2rem;
     width: 100%;
     justify-content: space-between;
+
+    @include media-breakpoint-up(lg) {
+      gap: 5rem;
+    }
+    @include media-breakpoint-up(xl) {
+      gap: 10rem;
+    }
+
   }
 
   &__value {
@@ -53,6 +63,7 @@
   &__chart {
     grid-column: 1/ -1;
     justify-self: center;
+    align-self: start;
 
     @include media-breakpoint-up(md) {
       grid-column: auto;
@@ -62,7 +73,7 @@
 
   &__notice {
     font-size: $small-font-size;
-    padding-top: 2rem;
+    margin-top: 2.5rem;
   }
 
   $colors: (

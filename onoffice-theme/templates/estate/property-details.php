@@ -369,7 +369,7 @@ while ($current_property = $pEstates->estateIterator()) {
                         data-splide='{
                             "type":"loop",
                             "perPage":1,
-                            "padding":"30rem",
+                            "padding":"20rem",
                             "gap":16,
                             "arrows":true,
                             "snap":true,
@@ -386,6 +386,9 @@ while ($current_property = $pEstates->estateIterator()) {
 
                                     $picture_values = $pEstates->getEstatePictureValues($id);
 
+                                    if ($picture_values['type'] === 'Grundriss') {
+                                        continue;
+                                    }
                                     // Image alt text
                                     $image_alt = $picture_values['title']
                                         ? esc_html($picture_values['title'])
@@ -671,96 +674,93 @@ while ($current_property = $pEstates->estateIterator()) {
             </div>
         </div>
 
-    <div class="c-property-details__contacts-wrapper">
-        <div class="c-property-details__container o-container">
-            <div class="c-property-details__row o-row">
-                <?php require_once 'property-contact.php'; ?>
+        <div class="c-property-details__contacts-wrapper">
+            <div class="c-property-details__container o-container">
+                <div class="c-property-details__row o-row">
+                    <?php require_once 'property-contact.php'; ?>
+                </div>
             </div>
         </div>
-    </div>
 
     
-            <?php if (!empty($pEstates->getEstateUnits())) { ?>
-                <div class="c-property-details__units-wrapper">
-                    <div class="c-property-details__units o-container-fluid">
-                        <div class="c-property-details__units-row o-row">
-                            <div class="c-property-details__units u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
-                                <?php echo $pEstates->getEstateUnits(); ?>
-                            </div>
+        <?php if (!empty($pEstates->getEstateUnits())) { ?>
+            <div class="c-property-details__units-wrapper">
+                <div class="c-property-details__units o-container-fluid">
+                    <div class="c-property-details__units-row o-row">
+                        <div class="c-property-details__units u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
+                            <?php echo $pEstates->getEstateUnits(); ?>
                         </div>
                     </div>
                 </div>
-            <?php } ?>
+            </div>
+        <?php } ?>
 
-    <div class="c-property-details__media-wrapper">
+        <div class="c-property-details__media-wrapper">
+            <div class="c-property-details__container o-container">
 
-        <div class="c-property-details__container o-container">
+            <?php // Ogulo
 
+                if (!empty($property_ogulo_embeds) || !empty($property_ogulo_links)) {
+                    echo '<div class="c-property-details__row o-row">';
+                    echo '<div class="c-property-details__media u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">';
+                    echo '<h2 class="c-property-details__headline o-headline --h2">' .
+                        esc_html__('360° Rundgänge', 'oo_theme') .
+                        '</h2>';
 
-        <?php // Ogulo
-
-            if (!empty($property_ogulo_embeds) || !empty($property_ogulo_links)) {
-                echo '<div class="c-property-details__row o-row">';
-                echo '<div class="c-property-details__media u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">';
-                echo '<h2 class="c-property-details__headline o-headline --h2">' .
-                    esc_html__('360° Rundgänge', 'oo_theme') .
-                    '</h2>';
-
-                if (
-                    !empty($property_ogulo_embeds) &&
-                    is_array($property_ogulo_embeds)
-                ) {
-                    echo '<div class="c-property-details__embeds">';
-
-                    foreach (
-                        $property_ogulo_embeds
-                        as $property_ogulo_embed
+                    if (
+                        !empty($property_ogulo_embeds) &&
+                        is_array($property_ogulo_embeds)
                     ) {
-                        echo '<div class="c-property-details__iframe --is-' .
-                            oo_get_service_domain_without_tld(
-                                $property_ogulo_embed['url'],
-                            ) .
-                            '">';
-                        echo $property_ogulo_embed['player'];
+                        echo '<div class="c-property-details__embeds">';
+
+                        foreach (
+                            $property_ogulo_embeds
+                            as $property_ogulo_embed
+                        ) {
+                            echo '<div class="c-property-details__iframe --is-' .
+                                oo_get_service_domain_without_tld(
+                                    $property_ogulo_embed['url'],
+                                ) .
+                                '">';
+                            echo $property_ogulo_embed['player'];
+                            echo '</div>';
+                        }
+                        echo '</div>';
+                    }
+
+                    if (
+                        !empty($property_ogulo_links) &&
+                        is_array($property_ogulo_links)
+                    ) {
+                        echo '<div class="c-property-details__buttons c-buttons">';
+                        foreach (
+                            $property_ogulo_links
+                            as $property_ogulo_link
+                        ) {
+                            // Button Text
+                            $button_title = !empty(
+                                $property_ogulo_link['title']
+                            )
+                                ? esc_attr($property_ogulo_link['title'])
+                                : esc_attr__(
+                                    '360°-Rundgang starten',
+                                    'oo_theme',
+                                );
+
+                            echo '<a class="c-button --ghost" href="' .
+                                esc_attr($property_ogulo_link['url']) .
+                                '" target="_blank" title="' .
+                                $button_title .
+                                '">' .
+                                $button_title .
+                                '</a>';
+                        }
                         echo '</div>';
                     }
                     echo '</div>';
-                }
-
-                if (
-                    !empty($property_ogulo_links) &&
-                    is_array($property_ogulo_links)
-                ) {
-                    echo '<div class="c-property-details__buttons c-buttons">';
-                    foreach (
-                        $property_ogulo_links
-                        as $property_ogulo_link
-                    ) {
-                        // Button Text
-                        $button_title = !empty(
-                            $property_ogulo_link['title']
-                        )
-                            ? esc_attr($property_ogulo_link['title'])
-                            : esc_attr__(
-                                '360°-Rundgang starten',
-                                'oo_theme',
-                            );
-
-                        echo '<a class="c-button --ghost" href="' .
-                            esc_attr($property_ogulo_link['url']) .
-                            '" target="_blank" title="' .
-                            $button_title .
-                            '">' .
-                            $button_title .
-                            '</a>';
-                    }
                     echo '</div>';
-                }
-                echo '</div>';
-                echo '</div>';
-            } 
-        ?>
-
+                } 
+            ?>
 
             <?php
             // Movie
@@ -977,206 +977,387 @@ while ($current_property = $pEstates->estateIterator()) {
         </div>
 
         
-                <div class="c-property-details__text-wrapper">
-                    <div class="c-property-details__header o-container">
-                        <div class="c-property-details__header-row o-row">
-            <?php
+        <div class="c-property-details__texts-wrapper">
+            <div class="c-property-details__texts o-container">
+                <div class="c-property-details__texts-row o-row">
 
-            if (!empty($pEstates->getTotalCostsData())) {
-                $totalCostsData = $pEstates->getTotalCostsData(); ?>
+                <?php
+
+                if (!empty($property_free_texts)) {
+                    foreach ($property_free_texts as $field) {
+                        if ($field['field'] === 'objektbeschreibung' && $field['has_value']) {
+
+                            $content = $field['value'];
+                            $field_toggle_id =
+                                'more-property-features' .
+                                '-' .
+                                $field['field'];
+                        ?>
+                        <div class="c-property-details__text u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
                             <h2 class="c-property-details__headline o-headline --h2">
-                                <?php echo __(
-                                    'Gesamtpreiskalkulator',
+                                <?php esc_html_e(
+                                    $field['label'],
                                     'oo_theme',
                                 ); ?>
                             </h2>
-                            <div class="c-property-details__calculator --is-price-calculator">
-                                <div class="c-price-calculator">
-                                <div class="c-price-calculator__chart">
-                                        <?php
-                                        $values = [
-                                            $totalCostsData['kaufpreis']['raw'],
-                                            $totalCostsData['bundesland'][
-                                                'raw'
-                                            ],
-                                            $totalCostsData['aussen_courtage'][
-                                                'raw'
-                                            ],
-                                            $totalCostsData['notary_fees'][
-                                                'raw'
-                                            ],
-                                            $totalCostsData[
-                                                'land_register_entry'
-                                            ]['raw'],
-                                        ];
-                                        $valuesTitle = [
-                                            $totalCostsData['kaufpreis'][
-                                                'default'
-                                            ],
-                                            $totalCostsData['bundesland'][
-                                                'default'
-                                            ],
-                                            $totalCostsData['aussen_courtage'][
-                                                'default'
-                                            ],
-                                            $totalCostsData['notary_fees'][
-                                                'default'
-                                            ],
-                                            $totalCostsData[
-                                                'land_register_entry'
-                                            ]['default'],
-                                        ];
-                                        $chart = new EstateCostsChart(
-                                            $values,
-                                            $valuesTitle,
-                                        );
-                                        echo $chart->generateSVG();
-                                        ?>
+                            <div class="c-property-details__text-content" id="<?php echo esc_attr(
+                                $field_toggle_id,
+                            ); ?>">
+                                <?php echo nl2br(
+                                    $show_secret_sale_block
+                                        ? '...'
+                                        : esc_html($content),
+                                ); ?>
+                            </div>
+                        </div>
+                <?php
+                        }
+                    }
+                }
+                ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="c-property-details__gallery-wrapper">
+            <div class="c-property-details__container o-container-fluid">
+                <?php if ($photos && !$show_secret_sale_block) {
+
+                    // Load Lightbox
+                    wp_enqueue_script('oo-glightbox-script');
+                    wp_enqueue_style('oo-glightbox-style');
+                    ?>
+
+                    <div 
+                        class="c-property-details__gallery c-slider splide --auto-height --is-property-details-slider"
+                        data-splide='{
+                            "type":"loop",
+                            "perPage":1,
+                            "padding":"20rem",
+                            "gap":16,
+                            "arrows":true,
+                            "snap":true,
+                            "lazyLoad":"nearby",
+                            "pagination":true,
+                            "updateOnMove":true,
+                            "focus":"center",
+                            "classes":{"page":"c-slider__page splide__pagination__page"}
+                        }'
+                    >
+                        <div class="c-slider__track splide__track">
+                            <div class="c-slider__list splide__list">
+                                <?php foreach ($sorted_pictures as $id) {
+                                    $picture_values = $pEstates->getEstatePictureValues($id);
+
+                                    if ($picture_values['type'] !== 'Grundriss') {
+                                        continue;
+                                    }
+                                    // Image alt text
+                                    $image_alt = $picture_values['title']
+                                        ? esc_html($picture_values['title'])
+                                        : esc_html__('Immobilienbild', 'oo_theme');
+
+                                    // Image width variants
+                                    $image_widths = [
+                                        'xs' => 543,
+                                        'sm' => 512,
+                                        'md' => 694,
+                                        'lg' => 608,
+                                        'xl' => 736,
+                                        'xxl' => 864,
+                                        'xxxl' => 952,
+                                    ];
+
+                                    $image = [
+                                        'url' => $pEstates->getEstatePictureUrl($id),
+                                        'alt' => $image_alt,
+                                    ];
+
+                                    // Lightbox Cloud Image
+                                    $lightbox_url = 'https://acnaayzuen.cloudimg.io/v7/' . $image['url'] . '?force_format=webp&org_if_sml=1';
+
+                                    $lightbox_image_size_list = [
+                                        ['id' => 'mobile', 'breakpoint' => 767, 'image_size' => 767],
+                                        ['id' => 'tablet', 'breakpoint' => 768, 'image_size' => 1200],
+                                        ['id' => 'desktop', 'breakpoint' => 1200, 'image_size' => 1920],
+                                    ];
+
+                                    // Responsive image helpers
+                                    $lightbox_image_breakpoints = '';
+                                    $lightbox_image_sizes = '';
+
+                                    foreach ($lightbox_image_size_list as $key => $size) {
+                                        $is_first = ($key === 0);
+                                        $is_last = ($key === array_key_last($lightbox_image_size_list));
+                                        $separator = $is_last ? '' : ',';
+
+                                        if ($is_first) {
+                                            $lightbox_image_breakpoints .= "(max-width: {$size['breakpoint']}px) {$size['image_size']}px,";
+                                            $lightbox_image_sizes .= "{$lightbox_url}&w={$size['image_size']} {$size['breakpoint']}w,";
+                                            continue;
+                                        }
+
+                                        $lightbox_image_breakpoints .= "(min-width:{$size['breakpoint']}px) {$size['image_size']}px{$separator}";
+                                        $lightbox_image_sizes .= "{$lightbox_url}&w={$size['image_size']} {$size['breakpoint']}w{$separator}";
+                                    }
+                                    ?>
+                                    
+                                    <a class="c-property-details__gallery-link glightbox c-slider__slide splide__slide"
+                                    data-gallery="gallery"
+                                    href="<?php echo esc_url($lightbox_url) . '&w=' . end($lightbox_image_size_list)['image_size']; ?>"
+                                    data-sizes="<?php echo esc_attr($lightbox_image_breakpoints); ?>"
+                                    data-srcset="<?php echo esc_attr($lightbox_image_sizes); ?>"
+                                    data-caption="<?php echo esc_attr($image['alt']); ?>"
+                                    title="<?php echo esc_attr($image['alt']); ?>"
+                                    aria-label="<?php echo sprintf(esc_attr_x('Bild %s vergrößert anzeigen', 'oo_theme'), $image['alt']); ?>">
+
+                                        <?php oo_get_template(
+                                            'components',
+                                            '',
+                                            'component-image',
+                                            [
+                                                'image' => $image,
+                                                'picture_class' => 'c-property-details__gallery-picture o-picture',
+                                                'image_class' => 'c-property-details__gallery-image o-image',
+                                                'dimensions' => [
+                                                    '575' => ['w' => $image_widths['xs'], 'h' => round(($image_widths['xs'] * 2) / 3)],
+                                                    '1600' => ['w' => $image_widths['xxxl'], 'h' => $image_widths['xxxl']],
+                                                    '1400' => ['w' => $image_widths['xxl'], 'h' => $image_widths['xxl']],
+                                                    '1200' => ['w' => $image_widths['xl'], 'h' => $image_widths['xl']],
+                                                    '992'  => ['w' => $image_widths['lg'], 'h' => $image_widths['lg']],
+                                                    '768'  => ['w' => $image_widths['md'], 'h' => round(($image_widths['md'] * 2) / 3)],
+                                                    '576'  => ['w' => $image_widths['sm'], 'h' => round(($image_widths['sm'] * 2) / 3)],
+                                                ],
+                                            ]
+                                        ); ?>
+                                    </a>
+                                <?php } ?>
+                            </div>
+                        </div>
+
+                        <div class="c-slider__navigation splide__navigation">
+                            <div class="c-slider__arrows splide__arrows">
+                                <button class="c-slider__arrow c-slider__arrow--prev splide__arrow splide__arrow--prev">
+                                    <span class="u-screen-reader-only"><?php esc_html_e('Vorheriges', 'oo_theme'); ?></span>
+                                    <?php echo oo_get_icon('chevron-left', true, ['class' => 'c-slider__icon splide__icon']); ?>
+                                </button>
+                                <button class="c-slider__arrow c-slider__arrow--next splide__arrow splide__arrow--next">
+                                    <span class="u-screen-reader-only"><?php esc_html_e('Nächstes', 'oo_theme'); ?></span>
+                                    <?php echo oo_get_icon('chevron-right', true, ['class' => 'c-slider__icon splide__icon']); ?>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="c-slider__controls splide__controls">
+                            <ul class="c-slider__pagination splide__pagination"></ul>
+                        </div>
+                    </div>
+
+                <?php } ?>
+            </div>
+        </div>
+        
+        <div class="c-property-details__texts-wrapper">
+            <div class="c-property-details__texts o-container">
+                <div class="c-property-details__texts-row o-row">
+                    <?php
+                    if (!empty($property_free_texts)) {
+                        foreach ($property_free_texts as $field) {
+                            if ($field['field'] !== 'objektbeschreibung' && $field['field'] !== 'sonstige_angaben' && $field['has_value']) {
+
+                                $content = $field['value'];
+                                $field_toggle_id =
+                                    'more-property-features' .
+                                    '-' .
+                                    $field['field'];
+                                ?>
+                                <div class="c-property-details__text u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
+                                    <h2 class="c-property-details__headline o-headline --h2">
+                                        <?php esc_html_e(
+                                            $field['label'],
+                                            'oo_theme',
+                                        ); ?>
+                                    </h2>
+                                    <div class="c-property-details__text-content" id="<?php echo esc_attr(
+                                        $field_toggle_id,
+                                    ); ?>">
+                                        <?php echo nl2br(
+                                            $show_secret_sale_block
+                                                ? '...'
+                                                : esc_html($content),
+                                        ); ?>
                                     </div>
-                                    <div class="c-price-calculator__overview">
-                                        <div class="c-price-calculator__item">
-                                            <span class="c-price-calculator__color-indicator oo-donut-chart-color0"></span>
-                                            <dl class="c-price-calculator__criteria">
-                                                <dt class="c-price-calculator__label">
-                                                    <?php echo esc_html_e(
-                                                        $pEstates->getFieldLabel(
-                                                            'kaufpreis',
-                                                        ),
-                                                    ); ?>
-                                                    </dt>
-                                                <dd class="c-price-calculator__value">
-                                                    <?php echo esc_html(
+                                    <?php if (
+                                        $field['field'] === 'lage' &&
+                                        !empty($map)
+                                    ): ?>
+                                        <div class="c-property-details__map">
+                                            <?php echo $map; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            <?php
+                            }
+                        }
+                    }
+                    ?>
+
+                     <?php
+
+                        if (!empty($pEstates->getTotalCostsData())) {
+                            $totalCostsData = $pEstates->getTotalCostsData(); ?>
+                             <div class="c-property-details__calculator-content u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
+                                <h2 class="c-property-details__headline o-headline --h2">
+                                    <?php echo __(
+                                        'Gesamtpreiskalkulator',
+                                        'oo_theme',
+                                    ); ?>
+                                </h2>
+                                <div class="c-property-details__calculator --is-price-calculator">
+                                    <div class="c-price-calculator">
+                                        <div class="c-price-calculator__chart">
+                                            <?php
+                                            $values = [
+                                                $totalCostsData['kaufpreis']['raw'],
+                                                $totalCostsData['bundesland'][
+                                                    'raw'
+                                                ],
+                                                $totalCostsData['aussen_courtage'][
+                                                    'raw'
+                                                ],
+                                                $totalCostsData['notary_fees'][
+                                                    'raw'
+                                                ],
+                                                $totalCostsData[
+                                                    'land_register_entry'
+                                                ]['raw'],
+                                            ];
+                                            $valuesTitle = [
+                                                $totalCostsData['kaufpreis'][
+                                                    'default'
+                                                ],
+                                                $totalCostsData['bundesland'][
+                                                    'default'
+                                                ],
+                                                $totalCostsData['aussen_courtage'][
+                                                    'default'
+                                                ],
+                                                $totalCostsData['notary_fees'][
+                                                    'default'
+                                                ],
+                                                $totalCostsData[
+                                                    'land_register_entry'
+                                                ]['default'],
+                                            ];
+                                            $chart = new EstateCostsChart(
+                                                $values,
+                                                $valuesTitle,
+                                            );
+                                            echo $chart->generateSVG();
+                                            ?>
+                                        </div>
+                                        <div class="c-price-calculator__overview">
+                                            <div class="c-price-calculator__item">
+                                                <span class="c-price-calculator__color-indicator oo-donut-chart-color0"></span>
+                                                <dl class="c-price-calculator__criteria">
+                                                    <dt class="c-price-calculator__label">
+                                                        <?php echo esc_html_e(
+                                                            $pEstates->getFieldLabel(
+                                                                'kaufpreis',
+                                                            ),
+                                                        ); ?>
+                                                        </dt>
+                                                    <dd class="c-price-calculator__value">
+                                                        <?php echo esc_html(
+                                                            $totalCostsData[
+                                                                'kaufpreis'
+                                                            ]['default'],
+                                                        ); ?>
+                                                    </dd>
+                                                </dl>
+                                            </div>
+                                            <div class="c-price-calculator__item">
+                                                <span class="c-price-calculator__color-indicator oo-donut-chart-color1"></span>
+                                                <dl class="c-price-calculator__criteria">
+                                                    <dt class="c-price-calculator__label"><?php esc_html_e(
+                                                        'Grunderwerbsteuer',
+                                                        'oo_theme',
+                                                    ); ?></dt>
+                                                    <dd class="c-price-calculator__value"><?php echo esc_html(
                                                         $totalCostsData[
-                                                            'kaufpreis'
+                                                            'bundesland'
                                                         ]['default'],
-                                                    ); ?>
-                                                </dd>
-                                            </dl>
-                                        </div>
-                                        <div class="c-price-calculator__item">
-                                            <span class="c-price-calculator__color-indicator oo-donut-chart-color1"></span>
-                                            <dl class="c-price-calculator__criteria">
-                                                <dt class="c-price-calculator__label"><?php esc_html_e(
-                                                    'Grunderwerbsteuer',
+                                                    ); ?></dd>
+                                                </dl>
+                                            </div>
+                                            <div class="c-price-calculator__item">
+                                                <span class="c-price-calculator__color-indicator oo-donut-chart-color2"></span>
+                                                <dl class="c-price-calculator__criteria">
+                                                    <dt class="c-price-calculator__label"><?php esc_html_e(
+                                                        'Maklerprovision',
+                                                        'oo_theme',
+                                                    ); ?></dt>
+                                                    <dd class="c-price-calculator__value"><?php echo esc_html(
+                                                        $totalCostsData[
+                                                            'aussen_courtage'
+                                                        ]['default'],
+                                                    ); ?></dd>
+                                                </dl>
+                                            </div>
+                                            <div class="c-price-calculator__item">
+                                                <span class="c-price-calculator__color-indicator oo-donut-chart-color3"></span>
+                                                <dl class="c-price-calculator__criteria">
+                                                    <dt class="c-price-calculator__label"><?php esc_html_e(
+                                                        'Notargebühren *',
+                                                        'oo_theme',
+                                                    ); ?></dt>
+                                                    <dd class="c-price-calculator__value"><?php echo esc_html(
+                                                        $totalCostsData[
+                                                            'notary_fees'
+                                                        ]['default'],
+                                                    ); ?></dd>
+                                                </dl>
+                                            </div>
+                                            <div class="c-price-calculator__item">
+                                                <span class="c-price-calculator__color-indicator oo-donut-chart-color4"></span>
+                                                <dl class="c-price-calculator__criteria">
+                                                    <dt class="c-price-calculator__label"><?php esc_html_e(
+                                                        'Grundbucheintrag *',
+                                                        'oo_theme',
+                                                    ); ?></dt>
+                                                    <dd class="c-price-calculator__value"><?php echo esc_html(
+                                                        $totalCostsData[
+                                                            'land_register_entry'
+                                                        ]['default'],
+                                                    ); ?></dd>
+                                                </dl>
+                                            </div>
+                                            <div class="c-price-calculator__item --is-total-cost">
+                                                <dl class="c-price-calculator__criteria">
+                                                    <dt class="c-price-calculator__label oo-total-costs-label"><?php esc_html_e(
+                                                        'Gesamtkosten',
+                                                        'oo_theme',
+                                                    ); ?></dt>
+                                                    <dd class="c-price-calculator__value"><?php echo esc_html(
+                                                        $totalCostsData[
+                                                            'total_costs'
+                                                        ]['default'],
+                                                    ); ?></dd>
+                                                </dl>
+                                            </div>
+                                            <div class="c-price-calculator__notice">
+                                                <?php echo esc_html_e(
+                                                    '* Für die Berechnung der Notar- und Grundbuchkosten wird ein Standardwert von 1,5% bzw. 0,5% verwendet.',
                                                     'oo_theme',
-                                                ); ?></dt>
-                                                <dd class="c-price-calculator__value"><?php echo esc_html(
-                                                    $totalCostsData[
-                                                        'bundesland'
-                                                    ]['default'],
-                                                ); ?></dd>
-                                            </dl>
-                                        </div>
-                                        <div class="c-price-calculator__item">
-                                            <span class="c-price-calculator__color-indicator oo-donut-chart-color2"></span>
-                                            <dl class="c-price-calculator__criteria">
-                                                <dt class="c-price-calculator__label"><?php esc_html_e(
-                                                    'Maklerprovision',
-                                                    'oo_theme',
-                                                ); ?></dt>
-                                                <dd class="c-price-calculator__value"><?php echo esc_html(
-                                                    $totalCostsData[
-                                                        'aussen_courtage'
-                                                    ]['default'],
-                                                ); ?></dd>
-                                            </dl>
-                                        </div>
-                                        <div class="c-price-calculator__item">
-                                            <span class="c-price-calculator__color-indicator oo-donut-chart-color3"></span>
-                                            <dl class="c-price-calculator__criteria">
-                                                <dt class="c-price-calculator__label"><?php esc_html_e(
-                                                    'Notargebühren *',
-                                                    'oo_theme',
-                                                ); ?></dt>
-                                                <dd class="c-price-calculator__value"><?php echo esc_html(
-                                                    $totalCostsData[
-                                                        'notary_fees'
-                                                    ]['default'],
-                                                ); ?></dd>
-                                            </dl>
-                                        </div>
-                                        <div class="c-price-calculator__item">
-                                            <span class="c-price-calculator__color-indicator oo-donut-chart-color4"></span>
-                                            <dl class="c-price-calculator__criteria">
-                                                <dt class="c-price-calculator__label"><?php esc_html_e(
-                                                    'Grundbucheintrag *',
-                                                    'oo_theme',
-                                                ); ?></dt>
-                                                <dd class="c-price-calculator__value"><?php echo esc_html(
-                                                    $totalCostsData[
-                                                        'land_register_entry'
-                                                    ]['default'],
-                                                ); ?></dd>
-                                            </dl>
-                                        </div>
-                                        <div class="c-price-calculator__item --is-total-cost">
-                                            <dl class="c-price-calculator__criteria">
-                                                <dt class="c-price-calculator__label oo-total-costs-label"><?php esc_html_e(
-                                                    'Gesamtkosten',
-                                                    'oo_theme',
-                                                ); ?></dt>
-                                                <dd class="c-price-calculator__value"><?php echo esc_html(
-                                                    $totalCostsData[
-                                                        'total_costs'
-                                                    ]['default'],
-                                                ); ?></dd>
-                                            </dl>
-                                        </div>
-                                        <div class="c-price-calculator__notice">
-                                            <?php echo esc_html_e(
-                                                '* Für die Berechnung der Notar- und Grundbuchkosten wird ein Standardwert von 1,5% bzw. 0,5% verwendet.',
-                                                'oo_theme',
-                                            ); ?>
+                                                ); ?>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-            <?php } ?>
+                    <?php } ?>
 
-            <?php
-
-            if (!empty($property_free_texts)) {
-                foreach ($property_free_texts as $field) {
-                    if ($field['has_value']) {
-
-                        $content = $field['value'];
-                        $field_toggle_id =
-                            'more-property-features' .
-                            '-' .
-                            $field['field'];
-                        ?>
-                                    <div class="c-property-details__text u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
-                                        <h2 class="c-property-details__headline o-headline --h2">
-                                            <?php esc_html_e(
-                                                $field['label'],
-                                                'oo_theme',
-                                            ); ?>
-                                        </h2>
-                                        <div class="c-property-details__text-content" id="<?php echo esc_attr(
-                                            $field_toggle_id,
-                                        ); ?>">
-                                            <?php echo nl2br(
-                                                $show_secret_sale_block
-                                                    ? '...'
-                                                    : esc_html($content),
-                                            ); ?>
-                                        </div>
-                                        <?php if (
-                                            $field['field'] === 'lage' &&
-                                            !empty($map)
-                                        ): ?>
-                                            <div class="c-property-details__map">
-                                                <?php echo $map; ?>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                    <?php
-                    }
-                }
-            }
-            ?>
-
-            <?php if (!empty($area_butler_url)) { ?>
+                    <?php if (!empty($area_butler_url)) { ?>
                         <div class="c-property-details__text-content u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
                             <h2 class="c-property-details__headline o-headline --h2">
                                 <?php echo __('Infrastruktur', 'oo_theme'); ?>
@@ -1198,53 +1379,96 @@ while ($current_property = $pEstates->estateIterator()) {
                             </span>
                             <?php if (!empty($infrastructure_info)) { ?>
                                 <div class="c-property-details__text">
-                                <div class="c-item-fields">
-                                <?php foreach (
-                                    $infrastructure_info
-                                    as $info
-                                ) { ?>
-                                    <dl class="c-item-fields__item">
-                                        <dt class="c-item-fields__value">
-                                            <?php echo $info['value']; ?>
-                                        </dt>
-                                        <dd class="c-item-fields__label">
-                                            <?php echo $info['label']; ?>
-                                        </dd>
-                                    </dl>
-                                <?php } ?>
+                                    <div class="c-item-fields">
+                                    <?php foreach (
+                                        $infrastructure_info
+                                        as $info
+                                    ) { ?>
+                                        <dl class="c-item-fields__item">
+                                            <dt class="c-item-fields__value">
+                                                <?php echo $info['value']; ?>
+                                            </dt>
+                                            <dd class="c-item-fields__label">
+                                                <?php echo $info['label']; ?>
+                                            </dd>
+                                        </dl>
+                                    <?php } ?>
+                                    </div>
                                 </div>
-                            </div>
                             <?php } ?>
-            <?php } ?>
+                        </div>
+                    <?php } ?>
 
-            <?php if ($energy_fields_available) {
+                </div>
+            </div>
+        </div>
+        
+        <div class="c-property-details__texts-wrapper">
+            <div class="c-property-details__texts o-container">
+                <div class="c-property-details__texts-row o-row">
+                    <?php
+                    if (!empty($property_free_texts)) {
+                        foreach ($property_free_texts as $field) {
+                            if ($field['field'] === 'sonstige_angaben' && $field['has_value']) {
 
-                // Fetch required values
-                $energy_class =
-                    $raw_values->getValueRaw($property_id)['elements'][
-                        'energyClass'
-                    ] ?? '';
-                $energy_class_permitted_values = $pEstates->getPermittedValues(
-                    'energyClass',
-                );
-                $energy_certificate_type =
-                    $raw_values->getValueRaw($property_id)['elements'][
-                        'energieausweistyp'
-                    ] ?? '';
-                $labels = oo_get_energy_certificate_values()[
-                    'value_ranges'
-                ]['energy_certificate'];
-                ?>
+                                $content = $field['value'];
+                                $field_toggle_id =
+                                    'more-property-features' .
+                                    '-' .
+                                    $field['field'];
+                                ?>
+                                <div class="c-property-details__text u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
+                                    <h2 class="c-property-details__headline o-headline --h2">
+                                        <?php esc_html_e(
+                                            $field['label'],
+                                            'oo_theme',
+                                        ); ?>
+                                    </h2>
+                                    <div class="c-property-details__text-content" id="<?php echo esc_attr(
+                                        $field_toggle_id,
+                                    ); ?>">
+                                        <?php echo nl2br(
+                                            $show_secret_sale_block
+                                                ? '...'
+                                                : esc_html($content),
+                                        ); ?>
+                                    </div>
+                                </div>
+                            <?php
+                            }
+                        }
+                    }
+                    ?>
 
-                            <div class="c-property-details__energy-content u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
-                                <h2 class="c-property-details__headline o-headline --h2">
-                                    <?= esc_html(
-                                        $pEstates->getFieldLabel(
-                                            'energieausweistyp',
-                                        ),
-                                    ) ?>
-                                </h2>
+                    <?php if ($energy_fields_available) {
 
+                        // Fetch required values
+                        $energy_class =
+                            $raw_values->getValueRaw($property_id)['elements'][
+                                'energyClass'
+                            ] ?? '';
+                        $energy_class_permitted_values = $pEstates->getPermittedValues(
+                            'energyClass',
+                        );
+                        $energy_certificate_type =
+                            $raw_values->getValueRaw($property_id)['elements'][
+                                'energieausweistyp'
+                            ] ?? '';
+                        $labels = oo_get_energy_certificate_values()[
+                            'value_ranges'
+                        ]['energy_certificate'];
+                        ?>
+
+                        <div class="c-property-details__energy u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
+                            <h2 class="c-property-details__headline o-headline --h2">
+                                <?= esc_html(
+                                    $pEstates->getFieldLabel(
+                                        'energieausweistyp',
+                                    ),
+                                ) ?>
+                            </h2>
+
+                            <div class="c-property-details__energy-content">
                                 <?php if (
                                     !empty($energy_class_permitted_values) &&
                                     !empty($energy_class) &&
@@ -1302,47 +1526,45 @@ while ($current_property = $pEstates->estateIterator()) {
                                         }
                                         ?>
                                         <dl class="c-item-fields__item">
-                                            <dt class="c-item-fields__label"><?= esc_html(
-                                                $pEstates->getFieldLabel($field),
-                                            ) ?></dt>
                                             <dd class="c-item-fields__value">
                                                 <?php if (is_array($value)): ?>
                                                     <?= esc_html(
                                                         implode(', ', $value),
-                                                    ) ?>
+                                                        ) ?>
                                                 <?php else: ?>
                                                     <?= esc_html($value) ?>
                                                 <?php endif; ?>
                                             </dd>
+                                            <dt class="c-item-fields__label"><?= esc_html(
+                                                $pEstates->getFieldLabel($field),
+                                            ) ?></dt>
                                         </dl>
                                     <?php
                                     endforeach;
                                     ?>
                                 </div>
                             </div>
-                            <?php
-            } ?>
+                        </div>
+                    <?php } ?>
+                </div>
             </div>
         </div>
-    </div>
 
-            <?php if (!empty($shortcode_form)) { ?>
-                <div class="c-property-details__form-wrapper">
-                    <div class="c-property-details__form o-container">
-                        <div class="c-property-details__form-row o-row">
-                            <div id="request" class="c-property-details__form-content o-col-12 o-col-lg-12">
-                                <?php echo do_shortcode($shortcode_form); ?>
-                            </div>
+        <?php if (!empty($shortcode_form)) { ?>
+            <div class="c-property-details__form-wrapper">
+                <div class="c-property-details__form o-container">
+                    <div class="c-property-details__form-row o-row">
+                        <div id="request" class="c-property-details__form-content o-col-12 o-col-lg-12">
+                            <?php echo do_shortcode($shortcode_form); ?>
                         </div>
                     </div>
                 </div>
-
-            <?php } ?>
-
-            <?php echo $pEstates->getSimilarEstates(); ?>
-
             </div>
-        </div>
+
+        <?php } ?>
+
+        <?php echo $pEstates->getSimilarEstates(); ?>
+
     </section>
 <?php
 }

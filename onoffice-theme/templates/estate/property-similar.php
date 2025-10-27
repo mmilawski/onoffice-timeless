@@ -17,7 +17,7 @@ $dontEcho = [
             'Weitere Immobilien',
             'oo_theme',
         ); ?></h2>
-        <div id="outerslider" class="c-property-details__similar-slider c-slider --is-properties-similar-slider splide" data-splide='{"perPage":1,"perMove":1,"gap":0,"snap":true,"lazyLoad":"nearby","pagination":false,"arrows":false,"page":false}'>
+        <div id="outerslider" class="c-property-details__similar-slider c-slider --is-properties-similar-slider splide" data-splide='{"perPage":3,"perMove":1,"gap":"1rem","snap":true,"lazyLoad":"nearby","pagination":false,"arrows":false,"page":false}'>
             <div class="c-slider__track splide__track">
                 <div class="c-slider__list splide__list">
                     <?php
