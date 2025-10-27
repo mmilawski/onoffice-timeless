@@ -17,6 +17,9 @@ foreach ($blocks as $block) {
     $details = $block['attrs']['data'] ?? null;
 }
 
+// get header level from parent block
+$header_level = get_current_header_level() + 1;
+
 // Content
 $card = get_field('news', $post_id) ?? [];
 $link = get_the_permalink($post_id) ?? null;
@@ -165,7 +168,10 @@ $link_title_more = sprintf(
             </div>
             
             <?php if (!empty($title)) { ?>
-                <span class="c-news-card__title o-headline --h3"><?php echo $title; ?></span>
+                <?php echo "<h{$header_level} " .
+                    'class="c-news-card__title o-headline --h3">' .
+                    $title .
+                    "</h{$header_level}>"; ?>
             <?php } ?>
 			<?php if (!empty($excerpt)) { ?>
 				<div class="c-news-card__text o-text --is-wysiwyg">
