@@ -29,10 +29,8 @@ $paged = is_home() || is_front_page() ? 'page' : 'paged';
 $no_found_rows = false;
 
 // Offset
-$offset_position = !empty($text['wysiwyg'])
-    ? ' u-offset-lg-1'
-    : '';
-    
+$offset_position = !empty($text['wysiwyg']) ? ' u-offset-lg-1' : '';
+
 $query_args = [
     'post_type' => 'oo_reviews',
     'post_status' => 'publish',
@@ -131,7 +129,8 @@ $max_num_pages = $reviews_query->max_num_pages ?? null;
         	<?php oo_get_template('components', '', 'component-headline', [
              'headline' => $headline,
              'additional_headline_class' =>
-                 'c-reviews__headline o-col-12 o-col-lg-10 o-col-xl-8' . $offset_position,
+                 'c-reviews__headline o-col-12 o-col-lg-10 o-col-xl-8' .
+                 $offset_position,
          ]); ?>
                 <?php } ?>
 
