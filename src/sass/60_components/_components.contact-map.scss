@@ -16,10 +16,7 @@
   &__content {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    @include media-breakpoint-up(xl) {
-      gap: 2rem;
-    }
+    gap: 2.5rem;
   }
 
   &__headline {
@@ -29,5 +26,7 @@
   }
 
   &__map {
+    border: 1px solid var(--oo-color-mix-bg-contrast-50);
+    
   }
 }
