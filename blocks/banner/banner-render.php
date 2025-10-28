@@ -22,8 +22,12 @@ $pause_on_hover = filter_var(
 $slide_speed = intval(get_field('slide_speed') ?? 1000);
 
 // Check if all slides have content type 'none'
-$all_slides_are_none = $slide_count > 0
-    && !array_filter($slider, static fn($slide) => (($slide['type'] ?? null) !== 'none'));
+$all_slides_are_none =
+    $slide_count > 0 &&
+    !array_filter(
+        $slider,
+        static fn($slide) => ($slide['type'] ?? null) !== 'none',
+    );
 $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
 ?>
 
@@ -66,6 +70,8 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
 
                     // Settings slide
                     $slide_settings = $slide['settings'] ?? null;
+                    $content_position =
+                        $slide_settings['position_content'] ?? 'left';
 
                     if ($first_slide === true) {
                         $slide_loading = 'eager';
@@ -138,7 +144,7 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
                     <div class="c-banner__slide --content-<?php echo $type; ?> --background-<?php echo $background; ?> <?php
  if ($slide_count > 1) { ?>c-slider__slide splide__slide<?php }
  if ($type != 'none') {
-     echo ' --content-is-' . $slide_settings['position_content'];
+     echo ' --content-is-' . $content_position;
  }
  ?>">
                         <?php if ($type != 'none'): ?>
