@@ -22,17 +22,8 @@ $pause_on_hover = filter_var(
 $slide_speed = intval(get_field('slide_speed') ?? 1000);
 
 // Check if all slides have content type 'none'
-$all_slides_are_none = true;
-if ($slide_count > 0) {
-    foreach ($slider as $slide) {
-        $type = $slide['type'] ?? null;
-        if ($type !== 'none') {
-            $all_slides_are_none = false;
-            break;
-        }
-    }
-}
-
+$all_slides_are_none = $slide_count > 0
+    && !array_filter($slider, static fn($slide) => (($slide['type'] ?? null) !== 'none'));
 $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
 ?>
 
