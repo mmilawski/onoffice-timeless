@@ -15,7 +15,7 @@ $company = get_field('company', 'option') ?? [];
 $company_name = $company['name'] ?? (get_bloginfo('name') ?? null);
 ?>
 
-<footer class="c-footer">
+<footer id="footer" class="c-footer">
     <button class="c-back-to-top" aria-label="<?php echo __(
         'Zurück zum Anfang',
         'oo_theme',
@@ -162,13 +162,35 @@ $company_name = $company['name'] ?? (get_bloginfo('name') ?? null);
                                 // encode the inner URL so it's safe as a query parameter value
                                 $param_value = rawurlencode($inner_url);
 
+                                $locale = get_locale() ?: '';
+                                $lang = substr($locale, 0, 2);
+
+                                $barrier_urls = [
+                                    'de' =>
+                                        'https://onoffice.com/barriere-gefunden/?wpf23379_106=',
+                                    'en' =>
+                                        'https://onoffice.com/en/barrier-found/?wpf24395_106=',
+                                    'it' =>
+                                        'https://it.onoffice.com/barriera-riscontrata/?wpf7104_23=',
+                                    'es' =>
+                                        'https://es.onoffice.com/encontrado-barrera/?wpf10467_10=',
+                                    'hr' =>
+                                        'https://hr.onoffice.com/pronadena-prepreka/?wpf2917_10=',
+                                ];
+
                                 $barrier_found_url =
-                                    'https://onoffice.com/barriere-gefunden/?wpf23379_106=' .
+                                    ($barrier_urls[$lang] ??
+                                        $barrier_urls['de']) .
                                     $param_value;
                                 ?>
                                 <a class="c-footer-nav__link --is-top-level"
+                                role="button"
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                aria-label="<?php esc_attr_e(
+                                    'Barriere gefunden? (Öffnet in neuem Tab)',
+                                    'oo_theme',
+                                ); ?>"
                                 href="<?= esc_url($barrier_found_url) ?>">
                                     <?php esc_html_e(
                                         'Barriere gefunden?',

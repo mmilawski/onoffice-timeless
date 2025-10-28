@@ -59,10 +59,8 @@ if ($pForm->needsReCaptcha() && $key !== '') {
   ); ?>" data-size="invisible">
 	</div>
     <script>
-        // Prevents the script from being initialized more than once on the same page.
-        if (!window.onOfficeFormInitialized) {
-            window.onOfficeFormInitialized = true;
-
+        // Script needs to run on every form even on the same page.
+        (() => {
             // Define the Usercentrics template IDs for Google Recaptcha and the desired consent state.
             const serviceConsents = [
                 { id: 'Hko_qNsui-Q', consent: true }, // Google Recaptcha v2
@@ -149,8 +147,14 @@ if ($pForm->needsReCaptcha() && $key !== '') {
                                         // Update and save the consent state.
                                         __ucCmp.updateServicesConsents(serviceConsents);
                                         window.__ucCmp.saveConsents();
-                                        // Enable the submit button after consent is given.
-                                        submitButtonElement.disabled = false;
+                                        // Enable all submit buttons on forms with reCAPTCHA once consent is given.
+                                        document.querySelectorAll('form[id^="onoffice-form"]').forEach(form => {
+                                            const recaptcha = form.querySelector('div.g-recaptcha');
+                                            const button = form.querySelector('.c-form__button');
+                                            if (recaptcha && button) {
+                                                button.disabled = false;
+                                            }
+                                        });
                                     } catch (error) {
                                         console.error('Failed to update consents:', error);
                                     }
@@ -169,8 +173,7 @@ if ($pForm->needsReCaptcha() && $key !== '') {
                     onOffice.captchaControl(form, submitButtonElement);
                 }
             });
-
-        }
+        })();
 	</script>
 	<button class="c-form__button c-button <?php if (
      !empty($settings['bg_color'])
