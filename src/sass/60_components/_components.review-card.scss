@@ -73,18 +73,14 @@
 
   &__text {
     &.--shorten {
-      max-height: calc($global-line-height * 7);
+      max-height: calc($global-line-height * 3);
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
       -webkit-box-orient: vertical;
       transition: max-height 0.25s ease-in-out;
-
-      @include media-breakpoint-up(xl) {
-        max-height: calc($global-line-height * 10);
-        -webkit-line-clamp: 10;
-        line-clamp: 10;
-      }
 
       &.--is-open {
         flex-grow: 1;

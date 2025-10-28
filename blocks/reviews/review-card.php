@@ -87,7 +87,7 @@ echo $is_image;
         'images'
             ? '--hide-images'
             : ''; ?>">
-            <?php if ($date) { ?>
+            <?php if ($date && $show_date) { ?>
                 <div class="c-review-card__date"><?php echo $date; ?></div>
             <?php } ?>
 
