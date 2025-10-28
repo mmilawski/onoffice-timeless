@@ -18,7 +18,7 @@ if (!empty($headline)):
     oo_get_template('components', '', 'component-headline', [
         'headline' => [
             'text' => strip_tags($headline),
-            'size' => 'span',
+            'size' => 'h2',
         ],
         'additional_headline_class' => 'c-module-seals__headline',
     ]);

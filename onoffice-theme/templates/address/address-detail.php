@@ -234,7 +234,10 @@ foreach ($current_address_array as $address_id => $current_address) {
 
                         <?php if (!empty($reviews)) { ?>
                             <p class="c-address-details__reviews">
-                                <a class="c-link --underlined --text-color --on-<?php echo $bg_color; ?>" href="<?php echo $reviews; ?>" rel="noopener noreferrer" target="_blank">
+                                <a class="c-link --underlined --text-color --on-<?php echo $bg_color; ?>" href="<?php echo $reviews; ?>" aria-label="<?php esc_attr_e(
+    'Bewertungen ansehen (Öffnet in neuem Tab)',
+    'oo_theme',
+); ?>" rel="noopener noreferrer" target="_blank">
                                     <?php echo __(
                                         'Bewertungen ansehen',
                                         'oo_theme',
@@ -319,7 +322,17 @@ foreach ($current_address_array as $address_id => $current_address) {
                                         ? esc_url($check_url)
                                         : '';
                                     $target =
-                                        'rel="noopener noreferrer" target="_blank"';
+                                        'rel="noopener noreferrer" aria-label="' .
+                                        esc_attr(
+                                            sprintf(
+                                                __(
+                                                    'Webseite von %s besuchen (Öffnet in neuem Tab)',
+                                                    'oo_theme',
+                                                ),
+                                                $full_name,
+                                            ),
+                                        ) .
+                                        '" target="_blank"';
                                 } else {
                                     $class = '';
                                     $link = '';
@@ -445,7 +458,17 @@ foreach ($current_address_array as $address_id => $current_address) {
                                     '">';
                                 echo '<a class="c-social-media__link" href="' .
                                     esc_url($value) .
-                                    '" rel="noopener noreferrer" target="_blank">';
+                                    '" rel="noopener noreferrer" aria-label="' .
+                                    esc_attr(
+                                        sprintf(
+                                            __(
+                                                'Webseite von %s besuchen (Öffnet in neuem Tab)',
+                                                'oo_theme',
+                                            ),
+                                            $label,
+                                        ),
+                                    ) .
+                                    '" target="_blank">';
                                 oo_get_icon($icon);
                                 echo '<span class="c-social-media__text u-screen-reader-only">' .
                                     $label .
