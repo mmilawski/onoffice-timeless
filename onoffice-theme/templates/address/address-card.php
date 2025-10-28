@@ -317,7 +317,18 @@ foreach ($current_address as $field => $value) {
                         $link = filter_var($check_url, FILTER_VALIDATE_URL)
                             ? esc_url($check_url)
                             : '';
-                        $target = 'rel="noopener noreferrer" target="_blank"';
+                        $target =
+                            'rel="noopener noreferrer" aria-label="' .
+                            esc_attr(
+                                sprintf(
+                                    __(
+                                        'Webseite von %s besuchen (Öffnet in neuem Tab)',
+                                        'oo_theme',
+                                    ),
+                                    $full_name,
+                                ),
+                            ) .
+                            '" target="_blank"';
                     } else {
                         $class = '';
                         $link = '';
@@ -351,7 +362,17 @@ foreach ($current_address as $field => $value) {
                 if (!empty($reviews)) {
                     echo '<a class="c-link --underlined --text-color --on-bg-transparent" href="' .
                         $reviews .
-                        '" rel="noopener noreferrer" target="_blank">' .
+                        '" rel="noopener noreferrer" aria-label="' .
+                        esc_attr(
+                            sprintf(
+                                __(
+                                    'Bewertungen für %s ansehen (Öffnet in neuem Tab)',
+                                    'oo_theme',
+                                ),
+                                $full_name,
+                            ),
+                        ) .
+                        '" target="_blank">' .
                         __('Bewertungen ansehen', 'oo_theme') .
                         '</a>';
                 }
