@@ -1,6 +1,11 @@
 .c-contact-map {
   $c-contact-map: &;
 
+  [class^='o-col-'],
+  [class*=' o-col-'] {
+    padding-inline: 0;
+  }
+
   &__container {
   }
 
@@ -20,13 +25,27 @@
   }
 
   &__headline {
+    padding-inline: 1rem;
+    @include media-breakpoint-up(sm) {
+      padding-inline: 0rem;
+    }
   }
 
   &__text {
+    padding-inline: 1rem;
+    @include media-breakpoint-up(sm) {
+      padding-inline: 0rem;
+    }
   }
 
   &__map {
+  }
+  &__map-wrapper {
+    width: 100%;
+    aspect-ratio: 3/2;
     border: 1px solid var(--oo-color-mix-bg-contrast-50);
-    
+    @include media-breakpoint-up(sm) {
+      aspect-ratio: 16/9;
+    }
   }
 }
