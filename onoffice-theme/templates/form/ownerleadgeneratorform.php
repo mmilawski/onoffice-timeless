@@ -99,7 +99,6 @@ require 'info-messages.php'; ?>
                         $titleData['value'];
                 }
             }
-
             ?>
             <div id="leadform-<?php echo sanitize_title(
                 $pForm->getFormId(),
