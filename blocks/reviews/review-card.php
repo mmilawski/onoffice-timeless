@@ -142,9 +142,13 @@ echo $is_image;
             <?php } ?>
 
             <?php if (!empty($text['wysiwyg'])) { ?>
-                <div class="c-review-card__text o-text --is-wysiwyg" id="<?php echo $uniqid; ?>">
+                <div class="c-review-card__text o-text --is-wysiwyg"
+                    id="<?php echo $uniqid; ?>"
+                    data-limit-mobile="<?php echo (int) 16; ?>"
+                    data-limit-desktop="<?php echo (int) 16; ?>">
                     <?php echo $text['wysiwyg']; ?>
                 </div>
+
             <?php } ?>
 
             <button class="c-review-card__more c-read-more"

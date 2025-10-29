@@ -1349,15 +1349,15 @@ function applyResponsiveTextShortening() {
 
   function shortenElements(elementsEach, textElement, elementToShorten) {
     $(elementsEach).each(function() {
+      const mobileLimit = parseInt($(this).find(textElement).data('limit-mobile')) || 50;
+      const desktopLimit = parseInt($(this).find(textElement).data('limit-desktop')) || 100;
+
       const text = $(this).find(textElement).text();
       const wordCount = text.trim().split(/\s+/).length;
 
-      let shouldShorten;
-      if (isMobile) {
-        shouldShorten = wordCount > 50;
-      } else {
-        shouldShorten = wordCount > 100;
-      }
+      const shouldShorten = isMobile
+        ? wordCount > mobileLimit
+        : wordCount > desktopLimit;
 
       if (shouldShorten) {
         $(this).find(elementToShorten).addClass('--shorten');
@@ -1371,13 +1371,17 @@ function applyResponsiveTextShortening() {
 
   // google review slider
   shortenElements('.c-google-review-card', '.c-google-review-card__text p', '.c-google-review-card__text');
+
   // review slider
   shortenElements('.c-review-card', '.c-review-card__text', '.c-review-card__text');
+
   // property list
   shortenElements('.c-property-details__text-wrapper', '.c-property-details__text-content', '.c-property-details__text-content');
+
   // team
   shortenElements('.c-team-card', '.c-team-card__description', '.c-team-card__description');
 }
+
 
 // Select2 copy class
 function select2CopyClasses(data, container) {
