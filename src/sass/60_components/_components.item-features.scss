@@ -37,19 +37,21 @@
     font-size: 0.875rem;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: -webkit-box;
+    display: block;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     line-clamp: 1;
+    white-space: nowrap;
   }
 
   &__value {
     font-size: 1rem;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: -webkit-box;
+    display: block;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     line-clamp: 1;
+    white-space: nowrap;
   }
 }
