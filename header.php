@@ -49,8 +49,16 @@ if (empty($header_modules_left) && empty($header_modules_right)) {
 
 <body <?php body_class('o-body'); ?>>
     <?php wp_body_open(); ?>
+    <a class="u-screen-reader-only" href="#menu-hauptmenue"><?php esc_html_e(
+        'Zur Navigation wechseln',
+        'oo_theme',
+    ); ?></a>
     <a class="u-screen-reader-only" href="#primary"><?php esc_html_e(
         'Zum Inhalt wechseln',
+        'oo_theme',
+    ); ?></a>
+    <a class="u-screen-reader-only" href="#footer"><?php esc_html_e(
+        'Zum Footer wechseln',
         'oo_theme',
     ); ?></a>
 
