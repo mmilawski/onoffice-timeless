@@ -13,12 +13,9 @@
   &__content {
     display: flex;
     flex-direction: column;
-    align-content: center;
-    gap: 1.5rem;
-    @include media-breakpoint-up(xl) {
-      gap: 2rem;
+    gap: 2.5rem;
     }
-  }
+  
 
   &__headline {
   }
@@ -28,7 +25,7 @@
   &__wrapper {
     display: flex;
     flex-direction: column;
-    align-content: center;
+    align-content: left;
     gap: 1.5rem;
     @include media-breakpoint-up(xl) {
       gap: 2rem;

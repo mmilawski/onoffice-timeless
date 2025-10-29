@@ -51,7 +51,7 @@
     display: grid;
     grid-template-columns: repeat(1, minmax(0, 1fr));
     grid: unset;
-    gap: 1.5rem;
+    gap: 2rem;
     align-items: stretch;
 
     #{$c-contact-card}__label {
