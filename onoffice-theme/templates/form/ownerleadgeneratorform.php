@@ -88,7 +88,7 @@ require 'info-messages.php'; ?>
     <?php if ($pForm->getFormStatus() !== FormPost::MESSAGE_SUCCESS): ?>
         <div data-oo-form-paging data-form-id="leadform-<?php echo sanitize_title(
             $pForm->getFormId(),
-        ); ?>" data-form-no="<?php echo $pForm->getFormNo(); ?>" class="c-form__wrapper">
+        ); ?>" data-form-no="<?php echo $pForm->getFormNo(); ?>" class="c-form__wrapper --<?php echo $bg_color; ?>">
             <?php
             $totalPages = count($estateValues);
             $rawPageTitles = $pForm->getPageTitlesByCurrentLanguage();
@@ -100,11 +100,6 @@ require 'info-messages.php'; ?>
                 }
             }
 
-            oo_get_template('components', '', 'component-progressbar', [
-                'in_modal' => $showFormAsModal,
-                'totalPages' => $totalPages,
-                'pageTitles' => $pageTitles,
-            ]);
             ?>
             <div id="leadform-<?php echo sanitize_title(
                 $pForm->getFormId(),
@@ -114,30 +109,34 @@ require 'info-messages.php'; ?>
                 'oo_theme',
             ); ?>
             </div>
+            <div class="c-form__fieldset">
                 <?php foreach ($estateValues as $pageNumber => $fields): ?>
                     <div class="lead-lightbox lead-page-<?php echo $pageNumber; ?>">
-                        <div class="c-form__fieldset --<?php echo $bg_color; ?>">
-                            <?php echo implode($fields); ?>
-                        </div>
+                        <div class="c-form__header"><?php echo $pageTitles[
+                            $pageNumber - 1
+                        ]; ?></div>
+                        <?php echo implode($fields); ?>
                     </div>
                 <?php endforeach; ?>
 
                 <?php echo implode($hiddenValues); ?>
-            </div>
-            <div class="c-form__button-wrapper --is-paged">
-                <button type="button" class="c-form__button c-button --ghost leadform-back">
-                    <?php echo esc_html__('Zurück', 'oo_theme'); ?>
-                </button>
-
-                <?php if ($totalPages > 1): ?>
-                    <button type="button" class="c-form__button c-button leadform-forward">
-                        <?php echo esc_html__('Weiter', 'oo_theme'); ?>
+                <div class="c-form__button-wrapper --is-paged">
+                    <button type="button" class="c-form__button c-button --ghost leadform-back">
+                        <?php echo esc_html__('Zurück', 'oo_theme'); ?>
                     </button>
-                <?php endif; ?>
 
-                <div class="leadform-submit" style="display:none;">
-                    <?php include get_template_directory() .
-                        '/onoffice-theme/templates/form/formsubmit.php'; ?>
+                    <div class="c-form__progress leadform-progress"></div>
+
+                    <?php if ($totalPages > 1): ?>
+                        <button type="button" class="c-form__button c-button leadform-forward">
+                            <?php echo esc_html__('Weiter', 'oo_theme'); ?>
+                        </button>
+                    <?php endif; ?>
+
+                    <div class="leadform-submit" style="display:none;">
+                        <?php include get_template_directory() .
+                            '/onoffice-theme/templates/form/formsubmit.php'; ?>
+                    </div>
                 </div>
             </div>
         </div>

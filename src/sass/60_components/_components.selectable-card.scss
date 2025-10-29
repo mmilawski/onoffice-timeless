@@ -33,6 +33,22 @@
 
     #{$c-selectable-card}__label {
       color: var(--oo-color-contrast-primary);
+
+      .--bg-light & {
+        color: var(--oo-color-light-contrast-primary);
+      }
+
+      .--bg-dark & {
+        color: var(--oo-color-dark-contrast-primary);
+      }
+
+      .--bg-primary & {
+        color: var(--oo-color-primary-contrast-primary);
+      }
+
+      .--bg-secondary & {
+        color: var(--oo-color-secondary-contrast-primary);
+      }
     }
 
     #{$c-selectable-card}__icon {
@@ -44,6 +60,54 @@
       }
       svg [fill='lightblue'] {
         fill: var(--oo-color-mix-bg-text-30);
+      }
+
+      .--bg-light & {
+        svg {
+          color: var(--oo-color-light-contrast-primary);
+        }
+        svg:not([fill='none']) {
+          fill: var(--oo-color-light-contrast-primary);
+        }
+        svg [fill='lightblue'] {
+          fill: var(--oo-color-light-mix-bg-text-30);
+        }
+      }
+
+      .--bg-dark & {
+        svg {
+          color: var(--oo-color-dark-contrast-primary);
+        }
+        svg:not([fill='none']) {
+          fill: var(--oo-color-dark-contrast-primary);
+        }
+        svg [fill='lightblue'] {
+          fill: var(--oo-color-dark-mix-bg-text-30);
+        }
+      }
+
+      .--bg-primary & {
+        svg {
+          color: var(--oo-color-primary-contrast-primary);
+        }
+        svg:not([fill='none']) {
+          fill: var(--oo-color-primary-contrast-primary);
+        }
+        svg [fill='lightblue'] {
+          fill: var(--oo-color-primary-mix-bg-text-30);
+        }
+      }
+
+      .--bg-secondary & {
+        svg {
+          color: var(--oo-color-secondary-contrast-primary);
+        }
+        svg:not([fill='none']) {
+          fill: var(--oo-color-secondary-contrast-primary);
+        }
+        svg [fill='lightblue'] {
+          fill: var(--oo-color-secondary-mix-bg-text-30);
+        }
       }
     }
   }
@@ -82,6 +146,22 @@
 
     #{$c-selectable-card}__label {
       color: var(--oo-color-contrast-primary);
+
+      .--bg-light & {
+        color: var(--oo-color-light-contrast-primary);
+      }
+
+      .--bg-dark & {
+        color: var(--oo-color-dark-contrast-primary);
+      }
+
+      .--bg-primary & {
+        color: var(--oo-color-primary-contrast-primary);
+      }
+
+      .--bg-secondary & {
+        color: var(--oo-color-secondary-contrast-primary);
+      }
     }
 
     #{$c-selectable-card}__icon {
@@ -94,6 +174,54 @@
 
       svg [fill='lightblue'] {
         fill: var(--oo-color-mix-bg-text-30);
+      }
+
+      .--bg-light & {
+        svg {
+          color: var(--oo-color-light-contrast-primary);
+        }
+        svg:not([fill='none']) {
+          fill: var(--oo-color-light-contrast-primary);
+        }
+        svg [fill='lightblue'] {
+          fill: var(--oo-color-light-mix-bg-text-30);
+        }
+      }
+
+      .--bg-dark & {
+        svg {
+          color: var(--oo-color-dark-contrast-primary);
+        }
+        svg:not([fill='none']) {
+          fill: var(--oo-color-dark-contrast-primary);
+        }
+        svg [fill='lightblue'] {
+          fill: var(--oo-color-dark-mix-bg-text-30);
+        }
+      }
+
+      .--bg-primary & {
+        svg {
+          color: var(--oo-color-primary-contrast-primary);
+        }
+        svg:not([fill='none']) {
+          fill: var(--oo-color-primary-contrast-primary);
+        }
+        svg [fill='lightblue'] {
+          fill: var(--oo-color-primary-mix-bg-text-30);
+        }
+      }
+
+      .--bg-secondary & {
+        svg {
+          color: var(--oo-color-secondary-contrast-primary);
+        }
+        svg:not([fill='none']) {
+          fill: var(--oo-color-secondary-contrast-primary);
+        }
+        svg [fill='lightblue'] {
+          fill: var(--oo-color-secondary-mix-bg-text-30);
+        }
       }
     }
   }
@@ -118,6 +246,54 @@
     svg [fill='lightblue'] {
       fill: var(--oo-color-mix-bg-text-30);
     }
+
+    .--bg-light & {
+      svg {
+        color: var(--oo-color-light-text);
+      }
+      svg:not([fill='none']) {
+        fill: var(--oo-color-light-text);
+      }
+      svg [fill='lightblue'] {
+        fill: var(--oo-color-light-mix-bg-text-30);
+      }
+    }
+
+    .--bg-dark & {
+      svg {
+        color: var(--oo-color-dark-text);
+      }
+      svg:not([fill='none']) {
+        fill: var(--oo-color-dark-text);
+      }
+      svg [fill='lightblue'] {
+        fill: var(--oo-color-dark-mix-bg-text-30);
+      }
+    }
+
+    .--bg-primary & {
+      svg {
+        color: var(--oo-color-primary-text);
+      }
+      svg:not([fill='none']) {
+        fill: var(--oo-color-primary-text);
+      }
+      svg [fill='lightblue'] {
+        fill: var(--oo-color-primary-mix-bg-text-30);
+      }
+    }
+
+    .--bg-secondary & {
+      svg {
+        color: var(--oo-color-secondary-text);
+      }
+      svg:not([fill='none']) {
+        fill: var(--oo-color-secondary-text);
+      }
+      svg [fill='lightblue'] {
+        fill: var(--oo-color-secondary-mix-bg-text-30);
+      }
+    }
   }
 
   &__label {
@@ -127,5 +303,21 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    .--bg-light & {
+      color: var(--oo-color-light-text);
+    }
+
+    .--bg-dark & {
+      color: var(--oo-color-dark-text);
+    }
+
+    .--bg-primary & {
+      color: var(--oo-color-primary-text);
+    }
+
+    .--bg-secondary & {
+      color: var(--oo-color-secondary-text);
+    }
   }
 }
