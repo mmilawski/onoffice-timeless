@@ -340,12 +340,23 @@
     font-size: 1.5rem; // 24px
     line-height: 2.125rem; // 34px
     width: calc(100% - 1px); // Force width calculation to enable text-overflow
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    max-height: 4.25rem; // Two lines
-    overflow: hidden;
+    display: block;
+
+    @include media-breakpoint-up(lg) {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      max-height: 2.125rem; // One line
+    }
+
+    @include media-breakpoint-up(xxl) {
+      white-space: normal;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      max-height: 4.25rem; // Two lines
+    }
     .--bg-light & {
       color: var(--oo-color-light-headline, var(--oo-color-headline));
     }
@@ -368,6 +379,12 @@
     flex: 1 1 0;
     min-height: 0; // Enable proper flex shrinking
     width: 100%;
+
+    @include media-breakpoint-down(md) {
+      flex: 0 0 auto; // Don't flex or shrink on mobile
+      height: auto; // Let height be determined by content
+    }
+
     color: var(--oo-color-text);
     font-size: 1rem; // 16px
     line-height: 1.75; // 22px
@@ -389,20 +406,29 @@
     }
     
     .--on-slider & {
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 8;
-      line-clamp: 8;
-      overflow: hidden;
-      max-height: calc(1.75rem * 6); // 6 lines of text
       @include media-breakpoint-up(xxl) {
-        -webkit-line-clamp: 3;
-        line-clamp: 3;
-      }
-
-      @include media-breakpoint-up(xxxl) {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
         -webkit-line-clamp: 4;
         line-clamp: 4;
+        overflow: hidden;
+        max-height: calc(1.75rem * 4);
+      }
+
+      @include media-breakpoint-up(xl) {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+        overflow: hidden;
+        max-height: calc(1.75rem * 3);
+      }
+
+      @include media-breakpoint-down(md) {
+        display: block;
+        overflow: visible;
+        height: auto;
+        max-height: none;
       }
     }
 
