@@ -42,10 +42,11 @@
   }
   &__map-wrapper {
     width: 100%;
-    aspect-ratio: 3/2;
-    border: 1px solid var(--oo-color-mix-bg-contrast-50);
-    @include media-breakpoint-up(sm) {
-      aspect-ratio: 16/9;
+    .c-map {
+      aspect-ratio: 3/2;
+      @include media-breakpoint-up(sm) {
+        aspect-ratio: 16/9;
+      }
     }
   }
 }
