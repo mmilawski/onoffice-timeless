@@ -188,7 +188,7 @@ if (empty($header_modules_left) && empty($header_modules_right)) {
                             endif; ?>
                         </a>
                     </div>
-
+                    <?php if (oo_has_menu_items('main-nav')): ?>
                     <button class="c-main-nav__button c-icon-button" data-open-text="<?php esc_html_e(
                         'Menü öffnen',
                         'oo_theme',
@@ -206,6 +206,7 @@ if (empty($header_modules_left) && empty($header_modules_right)) {
                             'class' => 'c-icon-button__icon --close',
                         ]); ?>
                     </button>
+                    <?php endif; ?>
 
                 </div><!-- #container -->
             </div>
