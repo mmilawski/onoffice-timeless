@@ -94,9 +94,12 @@ function oo_property_field_type($field, $item)
                     <?php esc_html_e('Web:', 'oo_theme'); ?>
                 </dt>
                 <dd class="c-contact-person__contact-value">
-                    <a class="c-link --text-color --on-bg-transparent" target="_blank" href="<?php echo esc_html(
-                        $item,
-                    ); ?>">
+                    <a class="c-link --text-color --on-bg-transparent" rel="noopener noreferrer" aria-label="<?php esc_attr_e(
+                        'Webseite besuchen (Öffnet in neuem Tab)',
+                        'oo_theme',
+                    ); ?>" target="_blank" href="<?php echo esc_html(
+    $item,
+); ?>">
                         <?php echo esc_html($item); ?>
                     </a>
                 </dd>
@@ -295,9 +298,9 @@ if (!empty($pEstates->getEstateContacts())) {
         }
 
         if ($name_output) {
-            echo '<p class="c-contact-person__name o-headline --h3">';
+            echo '<h3 class="c-contact-person__name o-headline --h3">';
             echo esc_html($name_output);
-            echo '</p>';
+            echo '</h3>';
         }
 
         // Output all other configured fields.

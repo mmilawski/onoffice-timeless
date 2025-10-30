@@ -849,8 +849,16 @@ while ($current_property = $pEstates->estateIterator()) {
 
                                 echo '<a class="c-button --ghost" href="' .
                                     esc_attr($property_ogulo_link['url']) .
-                                    '" target="_blank" title="' .
-                                    $button_title .
+                                    '" target="_blank" rel="noopener noreferrer" aria-label="' .
+                                    esc_attr(
+                                        sprintf(
+                                            __(
+                                                '360°-Rundgang von %s starten (Öffnet in neuem Tab)',
+                                                'oo_theme',
+                                            ),
+                                            $button_title,
+                                        ),
+                                    ) .
                                     '">' .
                                     $button_title .
                                     '</a>';
@@ -932,9 +940,17 @@ while ($current_property = $pEstates->estateIterator()) {
 
                                 echo '<a class="c-button --ghost" href="' .
                                     esc_attr($property_movie_link['url']) .
-                                    '" target="_blank" title="' .
-                                    $button_title .
-                                    '">' .
+                                    '" rel="noopener noreferrer" aria-label="' .
+                                    esc_attr(
+                                        sprintf(
+                                            __(
+                                                'Video von %s starten (Öffnet in neuem Tab)',
+                                                'oo_theme',
+                                            ),
+                                            $button_title,
+                                        ),
+                                    ) .
+                                    '" target="_blank">' .
                                     $button_title .
                                     '</a>';
                             }
@@ -989,9 +1005,17 @@ while ($current_property = $pEstates->estateIterator()) {
 
                                 echo '<a class="c-button --ghost" href="' .
                                     esc_attr($property_link['url']) .
-                                    '" target="_blank" title="' .
-                                    $button_title .
-                                    '">' .
+                                    '" rel="noopener noreferrer" aria-label="' .
+                                    esc_attr(
+                                        sprintf(
+                                            __(
+                                                'Link von %s öffnen (Öffnet in neuem Tab)',
+                                                'oo_theme',
+                                            ),
+                                            $button_title,
+                                        ),
+                                    ) .
+                                    '" target="_blank">' .
                                     $button_title .
                                     '</a>';
                             }
@@ -1056,6 +1080,16 @@ while ($current_property = $pEstates->estateIterator()) {
 
                                 echo '<a class="c-button --ghost" href="' .
                                     esc_attr($property_object_link['url']) .
+                                    '" rel="noopener noreferrer" aria-label="' .
+                                    esc_attr(
+                                        sprintf(
+                                            __(
+                                                'Objekt-Link von %s öffnen (Öffnet in neuem Tab)',
+                                                'oo_theme',
+                                            ),
+                                            $button_title,
+                                        ),
+                                    ) .
                                     '" target="_blank" title="' .
                                     $button_title .
                                     '">' .
