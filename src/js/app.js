@@ -1611,7 +1611,7 @@ function initNewsCardNavigation() {
   const container = document.querySelector('.c-news__news');
   if (!container) return;
   let focusableElements = [];
-  let isDesktop = window.matchMedia('(min-width: 768px)').matches;
+  let isDesktop = window.matchMedia('(min-width: 1000px)').matches;
   
   function buildFocusableList() {
     focusableElements = [];
@@ -1658,7 +1658,6 @@ function initNewsCardNavigation() {
     if (event.shiftKey) {
       // Shift+Tab: Move backwards
       nextIndex = currentIndex - 1;
-      console.log(nextIndex)
       if (nextIndex < 0) {
         // Exit container at the start
         const prevFocusable = findPreviousFocusable(currentElement);
