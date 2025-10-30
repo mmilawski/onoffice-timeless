@@ -1,10 +1,8 @@
 .c-accordion-card {
   $c-accordion-card: &;
-  $icon-wrapper-size: 2.5rem;
 
   display: flex;
   flex-direction: column;
-  padding: 1.5rem;
 
   &__icon-wrapper {
     display: grid;
@@ -14,9 +12,9 @@
     display: grid;
     grid-template-columns: auto $icon-wrapper-size;
     gap: 1rem;
+    padding: 1.5rem;
     cursor: pointer;
     margin: 0;
-    padding: 0;
     outline: $outline;
     outline-offset: $outline-offset;
     color: var(--oo-color-headline);
@@ -56,7 +54,7 @@
 
   &__icon {
     display: inherit;
-    height: 2.5rem;
+    height: $icon-size;
     transition: transform 0.25s ease-in-out;
     transform: rotate(90deg);
     color: var(--oo-color-headline);
@@ -76,7 +74,7 @@
       color: var(--oo-color-secondary-headline, var(--oo-color-headline));
     }
     [open] & {
-      transform: rotate(270deg);
+      transform: rotate(-90deg);
 
       .--open {
         display: none;
@@ -85,16 +83,17 @@
   }
 
   &__icon-wrapper {
-    .--open {
-      display: none;
-    }
-    .--close {
-      display: inline;
-    }
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
   }
 
   &__content {
-    margin-top: 2.5rem;
+    margin-top: 1rem;
+    padding: 0 1rem 1.5rem 1rem;
+    @include media-breakpoint-up(md) {
+      padding: 0 1.5rem 1.5rem 1.5rem;
+    }
     transition: max-height 0.25s ease-in-out;
     .--is-open & {
       max-height: 100rem;
@@ -177,6 +176,7 @@
     }
   }
   .--bg-secondary & {
+    background-color: var(--oo-color-secondary-mix-bg-contrast-05);
     #{$c-accordion-card}__title,
     #{$c-accordion-card}__icon {
       @include visited-active() {

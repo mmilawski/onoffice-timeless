@@ -35,7 +35,7 @@ $header_level = !empty($headline['text'])
 
         <?php if (!empty($accordion)) { ?>
             <div class="c-accordion__accordions-wrapper o-row">
-                <div class="c-accordion__accordions o-col-12 o-col-lg-10 o-col-xl-8 u-offset-lg-1">
+                <div class="c-accordion__accordions o-col-12 o-col-lg-10 u-offset-lg-1">
                     <?php foreach ($accordion as $key => $card) {
                         $accordion_headline = $card['headline'] ?? ''; ?>
                         <details class="c-accordion-card">
@@ -44,13 +44,12 @@ $header_level = !empty($headline['text'])
                                     'class="c-accordion-card__headline o-headline --h3 --span">' .
                                     esc_html($accordion_headline) .
                                     "</h{$header_level}>"; ?>
-                                <span class="c-accordion-card__icon-wrapper c-icon-button">
+                                <span class="c-accordion-card__icon-wrapper">
                                     <?php echo oo_get_icon(
                                         'chevron-right',
                                         true,
                                         [
-                                            'class' =>
-                                                'c-accordion-card__icon ',
+                                            'class' => 'c-accordion-card__icon',
                                         ],
                                     ); ?>
                                     <span class="u-screen-reader-only --open" aria-hidden="false">
@@ -76,7 +75,9 @@ $header_level = !empty($headline['text'])
                                 </span>
                             </summary>
                             <div class="c-accordion-card__content o-text --is-wysiwyg">
-                                <?php echo $card['text']['wysiwyg']; ?>
+                                <div class="c-accordion-card__text o-col-12 o-col-lg-10 ">
+                                    <?php echo $card['text']['wysiwyg']; ?>
+                                </div>
                             </div>
                         </details>
                     <?php
