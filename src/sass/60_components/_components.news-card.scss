@@ -371,6 +371,17 @@
     .--bg-secondary & {
       color: var(--oo-color-secondary-headline, var(--oo-color-headline));
     }
+
+    .--on-slider & {
+      @include media-breakpoint-up(lg) {
+        white-space: normal;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        max-height: 4.25rem;
+      }
+    }
   }
 
   &__text,
