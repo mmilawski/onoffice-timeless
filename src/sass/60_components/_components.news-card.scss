@@ -9,11 +9,10 @@
   flex-direction: column;
 
   &.--on-slider {
-    
     @include media-breakpoint-up(lg) {
       aspect-ratio: 1/2.8; // Large screens
     }
-    
+
     @include media-breakpoint-up(xl) {
       aspect-ratio: 1/2.3; // Extra large screens
     }
@@ -235,7 +234,7 @@
     gap: 1.5rem;
     background-color: var(--oo-color-mix-bg-contrast-05);
     position: relative;
-    
+
     .--on-slider & {
       height: auto;
       flex: 1 1 auto; // Allow content to take remaining space
@@ -287,9 +286,9 @@
         gap: 1.5rem;
       }
     }
-  }  
-    
-    @include media-breakpoint-down(md) {
+  }
+
+  @include media-breakpoint-down(md) {
     flex-direction: column;
     min-height: auto;
     height: auto; // Let height be determined by content
@@ -403,25 +402,44 @@
         -webkit-line-clamp: 3;
         line-clamp: 3;
       }
-    }
-    
-    .--on-slider & {
+
       @include media-breakpoint-up(xxl) {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
         -webkit-line-clamp: 4;
         line-clamp: 4;
-        overflow: hidden;
-        max-height: calc(1.75rem * 4);
       }
 
-      @include media-breakpoint-up(xl) {
+      @include media-breakpoint-up(xxxl) {
+        -webkit-line-clamp: 5;
+        line-clamp: 5;
+      }
+    }
+
+    .--on-slider & {
+      @include media-breakpoint-up(lg) {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 8;
+        line-clamp: 8;
+        overflow: hidden;
+        max-height: calc(1.75rem * 8);
+      }
+
+      @include media-breakpoint-up(xxl) {
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 3;
         line-clamp: 3;
         overflow: hidden;
         max-height: calc(1.75rem * 3);
+      }
+
+      @include media-breakpoint-up(xxxl) {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        line-clamp: 4;
+        overflow: hidden;
+        max-height: calc(1.75rem * 4);
       }
 
       @include media-breakpoint-down(md) {
