@@ -7,7 +7,6 @@
   overflow: hidden;
   background-color: var(--oo-color-primary);
 
-
   &__picture {
     height: auto;
     aspect-ratio: 3 / 4;
@@ -27,7 +26,7 @@
     min-height: 82px;
     max-height: 82px;
     gap: 0;
-    
+
     &:hover {
       gap: 0;
       max-height: 40rem;
@@ -46,7 +45,8 @@
         max-height: 20rem;
         pointer-events: auto;
         visibility: visible;
-        transition: opacity 0.4s ease-in-out, max-height 0.4s linear, visibility 0s;
+        transition: opacity 0.4s ease-in-out, max-height 0.4s linear,
+          visibility 0s;
 
         &.--job {
           margin-bottom: 0.5rem; // 8px space below job
@@ -121,8 +121,6 @@
     }
   }
 
-
-
   &__row {
     color: var(--oo-color-text);
 
@@ -140,7 +138,8 @@
       pointer-events: none;
       overflow: hidden;
       visibility: hidden;
-      transition: opacity 0.4s ease-in-out, max-height 0.4s linear, margin 0.4s ease-in-out, visibility 0s 0.4s;
+      transition: opacity 0.4s ease-in-out, max-height 0.4s linear,
+        margin 0.4s ease-in-out, visibility 0s 0.4s;
     }
 
     &.--job {
