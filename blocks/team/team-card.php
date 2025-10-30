@@ -156,7 +156,7 @@ echo $first_line . '<br>' . $second_line;
             <div class="c-team-card__row --rating">
                 <?php oo_get_template('components', '', 'component-stars', [
                     'rating' => $rating,
-                    'size' => 'small',
+                    'size' => 'medium-small',
                     'light_empty_stars' => true,
                 ]); ?>
                 <?php if (
@@ -303,7 +303,7 @@ echo $first_line . '<br>' . $second_line;
                     [
                         'networks' => $networks,
                         'additional_container_class' =>
-                            'c-team-card__social-links',
+                            'c-team-card__social-links --is-team-card',
                     ],
                 ); ?>
             </div>

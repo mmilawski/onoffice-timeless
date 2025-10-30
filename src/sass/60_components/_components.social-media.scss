@@ -117,6 +117,33 @@
     display: inline-flex;
   }
 
+  &.--is-team-card {
+    --oo-social-media-size: 1rem;
+    --oo-social-media-gap: 0.5rem;
+    --oo-social-media-color: var(--oo-color-text);
+    --oo-social-media-color-hover: var(--oo-color-text);
+
+    .--bg-light & {
+      --oo-social-media-color: var(--oo-color-light-text, var(--oo-color-text));
+      --oo-social-media-color-hover: var(--oo-color-light-text, var(--oo-color-text));
+    }
+
+    .--bg-dark & {
+      --oo-social-media-color: var(--oo-color-dark-text, var(--oo-color-text));
+      --oo-social-media-color-hover: var(--oo-color-dark-text, var(--oo-color-text));
+    }
+
+    .--bg-primary & {
+      --oo-social-media-color: var(--oo-color-primary-text, var(--oo-color-text));
+      --oo-social-media-color-hover: var(--oo-color-primary-text, var(--oo-color-text));
+    }
+
+    .--bg-secondary & {
+      --oo-social-media-color: var(--oo-color-secondary-text, var(--oo-color-text));
+      --oo-social-media-color-hover: var(--oo-color-secondary-text, var(--oo-color-text));
+    }
+  }
+
   &.--is-share {
     --oo-social-media-size: 2.5rem;
     --oo-social-media-gap: 2rem;
