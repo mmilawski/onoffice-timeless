@@ -92,12 +92,9 @@ set_current_header_level(2);
 </div>
 <?php } else { ?>
     <p class="c-property-list__count --no-properties">
-        <?php esc_html_e(
-            'Gefundene Immobilien:',
-            'oo_theme',
-        ); ?> <span class="c-property-list__number"><?php echo sprintf(
-     '%d',
-     $property_count,
- ); ?></span>
+        <?php printf(
+            esc_html__('%d Immobilien gefunden', 'oo_theme'),
+            $property_count,
+        ); ?>
     </p>
 <?php } ?>
