@@ -114,7 +114,7 @@ if ($rating_provider === 'google') {
                         ],
                     ]); ?>
                 <?php } else { ?>
-                    <div class="c-team-card__picture"></div>
+                    <div class="c-team-detail__picture"></div>
                 <?php } ?>
 
                 <div class="c-team-detail__content">
@@ -131,7 +131,7 @@ if ($rating_provider === 'google') {
                         !empty($card['rating_provider']) &&
                         $card['rating_provider'] !== 'none'
                     ): ?>
-                        <p class="c-team-card__contact --is-stars">
+                        <p class="c-team-detail__contact --is-stars">
                             <?php oo_get_template(
                                 'components',
                                 '',
@@ -160,7 +160,7 @@ if ($rating_provider === 'google') {
                         </p>
                     <?php endif; ?>
                     <?php if (!empty($card['languages'])) { ?>
-                        <p class="c-team-card__languages"><?php echo $card[
+                        <p class="c-team-detail__languages"><?php echo $card[
                             'languages'
                         ]; ?></p>
                     <?php } ?>
@@ -182,7 +182,7 @@ if ($rating_provider === 'google') {
                             'oo_theme',
                         ); ?></p>
                         <?php if (!empty($contact['email'])): ?>
-                            <p class="c-team-card__contact --is-email">
+                            <p class="c-team-detail__contact --is-email">
                                 <?php oo_get_template(
                                     'components',
                                     '',
@@ -204,7 +204,7 @@ if ($rating_provider === 'google') {
                         <?php endif; ?>
 
                         <?php if (!empty($contact['phone'])): ?>
-                            <p class="c-team-card__contact --is-phone">
+                            <p class="c-team-detail__contact --is-phone">
                                 <?php oo_get_template(
                                     'components',
                                     '',
@@ -225,7 +225,7 @@ if ($rating_provider === 'google') {
                         <?php endif; ?>
 
                         <?php if (!empty($contact['mobile'])): ?>
-                            <p class="c-team-card__contact --is-mobile">
+                            <p class="c-team-detail__contact --is-mobile">
                                 <?php oo_get_template(
                                     'components',
                                     '',
@@ -246,7 +246,7 @@ if ($rating_provider === 'google') {
                         <?php endif; ?>
 
                         <?php if (!empty($contact['fax'])): ?>
-                            <p class="c-team-card__contact --is-fax">
+                            <p class="c-team-detail__contact --is-fax">
                                 <?php oo_get_template(
                                     'components',
                                     '',
@@ -273,7 +273,7 @@ if ($rating_provider === 'google') {
                                 [
                                     'networks' => $networks,
                                     'additional_container_class' =>
-                                        'c-team-card__contact --is-networks',
+                                        'c-team-detail__contact --is-networks',
                                 ],
                             ); ?>
                         <?php endif; ?>
