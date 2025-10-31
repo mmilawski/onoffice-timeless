@@ -125,22 +125,40 @@
 
     .--bg-light & {
       --oo-social-media-color: var(--oo-color-light-text, var(--oo-color-text));
-      --oo-social-media-color-hover: var(--oo-color-light-text, var(--oo-color-text));
+      --oo-social-media-color-hover: var(
+        --oo-color-light-text,
+        var(--oo-color-text)
+      );
     }
 
     .--bg-dark & {
       --oo-social-media-color: var(--oo-color-dark-text, var(--oo-color-text));
-      --oo-social-media-color-hover: var(--oo-color-dark-text, var(--oo-color-text));
+      --oo-social-media-color-hover: var(
+        --oo-color-dark-text,
+        var(--oo-color-text)
+      );
     }
 
     .--bg-primary & {
-      --oo-social-media-color: var(--oo-color-primary-text, var(--oo-color-text));
-      --oo-social-media-color-hover: var(--oo-color-primary-text, var(--oo-color-text));
+      --oo-social-media-color: var(
+        --oo-color-primary-text,
+        var(--oo-color-text)
+      );
+      --oo-social-media-color-hover: var(
+        --oo-color-primary-text,
+        var(--oo-color-text)
+      );
     }
 
     .--bg-secondary & {
-      --oo-social-media-color: var(--oo-color-secondary-text, var(--oo-color-text));
-      --oo-social-media-color-hover: var(--oo-color-secondary-text, var(--oo-color-text));
+      --oo-social-media-color: var(
+        --oo-color-secondary-text,
+        var(--oo-color-text)
+      );
+      --oo-social-media-color-hover: var(
+        --oo-color-secondary-text,
+        var(--oo-color-text)
+      );
     }
   }
 
