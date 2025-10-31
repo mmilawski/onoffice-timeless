@@ -123,7 +123,7 @@ if ($rating_provider === 'google') {
                             <p class="c-team-detail__job"><?php echo $job; ?></p>
                         <?php } ?>
                         <?php if (!empty($name)) { ?>
-                            <p class="c-team-detail__name o-headline --h3" id="team-<?php echo $post_id; ?>-title"><?php echo $name; ?></p>
+                            <p class="c-team-detail__name" id="team-<?php echo $post_id; ?>-title"><?php echo $name; ?></p>
                         <?php } ?>
                     <?php } ?>
                     
@@ -131,7 +131,6 @@ if ($rating_provider === 'google') {
                         !empty($card['rating_provider']) &&
                         $card['rating_provider'] !== 'none'
                     ): ?>
-                        <p class="c-team-detail__contact --is-stars">
                             <?php oo_get_template(
                                 'components',
                                 '',
@@ -157,7 +156,6 @@ if ($rating_provider === 'google') {
     'oo_theme',
 ); ?></a>
                             <?php } ?>
-                        </p>
                     <?php endif; ?>
                     <?php if (!empty($card['languages'])) { ?>
                         <p class="c-team-detail__languages"><?php echo $card[
@@ -177,94 +175,92 @@ if ($rating_provider === 'google') {
                                 $networks
                         )
                     ) { ?>
-                        <p class="c-team-detail__title"><?php esc_html_e(
-                            'Kontakt:',
-                            'oo_theme',
-                        ); ?></p>
-                        <?php if (!empty($contact['email'])): ?>
-                            <p class="c-team-detail__contact --is-email">
-                                <?php oo_get_template(
-                                    'components',
-                                    '',
-                                    'component-email',
-                                    [
-                                        'email' => $contact['email'],
-                                        'additional_link_class' =>
-                                            '--is-underlined --text-color',
-                                        'aria-label' => sprintf(
-                                            esc_attr__(
-                                                'E-Mail senden an %s',
+                        <div class="c-team-detail__contact-block">
+                            <?php if (!empty($contact['email'])): ?>
+                                <p class="c-team-detail__contact --is-email">
+                                    <?php oo_get_template(
+                                        'components',
+                                        '',
+                                        'component-email',
+                                        [
+                                            'email' => $contact['email'],
+                                            'additional_link_class' =>
+                                                '--is-underlined --text-color',
+                                            'aria-label' => sprintf(
+                                                esc_attr__(
+                                                    'E-Mail senden an %s',
+                                                    'oo_theme',
+                                                ),
+                                                $contact['email'],
+                                            ),
+                                        ],
+                                    ); ?>
+                                </p>
+                            <?php endif; ?>
+
+                            <?php if (!empty($contact['phone'])): ?>
+                                <p class="c-team-detail__contact --is-phone">
+                                    <?php oo_get_template(
+                                        'components',
+                                        '',
+                                        'component-contact-numbers',
+                                        [
+                                            'number' => $contact['phone'],
+                                            'country_code' =>
+                                                $contact['phone-country'],
+                                            'additional_link_class' =>
+                                                '--is-underlined --text-color',
+                                            'aria-label' => esc_attr__(
+                                                'Telefonnummer %s anrufen',
                                                 'oo_theme',
                                             ),
-                                            $contact['email'],
-                                        ),
-                                    ],
-                                ); ?>
-                            </p>
-                        <?php endif; ?>
+                                        ],
+                                    ); ?>
+                                </p>
+                            <?php endif; ?>
 
-                        <?php if (!empty($contact['phone'])): ?>
-                            <p class="c-team-detail__contact --is-phone">
-                                <?php oo_get_template(
-                                    'components',
-                                    '',
-                                    'component-contact-numbers',
-                                    [
-                                        'number' => $contact['phone'],
-                                        'country_code' =>
-                                            $contact['phone-country'],
-                                        'additional_link_class' =>
-                                            '--is-underlined --text-color',
-                                        'aria-label' => esc_attr__(
-                                            'Telefonnummer %s anrufen',
-                                            'oo_theme',
-                                        ),
-                                    ],
-                                ); ?>
-                            </p>
-                        <?php endif; ?>
+                            <?php if (!empty($contact['mobile'])): ?>
+                                <p class="c-team-detail__contact --is-mobile">
+                                    <?php oo_get_template(
+                                        'components',
+                                        '',
+                                        'component-contact-numbers',
+                                        [
+                                            'number' => $contact['mobile'],
+                                            'country_code' =>
+                                                $contact['mobile-country'],
+                                            'additional_link_class' =>
+                                                '--is-underlined --text-color',
+                                            'aria-label' => esc_attr__(
+                                                'Mobilnummer %s anrufen',
+                                                'oo_theme',
+                                            ),
+                                        ],
+                                    ); ?>
+                                </p>
+                            <?php endif; ?>
 
-                        <?php if (!empty($contact['mobile'])): ?>
-                            <p class="c-team-detail__contact --is-mobile">
-                                <?php oo_get_template(
-                                    'components',
-                                    '',
-                                    'component-contact-numbers',
-                                    [
-                                        'number' => $contact['mobile'],
-                                        'country_code' =>
-                                            $contact['mobile-country'],
-                                        'additional_link_class' =>
-                                            '--is-underlined --text-color',
-                                        'aria-label' => esc_attr__(
-                                            'Mobilnummer %s anrufen',
-                                            'oo_theme',
-                                        ),
-                                    ],
-                                ); ?>
-                            </p>
-                        <?php endif; ?>
-
-                        <?php if (!empty($contact['fax'])): ?>
-                            <p class="c-team-detail__contact --is-fax">
-                                <?php oo_get_template(
-                                    'components',
-                                    '',
-                                    'component-contact-numbers',
-                                    [
-                                        'number' => $contact['fax'],
-                                        'country_code' =>
-                                            $contact['fax-country'],
-                                        'additional_link_class' =>
-                                            '--is-underlined --text-color',
-                                        'aria-label' => esc_attr__(
-                                            'Fax an %s senden',
-                                            'oo_theme',
-                                        ),
-                                    ],
-                                ); ?>
-                            </p>
-                        <?php endif; ?>
+                            <?php if (!empty($contact['fax'])): ?>
+                                <p class="c-team-detail__contact --is-fax">
+                                    <?php oo_get_template(
+                                        'components',
+                                        '',
+                                        'component-contact-numbers',
+                                        [
+                                            'number' => $contact['fax'],
+                                            'country_code' =>
+                                                $contact['fax-country'],
+                                            'additional_link_class' =>
+                                                '--is-underlined --text-color',
+                                            'aria-label' => esc_attr__(
+                                                'Fax an %s senden',
+                                                'oo_theme',
+                                            ),
+                                        ],
+                                    ); ?>
+                                </p>
+                            <?php endif; ?>
+                        </div>
                         <?php if (!empty($networks)): ?>
                             <?php oo_get_template(
                                 'components',
@@ -281,10 +277,6 @@ if ($rating_provider === 'google') {
 
                     <?php if (!empty($wysiwyg)) { ?>
                         <div class="c-team-detail__description-wrapper">
-                            <p class="c-team-detail__title"><?php esc_html_e(
-                                'Zur Person:',
-                                'oo_theme',
-                            ); ?></p>
                             <div class="c-team-detail__description o-text --is-wysiwyg">
                                 <?php echo $wysiwyg; ?>
                             </div>
