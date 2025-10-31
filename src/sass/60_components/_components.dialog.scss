@@ -99,3 +99,9 @@
     }
   }
 }
+
+.c-dialog.--team-dialog {
+  @include media-breakpoint-up(lg) {
+    max-width: 80vw;
+  }
+}

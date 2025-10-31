@@ -63,7 +63,7 @@ if ($rating_provider === 'google') {
 }
 ?>
 
-<dialog id="team-<?php echo $post_id; ?>" class="c-dialog --bg-transparent" aria-labelledby="team-<?php echo $post_id; ?>-title" aria-describedby="team-<?php echo $post_id; ?>-desc">
+<dialog id="team-<?php echo $post_id; ?>" class="c-dialog --bg-transparent --team-dialog" aria-labelledby="team-<?php echo $post_id; ?>-title" aria-describedby="team-<?php echo $post_id; ?>-desc">
     <div class="c-dialog__wrapper">
         <button class="c-dialog__close --close-popup c-button --only-icon" aria-label="<?php echo esc_html__(
             'Fenster schließen',
