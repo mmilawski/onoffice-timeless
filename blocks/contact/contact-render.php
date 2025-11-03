@@ -137,12 +137,12 @@ if (empty($addresses)) {
 					<?php oo_get_template('components', '', 'component-headline', [
          'headline' => $headline,
          'additional_headline_class' =>
-             'c-contact__headline o-col-12 o-col-xl-8',
+             'c-contact__headline u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8',
      ]); ?>
                 <?php } ?>
 
                 <?php if (!empty($text['wysiwyg'])) { ?>
-                    <div class="c-contact__text o-text --is-wysiwyg o-col-12 o-col-xl-8">
+                    <div class="c-contact__text o-text --is-wysiwyg u-offset-lg-1 o-col-xl-8 o-col-lg-10 o-col-12 ">
                         <?php echo $text['wysiwyg']; ?>
                     </div>
                 <?php } ?>
@@ -151,7 +151,7 @@ if (empty($addresses)) {
 
         <div class="c-contact__wrapper o-row">
         <?php if (!$is_map) { ?>
-            <div class="c-contact__addresses o-col-12 o-col-xl-8"> 
+            <div class="c-contact__addresses u-offset-lg-1 o-col-12 o-col-lg-10"> 
                 <?php foreach ($addresses as $address) {
                     $name = $address['name'] ?? null;
                     $street = $address['street'] ?? null;
@@ -169,6 +169,7 @@ if (empty($addresses)) {
                     $mobile = $contact['mobile'] ?? null;
 
                     echo '<div class="c-contact-card">';
+                    echo '<div class="c-contact-card__data-wrapper">';
                     if ($is_address) {
                         echo '<p class="c-contact-card__data --is-address">';
                         if (!empty($name)) {
@@ -294,6 +295,7 @@ if (empty($addresses)) {
                         echo '</div>';
                     }
                     echo '</div>';
+                    echo '</div>';
                 } ?>
             </div>
 
@@ -315,7 +317,7 @@ if (empty($addresses)) {
                     wp_enqueue_script('oo-init-open-street-map-marker-cluster');
                     ?>
                 <?php } ?>
-                <div class="c-contact__addresses o-col-12 o-col-xl-8 --is-map"> 
+                <div class="c-contact__addresses u-offset-lg-1 o-col-12 o-col-lg-10 --is-map">
                     <?php foreach ($addresses as $address) {
 
                         $name = $address['name'] ?? null;
@@ -341,6 +343,7 @@ if (empty($addresses)) {
                                     ? ' --position-alternating'
                                     : '')) .
                             '">';
+                        echo '<div class="c-contact-card__data-wrapper">';
                         if ($is_address) {
                             echo '<p class="c-contact-card__data --is-address">';
                             if (!empty($name)) {
@@ -467,6 +470,7 @@ if (empty($addresses)) {
                             }
                             echo '</div>';
                         }
+                        echo '</div>';
                         echo '<div class="c-contact-card__map c-map --is-' .
                             $map_type .
                             ' --is-' .
