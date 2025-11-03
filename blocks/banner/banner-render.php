@@ -67,6 +67,9 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
                     $buttons = $slide['buttons'] ?? null;
                     $shortcode = $slide['shortcode'] ?? null;
                     $align_text = $slide['settings']['align_text'] ?? 'left';
+                    $has_media =
+                        (!empty($image) && $background == 'image') ||
+                        (!empty($video) && $background == 'video');
 
                     // Settings slide
                     $slide_settings = $slide['settings'] ?? null;
@@ -224,137 +227,143 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
                                 </div>
                             </div>
                         <?php endif; ?>
-                        <div class="c-banner__media o-container<?php if (
-                            $type != 'none'
-                        ) {
-                            echo ' --content-is-' . $content_position;
-                        } ?>">
-                            <?php if (
-                                !empty($image) &&
-                                $background == 'image'
-                            ): ?>
-                                <?php oo_get_template(
-                                    'components',
-                                    '',
-                                    'component-image',
-                                    [
-                                        'image' => $image,
-                                        'picture_class' =>
-                                            'c-banner__picture o-picture',
-                                        'image_class' =>
-                                            'c-banner__image o-image --' .
-                                            $slide_settings['image_crop'],
-                                        'additional_cloudimg_params' =>
-                                            '&func=crop&gravity=' .
-                                            $slide_settings['image_crop'],
-                                        'loading' => $slide_loading,
-                                        'decoding' => $slide_decoding,
-                                        'dimensions' => [
-                                            '575' => [
-                                                'w' => $background_width_xs,
-                                                'h' => round(
-                                                    ($background_width_xs * 3) /
-                                                        4,
-                                                ),
-                                            ],
-                                            '1600' => [
-                                                'w' => $background_width_xxxl,
-                                                'h' => round(
-                                                    ($background_width_xxxl *
-                                                        9) /
-                                                        16,
-                                                ),
-                                            ],
-                                            '1400' => [
-                                                'w' => $background_width_xxl,
-                                                'h' => round(
-                                                    ($background_width_xxl *
-                                                        9) /
-                                                        16,
-                                                ),
-                                            ],
-                                            '1200' => [
-                                                'w' => $background_width_xl,
-                                                'h' => round(
-                                                    ($background_width_xl * 9) /
-                                                        16,
-                                                ),
-                                            ],
-                                            '992' => [
-                                                'w' => $background_width_lg,
-                                                'h' => round(
-                                                    ($background_width_lg * 9) /
-                                                        16,
-                                                ),
-                                            ],
-                                            '768' => [
-                                                'w' => $background_width_md,
-                                                'h' => round(
-                                                    ($background_width_md * 3) /
-                                                        4,
-                                                ),
-                                            ],
-                                            '576' => [
-                                                'w' => $background_width_sm,
-                                                'h' => round(
-                                                    ($background_width_sm * 3) /
-                                                        4,
-                                                ),
+                        <?php if ($has_media): ?>
+                            <div class="c-banner__media o-container<?php if (
+                                $type != 'none'
+                            ) {
+                                echo ' --content-is-' . $content_position;
+                            } ?>">
+                                <?php if (
+                                    !empty($image) &&
+                                    $background == 'image'
+                                ): ?>
+                                    <?php oo_get_template(
+                                        'components',
+                                        '',
+                                        'component-image',
+                                        [
+                                            'image' => $image,
+                                            'picture_class' =>
+                                                'c-banner__picture o-picture',
+                                            'image_class' =>
+                                                'c-banner__image o-image --' .
+                                                $slide_settings['image_crop'],
+                                            'additional_cloudimg_params' =>
+                                                '&func=crop&gravity=' .
+                                                $slide_settings['image_crop'],
+                                            'loading' => $slide_loading,
+                                            'decoding' => $slide_decoding,
+                                            'dimensions' => [
+                                                '575' => [
+                                                    'w' => $background_width_xs,
+                                                    'h' => round(
+                                                        ($background_width_xs *
+                                                            3) /
+                                                            4,
+                                                    ),
+                                                ],
+                                                '1600' => [
+                                                    'w' => $background_width_xxxl,
+                                                    'h' => round(
+                                                        ($background_width_xxxl *
+                                                            9) /
+                                                            16,
+                                                    ),
+                                                ],
+                                                '1400' => [
+                                                    'w' => $background_width_xxl,
+                                                    'h' => round(
+                                                        ($background_width_xxl *
+                                                            9) /
+                                                            16,
+                                                    ),
+                                                ],
+                                                '1200' => [
+                                                    'w' => $background_width_xl,
+                                                    'h' => round(
+                                                        ($background_width_xl *
+                                                            9) /
+                                                            16,
+                                                    ),
+                                                ],
+                                                '992' => [
+                                                    'w' => $background_width_lg,
+                                                    'h' => round(
+                                                        ($background_width_lg *
+                                                            9) /
+                                                            16,
+                                                    ),
+                                                ],
+                                                '768' => [
+                                                    'w' => $background_width_md,
+                                                    'h' => round(
+                                                        ($background_width_md *
+                                                            3) /
+                                                            4,
+                                                    ),
+                                                ],
+                                                '576' => [
+                                                    'w' => $background_width_sm,
+                                                    'h' => round(
+                                                        ($background_width_sm *
+                                                            3) /
+                                                            4,
+                                                    ),
+                                                ],
                                             ],
                                         ],
-                                    ],
-                                ); ?>
-                            <?php endif; ?>
+                                    ); ?>
+                                <?php endif; ?>
 
-                            <?php if (
-                                !empty($video) &&
-                                $background == 'video'
-                            ): ?>
-                                <div class="c-banner__video-wrapper <?php echo $video_class; ?>" aria-hidden="true">
-                                    <?php echo $iframe_with_attributes; ?>
-                                </div>
-                                <button
-                                    class="c-banner__video-playback-toggle c-icon-button<?php echo $slide_count ===
-                                    1
-                                        ? ' --single-slide'
-                                        : ''; ?>"
-                                    type="button"
-                                    aria-pressed="false"
-                                    aria-label="<?php esc_html_e(
-                                        'Video pausieren',
-                                        'oo_theme',
-                                    ); ?>"
-                                    data-label-play="<?php esc_html_e(
-                                        'Video abspielen',
-                                        'oo_theme',
-                                    ); ?>"
-                                    data-label-pause="<?php esc_html_e(
-                                        'Video pausieren',
-                                        'oo_theme',
-                                    ); ?>"
-                                    data-video-id="<?php echo $video_id; ?>"
->                               
-                                    <span class="c-banner__sr-label u-screen-reader-only">
-                                        <?php esc_html_e(
+                                <?php if (
+                                    !empty($video) &&
+                                    $background == 'video'
+                                ): ?>
+                                    <div class="c-banner__video-wrapper <?php echo $video_class; ?>" aria-hidden="true">
+                                        <?php echo $iframe_with_attributes; ?>
+                                    </div>
+                                    <button
+                                        class="c-banner__video-playback-toggle c-icon-button<?php echo $slide_count ===
+                                        1
+                                            ? ' --single-slide'
+                                            : ''; ?>"
+                                        type="button"
+                                        aria-pressed="false"
+                                        aria-label="<?php esc_html_e(
                                             'Video pausieren',
                                             'oo_theme',
-                                        ); ?>
-                                    </span>
+                                        ); ?>"
+                                        data-label-play="<?php esc_html_e(
+                                            'Video abspielen',
+                                            'oo_theme',
+                                        ); ?>"
+                                        data-label-pause="<?php esc_html_e(
+                                            'Video pausieren',
+                                            'oo_theme',
+                                        ); ?>"
+                                        data-video-id="<?php echo $video_id; ?>">                               
+                                        <span class="c-banner__sr-label u-screen-reader-only">
+                                            <?php esc_html_e(
+                                                'Video pausieren',
+                                                'oo_theme',
+                                            ); ?>
+                                        </span>
 
-                                    <?php echo oo_get_icon('play', true, [
-                                        'class' =>
-                                            'c-banner__icon c-icon-button__icon --play',
-                                        'aria-hidden' => 'true',
-                                    ]); ?>
+                                        <?php echo oo_get_icon('play', true, [
+                                            'class' =>
+                                                'c-banner__icon c-icon-button__icon --play',
+                                            'aria-hidden' => 'true',
+                                        ]); ?>
 
-                                    <?php echo oo_get_icon('pause', true, [
-                                        'class' =>
-                                            'c-banner__icon c-icon-button__icon --pause',
-                                        'aria-hidden' => 'true',
-                                    ]); ?>
-                                </button>
-                            <?php endif; ?>
-                        </div>
+                                        <?php echo oo_get_icon('pause', true, [
+                                            'class' =>
+                                                'c-banner__icon c-icon-button__icon --pause',
+                                            'aria-hidden' => 'true',
+                                        ]); ?>
+                                    </button>
+                                <?php endif; ?>
+                            </div>
+                        <?php endif; ?> 
                     </div>
                 <?php $first_slide = false;
                 } ?>
