@@ -291,7 +291,6 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
       @include media-breakpoint-up(xl) {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
         scroll-margin-top: calc(
           $mobile-header-height + $desktop-section-padding-top
         );
