@@ -28,11 +28,11 @@
   &__map {
   }
   &__map-wrapper {
+    width: 100%;
     padding-inline: 0rem;
     @include media-breakpoint-up(sm) {
       padding-inline: 1rem;
     }
-    width: 100%;
     .c-map {
       aspect-ratio: 3/2;
       @include media-breakpoint-up(sm) {
