@@ -57,7 +57,7 @@
     height: auto;
     width: 100%;
     aspect-ratio: 4 / 3;
-    
+
     @include media-breakpoint-up(lg) {
       position: absolute;
       top: 0;

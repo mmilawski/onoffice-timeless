@@ -73,6 +73,15 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
                     $content_position =
                         $slide_settings['position_content'] ?? 'left';
 
+                    $raw_content_position =
+                        $slide_settings['position_content'] ?? 'left';
+
+                    if ($raw_content_position === 'center') {
+                        $content_position = 'left';
+                    } else {
+                        $content_position = $raw_content_position;
+                    }
+
                     if ($first_slide === true) {
                         $slide_loading = 'eager';
                         $slide_decoding = 'auto';
@@ -149,9 +158,7 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
  ?>">
                         <?php if ($type != 'none'): ?>
                             <div class="c-banner__container o-container">
-                                <div class="c-banner__row o-row --position-<?php echo $slide_settings[
-                                    'position_content'
-                                ]; ?>">
+                                <div class="c-banner__row o-row --position-<?php echo $content_position; ?>">
                                     <div class="c-banner__content --content-<?php echo $type; ?>  --text-align-<?php echo $align_text; ?> o-col-12 o-col-lg-5">
                                         <?php if (!empty($headline['text'])) {
                                             $headline_size =
