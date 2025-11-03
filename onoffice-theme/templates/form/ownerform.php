@@ -25,7 +25,7 @@ include get_template_directory() . '/onoffice-theme/templates/fields.php';
 $settings = get_field('settings') ?? [];
 ?>
 
-<form method="post" action="#onoffice-form" id="onoffice-form-<?php echo $pForm->getFormNo(); ?>" class="c-form --is-owner-form">
+<form method="post" action="#onoffice-form" id="onoffice-form-<?php echo $pForm->getFormNo(); ?>" class="c-form --is-owner-form --custom-validation">
 
     <input type="hidden" name="oo_formid" value="<?php echo $pForm->getFormId(); ?>">
     <input type="hidden" name="oo_formno" value="<?php echo $pForm->getFormNo(); ?>">

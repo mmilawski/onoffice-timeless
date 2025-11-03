@@ -1498,7 +1498,7 @@ function sanitizeClonedYouTubeIframes(root) {
     });
 }
 document.addEventListener('DOMContentLoaded', function() {
-  const forms = document.querySelectorAll('.c-form');
+  const forms = document.querySelectorAll('.c-form.--custom-validation');
 
   forms.forEach(function(form) {
     form.setAttribute('novalidate', '');

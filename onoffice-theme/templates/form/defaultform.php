@@ -25,7 +25,7 @@ include get_template_directory() . '/onoffice-theme/templates/fields.php';
 $settings = get_field('settings') ?? [];
 ?>
 
-<form method="post" action="#onoffice-form" id="onoffice-form-<?php echo $pForm->getFormNo(); ?>" class="c-form --is-contact-form">
+<form method="post" action="#onoffice-form" id="onoffice-form-<?php echo $pForm->getFormNo(); ?>" class="c-form --is-contact-form --custom-validation">
 
     <?php if (!empty($pForm->getEstateContextLabel())) {
         echo '<h2 class="c-form__property-context o-headline">';

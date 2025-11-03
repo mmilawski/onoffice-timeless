@@ -7,8 +7,9 @@ $accordion = get_field('accordion') ?? null;
 // Settings
 $settings = get_field('settings') ?? null;
 
+// set header level
 $header_level = !empty($headline['text'])
-    ? sanitize_header_level($headline['size'])
+    ? sanitize_header_level($headline['size']) + 1
     : 2;
 ?>
 
