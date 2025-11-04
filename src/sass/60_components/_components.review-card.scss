@@ -73,7 +73,6 @@
 
   &__text {
     &.--shorten {
-      max-height: calc($global-line-height * 3);
       -webkit-line-clamp: 3;
       line-clamp: 3;
       overflow: hidden;

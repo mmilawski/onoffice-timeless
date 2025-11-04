@@ -14,10 +14,10 @@
     display: flex;
     flex-direction: row;
     gap: 2rem;
-    padding-inline: 1rem;
-    padding-block: 0 0.5rem;
-    @include media-breakpoint-up(lg) {
-      padding-inline: 0;
+    padding: 0 1rem 0.5rem 1rem;
+    @include media-breakpoint-up(sm) {
+      padding-left: 0;
+      padding-right: 0;
     }
     @include media-breakpoint-up(xl) {
       padding-block: 0 3rem;

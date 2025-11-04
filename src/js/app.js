@@ -1345,26 +1345,35 @@ function correctFirstElementPadding() {
 
 // Function to apply text shortening, read-more button and visibility adjustments based on word count and screen size
 function applyResponsiveTextShortening() {
-  const isMobile = window.innerWidth <= 768;
 
   function shortenElements(elementsEach, textElement, elementToShorten) {
     $(elementsEach).each(function() {
-      const mobileLimit = parseInt($(this).find(textElement).data('limit-mobile')) || 50;
-      const desktopLimit = parseInt($(this).find(textElement).data('limit-desktop')) || 100;
+      const $root = $(this);
+      const $textEl = $root.find(elementToShorten);
+      const $readMore = $root.find('.c-read-more');
 
-      const text = $(this).find(textElement).text();
-      const wordCount = text.trim().split(/\s+/).length;
+      if ($textEl.length === 0) {
+        $readMore.hide();
+        return;
+      }
 
-      const shouldShorten = isMobile
-        ? wordCount > mobileLimit
-        : wordCount > desktopLimit;
+      $textEl.addClass('--shorten');
+      const el = $textEl.get(0);
+      if (!el) {
+        $textEl.removeClass('--shorten');
+        $readMore.hide();
+        return;
+      }
+
+      const shouldShorten = el.scrollHeight > el.clientHeight;
 
       if (shouldShorten) {
-        $(this).find(elementToShorten).addClass('--shorten');
-        $(this).find('.c-read-more').show();
+        $root.find(elementToShorten).addClass('--shorten');
+        $root.find('.c-read-more').show();
+        $readMore.attr('aria-expanded', 'false').text($readMore.data('open-text') || 'weiterlesen...');
       } else {
-        $(this).find(elementToShorten).removeClass('--shorten');
-        $(this).find('.c-read-more').hide();
+        $root.find(elementToShorten).removeClass('--shorten');
+        $root.find('.c-read-more').hide();
       }
     });
   }
@@ -1377,10 +1386,13 @@ function applyResponsiveTextShortening() {
 
   // property list
   shortenElements('.c-property-details__text-wrapper', '.c-property-details__text-content', '.c-property-details__text-content');
-
-  // team
+  
+  // team 
   shortenElements('.c-team-card', '.c-team-card__description', '.c-team-card__description');
 }
+
+
+
 
 
 // Select2 copy class
