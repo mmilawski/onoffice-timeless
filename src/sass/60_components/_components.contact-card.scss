@@ -9,12 +9,11 @@
     gap: 5rem 2rem;
   }
 
-  /* 🧩 Neuer Wrapper für alle Data-Blöcke */
   &__data-wrapper {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    order: 1; // Standardmäßig über der Karte
+    order: 1;
     grid-column: 1;
   }
 
@@ -60,7 +59,6 @@
     word-break: break-word;
   }
 
-  /* 🗺 Karten-Layout */
   &.--is-map {
     display: grid;
     grid-template-columns: 1fr;
@@ -82,7 +80,6 @@
       }
     }
 
-    /* Default (Position Right – Daten oben mobil, Karte unten) */
     #{$c-contact-card}__data-wrapper {
       order: 1;
       grid-column: 1;
@@ -106,18 +103,19 @@
       }
     }
 
-    /* Position Left – Karte zuerst mobil */
-    &.--position-left {
-      #{$c-contact-card}__map {
-        order: 1;
-        grid-column: 1;
-      }
-
+    &.--position-left,
+    &.--position-right,
+    &.--position-alternating {
       #{$c-contact-card}__data-wrapper {
-        order: 2;
-        grid-column: 1;
+        order: 1;
       }
 
+      #{$c-contact-card}__map {
+        order: 2;
+      }
+    }
+
+    &.--position-left {
       @include media-breakpoint-up(md) {
         grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
 
@@ -131,16 +129,7 @@
       }
     }
 
-    /* Position Right – Standard */
     &.--position-right {
-      #{$c-contact-card}__data-wrapper {
-        order: 1;
-      }
-
-      #{$c-contact-card}__map {
-        order: 2;
-      }
-
       @include media-breakpoint-up(md) {
         grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
 
@@ -154,27 +143,8 @@
       }
     }
 
-    /* Alternierend: Daten-Karte, Karte-Daten */
     &.--position-alternating {
-      #{$c-contact-card}__data-wrapper {
-        order: 1;
-        grid-column: 1;
-      }
-
-      #{$c-contact-card}__map {
-        order: 2;
-        grid-column: 1;
-      }
-
       &:nth-child(even) {
-        #{$c-contact-card}__map {
-          order: 1;
-        }
-
-        #{$c-contact-card}__data-wrapper {
-          order: 2;
-        }
-
         @include media-breakpoint-up(md) {
           grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
 
