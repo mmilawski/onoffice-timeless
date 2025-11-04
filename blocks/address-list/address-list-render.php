@@ -15,6 +15,12 @@ $is_slider = filter_var($slider['slider'] ?? null, FILTER_VALIDATE_BOOLEAN);
 
 // Position
 $posiiton_center = !empty($text['wysiwyg']) ? ' --position-center' : '';
+
+// set header level for submodule
+$size = !empty($headline['text'])
+    ? sanitize_header_level($headline['size'])
+    : 1;
+set_current_header_level($size);
 ?>
 
 <section <?php echo oo_block_id(
