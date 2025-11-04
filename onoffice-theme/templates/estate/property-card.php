@@ -398,7 +398,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
         <?php endif; ?>
         <?php if ($current_property['objekttitel']) { ?>
             <?php echo "<h{$header_level} " .
-                'class="c-accordion-card__headline o-headline --h3 --span">' .
+                'class="c-property-card__title o-headline --h3">' .
                 $current_property['objekttitel'] .
                 "</h{$header_level}>"; ?>
         <?php } ?>

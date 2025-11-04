@@ -88,6 +88,12 @@ $query_args = [
 $news_query = new WP_Query($query_args);
 $found_posts = $news_query->found_posts ?? null;
 $max_num_pages = $news_query->max_num_pages ?? null;
+
+// set header level for submodule
+$size = !empty($headline['text'])
+    ? sanitize_header_level($headline['size'])
+    : 1;
+set_current_header_level($size);
 ?>
 
 
