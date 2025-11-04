@@ -50,6 +50,12 @@ $query_args = [
 ];
 
 $team_query = new WP_Query($query_args);
+
+// set header level for submodule
+$size = !empty($headline['text'])
+    ? sanitize_header_level($headline['size'])
+    : 1;
+set_current_header_level($size);
 ?>
 
 <section <?php oo_block_id(
