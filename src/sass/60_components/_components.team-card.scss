@@ -128,7 +128,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      min-height: 1.625rem; // Match the line-height of the name
+      min-height: 3rem; // Match the line-height of the name
     }
 
     &:not(.--name) {
