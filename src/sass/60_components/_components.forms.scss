@@ -35,6 +35,9 @@
   }
 
   &__wrapper {
+    @include media-breakpoint-down(xs) {
+      padding: 0;
+    }
   }
 
   &__form {

@@ -33,6 +33,10 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    @include media-breakpoint-down(xs) {
+      padding: 1rem;
+    }
+
     // add more margin to button if there is no read-more
     &:not(:has(.c-read-more)) {
       #{$c-form}__button {
@@ -284,12 +288,7 @@
       .c-selectable-cards {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 1rem;
-
-        // Increase the gap on larger screens
-        @include media-breakpoint-up(lg) {
-          gap: 2rem;
-        }
+        gap: 2rem;
 
         &.--has-selection .c-selectable-card:not(.--is-selected) {
           opacity: 0.5;
@@ -477,7 +476,9 @@
 }
 
 .lead-lightbox {
-  gap: 0 2rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  @include media-breakpoint-up(md) {
+    gap: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 }
