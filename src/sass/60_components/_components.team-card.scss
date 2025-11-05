@@ -22,10 +22,11 @@
     background-color: var(--oo-color-transparent-bg-80);
     padding: 1rem; // 16px padding
     padding-left: 1.5rem;
-    transition: max-height 0.4s linear, opacity 0.4s ease-in-out;
+    transition: max-height 0.6s linear;
     min-height: 82px;
     max-height: 82px;
     gap: 0;
+    overflow: hidden;
 
     &:hover {
       gap: 0;
@@ -43,30 +44,12 @@
       .c-team-card__row:not(.--name) {
         opacity: 1;
         max-height: 20rem;
-        pointer-events: auto;
-        visibility: visible;
-        transition: opacity 0.4s ease-in-out, max-height 0.4s linear,
-          visibility 0s;
+        transition: opacity 0.6s ease-in-out;
+      }
 
-        &.--job {
-          margin-bottom: 0.5rem; // 8px space below job
-        }
-
-        &.--rating {
-          margin-top: 1.5rem; // 24px space above rating
-        }
-
-        &.--contact {
-          margin-top: 1.5rem; // 24px space above contact
-        }
-
-        &.--social {
-          margin-top: 1.5rem; // 24px space above social
-        }
-
-        &.--action {
-          margin-top: 2.5rem; // 40px space above button
-        }
+      .c-team-card__row.--padding {
+        opacity: 0;
+        max-height: 0.5rem;
       }
     }
   }
@@ -162,35 +145,50 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-shrink: 0;
       min-height: 3rem; // Match the line-height of the name
     }
 
     &:not(.--name) {
+      min-height: 0;
+      box-sizing: border-box;
       opacity: 0;
-      max-height: 0;
-      margin: 0;
-      pointer-events: none;
-      overflow: hidden;
-      visibility: hidden;
-      transition: opacity 0.4s ease-in-out, max-height 0.4s linear,
-        margin 0.4s ease-in-out, visibility 0s 0.4s;
-    }
+      padding: 0;
+      transition: opacity 0.6s ease-in-out;
+      flex-shrink: 1;
+    }    
 
     &.--job {
       font-size: 1rem;
       line-height: 1.75rem;
     }
 
+    &.--padding {
+      font-size: 1rem;
+      line-height: 1.75rem;
+      max-height: 0.5rem;
+    }
+
     &.--rating {
       text-align: center;
+      padding-top: 1.5rem;
+    }
+
+    &.--contact {
+      padding-top: 1.5rem; // 24px space above contact
     }
 
     &.--social {
+      padding-top: 1.5rem;
       .c-team-card__social-links {
         display: flex;
         justify-content: flex-start;
         gap: 1rem;
       }
+    }
+
+    &.--action {
+      padding-top: 2.5rem; // 40px space above button
     }
   }
 
