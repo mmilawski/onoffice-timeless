@@ -88,7 +88,7 @@ require 'info-messages.php'; ?>
     <?php if ($pForm->getFormStatus() !== FormPost::MESSAGE_SUCCESS): ?>
         <div data-oo-form-paging data-form-id="leadform-<?php echo sanitize_title(
             $pForm->getFormId(),
-        ); ?>" data-form-no="<?php echo $pForm->getFormNo(); ?>" class="c-form__wrapper --<?php echo $bg_color; ?>">
+        ); ?>" data-form-no="<?php echo $pForm->getFormNo(); ?>" class="c-form__wrapper">
             <?php
             $totalPages = count($estateValues);
             $rawPageTitles = $pForm->getPageTitlesByCurrentLanguage();
