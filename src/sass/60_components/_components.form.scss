@@ -174,8 +174,20 @@
 
     #{$c-form}__progress {
       position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
+      @include media-breakpoint-only(xs) {
+        right: 1rem;
+        top: 1rem;
+      }
+
+      @include media-breakpoint-only(sm) {
+        right: 1.5rem;
+        top: 1rem;
+      }
+
+      @include media-breakpoint-up(md) {
+        left: 50%;
+        transform: translate(-50%, +50%);
+      }
     }
 
     .c-selectable-cards {
