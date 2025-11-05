@@ -5,6 +5,26 @@
   position: relative;
   flex-direction: column;
   color: var(--oo-color-text);
+  background-color: var(--oo-color-bg);
+  .--bg-light & {
+    color: var(--oo-color-light-text, var(--oo-color-text));
+    background-color: var(--oo-color-light-bg, var(--oo-color-bg));
+  }
+
+  .--bg-dark & {
+    color: var(--oo-color-dark-text, var(--oo-color-text));
+    background-color: var(--oo-color-dark-bg, var(--oo-color-bg));
+  }
+
+  .--bg-primary & {
+    color: var(--oo-color-primary-text, var(--oo-color-text));
+    background-color: var(--oo-color-primary-bg, var(--oo-color-bg));
+  }
+
+  .--bg-secondary & {
+    color: var(--oo-color-secondary-text, var(--oo-color-text));
+    background-color: var(--oo-color-secondary-bg, var(--oo-color-bg));
+  }
 
   @include media-breakpoint-up(md) {
     display: grid;
@@ -47,6 +67,25 @@
     color: var(--oo-color-text);
   }
 
+  .c-social-media__icon,
+  .c-team-detail__description p {
+    .--bg-light & {
+      color: var(--oo-color-light-text, var(--oo-color-text));
+    }
+
+    .--bg-dark & {
+      color: var(--oo-color-dark-text, var(--oo-color-text));
+    }
+
+    .--bg-primary & {
+      color: var(--oo-color-primary-text, var(--oo-color-text));
+    }
+
+    .--bg-secondary & {
+      color: var(--oo-color-secondary-text, var(--oo-color-text));
+    }
+  }
+
   &__picture {
     height: 100%;
     aspect-ratio: 1;
@@ -73,11 +112,6 @@
   justify-content: center;
   cursor: pointer;
 
-  // &:hover,
-  // &:focus {
-  //   background: transparent;
-  // }
-
   .c-button__icon {
     width: 34px;
     height: 34px;
@@ -85,7 +119,6 @@
     align-items: center;
     justify-content: center;
     font-size: 20px;
-    color: #000;
     font-weight: 400;
     line-height: 1;
     transition: color 0.2s;
@@ -104,15 +137,25 @@
       box-sizing: border-box;
       display: block;
       transition: border-color 0.2s, stroke 0.2s;
+      .--bg-light & {
+        border-color: var(--oo-color-light-text, var(--oo-color-text));
+        stroke: var(--oo-color-light-text, var(--oo-color-text));
+      }
+
+      .--bg-dark & {
+        border-color: var(--oo-color-dark-text, var(--oo-color-text));
+        stroke: var(--oo-color-dark-text, var(--oo-color-text));
+      }
+
+      .--bg-primary & {
+        border-color: var(--oo-color-primary-text, var(--oo-color-text));
+        stroke: var(--oo-color-primary-text, var(--oo-color-text));
+      }
+
+      .--bg-secondary & {
+        border-color: var(--oo-color-secondary-text, var(--oo-color-text));
+        stroke: var(--oo-color-secondary-text, var(--oo-color-text));
+      }
     }
   }
-  // &:hover .c-button__icon,
-  // &:focus .c-button__icon {
-  //   color: #000;
-  //   svg {
-  //     border-color: #000;
-  //     stroke: #000;
-  //     background: transparent;
-  //   }
-  // }
 }

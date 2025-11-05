@@ -36,9 +36,8 @@ $image_width_xl = '450';
 $image_width_xxl = '343';
 $image_width_xxxl = '378';
 
-$card['rating_provider'] = 'dfg';
 $rating_provider = $card['rating_provider'] ?? null;
-$rating = 3.4;
+$rating = 0.0;
 $google_api_key = $card['google_api_key'] ?? null;
 $place_id = $card['place_id'] ?? null;
 $place_id_url = "https://www.google.com/maps/place/?q=place_id:$place_id";
