@@ -50,9 +50,7 @@
     justify-content: space-between;
     position: relative;
 
-    @include media-breakpoint-up(xl) {
-      grid-column: span 2;
-    }
+    grid-column: span 2;
   }
 
   &__body {
@@ -193,12 +191,11 @@
       flex-direction: column;
       gap: 2.5rem;
 
-      .leadform-forward,
-      .leadform-submit {
-        margin-left: auto;
-      }
-
       @include media-breakpoint-up(md) {
+        .leadform-forward,
+        .leadform-submit {
+          margin-left: auto;
+        }
         gap: 5rem;
       }
 
@@ -224,8 +221,16 @@
     }
 
     #{$c-form}__button-wrapper {
-      display: flex;
-      justify-content: space-between;
+      @include media-breakpoint-up(md) {
+        display: flex;
+        justify-content: space-between;
+      }
+      @include media-breakpoint-down(sm) {
+        display: flex;
+        flex-direction: column;
+        align-content: space-between;
+        gap: 1.5rem;
+      }
     }
 
     #{$c-form}__fieldset {
