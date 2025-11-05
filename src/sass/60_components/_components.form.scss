@@ -269,7 +269,7 @@
 
         // Increase the gap on larger screens
         @include media-breakpoint-up(lg) {
-          gap: 3.5rem 2rem;
+          gap: 2rem;
         }
 
         &.--has-selection .c-selectable-card:not(.--is-selected) {
@@ -455,4 +455,10 @@
       background-color: var(--oo-color-bg);
     }
   }
+}
+
+.lead-lightbox {
+  gap: 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
