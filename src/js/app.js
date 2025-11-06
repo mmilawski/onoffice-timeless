@@ -1359,6 +1359,7 @@ function applyResponsiveTextShortening() {
 
       $textEl.addClass('--shorten');
       const el = $textEl.get(0);
+
       if (!el) {
         $textEl.removeClass('--shorten');
         $readMore.hide();
@@ -1368,12 +1369,14 @@ function applyResponsiveTextShortening() {
       const shouldShorten = el.scrollHeight > el.clientHeight;
 
       if (shouldShorten) {
-        $root.find(elementToShorten).addClass('--shorten');
-        $root.find('.c-read-more').show();
-        $readMore.attr('aria-expanded', 'false').text($readMore.data('open-text') || 'weiterlesen...');
+        $textEl.addClass('--shorten');
+        $readMore
+          .show()
+          .attr('aria-expanded', 'false')
+          .text($readMore.data('open-text') || 'weiterlesen...');
       } else {
-        $root.find(elementToShorten).removeClass('--shorten');
-        $root.find('.c-read-more').hide();
+        $textEl.removeClass('--shorten');
+        $readMore.hide();
       }
     });
   }
