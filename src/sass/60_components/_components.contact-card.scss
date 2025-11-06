@@ -3,7 +3,7 @@
 
   display: flex;
   flex-direction: column;
-  gap: 2.5rem 2rem;
+  row-gap: 2.5rem;
 
   @include media-breakpoint-up(md) {
     gap: 5rem 2rem;
@@ -13,8 +13,10 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    order: 1;
-    grid-column: 1;
+
+    @include media-breakpoint-up(md) {
+      grid-column: span 4;
+    }
   }
 
   &__data {
@@ -28,7 +30,6 @@
 
     &.--is-opening-hours {
       display: grid;
-      grid-gap: 0 1rem;
       grid-template-columns: auto 1fr;
     }
   }
@@ -41,7 +42,6 @@
       display: grid;
       grid-template-columns: subgrid;
       grid-column: span 2;
-      row-gap: 1.5rem;
     }
   }
 
@@ -62,7 +62,6 @@
   &.--is-map {
     display: grid;
     grid-template-columns: 1fr;
-    align-items: stretch;
 
     #{$c-contact-card}__label {
       max-width: 250px;
@@ -80,65 +79,26 @@
       }
     }
 
-    #{$c-contact-card}__data-wrapper {
-      order: 1;
-      grid-column: 1;
-    }
-
     #{$c-contact-card}__map {
-      order: 2;
-      grid-column: 1;
+      aspect-ratio: 3/2;
+
+      @include media-breakpoint-up(xl) {
+        aspect-ratio: 2/1;
+      }
+
+      @include media-breakpoint-up(md) {
+        grid-column: span 6;
+      }
     }
 
     @include media-breakpoint-up(md) {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-
-      #{$c-contact-card}__data-wrapper {
-        grid-column: 1;
-      }
-
-      #{$c-contact-card}__map {
-        grid-column: 2;
-        grid-row: 1 / span 3;
-      }
-    }
-
-    &.--position-left,
-    &.--position-right,
-    &.--position-alternating {
-      #{$c-contact-card}__data-wrapper {
-        order: 1;
-      }
-
-      #{$c-contact-card}__map {
-        order: 2;
-      }
+      grid-template-columns: repeat(10, 1fr);
     }
 
     &.--position-left {
       @include media-breakpoint-up(md) {
-        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-
         #{$c-contact-card}__map {
-          grid-column: 1;
-        }
-
-        #{$c-contact-card}__data-wrapper {
-          grid-column: 2;
-        }
-      }
-    }
-
-    &.--position-right {
-      @include media-breakpoint-up(md) {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-
-        #{$c-contact-card}__data-wrapper {
-          grid-column: 1;
-        }
-
-        #{$c-contact-card}__map {
-          grid-column: 2;
+          grid-row: 1;
         }
       }
     }
@@ -146,27 +106,9 @@
     &.--position-alternating {
       &:nth-child(even) {
         @include media-breakpoint-up(md) {
-          grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-
           #{$c-contact-card}__map {
-            grid-column: 1;
+            grid-row: 1;
           }
-
-          #{$c-contact-card}__data-wrapper {
-            grid-column: 2;
-          }
-        }
-      }
-
-      @include media-breakpoint-up(md) {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-
-        #{$c-contact-card}__map {
-          grid-column: 2;
-        }
-
-        #{$c-contact-card}__data-wrapper {
-          grid-column: 1;
         }
       }
     }

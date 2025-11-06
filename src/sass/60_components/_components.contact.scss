@@ -34,7 +34,7 @@
   &__addresses {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2.5rem 2rem;
+    gap: 2.5rem;
     padding-left: 0;
     padding-right: 0;
     @include media-breakpoint-up(sm) {
@@ -47,7 +47,7 @@
     }
 
     &.--is-map {
-      gap: 5rem 2rem;
+      gap: 5rem;
       display: flex;
       flex-direction: column;
     }
