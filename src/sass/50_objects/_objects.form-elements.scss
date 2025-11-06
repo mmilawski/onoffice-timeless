@@ -1314,36 +1314,42 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
   }
 
   .--bg-light & {
+    color: var(--oo-color-light-headline, var(--oo-color-headline));
     a {
       color: $form-light-primary;
     }
   }
 
   .--bg-dark & {
+    color: var(--oo-color-dark-headline, var(--oo-color-headline));
     a {
       color: $form-dark-primary;
     }
   }
 
   .--bg-primary & {
+    color: var(--oo-color-primary-headline, var(--oo-color-headline));
     a {
       color: $form-primary-primary;
     }
   }
 
   .--bg-secondary & {
+    color: var(--oo-color-secondary-headline, var(--oo-color-headline));
     a {
       color: $form-secondary-primary;
     }
   }
 
   .--bg-footer & {
+    color: var(--oo-color-footer-text, var(--oo-color-text));
     a {
       color: $form-footer-primary;
     }
   }
 
   .--bg-transparent & {
+    color: var(--oo-color-headline);
     a {
       color: $form-primary;
     }
