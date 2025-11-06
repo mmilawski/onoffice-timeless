@@ -6,6 +6,11 @@ $accordion = get_field('accordion') ?? null;
 
 // Settings
 $settings = get_field('settings') ?? null;
+
+// set header level
+$header_level = !empty($headline['text'])
+    ? sanitize_header_level($headline['size']) + 1
+    : 2;
 ?>
 
 <section <?php oo_block_id(
@@ -36,9 +41,10 @@ $settings = get_field('settings') ?? null;
                         $accordion_headline = $card['headline'] ?? ''; ?>
                         <details class="c-accordion-card">
                             <summary class="c-accordion-card__title">
-                                <span class="c-accordion-card__headline o-headline --h3 --span">
-                                    <?php echo $accordion_headline; ?>
-                                </span>
+                                <?php echo "<h{$header_level} " .
+                                    'class="c-accordion-card__headline o-headline --h3 --span">' .
+                                    esc_html($accordion_headline) .
+                                    "</h{$header_level}>"; ?>
                                 <span class="c-accordion-card__icon-wrapper c-icon-button">
                                     <?php echo oo_get_icon(
                                         'chevron-down',

@@ -111,6 +111,9 @@ $image_width_xl = '542';
 $image_width_xxl = '414';
 $image_width_xxxl = '458';
 
+// get header level from parent block
+$header_level = get_current_header_level() + 1;
+
 // fields
 $address_features = [];
 $address_fields_available = false;
@@ -248,9 +251,10 @@ foreach ($current_address as $field => $value) {
 
     <div class="c-address-card__content">
         <?php if (!empty($full_name)) { ?>
-            <h3 class="c-address-card__name o-headline --h3">
-                <?php echo $full_name; ?>
-            </h3>
+            <?php echo "<h{$header_level} " .
+                'class="c-address-card__name o-headline --h3">' .
+                $full_name .
+                "</h{$header_level}>"; ?>
         <?php } ?>
 
         <?php if (!empty($current_address['jobTitle'])) { ?>
@@ -317,7 +321,18 @@ foreach ($current_address as $field => $value) {
                         $link = filter_var($check_url, FILTER_VALIDATE_URL)
                             ? esc_url($check_url)
                             : '';
-                        $target = 'rel="noopener noreferrer" target="_blank"';
+                        $target =
+                            'rel="noopener noreferrer" aria-label="' .
+                            esc_attr(
+                                sprintf(
+                                    __(
+                                        'Webseite von %s besuchen (Öffnet in neuem Tab)',
+                                        'oo_theme',
+                                    ),
+                                    $full_name,
+                                ),
+                            ) .
+                            '" target="_blank"';
                     } else {
                         $class = '';
                         $link = '';
@@ -351,7 +366,17 @@ foreach ($current_address as $field => $value) {
                 if (!empty($reviews)) {
                     echo '<a class="c-link --underlined --text-color --on-bg-transparent" href="' .
                         $reviews .
-                        '" rel="noopener noreferrer" target="_blank">' .
+                        '" rel="noopener noreferrer" aria-label="' .
+                        esc_attr(
+                            sprintf(
+                                __(
+                                    'Bewertungen für %s ansehen (Öffnet in neuem Tab)',
+                                    'oo_theme',
+                                ),
+                                $full_name,
+                            ),
+                        ) .
+                        '" target="_blank">' .
                         __('Bewertungen ansehen', 'oo_theme') .
                         '</a>';
                 }

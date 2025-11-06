@@ -45,6 +45,9 @@ $map = ob_get_clean();
 $property_count = method_exists($pEstates, 'getEstateOverallCount')
     ? $pEstates->getEstateOverallCount()
     : 0;
+
+// set header level for submodule
+set_current_header_level(2);
 ?>
 
 <?php if ($property_count > 0) { ?>
