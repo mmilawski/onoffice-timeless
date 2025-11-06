@@ -45,9 +45,6 @@ $proven_expert_username = $card['proven_expert_username'] ?? null;
 $proven_expert_password = $card['proven_expert_password'] ?? null;
 $proven_expert_url = '';
 
-// get header level from parent block
-$header_level = get_current_header_level() + 1;
-
 if ($rating_provider === 'google') {
     if ($google_api_key && $place_id) {
         $rating = floatval(
@@ -172,7 +169,10 @@ echo $first_line . '<br>' . $second_line;
                         $rating_provider === 'google'
                             ? $place_id_url
                             : $proven_expert_url,
-                    ); ?>" 
+                    ); ?>"  rel="noopener noreferrer" aria-label="<?php esc_attr_e(
+                        'Bewertungen ansehen (Öffnet in neuem Tab)',
+                        'oo_theme',
+                    ); ?>"
                        target="_blank" class="--text-color">
                         <?php esc_html_e('Zu den Bewertungen', 'oo_theme'); ?>
                     </a>
