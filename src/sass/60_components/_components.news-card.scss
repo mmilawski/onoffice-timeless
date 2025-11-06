@@ -106,10 +106,6 @@
     width: 100%;
     aspect-ratio: 3/2;
 
-    .--on-slider & {
-      height: auto;
-      flex: 0 0 calc(100% / 3); // Keep the 3:2 aspect ratio by taking 1/3 of total height
-    }
 
     @include media-breakpoint-up(lg) {
       #{$c-news-card}:not(.--on-slider) & {
@@ -132,6 +128,7 @@
     transition: outline-color 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
     position: relative;
     z-index: 1;
+    overflow: hidden;
 
     @include focus-visible() {
       outline-color: var(--oo-color-primary);
