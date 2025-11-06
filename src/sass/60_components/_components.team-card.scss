@@ -156,7 +156,7 @@
       padding: 0;
       transition: opacity 0.6s ease-in-out;
       flex-shrink: 1;
-    }    
+    }
 
     &.--job {
       font-size: 1rem;
@@ -189,7 +189,7 @@
 
     &.--action {
       padding-top: 2.5rem; // 40px space above button
-      .c-button{
+      .c-button {
         justify-content: start;
       }
     }
