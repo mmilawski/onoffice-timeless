@@ -120,13 +120,13 @@ require 'info-messages.php'; ?>
 
                 <?php echo implode($hiddenValues); ?>
                 <div class="c-form__button-wrapper --is-paged">
-                    <button type="button" class="c-form__button c-button --ghost leadform-back">
-                        <?php echo esc_html__('Zurück', 'oo_theme'); ?>
-                    </button>
-
-                    <div class="c-form__progress leadform-progress"></div>
-
                     <?php if ($totalPages > 1): ?>
+                        <button type="button" class="c-form__button c-button --ghost leadform-back">
+                            <?php echo esc_html__('Zurück', 'oo_theme'); ?>
+                        </button>
+
+                        <div class="c-form__progress leadform-progress"></div>
+
                         <button type="button" class="c-form__button c-button leadform-forward">
                             <?php echo esc_html__('Weiter', 'oo_theme'); ?>
                         </button>
