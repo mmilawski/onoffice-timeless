@@ -3,7 +3,6 @@ $form-margin: 0; // Margin
 $form-padding: 0.6875rem 1rem; // Padding
 $form-padding-top: 1rem; // Padding top
 $form-padding-right: 1rem; // Padding right
-$form-line-height: $global-line-height;
 $form-remove-wrapper: 1rem; // Size of the remove background
 $form-remove-size: 1rem; // Size of the remove icon
 $form-select-size: 0.75rem; // Size of the select arrow icon
@@ -95,7 +94,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
   resize: vertical;
   font-family: inherit;
   font-size: 1rem;
-  line-height: $form-line-height;
+  line-height: $global-line-height;
   color: $form-color;
   background-color: $form-bg;
   border: $form-border $form-border-color;
@@ -320,7 +319,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
   resize: vertical;
   font-family: inherit;
   font-size: 100%;
-  line-height: $form-line-height;
+  line-height: $global-line-height;
   color: $form-color;
   background-color: $form-bg;
   border: $form-border $form-border-color;
@@ -524,7 +523,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
         vertical-align: middle;
         min-width: 100%;
         border: none;
-        line-height: $form-line-height;
+        line-height: $global-line-height;
         font-size: 1rem;
 
         &::placeholder {
@@ -660,7 +659,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
       display: block;
       align-self: center;
       height: 100%;
-      line-height: 1.75rem;
+      line-height: $global-line-height;
     }
   }
 
@@ -1184,7 +1183,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
   resize: vertical;
   font-family: inherit;
   font-size: 100%;
-  line-height: $form-line-height;
+  line-height: $global-line-height;
   color: $form-color;
   background-color: $form-bg;
   border: $form-border $form-border-color;
