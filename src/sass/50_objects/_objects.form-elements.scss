@@ -684,6 +684,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
 
   .ts-dropdown-content {
     padding: 0.5rem 0;
+    scrollbar-color: $form-color transparent;
   }
 
   .--bg-light & {
@@ -761,6 +762,10 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
         }
       }
     }
+
+    .ts-dropdown-content {
+      scrollbar-color: $form-light-color transparent;
+    }
   }
 
   .--bg-dark & {
@@ -834,6 +839,10 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
         }
       }
     }
+
+    .ts-dropdown-content {
+      scrollbar-color: $form-dark-color transparent;
+    }
   }
 
   .--bg-primary & {
@@ -906,6 +915,10 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
           }
         }
       }
+    }
+
+    .ts-dropdown-content {
+      scrollbar-color: $form-primary-color transparent;
     }
   }
 
@@ -981,6 +994,10 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
         }
       }
     }
+
+    .ts-dropdown-content {
+      scrollbar-color: $form-secondary-color transparent;
+    }
   }
 
   .--bg-footer & {
@@ -1055,6 +1072,10 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
         }
       }
     }
+
+    .ts-dropdown-content {
+      scrollbar-color: $form-footer-color transparent;
+    }
   }
 
   .--bg-transparent & {
@@ -1123,6 +1144,10 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
           }
         }
       }
+    }
+
+    .ts-dropdown-content {
+      scrollbar-color: $form-color transparent;
     }
   }
 }
