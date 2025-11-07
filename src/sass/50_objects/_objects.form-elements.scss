@@ -562,13 +562,13 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     cursor: default;
 
     &-remove {
-      background-color: $form-bg;
       margin: 0 0.5rem 0 0;
       padding: 0;
       width: $form-remove-wrapper;
       height: $form-remove-wrapper;
       font-size: 0;
       border: 0;
+      background-color: transparent;
       position: relative;
       top: -0.125rem;
       display: inline-flex;
@@ -723,7 +723,6 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
 
     .ts-item {
       &-remove {
-        background-color: $form-light-bg;
         @include hover-focus-active() {
           &:before {
             background-color: $form-light-border-color;
@@ -805,7 +804,6 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
     .ts-item {
       &-remove {
-        background-color: $form-dark-bg;
         @include hover-focus-active() {
           &:before {
             background-color: $form-dark-border-color;
@@ -886,7 +884,6 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
     .ts-item {
       &-remove {
-        background-color: $form-primary-bg;
         @include hover-focus-active() {
           &:before {
             background-color: $form-primary-border-color;
@@ -968,7 +965,6 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
     .ts-item {
       &-remove {
-        background-color: $form-secondary-bg;
         @include hover-focus-active() {
           &:before {
             background-color: $form-secondary-border-color;
@@ -1050,7 +1046,6 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
     .ts-item {
       &-remove {
-        background-color: $form-footer-bg;
         @include hover-focus-active() {
           &:before {
             background-color: $form-footer-border-color;
@@ -1131,7 +1126,6 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
     .ts-item {
       &-remove {
-        background-color: $form-bg;
         @include hover-focus-active() {
           &:before {
             background-color: $form-border-color;
