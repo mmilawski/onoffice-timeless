@@ -26,7 +26,7 @@ $settings = get_field('settings') ?? [];
 $bg_color = $settings['bg_color'] ?? null;
 ?>
 
-<form method="post" action="#onoffice-form" id="onoffice-form-<?php echo $pForm->getFormNo(); ?>" class="c-form --is-owner-form <?php if (
+<form method="post" action="#onoffice-form" id="onoffice-form-<?php echo $pForm->getFormNo(); ?>" class="c-form --is-owner-form --custom-validation <?php if (
     !empty($bg_color)
 ) {
     echo '--on-' . $bg_color;

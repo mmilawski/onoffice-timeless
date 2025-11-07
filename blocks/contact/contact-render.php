@@ -125,6 +125,12 @@ if (
 if (empty($addresses)) {
     return;
 }
+
+// set header level
+$header_level = !empty($headline['text'])
+    ? sanitize_header_level($headline['size']) + 1
+    : 2;
+$sub_header_level = !empty($header_level) ? $header_level + 1 : 3;
 ?>
 
 <section <?php oo_block_id(
@@ -169,14 +175,16 @@ if (empty($addresses)) {
                     $mobile = $contact['mobile'] ?? null;
 
                     echo '<div class="c-contact-card">';
-                        echo '<div class="c-contact-card__data-wrapper">';
-                        if ($is_address) {
-                            echo '<p class="c-contact-card__data --is-address">';
+                    if ($is_address) {
+                            echo '<div class="c-contact-card__data-wrapper">';
+                            echo '<div class="c-contact-card__data --is-address">';
                             if (!empty($name)) {
-                                echo '<span class="c-contact-card__title">' .
+                                echo "<h{$header_level} " .
+                                'class="c-contact-card__title">' .
                                     $name .
-                                    '</span><br>';
+                                    "</h{$header_level}>";
                             }
+                        echo '<p class="c-contact-card__text">';
                             if (!empty($street)) {
                                 echo $street . '<br>';
                             }
@@ -189,6 +197,7 @@ if (empty($addresses)) {
                                 echo $country;
                             }
                             echo '</p>';
+                        echo '</div>';
                         }
 
                         // Contact Info
@@ -343,14 +352,16 @@ if (empty($addresses)) {
                                     ? ' --position-alternating'
                                     : '')) .
                             '">';
-                            echo '<div class="c-contact-card__data-wrapper">';
                             if ($is_address) {
-                                echo '<p class="c-contact-card__data --is-address">';
+                                echo '<div class="c-contact-card__data-wrapper">';
+                                echo '<div class="c-contact-card__data --is-address">';
                                 if (!empty($name)) {
-                                    echo '<span class="c-contact-card__title">' .
+                                    echo "<h{$header_level} " .
+                                    'class="c-contact-card__title">' .
                                         $name .
-                                        '</span><br>';
+                                        "</h{$header_level}>";
                                 }
+                            echo '<p class="c-contact-card__text">';
                                 if (!empty($street)) {
                                     echo $street . '<br>';
                                 }
@@ -359,11 +370,12 @@ if (empty($addresses)) {
                                     echo $zip . '<br>';
                                 }
 
-                                if (!empty($country)) {
-                                    echo $country;
-                                }
-                                echo '</p>';
+                            if (!empty($country)) {
+                                echo $country;
                             }
+                            echo '</p>';
+                            echo '</div>';
+                        }
 
                             // Contact Info
                             if (
@@ -586,9 +598,10 @@ if (empty($addresses)) {
                             <div class="c-map__info --bg-transparent">
                                 <?php
                                 if (!empty($name)) {
-                                    echo '<h3 class="c-map__headline o-headline --h3">' .
+                                    echo "<h{$sub_header_level} " .
+                                        'class="c-map__headline o-headline --h3">' .
                                         $name .
-                                        '</h3>';
+                                        "</h{$sub_header_level}>";
                                 }
                                 if (
                                     !empty($street) ||
