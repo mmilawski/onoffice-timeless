@@ -39,7 +39,6 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
 <?php if ($slide_count > 1) { ?>
     <div class="c-banner__slider c-slider splide --auto-height --is-banner-slider" data-splide='{
     "perPage":1,
-    "pagination":false,
     "arrows":true,
     "snap":true,
     "lazyLoad":"nearby",
@@ -73,21 +72,12 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
 
                     // Settings slide
                     $slide_settings = $slide['settings'] ?? null;
+
                     $content_position =
                         $slide_settings['position_content'] ?? 'left';
-
-                    $raw_content_position =
-                        $slide_settings['position_content'] ?? 'left';
-
-                    if ($raw_content_position === 'center') {
+                    if ($content_position === 'center') {
                         $content_position = 'left';
-                    } else {
-                        $content_position = $raw_content_position;
-                  // Map 'center' to 'left' for content positioning
-                  $content_position = $slide_settings['position_content'] ?? 'left';
-                  if ($content_position === 'center') {
-                      $content_position = 'left';
-                  }
+                    }
 
                     if ($first_slide === true) {
                         $slide_loading = 'eager';
