@@ -175,8 +175,8 @@ $sub_header_level = !empty($header_level) ? $header_level + 1 : 3;
                     $mobile = $contact['mobile'] ?? null;
 
                     echo '<div class="c-contact-card">';
+                    echo '<div class="c-contact-card__data-wrapper">';
                     if ($is_address) {
-                        echo '<div class="c-contact-card__data-wrapper">';
                         echo '<div class="c-contact-card__data --is-address">';
                         if (!empty($name)) {
                             echo "<h{$header_level} " .
@@ -352,8 +352,8 @@ $sub_header_level = !empty($header_level) ? $header_level + 1 : 3;
                                     ? ' --position-alternating'
                                     : '')) .
                             '">';
+                        echo '<div class="c-contact-card__data-wrapper">';
                         if ($is_address) {
-                            echo '<div class="c-contact-card__data-wrapper">';
                             echo '<div class="c-contact-card__data --is-address">';
                             if (!empty($name)) {
                                 echo "<h{$header_level} " .
