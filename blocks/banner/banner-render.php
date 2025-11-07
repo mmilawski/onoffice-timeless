@@ -83,7 +83,11 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
                         $content_position = 'left';
                     } else {
                         $content_position = $raw_content_position;
-                    }
+                  // Map 'center' to 'left' for content positioning
+                  $content_position = $slide_settings['position_content'] ?? 'left';
+                  if ($content_position === 'center') {
+                      $content_position = 'left';
+                  }
 
                     if ($first_slide === true) {
                         $slide_loading = 'eager';
