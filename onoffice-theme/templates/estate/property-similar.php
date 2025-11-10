@@ -12,11 +12,17 @@ $dontEcho = [
     (bool) $pEstates->estateIterator() == true &&
     !empty($pEstates->estateIterator())
 ) { ?>
-    <div class="c-property-details__similar">
-        <h2 class="c-property-details__headline o-headline"><?php esc_html_e(
-            'Weitere Immobilien',
-            'oo_theme',
-        ); ?></h2>
+    <div class="c-property-details__similar-wrapper">
+        <div class="c-property-details__similar o-container">
+            <div class="c-property-details__similar-row o-row">
+                <div class="c-property-details__similar-content u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
+                    <h2 class="c-property-details__headline o-headline"><?php esc_html_e(
+                        'Weitere Immobilien',
+                        'oo_theme',
+                    ); ?></h2>
+                </div>
+            </div>
+        </div>
         <div id="outerslider" class="c-property-details__similar-slider c-slider --is-properties-similar-slider splide" data-splide='{"perPage":3,"perMove":1,"gap":"1rem","snap":true,"lazyLoad":"nearby","pagination":false,"arrows":false,"page":false}'>
             <div class="c-slider__track splide__track">
                 <div class="c-slider__list splide__list">
@@ -24,7 +30,7 @@ $dontEcho = [
                     $slider = ['slider' => 'yes'];
                     $bg_color = 'bg-transparent';
                     $is_slider = true;
-
+    
                     require 'property-card.php';
                     ?>
                 </div>

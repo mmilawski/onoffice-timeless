@@ -77,7 +77,7 @@
 
   &__media,
   &__units,
-  &__similar {
+  &__similar-wrapper {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -93,7 +93,7 @@
     gap: 1.5rem;
 
     @include media-breakpoint-up(xl) {
-      gap: 2rem;
+      gap: 2rem;  
     }
   }
 
