@@ -44,6 +44,9 @@
   }
 
   &__row {
+    @include media-breakpoint-down(sm) {
+      margin: 0;
+    }
   }
 
   &.--bg-transparent {

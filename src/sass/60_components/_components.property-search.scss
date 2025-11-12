@@ -24,6 +24,10 @@
     padding: 0 1.5rem 1.5rem 1.5rem;
     background-color: var(--oo-color-bg);
 
+    @include media-breakpoint-down(sm) {
+      padding: 0;
+    }
+
     &.--bg-light {
       background-color: var(--oo-color-light-bg, var(--oo-color-bg));
     }
