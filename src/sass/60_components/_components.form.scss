@@ -300,8 +300,12 @@
     }
 
     #{$c-form}__fieldset {
-      .c-form__field-group:not(:last-child) {
-        margin-bottom: 2rem;
+      .c-form__field-group + .c-form__field-group {
+        margin-top: 2rem;
+      }
+      .c-form__field-group:has(.--is-boolean)
+        + .c-form__field-group:has(.--is-boolean) {
+        margin-top: 0rem;
       }
 
       .c-form__field-group:has(
@@ -311,10 +315,6 @@
         ) {
         // Force these specific groups to span all columns of the parent grid.
         grid-column: 1 / -1;
-
-        &:not(:last-child) {
-          margin-bottom: 5rem;
-        }
       }
 
       .c-form__field-group:has(.o-label.--is-textarea) {
