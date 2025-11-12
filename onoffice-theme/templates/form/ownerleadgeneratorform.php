@@ -103,17 +103,19 @@ require 'info-messages.php'; ?>
             <div id="leadform-<?php echo sanitize_title(
                 $pForm->getFormId(),
             ); ?>">
-            <div class="c-form__required"><?php echo esc_html__(
-                '* Pflichtfelder',
-                'oo_theme',
-            ); ?>
-            </div>
             <div class="c-form__fieldset">
                 <?php foreach ($estateValues as $pageNumber => $fields): ?>
                     <div class="lead-lightbox lead-page-<?php echo $pageNumber; ?>">
-                        <div class="c-form__header"><?php echo $pageTitles[
-                            $pageNumber - 1
-                        ]; ?></div>
+                        <div class="c-form__header">
+                            <legend class="c-form__legend">
+                                <?php echo $pageTitles[
+                                    $pageNumber - 1
+                                ]; ?></legend>
+                            <div class="c-form__required"><?php echo esc_html__(
+                                '* Pflichtfelder',
+                                'oo_theme',
+                            ); ?></div>
+                        </div>
                         <?php echo implode($fields); ?>
                     </div>
                 <?php endforeach; ?>
