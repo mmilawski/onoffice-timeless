@@ -46,6 +46,16 @@
         }
       }
     }
+
+    @include media-breakpoint-down(sm) {
+      .lead-lightbox {
+        .c-form__header {
+          .c-form__legend {
+            margin-right: 2.25rem;
+          }
+        }
+      }
+    }
   }
 
   &__header {
