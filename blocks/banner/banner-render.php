@@ -336,7 +336,7 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
                                             'oo_theme',
                                         ); ?>"
                                         data-video-id="<?php echo $video_id; ?>">                               
-                                        <span class="c-banner__sr-label u-screen-reader-only">
+                                        <span class="c-icon-button__text c-banner__sr-label u-screen-reader-only">
                                             <?php esc_html_e(
                                                 'Video pausieren',
                                                 'oo_theme',
@@ -369,7 +369,7 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
                     <ul class="c-slider__pagination splide__pagination"></ul>
                     <?php if ($autoslide) { ?>
                         <button class="c-slider__autoslide-toggle c-icon-button splide__toggle" type="button">
-                            <span class="u-screen-reader-only">
+                            <span class="c-icon-button__text u-screen-reader-only">
                                 <?php esc_html_e(
                                     'Autoplay starten',
                                     'oo_theme',
@@ -377,9 +377,9 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
                             </span>
                             <?php echo oo_get_icon('play', true, [
                                 'class' =>
-                                    'c-slider__icon c-icon-button__icon splide__icon splide__toggle --play',
+                                    'c-icon-button__icon --play splide__toggle splide__icon',
                             ]); ?>
-                            <span class="u-screen-reader-only">
+                            <span class="c-icon-button__text u-screen-reader-only">
                                 <?php esc_html_e(
                                     'Autoplay stoppen',
                                     'oo_theme',
@@ -387,30 +387,28 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
                             </span>
                             <?php echo oo_get_icon('pause', true, [
                                 'class' =>
-                                    'c-slider__icon c-icon-button__icon splide__icon splide__toggle --pause',
+                                    'c-icon-button__icon --pause splide__toggle splide__icon',
                             ]); ?>
                         </button>
                     <?php } ?>
                 </div>
                 <div class="c-slider__arrows splide__arrows">
-                    <button class="c-slider__arrow c-icon-button c-slider__arrow--prev splide__arrow splide__arrow--prev">
-                        <span class="u-screen-reader-only"><?php esc_html_e(
+                    <button class="c-slider__arrow c-icon-button --prev splide__arrow splide__arrow--prev">
+                        <span class="c-icon-button__text u-screen-reader-only"><?php esc_html_e(
                             'Vorheriges',
                             'oo_theme',
                         ); ?></span>
                         <?php echo oo_get_icon('chevron-left', true, [
-                            'class' =>
-                                'c-slider__icon c-icon-button__icon splide__icon',
+                            'class' => 'c-icon-button__icon --chevron-left',
                         ]); ?>
                     </button>
-                    <button class="c-slider__arrow c-icon-button c-slider__arrow--next splide__arrow splide__arrow--next">
-                        <span class="u-screen-reader-only"><?php esc_html_e(
+                    <button class="c-slider__arrow c-icon-button --next splide__arrow splide__arrow--next">
+                        <span class="c-icon-button__text u-screen-reader-only"><?php esc_html_e(
                             'Nächstes',
                             'oo_theme',
                         ); ?></span>
                         <?php echo oo_get_icon('chevron-right', true, [
-                            'class' =>
-                                'c-slider__icon c-icon-button__icon splide__icon',
+                            'class' => 'c-icon-button__icon --chevron-right',
                         ]); ?>
                     </button>
                 </div>
