@@ -28,25 +28,25 @@
 
   // State: selected
   &.--is-selected {
-      .--bg-light & {
-        background-color: var(--oo-color-light-primary);
-        border-color: var(--oo-color-light-primary);
-      }
+    .--bg-light & {
+      background-color: var(--oo-color-light-primary);
+      border-color: var(--oo-color-light-primary);
+    }
 
-      .--bg-dark & {
-        background-color: var(--oo-color-dark-primary);
-        border-color: var(--oo-color-dark-primary);
-      }
+    .--bg-dark & {
+      background-color: var(--oo-color-dark-primary);
+      border-color: var(--oo-color-dark-primary);
+    }
 
-      .--bg-primary & {
-        background-color: var(--oo-color-primary-primary);
-        border-color: var(--oo-color-primary-primary);
-      }
+    .--bg-primary & {
+      background-color: var(--oo-color-primary-primary);
+      border-color: var(--oo-color-primary-primary);
+    }
 
-      .--bg-secondary & {
-        background-color: var(--oo-color-secondary-primary);
-        border-color: var(--oo-color-secondary-primary);
-      }
+    .--bg-secondary & {
+      background-color: var(--oo-color-secondary-primary);
+      border-color: var(--oo-color-secondary-primary);
+    }
 
     #{$c-selectable-card}__label {
       color: var(--oo-color-contrast-primary);
@@ -176,7 +176,6 @@
     .--bg-secondary & {
       background-color: var(--oo-color-secondary-mix-primary-contrast-20);
     }
-
 
     #{$c-selectable-card}__label {
       color: var(--oo-color-contrast-primary);

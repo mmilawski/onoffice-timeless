@@ -216,7 +216,7 @@
 
       @include media-breakpoint-up(md) {
         left: 50%;
-        transform: translate(-50%, +50%);
+        transform: translate(-50%, 50%);
       }
 
       .--bg-light & {
@@ -300,6 +300,10 @@
     }
 
     #{$c-form}__fieldset {
+      .c-form__field-group:not(:last-child) {
+        margin-bottom: 2rem;
+      }
+
       .c-form__field-group:has(
           .o-label[data-icon-button-group]:not([style*='display: none']):not(
               [style*='display:none']
