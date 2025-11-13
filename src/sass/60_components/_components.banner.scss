@@ -182,24 +182,6 @@
     @include focus-visible() {
       outline-color: var(--oo-color-text) !important;
     }
-
-    &[aria-pressed='false'] {
-      #{$c-banner}__icon.--play {
-        display: none;
-      }
-      #{$c-banner}__icon.--pause {
-        display: inline-block;
-      }
-    }
-
-    &[aria-pressed='true'] {
-      #{$c-banner}__icon.--pause {
-        display: none;
-      }
-      #{$c-banner}__icon.--play {
-        display: inline-block;
-      }
-    }
   }
 
   &.--bg-light {

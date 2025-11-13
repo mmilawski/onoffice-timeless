@@ -58,6 +58,24 @@
     }
   }
 
+  &[aria-pressed='false'] {
+    #{$c-icon-button}__icon.--play {
+      display: none;
+    }
+    #{$c-icon-button}__icon.--pause {
+      display: inline-block;
+    }
+  }
+
+  &[aria-pressed='true'] {
+    #{$c-icon-button}__icon.--pause {
+      display: none;
+    }
+    #{$c-icon-button}__icon.--play {
+      display: inline-block;
+    }
+  }
+
   &.--on-bg-light,
   .--bg-light & {
     @include plain-visited() {

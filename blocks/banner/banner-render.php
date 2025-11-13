@@ -336,7 +336,7 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
                                             'oo_theme',
                                         ); ?>"
                                         data-video-id="<?php echo $video_id; ?>">                               
-                                        <span class="c-icon-button__text c-banner__sr-label u-screen-reader-only">
+                                        <span class="c-icon-button__text u-screen-reader-only">
                                             <?php esc_html_e(
                                                 'Video pausieren',
                                                 'oo_theme',
@@ -345,13 +345,13 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
 
                                         <?php echo oo_get_icon('play', true, [
                                             'class' =>
-                                                'c-banner__icon c-icon-button__icon --play',
+                                                'c-icon-button__icon --play',
                                             'aria-hidden' => 'true',
                                         ]); ?>
 
                                         <?php echo oo_get_icon('pause', true, [
                                             'class' =>
-                                                'c-banner__icon c-icon-button__icon --pause',
+                                                'c-icon-button__icon --pause',
                                             'aria-hidden' => 'true',
                                         ]); ?>
                                     </button>
