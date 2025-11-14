@@ -60,7 +60,7 @@
 
   &__header {
     font-size: 1.5rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -310,12 +310,9 @@
     }
 
     #{$c-form}__fieldset {
-      .c-form__field-group + .c-form__field-group {
-        margin-top: 2rem;
-      }
       .c-form__field-group:has(.--is-boolean)
         + .c-form__field-group:has(.--is-boolean) {
-        margin-top: 0rem;
+        margin-top: -2rem;
       }
 
       .c-form__field-group:has(
@@ -539,7 +536,7 @@
 
 .lead-lightbox {
   @include media-breakpoint-up(md) {
-    gap: 0 2rem;
+    gap: 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
