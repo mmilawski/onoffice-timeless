@@ -64,7 +64,7 @@ set_current_header_level($size);
                 !empty($headline['text']) ||
                 !empty($text['wysiwyg'])
             ) { ?>
-                <div class="c-team__content o-col-12 o-col-xl-8">
+                <div class="c-team__content o-col-12 o-col-lg-10 o-col-xl-8 u-offset-lg-1">
                     <?php if (!empty($headline['text'])) { ?>
                         <?php oo_get_template(
                             'components',
