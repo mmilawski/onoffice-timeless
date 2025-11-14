@@ -884,7 +884,7 @@ if (!function_exists('renderRegionalAddition')) {
     ): string {
         $output = '';
         $name = esc_attr($fieldName) . ($multiple ? '[]' : '');
-        $multipleAttr = $multiple ? 'multiple' : 'size="1"';
+        $multipleAttr = $multiple ? 'multiple ' : 'size="1" ';
         $requiredAttribute = $isRequired ? 'required ' : '';
         $output .=
             '<select aria-hidden="true" tabindex="-1" class="o-select --multiple --is-styled" ' .
