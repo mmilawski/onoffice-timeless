@@ -192,6 +192,10 @@
       .c-button {
         justify-content: start;
       }
+
+      .c-team-card__button {
+        color: var(--oo-color-text);
+      }
     }
   }
 
@@ -211,7 +215,6 @@
     padding: 0;
     background: none;
     border: none;
-    color: var(--oo-color-text);
     text-decoration: underline;
     font-size: inherit;
     line-height: inherit;
