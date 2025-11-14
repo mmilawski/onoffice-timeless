@@ -46,6 +46,11 @@
 
   &__slider {
     margin: 0;
+    overflow: visible;
+
+    .c-slider__track {
+      overflow: visible;
+    }
   }
 
   &__buttons {
