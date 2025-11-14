@@ -118,15 +118,16 @@ if ($rating_provider === 'google') {
                 <?php } ?>
 
                 <div class="c-team-detail__content">
-                    <?php if (!empty($name) || !empty($job)) { ?>
-                        <?php if (!empty($job)) { ?>
-                            <p class="c-team-detail__job"><?php echo $job; ?></p>
+                    <div>
+                        <?php if (!empty($name) || !empty($job)) { ?>
+                            <?php if (!empty($job)) { ?>
+                                <p class="c-team-detail__job"><?php echo $job; ?></p>
+                            <?php } ?>
+                            <?php if (!empty($name)) { ?>
+                                <p class="c-team-detail__name" id="team-<?php echo $post_id; ?>-title"><?php echo $name; ?></p>
+                            <?php } ?>
                         <?php } ?>
-                        <?php if (!empty($name)) { ?>
-                            <p class="c-team-detail__name" id="team-<?php echo $post_id; ?>-title"><?php echo $name; ?></p>
-                        <?php } ?>
-                    <?php } ?>
-                    
+                    </div>
                     <?php if (
                         !empty($card['rating_provider']) &&
                         $card['rating_provider'] !== 'none'
