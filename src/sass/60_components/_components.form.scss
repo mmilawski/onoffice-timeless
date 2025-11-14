@@ -312,7 +312,11 @@
     #{$c-form}__fieldset {
       .c-form__field-group:has(.--is-boolean)
         + .c-form__field-group:has(.--is-boolean) {
-        margin-top: -2rem;
+        margin-top: -1.5rem;
+
+        @include media-breakpoint-up(md) {
+          margin-top: -2rem;
+        }
       }
 
       .c-form__field-group:has(
@@ -535,6 +539,10 @@
 }
 
 .lead-lightbox {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
   @include media-breakpoint-up(md) {
     gap: 2rem;
     display: grid;
