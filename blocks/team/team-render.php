@@ -59,7 +59,7 @@ set_current_header_level($size);
     $block,
 ); ?>  class="c-team o-section --<?php echo $bg_color; ?>">
     <div class="c-team__container o-container">
-        <div class="c-team__row o-row --position-center">
+        <div class="c-team__row o-row">
             <?php if (
                 !empty($headline['text']) ||
                 !empty($text['wysiwyg'])
