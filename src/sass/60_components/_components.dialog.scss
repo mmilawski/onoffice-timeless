@@ -126,7 +126,7 @@
     padding: 0;
   }
 
-  .c-dialog__close {
+  #{$c-dialog}__close {
     background-color: transparent;
   }
 }
