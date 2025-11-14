@@ -122,11 +122,11 @@
     max-width: 60vw;
   }
 
- #{$c-dialog}__content {
+  .c-dialog__content {
     padding: 0;
   }
 
-  #{$c-dialog}__close {
+  .c-dialog__close {
     background-color: transparent;
   }
 }
