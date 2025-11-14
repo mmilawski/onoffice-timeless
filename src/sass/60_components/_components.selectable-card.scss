@@ -26,6 +26,22 @@
     padding: 1rem;
   }
 
+  .--bg-light & {
+    border-color: var(--oo-color-light-mix-bg-contrast-60);
+  }
+
+  .--bg-dark & {
+    border-color: var(--oo-color-dark-mix-bg-contrast-60);
+  }
+
+  .--bg-primary & {
+    border-color: var(--oo-color-primary-mix-bg-contrast-60);
+  }
+
+  .--bg-secondary & {
+    border-color: var(--oo-color-secondary-mix-bg-contrast-60);
+  }
+
   // State: selected
   &.--is-selected {
     .--bg-light & {
