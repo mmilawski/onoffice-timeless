@@ -255,22 +255,22 @@ $slides_destroy = $slides_count < 5 ? true : false;
                             <div class="c-slider__progress-bar splide__progress-bar"></div>
                         </div>
                         <div class="c-slider__arrows splide__arrows">
-                            <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
-                                <span class="c-slider__arrow-text u-screen-reader-only">
+                            <button class="c-slider__arrow c-icon-button --prev splide__arrow splide__arrow--prev">
+                                <span class="c-icon-button__text u-screen-reader-only">
                                     <?php esc_html_e(
                                         'Vorheriges',
                                         'oo_theme',
                                     ); ?>
                                 </span>
-                                <span class="c-slider__arrow-icon --chevron-left">
+                                <span class="c-icon-button__icon --chevron-left">
                                     <?php oo_get_icon('chevron-left'); ?>
                                 </span>                                
                             </button>
-                            <button class="c-slider__arrow --next splide__arrow splide__arrow--next">
-                                <span class="c-slider__arrow-text u-screen-reader-only">
+                            <button class="c-slider__arrow c-icon-button__text --next splide__arrow splide__arrow--next">
+                                <span class="c-icon-button__text u-screen-reader-only">
                                     <?php esc_html_e('Nächstes', 'oo_theme'); ?>
                                 </span>
-                                <span class="c-slider__arrow-icon --chevron-right">
+                                <span class="c-icon-button__icon --chevron-right">
                                     <?php oo_get_icon('chevron-right'); ?>
                                 </span>                                
                             </button>
