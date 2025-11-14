@@ -514,4 +514,9 @@
     display: inline-block;
     margin-top: 1rem;
   }
+
+  &.--open-popup {
+    margin: 0 1rem 0 1rem;
+    max-width: calc(100% - 2rem);
+  }
 }
