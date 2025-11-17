@@ -2,22 +2,34 @@
   $c-contact-card: &;
 
   display: flex;
-  gap: 1rem;
   flex-direction: column;
+  row-gap: 2.5rem;
 
   @include media-breakpoint-up(md) {
-    gap: 1rem;
+    gap: 5rem 2rem;
+  }
+
+  &__data-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    @include media-breakpoint-up(md) {
+      grid-column: span 4;
+    }
   }
 
   &__data {
-    &.--is-address {
-    }
-    &.--is-contact {
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    @include media-breakpoint-up(sm) {
+      padding-left: 0;
+      padding-right: 0;
     }
 
     &.--is-opening-hours {
       display: grid;
-      grid-gap: 0 1rem;
       grid-template-columns: auto 1fr;
     }
   }
@@ -56,10 +68,7 @@
 
   &.--is-map {
     display: grid;
-    grid-template-columns: repeat(1, minmax(0, 1fr));
-    grid: unset;
-    gap: 1.5rem;
-    align-items: stretch;
+    grid-template-columns: 1fr;
 
     #{$c-contact-card}__label {
       max-width: 250px;
@@ -77,80 +86,36 @@
       }
     }
 
-    #{$c-contact-card}__data {
-      grid-column: 1;
-    }
-
     #{$c-contact-card}__map {
-      grid-row: auto;
+      aspect-ratio: 3/2;
+
+      @include media-breakpoint-up(xl) {
+        aspect-ratio: 2/1;
+      }
 
       @include media-breakpoint-up(md) {
-        grid-column: 2;
-        grid-row: 1 / span 3;
+        grid-column: span 6;
       }
     }
 
     @include media-breakpoint-up(md) {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-
-      &.--position-left {
-        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
-      }
+      grid-template-columns: repeat(10, 1fr);
     }
 
     &.--position-left {
-      #{$c-contact-card}__data {
-        grid-column: 1;
-
-        @include media-breakpoint-up(md) {
-          grid-column: 2;
-        }
-      }
-
-      #{$c-contact-card}__map {
-        grid-row: auto;
-
-        @include media-breakpoint-up(md) {
-          grid-column: 1;
-          grid-row: 1 / span 3;
+      @include media-breakpoint-up(md) {
+        #{$c-contact-card}__map {
+          grid-row: 1;
         }
       }
     }
 
     &.--position-alternating {
-      #{$c-contact-card}__data {
-        grid-column: 1;
-      }
-
-      #{$c-contact-card}__map {
-        grid-row: auto;
-
-        @include media-breakpoint-up(md) {
-          grid-column: 2;
-          grid-row: 1 / span 3;
-        }
-      }
-
       &:nth-child(even) {
-        #{$c-contact-card}__data {
-          grid-column: 1;
-
-          @include media-breakpoint-up(md) {
-            grid-column: 2;
-          }
-        }
-
-        #{$c-contact-card}__map {
-          grid-row: auto;
-
-          @include media-breakpoint-up(md) {
-            grid-column: 1;
-            grid-row: 1 / span 3;
-          }
-        }
-
         @include media-breakpoint-up(md) {
-          grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+          #{$c-contact-card}__map {
+            grid-row: 1;
+          }
         }
       }
     }
