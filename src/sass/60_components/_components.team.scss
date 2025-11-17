@@ -46,6 +46,7 @@
 
   &__slider {
     margin: 0;
+    contain: layout;
     overflow: visible;
 
     .c-slider__track {
