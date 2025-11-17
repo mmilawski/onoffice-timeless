@@ -72,6 +72,8 @@ if (function_exists('oo_setup_parent_theme')) {
     add_action(
         'wp_enqueue_scripts',
         function () use ($app_script_handle) {
+            $pins = get_field('pins', 'option');
+            $custom_pin = $pins['custom_pin'] ?? null;
             wp_localize_script($app_script_handle, 'ooTimelessTheme', [
                 'translations' => [
                     'noResults' => __('Keine Ergebnisse', 'oo_theme'),
@@ -109,6 +111,9 @@ if (function_exists('oo_setup_parent_theme')) {
                     )
                         ? oo_find_property_list_page_url()
                         : home_url('/'),
+                ],
+                'acfData' => [
+                    'customPin' => $custom_pin,
                 ],
             ]);
         },
