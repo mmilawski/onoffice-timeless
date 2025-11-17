@@ -1,187 +1,89 @@
 <?php
+$dontEcho = [
+    'vermarktungsstatus',
+    'objekttitel',
+    'objektbeschreibung',
+    'lage',
+    'ausstatt_beschr',
+    'sonstige_angaben',
+];
 
-$dont_echo = ['vermarktungsstatus'];
-
-$pEstatesClone = clone $pEstates;
-$pEstatesClone->resetEstateIterator();
-$raw_values = $pEstates->getRawValues();
-?>
-
-<?php if (
-    (bool) $pEstates->estateIterator() == true &&
+if (
+    (bool) $pEstates->estateIterator() === true &&
     !empty($pEstates->estateIterator())
-) { ?>
+): ?>
+    <div class="c-property-details__units-wrapper">
+        <div class="c-property-details__units o-container">
+            <div class="c-property-details__units-row o-row">
+                <div class="c-property-details__units-content u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
+                    <h2 class="c-property-details__headline o-headline">
+                        <?php esc_html_e('Einheiten', 'oo_theme'); ?>
+                    </h2>
+                </div>
+            </div>
+        </div>
 
-    <h2 class="c-property-detail__headline o-headline --h2">
-        <?php esc_html_e('Einheiten', 'oo_theme'); ?>
-    </h2>
-    <div class="c-property-details__units-table c-table --is-scrollable">
-        <table class="c-table__wrapper">
-            <thead class="c-table__head">
-                <tr class="c-table__row --is-head">
-                    <?php
-                    $empty_columns = [];
-                    while (
-                        $current_property = $pEstatesClone->estateIterator()
-                    ) {
-                        $property_id = $pEstatesClone->getCurrentMultiLangEstateMainId();
-                        if (!empty($current_property)) {
-                            foreach ($current_property as $field => $value) {
-                                if (in_array($field, $dont_echo)) {
-                                    continue;
-                                }
-
-                                if (!isset($empty_columns[$field])) {
-                                    $empty_columns[$field] = true;
-                                }
-
-                                if (
-                                    !(
-                                        (is_numeric($value) && 0 == $value) ||
-                                        $value == '0000-00-00' ||
-                                        $value == '0.00' ||
-                                        (is_string($value) &&
-                                            $value !== '' &&
-                                            !is_numeric($value) &&
-                                            ($raw_values->getValueRaw(
-                                                $property_id,
-                                            )['elements'][$field] ??
-                                                null) ===
-                                                '0') || // skip negative boolean fields
-                                        $value == '' ||
-                                        empty($value)
-                                    )
-                                ) {
-                                    $empty_columns[$field] = false;
-                                }
-                            }
-                        }
+        <div id="unitslider" class="c-property-details__units-slider c-slider --is-properties-units-slider splide"
+            data-splide='{
+                "perPage": 3,
+                "perMove": 1,
+                "gap": "1rem",
+                "snap": true,
+                "lazyLoad": "nearby",
+                "pagination": false,
+                "arrows": false,
+                "page": false,
+                "breakpoints": {
+                    "768": {
+                    "perPage": 1
                     }
-
-                    $pEstates->resetEstateIterator();
-                    $first_property = $pEstates->estateIterator();
-                    $property_id = $pEstates->getCurrentMultiLangEstateMainId();
-
-                    if ($first_property) {
-                        foreach ($first_property as $field => $value) {
-                            if (
-                                in_array($field, $dont_echo) ||
-                                (isset($empty_columns[$field]) &&
-                                    $empty_columns[$field])
-                            ) {
-                                continue;
-                            }
-
-                            echo '<th class="c-table__data">';
-                            echo $pEstates->getFieldLabel($field);
-                            echo '</th>';
-                        }
-                    }
-
-                    echo '<th class="c-table__data">';
-                    echo esc_html__('Details', 'oo_theme');
-                    echo '</th>';
-                    ?>
-                </tr>
-            </thead>
-            <tbody class="c-table__body">
-                <?php
-                $pEstates->resetEstateIterator();
-                while ($current_property = $pEstates->estateIterator()) {
-                    $property_id = $pEstates->getCurrentMultiLangEstateMainId();
-
-                    $is_secret_sale = filter_var(
-                        $raw_values->getValueRaw($property_id)['elements'][
-                            'secret_sale'
-                        ] ?? null,
-                        FILTER_VALIDATE_BOOLEAN,
-                    );
-
-                    echo '<tr class="c-table__row --is-body">';
-                    foreach ($current_property as $field => $value):
-                        if (
-                            in_array($field, $dont_echo) ||
-                            (isset($empty_columns[$field]) &&
-                                $empty_columns[$field])
-                        ) {
-                            continue;
-                        }
-
-                        if (
-                            (is_numeric($value) && 0 == $value) ||
-                            $value == '0000-00-00' ||
-                            $value == '0.00' ||
-                            (is_string($value) &&
-                                $value !== '' &&
-                                !is_numeric($value) &&
-                                ($raw_values->getValueRaw($property_id)[
-                                    'elements'
-                                ][$field] ??
-                                    null) ===
-                                    '0') || // skip negative boolean fields
-                            $value == '' ||
-                            empty($value) ||
-                            (($raw_values->getValueRaw($property_id)[
-                                'elements'
-                            ]['provisionsfrei'] ??
-                                null) ===
-                                '1' &&
-                                in_array(
-                                    $field,
-                                    ['innen_courtage', 'aussen_courtage'],
-                                    true,
-                                ))
-                        ) {
-                            $value = '-';
-                            $class = '--empty';
-                        } else {
-                            $value = $value;
-                            $class = '';
-                        }
-
-                        if (
-                            $masking_attributes = oo_apply_secret_sale_masking(
-                                $field,
-                                $is_secret_sale,
-                            )
-                        ) {
-                            $value = $masking_attributes['value'];
-                            $class .= $masking_attributes['class'];
-                        }
-
-                        echo '<td class="c-table__data ' .
-                            $class .
-                            '" data-label="' .
-                            $pEstates->getFieldLabel($field) .
-                            '">';
-                        echo $value;
-                        echo '</td>';
-                    endforeach;
-
-                    echo '<td class="c-table__data" data-label="' .
-                        esc_html__('Details', 'oo_theme') .
-                        '">';
-                    if (!empty($pEstates->getEstateLink())) {
-                        echo '<a class="c-link --underlined --on-bg-transparent.--attach-popup';
-                        echo oo_should_show_secret_sale_placeholder(
-                            $is_secret_sale,
-                        )
-                            ? '--open-popup" data-popup="customer-login" data-forceurl="' .
-                                esc_url($pEstatesClone->getEstateLink()) .
-                                '"'
-                            : '"';
-                        echo ' href="' .
-                            esc_url($pEstates->getEstateLink()) .
-                            '">';
-                    }
-                    echo esc_html__('Zur Einheit', 'oo_theme');
-                    echo '</a>';
-                    echo '</td>';
-
-                    echo '</tr>';
                 }
-                ?>
-            </tbody>
-        </table>
+                }'>
+            <div class="c-slider__track splide__track">
+                <div class="c-slider__list splide__list">
+                    <?php
+                    $pEstates->resetEstateIterator();
+                    while ($current_property = $pEstates->estateIterator()):
+                        $property_id = $pEstates->getCurrentMultiLangEstateMainId();
+
+                        foreach ($current_property as $field => $value) {
+                            if (in_array($field, $dontEcho, true)) {
+                                unset($current_property[$field]);
+                            }
+                        }
+                        $slider = ['slider' => 'yes'];
+                        $bg_color = 'bg-transparent';
+                        $is_slider = true;
+
+                        require 'property-card.php';
+                    endwhile;
+                    ?>
+                </div>
+            </div>
+
+            <div class="c-slider__navigation splide__navigation --is-properties-slider">
+                <div class="c-slider__progress splide__progress">
+                    <div class="c-slider__progress-bar splide__progress-bar"></div>
+                </div>
+                <div class="c-slider__arrows splide__arrows">
+                    <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
+                        <span class="c-slider__arrow-text u-screen-reader-only">
+                            <?php esc_html_e('Vorheriges', 'oo_theme'); ?>
+                        </span>
+                        <span class="c-slider__arrow-icon --chevron-left"><?php oo_get_icon(
+                            'chevron-left',
+                        ); ?></span>
+                    </button>
+                    <button class="c-slider__arrow --next splide__arrow splide__arrow--next">
+                        <span class="c-slider__arrow-text u-screen-reader-only">
+                            <?php esc_html_e('Nächstes', 'oo_theme'); ?>
+                        </span>
+                        <span class="c-slider__arrow-icon --chevron-right"><?php oo_get_icon(
+                            'chevron-right',
+                        ); ?></span>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-<?php } ?>
+<?php endif; ?>

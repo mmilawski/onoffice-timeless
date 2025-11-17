@@ -387,7 +387,18 @@ while ($current_property = $pEstates->estateIterator()) {
                             "pagination":true,
                             "updateOnMove":true,
                             "focus":"center",
-                            "classes":{"page":"c-slider__page splide__pagination__page"}
+                            "classes":{"page":"c-slider__page splide__pagination__page"},
+                            "breakpoints": {
+                                "1200": {
+                                    "padding":"10rem"
+                                },
+                                "992": {
+                                    "padding":"5rem"
+                                },
+                                "576": {
+                                    "padding":"2.5rem"
+                                }
+                            }
                         }'
                     >
                         <div class="c-slider__track splide__track">
@@ -844,15 +855,7 @@ while ($current_property = $pEstates->estateIterator()) {
 
     
         <?php if (!empty($pEstates->getEstateUnits())) { ?>
-            <div class="c-property-details__units-wrapper">
-                <div class="c-property-details__units o-container-fluid">
-                    <div class="c-property-details__units-row o-row">
-                        <div class="c-property-details__units u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
-                            <?php echo $pEstates->getEstateUnits(); ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php echo $pEstates->getEstateUnits(); ?>
         <?php } ?>
 
         <div class="c-property-details__media-wrapper">
@@ -1160,7 +1163,12 @@ while ($current_property = $pEstates->estateIterator()) {
                             "pagination":true,
                             "updateOnMove":true,
                             "focus":"center",
-                            "classes":{"page":"c-slider__page splide__pagination__page"}
+                            "classes":{"page":"c-slider__page splide__pagination__page"},
+                            "breakpoints": {
+                                "768": {
+                                    "padding": "0"
+                                }
+                            }
                         }'
                     >
                         <div class="c-slider__track splide__track">

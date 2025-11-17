@@ -246,7 +246,7 @@
   &.--auto-height {
     #{$c-slider}__slide {
       &:not(.is-active) {
-        max-height: 0;
+        max-height: inherit;
         @include media-breakpoint-up(xl) {
           max-height: inherit;
         }
@@ -351,12 +351,27 @@
     }
     #{$c-slider}__arrow {
       pointer-events: auto;
+      top: 0;
 
       &.--next {
         right: 1rem;
       }
       &.--prev {
         left: 1rem;
+      }
+    }
+    #{$c-slider}__controls {
+      bottom: -0.5rem;
+
+      @include media-breakpoint-up(sm) {
+        bottom: unset;
+      }
+    }
+    #{$c-slider}__pagination {
+      width: 50%;
+
+      @include media-breakpoint-up(sm) {
+        width: 100%;
       }
     }
     &:not(.is-overflow) {

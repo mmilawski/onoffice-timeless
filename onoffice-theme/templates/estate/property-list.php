@@ -59,40 +59,44 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
 <?php if ($property_count > 0) { ?>
     <?php if (!$is_slider) { ?>
         <?php if ($map) { ?>
-            <div class="c-property-list__map-wrapper">
+            <div class="c-property-list__map-wrapper o-container">
+            <div class="u-offset-lg-1">
                 <?php echo $map; ?>
+                </div>
             </div>
         <?php } ?>
 
         <div class="c-property-list__wrapper">
-
-            <div class="c-property-list__nav o-row">
-                <p class="c-property-list__count o-col-12 o-col-md-6">
-                    <?php printf(
-                        esc_html__('%d Immobilien gefunden', 'oo_theme'),
-                        $property_count,
-                    ); ?>
-                </p>
-                <?php if ($generateSortDropDown()) { ?>
+            <div class="c-property-list__nav o-container">
+                <div class="o-row">
                         <?php if ($generateSortDropDown()) { ?>
-                            <div class="c-property-list__sort-wrapper o-col-12 o-col-md-6">
+                            <div class="c-property-list__sort-wrapper o-col-12 o-col-lg-6 u-offset-lg-1 --<?php echo $bg_color; ?>">
                                 <?php wp_enqueue_script(
                                     'oo-sort-list-script',
                                 ); ?>
                                 <label class="c-property-list__sort o-label" for="onofficeSortListSelector">
                                     <?php esc_html_e(
-                                        'Sortieren',
+                                        'Immobilien sortiert nach:',
                                         'oo_theme',
                                     ); ?>
                                     <?php echo $generateSortDropDown(); ?>
                                 </label>
                             </div>
                         <?php } ?>
-                    
-                <?php } ?>
+                        <p class="c-property-list__count o-col-12 o-col-lg-5">
+                            <?php printf(
+                                esc_html__(
+                                    '%d Immobilien gefunden',
+                                    'oo_theme',
+                                ),
+                                $property_count,
+                            ); ?>
+                        </p>
+                </div>
             </div>
+        </div>
 
-            <div class="c-property-list__properties">
+            <div class="c-property-list__properties o-container-fluid">
                 <?php require 'property-card.php'; ?>
             </div>
 

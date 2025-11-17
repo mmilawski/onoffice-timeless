@@ -177,7 +177,7 @@ if (!empty($pEstates->getEstateContacts())) {
             $contact_image_width_xxxl = '460';
 
             if (!empty($image)) {
-                echo '<div class="c-property-details__contact c-contact-person o-col-12 o-col-md-5">';
+                echo '<div class="c-property-details__contact c-contact-person o-col-6 o-col-md-5">';
                 $contact_link = isset($contact_data['id'])
                     ? $pEstates->getAddressLink($contact_data['id'])
                     : '';

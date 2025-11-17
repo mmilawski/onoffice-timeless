@@ -23,14 +23,18 @@ $dontEcho = [
                 </div>
             </div>
         </div>
-        <div id="outerslider" class="c-property-details__similar-slider c-slider --is-properties-similar-slider splide" data-splide='{"perPage":3,"perMove":1,"gap":"1rem","snap":true,"lazyLoad":"nearby","pagination":false,"arrows":false,"page":false}'>
+        <div id="outerslider" class="c-property-details__similar-slider c-slider --is-properties-similar-slider splide" data-splide='{"perPage":3,"perMove":1,"gap":"1rem","snap":true,"lazyLoad":"nearby","pagination":false,"arrows":false,"page":false,"breakpoints": {
+                    "768": {
+                    "perPage": 1
+                    }
+                }}'>
             <div class="c-slider__track splide__track">
                 <div class="c-slider__list splide__list">
                     <?php
                     $slider = ['slider' => 'yes'];
                     $bg_color = 'bg-transparent';
                     $is_slider = true;
-    
+
                     require 'property-card.php';
                     ?>
                 </div>

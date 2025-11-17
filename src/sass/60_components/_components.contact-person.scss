@@ -28,11 +28,19 @@
   }
 
   &__content {
-    padding-top: 5rem;
+    padding-top: 2.5rem;
+
+    @include media-breakpoint-up(xl) {
+      padding-top: 5rem;
+    }
   }
 
   &__data-wrapper {
-    padding-top: 2.5rem;
+    padding-top: 1.5rem;
+
+    @include media-breakpoint-up(xl) {
+      padding-top: 2.5rem;
+    }
   }
 
   &__jobtitle {
