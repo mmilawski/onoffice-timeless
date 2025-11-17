@@ -170,9 +170,9 @@ echo $first_line . '<br>' . $second_line;
                             ? $place_id_url
                             : $proven_expert_url,
                     ); ?>"  rel="noopener noreferrer" aria-label="<?php esc_attr_e(
-                        'Bewertungen ansehen (Öffnet in neuem Tab)',
-                        'oo_theme',
-                    ); ?>"
+    'Bewertungen ansehen (Öffnet in neuem Tab)',
+    'oo_theme',
+); ?>"
                        target="_blank" class="--text-color">
                         <?php esc_html_e('Zu den Bewertungen', 'oo_theme'); ?>
                     </a>
