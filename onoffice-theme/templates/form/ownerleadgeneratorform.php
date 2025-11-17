@@ -81,6 +81,7 @@ ob_start();
 
     <input type="hidden" name="oo_formid" value="<?php echo $pForm->getFormId(); ?>">
     <input type="hidden" name="oo_formno" value="<?php echo $pForm->getFormNo(); ?>">
+    <?php wp_nonce_field('onoffice_form_' . esc_attr($pForm->getFormId()), 'onoffice_nonce', false); ?>
     <?php // Info Messages
 
 require 'info-messages.php'; ?>
