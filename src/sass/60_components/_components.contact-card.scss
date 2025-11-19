@@ -38,8 +38,15 @@
   }
 
   &__title {
-    font-family: var(--oo-font-text-bold, var(--oo-font-text));
-    font-weight: var(--oo-font-text-bold-weight, var(--oo-font-text-weight));
+    font-family: $font-family-text-bold;
+    font-weight: $font-weight-text-bold;
+    @include font-size($global-font-size, $global-line-height);
+    color: currentColor;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  &__text {
   }
 
   &__value {
