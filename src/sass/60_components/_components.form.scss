@@ -145,7 +145,6 @@
   &__required {
     position: absolute;
     right: 0;
-    bottom: -2.5rem; // must match fieldset gap
     font-size: 0.875rem;
   }
 
@@ -310,15 +309,6 @@
     }
 
     #{$c-form}__fieldset {
-      .c-form__field-group:has(.--is-boolean)
-        + .c-form__field-group:has(.--is-boolean) {
-        margin-top: -1.5rem;
-
-        @include media-breakpoint-up(md) {
-          margin-top: -2rem;
-        }
-      }
-
       .c-form__field-group:has(
           .o-label[data-icon-button-group]:not([style*='display: none']):not(
               [style*='display:none']
