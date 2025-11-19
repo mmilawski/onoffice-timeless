@@ -75,9 +75,7 @@ ob_start();
 ?>
 <form method="post" action="#onoffice-form" id="onoffice-form-<?php echo $pForm->getFormNo(); ?>" class="c-form --is-owner-leadgenerator-form <?php if (
     !empty($bg_color)
-) {
-    echo '--on-' . $bg_color;
-} ?>">
+); ?>">
 
     <input type="hidden" name="oo_formid" value="<?php echo $pForm->getFormId(); ?>">
     <input type="hidden" name="oo_formno" value="<?php echo $pForm->getFormNo(); ?>">
