@@ -59,15 +59,13 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
 <?php if ($property_count > 0) { ?>
     <?php if (!$is_slider) { ?>
         <?php if ($map) { ?>
-            <div class="c-property-list__map-wrapper o-container">
-            <div class="u-offset-lg-1">
+            <div class="c-property-list__map-wrapper o-col-lg-10 o-col-xl-10 u-offset-lg-1">
                 <?php echo $map; ?>
-                </div>
             </div>
         <?php } ?>
 
         <div class="c-property-list__wrapper">
-            <div class="c-property-list__nav o-container">
+            <div class="c-property-list__nav o-container-fluid">
                 <div class="o-row">
                         <?php if ($generateSortDropDown()) { ?>
                             <div class="c-property-list__sort-wrapper o-col-12 o-col-lg-6 u-offset-lg-1 --<?php echo $bg_color; ?>">
@@ -83,7 +81,7 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
                                 </label>
                             </div>
                         <?php } ?>
-                        <p class="c-property-list__count o-col-12 o-col-lg-5">
+                        <p class="c-property-list__count o-col-12 o-col-lg-4">
                             <?php printf(
                                 esc_html__(
                                     '%d Immobilien gefunden',
@@ -115,6 +113,7 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
                 </div>
             </div>
 
+            <div class="c-slider__navigation__wrapper o-col-lg-12">
             <div class="c-slider__navigation splide__navigation --is-properties-slider">
                 <div class="c-slider__progress splide__progress">
                     <div class="c-slider__progress-bar splide__progress-bar"></div>
@@ -139,6 +138,7 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
                         ); ?></span>
                     </button>
                 </div>
+            </div>
             </div>
         </div>
     <?php } ?>

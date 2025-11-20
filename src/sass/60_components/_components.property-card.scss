@@ -104,7 +104,6 @@
     align-self: end;
     align-content: center;
     flex-wrap: wrap;
-    padding: 0.5rem 1rem;
     overflow: hidden;
     text-overflow: ellipsis;
     display: flex;
@@ -114,10 +113,8 @@
     -webkit-box-orient: vertical;
     hyphens: manual;
     height: 100%;
-
-    @include media-breakpoint-up(xl) {
-      padding: 1rem 2rem;
-    }
+    min-height: 4rem;
+    padding: 0 2rem;
   }
 
   &__content {
