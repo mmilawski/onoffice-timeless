@@ -74,8 +74,8 @@ $header_level = !empty($headline['text'])
                                     </span>
                                 </span>
                             </summary>
-                            <div class="c-accordion-card__content o-text --is-wysiwyg">
-                                <div class="c-accordion-card__text o-col-12 o-col-lg-10 ">
+                            <div class="c-accordion-card__content">
+                                <div class="c-accordion-card__text o-text --is-wysiwyg o-col-12 o-col-lg-10 ">
                                     <?php echo $card['text']['wysiwyg']; ?>
                                 </div>
                             </div>

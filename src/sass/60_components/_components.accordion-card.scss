@@ -97,7 +97,7 @@
   }
 
   &__content {
-    margin-top: 2.5rem;
+    padding-top: 2.5rem;
     transition: max-height 0.25s ease-in-out;
     .--is-open & {
       max-height: 100rem;
@@ -192,6 +192,11 @@
       @include hover-focus() {
         #{$c-accordion-card}__headline,
         #{$c-accordion-card}__icon {
+          color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+        }
+      }
+      @include hover-focus() {
+        #{$c-accordion-card}__headline {
           color: var(--oo-color-secondary-primary, var(--oo-color-primary));
         }
       }
