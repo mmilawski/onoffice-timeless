@@ -37,8 +37,9 @@ $image['alt'] = $image['alt'] ?? $title;
             <div class="c-news-details__row o-row">
                 <div class="c-news-details__content o-col-12 o-col-lg-6">
                     <?php
-                    // Get post categories
-                    $categories = get_the_category($post_id);
+                    // Get post categories (excluding default "Uncategorized" category)
+                    require_once get_template_directory() . '/shared/includes/category.php';
+                    $categories = get_filtered_categories($post_id);
                     if (!empty($categories)): ?>
                     <div class="c-news-details__categories">
                         <?php foreach ($categories as $category): ?>
