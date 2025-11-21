@@ -47,24 +47,32 @@
   & > *:first-child {
     .c-banner__slide {
       .--is-header-style-transparent & {
-        @include media-breakpoint-up(lg) {
-          padding-top: calc(
-            $mobile-header-height + $desktop-section-padding-top
-          );
+        @include media-breakpoint-up(xl) {
+          padding-top: calc($desktop-header-height + 2.5rem);
         }
-        @include media-breakpoint-up(xxl) {
-          padding-top: calc(
-            $desktop-header-height + $desktop-section-padding-top
-          );
+
+        &.--content-is-left {
+          padding-top: calc($mobile-header-height + (3.75rem - 2.5rem));
+          @include media-breakpoint-up(xl) {
+            padding-top: calc($desktop-header-height + 2.5rem);
+          }
         }
       }
 
-      &:not(.--content-is-left) {
+      @at-root body:not(.--is-header-style-transparent) & {
         margin-top: 3.75rem;
-      }
 
-      @include media-breakpoint-up(lg) {
-        margin-top: 2.5rem;
+        @include media-breakpoint-up(xl) {
+          margin-top: 2.5rem;
+        }
+
+        &.--content-is-left {
+          margin-top: calc(3.75rem - 2.5rem);
+
+          @include media-breakpoint-up(xl) {
+            margin-top: 2.5rem;
+          }
+        }
       }
     }
   }

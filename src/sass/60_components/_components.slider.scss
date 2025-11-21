@@ -312,6 +312,25 @@
       position: absolute;
       width: 100%;
       pointer-events: auto;
+
+      #{$c-slider}__arrow {
+        &.--next {
+          right: 1rem;
+        }
+        &.--prev {
+          left: 1rem;
+        }
+
+        @include media-breakpoint-up(xl) {
+          &.--next {
+            right: 0;
+          }
+
+          &.--prev {
+            left: 0;
+          }
+        }
+      }
     }
   }
 

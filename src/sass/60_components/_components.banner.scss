@@ -4,14 +4,6 @@
   position: relative;
   background-color: var(--oo-color-bg);
 
-  // none of the slides have content
-  &.--content-none {
-    #{$c-banner}__media,
-    #{$c-banner}__slide {
-      max-height: 60vh;
-    }
-  }
-
   &__slide {
     position: relative;
     display: flex;
@@ -23,8 +15,7 @@
       min-height: 60vh;
       justify-content: center;
       &:not(.--content-none) {
-        padding-block: $desktop-section-padding-top
-          $desktop-section-padding-bottom;
+        padding-block: 5rem 5rem;
       }
 
       .--is-header-style-transparent & {
@@ -63,6 +54,7 @@
       top: 0;
       width: 50%;
       height: 100%;
+      min-height: 60vh;
       padding: 0;
       margin: 0;
       aspect-ratio: unset;
@@ -109,7 +101,7 @@
   }
 
   &__container {
-    padding-block: $mobile-section-padding-top $mobile-section-padding-bottom;
+    padding-block: 2.5rem 2.5rem;
     @include media-breakpoint-up(lg) {
       padding-block: 0;
       margin-top: 0;
