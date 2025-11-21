@@ -3,7 +3,12 @@
 $post_id = get_the_ID() ?? null;
 
 // Get categories for this post
-$categories = get_the_category($post_id);
+$all_categories = get_the_category($post_id);
+// Filter out the default "Uncategorized" category
+$default_category_id = (int) get_option('default_category');
+$categories = array_filter($all_categories, function($category) use ($default_category_id) {
+    return (int) $category->term_id !== $default_category_id;
+});
 
 // Get data from news-details block
 $details = [];
