@@ -67,7 +67,7 @@ $image['alt'] = $image['alt'] ?? $title;
                                     'size' => 'h1',
                                 ],
                                 'additional_headline_class' =>
-                                    'c-news-detail__title --h1',
+                                    'c-news-details__title --h1',
                             ],
                         ); ?>
                     <?php } ?>
