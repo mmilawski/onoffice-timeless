@@ -35,52 +35,26 @@ $image['alt'] = $image['alt'] ?? $title;
 
         <div class="c-news-details__container o-container">
             <div class="c-news-details__row o-row">
-            <?php if (!empty($image)) { ?>
-                <?php oo_get_template('components', '', 'component-image', [
-                    'image' => $image,
-                    'picture_class' =>
-                        'c-news-details__picture o-picture o-col-12 o-col-lg-6 o-col-xl-4',
-                    'image_class' => 'c-news-details__image o-image',
-                    'dimensions' => [
-                        '575' => [
-                            'w' => $media_width_xs,
-                            'h' => round(($media_width_xs * 3) / 4),
-                        ],
-                        '1600' => [
-                            'w' => $media_width_xxxl,
-                            'h' => round(($media_width_xxxl * 3) / 4),
-                        ],
-                        '1400' => [
-                            'w' => $media_width_xxl,
-                            'h' => round(($media_width_xxl * 3) / 4),
-                        ],
-                        '1200' => [
-                            'w' => $media_width_xl,
-                            'h' => round(($media_width_xl * 3) / 4),
-                        ],
-                        '992' => [
-                            'w' => $media_width_lg,
-                            'h' => round(($media_width_lg * 3) / 4),
-                        ],
-                        '768' => [
-                            'w' => $media_width_md,
-                            'h' => round(($media_width_md * 3) / 4),
-                        ],
-                        '576' => [
-                            'w' => $media_width_sm,
-                            'h' => round(($media_width_sm * 3) / 4),
-                        ],
-                    ],
-                ]); ?>
-            <?php } elseif (empty($image) && $type == 'image') {
-                echo '<div class="c-media-text__placeholder c-placeholder o-col-12 o-col-lg-6 o-col-xl-4"></div>';
-            } ?>
+                <div class="c-news-details__content o-col-12 o-col-lg-6">
+                    <?php
+                    // Get post categories (excluding default "Uncategorized" category)
+                    require_once get_template_directory() .
+                        '/shared/includes/category.php';
+                    $categories = get_filtered_categories($post_id);
+                    if (!empty($categories)): ?>
+                    <div class="c-news-details__categories">
+                        <?php foreach ($categories as $category): ?>
+                            <span class="c-news-details__category">
+                                <?php echo esc_html($category->name); ?>
+                            </span>
+                        <?php endforeach; ?>
+                    </div>
+                    <?php endif;
+                    ?>
 
-
-                <div class="c-news-details__content o-col-12 o-col-xl-8">
                     <?php if ($is_date && !empty($date)) { ?>
-                        <span class="c-news-details__date c-flag">
-                            <?php echo $date; ?>            
+                        <span class="c-news-details__date">
+                            <?php echo $date; ?>
                         </span>
                     <?php } ?>
                     <?php if (!empty($title)) { ?>
@@ -94,7 +68,7 @@ $image['alt'] = $image['alt'] ?? $title;
                                     'size' => 'h1',
                                 ],
                                 'additional_headline_class' =>
-                                    'c-news-detail__title --h1',
+                                    'c-news-details__title --h1',
                             ],
                         ); ?>
                     <?php } ?>
@@ -104,7 +78,45 @@ $image['alt'] = $image['alt'] ?? $title;
                         </div>
                     <?php } ?>
                 </div>
-            </div>
-        </div>
+
+                <?php if (!empty($image)) { ?>
+                <div class="c-news-details__media o-col-12 o-col-lg-6">
+                    <?php oo_get_template('components', '', 'component-image', [
+                        'image' => $image,
+                        'picture_class' => 'c-news-details__picture o-picture',
+                        'image_class' => 'c-news-details__image o-image',
+                        'dimensions' => [
+                            '575' => [
+                                'w' => $image_width_xs,
+                                'h' => round(($image_width_xs * 2) / 3),
+                            ],
+                            '1600' => [
+                                'w' => $image_width_xxxl,
+                                'h' => round(($image_width_xxxl * 2) / 3),
+                            ],
+                            '1400' => [
+                                'w' => $image_width_xxl,
+                                'h' => round(($image_width_xxl * 2) / 3),
+                            ],
+                            '1200' => [
+                                'w' => $image_width_xl,
+                                'h' => round(($image_width_xl * 2) / 3),
+                            ],
+                            '992' => [
+                                'w' => $image_width_lg,
+                                'h' => round(($image_width_lg * 2) / 3),
+                            ],
+                            '768' => [
+                                'w' => $image_width_md,
+                                'h' => round(($image_width_md * 2) / 3),
+                            ],
+                            '576' => [
+                                'w' => $image_width_sm,
+                                'h' => round(($image_width_sm * 2) / 3),
+                            ],
+                        ],
+                    ]); ?>
+                </div>
+                <?php } ?>
     </div>
 </section>
