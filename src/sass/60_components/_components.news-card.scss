@@ -106,7 +106,6 @@
     width: 100%;
     aspect-ratio: 3/2;
 
-
     @include media-breakpoint-up(lg) {
       #{$c-news-card}:not(.--on-slider) & {
         width: 41.666666%; // 5/12 columns of the card's width (11 columns)
