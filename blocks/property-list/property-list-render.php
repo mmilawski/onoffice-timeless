@@ -23,7 +23,7 @@ set_current_header_level($size);
 <section <?php oo_block_id(
     $block,
 ); ?> class="c-property-list o-section --<?php echo $bg_color; ?>">
-    <div class="c-property-list__container o-container-fluid">
+    <div class="c-property-list__container o-container">
         <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
             <div class="c-property-list__content o-row">
                 <?php if (!empty($headline['text'])) {
@@ -59,8 +59,7 @@ set_current_header_level($size);
                     'additional_button_class' => $bg_color
                         ? '--on-' . $bg_color
                         : '',
-                    'additional_container_class' =>
-                        'c-property-list__buttons o-col-12 o-col-lg-10 o-col-xl-8',
+                    'additional_container_class' => 'c-property-list__buttons',
                 ]); ?>
            
         <?php } ?>

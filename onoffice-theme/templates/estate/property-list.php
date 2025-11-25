@@ -59,13 +59,18 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
 <?php if ($property_count > 0) { ?>
     <?php if (!$is_slider) { ?>
         <?php if ($map) { ?>
+            <div class="c-property-list__container o-container">
+                <div class="o-row">
+
+             
+
             <div class="c-property-list__map-wrapper o-col-lg-10 o-col-xl-10 u-offset-lg-1">
                 <?php echo $map; ?>
-            </div>
+            </div></div></div>
         <?php } ?>
 
         <div class="c-property-list__wrapper">
-            <div class="c-property-list__nav o-container-fluid">
+            <div class="c-property-list__nav o-container">
                 <div class="o-row">
                         <?php if ($generateSortDropDown()) { ?>
                             <div class="c-property-list__sort-wrapper o-col-12 o-col-lg-6 u-offset-lg-1 --<?php echo $bg_color; ?>">
@@ -113,12 +118,12 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
                 </div>
             </div>
 
-            <div class="c-slider__navigation__wrapper o-col-lg-12">
-            <div class="c-slider__navigation splide__navigation --is-properties-slider">
+            <div class="c-slider__navigation__wrapper o-container">
+            <div class="c-slider__navigation splide__navigation --is-properties-slider o-row">
                 <div class="c-slider__progress splide__progress">
                     <div class="c-slider__progress-bar splide__progress-bar"></div>
                 </div>
-                <div class="c-slider__arrows splide__arrows">
+                <div class="c-slider__arrows splide__arrows o-col-lg-12">
                     <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
                         <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
                             'Vorheriges',
