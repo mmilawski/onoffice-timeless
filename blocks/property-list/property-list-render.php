@@ -59,7 +59,7 @@ set_current_header_level($size);
                     'additional_button_class' => $bg_color
                         ? '--on-' . $bg_color
                         : '',
-                    'additional_container_class' => 'c-property-list__buttons',
+                    'additional_container_class' => 'c-property-list__buttons o-col-12',
                 ]); ?>
            
         <?php } ?>
