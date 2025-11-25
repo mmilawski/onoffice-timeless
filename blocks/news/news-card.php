@@ -2,6 +2,10 @@
 // Post ID
 $post_id = get_the_ID() ?? null;
 
+// Get categories for this post (excluding default "Uncategorized" category)
+require_once get_template_directory() . '/shared/includes/category.php';
+$categories = get_filtered_categories($post_id);
+
 // Get data from news-details block
 $details = [];
 $post_content = get_post_field('post_content', $post_id);
@@ -142,9 +146,6 @@ $link_title_more = sprintf(
        ],
    ]); ?>
 
-        <?php if ($is_date && !empty($date)) { ?>
-            <time class="c-news-card__date c-flag" datetime="<?php echo $dateYMD; ?>"><?php echo $date; ?></time>
-        <?php } ?>
     <?php if (!empty($link)) { ?>
         </a>
     <?php } else { ?>
@@ -152,6 +153,21 @@ $link_title_more = sprintf(
     <?php } ?>
     <?php if (!empty($title) || !empty($excerpt) || !empty($link)) { ?>
 	    <div class="c-news-card__content">
+            <div class="c-news-card__meta">
+                <?php if (!empty($categories)) { ?>
+                    <div class="c-news-card__categories">
+                        <?php foreach ($categories as $category) { ?>
+                            <span class="c-news-card__category c-tag"><?php echo esc_html(
+                                $category->name,
+                            ); ?></span>
+                        <?php } ?>
+                    </div>
+                <?php } ?>
+                <?php if ($is_date && !empty($date)) { ?>
+                    <time class="c-news-card__date c-flag" datetime="<?php echo $dateYMD; ?>"><?php echo $date; ?></time>
+                <?php } ?>
+            </div>
+            
             <?php if (!empty($title)) { ?>
                 <?php echo "<h{$header_level} " .
                     'class="c-news-card__title o-headline --h3">' .
@@ -169,13 +185,13 @@ $link_title_more = sprintf(
 			<?php } ?>
 
 			<?php if (!empty($link)) {
-       echo '<a class="c-news-card__button c-button --full-width --on-bg-transparent"  
+       echo '<a class="c-news-card__more-link"  
                 aria-label="' .
-           $link_title_more .
+           esc_html__('Weiterlesen...', 'oo_theme') .
            '" href="' .
            $link .
            '">';
-       echo esc_html__('Mehr erfahren', 'oo_theme');
+       echo esc_html__('Weiterlesen...', 'oo_theme');
        echo '</a>';
    } ?>
 		</div> 

@@ -16,10 +16,7 @@
   &__content {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    @include media-breakpoint-up(xl) {
-      gap: 2rem;
-    }
+    gap: 2.5rem;
   }
 
   &__headline {
@@ -29,5 +26,18 @@
   }
 
   &__map {
+  }
+  &__map-wrapper {
+    width: 100%;
+    padding-inline: 0rem;
+    @include media-breakpoint-up(sm) {
+      padding-inline: 1rem;
+    }
+    .c-map {
+      aspect-ratio: 3/2;
+      @include media-breakpoint-up(sm) {
+        aspect-ratio: 16/9;
+      }
+    }
   }
 }

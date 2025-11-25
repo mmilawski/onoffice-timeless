@@ -58,23 +58,23 @@ $posiiton_center = !empty($text['wysiwyg']) ? ' --position-center' : '';
     $block,
 ); ?> class="c-iframe-script o-section --<?php echo $settings['bg_color']; ?>"> 
     <div class="c-iframe-script__container o-container">
-        <div class="c-iframe-script__row o-row <?php echo $posiiton_center; ?>">
+        <div class="c-iframe-script__row o-row">
 
             <?php if (!empty($headline['text'])) { ?>
                 <?php oo_get_template('components', '', 'component-headline', [
                     'headline' => $headline,
                     'additional_headline_class' =>
-                        'c-iframe-script__headline o-col-12 o-col-xl-8',
+                        'c-iframe-script__headline u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8',
                 ]); ?>
             <?php } ?>
 
             <?php if (!empty($text['wysiwyg'])) { ?>
-                <div class="c-iframe-script__text o-text o-col-12 o-col-xl-8 --is-wysiwyg">
+                <div class="c-iframe-script__text o-text u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8 --is-wysiwyg">
                     <?php echo $text['wysiwyg']; ?>
                 </div>
             <?php } ?>
 
-            <div class="c-iframe-script__col o-col-12">
+            <div class="c-iframe-script__col u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">
             <?php if (!empty($type) && isset($iframe_name)) {
                 oo_get_template('templates', 'iframes', $iframe_name, ['']);
             } ?>
