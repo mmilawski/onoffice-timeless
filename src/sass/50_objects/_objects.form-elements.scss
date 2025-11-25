@@ -127,7 +127,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     opacity: 1; // Reset opacity for Firefox
   }
 
-  .--on-bg-light & {
+  .--bg-light & {
     background-color: $form-light-bg;
     border-color: $form-light-border-color;
     color: $form-light-color;
@@ -146,7 +146,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-dark & {
+  .--bg-dark & {
     background-color: $form-dark-bg;
     border-color: $form-dark-border-color;
     color: $form-dark-color;
@@ -165,7 +165,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-primary & {
+  .--bg-primary & {
     background-color: $form-primary-bg;
     border-color: $form-primary-border-color;
     color: $form-primary-color;
@@ -184,7 +184,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-secondary & {
+  .--bg-secondary & {
     background-color: $form-secondary-bg;
     border-color: $form-secondary-border-color;
     color: $form-secondary-color;
@@ -203,7 +203,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-footer & {
+  .--bg-footer & {
     background-color: $form-footer-bg;
     border-color: $form-footer-border-color;
     color: $form-footer-color;
@@ -218,7 +218,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-transparent & {
+  .--bg-transparent & {
     background-color: $form-bg;
     border-color: $form-border-color;
     color: $form-color;
@@ -351,7 +351,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     max-height: $form-height;
   }
 
-  .--on-bg-light & {
+  .--bg-light & {
     background-color: $form-light-bg;
     border-color: $form-light-border-color;
     color: $form-light-color;
@@ -368,7 +368,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-dark & {
+  .--bg-dark & {
     background-color: $form-dark-bg;
     border-color: $form-dark-border-color;
     color: $form-dark-color;
@@ -385,7 +385,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-primary & {
+  .--bg-primary & {
     background-color: $form-primary-bg;
     border-color: $form-primary-border-color;
     color: $form-primary-color;
@@ -402,7 +402,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-secondary & {
+  .--bg-secondary & {
     background-color: $form-secondary-bg;
     border-color: $form-secondary-border-color;
     color: $form-secondary-color;
@@ -419,7 +419,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-footer & {
+  .--bg-footer & {
     background-color: $form-footer-bg;
     border-color: $form-footer-border-color;
     color: $form-footer-color;
@@ -436,7 +436,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-transparent & {
+  .--bg-transparent & {
     background-color: $form-bg;
     border-color: $form-border-color;
     color: $form-color;
@@ -684,7 +684,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-light & {
+  .--bg-light & {
     border-color: $form-light-border-color;
 
     &.focus {
@@ -768,7 +768,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-dark & {
+  .--bg-dark & {
     border-color: $form-dark-border-color;
 
     &.focus {
@@ -848,7 +848,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-primary & {
+  .--bg-primary & {
     border-color: $form-primary-border-color;
 
     &.focus {
@@ -928,7 +928,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-secondary & {
+  .--bg-secondary & {
     border-color: $form-secondary-border-color;
 
     &.focus {
@@ -1009,7 +1009,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-footer & {
+  .--bg-footer & {
     border-color: $form-footer-border-color;
 
     &.focus {
@@ -1090,7 +1090,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-transparent & {
+  .--bg-transparent & {
     border-color: $form-border-color;
 
     &.focus {
@@ -1198,7 +1198,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     opacity: 1; // Reset opacity for Firefox
   }
 
-  .--on-bg-light & {
+  .--bg-light & {
     background-color: $form-light-bg;
     border-color: $form-light-border-color;
     color: $form-light-color;
@@ -1213,7 +1213,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-dark & {
+  .--bg-dark & {
     background-color: $form-dark-bg;
     border-color: $form-dark-border-color;
     color: $form-dark-color;
@@ -1228,7 +1228,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-primary & {
+  .--bg-primary & {
     background-color: $form-primary-bg;
     border-color: $form-primary-border-color;
     color: $form-primary-color;
@@ -1243,7 +1243,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-secondary & {
+  .--bg-secondary & {
     background-color: $form-secondary-bg;
     border-color: $form-secondary-border-color;
     color: $form-secondary-color;
@@ -1258,7 +1258,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-footer & {
+  .--bg-footer & {
     background-color: $form-footer-bg;
     border-color: $form-footer-border-color;
     color: $form-footer-color;
@@ -1273,7 +1273,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-transparent & {
+  .--bg-transparent & {
     background-color: $form-bg;
     border-color: $form-border-color;
     color: $form-color;
@@ -1313,39 +1313,45 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-light & {
+  .--bg-light & {
+    color: var(--oo-color-light-headline, var(--oo-color-headline));
     a {
-      color: $form-light-primary;
+      color: var(--oo-color-light-contrast-bg);
     }
   }
 
-  .--on-bg-dark & {
+  .--bg-dark & {
+    color: var(--oo-color-dark-headline, var(--oo-color-headline));
     a {
-      color: $form-dark-primary;
+      color: var(--oo-color-dark-contrast-bg);
     }
   }
 
-  .--on-bg-primary & {
+  .--bg-primary & {
+    color: var(--oo-color-primary-headline, var(--oo-color-headline));
     a {
-      color: $form-primary-primary;
+      color: var(--oo-color-primary-contrast-bg);
     }
   }
 
-  .--on-bg-secondary & {
+  .--bg-secondary & {
+    color: var(--oo-color-secondary-headline, var(--oo-color-headline));
     a {
-      color: $form-secondary-primary;
+      color: var(--oo-color-secondary-contrast-bg);
     }
   }
 
-  .--on-bg-footer & {
+  .--bg-footer & {
+    color: var(--oo-color-footer-text, var(--oo-color-text));
     a {
-      color: $form-footer-primary;
+      color: var(--oo-color-footer-contrast-bg);
     }
   }
 
-  .--on-bg-transparent & {
+  .--bg-transparent & {
+    color: var(--oo-color-headline);
     a {
-      color: $form-primary;
+      color: var(--oo-color-primary);
     }
   }
 }
@@ -1450,7 +1456,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-light & {
+  .--bg-light & {
     #{$o-control}__label {
       &:before {
         background-color: $form-light-bg;
@@ -1482,7 +1488,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-dark & {
+  .--bg-dark & {
     #{$o-control}__label {
       &:before {
         background-color: $form-dark-bg;
@@ -1514,7 +1520,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-primary & {
+  .--bg-primary & {
     #{$o-control}__label {
       &:before {
         background-color: $form-primary-bg;
@@ -1546,7 +1552,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-secondary & {
+  .--bg-secondary & {
     #{$o-control}__label {
       &:before {
         background-color: $form-secondary-bg;
@@ -1578,7 +1584,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-footer & {
+  .--bg-footer & {
     #{$o-control}__label {
       &:before {
         background-color: $form-footer-bg;
@@ -1610,7 +1616,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     }
   }
 
-  .--on-bg-transparent & {
+  .--bg-transparent & {
     #{$o-control}__label {
       &:after {
         background-color: $form-color;
@@ -1658,7 +1664,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     grid-template-columns: 1fr;
     gap: 1rem 0;
 
-    @include media-breakpoint-up(md) {
+    @include media-breakpoint-up(lg) {
       grid-template-columns: repeat(2, 1fr);
       gap: 0 2rem;
     }

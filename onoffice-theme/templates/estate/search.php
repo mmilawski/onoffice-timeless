@@ -56,7 +56,7 @@ $formId = sanitize_key($getListName());
  } ?> <?php if (!empty($bg_color)) {
      echo ' --on-' . $bg_color;
  } ?>" data-estate-search-name="<?php echo esc_attr($getListName()); ?>">
-    <div class="c-form__fieldset">
+    <div class="c-form__fieldset --<?php echo $bg_color; ?>">
         <div class="c-form__body">
             <?php
             $number = 0;

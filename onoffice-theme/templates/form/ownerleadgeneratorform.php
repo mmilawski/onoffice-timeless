@@ -75,9 +75,7 @@ ob_start();
 ?>
 <form method="post" action="#onoffice-form" id="onoffice-form-<?php echo $pForm->getFormNo(); ?>" class="c-form --is-owner-leadgenerator-form <?php if (
     !empty($bg_color)
-) {
-    echo '--on-' . $bg_color;
-} ?>">
+); ?>">
 
     <input type="hidden" name="oo_formid" value="<?php echo $pForm->getFormId(); ?>">
     <input type="hidden" name="oo_formno" value="<?php echo $pForm->getFormNo(); ?>">
@@ -99,45 +97,45 @@ require 'info-messages.php'; ?>
                         $titleData['value'];
                 }
             }
-
-            oo_get_template('components', '', 'component-progressbar', [
-                'in_modal' => $showFormAsModal,
-                'totalPages' => $totalPages,
-                'pageTitles' => $pageTitles,
-            ]);
             ?>
             <div id="leadform-<?php echo sanitize_title(
                 $pForm->getFormId(),
             ); ?>">
-            <div class="c-form__required"><?php echo esc_html__(
-                '* Pflichtfelder',
-                'oo_theme',
-            ); ?>
-            </div>
+            <div class="c-form__fieldset">
                 <?php foreach ($estateValues as $pageNumber => $fields): ?>
                     <div class="lead-lightbox lead-page-<?php echo $pageNumber; ?>">
-                        <div class="c-form__fieldset">
-                            <?php echo implode($fields); ?>
+                        <div class="c-form__header">
+                            <legend class="c-form__legend">
+                                <?php echo $pageTitles[
+                                    $pageNumber - 1
+                                ]; ?></legend>
+                            <div class="c-form__required"><?php echo esc_html__(
+                                '* Pflichtfelder',
+                                'oo_theme',
+                            ); ?></div>
                         </div>
+                        <?php echo implode($fields); ?>
                     </div>
                 <?php endforeach; ?>
 
                 <?php echo implode($hiddenValues); ?>
-            </div>
-            <div class="c-form__button-wrapper --is-paged">
-                <button type="button" class="c-form__button c-button --ghost leadform-back">
-                    <?php echo esc_html__('Zurück', 'oo_theme'); ?>
-                </button>
+                <div class="c-form__button-wrapper --is-paged">
+                    <?php if ($totalPages > 1): ?>
+                        <button type="button" class="c-form__button c-button --ghost leadform-back">
+                            <?php echo esc_html__('Zurück', 'oo_theme'); ?>
+                        </button>
 
-                <?php if ($totalPages > 1): ?>
-                    <button type="button" class="c-form__button c-button leadform-forward">
-                        <?php echo esc_html__('Weiter', 'oo_theme'); ?>
-                    </button>
-                <?php endif; ?>
+                        <div class="c-form__progress leadform-progress"></div>
 
-                <div class="leadform-submit" style="display:none;">
-                    <?php include get_template_directory() .
-                        '/onoffice-theme/templates/form/formsubmit.php'; ?>
+                        <button type="button" class="c-form__button c-button leadform-forward">
+                            <?php echo esc_html__('Weiter', 'oo_theme'); ?>
+                        </button>
+                    <?php endif; ?>
+
+                    <div class="leadform-submit" style="display:none;">
+                        <?php include get_template_directory() .
+                            '/onoffice-theme/templates/form/formsubmit.php'; ?>
+                    </div>
                 </div>
             </div>
         </div>
