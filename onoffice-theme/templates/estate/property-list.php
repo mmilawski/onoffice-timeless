@@ -123,7 +123,7 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
                 <div class="c-slider__progress splide__progress">
                     <div class="c-slider__progress-bar splide__progress-bar"></div>
                 </div>
-                <div class="c-slider__arrows splide__arrows o-col-lg-12">
+                <div class="c-slider__arrows splide__arrows">
                     <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
                         <span class="c-slider__arrow-text u-screen-reader-only"><?php esc_html_e(
                             'Vorheriges',
