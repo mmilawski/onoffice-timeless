@@ -117,12 +117,12 @@ if (empty($addresses)) {
     $block,
 ); ?> class="c-contact-map o-section --<?php echo $bg_color; ?>">
     <div class="c-contact-map__container o-container">
-        <div class="c-contact-map__row o-row --position-center">
+        <div class="c-contact-map__row o-row">
             <?php if (
                 !empty($headline['text']) ||
                 !empty($text['wysiwyg'])
             ) { ?>
-                <div class="c-contact-map__content o-col-12 o-col-lg-10 o-col-xl-8">
+                <div class="c-contact-map__content o-col-12 o-col-lg-10 o-col-xl-8 u-offset-lg-1">
                     <?php if (!empty($headline['text'])) { ?>
                         <?php oo_get_template(
                             'components',
@@ -161,7 +161,7 @@ if (empty($addresses)) {
                 wp_enqueue_script('oo-init-open-street-map-marker-cluster');
                 ?>
             <?php } ?>
-            <div class="c-contact-map__map-wrapper o-col-12 o-col-lg-10 o-col-xl-8">
+            <div class="c-contact-map__map-wrapper o-col-12 o-col-lg-10 o-col-xl-8 u-offset-lg-1">
                 <div class="c-contact-map__map c-map --is-<?php echo $map_type; ?> --is-<?php echo $map_color; ?>" data-map-color="<?php echo $map_color; ?>" data-marker-color="<?php echo $marker_color; ?>" style="width: 100%;" role="region" aria-label="<?php echo esc_html__(
     'Karte mit Kontaktinformationen',
     'oo_theme',
