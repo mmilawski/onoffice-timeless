@@ -15,7 +15,7 @@
 		"build": "grunt && npm run format && npm run shared-build && prettier --check \"**/*.{js,scss,php}\" && echo \"Build wurde erfolgreich erstellt.\"",
 		"release": "npm run format && npm run build && grunt compress && echo \"Build & ZIP wurden erfolgreich erstellt und stehen zum Release bereit.\"",
 		"deploy": "npm run format && npm run build && grunt clean",
-		"i18n": "echo 'Install WPCLI if you havent yet: https://make.wordpress.org/cli/handbook/guides/installing/' && wp i18n make-pot . shared/languages/oo_theme.pot --merge=\"shared/languages/oo_theme.pot\" && wp i18n make-pot . shared/languages/oo_theme.pot --include=\"onoffice-theme/*\" --merge=\"shared/languages/oo_theme.pot\" && wp i18n update-po shared/languages/oo_theme.pot shared/languages/de_ch.po && find shared/languages -name 'de_ch.po' -exec sh -c 'wp i18n make-mo \"$0\" ' {} \\; && echo '\nDont forget to push changes from shared!!!'",
+		"i18n": "echo 'Install WPCLI if you havent yet: https://make.wordpress.org/cli/handbook/guides/installing/' && wp i18n make-pot . shared/languages/oo_theme.pot --merge=\"shared/languages/oo_theme.pot\" && wp i18n make-pot . shared/languages/oo_theme.pot --include=\"onoffice-theme/*\" --merge=\"shared/languages/oo_theme.pot\" && ([ -f shared/languages/de_DE.po ] && wp i18n update-po shared/languages/oo_theme.pot shared/languages/de_DE.po || msginit --input=shared/languages/oo_theme.pot --output-file=shared/languages/de_DE.po --locale=de_DE --no-translator) && node shared/src/js/translations/create-german-translations.js && wp i18n make-mo shared/languages/de_DE.po && echo '\nDont forget to push changes from shared!!!'",
 		"shared-build": "[ -f shared/build.sh ] && sh shared/build.sh || echo 'shared/build.sh nicht gefunden, überspringe shared-build.'"
 	},
 	"repository": {
@@ -37,6 +37,7 @@
 		"@prettier/plugin-php": "^0.19.3",
 		"autoprefixer": "^9.8.6",
 		"browserslist": "^4.22.1",
+		"gettext-parser": "^8.0.0",
 		"grunt-autoprefixer": "^3.0.0",
 		"grunt-browser-sync": "^2.2.0",
 		"grunt-contrib-clean": "^2.0.1",
