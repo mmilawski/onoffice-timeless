@@ -1,19 +1,24 @@
 .c-reviews {
   $c-reviews: &;
+  overflow-x: hidden;
 
   &__container {
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    padding: 0;
   }
 
   &__content {
     display: flex;
     flex-direction: row;
     gap: 2rem;
-    padding-block: 0 0.5rem;
-
+    padding: 0 1rem 0.5rem 1rem;
+    @include media-breakpoint-up(sm) {
+      padding-left: 0;
+      padding-right: 0;
+    }
     @include media-breakpoint-up(xl) {
       padding-block: 0 3rem;
     }

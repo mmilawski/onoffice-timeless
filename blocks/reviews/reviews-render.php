@@ -28,8 +28,8 @@ $is_slider = filter_var($slider['slider'] ?? null, FILTER_VALIDATE_BOOLEAN);
 $paged = is_home() || is_front_page() ? 'page' : 'paged';
 $no_found_rows = false;
 
-// Posiiton
-$posiiton_center = !empty($text['wysiwyg']) ? ' --position-center' : '';
+// Offset
+$offset_position = !empty($text['wysiwyg']) ? ' u-offset-lg-1' : '';
 
 $query_args = [
     'post_type' => 'oo_reviews',
@@ -123,21 +123,19 @@ $max_num_pages = $reviews_query->max_num_pages ?? null;
     <div class="c-reviews__container o-container">
 
         <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
-            <div class="c-reviews__content o-row <?php echo '--is-' .
-                $type .
-                '-reviews' .
-                $posiiton_center; ?> ">
+            <div class="c-reviews__content o-row --is-<?php echo $type; ?>-reviews">
 
                 <?php if (!empty($headline['text'])) { ?>
         	<?php oo_get_template('components', '', 'component-headline', [
              'headline' => $headline,
              'additional_headline_class' =>
-                 'c-reviews__headline o-col-12 o-col-lg-10 o-col-xl-8',
+                 'c-reviews__headline o-col-12 o-col-lg-10 o-col-xl-8' .
+                 $offset_position,
          ]); ?>
                 <?php } ?>
 
             <?php if (!empty($text['wysiwyg'])) { ?>
-                <div class="c-reviews__text o-text --is-wysiwyg o-col-12 o-col-lg-10 o-col-xl-8">
+                <div class="c-reviews__text o-text --is-wysiwyg o-col-12 o-col-lg-10 o-col-xl-8<?php echo $offset_position; ?>">
                     <?php echo $text['wysiwyg']; ?>
                 </div>
             <?php } ?>
