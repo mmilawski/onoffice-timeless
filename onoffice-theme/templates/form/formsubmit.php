@@ -21,6 +21,7 @@
 // Settings
 $post_id = get_the_ID();
 $is_popup = get_post_type($post_id) === OO_POPUPS_CPT_ID ?? false;
+$buttonDisabled = '';
 
 if ($is_popup) {
     $settings = get_field('popup', $post_id)['settings'] ?? null;
@@ -33,6 +34,7 @@ $key = get_option('onoffice-settings-captcha-sitekey', '');
 /** @var \onOffice\WPlugin\Form $pForm */
 if ($pForm->needsReCaptcha() && $key !== '') {
 
+    $buttonDisabled = ' disabled';
     $formId = $pForm->getGenericSetting('formId');
     $pFormNo = $pForm->getFormNo();
     ?>
@@ -175,12 +177,9 @@ if ($pForm->needsReCaptcha() && $key !== '') {
             });
         })();
     </script>
-    <button class="c-form__button c-button
-<?php
-} else {
-     ?>
-<button class="c-form__button c-button"> <?php echo esc_html(
-    $pForm->getGenericSetting('submitButtonLabel'),
-); ?></button>
 <?php
 }
+?>
+<button class="c-form__button c-button"<?php echo $buttonDisabled; ?>>
+    <?php echo esc_html($pForm->getGenericSetting('submitButtonLabel')); ?>
+</button>
