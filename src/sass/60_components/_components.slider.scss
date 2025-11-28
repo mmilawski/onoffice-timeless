@@ -284,6 +284,11 @@
     #{$c-slider}__arrow {
       top: 0;
     }
+    #{$c-slider}__navigation {
+      margin-left: 0;
+      margin-right: 0;
+        }
+
   }
 
   &.--is-seals-slider {
