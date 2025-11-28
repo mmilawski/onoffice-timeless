@@ -349,8 +349,7 @@
       }
     }
     #{$c-form}__required {
-      display: flex;
-      justify-content: flex-end;
+      bottom: -1rem;
     }
   }
 
