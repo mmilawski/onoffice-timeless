@@ -292,6 +292,7 @@
     bottom: auto;
     left: auto;
     padding: 0;
+    background: transparent;
 
     #{$c-popup} {
       &__wrapper {
