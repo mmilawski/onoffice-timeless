@@ -495,7 +495,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
       top: 50%;
       transform: translateY(-50%);
       width: 0.75rem;
-      height: 0.375rem;
+      height: 100%;
       background-color: $form-color;
       mask: $form-svg-arrow;
       mask-repeat: no-repeat;
