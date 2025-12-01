@@ -13,22 +13,19 @@
   &__content {
     display: flex;
     flex-direction: column;
-    align-content: center;
-    gap: 1.5rem;
-    @include media-breakpoint-up(xl) {
-      gap: 2rem;
-    }
+    gap: 2.5rem;
   }
 
   &__headline {
   }
 
   &__text {
+    width: auto;
   }
   &__wrapper {
     display: flex;
     flex-direction: column;
-    align-content: center;
+    align-content: left;
     gap: 1.5rem;
     @include media-breakpoint-up(xl) {
       gap: 2rem;
@@ -37,14 +34,20 @@
   &__addresses {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 3rem 0;
-
+    gap: 2.5rem;
+    padding-left: 0;
+    padding-right: 0;
+    @include media-breakpoint-up(sm) {
+      padding-left: 1rem;
+      padding-right: 1rem;
+      gap: 5rem 2rem;
+    }
     @include media-breakpoint-up(md) {
       grid-template-columns: repeat(2, 1fr);
-      gap: 5rem 1rem;
     }
 
     &.--is-map {
+      gap: 5rem;
       display: flex;
       flex-direction: column;
     }

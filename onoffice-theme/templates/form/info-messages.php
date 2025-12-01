@@ -63,7 +63,7 @@ if ($pForm->getFormStatus()) { ?>
           const form = message.parentElement
           if(form && form.classList.contains('c-form')){
             form.reset()
-            form.querySelectorAll('input, textarea').forEach(el => {
+            form.querySelectorAll('input:not([type="hidden"]), textarea').forEach(el => {
               el.value = ''
             })
             form.querySelectorAll('select.tomselected').forEach(sel => {

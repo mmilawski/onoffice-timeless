@@ -1345,39 +1345,58 @@ function correctFirstElementPadding() {
 
 // Function to apply text shortening, read-more button and visibility adjustments based on word count and screen size
 function applyResponsiveTextShortening() {
-  const isMobile = window.innerWidth <= 768;
 
   function shortenElements(elementsEach, textElement, elementToShorten) {
     $(elementsEach).each(function() {
-      const text = $(this).find(textElement).text();
-      const wordCount = text.trim().split(/\s+/).length;
+      const $root = $(this);
+      const $textEl = $root.find(elementToShorten);
+      const $readMore = $root.find('.c-read-more');
 
-      let shouldShorten;
-      if (isMobile) {
-        shouldShorten = wordCount > 50;
-      } else {
-        shouldShorten = wordCount > 100;
+      if ($textEl.length === 0) {
+        $readMore.hide();
+        return;
       }
 
+      $textEl.addClass('--shorten');
+      const el = $textEl.get(0);
+
+      if (!el) {
+        $textEl.removeClass('--shorten');
+        $readMore.hide();
+        return;
+      }
+
+      const shouldShorten = el.scrollHeight > el.clientHeight;
+
       if (shouldShorten) {
-        $(this).find(elementToShorten).addClass('--shorten');
-        $(this).find('.c-read-more').show();
+        $textEl.addClass('--shorten');
+        $readMore
+          .show()
+          .attr('aria-expanded', 'false')
+          .text($readMore.data('open-text') || 'weiterlesen...');
       } else {
-        $(this).find(elementToShorten).removeClass('--shorten');
-        $(this).find('.c-read-more').hide();
+        $textEl.removeClass('--shorten');
+        $readMore.hide();
       }
     });
   }
 
   // google review slider
   shortenElements('.c-google-review-card', '.c-google-review-card__text p', '.c-google-review-card__text');
+
   // review slider
   shortenElements('.c-review-card', '.c-review-card__text', '.c-review-card__text');
+
   // property list
   shortenElements('.c-property-details__text-wrapper', '.c-property-details__text-content', '.c-property-details__text-content');
-  // team
+  
+  // team 
   shortenElements('.c-team-card', '.c-team-card__description', '.c-team-card__description');
 }
+
+
+
+
 
 // Select2 copy class
 function select2CopyClasses(data, container) {
@@ -1498,7 +1517,7 @@ function sanitizeClonedYouTubeIframes(root) {
     });
 }
 document.addEventListener('DOMContentLoaded', function() {
-  const forms = document.querySelectorAll('.c-form');
+  const forms = document.querySelectorAll('.c-form.--custom-validation');
 
   forms.forEach(function(form) {
     form.setAttribute('novalidate', '');
@@ -1605,3 +1624,127 @@ jQuery(window).on('load', function () {
   initVimeoPlayers();
   sanitizeClonedYouTubeIframes(document);
 });
+
+// Initialize news card navigation on load
+function initNewsCardNavigation() {
+  const container = document.querySelector('.c-news__news');
+  if (!container) return;
+  let focusableElements = [];
+  let isDesktop = window.matchMedia('(min-width: 1000px)').matches;
+  
+  function buildFocusableList() {
+    focusableElements = [];
+    const newsCards = container.querySelectorAll('.c-news-card');
+    
+    newsCards.forEach(function(card, index) {
+      const picture = card.querySelector('.c-news-card__link');
+      const button = card.querySelector('.c-news-card__more-link');
+      
+      // Build array based on desktop/mobile layout
+      if (isDesktop) {
+        if (index % 2 === 0) {
+          // Even cards: Picture -> Content -> Button
+          if (picture) focusableElements.push(picture);
+          if (button) focusableElements.push(button);
+        } else {
+          // Odd cards: Content -> Button -> Picture
+          if (button) focusableElements.push(button);
+          if (picture) focusableElements.push(picture);
+        }
+      } else {
+        // Mobile: Natural order for all cards
+        if (picture) focusableElements.push(picture);
+        if (button) focusableElements.push(button);
+      }
+    });
+  }
+
+  function handleKeyDown(event) {
+    // Only handle tab navigation
+    if (event.key !== 'Tab') return;
+ 
+    // Find the currently focused element
+    const currentElement = document.activeElement;
+    const currentIndex = focusableElements.indexOf(currentElement);
+    
+    // Only handle focus if we're within our container
+    if (currentIndex === -1) return;
+    
+    // Prevent default tab behavior
+    event.preventDefault();
+    
+    let nextIndex;
+    if (event.shiftKey) {
+      // Shift+Tab: Move backwards
+      nextIndex = currentIndex - 1;
+      if (nextIndex < 0) {
+        // Exit container at the start
+        const prevFocusable = findPreviousFocusable(currentElement);
+        if (prevFocusable) prevFocusable.focus();
+        return;
+      }
+    } else {
+      // Tab: Move forwards
+      nextIndex = currentIndex + 1;
+      if (nextIndex >= focusableElements.length) {
+        // Exit container at the end
+        const nextFocusable = findNextFocusable(currentElement);
+        if (nextFocusable) nextFocusable.focus();
+        return;
+      }
+    }
+    
+    // Focus the next element in our sequence
+    focusableElements[nextIndex].focus();
+  }
+
+  function findNextFocusable(element) {
+    const focusable = 'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    const all = Array.from(document.querySelectorAll(focusable));
+    let index = all.indexOf(element);
+    
+    // Keep looking for the next focusable element that's not a news card link or button
+    while (index < all.length - 1) {
+      index++;
+      const nextElement = all[index];
+      if (!nextElement.classList.contains('c-news-card__link') && 
+          !nextElement.classList.contains('c-news-card__more-link')) {
+        return nextElement;
+      }
+    }
+    return null;
+  }
+
+  function findPreviousFocusable(element) {
+    const focusable = 'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    const all = Array.from(document.querySelectorAll(focusable));
+    let index = all.indexOf(element);
+    
+    // Keep looking for the previous focusable element that's not a news card link or button
+    while (index > 0) {
+      index--;
+      const prevElement = all[index];
+      if (!prevElement.classList.contains('c-news-card__link') && 
+          !prevElement.classList.contains('c-news-card__more-link')) {
+        return prevElement;
+      }
+    }
+    return null;
+  }
+
+  // Build initial focus list
+  buildFocusableList();
+
+  // Listen for Tab key events
+  container.addEventListener('keydown', handleKeyDown);
+
+  // Rebuild focus list on resize
+  const mediaQuery = window.matchMedia('(min-width: 768px)');
+  mediaQuery.addListener(function(e) {
+    isDesktop = e.matches;
+    buildFocusableList();
+  });
+}
+
+// Usage (don't include this part, just for reference):
+jQuery(window).on('load', initNewsCardNavigation);

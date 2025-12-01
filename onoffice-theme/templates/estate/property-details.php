@@ -899,19 +899,28 @@ while ($current_property = $pEstates->estateIterator()) {
                             ? esc_attr($property_ogulo_link['title'])
                             : esc_attr__('360°-Rundgang starten', 'oo_theme');
 
-                        echo '<a class="c-button --ghost" href="' .
-                            esc_attr($property_ogulo_link['url']) .
-                            '" target="_blank" title="' .
-                            $button_title .
-                            '">' .
-                            $button_title .
-                            '</a>';
-                    }
-                    echo '</div>';
-                }
-                echo '</div>';
-                echo '</div>';
-            } ?>
+                                echo '<a class="c-button --ghost" href="' .
+                                    esc_attr($property_ogulo_link['url']) .
+                                    '" target="_blank" rel="noopener noreferrer" aria-label="' .
+                                    esc_attr(
+                                        sprintf(
+                                            __(
+                                                '360°-Rundgang von %s starten (Öffnet in neuem Tab)',
+                                                'oo_theme',
+                                            ),
+                                            $button_title,
+                                        ),
+                                    ) .
+                                    '">' .
+                                    $button_title .
+                                    '</a>';
+                            }
+                            echo '</div>';
+                        }
+
+                        echo '</div>';
+                    } ?>
+
 
             <?php
             // Movie
@@ -974,19 +983,27 @@ while ($current_property = $pEstates->estateIterator()) {
                             ? esc_attr($property_movie_link['title'])
                             : esc_html__('Video starten', 'oo_theme');
 
-                        echo '<a class="c-button --ghost" href="' .
-                            esc_attr($property_movie_link['url']) .
-                            '" target="_blank" title="' .
-                            $button_title .
-                            '">' .
-                            $button_title .
-                            '</a>';
+                                echo '<a class="c-button --ghost" href="' .
+                                    esc_attr($property_movie_link['url']) .
+                                    '" rel="noopener noreferrer" aria-label="' .
+                                    esc_attr(
+                                        sprintf(
+                                            __(
+                                                'Video von %s starten (Öffnet in neuem Tab)',
+                                                'oo_theme',
+                                            ),
+                                            $button_title,
+                                        ),
+                                    ) .
+                                    '" target="_blank">' .
+                                    $button_title .
+                                    '</a>';
+                            }
+                            echo '</div>';
+                        }
+
+                        echo '</div>';
                     }
-                    echo '</div>';
-                }
-                echo '</div>';
-                echo '</div>';
-            }
 
             // Links
             if (!empty($property_links) || !empty($property_link_embeds)) {
@@ -1023,16 +1040,24 @@ while ($current_property = $pEstates->estateIterator()) {
                             ? esc_attr($property_link['title'])
                             : esc_attr__('Link öffnen', 'oo_theme');
 
-                        echo '<a class="c-button --ghost" href="' .
-                            esc_attr($property_link['url']) .
-                            '" target="_blank" title="' .
-                            $button_title .
-                            '">' .
-                            $button_title .
-                            '</a>';
-                    }
-                    echo '</div>';
-                }
+                                echo '<a class="c-button --ghost" href="' .
+                                    esc_attr($property_link['url']) .
+                                    '" rel="noopener noreferrer" aria-label="' .
+                                    esc_attr(
+                                        sprintf(
+                                            __(
+                                                'Link von %s öffnen (Öffnet in neuem Tab)',
+                                                'oo_theme',
+                                            ),
+                                            $button_title,
+                                        ),
+                                    ) .
+                                    '" target="_blank">' .
+                                    $button_title .
+                                    '</a>';
+                            }
+                            echo '</div>';
+                        }
 
                 echo '</div>';
                 echo '</div>';
@@ -1081,16 +1106,26 @@ while ($current_property = $pEstates->estateIterator()) {
                             ? esc_attr($property_object_link['title'])
                             : esc_attr__('Objekt-Link öffnen', 'oo_theme');
 
-                        echo '<a class="c-button --ghost" href="' .
-                            esc_attr($property_object_link['url']) .
-                            '" target="_blank" title="' .
-                            $button_title .
-                            '">' .
-                            $button_title .
-                            '</a>';
-                    }
-                    echo '</div>';
-                }
+                                echo '<a class="c-button --ghost" href="' .
+                                    esc_attr($property_object_link['url']) .
+                                    '" rel="noopener noreferrer" aria-label="' .
+                                    esc_attr(
+                                        sprintf(
+                                            __(
+                                                'Objekt-Link von %s öffnen (Öffnet in neuem Tab)',
+                                                'oo_theme',
+                                            ),
+                                            $button_title,
+                                        ),
+                                    ) .
+                                    '" target="_blank" title="' .
+                                    $button_title .
+                                    '">' .
+                                    $button_title .
+                                    '</a>';
+                            }
+                            echo '</div>';
+                        }
 
                 echo '</div>';
                 echo '</div>';

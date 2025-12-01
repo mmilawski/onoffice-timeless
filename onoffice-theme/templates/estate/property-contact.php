@@ -94,9 +94,12 @@ function oo_property_field_type($field, $item)
                     <?php esc_html_e('Web:', 'oo_theme'); ?>
                 </dt>
                 <dd class="c-contact-person__contact-value">
-                    <a class="c-link --text-color --on-bg-transparent" target="_blank" href="<?php echo esc_html(
-                        $item,
-                    ); ?>">
+                    <a class="c-link --text-color --on-bg-transparent" rel="noopener noreferrer" aria-label="<?php esc_attr_e(
+                        'Webseite besuchen (Öffnet in neuem Tab)',
+                        'oo_theme',
+                    ); ?>" target="_blank" href="<?php echo esc_html(
+    $item,
+); ?>">
                         <?php echo esc_html($item); ?>
                     </a>
                 </dd>
