@@ -13,7 +13,6 @@
   }
 
   &__text[popover] {
-    position-area: bottom;
     color: var(--oo-color-text);
     background-color: var(--oo-color-bg);
     border: 1px solid var(--oo-color-mix-bg-text-50);
@@ -25,24 +24,37 @@
     font-size: $small-font-size;
     line-height: $small-line-height;
     width: 60vw;
-    left: 45%;
-    max-inline-size: min(90vw, 280px);
-    inset-inline-start: max(0px, min(50%, 100% - 280px));
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
 
     @include media-breakpoint-up(lg) {
       width: 30rem;
       padding: 1.5rem;
       font-size: $global-font-size;
       line-height: $global-line-height;
-      max-inline-size: min(90vw, 500px);
-      inset-inline-start: max(0px, min(50%, 100% - 500px));
+    }
+    .--is-sticky-google-reviews & {
+      transform: none;
+      position: fixed;
+      right: 1rem;
+      inset-inline-start: auto;
+      width: 20rem;
+      top: 30%;
     }
 
     &:popover-open {
       display: block;
       opacity: 1;
-      transform: translateX(-45%) translateY(0);
       pointer-events: auto;
+    }
+
+    @supports (position-anchor: auto) {
+      margin: 0;
+      inset: auto;
+      position-anchor: auto;
+      top: calc(anchor(top) + 2rem);
+      left: max(8px, calc(anchor(left) - 2rem));
     }
   }
 
