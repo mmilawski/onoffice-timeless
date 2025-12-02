@@ -84,11 +84,10 @@
   }
 
   &__news {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 2rem;
-    @include media-breakpoint-up(lg) {
-      grid-template-columns: repeat(3, 1fr);
-    }
+    max-width: 100%;
   }
 
   &__pagination {
