@@ -8,7 +8,10 @@ $places = get_field('places') ?? [];
 // Settings
 $settings = get_field('settings') ?? [];
 $bg_color = $settings['bg_color'] ?? 'bg-transparent';
-$map_color = $settings['map_color'] ?? 'colored';
+$map_color = get_field('map_color');
+if (empty($map_color)) {
+    $map_color = $settings['map_color'] ?? 'colored';
+}
 
 // Marker color
 $colors = get_field('colors', 'option') ?? [];

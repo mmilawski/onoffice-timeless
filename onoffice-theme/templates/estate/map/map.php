@@ -21,8 +21,16 @@
 use onOffice\WPlugin\EstateList;
 use onOffice\WPlugin\Types\MapProvider;
 
+$map_color = $map_color ?? 'colored';
+$marker_color = $marker_color ?? 'currentColor';
+
 /** @var EstateList $pEstates */
-(function (MapProvider $pMapProvider, EstateList $pEstates) {
+(function (
+    MapProvider $pMapProvider, 
+    EstateList $pEstates,
+    string $map_color,     
+    string $marker_color  
+) {
     $pCallback = null;
     switch ($pMapProvider->getActiveMapProvider()) {
         case MapProvider::GOOGLE_MAPS:
@@ -35,6 +43,6 @@ use onOffice\WPlugin\Types\MapProvider;
     }
 
     if ($pCallback !== null) {
-        $pCallback(clone $pEstates);
+        $pCallback(clone $pEstates, $map_color, $marker_color);
     }
-})(new MapProvider(), $pEstates);
+})(new MapProvider(), $pEstates, $map_color, $marker_color); 
