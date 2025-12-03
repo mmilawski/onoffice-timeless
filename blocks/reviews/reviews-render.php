@@ -24,12 +24,54 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
 $slider = get_field('slider') ?? [];
 $is_slider = filter_var($slider['slider'] ?? null, FILTER_VALIDATE_BOOLEAN);
 
+$is_sticky_overall_google_rating = filter_var(
+    get_field('sticky_overall_google_rating') ?? false,
+    FILTER_VALIDATE_BOOLEAN,
+);
+
+// Google APIs
+$google_api_key = get_option('onoffice-settings-googlemaps-key') ?? null;
+$place_id = $third_parties['google']['place_id'] ?? null;
+$place_id_override = get_field('place_id') ?? null;
+
+if (!empty($place_id_override)) {
+    $place_id = $place_id_override;
+}
+
+if (
+    function_exists('oo_get_google_place') &&
+    !empty($google_api_key) &&
+    !empty($place_id)
+) {
+    $rating = oo_get_google_place($place_id, $google_api_key, 5, 'rating');
+}
+
+$tooltip_headline = esc_html__('Echtheit der Bewertungen', 'oo_theme');
+
+$info_text = esc_html__(
+    'Die hier veröffentlichten Bewertungen stammen ausschließlich von Personen, die unsere Dienstleistungen / unser Angebot tatsächlich in Anspruch genommen
+haben. Eine Überprüfung der Echtheit der erfolgten Bewertungen, stammt durch manuelle Prüfung vor Veröffentlichung auf dieser Webseite.',
+    'oo_theme',
+);
+
+if ($type === 'google') {
+    $info_text = esc_html__(
+        'Die hier veröffentlichten Bewertungen stammen von Personen, die unsere Dienstleistungen auf Portalen von Dritten bewertet haben. Eine Prüfung der Echtheit kann derzeit nicht sicher gestellt werden, da die bewertenden
+    Personen teilweise unter Synonymen diese auf den Seiten von Dritten hinterlassen.',
+        'oo_theme',
+    );
+}
+
+ob_start(); // Start buffer
+oo_get_template('components', '', 'component-tooltip', [
+    'text' => $info_text,
+    'headline' => $tooltip_headline,
+]);
+$tooltip_html = ob_get_clean();
+
 // Reviews Query
 $paged = is_home() || is_front_page() ? 'page' : 'paged';
 $no_found_rows = false;
-
-// Posiiton
-$posiiton_center = !empty($text['wysiwyg']) ? ' --position-center' : '';
 
 $query_args = [
     'post_type' => 'oo_reviews',
@@ -123,21 +165,49 @@ $max_num_pages = $reviews_query->max_num_pages ?? null;
     <div class="c-reviews__container o-container">
 
         <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
-            <div class="c-reviews__content o-row <?php echo '--is-' .
-                $type .
-                '-reviews' .
-                $posiiton_center; ?> ">
+            <div class="c-reviews__content o-row --is-<?php echo $type; ?>-reviews">
 
-                <?php if (!empty($headline['text'])) { ?>
-        	<?php oo_get_template('components', '', 'component-headline', [
-             'headline' => $headline,
-             'additional_headline_class' =>
-                 'c-reviews__headline o-col-12 o-col-lg-10 o-col-xl-8',
-         ]); ?>
-                <?php } ?>
+
+
+                <div class="c-reviews__headline-wrapper o-col-12 o-col-lg-10 o-col-xl-8 u-offset-lg-1">
+ <?php if (!empty($headline['text'])) { ?>
+                            <?php oo_get_template(
+                                'components',
+                                '',
+                                'component-headline',
+                                [
+                                    'headline' => $headline,
+                                    'additional_headline_class' =>
+                                        'c-reviews__headline',
+                                ],
+                            ); ?>
+                        <?php } ?>
+
+                        <?php if ($type !== 'google') {
+                            echo $tooltip_html;
+                        } ?>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             <?php if (!empty($text['wysiwyg'])) { ?>
-                <div class="c-reviews__text o-text --is-wysiwyg o-col-12 o-col-lg-10 o-col-xl-8">
+                <div class="c-reviews__text o-text --is-wysiwyg o-col-12 o-col-lg-10 o-col-xl-8 u-offset-lg-1">
                     <?php echo $text['wysiwyg']; ?>
                 </div>
             <?php } ?>
@@ -217,8 +287,42 @@ $max_num_pages = $reviews_query->max_num_pages ?? null;
             <?php } ?>
         <?php wp_reset_postdata();endif; ?>
 
+
+
+
+        <?php if ($type === 'google') { ?>
+            <div class="c-reviews__google-header">
+<div class="c-reviews__google-wrapper">
+            <span class="c-reviews__google-logo"><?php oo_get_icon(
+                'google-logo',
+            ); ?>
+                                </span>
+            <span class="c-reviews__google-headline"><?php esc_html_e(
+                'Reviews',
+                'oo_theme',
+            ); ?></span>
+            <?php echo $tooltip_html; ?>
+</div>
+<?php if ($rating && !$is_sticky_overall_google_rating) { ?>
+    <div class="c-reviews__google-wrapper">
+        <div class="c-reviews__google-total"><?php echo $rating[
+            'rating'
+        ]; ?></div>
+        <div class="c-google-rating__stars --star-color-bg-gold">
+        <?php oo_get_template('components', '', 'component-stars', [
+            'rating' => $rating['rating'],
+        ]); ?>
+        </div>
+        <div class="c-reviews__google-count"><?php echo '(' .
+            $rating['total_ratings'] .
+            ')'; ?></div>
+    </div>
+<?php } ?>
+</div>
+
+            <?php } ?>
         <?php if ($type == 'google' && !$is_slider) { ?>
-            <div class="c-reviews__google-reviews o-row --position-center">
+            <div class="c-reviews__google-reviews o-row ">
                 <div class="c-reviews__col --is-grid o-col-12">
                 	<?php require 'google-review-card.php'; ?>
                 </div>
@@ -226,7 +330,7 @@ $max_num_pages = $reviews_query->max_num_pages ?? null;
         <?php } ?>
 
         <?php if ($type == 'google' && $is_slider) { ?>
-    <div class="c-reviews__google-reviews o-row --position-center">
+    <div class="c-reviews__google-reviews o-row">
         <div class="c-reviews__col o-col-12">
             <div class="c-reviews__slider --on-<?php echo $bg_color; ?> c-slider --is-reviews-slider splide" 
                 data-splide='{
@@ -285,8 +389,7 @@ $max_num_pages = $reviews_query->max_num_pages ?? null;
         oo_get_template('components', '', 'component-buttons', [
             'buttons' => $buttons['buttons'],
             'additional_button_class' => $bg_color ? '--on-' . $bg_color : '',
-            'additional_container_class' =>
-                'c-reviews__buttons --position-center o-col-12',
+            'additional_container_class' => 'c-reviews__buttons',
         ]);
     } ?>
     </div>
