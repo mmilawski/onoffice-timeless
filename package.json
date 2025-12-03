@@ -15,7 +15,7 @@
 		"build": "grunt && npm run format && npm run shared-build && prettier --check \"**/*.{js,scss,php}\" && echo \"Build wurde erfolgreich erstellt.\"",
 		"release": "npm run format && npm run build && grunt compress && echo \"Build & ZIP wurden erfolgreich erstellt und stehen zum Release bereit.\"",
 		"deploy": "npm run format && npm run build && grunt clean",
-		"i18n": "echo 'Install WPCLI if you havent yet: https://make.wordpress.org/cli/handbook/guides/installing/' && wp i18n make-pot . shared/languages/oo_theme.pot --merge=\"shared/languages/oo_theme.pot\" && wp i18n make-pot . shared/languages/oo_theme.pot --include=\"onoffice-theme/*\" --merge=\"shared/languages/oo_theme.pot\" && ([ -f shared/languages/de_DE.po ] && wp i18n update-po shared/languages/oo_theme.pot shared/languages/de_DE.po || msginit --input=shared/languages/oo_theme.pot --output-file=shared/languages/de_DE.po --locale=de_DE --no-translator) && node shared/src/js/translations/create-german-translations.js && wp i18n make-mo shared/languages/de_DE.po && echo '\nDont forget to push changes from shared!!!'",
+		"i18n": "bash shared/bin/i18n.sh",
 		"shared-build": "[ -f shared/bin/build.sh ] && sh shared/bin/build.sh || echo 'shared/bin/build.sh nicht gefunden, überspringe shared-build.'"
 	},
 	"repository": {
