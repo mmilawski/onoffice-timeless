@@ -85,7 +85,18 @@ set_current_header_level($size);
                     <?php } ?>
                 </div>
             <?php } ?>
-            
+            <?php if (!empty($buttons['buttons'][0]['link'])) { ?>
+                <?php oo_get_template('components', '', 'component-buttons', [
+                    'buttons' => $buttons['buttons'],
+                    'icon_first' => 'arrow-right',
+                    'icon_second' => 'arrow-right',
+                    'additional_button_class' => $bg_color
+                        ? '--on-' . $bg_color
+                        : '',
+                    'additional_container_class' =>
+                        'c-team__buttons o-col-12 o-col-xl-8 u-offset-lg-1',
+                ]); ?>
+            <?php } ?>
             <?php if ($team_query->have_posts()): ?>
                 <?php if (!$is_slider) { ?>
                     <div class="c-team__members o-col-12 o-col-xl-10">
@@ -136,18 +147,6 @@ set_current_header_level($size);
                     </div>
                 <?php } ?>
             <?php endif; ?>
-            <?php if (!empty($buttons['buttons'][0]['link'])) { ?>
-                <?php oo_get_template('components', '', 'component-buttons', [
-                    'buttons' => $buttons['buttons'],
-                    'icon_first' => 'arrow-right',
-                    'icon_second' => 'arrow-right',
-                    'additional_button_class' => $bg_color
-                        ? '--on-' . $bg_color
-                        : '',
-                    'additional_container_class' =>
-                        'c-team__buttons o-col-12 o-col-xl-8',
-                ]); ?>
-            <?php } ?>
         </div>
     </div>
     <?php // Popup
