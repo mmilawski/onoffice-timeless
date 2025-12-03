@@ -212,7 +212,10 @@
     }
 
     #{$c-form}__progress {
-      position: absolute;
+      @include media-breakpoint-down(sm) {
+        position: absolute;
+      }
+
       @include media-breakpoint-only(xs) {
         right: 1rem;
         top: 1rem;
@@ -221,11 +224,6 @@
       @include media-breakpoint-only(sm) {
         right: 1.5rem;
         top: 1rem;
-      }
-
-      @include media-breakpoint-up(md) {
-        left: 50%;
-        transform: translate(-50%, 50%);
       }
 
       .--bg-light & {
@@ -265,12 +263,19 @@
       display: flex;
       flex-direction: column;
       gap: 2.5rem;
+      #{$c-form}__button-wrapper {
+        gap: 2.5rem;
+        align-items: flex-end;
+        @include media-breakpoint-up(md) {
+          .leadform-submit {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+          }
+        }
+      }
 
       @include media-breakpoint-up(md) {
-        .leadform-forward,
-        .leadform-submit {
-          margin-left: auto;
-        }
         gap: 5rem;
       }
 
@@ -305,6 +310,9 @@
         flex-direction: column;
         align-content: space-between;
         gap: 1.5rem;
+        .leadform-submit {
+          width: 100%;
+        }
       }
     }
 
