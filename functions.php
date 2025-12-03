@@ -69,6 +69,7 @@ if (function_exists('oo_setup_parent_theme')) {
     );
 
     // localize for app.js
+    // Note: the $pin / $custom_pin access should be refactored and can be handled in shared, I'm out of time currently
     add_action(
         'wp_enqueue_scripts',
         function () use ($app_script_handle) {

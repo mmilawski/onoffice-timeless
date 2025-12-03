@@ -26,10 +26,10 @@ $marker_color = $marker_color ?? 'currentColor';
 
 /** @var AddressList $pAddressList */
 (function (
-    MapProvider $pMapProvider, 
+    MapProvider $pMapProvider,
     AddressList $pAddressList,
-    string $map_color,      
-    string $marker_color    
+    string $map_color,
+    string $marker_color,
 ) {
     $pCallback = null;
     switch ($pMapProvider->getActiveMapProvider()) {
@@ -45,4 +45,4 @@ $marker_color = $marker_color ?? 'currentColor';
     if ($pCallback !== null) {
         $pCallback(clone $pAddressList, $map_color, $marker_color);
     }
-})(new MapProvider(), $pAddressList, $map_color, $marker_color); 
+})(new MapProvider(), $pAddressList, $map_color, $marker_color);

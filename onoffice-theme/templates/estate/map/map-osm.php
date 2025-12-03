@@ -29,8 +29,8 @@ use onOffice\WPlugin\ViewFieldModifier\EstateViewFieldModifierTypes;
 
 return function (
     EstateList $pEstatesClone,
-    string $map_color = 'colored',       
-    string $marker_color = 'currentColor' 
+    string $map_color = 'colored',
+    string $marker_color = 'currentColor',
 ) {
     $pEstatesClone->resetEstateIterator();
     $property_data = [];
@@ -95,7 +95,9 @@ return function (
     wp_enqueue_script('oo-init-open-street-map-marker-cluster');
     ?>
 
-    <div class="c-map --is-open-street-map --is-<?php echo esc_attr($map_color); ?>" 
+    <div class="c-map --is-open-street-map --is-<?php echo esc_attr(
+        $map_color,
+    ); ?>" 
          data-max-zoom="12" 
          data-marker-color="<?php echo esc_attr($marker_color); ?>" 
          data-map-color="<?php echo esc_attr($map_color); ?>" 

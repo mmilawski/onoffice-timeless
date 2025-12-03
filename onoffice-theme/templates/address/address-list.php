@@ -39,34 +39,7 @@ if (empty($map_color)) {
     $map_color = $settings['map_color'] ?? 'colored';
 }
 
-// Marker Color
-$colors = get_field('colors', 'option') ?? [];
-$marker_color = match ($bg_color) {
-    'bg-transparent' => !empty($colors['global']['primary'])
-        ? $colors['global']['primary']
-        : 'currentColor',
-    'bg-light' => !empty($colors['variations']['light']['primary'])
-        ? $colors['variations']['light']['primary']
-        : (!empty($colors['global']['primary'])
-            ? $colors['global']['primary']
-            : 'currentColor'),
-    'bg-dark' => !empty($colors['variations']['dark']['primary'])
-        ? $colors['variations']['dark']['primary']
-        : (!empty($colors['global']['primary'])
-            ? $colors['global']['primary']
-            : 'currentColor'),
-    'bg-primary' => !empty($colors['variations']['primary']['primary'])
-        ? $colors['variations']['primary']['primary']
-        : (!empty($colors['global']['primary'])
-            ? $colors['global']['primary']
-            : 'currentColor'),
-    'bg-secondary' => !empty($colors['variations']['secondary']['primary'])
-        ? $colors['variations']['secondary']['primary']
-        : (!empty($colors['global']['primary'])
-            ? $colors['global']['primary']
-            : 'currentColor'),
-    default => 'currentColor',
-};
+$marker_color = oo_get_marker_color_for_bg($bg_color);
 
 // Slider
 $slider = get_field('slider') ?? [];

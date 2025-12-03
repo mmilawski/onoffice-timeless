@@ -26,10 +26,10 @@ $marker_color = $marker_color ?? 'currentColor';
 
 /** @var EstateList $pEstates */
 (function (
-    MapProvider $pMapProvider, 
+    MapProvider $pMapProvider,
     EstateList $pEstates,
-    string $map_color,     
-    string $marker_color  
+    string $map_color,
+    string $marker_color,
 ) {
     $pCallback = null;
     switch ($pMapProvider->getActiveMapProvider()) {
@@ -45,4 +45,4 @@ $marker_color = $marker_color ?? 'currentColor';
     if ($pCallback !== null) {
         $pCallback(clone $pEstates, $map_color, $marker_color);
     }
-})(new MapProvider(), $pEstates, $map_color, $marker_color); 
+})(new MapProvider(), $pEstates, $map_color, $marker_color);

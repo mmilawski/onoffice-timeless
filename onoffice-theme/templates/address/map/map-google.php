@@ -29,8 +29,8 @@ use onOffice\WPlugin\ViewFieldModifier\AddressViewFieldModifierTypes;
 
 return function (
     AddressList $pAddressClone,
-    string $map_color = 'colored',       
-    string $marker_color = 'currentColor' 
+    string $map_color = 'colored',
+    string $marker_color = 'currentColor',
 ) {
     $pAddressClone->resetAddressesIterator();
     $address_data = [];

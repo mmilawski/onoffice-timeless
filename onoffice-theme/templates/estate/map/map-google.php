@@ -29,8 +29,8 @@ use onOffice\WPlugin\ViewFieldModifier\EstateViewFieldModifierTypes;
 
 return function (
     EstateList $pEstatesClone,
-    string $map_color = 'colored',       
-    string $marker_color = 'currentColor' 
+    string $map_color = 'colored',
+    string $marker_color = 'currentColor',
 ) {
     $pEstatesClone->resetEstateIterator();
     $property_data = [];
