@@ -34,16 +34,17 @@ $bg_color = $settings['bg_color'] ?? null;
 
     <input type="hidden" name="oo_formid" value="<?php echo $pForm->getFormId(); ?>">
     <input type="hidden" name="oo_formno" value="<?php echo $pForm->getFormNo(); ?>">
+    <?php wp_nonce_field(
+        'onoffice_form_' . esc_attr($pForm->getFormId()),
+        'onoffice_nonce',
+        false,
+    ); ?>
 <?php
 $addressValues = [];
 $estateValues = [];
 $hiddenValues = [];
-$otherValues = [];
-
-// Info Messages
-require 'info-messages.php';
-
-/* @var $pForm \onOffice\WPlugin\Form */
+$otherValues = []; // Info Messages
+require 'info-messages.php'; /* @var $pForm \onOffice\WPlugin\Form */
 foreach ($pForm->getInputFields() as $input => $table) {
     if (method_exists($pForm, 'isHiddenField')) {
         if ($pForm->isHiddenField($input)) {
@@ -52,7 +53,6 @@ foreach ($pForm->getInputFields() as $input => $table) {
         }
     }
     $line = renderFormField($input, $pForm);
-
     if (
         in_array($input, ['gdprcheckbox', 'Id']) ||
         in_array($input, ['newsletter', 'Id']) ||
@@ -63,19 +63,15 @@ foreach ($pForm->getInputFields() as $input => $table) {
     ) {
         $table = 'other';
     }
-
     if ($table == 'address') {
         $addressValues[] = $line;
     }
-
     if ($table == 'estate') {
         $estateValues[] = $line;
     }
-
     if ($table == '') {
         $addressValues[] = $line;
     }
-
     if ($table == 'other') {
         $otherValues[] = $line;
     }
@@ -83,8 +79,7 @@ foreach ($pForm->getInputFields() as $input => $table) {
 ?>
 
 <?php if (isset($estateId)) {
-    /** @var \onOffice\WPlugin\Form $pForm */
-    echo '<p class="c-form__context">' .
+    /** @var \onOffice\WPlugin\Form $pForm */ echo '<p class="c-form__context">' .
         $pForm->getEstateContextLabel() .
         '</p>';
 } ?>
