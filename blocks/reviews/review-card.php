@@ -96,7 +96,7 @@ echo $is_image;
                 $stars_average = round($stars * 2) / 2;
                 $stars_all = 5;
                 ?>
-                <div class="c-review-card__stars c-stars" role="img" aria-label="<?php echo sprintf(
+                <div class="c-review-card__stars c-stars --star-color-bg-primary" role="img" aria-label="<?php echo sprintf(
                     esc_attr__('Bewertung: %1$s von %2$s Sternen', 'oo_theme'),
                     $stars_average,
                     $stars_all,
