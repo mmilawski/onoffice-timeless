@@ -3,10 +3,7 @@
 
   &__container {
     @include media-breakpoint-down(sm) {
-      margin: 0;
-      padding: 0;
-      width: 100vw;
-      max-width: unset;
+      max-width: 100vw;
     }
   }
 
@@ -47,6 +44,9 @@
     margin: 0;
     margin-bottom: 5rem;
     overflow: visible;
+    padding-right: 0;
+    padding-left: 0;
+    width: 100vw;
 
     @include media-breakpoint-up(xl) {
       margin-bottom: 1rem;
