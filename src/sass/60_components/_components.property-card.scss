@@ -115,6 +115,11 @@
     height: 100%;
     min-height: 4rem;
     padding: 0 2rem;
+
+    &.--open-popup {
+      margin: 0;
+      max-width: 100%;
+    }
   }
 
   &__content {
