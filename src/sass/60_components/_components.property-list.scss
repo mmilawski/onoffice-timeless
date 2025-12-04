@@ -77,13 +77,8 @@
 
     & .onofficeSortListSelector {
       width: 100%;
-
-      @include media-breakpoint-up(lg) {
-        width: auto;
-      }
     }
   }
-
   &__properties {
     display: grid;
     grid-template-rows: 1fr;
