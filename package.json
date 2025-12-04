@@ -37,7 +37,6 @@
 		"@prettier/plugin-php": "^0.19.3",
 		"autoprefixer": "^9.8.6",
 		"browserslist": "^4.22.1",
-		"gettext-parser": "^8.0.0",
 		"grunt-autoprefixer": "^3.0.0",
 		"grunt-browser-sync": "^2.2.0",
 		"grunt-contrib-clean": "^2.0.1",
