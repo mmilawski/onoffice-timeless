@@ -31,6 +31,7 @@ return function (
     AddressList $pAddressClone,
     string $map_color = 'colored',
     string $marker_color = 'currentColor',
+    string $map_zoom = 'no',
 ) {
     $pAddressClone->resetAddressesIterator();
     $address_data = [];
@@ -71,12 +72,17 @@ return function (
     ?>
 
     <div class="c-map --is-google-map --is-<?php echo esc_attr($map_color); ?>" 
-         data-max-zoom="12" 
+         data-max-zoom="<?php echo esc_attr(
+             $map_zoom === 'yes' ? '20' : '12',
+         ); ?>" 
+         data-scroll-zoom="<?php echo esc_attr(
+             $map_zoom === 'yes' ? 'true' : 'false',
+         ); ?>" 
          data-marker-color="<?php echo esc_attr($marker_color); ?>" 
          data-map-color="<?php echo esc_attr($map_color); ?>" 
          style="width: 100%;" 
          role="application" 
-         aria-label="<?php echo esc_html__(
+         aria-label="<?php echo esc_attr__(
              'Karte mit Adressenstandorten',
              'oo_theme',
          ); ?>">

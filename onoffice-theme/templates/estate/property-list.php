@@ -35,6 +35,9 @@ $headline = get_field('headline') ?? [];
 // Settings
 $settings = get_field('settings') ?? [];
 $bg_color = $settings['bg_color'] ?? 'bg-transparent';
+$map_zoom = $settings['map_zoom'] ?? 'no';
+$show_map = $settings['show_map'] ?? 'no';
+$is_show_map = $show_map === 'yes';
 
 $map_color = get_field('map_color');
 if (empty($map_color)) {
@@ -65,7 +68,7 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
 
 <?php if ($property_count > 0) { ?>
     <?php if (!$is_slider) { ?>
-        <?php if ($map) { ?>
+        <?php if ($map && $is_show_map) { ?>
             <div class="c-property-list__map-wrapper">
                 <?php echo $map; ?>
             </div>

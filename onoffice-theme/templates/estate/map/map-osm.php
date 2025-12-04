@@ -31,6 +31,7 @@ return function (
     EstateList $pEstatesClone,
     string $map_color = 'colored',
     string $marker_color = 'currentColor',
+    string $map_zoom = 'no',
 ) {
     $pEstatesClone->resetEstateIterator();
     $property_data = [];
@@ -98,11 +99,16 @@ return function (
     <div class="c-map --is-open-street-map --is-<?php echo esc_attr(
         $map_color,
     ); ?>" 
-         data-max-zoom="12" 
+         data-max-zoom="<?php echo esc_attr(
+             $map_zoom === 'yes' ? '20' : '12',
+         ); ?>" 
+         data-scroll-zoom="<?php echo esc_attr(
+             $map_zoom === 'yes' ? 'true' : 'false',
+         ); ?>" 
          data-marker-color="<?php echo esc_attr($marker_color); ?>" 
          data-map-color="<?php echo esc_attr($map_color); ?>" 
          style="width: 100%;" 
-         aria-label="<?php echo esc_html__(
+         aria-label="<?php echo esc_attr__(
              'Karte mit Immobilienstandorten',
              'oo_theme',
          ); ?>">

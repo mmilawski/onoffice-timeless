@@ -8,6 +8,8 @@ $places = get_field('places') ?? [];
 // Settings
 $settings = get_field('settings') ?? [];
 $bg_color = $settings['bg_color'] ?? 'bg-transparent';
+$map_zoom = $settings['map_zoom'] ?? 'no';
+
 $map_color = get_field('map_color');
 if (empty($map_color)) {
     $map_color = $settings['map_color'] ?? 'colored';
@@ -137,11 +139,23 @@ if (empty($addresses)) {
                 wp_enqueue_script('oo-init-open-street-map-marker-cluster');
                 ?>
             <?php } ?>
-            <div class="c-contact-map__map-wrapper o-col-12 o-col-lg-10 o-col-xl-8 u-offset-lg-1">
-                <div class="c-contact-map__map c-map --is-<?php echo $map_type; ?> --is-<?php echo $map_color; ?>" data-map-color="<?php echo $map_color; ?>" data-marker-color="<?php echo $marker_color; ?>" style="width: 100%;" role="region" aria-label="<?php echo esc_html__(
-    'Karte mit Kontaktinformationen',
-    'oo_theme',
-); ?>">
+            <div class="c-contact-map__map c-map --is-<?php echo esc_attr(
+                $map_type,
+            ); ?> --is-<?php echo esc_attr($map_color); ?>" 
+                    data-map-color="<?php echo esc_attr($map_color); ?>" 
+                    data-marker-color="<?php echo esc_attr($marker_color); ?>" 
+                    style="width: 100%;" 
+                    data-max-zoom="<?php echo esc_attr(
+                        $map_zoom === 'yes' ? '20' : '15',
+                    ); ?>" 
+                    data-scroll-zoom="<?php echo esc_attr(
+                        $map_zoom === 'yes' ? 'true' : 'false',
+                    ); ?>"
+                    role="region" 
+                    aria-label="<?php echo esc_attr__(
+                        'Karte mit Kontaktinformationen',
+                        'oo_theme',
+                    ); ?>">
                     <?php foreach ($addresses as $address) {
 
                         $map = $address['maps'] ?? [];

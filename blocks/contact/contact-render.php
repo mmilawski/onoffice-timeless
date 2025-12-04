@@ -4,7 +4,9 @@ $headline = get_field('headline') ?? [];
 $text = get_field('text') ?? [];
 $filter = get_field('filter') ?? 'all';
 $places = get_field('places') ?? [];
-$position_map = get_field('position_map') ?? 'right';
+$map_settings = get_field('map_settings') ?? [];
+$position_map = $map_settings['position_map'] ?? 'right';
+$map_zoom = $map_settings['map_zoom'] ?? 'no';
 
 $is_address = filter_var(get_field('show_address'), FILTER_VALIDATE_BOOLEAN);
 $is_contact_numbers = filter_var(
@@ -20,7 +22,7 @@ $is_map = filter_var(get_field('show_map'), FILTER_VALIDATE_BOOLEAN);
 // Settings
 $settings = get_field('settings') ?? [];
 $bg_color = $settings['bg_color'] ?? 'bg-transparent';
-$map_color = get_field('map_color');
+$map_color = $map_settings['map_color'] ?? null;
 if (empty($map_color)) {
     $map_color = $settings['map_color'] ?? 'colored';
 }
@@ -472,7 +474,11 @@ $sub_header_level = !empty($header_level) ? $header_level + 1 : 3;
                             $map_color .
                             '" data-marker-color="' .
                             $marker_color .
-                            '" style="width: 100%;" data-max-zoom="15" role="region" aria-label="' .
+                            '" style="width: 100%;" data-max-zoom="' .
+                            ($map_zoom === 'yes' ? '20' : '15') .
+                            '" data-scroll-zoom="' .
+                            ($map_zoom === 'yes' ? 'true' : 'false') .
+                            '" role="region" aria-label="' .
                             esc_html__(
                                 'Karte mit Kontaktinformationen',
                                 'oo_theme',

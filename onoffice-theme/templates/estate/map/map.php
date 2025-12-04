@@ -23,6 +23,7 @@ use onOffice\WPlugin\Types\MapProvider;
 
 $map_color = $map_color ?? 'colored';
 $marker_color = $marker_color ?? 'currentColor';
+$map_zoom = $map_zoom ?? 'no';
 
 /** @var EstateList $pEstates */
 (function (
@@ -30,6 +31,7 @@ $marker_color = $marker_color ?? 'currentColor';
     EstateList $pEstates,
     string $map_color,
     string $marker_color,
+    string $map_zoom,
 ) {
     $pCallback = null;
     switch ($pMapProvider->getActiveMapProvider()) {
@@ -43,6 +45,6 @@ $marker_color = $marker_color ?? 'currentColor';
     }
 
     if ($pCallback !== null) {
-        $pCallback(clone $pEstates, $map_color, $marker_color);
+        $pCallback(clone $pEstates, $map_color, $marker_color, $map_zoom);
     }
-})(new MapProvider(), $pEstates, $map_color, $marker_color);
+})(new MapProvider(), $pEstates, $map_color, $marker_color, $map_zoom);
