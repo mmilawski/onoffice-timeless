@@ -284,4 +284,44 @@
       }
     }
   }
+  &.--is-sticky-google-reviews {
+    border: 0;
+    z-index: 20000;
+    top: 15rem;
+    right: 0;
+    bottom: auto;
+    left: auto;
+    padding: 0;
+    background: transparent;
+
+    #{$c-popup} {
+      &__wrapper {
+        box-shadow: none;
+        max-width: 400px;
+        overflow-y: hidden;
+        border-radius: 0.5rem 0 0 0.5rem;
+        padding: 0.5rem;
+        border: 1px solid var(--oo-color-mix-bg-text-50);
+      }
+
+      &__close {
+        background-color: var(--oo-color-mix-bg-contrast-05);
+        color: var(--oo-color-contrast-bg);
+      }
+
+      &__content {
+        padding: 0.5rem 3rem 0 0;
+        max-height: max-content;
+        overflow: visible;
+        position: relative;
+      }
+
+      &__text {
+        z-index: 21000;
+      }
+    }
+    & .c-stars {
+      gap: 0;
+    }
+  }
 }

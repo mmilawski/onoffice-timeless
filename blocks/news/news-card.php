@@ -23,6 +23,12 @@ $header_level = get_current_header_level() + 1;
 
 // Content
 $card = get_field('news', $post_id) ?? [];
+
+// Ensure $card is an array
+if (!is_array($card)) {
+    $card = [];
+}
+
 $link = get_the_permalink($post_id) ?? null;
 $date = get_the_date('d.m.Y', $post_id) ?? null;
 $dateYMD = get_the_date('Y-m-d', $post_id) ?? null;
@@ -50,7 +56,8 @@ if (isset($card['image']) && $card['image']) {
 } else {
     $image = [];
 }
-$excerpt = $card['excerpt']['wysiwyg_excerpt']
+
+$excerpt = !empty($card['excerpt']['wysiwyg_excerpt'])
     ? $card['excerpt']['wysiwyg_excerpt']
     : $details['text_wysiwyg'] ?? null;
 

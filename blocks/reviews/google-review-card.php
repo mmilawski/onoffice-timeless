@@ -6,6 +6,7 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
 $slider = get_field('slider') ?? [];
 $is_slider = filter_var($slider['slider'] ?? null, FILTER_VALIDATE_BOOLEAN);
 $third_parties = get_field('third_parties', 'option') ?? null;
+$color_stars = get_field('color_stars') ?? 'gold';
 
 // Google APIs
 $google_api_key = get_option('onoffice-settings-googlemaps-key') ?? null;
@@ -29,6 +30,7 @@ if (
 
             $uniqid = 'google-review-' . uniqid();
 
+            $photo = $review['authorAttribution']['photoUri'] ?? null;
             $author = $review['authorAttribution']['displayName'] ?? null;
             $text = $review['originalText']['text'] ?? null;
             $text_word_count = str_word_count(trim(strip_tags($text))) ?? 0;
@@ -46,54 +48,41 @@ if (
             } ?> <?php echo '--is-' . $type . '-reviews'; ?>">
                 <?php if (!empty($author) && !empty($date)) { ?>
                     <div class="c-google-review-card__author">
-                        <div class="c-google-review-card__date c-flag">
-                        <?php echo htmlspecialchars($date); ?>
-                        </div>
-                        <div class="c-google-review-card__name o-headline --h3">
-                        <p><?php echo htmlspecialchars($author); ?></p>
-                        </div>
+                    <div class="c-google-review-card__image">
+                                <?php if (
+                                    !empty($photo)
+                                ) { ?> <img loading="lazy" referrerpolicy="no-referrer" src="<?php echo htmlspecialchars(
+     $photo,
+ ); ?>" alt="<?php echo htmlspecialchars(
+    $author,
+); ?>" width="48" height="48"/> <?php } ?>
+
+                
+
+</div>
+                            <div><p class="c-google-review-card__name o-headline --h3"><?php echo htmlspecialchars(
+                                $author,
+                            ); ?></p>
+                                        <p class="c-google-review-card__date">
+                                            <?php echo htmlspecialchars(
+                                                $date,
+                                            ); ?>
+                                        </p>
+                
+                                    </div>
+                                        
                     </div>
                 <?php } ?>
-
-                <?php if (!empty($text)) { ?>
-                    <div class="c-google-review-card__contents">
-                        <div class="c-google-review-card__text o-text" id="<?php echo $uniqid; ?>">
-                            <p>
-                                <?php echo htmlspecialchars($text); ?>
-                            </p>
-                        </div>
-
-                        <button class="c-google-review-card__more c-read-more" 
-                            data-open-text="<?php esc_html_e(
-                                'Mehr anzeigen',
-                                'oo_theme',
-                            ); ?>"
-                            data-close-text="<?php esc_html_e(
-                                'Weniger anzeigen',
-                                'oo_theme',
-                            ); ?>"
-                            aria-expanded="false" aria-controls="<?php echo $uniqid; ?>">
-                            <?php echo esc_html__(
-                                'Mehr anzeigen',
-                                'oo_theme',
-                            ); ?>
-                        </button>
-                    </div>
-                <?php } ?>
-
                 <?php if ($rating) { ?>
                     <?php
                     $rating = round($rating * 2) / 2;
                     $stars_total = 5;
                     ?>
-                    <div class="c-google-review-card__stars c-stars" role="img" aria-label="<?php echo sprintf(
-                        esc_attr__(
-                            'Bewertung: %1$s von %2$s Sternen',
-                            'oo_theme',
-                        ),
-                        $rating,
-                        $stars_total,
-                    ); ?>">
+                                 <div class="c-google-review-card__stars c-stars --star-color-<?php echo $color_stars; ?>" role="img" aria-label="<?php echo sprintf(
+    esc_attr__('Bewertung: %1$s von %2$s Sternen', 'oo_theme'),
+    $rating,
+    $stars_total,
+); ?>">
                         <?php
                         for ($i = 0; $i < floor($rating); $i++) {
                             $stars_total--;
@@ -122,6 +111,31 @@ if (
                         ?>
                     </div>
                 <?php } ?> 
+                <?php if (!empty($text)) { ?>
+                    <div class="c-google-review-card__contents">
+                        <div class="c-google-review-card__text o-text" id="<?php echo $uniqid; ?>">
+                            <p>
+                                <?php echo htmlspecialchars($text); ?>
+                            </p>
+                        </div>
+
+                        <button class="c-google-review-card__more c-read-more" 
+                            data-open-text="<?php esc_html_e(
+                                'Mehr anzeigen',
+                                'oo_theme',
+                            ); ?>"
+                            data-close-text="<?php esc_html_e(
+                                'Weniger anzeigen',
+                                'oo_theme',
+                            ); ?>"
+                            aria-expanded="false" aria-controls="<?php echo $uniqid; ?>">
+                            <?php echo esc_html__(
+                                'Mehr anzeigen',
+                                'oo_theme',
+                            ); ?>
+                        </button>
+                    </div>
+                <?php } ?>
             </article>
         <?php
         }}
