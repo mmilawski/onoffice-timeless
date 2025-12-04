@@ -64,11 +64,7 @@ return function (
             $link = $property_url;
         }
 
-        if (
-            0.0 !== $position['lng'] &&
-            0.0 !== $position['lat'] &&
-            $current_property['showGoogleMap']
-        ) {
+        if (0.0 !== $position['lng'] && 0.0 !== $position['lat']) {
             $property_data[] = [
                 'position' => $position,
                 'title' => $current_property['objekttitel'],

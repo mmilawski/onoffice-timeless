@@ -32,10 +32,10 @@ $headline = get_field('headline') ?? [];
 
 // Settings
 $settings = get_field('settings') ?? [];
+$shortcode = get_field('shortcode') ?? '';
 $bg_color = $settings['bg_color'] ?? 'bg-transparent';
 $map_zoom = $settings['map_zoom'] ?? 'no';
-$show_map = $settings['show_map'] ?? 'no';
-$is_show_map = $show_map === 'yes';
+$is_show_map = oo_get_effective_show_map($settings, $shortcode);
 
 $map_color = get_field('map_color');
 if (empty($map_color)) {
