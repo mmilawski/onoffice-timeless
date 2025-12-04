@@ -63,8 +63,7 @@ $agent_count = method_exists($pAddressList, 'getAddressOverallCount')
 
 <?php if ($agent_count > 0) { ?>
     <?php if (!$is_slider) { ?>
-        <?php 
-        if ($map_html && $is_show_map) { ?>
+        <?php if ($map_html && $is_show_map) { ?>
             <div class="c-address-list__map-wrapper">
                 <?php echo $map_html; ?>
             </div>
