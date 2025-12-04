@@ -15,13 +15,32 @@
       stroke: var(--oo-color-primary);
     }
 
-    &.--filled {
+    .--star-color-bg-primary & {
       svg {
+        color: var(--oo-color-primary);
         stroke: var(--oo-color-primary);
-        fill: var(--oo-color-primary);
+      }
+
+      &.--filled {
+        svg {
+          stroke: var(--oo-color-primary);
+          fill: var(--oo-color-primary);
+        }
       }
     }
+    .--star-color-bg-gold & {
+      svg {
+        color: var(--oo-color-google-gold);
+        stroke: var(--oo-color-google-gold);
+      }
 
+      &.--filled {
+        svg {
+          stroke: var(--oo-color-google-gold);
+          fill: var(--oo-color-google-gold);
+        }
+      }
+    }
     &.--empty {
       svg {
         stroke: currentColor;
@@ -66,89 +85,90 @@
       }
     }
   }
-
-  .--bg-light & {
-    svg {
-      stroke: var(--oo-color-light-primary, var(--oo-color-primary));
-    }
-    .--filled {
-      color: var(--oo-color-light-primary, var(--oo-color-primary));
+  .--star-color-bg-primary & {
+    .--bg-light & {
       svg {
-        fill: var(--oo-color-light-primary, var(--oo-color-primary));
+        stroke: var(--oo-color-light-primary, var(--oo-color-primary));
+      }
+      .--filled {
+        color: var(--oo-color-light-primary, var(--oo-color-primary));
+        svg {
+          fill: var(--oo-color-light-primary, var(--oo-color-primary));
+        }
+      }
+      .--empty {
+        color: var(
+          --oo-color-light-mix-bg-text-20,
+          var(--oo-color-mix-bg-text-20)
+        );
       }
     }
-    .--empty {
-      color: var(
-        --oo-color-light-mix-bg-text-20,
-        var(--oo-color-mix-bg-text-20)
-      );
-    }
-  }
-  .--bg-dark & {
-    svg {
-      stroke: var(--oo-color-dark-primary, var(--oo-color-primary));
-    }
-    .--filled {
-      color: var(--oo-color-dark-primary, var(--oo-color-primary));
-
+    .--bg-dark & {
       svg {
-        fill: var(--oo-color-dark-primary, var(--oo-color-primary));
+        stroke: var(--oo-color-dark-primary, var(--oo-color-primary));
+      }
+      .--filled {
+        color: var(--oo-color-dark-primary, var(--oo-color-primary));
+
+        svg {
+          fill: var(--oo-color-dark-primary, var(--oo-color-primary));
+        }
+      }
+      .--empty {
+        color: var(
+          --oo-color-dark-mix-bg-text-20,
+          var(--oo-color-mix-bg-text-20)
+        );
       }
     }
-    .--empty {
-      color: var(
-        --oo-color-dark-mix-bg-text-20,
-        var(--oo-color-mix-bg-text-20)
-      );
-    }
-  }
 
-  .--bg-primary & {
-    svg {
-      stroke: var(--oo-color-primary-primary, var(--oo-color-primary));
-    }
-    .--filled {
-      color: var(--oo-color-primary-primary, var(--oo-color-primary));
+    .--bg-primary & {
       svg {
-        fill: var(--oo-color-primary-primary, var(--oo-color-primary));
+        stroke: var(--oo-color-primary-primary, var(--oo-color-primary));
+      }
+      .--filled {
+        color: var(--oo-color-primary-primary, var(--oo-color-primary));
+        svg {
+          fill: var(--oo-color-primary-primary, var(--oo-color-primary));
+        }
+      }
+      .--empty {
+        color: var(
+          --oo-color-primary-mix-bg-text-20,
+          var(--oo-color-mix-bg-text-20)
+        );
       }
     }
-    .--empty {
-      color: var(
-        --oo-color-primary-mix-bg-text-20,
-        var(--oo-color-mix-bg-text-20)
-      );
-    }
-  }
 
-  .--bg-secondary & {
-    svg {
-      stroke: var(--oo-color-secondary-primary, var(--oo-color-primary));
-    }
-    .--filled {
-      color: var(--oo-color-secondary-primary, var(--oo-color-primary));
-    }
-    .--empty {
-      color: var(
-        --oo-color-secondary-mix-bg-text-20,
-        var(--oo-color-mix-bg-text-20)
-      );
-    }
-  }
-
-  .--bg-transparent & {
-    svg {
-      stroke: var(--oo-color-primary);
-    }
-    .--filled {
-      color: var(--oo-color-primary);
-
+    .--bg-secondary & {
       svg {
-        fill: var(--oo-color-primary);
+        stroke: var(--oo-color-secondary-primary, var(--oo-color-primary));
+      }
+      .--filled {
+        color: var(--oo-color-secondary-primary, var(--oo-color-primary));
+      }
+      .--empty {
+        color: var(
+          --oo-color-secondary-mix-bg-text-20,
+          var(--oo-color-mix-bg-text-20)
+        );
       }
     }
-    .--empty {
-      color: var(--oo-color-mix-bg-text-20);
+
+    .--bg-transparent & {
+      svg {
+        stroke: var(--oo-color-primary);
+      }
+      .--filled {
+        color: var(--oo-color-primary);
+
+        svg {
+          fill: var(--oo-color-primary);
+        }
+      }
+      .--empty {
+        color: var(--oo-color-mix-bg-text-20);
+      }
     }
   }
 }

@@ -1,5 +1,6 @@
 .c-reviews {
   $c-reviews: &;
+  overflow-x: hidden;
 
   &__container {
     position: relative;
@@ -12,19 +13,20 @@
     display: flex;
     flex-direction: row;
     gap: 2rem;
-    padding-block: 0 0.5rem;
 
-    @include media-breakpoint-up(xl) {
-      padding-block: 0 3rem;
-    }
-
-    &.--is-google-reviews {
-      justify-content: center;
-      text-align: left;
+    @include media-breakpoint-up(sm) {
+      padding-left: 0;
+      padding-right: 0;
     }
   }
 
   &__headline {
+  }
+
+  &__headline-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
   }
 
   &__text {
@@ -46,6 +48,14 @@
 
   &__col {
     .--is-google-reviews & {
+      padding-right: 0;
+      padding-left: 0;
+
+      @include media-breakpoint-up(md) {
+        padding-right: 1rem;
+        padding-left: 1rem;
+      }
+
       &.--is-grid {
         display: grid;
         gap: 2rem;
@@ -71,6 +81,47 @@
       display: flex;
       flex-direction: column;
       gap: 3rem 0;
+    }
+  }
+
+  &__google {
+    &-wrapper {
+      display: flex;
+      gap: 0.5rem;
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+
+    &-total {
+      font-size: 2rem;
+      font-weight: $font-weight-text-bold;
+    }
+
+    &-logo {
+      svg {
+        height: 2rem;
+      }
+    }
+
+    &-headline {
+      font-size: 1.75rem;
+      font-weight: $font-weight-text-bold;
+    }
+
+    .c-popup & {
+      &-wrapper {
+        margin-bottom: 0 !important;
+      }
+      &-total {
+        font-size: 1.5rem;
+      }
+      &-count {
+        font-size: 0.875rem;
+        color: var(--oo-color-mix-bg-text-50);
+      }
+      &-headline {
+        font-size: 1.5rem;
+      }
     }
   }
 }

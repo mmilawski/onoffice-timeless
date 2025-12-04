@@ -85,7 +85,18 @@ set_current_header_level($size);
                     <?php } ?>
                 </div>
             <?php } ?>
-            
+            <?php if (!empty($buttons['buttons'][0]['link'])) { ?>
+                <?php oo_get_template('components', '', 'component-buttons', [
+                    'buttons' => $buttons['buttons'],
+                    'icon_first' => 'arrow-right',
+                    'icon_second' => 'arrow-right',
+                    'additional_button_class' => $bg_color
+                        ? '--on-' . $bg_color
+                        : '',
+                    'additional_container_class' =>
+                        'c-team__buttons o-col-12 o-col-xl-8 u-offset-lg-1',
+                ]); ?>
+            <?php } ?>
             <?php if ($team_query->have_posts()): ?>
                 <?php if (!$is_slider) { ?>
                     <div class="c-team__members o-col-12 o-col-xl-10">
@@ -99,7 +110,7 @@ set_current_header_level($size);
                         ?>
                     </div>
                 <?php } else { ?>
-                    <div class="c-team__slider --on-<?php echo $bg_color; ?> o-col-12 c-slider --is-team-slider splide" data-splide='{"type":"loop","perPage":1,"gap":16,"snap":true,"lazyLoad":"nearby","mediaQuery":"min","focus":0,"breakpoints":{"768":{"perPage":2},"1400":{"perPage":3}}}'>
+                    <div class="c-team__slider --on-<?php echo $bg_color; ?> c-slider --is-team-slider splide" data-splide='{"type":"loop","perPage":1,"gap":0,"snap":true,"lazyLoad":"nearby","mediaQuery":"min","focus":0,"breakpoints":{"768":{"perPage":2, "gap":16},"1400":{"perPage":3}}}'>
                         <div class="c-slider__track splide__track o-col-12 o-col-xl-10">
                             <div class="c-slider__list splide__list">
                                 <?php
@@ -136,18 +147,6 @@ set_current_header_level($size);
                     </div>
                 <?php } ?>
             <?php endif; ?>
-            <?php if (!empty($buttons['buttons'][0]['link'])) { ?>
-                <?php oo_get_template('components', '', 'component-buttons', [
-                    'buttons' => $buttons['buttons'],
-                    'icon_first' => 'arrow-right',
-                    'icon_second' => 'arrow-right',
-                    'additional_button_class' => $bg_color
-                        ? '--on-' . $bg_color
-                        : '',
-                    'additional_container_class' =>
-                        'c-team__buttons o-col-12 o-col-xl-8',
-                ]); ?>
-            <?php } ?>
         </div>
     </div>
     <?php // Popup
