@@ -1,0 +1,176 @@
+.c-tooltip {
+  $c-tooltip: &;
+  position: relative;
+  display: inline-block;
+
+  &__headline {
+    padding-bottom: 1.5rem;
+    display: block;
+    @include font-size($mobile-h3-font-size, $mobile-h3-line-height);
+    @include media-breakpoint-up(lg) {
+      @include font-size($desktop-h3-font-size, $desktop-h3-line-height);
+    }
+  }
+
+  &__text[popover] {
+    color: var(--oo-color-text);
+    background-color: var(--oo-color-bg);
+    border: 1px solid var(--oo-color-mix-bg-text-50);
+    padding: 1rem;
+    display: none;
+    opacity: 0;
+    z-index: 1000;
+    transition: opacity 0.25s ease-in-out;
+    font-size: $small-font-size;
+    line-height: $small-line-height;
+    width: 60vw;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    font-weight: normal;
+
+    @include media-breakpoint-up(lg) {
+      width: 30rem;
+      padding: 1.5rem;
+      font-size: $global-font-size;
+      line-height: $global-line-height;
+    }
+    .--is-sticky-google-reviews & {
+      transform: none;
+      position: fixed;
+      right: 1rem;
+      inset-inline-start: auto;
+      width: 20rem;
+      top: 30%;
+    }
+
+    &:popover-open {
+      display: block;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    @supports (position-anchor: auto) {
+      margin: 0;
+      inset: auto;
+      position-anchor: auto;
+      top: calc(anchor(top) + 2rem);
+      left: max(8px, calc(anchor(left) - 2rem));
+    }
+  }
+
+  #{$c-tooltip}__button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--oo-color-mix-bg-text-50);
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    stroke-width: 2;
+
+    &:hover {
+      svg {
+        color: var(--oo-color-contrast-primary);
+        fill: var(--oo-color-primary);
+      }
+    }
+
+    &:focus {
+      svg {
+        color: var(--oo-color-contrast-primary);
+        fill: var(--oo-color-primary);
+      }
+    }
+
+    .--bg-light & {
+      svg {
+        color: var(--oo-color-light-text, var(--oo-color-text));
+      }
+
+      &:hover {
+        svg {
+          fill: var(--oo-color-light-contrast-primary);
+          color: var(--oo-color-light-mix-primary-contrast-20);
+        }
+      }
+      &:focus {
+        svg {
+          fill: var(--oo-color-light-contrast-primary);
+          color: var(--oo-color-light-mix-primary-contrast-20);
+        }
+      }
+    }
+    .--bg-dark & {
+      svg {
+        color: var(--oo-color-dark-text, var(--oo-color-text));
+      }
+
+      &:hover {
+        svg {
+          color: var(--oo-color-dark-contrast-primary);
+          fill: var(--oo-color-dark-primary, var(--oo-color-primary));
+        }
+      }
+
+      &:focus {
+        svg {
+          color: var(--oo-color-dark-contrast-primary);
+          fill: var(--oo-color-dark-primary, var(--oo-color-primary));
+        }
+      }
+    }
+
+    .--bg-primary & {
+      svg {
+        color: var(--oo-color-primary-text, var(--oo-color-text));
+      }
+
+      &:hover {
+        svg {
+          color: var(--oo-color-primary-contrast-primary);
+          fill: var(--oo-color-primary-primary, var(--oo-color-primary));
+        }
+      }
+
+      &:focus {
+        svg {
+          color: var(--oo-color-primary-contrast-primary);
+          fill: var(--oo-color-primary-primary, var(--oo-color-primary));
+        }
+      }
+    }
+
+    .--bg-secondary & {
+      svg {
+        color: var(--oo-color-secondary-text, var(--oo-color-text));
+      }
+
+      &:hover {
+        svg {
+          fill: var(--oo-color-secondary-contrast-primary);
+          color: var(--oo-color-secondary-mix-text-contrast-20);
+        }
+      }
+
+      &:focus {
+        svg {
+          fill: var(--oo-color-secondary-contrast-primary);
+          color: var(--oo-color-secondary-mix-text-contrast-20);
+        }
+      }
+    }
+
+    .--bg-transparent & {
+      &:hover {
+        svg {
+          color: var(--oo-color-contrast-primary);
+          fill: var(--oo-color-primary);
+        }
+      }
+    }
+  }
+}
