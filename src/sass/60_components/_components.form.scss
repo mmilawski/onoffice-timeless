@@ -143,8 +143,7 @@
   }
 
   &__required {
-    position: absolute;
-    right: 0;
+    align-self: flex-end;
     font-size: 0.875rem;
   }
 
@@ -200,6 +199,7 @@
 
   &.--is-owner-leadgenerator-form {
     #{$c-form}__header {
+      flex-direction: column;
       // Hide this element on large screens and up (desktop).
       &.--is-mobile-only {
         @include media-breakpoint-up(md) {
@@ -263,6 +263,7 @@
       display: flex;
       flex-direction: column;
       gap: 2.5rem;
+      padding: 1.5rem;
       #{$c-form}__button-wrapper {
         gap: 2.5rem;
         align-items: flex-end;
@@ -275,27 +276,23 @@
         }
       }
 
-      @include media-breakpoint-up(md) {
-        gap: 5rem;
-      }
-
-      &.--bg-transparent {
+      .--bg-transparent & {
         background-color: var(--oo-color-bg);
       }
 
-      &.--bg-light {
+      .--bg-light & {
         background-color: var(--oo-color-light-bg, var(--oo-color-bg));
       }
 
-      &.--bg-dark {
+      .--bg-dark & {
         background-color: var(--oo-color-dark-bg, var(--oo-color-bg));
       }
 
-      &.--bg-primary {
+      .--bg-primary & {
         background-color: var(--oo-color-primary-bg, var(--oo-color-bg));
       }
 
-      &.--bg-secondary {
+      .--bg-secondary & {
         background-color: var(--oo-color-secondary-bg, var(--oo-color-bg));
       }
     }
@@ -317,6 +314,16 @@
     }
 
     #{$c-form}__fieldset {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding: 0;
+
+      @include media-breakpoint-up(md) {
+        gap: 2rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
       .c-form__field-group:has(
           .o-label[data-icon-button-group]:not([style*='display: none']):not(
               [style*='display:none']
@@ -355,9 +362,6 @@
           opacity: 0.5;
         }
       }
-    }
-    #{$c-form}__required {
-      bottom: -1rem;
     }
   }
 
@@ -532,17 +536,5 @@
     #{$c-form}__fieldset {
       background-color: var(--oo-color-bg);
     }
-  }
-}
-
-.lead-lightbox {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-
-  @include media-breakpoint-up(md) {
-    gap: 2rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
   }
 }
