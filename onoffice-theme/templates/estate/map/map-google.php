@@ -19,7 +19,7 @@
  */
 
 /**
- *  Map template for Google Maps
+ * Map template for Google Maps
  */
 
 use onOffice\WPlugin\EstateList;
@@ -27,7 +27,12 @@ use onOffice\WPlugin\ViewFieldModifier\EstateViewFieldModifierTypes;
 
 /* @var $pEstates EstateList */
 
-return function (EstateList $pEstatesClone) {
+return function (
+    EstateList $pEstatesClone,
+    string $map_color = 'colored',
+    string $marker_color = 'currentColor',
+    string $map_zoom = 'no',
+) {
     $pEstatesClone->resetEstateIterator();
     $property_data = [];
 
@@ -51,6 +56,7 @@ return function (EstateList $pEstatesClone) {
                 null,
             FILTER_VALIDATE_BOOLEAN,
         );
+        $estateId = $pEstatesClone->getCurrentEstateId();
         $is_restricted_view = $pEstatesClone->getViewRestrict();
 
         if ($is_reference && $is_restricted_view) {
@@ -59,11 +65,7 @@ return function (EstateList $pEstatesClone) {
             $link = $property_url;
         }
 
-        if (
-            0.0 !== $position['lng'] &&
-            0.0 !== $position['lat'] &&
-            $current_property['showGoogleMap']
-        ) {
+        if (0.0 !== $position['lng'] && 0.0 !== $position['lat']) {
             $property_data[] = [
                 'position' => $position,
                 'title' => $current_property['objekttitel'],
@@ -74,6 +76,7 @@ return function (EstateList $pEstatesClone) {
                 'country' => $current_property['land'],
                 'link' => $link,
                 'visible' => $visible,
+                'id' => $estateId,
             ];
         }
     }
@@ -82,20 +85,27 @@ return function (EstateList $pEstatesClone) {
         return;
     }
 
-    // Styling
-    $colors = get_field('colors', 'option') ?? null;
-    $primary_color = $colors['global']['primary'] ?? 'currentColor';
-
     // Scripts
     wp_enqueue_script('oo-google-map-script');
     wp_enqueue_script('oo-init-google-map-script');
     wp_enqueue_script('oo-google-map-marker-cluster-script');
     ?>
 
-    <div class="c-map --is-google-map" data-max-zoom="12" data-marker-color="<?php echo $primary_color; ?>" style="width: 100%;" role="application" aria-label="<?php echo esc_html__(
-    'Karte mit Immobilienstandorten',
-    'oo_theme',
-); ?>">
+    <div class="c-map --is-google-map --is-<?php echo esc_attr($map_color); ?>" 
+         data-max-zoom="<?php echo esc_attr(
+             $map_zoom === 'yes' ? '20' : '12',
+         ); ?>" 
+         data-scroll-zoom="<?php echo esc_attr(
+             $map_zoom === 'yes' ? 'true' : 'false',
+         ); ?>"
+         data-marker-color="<?php echo esc_attr($marker_color); ?>" 
+         data-map-color="<?php echo esc_attr($map_color); ?>" 
+         style="width: 100%;" 
+         role="application" 
+         aria-label="<?php echo esc_attr__(
+             'Karte mit Immobilienstandorten',
+             'oo_theme',
+         ); ?>">
         <?php foreach ($property_data as $property) {
 
             $position = $property['position'] ?? [];
@@ -108,6 +118,7 @@ return function (EstateList $pEstatesClone) {
             $city = $property['city'] ?? null;
             $country = $property['country'] ?? null;
             $link = $property['link'] ?? null;
+            $id = $property['id'] ?? null;
 
             if (empty($lat) || empty($lng)) {
                 continue;
@@ -131,7 +142,7 @@ return function (EstateList $pEstatesClone) {
                 <div class="c-map__info --bg-transparent">
                     <?php
                     if (!empty($title)) {
-                        echo '<h3 class="c-map__headline o-headline --h3">' .
+                        echo '<h3 class="c-map__headline o-headline --h5">' .
                             $title .
                             '</h3>';
                     }
@@ -175,24 +186,27 @@ return function (EstateList $pEstatesClone) {
                         echo '</p>';
                     }
                     if (!empty($link)) {
-                        $button = [
-                            [
-                                'link' => [
-                                    'title' => esc_html__(
-                                        'Zur Detailansicht',
-                                        'oo_theme',
-                                    ),
-                                    'url' => $link,
-                                ],
-                            ],
-                        ];
-                        oo_get_template('components', '', 'component-buttons', [
-                            'buttons' => $button,
-                            'additional_container_class' =>
-                                'c-map__button-wrapper',
-                            'additional_button_class' =>
-                                'c-map__button --full-width --on-bg-transparent',
-                        ]);
+                        $attr = oo_set_link_attr($link);
+
+                        $aria_label = sprintf(
+                            __(
+                                'Zur Detailansicht der Immobilie Nr. %s anzeigen',
+                                'oo_theme',
+                            ),
+                            $id,
+                        );
+
+                        echo '<a href="' .
+                            esc_url($link) .
+                            '" class="c-map__link c-link --underlined --on-bg-' .
+                            esc_attr($attr) .
+                            '" aria-label="' .
+                            esc_attr($aria_label) .
+                            '">';
+
+                        esc_html_e('Zur Detailansicht', 'oo_theme');
+
+                        echo '</a>';
                     }
                     ?>
                 </div>

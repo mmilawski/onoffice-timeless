@@ -174,26 +174,12 @@ if ($pForm->needsReCaptcha() && $key !== '') {
                 }
             });
         })();
-	</script>
-	<button class="c-form__button c-button <?php if (
-     !empty($settings['bg_color'])
- ) {
-     echo '--on-' . $settings['bg_color'];
- } else {
-     echo '--on-bg-footer';
- } ?>" disabled><?php echo esc_html(
-    $pForm->getGenericSetting('submitButtonLabel'),
-); ?></button>
-
-
+    </script>
+    <button class="c-form__button c-button
 <?php
 } else {
      ?>
-	<button class="c-form__button c-button <?php if (
-     !empty($settings['bg_color'])
- ) {
-     echo '--on-' . $settings['bg_color'];
- } ?>"><?php echo esc_html(
+<button class="c-form__button c-button"> <?php echo esc_html(
     $pForm->getGenericSetting('submitButtonLabel'),
 ); ?></button>
 <?php
