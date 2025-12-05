@@ -56,6 +56,15 @@
       contain: layout;
       overflow: visible;
     }
+
+    .splide__pagination {
+      margin-top: -2.125rem;
+
+      @include media-breakpoint-up(lg) {
+        margin-top: -3.125rem;
+      }
+
+    }
   }
 
   &__buttons {
