@@ -51,6 +51,7 @@ return function (EstateList $pEstatesClone) {
                 null,
             FILTER_VALIDATE_BOOLEAN,
         );
+        $estateId = $pEstatesClone->getCurrentEstateId();
         $is_restricted_view = $pEstatesClone->getViewRestrict();
 
         if ($is_reference && $is_restricted_view) {
@@ -74,6 +75,7 @@ return function (EstateList $pEstatesClone) {
                 'country' => $current_property['land'],
                 'link' => $link,
                 'visible' => $visible,
+                'id' => $estateId,
             ];
         }
     }
@@ -111,6 +113,7 @@ return function (EstateList $pEstatesClone) {
             $city = $property['city'] ?? null;
             $country = $property['country'] ?? null;
             $link = $property['link'] ?? null;
+            $id = $property['id'] ?? null;
 
             if (empty($lat) || empty($lng)) {
                 continue;
@@ -133,7 +136,7 @@ return function (EstateList $pEstatesClone) {
                 <div class="c-map__info --bg-transparent">
                     <?php
                     if (!empty($title)) {
-                        echo '<h3 class="c-map__headline o-headline --h3">' .
+                        echo '<h3 class="c-map__headline o-headline --h5">' .
                             $title .
                             '</h3>';
                     }
@@ -177,24 +180,27 @@ return function (EstateList $pEstatesClone) {
                         echo '</p>';
                     }
                     if (!empty($link)) {
-                        $button = [
-                            [
-                                'link' => [
-                                    'title' => esc_html__(
-                                        'Zur Detailansicht',
-                                        'oo_theme',
-                                    ),
-                                    'url' => $link,
-                                ],
-                            ],
-                        ];
-                        oo_get_template('components', '', 'component-buttons', [
-                            'buttons' => $button,
-                            'additional_container_class' =>
-                                'c-map__button-wrapper',
-                            'additional_button_class' =>
-                                'c-map__button --full-width --on-bg-transparent',
-                        ]);
+                        $attr = oo_set_link_attr($link);
+
+                        $aria_label = sprintf(
+                            __(
+                                'Zur Detailansicht der Immobilie Nr. %s anzeigen',
+                                'oo_theme',
+                            ),
+                            $id,
+                        );
+
+                        echo '<a href="' .
+                            esc_url($link) .
+                            '" class="c-map__link c-link --underlined --on-bg-' .
+                            esc_attr($attr) .
+                            '" aria-label="' .
+                            esc_attr($aria_label) .
+                            '">';
+
+                        esc_html_e('Zur Detailansicht', 'oo_theme');
+
+                        echo '</a>';
                     }
                     ?>
                 </div>
