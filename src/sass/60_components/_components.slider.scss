@@ -266,6 +266,12 @@
   }
 
   &.--is-properties-slider {
+    #{$c-slider}__navigation {
+      @include media-breakpoint-up(lg) {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
   }
 
   &.--is-addresses-slider {

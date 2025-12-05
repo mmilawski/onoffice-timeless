@@ -58,6 +58,10 @@
 
     &.--has-icon {
       padding: 0;
+      @include hover() {
+        color: var(--oo-color-mix-primary-contrast-20);
+        background: transparent;
+      }
     }
 
     &.--first,
@@ -83,6 +87,9 @@
   }
 
   &.--on-bg-light {
+    #{$c-pagination}__list {
+      background-color: var(--oo-color-light-mix-bg-contrast-05);
+    }
     #{$c-pagination}__link {
       @include plain-visited() {
         color: var(--oo-color-light-primary, var(--oo-color-primary));
@@ -111,6 +118,9 @@
   }
 
   &.--on-bg-dark {
+    #{$c-pagination}__list {
+      background-color: var(--oo-color-dark-mix-bg-contrast-05);
+    }
     #{$c-pagination}__link {
       @include plain-visited() {
         color: var(--oo-color-dark-primary, var(--oo-color-primary));
@@ -136,6 +146,9 @@
   }
 
   &.--on-bg-primary {
+    #{$c-pagination}__list {
+      background-color: var(--oo-color-primary-mix-bg-contrast-05);
+    }
     #{$c-pagination}__link {
       @include plain-visited() {
         color: var(--oo-color-primary-primary, var(--oo-color-primary));
@@ -164,6 +177,9 @@
   }
 
   &.--on-bg-secondary {
+    #{$c-pagination}__list {
+      background-color: var(--oo-color-secondary-mix-bg-contrast-05);
+    }
     #{$c-pagination}__link {
       @include plain-visited() {
         color: var(--oo-color-secondary-primary, var(--oo-color-primary));
