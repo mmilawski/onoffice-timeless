@@ -88,8 +88,7 @@ set_current_header_level($size);
             <?php if (!empty($buttons['buttons'][0]['link'])) { ?>
                 <?php oo_get_template('components', '', 'component-buttons', [
                     'buttons' => $buttons['buttons'],
-                    'icon_first' => 'arrow-right',
-                    'icon_second' => 'arrow-right',
+                
                     'additional_button_class' => $bg_color
                         ? '--on-' . $bg_color
                         : '',
