@@ -109,7 +109,7 @@ set_current_header_level($size);
                         ?>
                     </div>
                 <?php } else { ?>
-                    <div class="c-team__slider --on-<?php echo $bg_color; ?> c-slider --is-team-slider splide" data-splide='{"type":"loop","perPage":1,"gap":0,"snap":true,"lazyLoad":"nearby","mediaQuery":"min","focus":0,"breakpoints":{"768":{"perPage":2, "gap":16},"1400":{"perPage":3}}}'>
+                    <div class="c-team__slider --on-<?php echo $bg_color; ?> c-slider --is-team-slider splide" data-splide='{"type":"loop","perPage":1,"gap":0,"snap":true,"lazyLoad":"nearby","mediaQuery":"min","focus":0,"classes":{"page":"c-slider__page splide__pagination__page"},"breakpoints":{"768":{"perPage":2, "gap":16},"1400":{"perPage":3}}}'>
                         <div class="c-slider__track splide__track o-col-12 o-col-xl-10">
                             <div class="c-slider__list splide__list">
                                 <?php
