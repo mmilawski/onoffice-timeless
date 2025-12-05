@@ -580,7 +580,8 @@ jQuery(document).ready(function() {
     );
   }
 
-  // Open popup
+  setTimeout(()=>{
+    // Open popup
   const openPopup = document.querySelectorAll('.--open-popup');
   const popUpHeadline = document.querySelectorAll('.c-popup__headline');
 
@@ -603,6 +604,7 @@ jQuery(document).ready(function() {
 
   if (openPopup.length > 0) {
     openPopup.forEach(button => {
+      console.log(button)
       button.addEventListener('click', function(e) {
         e.preventDefault();
         // Get the ID of the popup from the data-popup attribute
@@ -667,6 +669,8 @@ jQuery(document).ready(function() {
       });
     });
   }
+
+  }, 600)
 
   // Lightbox
   const lightboxClass = document.querySelectorAll('.glightbox');
