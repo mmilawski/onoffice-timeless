@@ -8,36 +8,14 @@ $places = get_field('places') ?? [];
 // Settings
 $settings = get_field('settings') ?? [];
 $bg_color = $settings['bg_color'] ?? 'bg-transparent';
-$map_color = $settings['map_color'] ?? 'colored';
+$map_zoom = $settings['map_zoom'] ?? 'no';
 
-// Marker color
-$colors = get_field('colors', 'option') ?? [];
-$marker_color = match ($bg_color) {
-    'bg-transparent' => !empty($colors['global']['primary'])
-        ? $colors['global']['primary']
-        : 'currentColor',
-    'bg-light' => !empty($colors['variations']['light']['primary'])
-        ? $colors['variations']['light']['primary']
-        : (!empty($colors['global']['primary'])
-            ? $colors['global']['primary']
-            : 'currentColor'),
-    'bg-dark' => !empty($colors['variations']['dark']['primary'])
-        ? $colors['variations']['dark']['primary']
-        : (!empty($colors['global']['primary'])
-            ? $colors['global']['primary']
-            : 'currentColor'),
-    'bg-primary' => !empty($colors['variations']['primary']['primary'])
-        ? $colors['variations']['primary']['primary']
-        : (!empty($colors['global']['primary'])
-            ? $colors['global']['primary']
-            : 'currentColor'),
-    'bg-secondary' => !empty($colors['variations']['secondary']['primary'])
-        ? $colors['variations']['secondary']['primary']
-        : (!empty($colors['global']['primary'])
-            ? $colors['global']['primary']
-            : 'currentColor'),
-    default => 'currentColor',
-};
+$map_color = get_field('map_color');
+if (empty($map_color)) {
+    $map_color = $settings['map_color'] ?? 'colored';
+}
+
+$marker_color = oo_get_marker_color_for_bg($bg_color);
 
 // Map
 $third_parties = get_field('third_parties', 'option') ?? null;
@@ -161,11 +139,23 @@ if (empty($addresses)) {
                 wp_enqueue_script('oo-init-open-street-map-marker-cluster');
                 ?>
             <?php } ?>
-            <div class="c-contact-map__map-wrapper o-col-12 o-col-lg-10 o-col-xl-8 u-offset-lg-1">
-                <div class="c-contact-map__map c-map --is-<?php echo $map_type; ?> --is-<?php echo $map_color; ?>" data-map-color="<?php echo $map_color; ?>" data-marker-color="<?php echo $marker_color; ?>" style="width: 100%;" role="region" aria-label="<?php echo esc_html__(
-    'Karte mit Kontaktinformationen',
-    'oo_theme',
-); ?>">
+            <div class="c-contact-map__map c-map --is-<?php echo esc_attr(
+                $map_type,
+            ); ?> --is-<?php echo esc_attr($map_color); ?>" 
+                    data-map-color="<?php echo esc_attr($map_color); ?>" 
+                    data-marker-color="<?php echo esc_attr($marker_color); ?>" 
+                    style="width: 100%;" 
+                    data-max-zoom="<?php echo esc_attr(
+                        $map_zoom === 'yes' ? '20' : '15',
+                    ); ?>" 
+                    data-scroll-zoom="<?php echo esc_attr(
+                        $map_zoom === 'yes' ? 'true' : 'false',
+                    ); ?>"
+                    role="region" 
+                    aria-label="<?php echo esc_attr__(
+                        'Karte mit Kontaktinformationen',
+                        'oo_theme',
+                    ); ?>">
                     <?php foreach ($addresses as $address) {
 
                         $map = $address['maps'] ?? [];

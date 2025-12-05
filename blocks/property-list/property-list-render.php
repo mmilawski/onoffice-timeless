@@ -8,6 +8,7 @@ $buttons = get_field('buttons') ?? [];
 // Settings
 $settings = get_field('settings') ?? [];
 $bg_color = $settings['bg_color'] ?? 'bg-transparent';
+$map_zoom = $settings['map_zoom'] ?? 'no';
 
 // Slider
 $slider = get_field('slider') ?? [];
