@@ -200,6 +200,7 @@
   &.--is-owner-leadgenerator-form {
     #{$c-form}__header {
       flex-direction: column;
+      align-items: flex-start;
       // Hide this element on large screens and up (desktop).
       &.--is-mobile-only {
         @include media-breakpoint-up(md) {
@@ -212,6 +213,9 @@
     }
 
     #{$c-form}__progress {
+      justify-self: center;
+      align-self: flex-end;
+
       @include media-breakpoint-down(sm) {
         position: absolute;
       }
@@ -257,6 +261,15 @@
 
     #{$c-form}__button {
       margin-top: 0;
+      &.--is-hidden {
+        display: none;
+        // Remove element on mobile to avoid extra height/padding in vertical layout
+        // Keep space on desktop horizontal layout using visibility: hidden
+        @include media-breakpoint-up(md) {
+          display: block;
+          visibility: hidden;
+        }
+      }
     }
 
     #{$c-form}__wrapper {

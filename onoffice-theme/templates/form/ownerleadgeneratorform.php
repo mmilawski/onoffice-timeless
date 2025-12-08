@@ -119,7 +119,7 @@ require 'info-messages.php'; ?>
             </div>
             <div class="c-form__button-wrapper --is-paged">
                 <?php if ($totalPages > 1): ?>
-                    <button type="button" class="c-form__button c-button --ghost leadform-back">
+                    <button type="button" class="c-form__button c-button --ghost leadform-back --is-hidden">
                         <?php echo esc_html__('Zurück', 'oo_theme'); ?>
                     </button>
 
