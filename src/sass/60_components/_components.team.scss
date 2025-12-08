@@ -28,6 +28,7 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
+    margin-top: 3.75rem;
     @include media-breakpoint-up(md) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -55,6 +56,15 @@
     .c-slider__track {
       contain: layout;
       overflow: visible;
+    }
+
+    .splide__pagination {
+      margin-top: -2.125rem;
+
+      @include media-breakpoint-up(lg) {
+        margin-top: -3.125rem;
+      }
+
     }
   }
 

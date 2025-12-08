@@ -1,8 +1,4 @@
 .c-item-fields {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-
   &__item {
     padding: 0.25rem 0;
     border-bottom: 1px solid var(--oo-color-mix-bg-contrast-50);

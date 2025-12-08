@@ -30,10 +30,62 @@
 
   &.--is-colored {
   }
-  &.--is-black-white {
-    // open street map
-    .leaflet-tile {
-      filter: grayscale(100%) contrast(110%);
+
+  &.--is-open-street-map {
+    #{$c-map}__osm-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    background-color: #aad3df;
+
+    &.--is-black-white {
+      // open street map
+      .leaflet-tile {
+        filter: grayscale(100%) contrast(110%);
+      }
+      background-color: #d3d3d3;
+    }
+
+    &.--is-dark {
+      .leaflet-tile {
+        filter: invert(100%) hue-rotate(180deg) contrast(98%) grayscale(95%);
+      }
+      background-color: #323434;
+    }
+
+    &.--is-retro {
+      .leaflet-tile {
+        filter: sepia(0.4) contrast(1) brightness(1) saturate(1.2);
+      }
+      background-color: #bcc7ab;
+
+      #{$c-map}__custom-pane {
+        mix-blend-mode: hard-light;
+      }
+
+      #{$c-map}__osm-overlay {
+        background-color: #4c41223d;
+      }
+    }
+
+    &.--is-aubergine {
+      .leaflet-tile {
+        filter: invert(90%) hue-rotate(200deg) brightness(85%) saturate(150%)
+          contrast(95%) sepia(20%) saturate(140%);
+      }
+      background-color: #224555;
+
+      #{$c-map}__custom-pane {
+        mix-blend-mode: hue;
+      }
+
+      #{$c-map}__osm-overlay {
+        background-color: #023e58;
+      }
     }
   }
 
@@ -54,6 +106,7 @@
       background-color: var(--oo-color-bg);
       color: var(--oo-color-text);
       padding: 0.75rem !important;
+      border-radius: 0;
     }
     .gm-style-iw-tc {
       &:after {
@@ -75,6 +128,10 @@
 
   // open street map
   // info window
+
+  .leaflet-popup-content-wrapper {
+    border-radius: 0;
+  }
   .leaflet-popup-content-wrapper,
   .leaflet-popup-tip {
     background-color: var(--oo-color-bg);
@@ -152,6 +209,7 @@
   }
 
   &__link {
+    text-transform: uppercase;
   }
 
   &__button {
