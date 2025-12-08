@@ -580,97 +580,97 @@ jQuery(document).ready(function() {
     );
   }
 
-  setTimeout(()=>{
-    // Open popup
-  const openPopup = document.querySelectorAll('.--open-popup');
-  const popUpHeadline = document.querySelectorAll('.c-popup__headline');
+  function setPopupEventListener(openPopup, popupHeadline){
+    // Trim Popup Headine
+    if (popUpHeadline.length > 0) {
+      popUpHeadline.forEach(function(headline) {
+        const originalText = headline.textContent;
+        const lineHeight = parseFloat(window.getComputedStyle(headline).lineHeight);
+        const maxHeight = lineHeight * 5;
 
-  // Trim Popup Headine
-  if (popUpHeadline.length > 0) {
-    popUpHeadline.forEach(function(headline) {
-      const originalText = headline.textContent;
-      const lineHeight = parseFloat(window.getComputedStyle(headline).lineHeight);
-      const maxHeight = lineHeight * 5;
+        let truncatedText = originalText;
+        headline.textContent = truncatedText;
 
-      let truncatedText = originalText;
-      headline.textContent = truncatedText;
-
-      while (headline.scrollHeight > maxHeight) {
-        truncatedText = truncatedText.slice(0, -1);
-        headline.textContent = truncatedText + '…';
-      }
-    });
-  }
-
-  if (openPopup.length > 0) {
-    openPopup.forEach(button => {
-      console.log(button)
-      button.addEventListener('click', function(e) {
-        e.preventDefault();
-        // Get the ID of the popup from the data-popup attribute
-        const popupId = button.getAttribute('data-popup');
-        const popupElement = document.getElementById(popupId);
-
-        if (!popupElement) {
-          return;
-        }
-
-        if (popupElement) {
-          const closeButton = popupElement.querySelector('.c-popup__close, .--close-popup');
-          if (popupElement instanceof HTMLDialogElement && typeof popupElement.showModal === 'function') {
-            popupElement.showModal();
-          }
-          popupElement.classList.add('--is-open');
-          document.body.classList.add('--modal-open');
-          if(closeButton){
-              setTimeout(() => {
-                  closeButton.focus();
-              }, 100);
-          }
-
-          function closePopup() {
-            if (popupElement.dataset.unclosable === 'true') {
-                const propertyListUrl = window.ooTimelessTheme?.urls?.propertyList || '/';
-                const referrer = document.referrer;
-                
-                if (referrer && referrer !== window.location.href) {
-                    window.location.href = referrer;
-                } else {
-                    window.location.href = propertyListUrl;
-                }
-                return; // Stop further execution
-            }
-
-            popupElement.classList.remove('--is-open');
-            if (popupElement instanceof HTMLDialogElement && typeof popupElement.close === 'function') {
-              popupElement.close();
-            }
-            document.body.classList.remove('--modal-open');
-          }
-
-          if (closeButton) {
-            closeButton.addEventListener('click', closePopup);
-          }
-
-          popupElement.addEventListener('click', (event) => {
-            if (event.target === popupElement) {
-              closePopup();
-            }
-          });
-
-          // Close popup on press ESC
-          document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-              e.preventDefault();
-              closePopup();
-            }
-          });
+        while (headline.scrollHeight > maxHeight) {
+          truncatedText = truncatedText.slice(0, -1);
+          headline.textContent = truncatedText + '…';
         }
       });
-    });
+    }
+
+    if (openPopup.length > 0) {
+      openPopup.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          // Get the ID of the popup from the data-popup attribute
+          const popupId = button.getAttribute('data-popup');
+          const popupElement = document.getElementById(popupId);
+
+          if (!popupElement) {
+            return;
+          }
+
+          if (popupElement) {
+            const closeButton = popupElement.querySelector('.c-popup__close, .--close-popup');
+            if (popupElement instanceof HTMLDialogElement && typeof popupElement.showModal === 'function') {
+              popupElement.showModal();
+            }
+            popupElement.classList.add('--is-open');
+            document.body.classList.add('--modal-open');
+            if(closeButton){
+                setTimeout(() => {
+                    closeButton.focus();
+                }, 100);
+            }
+
+            function closePopup() {
+              if (popupElement.dataset.unclosable === 'true') {
+                  const propertyListUrl = window.ooTimelessTheme?.urls?.propertyList || '/';
+                  const referrer = document.referrer;
+                  
+                  if (referrer && referrer !== window.location.href) {
+                      window.location.href = referrer;
+                  } else {
+                      window.location.href = propertyListUrl;
+                  }
+                  return; // Stop further execution
+              }
+
+              popupElement.classList.remove('--is-open');
+              if (popupElement instanceof HTMLDialogElement && typeof popupElement.close === 'function') {
+                popupElement.close();
+              }
+              document.body.classList.remove('--modal-open');
+            }
+
+            if (closeButton) {
+              closeButton.addEventListener('click', closePopup);
+            }
+
+            popupElement.addEventListener('click', (event) => {
+              if (event.target === popupElement) {
+                closePopup();
+              }
+            });
+
+            // Close popup on press ESC
+            document.addEventListener('keydown', function(event) {
+              if (event.key === 'Escape') {
+                e.preventDefault();
+                closePopup();
+              }
+            });
+          }
+        });
+      });
+    }
   }
 
-  }, 600)
+  // Open popup
+  const openPopup = document.querySelectorAll('.--open-popup');
+  const popUpHeadline = document.querySelectorAll('.c-popup__headline');
+  setPopupEventListener(openPopup, popUpHeadline)
+  
 
   // Lightbox
   const lightboxClass = document.querySelectorAll('.glightbox');
@@ -912,6 +912,13 @@ jQuery(document).ready(function() {
           $pagination.append($autoslideItem);
         }
       });
+
+      if(slider.classList.contains('--is-team-slider')){
+        splide.on('ready', function() {
+          const openPopup = slider.querySelectorAll('.--open-popup-team-slider')
+          setPopupEventListener(openPopup, [])
+        })
+      }
 
       splide.mount();
     });
