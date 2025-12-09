@@ -458,7 +458,8 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
 .ts-wrapper,
 .ts-wrapper.single,
 .ts-wrapper.multi {
-  &.o-select {
+  &.o-select,
+  &.onofficeSortListSelector {
     position: relative;
     padding: unset;
     height: 3.375rem;

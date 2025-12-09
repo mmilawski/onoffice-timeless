@@ -32,7 +32,17 @@ $headline = get_field('headline') ?? [];
 
 // Settings
 $settings = get_field('settings') ?? [];
+$shortcode = get_field('shortcode') ?? '';
 $bg_color = $settings['bg_color'] ?? 'bg-transparent';
+$map_zoom = $settings['map_zoom'] ?? 'no';
+$is_show_map = oo_get_effective_show_map($settings, $shortcode);
+
+$map_color = get_field('map_color');
+if (empty($map_color)) {
+    $map_color = $settings['map_color'] ?? 'colored';
+}
+
+$marker_color = oo_get_marker_color_for_bg($bg_color);
 
 // Slider
 $slider = get_field('slider') ?? [];
@@ -41,8 +51,7 @@ $is_slider = filter_var($slider['slider'] ?? null, FILTER_VALIDATE_BOOLEAN);
 // Map
 ob_start();
 require 'map/map.php';
-$map = ob_get_clean();
-$is_map = $pAddressList->getShowMapConfig() ?? false;
+$map_html = ob_get_clean();
 
 // Section ID for pagination anchor
 $anchor = isset($headline['text']) ? clean_id($headline['text']) : '';
@@ -54,9 +63,9 @@ $agent_count = method_exists($pAddressList, 'getAddressOverallCount')
 
 <?php if ($agent_count > 0) { ?>
     <?php if (!$is_slider) { ?>
-        <?php if ($is_map) { ?>
+        <?php if ($map_html && $is_show_map) { ?>
             <div class="c-address-list__map-wrapper">
-                <?php echo $map; ?>
+                <?php echo $map_html; ?>
             </div>
         <?php } ?>
 
