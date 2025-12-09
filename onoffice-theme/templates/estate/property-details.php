@@ -919,6 +919,7 @@ while ($current_property = $pEstates->estateIterator()) {
                         }
 
                         echo '</div>';
+                        echo '</div>';
                     } ?>
 
 
@@ -1002,6 +1003,7 @@ while ($current_property = $pEstates->estateIterator()) {
                             echo '</div>';
                         }
 
+                        echo '</div>';
                         echo '</div>';
                     }
 
