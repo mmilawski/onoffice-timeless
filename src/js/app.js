@@ -580,7 +580,7 @@ jQuery(document).ready(function() {
     );
   }
 
-  function setPopupEventListener(openPopup, popupHeadline){
+  function setPopupEventListener(openPopup, popUpHeadline){
     // Trim Popup Headine
     if (popUpHeadline.length > 0) {
       popUpHeadline.forEach(function(headline) {
@@ -924,6 +924,22 @@ jQuery(document).ready(function() {
     });
   }
 
+  // Debounced resize event listener for team slider popups
+  const debouncedTeamSliderResize = debounce(() => {
+    const openPopup = document.querySelectorAll('.--is-team-slider .--open-popup-team-slider');
+    if (openPopup.length > 0) {
+      // Remove existing event listeners by cloning nodes
+      openPopup.forEach(button => {
+        const newButton = button.cloneNode(true);
+        button.parentNode.replaceChild(newButton, button);
+      });
+      // Re-query after cloning and attach fresh listeners
+      const refreshedPopup = document.querySelectorAll('.--is-team-slider .--open-popup-team-slider');
+      setPopupEventListener(refreshedPopup, []);
+    }
+  }, 500);
+
+  window.addEventListener('resize', debouncedTeamSliderResize);
 
   // Toogle Property Card
   const propertyFeatureOpenerButton = $('.c-property-details__more');

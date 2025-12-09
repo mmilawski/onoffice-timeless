@@ -316,9 +316,10 @@ echo $first_line . '<br>' . $second_line;
 
         <?php if (!empty($wysiwyg) && $is_description) { ?>
             <div class="c-team-card__row --action">
-                <button class="c-team-card__button c-button --ghost <?php echo $bg_color
-                    ? '--on-' . $bg_color
-                    : ''; ?> --open-popup-team-slider" data-popup="team-<?php echo $post_id; ?>" aria-haspopup="dialog" aria-controls="team-<?php echo $post_id; ?>">
+                <button class="c-team-card__button c-button --ghost <?php
+                echo $bg_color ? '--on-' . $bg_color . ' ' : ' ';
+                echo $is_slider ? '--open-popup-team-slider' : '--open-popup';
+                ?>" data-popup="team-<?php echo $post_id; ?>" aria-haspopup="dialog" aria-controls="team-<?php echo $post_id; ?>">
                     <span class="c-button__text"><?php esc_html_e(
                         'Mehr erfahren',
                         'oo_theme',
