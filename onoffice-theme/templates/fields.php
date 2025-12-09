@@ -784,9 +784,7 @@ if (!function_exists('renderFormField')) {
                         $pForm->getSearchcriteriaRangeInfosForField($fieldName),
                     )) > 0
             ) {
-                if (str_contains($fieldName, 'zimmer')) {
-                    $placeholderAddition = ' ...';
-                } elseif (str_contains($fieldName, 'flaeche')) {
+                if (str_contains($fieldName, 'flaeche')) {
                     $placeholderAddition = ' (in m²)';
                 } else {
                     $placeholderAddition = '';
