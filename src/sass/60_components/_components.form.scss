@@ -16,7 +16,7 @@
     scroll-margin-top: calc(
       $desktop-header-height + $desktop-section-padding-top
     );
-    gap: 5rem;
+    gap: 2rem;
   }
 
   &__property-context {
@@ -26,9 +26,15 @@
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
+    padding: 1.5rem;
+    background-color: var(--oo-color-bg);
 
     @include media-breakpoint-up(xl) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include media-breakpoint-down(xs) {
+      padding: 1rem;
     }
 
     // add more margin to button if there is no read-more
@@ -40,23 +46,57 @@
         }
       }
     }
+
+    @include media-breakpoint-down(sm) {
+      .lead-lightbox {
+        .c-form__header {
+          .c-form__legend {
+            margin-right: 2.25rem;
+          }
+        }
+      }
+    }
   }
 
   &__header {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: relative;
 
-    @include media-breakpoint-up(xl) {
-      grid-column: span 2;
+    grid-column: span 2;
+
+    .--bg-light & {
+      color: var(--oo-color-light-headline, var(--oo-color-headline));
+    }
+
+    .--bg-dark & {
+      color: var(--oo-color-dark-headline, var(--oo-color-headline));
+    }
+
+    .--bg-primary & {
+      color: var(--oo-color-primary-headline, var(--oo-color-headline));
+    }
+
+    .--bg-secondary & {
+      color: var(--oo-color-secondary-headline, var(--oo-color-headline));
+    }
+
+    .--bg-footer & {
+      color: var(--oo-color-footer-text, var(--oo-color-text));
+    }
+
+    .--bg-transparent & {
+      color: var(--oo-color-headline);
     }
   }
 
   &__body {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 1.25rem 2rem;
+    gap: 1.5rem 2rem;
     align-items: flex-end;
 
     @include media-breakpoint-up(md) {
@@ -105,7 +145,6 @@
   &__required {
     position: absolute;
     right: 0;
-    bottom: -2.5rem; // must match fieldset gap
     font-size: 0.875rem;
   }
 
@@ -118,9 +157,6 @@
   }
 
   &__button-wrapper {
-    @include media-breakpoint-up(xl) {
-      grid-column: span 2;
-    }
   }
 
   &_button {
@@ -138,17 +174,17 @@
   .--is-input {
   }
   .--is-textarea {
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-up(md) {
       grid-column: span 2;
     }
   }
-  .--is-range {
-    @include media-breakpoint-up(xl) {
+  .--is-range:has(*:nth-child(2)) {
+    @include media-breakpoint-up(md) {
       grid-column: span 2;
     }
   }
   .--is-boolean {
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-up(md) {
       grid-column: span 2;
     }
   }
@@ -175,24 +211,101 @@
       }
     }
 
+    #{$c-form}__progress {
+      position: absolute;
+      @include media-breakpoint-only(xs) {
+        right: 1rem;
+        top: 1rem;
+      }
+
+      @include media-breakpoint-only(sm) {
+        right: 1.5rem;
+        top: 1rem;
+      }
+
+      @include media-breakpoint-up(md) {
+        left: 50%;
+        transform: translate(-50%, 50%);
+      }
+
+      .--bg-light & {
+        color: var(--oo-color-light-headline, var(--oo-color-headline));
+      }
+
+      .--bg-dark & {
+        color: var(--oo-color-dark-headline, var(--oo-color-headline));
+      }
+
+      .--bg-primary & {
+        color: var(--oo-color-primary-headline, var(--oo-color-headline));
+      }
+
+      .--bg-secondary & {
+        color: var(--oo-color-secondary-headline, var(--oo-color-headline));
+      }
+
+      .--bg-footer & {
+        color: var(--oo-color-footer-text, var(--oo-color-text));
+      }
+
+      .--bg-transparent & {
+        color: var(--oo-color-headline);
+      }
+    }
+
+    .c-selectable-cards {
+      gap: 2rem;
+    }
+
+    #{$c-form}__button {
+      margin-top: 0;
+    }
+
     #{$c-form}__wrapper {
       display: flex;
       flex-direction: column;
       gap: 2.5rem;
 
-      .leadform-forward,
-      .leadform-submit {
-        margin-left: auto;
+      @include media-breakpoint-up(md) {
+        .leadform-forward,
+        .leadform-submit {
+          margin-left: auto;
+        }
+        gap: 5rem;
       }
 
-      @include media-breakpoint-up(md) {
-        gap: 5rem;
+      &.--bg-transparent {
+        background-color: var(--oo-color-bg);
+      }
+
+      &.--bg-light {
+        background-color: var(--oo-color-light-bg, var(--oo-color-bg));
+      }
+
+      &.--bg-dark {
+        background-color: var(--oo-color-dark-bg, var(--oo-color-bg));
+      }
+
+      &.--bg-primary {
+        background-color: var(--oo-color-primary-bg, var(--oo-color-bg));
+      }
+
+      &.--bg-secondary {
+        background-color: var(--oo-color-secondary-bg, var(--oo-color-bg));
       }
     }
 
     #{$c-form}__button-wrapper {
-      display: flex;
-      justify-content: space-between;
+      @include media-breakpoint-up(md) {
+        display: flex;
+        justify-content: space-between;
+      }
+      @include media-breakpoint-down(sm) {
+        display: flex;
+        flex-direction: column;
+        align-content: space-between;
+        gap: 1.5rem;
+      }
     }
 
     #{$c-form}__fieldset {
@@ -203,10 +316,6 @@
         ) {
         // Force these specific groups to span all columns of the parent grid.
         grid-column: 1 / -1;
-
-        &:not(:last-child) {
-          margin-bottom: 5rem;
-        }
       }
 
       .c-form__field-group:has(.o-label.--is-textarea) {
@@ -231,13 +340,8 @@
 
       .c-selectable-cards {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(192px, 1fr));
-        gap: 1rem;
-
-        // Increase the gap on larger screens
-        @include media-breakpoint-up(lg) {
-          gap: 3.5rem 2rem;
-        }
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
 
         &.--has-selection .c-selectable-card:not(.--is-selected) {
           opacity: 0.5;
@@ -256,7 +360,7 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
       @include media-breakpoint-up(xl) {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
     }
     #{$c-form}__button-wrapper {
@@ -369,15 +473,27 @@
   }
 
   .--bg-light & {
+    #{$c-form}__fieldset {
+      background-color: var(--oo-color-light-bg, var(--oo-color-bg));
+    }
   }
 
   .--bg-dark & {
+    #{$c-form}__fieldset {
+      background-color: var(--oo-color-dark-bg, var(--oo-color-bg));
+    }
   }
 
   .--bg-primary & {
+    #{$c-form}__fieldset {
+      background-color: var(--oo-color-primary-bg, var(--oo-color-bg));
+    }
   }
 
   .--bg-secondary & {
+    #{$c-form}__fieldset {
+      background-color: var(--oo-color-secondary-bg, var(--oo-color-bg));
+    }
   }
 
   .--bg-footer & {
@@ -398,8 +514,27 @@
     #{$c-form}__required {
       align-self: flex-end;
     }
+
+    #{$c-form}__fieldset {
+      background-color: var(--oo-color-footer-bg, var(--oo-color-bg));
+    }
   }
 
   &.--bg-transparent {
+    #{$c-form}__fieldset {
+      background-color: var(--oo-color-bg);
+    }
+  }
+}
+
+.lead-lightbox {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  @include media-breakpoint-up(md) {
+    gap: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 }

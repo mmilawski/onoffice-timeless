@@ -23,17 +23,17 @@ include get_template_directory() . '/onoffice-theme/templates/fields.php';
 // ACF
 // Settings
 $settings = get_field('settings') ?? [];
-$bg_color = $settings['bg_color'] ?? null;
 ?>
 
-<form method="post" action="#onoffice-form" id="onoffice-form-<?php echo $pForm->getFormNo(); ?>" class="c-form --is-newsletter-form --custom-validation <?php if (
-    !empty($bg_color)
-) {
-    echo '--on-' . $bg_color;
-} ?>">
+<form method="post" action="#onoffice-form" id="onoffice-form-<?php echo $pForm->getFormNo(); ?>" class="c-form --is-newsletter-form --custom-validation">
 
     <input type="hidden" name="oo_formid" value="<?php echo $pForm->getFormId(); ?>">
     <input type="hidden" name="oo_formno" value="<?php echo $pForm->getFormNo(); ?>">
+    <?php wp_nonce_field(
+        'onoffice_form_' . esc_attr($pForm->getFormId()),
+        'onoffice_nonce',
+        false,
+    ); ?>
 
     <?php if (isset($estateId)): ?>
         <input type="hidden" name="Id" value="<?php echo esc_attr(

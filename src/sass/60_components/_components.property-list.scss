@@ -8,7 +8,7 @@
     flex-direction: column;
     gap: 1.5rem;
     @include media-breakpoint-up(xxl) {
-      gap: 2rem;
+      gap: 5rem;
     }
   }
 
@@ -18,7 +18,7 @@
     margin-bottom: 1rem;
     @include media-breakpoint-up(xxl) {
       gap: 2rem;
-      margin-bottom: 3rem;
+      margin-bottom: 2.5rem;
     }
 
     .--is-address-details & {
@@ -35,37 +35,37 @@
   &__wrapper {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 2.5rem;
     @include media-breakpoint-up(lg) {
-      gap: 2rem;
+      gap: 5rem;
     }
   }
 
   &__nav {
-    display: flex;
-    align-items: flex-end;
-    gap: 1.5rem 0;
-
-    @include media-breakpoint-up(lg) {
-      gap: unset;
-    }
   }
 
   &__count {
     font-size: 1.5rem;
     text-transform: uppercase;
+    display: flex;
+    justify-content: flex-start;
+    padding-top: 1.5rem;
+
+    @include media-breakpoint-up(lg) {
+      padding-top: 0;
+      justify-content: flex-end;
+      align-items: flex-end;
+    }
 
     &.--no-properties {
+    }
+
+    &:only-child {
+      margin-left: auto;
     }
   }
 
   &__sort-wrapper {
-    display: flex;
-    justify-content: flex-start;
-
-    @include media-breakpoint-up(lg) {
-      justify-content: flex-end;
-    }
   }
 
   &__sort {
@@ -74,16 +74,24 @@
     @include media-breakpoint-up(lg) {
       width: auto;
     }
-  }
 
+    & .onofficeSortListSelector {
+      width: 100%;
+    }
+  }
   &__properties {
     display: grid;
     grid-template-rows: 1fr;
     gap: 1.5rem;
 
+    @include media-breakpoint-up(xs) {
+      grid-template-columns: repeat(1, 1fr);
+      gap: 1rem;
+      padding: 0;
+    }
+
     @include media-breakpoint-up(lg) {
       grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
     }
 
     @include media-breakpoint-up(xxl) {
@@ -101,5 +109,9 @@
   }
 
   &__buttons {
+    margin-top: 2.5rem;
+    @include media-breakpoint-up(lg) {
+      margin-top: 3.75rem;
+    }
   }
 }

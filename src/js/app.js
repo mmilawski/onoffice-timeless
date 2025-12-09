@@ -264,24 +264,22 @@ jQuery(document).ready(function() {
               $(firstOption).prop('selected', true);
           }
       }
-
-      var plugins = {
-          'oo_remove_button': {
-              'className': 'ts-item-remove',
-              'title': window.ooTimelessTheme.translations.removeThisItem || 'Remove this item',
-              'label': '',
-              'position': 'before'
-          },
-      };
-
+      var plugins = {};
       if (isMultiselect) {
-          plugins['oo_checkbox_options'] = {
-              'className': 'o-control__input',
-              'checkedClassNames': ['ts-checked'],
-              'uncheckedClassNames': ['ts-unchecked'],
-          };
-      }
-
+        plugins['oo_remove_button'] = {
+            'className': 'ts-item-remove',
+            'title': window.ooTimelessTheme.translations.removeThisItem || 'Remove this item',
+            'label': '',
+            'position': 'before'
+        };
+    
+        plugins['oo_checkbox_options'] = {
+            'className': 'o-control__input',
+            'checkedClassNames': ['ts-checked'],
+            'uncheckedClassNames': ['ts-unchecked'],
+        };
+    }
+      var is_sorting = select.hasClass('onofficeSortListSelector');
       const is_regionaler_zusatz = select.length && select[0].id === 'regionaler_zusatz';
 
       const tom = new TomSelect(select, {
@@ -294,9 +292,13 @@ jQuery(document).ready(function() {
           field: "text",
           direction: "asc"
         },
+        placeholder: is_sorting ? "Bitte auswählen" : "",
         plugins: plugins,
         onInitialize: function() {
           let labelText = '';
+          if (!isMultiselect) {
+          this.control_input.setAttribute('readonly', true);
+          }
 
           // 1. Primary Method: Try to get the label from the original <select>
           if (this.input.labels && this.input.labels.length > 0) {
@@ -1623,3 +1625,127 @@ jQuery(window).on('load', function () {
   initVimeoPlayers();
   sanitizeClonedYouTubeIframes(document);
 });
+
+// Initialize news card navigation on load
+function initNewsCardNavigation() {
+  const container = document.querySelector('.c-news__news');
+  if (!container) return;
+  let focusableElements = [];
+  let isDesktop = window.matchMedia('(min-width: 1000px)').matches;
+  
+  function buildFocusableList() {
+    focusableElements = [];
+    const newsCards = container.querySelectorAll('.c-news-card');
+    
+    newsCards.forEach(function(card, index) {
+      const picture = card.querySelector('.c-news-card__link');
+      const button = card.querySelector('.c-news-card__more-link');
+      
+      // Build array based on desktop/mobile layout
+      if (isDesktop) {
+        if (index % 2 === 0) {
+          // Even cards: Picture -> Content -> Button
+          if (picture) focusableElements.push(picture);
+          if (button) focusableElements.push(button);
+        } else {
+          // Odd cards: Content -> Button -> Picture
+          if (button) focusableElements.push(button);
+          if (picture) focusableElements.push(picture);
+        }
+      } else {
+        // Mobile: Natural order for all cards
+        if (picture) focusableElements.push(picture);
+        if (button) focusableElements.push(button);
+      }
+    });
+  }
+
+  function handleKeyDown(event) {
+    // Only handle tab navigation
+    if (event.key !== 'Tab') return;
+ 
+    // Find the currently focused element
+    const currentElement = document.activeElement;
+    const currentIndex = focusableElements.indexOf(currentElement);
+    
+    // Only handle focus if we're within our container
+    if (currentIndex === -1) return;
+    
+    // Prevent default tab behavior
+    event.preventDefault();
+    
+    let nextIndex;
+    if (event.shiftKey) {
+      // Shift+Tab: Move backwards
+      nextIndex = currentIndex - 1;
+      if (nextIndex < 0) {
+        // Exit container at the start
+        const prevFocusable = findPreviousFocusable(currentElement);
+        if (prevFocusable) prevFocusable.focus();
+        return;
+      }
+    } else {
+      // Tab: Move forwards
+      nextIndex = currentIndex + 1;
+      if (nextIndex >= focusableElements.length) {
+        // Exit container at the end
+        const nextFocusable = findNextFocusable(currentElement);
+        if (nextFocusable) nextFocusable.focus();
+        return;
+      }
+    }
+    
+    // Focus the next element in our sequence
+    focusableElements[nextIndex].focus();
+  }
+
+  function findNextFocusable(element) {
+    const focusable = 'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    const all = Array.from(document.querySelectorAll(focusable));
+    let index = all.indexOf(element);
+    
+    // Keep looking for the next focusable element that's not a news card link or button
+    while (index < all.length - 1) {
+      index++;
+      const nextElement = all[index];
+      if (!nextElement.classList.contains('c-news-card__link') && 
+          !nextElement.classList.contains('c-news-card__more-link')) {
+        return nextElement;
+      }
+    }
+    return null;
+  }
+
+  function findPreviousFocusable(element) {
+    const focusable = 'a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    const all = Array.from(document.querySelectorAll(focusable));
+    let index = all.indexOf(element);
+    
+    // Keep looking for the previous focusable element that's not a news card link or button
+    while (index > 0) {
+      index--;
+      const prevElement = all[index];
+      if (!prevElement.classList.contains('c-news-card__link') && 
+          !prevElement.classList.contains('c-news-card__more-link')) {
+        return prevElement;
+      }
+    }
+    return null;
+  }
+
+  // Build initial focus list
+  buildFocusableList();
+
+  // Listen for Tab key events
+  container.addEventListener('keydown', handleKeyDown);
+
+  // Rebuild focus list on resize
+  const mediaQuery = window.matchMedia('(min-width: 768px)');
+  mediaQuery.addListener(function(e) {
+    isDesktop = e.matches;
+    buildFocusableList();
+  });
+}
+
+// Usage (don't include this part, just for reference):
+jQuery(window).on('load', initNewsCardNavigation);

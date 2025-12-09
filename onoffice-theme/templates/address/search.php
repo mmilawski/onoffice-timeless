@@ -55,7 +55,8 @@ $uniqid = 'address-search-' . uniqid();
  } ?> <?php if (!empty($bg_color)) {
      echo '--on-' . $bg_color;
  } ?>" data-estate-search-name="<?php echo esc_attr($getListName()); ?>">
-    <div class="c-form__fieldset">
+    <div class="c-form__fieldset --<?php echo $bg_color; ?>">
+        <div class="c-form__body">
         <?php
         $number = 0;
         $fields_counter = is_array($visible) ? count($visible) : 0;
@@ -159,5 +160,6 @@ $uniqid = 'address-search-' . uniqid();
             $number++;
         }
         ?>
+        </div>
     </div>
 </form>
