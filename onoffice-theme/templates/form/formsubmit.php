@@ -42,7 +42,7 @@ if ($pForm->needsReCaptcha() && $key !== '') {
         function submitForm<?php echo $pFormNo; ?>(e) {
             const selectorFormById = `form[id^="onoffice-form"] input[name="oo_formno"][value="<?php echo $pFormNo; ?>"]`;
             const form = document.querySelector(selectorFormById)?.parentElement;
-            const submitButtonElement = form.querySelector('.c-form__button');
+            const submitButtonElement = form.querySelector('.oo-js-submit-button');
 
             if (!form) {
                 console.error('Form not found.');
@@ -121,7 +121,7 @@ if ($pForm->needsReCaptcha() && $key !== '') {
             document.addEventListener('DOMContentLoaded', () => {
                 const selectorFormById = `form[id^="onoffice-form"] input[name="oo_formno"][value="<?php echo $pFormNo; ?>"]`;
                 const form = document.querySelector(selectorFormById)?.parentElement;
-                const submitButtonElement = form.querySelector('.c-form__button');
+                const submitButtonElement = form.querySelector('.oo-js-submit-button');
 
                 if (!form || !submitButtonElement) {
                     console.warn('Form or submit button not found for CMP logic.');
@@ -152,7 +152,7 @@ if ($pForm->needsReCaptcha() && $key !== '') {
                                         // Enable all submit buttons on forms with reCAPTCHA once consent is given.
                                         document.querySelectorAll('form[id^="onoffice-form"]').forEach(form => {
                                             const recaptcha = form.querySelector('div.g-recaptcha');
-                                            const button = form.querySelector('.c-form__button');
+                                            const button = form.querySelector('.oo-js-submit-button');
                                             if (recaptcha && button) {
                                                 button.disabled = false;
                                             }
@@ -180,6 +180,6 @@ if ($pForm->needsReCaptcha() && $key !== '') {
 <?php
 }
 ?>
-<button class="c-form__button c-button"<?php echo $buttonDisabled; ?>>
+<button class="c-form__button c-button oo-js-submit-button"<?php echo $buttonDisabled; ?>>
     <?php echo esc_html($pForm->getGenericSetting('submitButtonLabel')); ?>
 </button>

@@ -30,7 +30,6 @@ wp_enqueue_script('oo-leadgenerator-script');
 // ACF
 // Settings
 $settings = get_field('settings') ?? [];
-$bg_color = $settings['bg_color'] ?? null;
 
 $showFormAsModal =
     $pForm->getShowFormAsModal() &&
@@ -73,10 +72,7 @@ if ($pForm->getFormStatus() !== FormPost::MESSAGE_SUCCESS) {
 // Capture form content in buffer
 ob_start();
 ?>
-<form method="post" action="#onoffice-form" id="onoffice-form-<?php echo $pForm->getFormNo(); ?>" class="c-form --is-owner-leadgenerator-form <?php if (
-    !empty($bg_color)
-); ?>">
-
+<form method="post" action="#onoffice-form" id="onoffice-form-<?php echo $pForm->getFormNo(); ?>" class="c-form --is-owner-leadgenerator-form">
     <input type="hidden" name="oo_formid" value="<?php echo $pForm->getFormId(); ?>">
     <input type="hidden" name="oo_formno" value="<?php echo $pForm->getFormNo(); ?>">
     <?php wp_nonce_field(
@@ -106,41 +102,42 @@ require 'info-messages.php'; ?>
             <div id="leadform-<?php echo sanitize_title(
                 $pForm->getFormId(),
             ); ?>">
-            <div class="c-form__fieldset">
                 <?php foreach ($estateValues as $pageNumber => $fields): ?>
                     <div class="lead-lightbox lead-page-<?php echo $pageNumber; ?>">
-                        <div class="c-form__header">
-                            <legend class="c-form__legend">
-                                <?php echo $pageTitles[
-                                    $pageNumber - 1
-                                ]; ?></legend>
-                            <div class="c-form__required"><?php echo esc_html__(
-                                '* Pflichtfelder',
-                                'oo_theme',
-                            ); ?></div>
+                        <div class="c-form__fieldset">
+                            <div class="c-form__header">
+                                <legend class="c-form__legend">
+                                    <?php echo $pageTitles[
+                                        $pageNumber - 1
+                                    ]; ?></legend>
+                                <div class="c-form__required"><?php echo esc_html__(
+                                    '* Pflichtfelder',
+                                    'oo_theme',
+                                ); ?></div>
+                            </div>
+                                <?php echo implode($fields); ?>
                         </div>
-                        <?php echo implode($fields); ?>
                     </div>
                 <?php endforeach; ?>
 
                 <?php echo implode($hiddenValues); ?>
-                <div class="c-form__button-wrapper --is-paged">
-                    <?php if ($totalPages > 1): ?>
-                        <button type="button" class="c-form__button c-button --ghost leadform-back">
-                            <?php echo esc_html__('Zurück', 'oo_theme'); ?>
-                        </button>
+            </div>
+            <div class="c-form__button-wrapper --is-paged">
+                <?php if ($totalPages > 1): ?>
+                    <button type="button" class="c-form__button c-button --ghost leadform-back --is-hidden">
+                        <?php echo esc_html__('Zurück', 'oo_theme'); ?>
+                    </button>
 
-                        <div class="c-form__progress leadform-progress"></div>
+                    <div class="c-form__progress leadform-progress"></div>
 
-                        <button type="button" class="c-form__button c-button leadform-forward">
-                            <?php echo esc_html__('Weiter', 'oo_theme'); ?>
-                        </button>
-                    <?php endif; ?>
+                    <button type="button" class="c-form__button c-button leadform-forward">
+                        <?php echo esc_html__('Weiter', 'oo_theme'); ?>
+                    </button>
+                <?php endif; ?>
 
-                    <div class="leadform-submit" style="display:none;">
-                        <?php include get_template_directory() .
-                            '/onoffice-theme/templates/form/formsubmit.php'; ?>
-                    </div>
+                <div class="leadform-submit" style="display:none;">
+                    <?php include get_template_directory() .
+                        '/onoffice-theme/templates/form/formsubmit.php'; ?>
                 </div>
             </div>
         </div>
