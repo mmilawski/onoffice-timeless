@@ -21,8 +21,18 @@
 use onOffice\WPlugin\AddressList;
 use onOffice\WPlugin\Types\MapProvider;
 
+$map_color = $map_color ?? 'colored';
+$marker_color = $marker_color ?? 'currentColor';
+$map_zoom = $map_zoom ?? 'no';
+
 /** @var AddressList $pAddressList */
-(function (MapProvider $pMapProvider, AddressList $pAddressList) {
+(function (
+    MapProvider $pMapProvider,
+    AddressList $pAddressList,
+    string $map_color,
+    string $marker_color,
+    string $map_zoom,
+) {
     $pCallback = null;
     switch ($pMapProvider->getActiveMapProvider()) {
         case MapProvider::GOOGLE_MAPS:
@@ -35,6 +45,6 @@ use onOffice\WPlugin\Types\MapProvider;
     }
 
     if ($pCallback !== null) {
-        $pCallback(clone $pAddressList);
+        $pCallback(clone $pAddressList, $map_color, $marker_color, $map_zoom);
     }
-})(new MapProvider(), $pAddressList);
+})(new MapProvider(), $pAddressList, $map_color, $marker_color, $map_zoom);

@@ -34,7 +34,17 @@ $headline = get_field('headline') ?? [];
 
 // Settings
 $settings = get_field('settings') ?? [];
+$shortcode = get_field('shortcode') ?? '';
 $bg_color = $settings['bg_color'] ?? 'bg-transparent';
+$map_zoom = $settings['map_zoom'] ?? 'no';
+$is_show_map = oo_get_effective_show_map($settings, $shortcode);
+
+$map_color = get_field('map_color');
+if (empty($map_color)) {
+    $map_color = $settings['map_color'] ?? 'colored';
+}
+
+$marker_color = oo_get_marker_color_for_bg($bg_color);
 
 // Slider
 $slider = get_field('slider') ?? [];
@@ -58,19 +68,22 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
 
 <?php if ($property_count > 0) { ?>
     <?php if (!$is_slider) { ?>
-        <?php if ($map) { ?>
-            <div class="c-property-list__map-wrapper o-container">
-            <div class="u-offset-lg-1">
+        <?php if ($map && $is_show_map) { ?>
+            <div class="c-property-list__container o-container">
+                <div class="o-row">
+
+             
+
+            <div class="c-property-list__map-wrapper o-col-lg-10 o-col-xl-10 u-offset-lg-1">
                 <?php echo $map; ?>
-                </div>
-            </div>
+            </div></div></div>
         <?php } ?>
 
         <div class="c-property-list__wrapper">
             <div class="c-property-list__nav o-container">
                 <div class="o-row">
                         <?php if ($generateSortDropDown()) { ?>
-                            <div class="c-property-list__sort-wrapper o-col-12 o-col-lg-6 u-offset-lg-1 --<?php echo $bg_color; ?>">
+                            <div class="c-property-list__sort-wrapper o-col-12 o-col-lg-4 u-offset-lg-1 --<?php echo $bg_color; ?>">
                                 <?php wp_enqueue_script(
                                     'oo-sort-list-script',
                                 ); ?>
@@ -83,7 +96,7 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
                                 </label>
                             </div>
                         <?php } ?>
-                        <p class="c-property-list__count o-col-12 o-col-lg-5">
+                        <p class="c-property-list__count o-col-12 o-col-lg-7">
                             <?php printf(
                                 esc_html__(
                                     '%d Immobilien gefunden',
@@ -115,7 +128,8 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
                 </div>
             </div>
 
-            <div class="c-slider__navigation splide__navigation --is-properties-slider">
+            <div class="c-slider__navigation__wrapper o-container">
+            <div class="c-slider__navigation splide__navigation --is-properties-slider o-row">
                 <div class="c-slider__progress splide__progress">
                     <div class="c-slider__progress-bar splide__progress-bar"></div>
                 </div>
@@ -139,6 +153,7 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
                         ); ?></span>
                     </button>
                 </div>
+            </div>
             </div>
         </div>
     <?php } ?>

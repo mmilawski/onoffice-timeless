@@ -19,4 +19,29 @@
 
   &__text {
   }
+
+  &__shortcode {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    background-color: var(--oo-color-bg);
+
+    @include media-breakpoint-down(sm) {
+      padding: 0;
+    }
+
+    &.--bg-light {
+      background-color: var(--oo-color-light-bg, var(--oo-color-bg));
+    }
+
+    &.--bg-dark {
+      background-color: var(--oo-color-dark-bg, var(--oo-color-bg));
+    }
+
+    &.--bg-primary {
+      background-color: var(--oo-color-primary-bg, var(--oo-color-bg));
+    }
+
+    &.--bg-secondary {
+      background-color: var(--oo-color-secondary-bg, var(--oo-color-bg));
+    }
+  }
 }
