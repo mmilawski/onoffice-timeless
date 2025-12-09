@@ -34,7 +34,17 @@ $headline = get_field('headline') ?? [];
 
 // Settings
 $settings = get_field('settings') ?? [];
+$shortcode = get_field('shortcode') ?? '';
 $bg_color = $settings['bg_color'] ?? 'bg-transparent';
+$map_zoom = $settings['map_zoom'] ?? 'no';
+$is_show_map = oo_get_effective_show_map($settings, $shortcode);
+
+$map_color = get_field('map_color');
+if (empty($map_color)) {
+    $map_color = $settings['map_color'] ?? 'colored';
+}
+
+$marker_color = oo_get_marker_color_for_bg($bg_color);
 
 // Slider
 $slider = get_field('slider') ?? [];
@@ -58,7 +68,7 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
 
 <?php if ($property_count > 0) { ?>
     <?php if (!$is_slider) { ?>
-        <?php if ($map) { ?>
+        <?php if ($map && $is_show_map) { ?>
             <div class="c-property-list__container o-container">
                 <div class="o-row">
 
