@@ -19,77 +19,13 @@
   &.--header-fixed {
   }
 
-  // First section gets more padding-top because of the transparent header
-  & > *:not(.c-banner):not(.c-news):not(.c-property-details):first-child {
-    padding-top: calc($mobile-header-height + $mobile-section-padding-top);
-    @include media-breakpoint-up(xl) {
-      padding-top: calc($mobile-header-height + $desktop-section-padding-top);
-    }
-    @include media-breakpoint-up(xxl) {
-      padding-top: calc($desktop-header-height + $desktop-section-padding-top);
-    }
-  }
-
-  & > *.c-news:first-child {
-    padding-top: calc($mobile-header-height + 2.5rem);
-    @include media-breakpoint-up(xl) {
-      padding-top: calc($mobile-header-height + 5rem);
-    }
-    @include media-breakpoint-up(xxl) {
-      padding-top: calc($desktop-header-height + 5rem);
-    }
-  }
-
-  .--is-header-style-white &,
-  .--is-header-style-white + & {
-    // First section gets more padding-top because of the transparent header
-    & > *:not(.c-banner):not(.c-news):not(.c-property-details):first-child {
-      @include media-breakpoint-up(xl) {
-        padding-top: $desktop-section-padding-top;
-      }
-      @include media-breakpoint-up(xxl) {
-        padding-top: $desktop-section-padding-top;
-      }
-    }
-
-    & > *.c-news:first-child {
-      padding-top: 2.5rem;
-      @include media-breakpoint-up(xl) {
-        padding-top: 5rem;
-      }
-    }
-  }
-
-  // First banner gets more padding-top because of the transparent header
+  // // First banner gets more padding-top because of the transparent header
   & > *:first-child {
     .c-banner__slide {
-      .--is-header-style-transparent & {
-        @include media-breakpoint-up(xl) {
-          padding-top: calc($desktop-header-height + 2.5rem);
-        }
+      margin-top: 3.75rem;
 
-        &.--content-is-left {
-          padding-top: calc($mobile-header-height + (3.75rem - 2.5rem));
-          @include media-breakpoint-up(xl) {
-            padding-top: calc($desktop-header-height + 2.5rem);
-          }
-        }
-      }
-
-      @at-root body:not(.--is-header-style-transparent) & {
-        margin-top: 3.75rem;
-
-        @include media-breakpoint-up(xl) {
-          margin-top: 2.5rem;
-        }
-
-        &.--content-is-left {
-          margin-top: calc(3.75rem - 2.5rem);
-
-          @include media-breakpoint-up(xl) {
-            margin-top: 2.5rem;
-          }
-        }
+      @include media-breakpoint-up(xl) {
+        margin-top: 2.5rem;
       }
     }
   }

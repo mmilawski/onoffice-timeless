@@ -278,18 +278,16 @@
     }
 
     #{$c-slider}__controls-container {
-      position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-top: 2.5rem;
-      margin-bottom: 2.5rem;
       padding-left: 0;
       padding-right: 0;
+      margin: 2.5rem auto 2.5rem auto;
     }
 
     #{$c-slider}__controls {
-      position: static;
+      position: absolute;
       top: unset;
       left: unset;
       right: unset;
@@ -300,7 +298,7 @@
       z-index: 1;
 
       @include media-breakpoint-up(sm) {
-        position: static;
+        position: absolute;
         top: unset;
         left: unset;
         right: unset;
@@ -315,28 +313,8 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: absolute;
       width: 100%;
       pointer-events: auto;
-
-      #{$c-slider}__arrow {
-        &.--next {
-          right: 1rem;
-        }
-        &.--prev {
-          left: 1rem;
-        }
-
-        @include media-breakpoint-up(xl) {
-          &.--next {
-            right: 0;
-          }
-
-          &.--prev {
-            left: 0;
-          }
-        }
-      }
     }
   }
 
