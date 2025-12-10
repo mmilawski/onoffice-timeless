@@ -1394,6 +1394,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
 
     &:before {
       content: '';
+      align-self: center;
       width: $form-control-wrapper;
       height: $form-control-wrapper;
       flex-shrink: 0;
