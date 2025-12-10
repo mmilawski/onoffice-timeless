@@ -281,9 +281,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding-left: 0;
-      padding-right: 0;
       margin: 2.5rem auto 2.5rem auto;
+
+      @include media-breakpoint-up(xl) {
+        padding: 0;
+      }
     }
 
     #{$c-slider}__controls {
