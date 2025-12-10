@@ -132,7 +132,25 @@
     }
 
     #{$c-dialog}__close {
-      background-color: transparent;
+      color: var(--oo-color-contrast-bg);
+      background-color: var(--oo-color-mix-bg-contrast-05);
+      width: 3.375rem;
+      height: 3.375rem;
+      top: 0;
+      right: 0;
+
+      @include hover() {
+        background-color: var(--oo-color-primary);
+        color: var(--oo-color-contrast-primary);
+      }
+
+      @include focus-visible() {
+        outline-color: var(--oo-color-text) !important;
+      }
+
+      @include active() {
+        background-color: var(--oo-color-mix-primary-contrast-40);
+      }
     }
   }
 }

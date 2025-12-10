@@ -65,11 +65,11 @@ if ($rating_provider === 'google') {
 
 <dialog id="team-<?php echo $post_id; ?>" class="c-dialog --bg-transparent --team-dialog" aria-labelledby="team-<?php echo $post_id; ?>-title" aria-describedby="team-<?php echo $post_id; ?>-desc">
     <div class="c-dialog__wrapper">
-        <button class="c-dialog__close --close-popup c-button --only-icon" aria-label="<?php echo esc_html__(
+        <button class="c-dialog__close c-icon-button --close-popup" aria-label="<?php echo esc_html__(
             'Fenster schließen',
             'oo_theme',
         ); ?>">
-            <span class="c-button__icon --close"><?php oo_get_icon(
+            <span class="c-icon-button__icon --close"><?php oo_get_icon(
                 'close',
             ); ?></span>
         </button>
