@@ -770,8 +770,10 @@ if (!function_exists('renderFormField')) {
                 $inputClass = 'o-input --number';
             } elseif ($fieldName == 'Email') {
                 $inputType = 'type="email"';
-
                 $inputClass = 'o-input --email';
+            } elseif ($typeCurrentInput === onOffice\WPlugin\Types\FieldTypes::FIELD_TYPE_DATE) {
+                $inputType = 'type="date"';
+                $inputClass = 'o-input --date';
             }
 
             if (
