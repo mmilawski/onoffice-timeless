@@ -451,6 +451,10 @@
         grid-column: auto;
       }
     }
+    #{$c-form}__fieldset {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 
   &.--is--popup {
