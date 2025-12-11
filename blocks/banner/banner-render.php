@@ -31,7 +31,7 @@ $all_slides_are_none =
 $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
 ?>
 
-<div <?php oo_block_id($block); ?> class="c-banner o-section --<?php
+<div <?php oo_block_id($block); ?> class="c-banner --<?php
  echo $bg_color;
  echo $banner_content_class;
  ?>">

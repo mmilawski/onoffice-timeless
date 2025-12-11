@@ -21,10 +21,6 @@
 
   // // First banner gets more padding-top because of the transparent header
   & > *:first-child {
-    &.c-banner {
-      padding-top: 0;
-      padding-bottom: 0;
-    }
     .c-banner__slide {
       margin-top: 3.75rem;
 
