@@ -98,7 +98,7 @@ set_current_header_level($size);
             <?php } ?>
             <?php if ($team_query->have_posts()): ?>
                 <?php if (!$is_slider) { ?>
-                    <div class="c-team__members o-col-12 o-col-xl-10">
+                    <div class="c-team__members o-col-12">
                         <?php
                         while ($team_query->have_posts()):
                             $team_query->the_post();
