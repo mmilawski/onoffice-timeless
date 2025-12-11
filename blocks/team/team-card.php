@@ -135,9 +135,6 @@ if ($rating_provider === 'google') {
                 <p id="desc-<?php echo $post_id; ?>" class="c-team-card__job"><?php echo $job; ?></p>
             </div>
         <?php } ?>
-        <div class="c-team-card__row --padding">
-            <p>invisible</p>
-        </div>
 
         <div class="c-team-card__row --name">
             <?php if (!empty($name)) { ?>
