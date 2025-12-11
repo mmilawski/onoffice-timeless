@@ -15,6 +15,13 @@
       stroke: var(--oo-color-primary);
     }
 
+    &.--filled {
+      svg {
+        stroke: var(--oo-color-primary);
+        fill: var(--oo-color-primary);
+      }
+    }
+
     .--star-color-bg-primary & {
       svg {
         color: var(--oo-color-primary);

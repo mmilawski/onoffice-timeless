@@ -158,22 +158,6 @@ echo $first_line . '<br>' . $second_line;
                     'size' => 'medium-small',
                     'light_empty_stars' => true,
                 ]); ?>
-                <?php if (
-                    $rating_provider === 'google' ||
-                    ($rating_provider === 'proven_expert' && $proven_expert_url)
-                ): ?>
-                    <a href="<?php echo esc_url(
-                        $rating_provider === 'google'
-                            ? $place_id_url
-                            : $proven_expert_url,
-                    ); ?>"  rel="noopener noreferrer" aria-label="<?php esc_attr_e(
-    'Bewertungen ansehen (Öffnet in neuem Tab)',
-    'oo_theme',
-); ?>"
-                       target="_blank" class="--text-color">
-                        <?php esc_html_e('Zu den Bewertungen', 'oo_theme'); ?>
-                    </a>
-                <?php endif; ?>
             </div>
         <?php endif; ?>
 
