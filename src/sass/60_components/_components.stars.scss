@@ -13,12 +13,46 @@
       height: 100%;
       color: var(--oo-color-primary);
       stroke: var(--oo-color-primary);
+
+      .--on-bg-light &{
+        color: var(--oo-color-light-primary);
+        stroke: var(--oo-color-light-primary);
+      }
+      .--on-bg-dark &{
+        color: var(--oo-color-dark-primary);
+        stroke: var(--oo-color-dark-primary);
+      }
+      .--on-bg-primary &{
+        color: var(--oo-color-primary-primary);
+        stroke: var(--oo-color-primary-primary);
+      }
+      .--on-bg-secondary &{
+        color: var(--oo-color-secondary-primary);
+        stroke: var(--oo-color-secondary-primary);
+      }
     }
 
     &.--filled {
       svg {
         stroke: var(--oo-color-primary);
         fill: var(--oo-color-primary);
+
+        .--on-bg-light &{
+          stroke: var(--oo-color-light-primary);
+          fill: var(--oo-color-light-primary);
+        }
+        .--on-bg-dark &{
+          stroke: var(--oo-color-dark-primary);
+          fill: var(--oo-color-dark-primary);
+        }
+        .--on-bg-primary &{
+          stroke: var(--oo-color-primary-primary);
+          fill: var(--oo-color-primary-primary);
+        }
+        .--on-bg-secondary &{
+          stroke: var(--oo-color-secondary-primary);
+          fill: var(--oo-color-secondary-primary);
+        }
       }
     }
 
