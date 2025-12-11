@@ -138,25 +138,10 @@ if ($rating_provider === 'google') {
                                 'component-stars',
                                 [
                                     'rating' => $rating,
-                                    'size' => 'small',
+                                    'size' => 'medium-small',
                                     'light_empty_stars' => true,
                                 ],
                             ); ?>
-                            <?php if ($rating_provider === 'google') { ?>
-                                <a href="<?php echo $place_id_url; ?>" target="_blank"><?php esc_html_e(
-    'Zu den Bewertungen',
-    'oo_theme',
-); ?></a>
-                            <?php } ?>
-                            <?php if (
-                                $rating_provider === 'proven_expert' &&
-                                $proven_expert_url
-                            ) { ?>
-                                <a href="<?php echo $proven_expert_url; ?>" target="_blank"><?php esc_html_e(
-    'Zu den Bewertungen',
-    'oo_theme',
-); ?></a>
-                            <?php } ?>
                     <?php endif; ?>
                     <?php if (!empty($card['languages'])) { ?>
                         <p class="c-team-detail__languages"><?php echo $card[

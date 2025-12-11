@@ -140,11 +140,6 @@
 
     #{$c-dialog}__close {
       color: var(--oo-color-contrast-bg);
-      background-color: var(--oo-color-mix-bg-contrast-05);
-      width: 3.375rem;
-      height: 3.375rem;
-      top: 0;
-      right: 0;
 
       @include hover() {
         background-color: var(--oo-color-primary);
@@ -158,6 +153,81 @@
       @include active() {
         background-color: var(--oo-color-mix-primary-contrast-40);
       }
+
+      .--bg-light & {
+        color: var(--oo-color-light-contrast-bg);
+
+        @include hover() {
+          background-color: var(--oo-color-light-primary);
+          color: var(--oo-color-light-contrast-primary);
+        }
+
+        @include focus-visible() {
+          outline-color: var(--oo-color-light-text) !important;
+        }
+
+        @include active() {
+          background-color: var(--oo-color-light-mix-primary-contrast-40);
+        }
+      }
+
+      .--bg-dark & {
+        color: var(--oo-color-dark-contrast-bg);
+
+        @include hover() {
+          background-color: var(--oo-color-dark-primary);
+          color: var(--oo-color-dark-contrast-primary);
+        }
+
+        @include focus-visible() {
+          outline-color: var(--oo-color-dark-text) !important;
+        }
+
+        @include active() {
+          background-color: var(--oo-color-dark-mix-primary-contrast-40);
+        }
+      }
+
+      .--bg-primary & {
+        color: var(--oo-color-light-contrast-bg);
+
+        @include hover() {
+          background-color: var(--oo-color-primary-primary);
+          color: var(--oo-color-primary-contrast-primary);
+        }
+
+        @include focus-visible() {
+          outline-color: var(--oo-color-primary-text) !important;
+        }
+
+        @include active() {
+          background-color: var(--oo-color-primary-mix-primary-contrast-40);
+        }
+      }
+
+      .--bg-secondary & {
+        color: var(--oo-color-secondary-contrast-bg);
+
+        @include hover() {
+          background-color: var(--oo-color-secondary-primary);
+          color: var(--oo-color-secondary-contrast-primary);
+        }
+
+        @include focus-visible() {
+          outline-color: var(--oo-color-secondary-text) !important;
+        }
+
+        @include active() {
+          background-color: var(--oo-color-secondary-mix-primary-contrast-40);
+        }
+      }
+
+
+      background-color: transparent;
+      width: 3.375rem;
+      height: 3.375rem;
+      top: 0;
+      right: 0;
     }
   }
 }

@@ -174,7 +174,10 @@
         }
 
         .--bg-secondary & {
-          background-color: var(--oo-color-secondary-text, var(--oo-color-text));
+          background-color: var(
+            --oo-color-secondary-text,
+            var(--oo-color-text)
+          );
           color: var(--oo-color-secondary-bg, var(--oo-color-bg));
         }
       }
@@ -300,16 +303,16 @@
         margin-left: 0;
         margin-right: 0;
 
-        .--on-bg-light &{
+        .--on-bg-light & {
           color: var(--oo-color-light-text);
         }
-        .--on-bg-dark &{
+        .--on-bg-dark & {
           color: var(--oo-color-dark-text);
         }
-        .--on-bg-primary &{
+        .--on-bg-primary & {
           color: var(--oo-color-primary-text);
         }
-        .--on-bg-secondary &{
+        .--on-bg-secondary & {
           color: var(--oo-color-secondary-text);
         }
       }
