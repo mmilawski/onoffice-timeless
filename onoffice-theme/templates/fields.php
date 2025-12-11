@@ -645,8 +645,7 @@ if (!function_exists('renderFormField')) {
                 $requiredAttribute .
                 '>';
             /* translators: %s will be replaced with the translated field name. */
-            $output .=
-                '<option value=""></option>';
+            $output .= '<option value=""></option>';
             foreach ($permittedValues as $key => $value) {
                 if (is_array($selectedValue)) {
                     $isSelected = in_array($key, $selectedValue, true);
