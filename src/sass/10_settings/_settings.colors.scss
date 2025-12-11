@@ -646,7 +646,11 @@
     0.2,
     var(--oo-color-primary)
   );
-
+  #{--oo-color-header-contrast-primary}: contrast-color(
+    var(--oo-color-header-primary),
+    var(--oo-color-primary)
+  );
+  
   #{--oo-color-header-contrast-bg}: contrast-color(
     var(--oo-color-header-bg),
     var(--oo-color-bg)

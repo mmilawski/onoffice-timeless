@@ -478,12 +478,9 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     border-color: $form-focus;
   }
 
-  // --- FIX START: Rotation Logic ---
-  // Apply rotation to the .ts-control arrow when the dropdown is active
   &.dropdown-active .ts-control::after {
     transform: translateY(-50%) rotate(180deg);
   }
-  // --- FIX END ---
 
   .ts-control {
     height: 100%;
