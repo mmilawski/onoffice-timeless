@@ -38,7 +38,7 @@
     gap: 1.5rem;
     order: 1;
     padding: 1.5rem;
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 100%;
 
     @include media-breakpoint-up(md) {
