@@ -115,13 +115,25 @@ if (!function_exists('renderFieldEstateSearch')) {
 
         // type and class
         if (in_array($typeCurrentInput, $typesFloat)) {
-            $inputType = 'type="number" step="1"';
             $inputClass = 'o-input --number';
+            if (in_array($typeCurrentInput, $typesFloat)) {
+                $inputClass = 'o-input --number';
+                $fieldsHalfStep = [
+                    'anzahl_zimmer',
+                    'anzahl_schlafzimmer',
+                    'anzahl_badezimmer',
+                ];
+                if (in_array($fieldName, $fieldsHalfStep)) {
+                    $inputType = 'type="number" step="0.5" min="0.5"';
+                } else {
+                    $inputType = 'type="number" step="1" min="1"';
+                }
+            }
         } elseif (in_array($typeCurrentInput, $typesDate)) {
             $inputType = 'type="date"';
             $inputClass = 'o-input --date';
         } elseif ($fieldName == 'radius') {
-            $inputType = 'type="number" step="1"';
+            $inputType = 'type="number" step="1" min="1"';
             $inputClass = 'o-input --radius';
         } elseif ($typeCurrentInput === 'hidden') {
             $inputType = 'type="hidden"';
@@ -133,8 +145,10 @@ if (!function_exists('renderFieldEstateSearch')) {
         // placeholder
         if (str_contains($fieldName, 'miete')) {
             $placeholder = esc_html__('z.B. "950"', 'oo_theme');
-        } elseif (str_contains($fieldName, 'preis')) {
-            $placeholder = esc_html__('z.B. "500.000"', 'oo_theme');
+        } elseif (
+            str_contains($fieldName, 'preis') &&
+            $fieldName !== 'preisAufAnfrage'
+        ) {
         } elseif (str_contains($fieldName, 'flaeche')) {
             $placeholder = esc_html__('z.B. "80"', 'oo_theme');
         } elseif (str_contains($fieldName, 'zimmer')) {
@@ -758,7 +772,16 @@ if (!function_exists('renderFormField')) {
                 $typeCurrentInput ===
                     'urn:onoffice-de-ns:smart:2.5:dbAccess:dataType:float'
             ) {
-                $inputType = 'type="number" step="1"';
+                $fieldsHalfStep = [
+                    'anzahl_zimmer',
+                    'anzahl_schlafzimmer',
+                    'anzahl_badezimmer',
+                ];
+                if (in_array($fieldName, $fieldsHalfStep)) {
+                    $inputType = 'type="number" step="0.5" min="0.5"';
+                } else {
+                    $inputType = 'type="number" step="1" min="1"';
+                }
                 $inputClass = 'o-input --number';
             } elseif (
                 $typeCurrentInput ===
@@ -766,7 +789,7 @@ if (!function_exists('renderFormField')) {
                 $typeCurrentInput ===
                     'urn:onoffice-de-ns:smart:2.5:dbAccess:dataType:decimal'
             ) {
-                $inputType = 'type="number" step="1"';
+                $inputType = 'type="number" step="1" min="1"';
                 $inputClass = 'o-input --number';
             } elseif ($fieldName == 'Email') {
                 $inputType = 'type="email"';
