@@ -33,7 +33,7 @@
     &:focus,
     &:focus-within {
       gap: 0;
-      max-height: 40rem;
+      max-height: calc(100% - 3rem);
 
       .c-team-card__icon {
         &.--less {
@@ -58,6 +58,41 @@
       .c-team-card__row.--padding {
         opacity: 0;
         max-height: 0.5rem;
+      }
+
+      .c-team-card__name {
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+
+        @media (min-width: 380px) {
+          -webkit-line-clamp: 3;
+          line-clamp: 3;
+        }
+
+        @media (min-width: 420px) {
+          -webkit-line-clamp: 4;
+          line-clamp: 4;
+        }
+
+        @media (min-width: 500px) {
+          -webkit-line-clamp: 6;
+          line-clamp: 6;
+        }
+
+        @include media-breakpoint-up(sm) {
+          -webkit-line-clamp: 8;
+          line-clamp: 8;
+        }
+
+        @include media-breakpoint-up(md) {
+          -webkit-line-clamp: 3;
+          line-clamp: 3;
+        }
+
+        @include media-breakpoint-up(xxl) {
+          -webkit-line-clamp: 2;
+          line-clamp: 2;
+        }
       }
     }
   }
@@ -172,6 +207,48 @@
     &.--job {
       font-size: 1rem;
       line-height: 1.75rem;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+
+      @media (min-width: 380px) {
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+      }
+
+      @media (min-width: 420px) {
+        -webkit-line-clamp: 4;
+        line-clamp: 4;
+      }
+
+      @media (min-width: 500px) {
+        -webkit-line-clamp: 6;
+        line-clamp: 6;
+      }
+
+      @include media-breakpoint-up(sm) {
+        -webkit-line-clamp: 8;
+        line-clamp: 8;
+      }
+
+      @include media-breakpoint-up(md) {
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+      }
+
+      @include media-breakpoint-up(lg) {
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+      }
+
+      @include media-breakpoint-up(xxl) {
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+      }
+
     }
 
     &.--padding {
