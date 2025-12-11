@@ -26,17 +26,22 @@
     line-height: $small-line-height;
     gap: 0.5rem;
 
+    @include media-breakpoint-up(md) {
+      gap: 1rem;
+    }
+
     &.--is-total-cost {
       font-weight: $font-weight-text-bold;
       margin-top: 0.5rem;
+      padding-left: 3rem;
     }
   }
 
   &__color-indicator {
     display: inline-block;
-    width: $icon-size-small;
-    height: $icon-size-small;
-    padding-right: 1.25rem;
+    width: 2rem;
+    height: 2rem;
+    padding-right: 1.5rem;
   }
 
   &__criteria {

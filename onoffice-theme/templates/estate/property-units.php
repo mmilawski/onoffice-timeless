@@ -15,7 +15,7 @@ if (
     <div class="c-property-details__units-wrapper">
         <div class="c-property-details__units o-container">
             <div class="c-property-details__units-row o-row">
-                <div class="c-property-details__units-content u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
+                <div class="c-property-details__units-content u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">
                     <h2 class="c-property-details__headline o-headline">
                         <?php esc_html_e('Einheiten', 'oo_theme'); ?>
                     </h2>
@@ -61,7 +61,7 @@ if (
                 </div>
             </div>
 
-            <div class="c-slider__navigation splide__navigation --is-properties-slider">
+            <div class="c-slider__navigation splide__navigation o-container --is-properties-slider">
                 <div class="c-slider__progress splide__progress">
                     <div class="c-slider__progress-bar splide__progress-bar"></div>
                 </div>

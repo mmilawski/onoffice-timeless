@@ -242,12 +242,12 @@ while ($current_property = $pEstates->estateIterator()) {
         <div class="c-property-details__header-wrapper">
             <div class="c-property-details__header o-container">
                 <div class="c-property-details__header-row o-row">
-                    <div class="c-property-details__header-content u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
+                    <div class="c-property-details__header-content u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">
                         <?php if ($show_secret_sale_block): ?>
                             <?php
                             // --- SECRET SALE: PLACEHOLDER TITLE & PRICE ---
                             ?>
-                            <h1 class="c-property-details__title o-headline --h2">
+                            <h1 class="c-property-details__title o-headline --h1">
                                 <?php esc_html_e(
                                     'Exklusives Objekt',
                                     'oo_theme',
@@ -322,7 +322,7 @@ while ($current_property = $pEstates->estateIterator()) {
                         <?php }
 
                             if ($current_property['objekttitel']) { ?>
-                            <h1 class="c-property-details__title o-headline --h2">
+                            <h1 class="c-property-details__title o-headline --h1">
                                 <?php echo $current_property['objekttitel']; ?>
                             </h1>
                         <?php }
@@ -596,7 +596,21 @@ while ($current_property = $pEstates->estateIterator()) {
                                                     ],
                                                 ],
                                             ],
+                                        );?>
+                                        <div class="c-slider__fullscreen splide__fullscreen">
+                                        <span class="u-screen-reader-only"><?php esc_html_e(
+                                            'Vergrößern',
+                                            'oo_theme',
+                                        ); ?></span>
+                                        <?php echo oo_get_icon(
+                                            'resize',
+                                            true,
+                                            [
+                                                'class' =>
+                                                    'c-slider__icon splide__icon',
+                                            ],
                                         ); ?>
+                                    </div>
                                     </a>
                                 <?php
                                 } ?>
@@ -657,7 +671,7 @@ while ($current_property = $pEstates->estateIterator()) {
                 ); ?>
                 
                 <div class="c-property-details__fields-row o-row">
-                    <div class="c-property-details__fields-content u-offset-md-1 o-col-12 o-col-lg-10">
+                    <div class="c-property-details__fields-content u-offset-lg-1 o-col-12 o-col-lg-10">
 
                         <?php echo '<h2 class="c-property-details__headline o-headline --h2">' .
                             esc_html__('Immobiliendetails', 'oo_theme') .
@@ -778,7 +792,7 @@ while ($current_property = $pEstates->estateIterator()) {
         <div class="c-property-details__buttons-wrapper">
             <div class="c-property-details__container o-container">
                 <div class="c-property-details__row o-row">
-                    <div class="c-property-details__main u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
+                    <div class="c-property-details__main u-offset-lg-1 o-col-12 o-col-lg-10">
 
                         <div class="c-property-details__buttons-content c-buttons">
                             <?php
@@ -865,7 +879,7 @@ while ($current_property = $pEstates->estateIterator()) {
 
     if (!empty($property_ogulo_embeds) || !empty($property_ogulo_links)) {
                 echo '<div class="c-property-details__row o-row">';
-                echo '<div class="c-property-details__media u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">';
+                echo '<div class="c-property-details__media u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">';
                 echo '<h2 class="c-property-details__headline o-headline --h2">' .
                     esc_html__('360° Rundgänge', 'oo_theme') .
                     '</h2>';
@@ -930,7 +944,7 @@ while ($current_property = $pEstates->estateIterator()) {
                 !empty($property_movie_links)
             ) {
                 echo '<div class="c-property-details__row o-row">';
-                echo '<div class="c-property-details__media u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">';
+                echo '<div class="c-property-details__media u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">';
                 echo '<h2 class="c-property-details__headline o-headline --h2">' .
                     esc_html__('Videos', 'oo_theme') .
                     '</h2>';
@@ -1010,7 +1024,7 @@ while ($current_property = $pEstates->estateIterator()) {
             // Links
             if (!empty($property_links) || !empty($property_link_embeds)) {
                 echo '<div class="c-property-details__row o-row">';
-                echo '<div class="c-property-details__media u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">';
+                echo '<div class="c-property-details__media u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">';
                 echo '<h2 class="c-property-details__headline o-headline --h2">' .
                     esc_html__('Links', 'oo_theme') .
                     '</h2>';
@@ -1070,7 +1084,7 @@ while ($current_property = $pEstates->estateIterator()) {
 
     if (!empty($property_object_embeds) || !empty($property_object_links)) {
                 echo '<div class="c-property-details__row o-row">';
-                echo '<div class="c-property-details__media u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">';
+                echo '<div class="c-property-details__media u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">';
                 echo '<h2 class="c-property-details__headline o-headline --h2">' .
                     esc_html__('Objekte', 'oo_theme') .
                     '</h2>';
@@ -1153,7 +1167,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                 '-' .
                                 $field['field'];
                             ?>
-                        <div class="c-property-details__text u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
+                        <div class="c-property-details__text u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">
                             <h2 class="c-property-details__headline o-headline --h2">
                                 <?php esc_html_e(
                                     $field['label'],
@@ -1188,7 +1202,7 @@ while ($current_property = $pEstates->estateIterator()) {
                     ?>
 
                     <div 
-                        class="c-property-details__gallery c-slider splide --auto-height --is-property-details-slider"
+                        class="c-property-details__gallery c-slider splide --auto-height --is-property-details-slider --is-layout-slider"
                         data-splide='{
                             "type":"loop",
                             "perPage":1,
@@ -1202,8 +1216,14 @@ while ($current_property = $pEstates->estateIterator()) {
                             "focus":"center",
                             "classes":{"page":"c-slider__page splide__pagination__page"},
                             "breakpoints": {
-                                "768": {
-                                    "padding": "0"
+                                "1200": {
+                                    "padding":"10rem"
+                                },
+                                "992": {
+                                    "padding":"5rem"
+                                },
+                                "576": {
+                                    "padding":"2.5rem"
                                 }
                             }
                         }'
@@ -1470,7 +1490,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                     '-' .
                                     $field['field'];
                                 ?>
-                                <div class="c-property-details__text u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
+                                <div class="c-property-details__text u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">
                                     <h2 class="c-property-details__headline o-headline --h2">
                                         <?php esc_html_e(
                                             $field['label'],
@@ -1502,7 +1522,7 @@ while ($current_property = $pEstates->estateIterator()) {
 
                      <?php if (!empty($pEstates->getTotalCostsData())) {
                          $totalCostsData = $pEstates->getTotalCostsData(); ?>
-                             <div class="c-property-details__calculator-content u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
+                             <div class="c-property-details__calculator-content u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">
                                 <h2 class="c-property-details__headline o-headline --h2">
                                     <?php echo __(
                                         'Gesamtpreiskalkulator',
@@ -1657,7 +1677,7 @@ while ($current_property = $pEstates->estateIterator()) {
                      } ?>
 
                     <?php if (!empty($area_butler_url)) { ?>
-                        <div class="c-property-details__text-content u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
+                        <div class="c-property-details__text-content u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">
                             <h2 class="c-property-details__headline o-headline --h2">
                                 <?php echo __('Infrastruktur', 'oo_theme'); ?>
                             </h2>
@@ -1718,7 +1738,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                     '-' .
                                     $field['field'];
                                 ?>
-                                <div class="c-property-details__text u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
+                                <div class="c-property-details__text u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">
                                     <h2 class="c-property-details__headline o-headline --h2">
                                         <?php esc_html_e(
                                             $field['label'],
@@ -1759,7 +1779,7 @@ while ($current_property = $pEstates->estateIterator()) {
                         ]['energy_certificate'];
                         ?>
 
-                        <div class="c-property-details__energy u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl-8">
+                        <div class="c-property-details__energy u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">
                             <h2 class="c-property-details__headline o-headline --h2">
                                 <?= esc_html(
                                     $pEstates->getFieldLabel(

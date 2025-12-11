@@ -110,7 +110,7 @@ function oo_property_field_type($field, $item)
 }
 
 if (!empty($pEstates->getEstateContacts())) {
-    echo '<div class="c-property-details__contacts u-offset-md-1 o-col-12 o-col-lg-10 o-col-xl">';
+    echo '<div class="c-property-details__contacts u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl">';
 
     $configured_address_fields = $pEstates->getAddressFields();
 
@@ -288,7 +288,7 @@ if (!empty($pEstates->getEstateContacts())) {
             !empty($street_output) ||
             !empty($city_output)
         ) {
-            echo '<div class="c-contact-person__content o-col-12 o-col-md-7">';
+            echo '<div class="c-contact-person__content o-col-12 u-offset-lg-1 o-col-md-6">';
         }
 
         echo '<h2 class="c-contact-person__headline o-headline">';
