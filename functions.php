@@ -101,6 +101,10 @@ if (function_exists('oo_setup_parent_theme')) {
                         'Bitte wählen Sie einen Wert aus',
                         'oo_theme',
                     ),
+                    'numberTooSmall' => __(
+                        'Bitte geben Sie einen größeren Wert ein.',
+                        'oo_theme',
+                    ),
                     'requiredCheckbox' => __(
                         'Bitte bestätigen Sie das Feld',
                         'oo_theme',
