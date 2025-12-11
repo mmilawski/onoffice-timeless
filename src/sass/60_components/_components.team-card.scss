@@ -50,9 +50,9 @@
         transition: opacity 0.6s ease-in-out;
       }
 
-      .c-team-card__row.--name {
-        padding-top: 0.5rem;
-        transition: padding-top 0.1s ease-in-out;
+      .c-team-card__row.--job {
+        padding-bottom: 0.5rem;
+        transition: padding-bottom 0.1s ease-in-out;
       }
 
       .c-team-card__row.--padding {
@@ -191,7 +191,6 @@
       justify-content: space-between;
       align-items: center;
       flex-shrink: 0;
-      transition: padding-top 0.1s ease-in-out 0.5s;
       min-height: 3rem; // Match the line-height of the name
     }
 
@@ -207,6 +206,7 @@
     &.--job {
       font-size: 1rem;
       line-height: 1.75rem;
+      transition: opacity 0.6s ease-in-out, padding-bottom 0.1s ease-in-out 0.5s;
       display: -webkit-box;
       -webkit-box-orient: vertical;
       overflow: hidden;
