@@ -62,8 +62,6 @@
         word-wrap: break-word;
 
         @include media-breakpoint-up(md) {
-       
-
           .c-team__members & {
             -webkit-line-clamp: 8;
             line-clamp: 8;

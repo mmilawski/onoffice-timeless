@@ -22,6 +22,7 @@ $is_description = filter_var(
 // Settings
 $settings = get_field('settings') ?? [];
 $bg_color = $settings['bg_color'] ?? 'bg-transparent';
+$third_parties = get_field('third_parties', 'option') ?? null;
 
 // Slider
 $slider = get_field('slider') ?? [];
@@ -39,17 +40,22 @@ $image_width_xxxl = '378';
 $rating_provider = $card['rating_provider'] ?? null;
 $rating = 0.0;
 $google_api_key = $card['google_api_key'] ?? null;
-$place_id = $card['place_id'] ?? null;
-$place_id_url = "https://www.google.com/maps/place/?q=place_id:$place_id";
+$place_id = $third_parties['google']['place_id'] ?? null;
+$place_id_override = $card['place_id'] ?? null;
 $proven_expert_username = $card['proven_expert_username'] ?? null;
 $proven_expert_password = $card['proven_expert_password'] ?? null;
 $proven_expert_url = '';
 
 if ($rating_provider === 'google') {
+    if (!empty($place_id_override)) {
+        $place_id = $place_id_override;
+    }
+
     if ($google_api_key && $place_id) {
-        $rating = floatval(
-            oo_get_google_place($place_id, $google_api_key, 'rating') ?? 0.0,
-        );
+        $rating =
+            oo_get_google_place($place_id, $google_api_key, 5, 'rating')[
+                'rating'
+            ] ?? 0.0;
     }
 } elseif ($rating_provider === 'proven_expert') {
     if ($proven_expert_username && $proven_expert_password) {
@@ -138,21 +144,23 @@ if ($rating_provider === 'google') {
 
         <div class="c-team-card__row --name">
             <?php if (!empty($name)) { ?>
-                <p id="name-<?php echo $post_id; ?>" class="c-team-card__name"><?php
-                    echo $name; ?></p>
+                <p id="name-<?php echo $post_id; ?>" class="c-team-card__name"><?php echo $name; ?></p>
             <?php } ?>
         </div>
 
         <?php if (
             !empty($card['rating_provider']) &&
-            $card['rating_provider'] !== 'none'
+            $card['rating_provider'] !== 'none' &&
+            isset($rating)
         ): ?>
-            <div class="c-team-card__row --rating">
-                <?php oo_get_template('components', '', 'component-stars', [
-                    'rating' => $rating,
-                    'size' => 'medium-small',
-                    'light_empty_stars' => true,
-                ]); ?>
+            <div class="c-team-card__row --rating --star-color-bg-primary">
+                <?php if ($card['rating_provider'] === 'google') {
+                    oo_get_template('components', '', 'component-stars', [
+                        'rating' => $rating,
+                        'size' => 'medium-small',
+                        'light_empty_stars' => false,
+                    ]);
+                } ?>
             </div>
         <?php endif; ?>
 

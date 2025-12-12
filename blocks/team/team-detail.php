@@ -31,17 +31,22 @@ $image_width_xxxl = '598';
 $rating_provider = $card['rating_provider'];
 $rating = 0.0;
 $google_api_key = $card['google_api_key'] ?? null;
-$place_id = $card['place_id'] ?? null;
-$place_id_url = "https://www.google.com/maps/place/?q=place_id:$place_id";
+$place_id = $third_parties['google']['place_id'] ?? null;
+$place_id_override = $card['place_id'] ?? null;
 $proven_expert_username = $card['proven_expert_username'];
 $proven_expert_password = $card['proven_expert_password'];
 $proven_expert_url = '';
 
 if ($rating_provider === 'google') {
+    if (!empty($place_id_override)) {
+        $place_id = $place_id_override;
+    }
+
     if ($google_api_key && $place_id) {
-        $rating = floatval(
-            oo_get_google_place($place_id, $google_api_key, 'rating') ?? 0.0,
-        );
+        $rating =
+            oo_get_google_place($place_id, $google_api_key, 5, 'rating')[
+                'rating'
+            ] ?? 0.0;
     }
 } elseif ($rating_provider === 'proven_expert') {
     if ($proven_expert_username && $proven_expert_password) {
@@ -118,7 +123,7 @@ if ($rating_provider === 'google') {
                 <?php } ?>
 
                 <div class="c-team-detail__content">
-                    <div>
+                    <div class="c-team-detail__content-wrapper">
                         <?php if (!empty($name) || !empty($job)) { ?>
                             <?php if (!empty($job)) { ?>
                                 <p class="c-team-detail__job"><?php echo $job; ?></p>
@@ -130,29 +135,14 @@ if ($rating_provider === 'google') {
                     </div>
                     <?php if (
                         !empty($card['rating_provider']) &&
-                        $card['rating_provider'] !== 'none'
+                        $card['rating_provider'] !== 'none' &&
+                        isset($rating)
                     ): ?>
-
-
- <?php 
- 
-
- if (isset($rating['rating']) && $rating_provider === 'google') { 
-    ?>
+<div class="c-team-detail__reviews --star-color-bg-primary">
+                
+         
+                           
                             <?php oo_get_template(
-                                'components',
-                                '',
-                                'component-stars',
-                                [
-                                    'rating' => $rating['rating'],
-                                    'size' => 'medium-small',
-                                    'light_empty_stars' => true,
-                                ],
-                            ); 
-                            }
-
-                         else {
-                            oo_get_template(
                                 'components',
                                 '',
                                 'component-stars',
@@ -161,14 +151,11 @@ if ($rating_provider === 'google') {
                                     'size' => 'medium-small',
                                     'light_empty_stars' => true,
                                 ],
-                            ); 
+                            ); ?>  </div>
+                            
+                            
+                          <?php endif; ?>
 
-
-                         }
-
-
-
-                  endif; ?>
                     <?php if (!empty($card['languages'])) { ?>
                         <p class="c-team-detail__languages"><?php echo $card[
                             'languages'

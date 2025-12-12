@@ -43,7 +43,12 @@ if (
     !empty($google_api_key) &&
     !empty($place_id)
 ) {
-    $rating = oo_get_google_place($place_id, $google_api_key, 5, 'rating');
+    $rating = oo_get_google_place(
+        $place_id,
+        $google_api_key,
+        5,
+        'total_ratings',
+    );
 }
 
 $tooltip_headline = esc_html__('Echtheit der Bewertungen', 'oo_theme');
