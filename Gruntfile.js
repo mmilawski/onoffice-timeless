@@ -92,6 +92,7 @@ const releaseFiles = [
   'blocks/**/*.json',
   'blocks/**/build/**/*.css',
   'blocks/**/build/**/*.js',
+  'acfe-php/**',
 
   // MAIN
   'build/**',
