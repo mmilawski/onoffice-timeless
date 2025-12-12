@@ -336,18 +336,27 @@
       pointer-events: none;
     }
 
-    #{$c-slider}__arrows {
-      height: 100%;
-    }
-    #{$c-slider}__arrow {
-      pointer-events: auto;
+    #{$c-slider}__controls-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 2.5rem auto 2.5rem auto;
 
-      &.--next {
-        right: 1rem;
+      @include media-breakpoint-up(xl) {
+        padding: 0;
       }
-      &.--prev {
-        left: 1rem;
-      }
+    }
+
+    #{$c-slider}__controls {
+      bottom: unset;
+    }
+
+    #{$c-slider}__arrows {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      pointer-events: auto;
     }
   }
   &.--is-properties-images-slider {
