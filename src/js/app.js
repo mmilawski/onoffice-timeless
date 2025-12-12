@@ -290,6 +290,7 @@ jQuery(document).ready(function() {
           field: "text",
           direction: "asc"
         },
+        // placeholder: select.getAttribute("placeholder") ?? select.getAttribute("data-placeholder") ?? "",
         plugins: plugins,
         onInitialize: function() {
           let labelText = '';
