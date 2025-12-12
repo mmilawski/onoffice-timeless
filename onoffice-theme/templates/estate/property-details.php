@@ -641,37 +641,38 @@ while ($current_property = $pEstates->estateIterator()) {
                                     } ?>
                                 </div>
                             </div>
-
-                            <div class="c-slider__navigation splide__navigation">
-                                <div class="c-slider__arrows splide__arrows">
-                                    <button class="c-slider__arrow c-slider__arrow--prev splide__arrow splide__arrow--prev">
-                                        <span class="u-screen-reader-only"><?php esc_html_e(
-                                            'Vorheriges',
-                                            'oo_theme',
-                                        ); ?></span>
-                                        <?php echo oo_get_icon(
-                                            'chevron-left',
-                                            true,
-                                            [
-                                                'class' =>
-                                                    'c-slider__icon splide__icon',
-                                            ],
-                                        ); ?>
-                                    </button>
-                                    <button class="c-slider__arrow c-slider__arrow--next splide__arrow splide__arrow--next">
-                                        <span class="u-screen-reader-only"><?php esc_html_e(
-                                            'Nächstes',
-                                            'oo_theme',
-                                        ); ?></span>
-                                        <?php echo oo_get_icon(
-                                            'chevron-right',
-                                            true,
-                                            [
-                                                'class' =>
-                                                    'c-slider__icon splide__icon',
-                                            ],
-                                        ); ?>
-                                    </button>
+                            <div class="o-container">
+                                <div class="c-slider__navigation splide__navigation o-row">
+                                    <div class="c-slider__arrows splide__arrows">
+                                        <button class="c-slider__arrow c-slider__arrow--prev splide__arrow splide__arrow--prev">
+                                            <span class="u-screen-reader-only"><?php esc_html_e(
+                                                'Vorheriges',
+                                                'oo_theme',
+                                            ); ?></span>
+                                            <?php echo oo_get_icon(
+                                                'chevron-left',
+                                                true,
+                                                [
+                                                    'class' =>
+                                                        'c-slider__icon splide__icon',
+                                                ],
+                                            ); ?>
+                                        </button>
+                                        <button class="c-slider__arrow c-slider__arrow--next splide__arrow splide__arrow--next">
+                                            <span class="u-screen-reader-only"><?php esc_html_e(
+                                                'Nächstes',
+                                                'oo_theme',
+                                            ); ?></span>
+                                            <?php echo oo_get_icon(
+                                                'chevron-right',
+                                                true,
+                                                [
+                                                    'class' =>
+                                                        'c-slider__icon splide__icon',
+                                                ],
+                                            ); ?>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
 
@@ -1520,36 +1521,38 @@ while ($current_property = $pEstates->estateIterator()) {
                                 </div>
                             </div>
 
-                            <div class="c-slider__navigation splide__navigation">
-                                <div class="c-slider__arrows splide__arrows">
-                                    <button class="c-slider__arrow c-slider__arrow--prev splide__arrow splide__arrow--prev">
-                                        <span class="u-screen-reader-only"><?php esc_html_e(
-                                            'Vorheriges',
-                                            'oo_theme',
-                                        ); ?></span>
-                                        <?php echo oo_get_icon(
-                                            'chevron-left',
-                                            true,
-                                            [
-                                                'class' =>
-                                                    'c-slider__icon splide__icon',
-                                            ],
-                                        ); ?>
-                                    </button>
-                                    <button class="c-slider__arrow c-slider__arrow--next splide__arrow splide__arrow--next">
-                                        <span class="u-screen-reader-only"><?php esc_html_e(
-                                            'Nächstes',
-                                            'oo_theme',
-                                        ); ?></span>
-                                        <?php echo oo_get_icon(
-                                            'chevron-right',
-                                            true,
-                                            [
-                                                'class' =>
-                                                    'c-slider__icon splide__icon',
-                                            ],
-                                        ); ?>
-                                    </button>
+                            <div class="o-container">
+                                <div class="c-slider__navigation splide__navigation o-row">
+                                    <div class="c-slider__arrows splide__arrows">
+                                        <button class="c-slider__arrow c-slider__arrow--prev splide__arrow splide__arrow--prev">
+                                            <span class="u-screen-reader-only"><?php esc_html_e(
+                                                'Vorheriges',
+                                                'oo_theme',
+                                            ); ?></span>
+                                            <?php echo oo_get_icon(
+                                                'chevron-left',
+                                                true,
+                                                [
+                                                    'class' =>
+                                                        'c-slider__icon splide__icon',
+                                                ],
+                                            ); ?>
+                                        </button>
+                                        <button class="c-slider__arrow c-slider__arrow--next splide__arrow splide__arrow--next">
+                                            <span class="u-screen-reader-only"><?php esc_html_e(
+                                                'Nächstes',
+                                                'oo_theme',
+                                            ); ?></span>
+                                            <?php echo oo_get_icon(
+                                                'chevron-right',
+                                                true,
+                                                [
+                                                    'class' =>
+                                                        'c-slider__icon splide__icon',
+                                                ],
+                                            ); ?>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
 

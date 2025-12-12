@@ -72,8 +72,12 @@
   &.--has-icon {
     display: flex;
     gap: 1.5rem;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+
+    @include media-breakpoint-up(md) {
+      justify-content: space-between;
+    }
   }
 
   &.--is-small {
