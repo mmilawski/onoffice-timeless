@@ -132,7 +132,27 @@ if ($rating_provider === 'google') {
                         !empty($card['rating_provider']) &&
                         $card['rating_provider'] !== 'none'
                     ): ?>
+
+
+ <?php 
+ 
+
+ if (isset($rating['rating']) && $rating_provider === 'google') { 
+    ?>
                             <?php oo_get_template(
+                                'components',
+                                '',
+                                'component-stars',
+                                [
+                                    'rating' => $rating['rating'],
+                                    'size' => 'medium-small',
+                                    'light_empty_stars' => true,
+                                ],
+                            ); 
+                            }
+
+                         else {
+                            oo_get_template(
                                 'components',
                                 '',
                                 'component-stars',
@@ -141,8 +161,14 @@ if ($rating_provider === 'google') {
                                     'size' => 'medium-small',
                                     'light_empty_stars' => true,
                                 ],
-                            ); ?>
-                    <?php endif; ?>
+                            ); 
+
+
+                         }
+
+
+
+                  endif; ?>
                     <?php if (!empty($card['languages'])) { ?>
                         <p class="c-team-detail__languages"><?php echo $card[
                             'languages'

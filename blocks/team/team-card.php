@@ -139,12 +139,7 @@ if ($rating_provider === 'google') {
         <div class="c-team-card__row --name">
             <?php if (!empty($name)) { ?>
                 <p id="name-<?php echo $post_id; ?>" class="c-team-card__name"><?php
-$words = explode(' ', $name);
-$word_count = count($words);
-$first_line = implode(' ', array_slice($words, 0, ceil($word_count / 2)));
-$second_line = implode(' ', array_slice($words, ceil($word_count / 2)));
-echo $first_line . '<br>' . $second_line;
-?></p>
+                    echo $name; ?></p>
             <?php } ?>
         </div>
 
