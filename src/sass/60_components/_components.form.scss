@@ -222,12 +222,12 @@
 
       @include media-breakpoint-only(xs) {
         right: 1rem;
-        top: 1rem;
+        top: 0.75rem;
       }
 
       @include media-breakpoint-only(sm) {
         right: 1.5rem;
-        top: 1rem;
+        top: 0.75rem;
       }
 
       .--bg-light & {
@@ -276,7 +276,12 @@
       display: flex;
       flex-direction: column;
       gap: 2.5rem;
-      padding: 1.5rem;
+      padding: 2rem 1rem;
+
+      @include media-breakpoint-up(md) {
+        padding: 1.5rem;
+      }
+
       #{$c-form}__button-wrapper {
         gap: 2.5rem;
         align-items: flex-end;
