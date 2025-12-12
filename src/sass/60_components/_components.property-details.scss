@@ -36,7 +36,6 @@
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
-    padding: 0;
 
     @include media-breakpoint-up(xl) {
       gap: 5rem;
@@ -282,17 +281,19 @@
   }
 
   &__gallery-wrapper {
+    .c-property-details__container {
+      padding: 0;
+    }
   }
 
   &__gallery {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
 
     @include media-breakpoint-up(md) {
-      display: flex;
-      gap: 2.5rem;
       height: 50vh;
     }
-
     @include media-breakpoint-up(lg) {
       height: 75vh;
     }
@@ -301,9 +302,11 @@
       display: flex;
       justify-content: center;
       width: 100%;
+      height: 12.5rem;
 
-      @include media-breakpoint-up(xl) {
+      @include media-breakpoint-up(md) {
         aspect-ratio: unset;
+        height: 100%;
         width: 100%;
         max-width: 100%;
       }
@@ -315,7 +318,7 @@
       height: 100%;
       object-fit: cover;
 
-      @include media-breakpoint-up(xl) {
+      @include media-breakpoint-up(md) {
         object-fit: cover;
       }
     }
@@ -328,7 +331,6 @@
       margin: 0 auto;
       max-width: 100%;
       position: relative;
-      margin-bottom: 1rem;
       overflow: hidden;
       outline: $outline;
       outline-offset: $outline-offset;
@@ -337,37 +339,6 @@
 
       @include media-breakpoint-up(lg) {
         margin-bottom: 0;
-      }
-
-      @include media-breakpoint-up(xl) {
-        &:nth-child(n) {
-          display: flex;
-          content-visibility: visible;
-          margin: 0;
-
-          #{$c-property-details}__open-lightbox {
-            display: none;
-          }
-        }
-
-        &:nth-child(4) {
-          #{$c-property-details}__open-lightbox {
-            display: block;
-          }
-
-          &::after {
-            content: '';
-          }
-        }
-
-        &:nth-child(n + 5) {
-          display: none;
-          content-visibility: hidden;
-        }
-      }
-
-      &:nth-child(4) {
-        position: relative;
       }
     }
 
