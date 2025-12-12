@@ -85,7 +85,7 @@
             -webkit-line-clamp: 2;
             line-clamp: 2;
           }
-      }
+        }
 
         @include media-breakpoint-up(xxl) {
           -webkit-line-clamp: 2;
@@ -244,7 +244,6 @@
         -webkit-line-clamp: 4;
         line-clamp: 4;
       }
-
 
       @include media-breakpoint-up(sm) {
         -webkit-line-clamp: 6;
