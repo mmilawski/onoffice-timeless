@@ -335,7 +335,7 @@
       @include media-breakpoint-up(md) {
         gap: 2rem;
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
       .c-form__field-group:has(
           .o-label[data-icon-button-group]:not([style*='display: none']):not(
