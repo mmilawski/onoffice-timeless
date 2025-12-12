@@ -40,7 +40,9 @@ if (!function_exists('printRegion')) {
 if (!function_exists('printCountry')) {
     function printCountry($values, $selectedValue)
     {
-        echo '<option value=""></option>';
+        echo '<option value="">' .
+            esc_html__('Bitte wählen', 'oo_theme') .
+            '</option>';
         foreach ($values as $key => $name) {
             $selected = null;
             if ($key == $selectedValue) {
@@ -213,7 +215,9 @@ if (!function_exists('renderFieldEstateSearch')) {
                 $formId .
                 '" name="' .
                 esc_html($fieldName) .
-                '[]" multiple="multiple">';
+                '[]" multiple="multiple" data-placeholder="' .
+                $placeholder .
+                '">';
             $output .= $htmlOptions;
             $output .= '</select>';
             $output .= '</div>';
@@ -232,6 +236,8 @@ if (!function_exists('renderFieldEstateSearch')) {
                 $formId .
                 '" name="' .
                 esc_html($fieldName) .
+                '" data-placeholder="' .
+                $placeholder .
                 '">';
             $output .=
                 '<option value="" ' .
@@ -643,9 +649,14 @@ if (!function_exists('renderFormField')) {
                 '" size="1" ' .
                 renderAutocomplete($fieldName) .
                 $requiredAttribute .
-                '>';
+                ' data-placeholder="' .
+                esc_html__('Bitte wählen', 'oo_theme') .
+                '">';
             /* translators: %s will be replaced with the translated field name. */
-            $output .= '<option value=""></option>';
+            $output .=
+                '<option value="">' .
+                esc_html__('Bitte wählen', 'oo_theme') .
+                '</option>';
             foreach ($permittedValues as $key => $value) {
                 if (is_array($selectedValue)) {
                     $isSelected = in_array($key, $selectedValue, true);
@@ -702,7 +713,9 @@ if (!function_exists('renderFormField')) {
                 esc_html($fieldName) .
                 '[]" multiple="multiple" ' .
                 $requiredAttribute .
-                '>';
+                ' data-placeholder="' .
+                esc_html__('Bitte wählen', 'oo_theme') .
+                '">';
             $output .= $htmlOptions;
             $output .= '</select><div class="c-form__error-message"></div>';
             $output .= '</div>';
@@ -776,7 +789,9 @@ if (!function_exists('renderFormField')) {
                         $pForm->getSearchcriteriaRangeInfosForField($fieldName),
                     )) > 0
             ) {
-                if (str_contains($fieldName, 'flaeche')) {
+                if (str_contains($fieldName, 'zimmer')) {
+                    $placeholderAddition = ' ...';
+                } elseif (str_contains($fieldName, 'flaeche')) {
                     $placeholderAddition = ' (in m²)';
                 } else {
                     $placeholderAddition = '';
@@ -886,7 +901,9 @@ if (!function_exists('renderRegionalAddition')) {
             '" ' .
             $multipleAttr .
             $requiredAttribute .
-            '>';
+            ' data-placeholder="' .
+            esc_html__('Bitte wählen', 'oo_theme') .
+            '">';
         $pRegionController = new RegionController();
 
         if ($permittedValues !== null) {
@@ -897,7 +914,9 @@ if (!function_exists('renderRegionalAddition')) {
             $regions = $pRegionController->getRegions();
         }
         ob_start();
-        echo '<option value=""></option>';
+        echo '<option value="">' .
+            esc_html__('Bitte wählen', 'oo_theme') .
+            '</option>';
         foreach ($regions as $pRegion) {
             /* @var $pRegion Region */
             printRegion($pRegion, $selectedValue ?? []);
@@ -924,7 +943,9 @@ if (!function_exists('renderCityField')) {
             esc_attr($fieldName) .
             '[]" multiple="multiple" ' .
             $requiredAttribute .
-            '>';
+            ' data-placeholder="' .
+            esc_html__('Bitte wählen', 'oo_theme') .
+            '">';
 
         if (is_array($permittedValues)) {
             foreach ($permittedValues as $value) {

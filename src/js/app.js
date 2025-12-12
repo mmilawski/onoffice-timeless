@@ -278,7 +278,6 @@ jQuery(document).ready(function() {
           'uncheckedClassNames': ['ts-unchecked'],
       }
 
-      var is_sorting = select.hasClass('onofficeSortListSelector');
       const is_regionaler_zusatz = select.length && select[0].id === 'regionaler_zusatz';
 
       const tom = new TomSelect(select, {
@@ -291,7 +290,7 @@ jQuery(document).ready(function() {
           field: "text",
           direction: "asc"
         },
-        placeholder: is_sorting ? "Bitte auswählen" : "",
+        placeholder: select.getAttribute("placeholder") ?? select.getAttribute("data-placeholder") ?? "",
         plugins: plugins,
         onInitialize: function() {
           let labelText = '';
