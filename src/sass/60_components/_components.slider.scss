@@ -390,22 +390,6 @@
   &.--is-property-details-slider {
     position: relative;
 
-    #{$c-slider}__track {
-      height: 200px;
-
-      @include media-breakpoint-up(sm) {
-        height: unset;
-      }
-    }
-
-    &.--is-layout-slider #{$c-slider}__track {
-      height: 200px;
-
-      @include media-breakpoint-up(sm) {
-        height: 400px;
-      }
-    }
-
     #{$c-slider}__navigation {
       width: 100%;
       height: auto;
