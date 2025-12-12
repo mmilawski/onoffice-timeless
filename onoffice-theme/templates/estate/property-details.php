@@ -383,7 +383,7 @@ while ($current_property = $pEstates->estateIterator()) {
                             "gap":16,
                             "arrows":true,
                             "snap":true,
-                            "lazyLoad":"nearby",
+                            "lazyLoad":false,
                             "pagination":true,
                             "updateOnMove":true,
                             "focus":"center",
@@ -524,6 +524,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                             'component-image',
                                             [
                                                 'image' => $image,
+                                                'loading' => 'eager',
                                                 'picture_class' =>
                                                     'c-property-details__gallery-picture o-picture',
                                                 'image_class' =>
@@ -1205,7 +1206,7 @@ while ($current_property = $pEstates->estateIterator()) {
                             "gap":16,
                             "arrows":true,
                             "snap":true,
-                            "lazyLoad":"nearby",
+                            "lazyLoad":false,
                             "pagination":true,
                             "updateOnMove":true,
                             "focus":"center",
@@ -1346,6 +1347,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                             'component-image',
                                             [
                                                 'image' => $image,
+                                                'loading' => 'eager',
                                                 'picture_class' =>
                                                     'c-property-details__gallery-picture o-picture',
                                                 'image_class' =>
