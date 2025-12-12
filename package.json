@@ -15,8 +15,8 @@
 		"build": "grunt && npm run format && npm run shared-build && prettier --check \"**/*.{js,scss,php}\" && echo \"Build wurde erfolgreich erstellt.\"",
 		"release": "npm run format && npm run build && grunt compress && echo \"Build & ZIP wurden erfolgreich erstellt und stehen zum Release bereit.\"",
 		"deploy": "npm run format && npm run build && grunt clean",
-		"i18n": "[ -f shared/bin/i18n.sh ] || { echo 'shared/bin/i18n.sh nicht gefunden, überspringe i18n.'; exit 0; } && sh shared/bin/i18n.sh || echo 'i18n fehlgeschlagen'",
-		"shared-build": "[ -f shared/bin/build.sh ] || { echo 'shared/bin/build.sh nicht gefunden, überspringe shared-build.'; exit 0; } && sh shared/bin/build.sh || echo 'shared-build fehlgeschlagen'"
+		"i18n": "[ -f shared/bin/i18n.sh ] || { echo 'shared/bin/i18n.sh nicht gefunden, überspringe i18n.'; exit 0; } && bash shared/bin/i18n.sh || echo 'i18n fehlgeschlagen'",
+		"shared-build": "[ -f shared/bin/build.sh ] || { echo 'shared/bin/build.sh nicht gefunden, überspringe shared-build.'; exit 0; } && bash shared/bin/build.sh || echo 'shared-build fehlgeschlagen'"
 	},
 	"repository": {
 		"type": "git",
