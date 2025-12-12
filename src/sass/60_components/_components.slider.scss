@@ -271,7 +271,7 @@
     height: $icon-wrapper-size;
     background-color: var(--oo-color-mix-bg-contrast-05);
     padding: 0.625rem;
-    
+
     @include media-breakpoint-up(sm) {
       display: block;
     }
@@ -402,8 +402,7 @@
       }
     }
 
-    &.--is-layout-slider
-    #{$c-slider}__track {
+    &.--is-layout-slider #{$c-slider}__track {
       height: 200px;
 
       @include media-breakpoint-up(sm) {
