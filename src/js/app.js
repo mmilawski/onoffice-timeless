@@ -1485,7 +1485,6 @@ function initVideoToggle() {
   
       btn.attr('aria-pressed', newState);
       btn.attr('aria-label', newLabel);
-      btn.find('.c-banner__sr-label').text(newLabel);
     });
 }
 

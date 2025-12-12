@@ -46,6 +46,7 @@
   }
 
   @include hover() {
+    color: var(--oo-color-contrast-primary);
     background-color: var(--oo-color-mix-primary-contrast-20);
     border-color: var(--oo-color-mix-primary-contrast-20);
   }
