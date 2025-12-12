@@ -234,6 +234,11 @@
       @include active() {
         background-color: var(--oo-color-mix-status-contrast-40);
       }
+
+      .c-icon-button__icon {
+        width: $icon-size-small;
+        height: $icon-size-small;
+      }
     }
   }
 

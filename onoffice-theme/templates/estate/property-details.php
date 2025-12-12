@@ -597,14 +597,14 @@ while ($current_property = $pEstates->estateIterator()) {
                                                 ],
                                             ],
                                         ); ?>
-                                        <div class="c-slider__fullscreen splide__fullscreen">
+                                        <div class="c-slider__fullscreen c-icon-button splide__fullscreen">
                                         <span class="u-screen-reader-only"><?php esc_html_e(
                                             'Vergrößern',
                                             'oo_theme',
                                         ); ?></span>
                                         <?php echo oo_get_icon('resize', true, [
                                             'class' =>
-                                                'c-slider__icon splide__icon',
+                                                'c-icon-button__icon',
                                         ]); ?>
                                     </div>
                                     </a>

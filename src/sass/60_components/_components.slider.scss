@@ -267,13 +267,9 @@
     position: absolute;
     right: 0.5rem;
     bottom: 0.5rem;
-    width: $icon-wrapper-size;
-    height: $icon-wrapper-size;
-    background-color: var(--oo-color-mix-bg-contrast-05);
-    padding: 0.625rem;
 
     @include media-breakpoint-up(sm) {
-      display: block;
+      display: flex;
     }
   }
 
