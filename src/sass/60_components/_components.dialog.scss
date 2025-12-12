@@ -75,26 +75,12 @@
 
     #{$c-dialog}__header {
       padding: 0;
-      margin-left: 1rem;
-      justify-content: space-between;
+      justify-content: end;
       align-items: flex-start;
-      @include media-breakpoint-up(md) {
-        margin-left: 2.5rem;
-      }
     }
 
     #{$c-dialog}__wrapper {
       gap: 2rem;
-    }
-
-    #{$c-dialog}__title {
-      hyphens: auto;
-      text-wrap-style: balance;
-      word-break: break-word;
-
-      @include media-breakpoint-up(sm) {
-        hyphens: manual;
-      }
     }
 
     #{$c-dialog}__content {
@@ -106,13 +92,6 @@
 
     #{$c-dialog}__close {
       background-color: transparent;
-    }
-
-    #{$c-dialog}__title {
-      padding-top: 1rem;
-      @include media-breakpoint-up(md) {
-        padding-top: 2rem;
-      }
     }
   }
 }

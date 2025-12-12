@@ -158,7 +158,7 @@ if ($showFormAsModal):
         'form_content' => $form_content,
         'form_id' => $pForm->getFormId(),
         'form_no' => $pForm->getFormNo(),
-        'additional_dialog_class' => '--is-form-modal',
+        'additional_dialog_class' => '--is-form-modal --is-leadgen',
     ]);
     // Render form directly
 else:
