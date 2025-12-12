@@ -59,9 +59,7 @@ if ($config['type'] === 'enterprise') {
             ooRecaptchaEnterpriseInit(<?php echo json_encode(
                 $formNo,
             ); ?>, <?php echo json_encode($config['siteKey']); ?>);
-            ooRecaptchaUsercentrics(<?php echo json_encode(
-                $formNo,
-            ); ?>, ['Hko_qNsui-Q', 'cfADcn3E3']);
+            ooRecaptchaUsercentrics(<?php echo json_encode($formNo); ?>);
         });
     </script>
     <?php
@@ -85,9 +83,7 @@ if ($config['type'] === 'enterprise') {
             if (form && btn && onOffice?.captchaControl) {
                 onOffice.captchaControl(form, btn);
             }
-            ooRecaptchaUsercentrics(<?php echo json_encode(
-                $formNo,
-            ); ?>, ['Hko_qNsui-Q', 'cfADcn3E3']);
+            ooRecaptchaUsercentrics(<?php echo json_encode($formNo); ?>);
         });
     </script>
     <?php
