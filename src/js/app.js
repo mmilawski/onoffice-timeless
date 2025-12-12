@@ -706,7 +706,8 @@ jQuery(document).ready(function() {
       </div>
     </div>`;
     
-    const lightbox = GLightbox({
+    window.ooLightbox = GLightbox({
+      selector: '.glightbox:not(.splide__slide--clone)', 
       loop: true,
       moreLength: 0,
       zoomable: false,
@@ -715,11 +716,11 @@ jQuery(document).ready(function() {
       slideHTML: customSlideHTML
     });
 
-    lightbox.on('open', () => {
+    window.ooLightbox.on('open', () => {
       const closeElements = document.querySelectorAll('.gclose');
       closeElements.forEach(closeButton => {
         closeButton.addEventListener("click", function(e){ 
-          lightbox.close();
+          window.ooLightbox.close();
         });
       });
     });
@@ -851,6 +852,27 @@ jQuery(document).ready(function() {
         splide.on('mounted', sanitize);
         splide.on('move', sanitize);
         splide.on('refresh', sanitize);
+      }
+
+      if ($slider.hasClass('c-property-details__gallery')) {
+        $slider.on('click', '.splide__slide--clone', function(e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            
+            if (typeof window.ooLightbox !== 'undefined') {
+                const clickedUrl = $(this).attr('href');
+                
+                const slideIndex = window.ooLightbox.elements.findIndex(element => 
+                    element.href === clickedUrl || element.node.href === clickedUrl
+                );
+
+                if (slideIndex > -1) {
+                    setTimeout(() => {
+                        window.ooLightbox.openAt(slideIndex);
+                    }, 10);
+                }
+            }
+        });
       }
 
       const innerslider = $slider.hasClass("--is-properties-images-slider");

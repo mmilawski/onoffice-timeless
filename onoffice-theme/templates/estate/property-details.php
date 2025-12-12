@@ -603,8 +603,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                             'oo_theme',
                                         ); ?></span>
                                         <?php echo oo_get_icon('resize', true, [
-                                            'class' =>
-                                                'c-icon-button__icon',
+                                            'class' => 'c-icon-button__icon',
                                         ]); ?>
                                     </div>
                                     </a>
