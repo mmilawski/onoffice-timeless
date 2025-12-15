@@ -411,7 +411,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                 "breakpoints": {
                                     "1200": { "padding":"10rem" },
                                     "992": { "padding":"5rem" },
-                                    "576": { "padding":"2.5rem" }
+                                    "576": { "padding":"2.5rem", "gap": 8 }
                                 }
                             }'
                         >
@@ -1289,7 +1289,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                 "breakpoints": {
                                     "1200": { "padding":"10rem" },
                                     "992": { "padding":"5rem" },
-                                    "576": { "padding":"2.5rem" }
+                                    "576": { "padding":"2.5rem", "gap": 8 }
                                 }
                             }'
                         >
