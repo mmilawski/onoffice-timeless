@@ -89,16 +89,15 @@
     }
   }
 
+  &__slider-controls {
+    padding: 0;
+  }
+
   &__units-wrapper,
   &__similar-wrapper {
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
-
-    @include media-breakpoint-up(xl) {
-      gap: 5rem;
-      margin-top: 5rem;
-    }
   }
 
   &__media-wrapper {
@@ -117,6 +116,10 @@
     @include media-breakpoint-up(xl) {
       gap: 2rem;
     }
+  }
+
+  &__units-slider {
+    align-items: center;
   }
 
   &__contacts {
