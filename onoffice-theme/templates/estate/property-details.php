@@ -56,6 +56,14 @@ $iframe_display = filter_var(
     FILTER_VALIDATE_BOOLEAN,
 );
 
+$property_detail_opts = get_field('general', 'option')['property_detail'] ?? [];
+$is_share_available = isset($property_detail_opts['property_share_button'])
+    ? filter_var(
+        $property_detail_opts['property_share_button'],
+        FILTER_VALIDATE_BOOLEAN,
+    )
+    : true;
+
 /** @var EstateDetail $pEstates */
 
 $pEstates->resetEstateIterator();
@@ -850,7 +858,7 @@ while ($current_property = $pEstates->estateIterator()) {
                             <?php }
                             ?>
                         
-
+                            <?php if ($is_share_available) { ?>
                             <div class="c-property-details__share">
                                 <?php
                                 global $wp;
@@ -878,14 +886,13 @@ while ($current_property = $pEstates->estateIterator()) {
                                             'button_icon' => 'share',
                                             'popup_id' =>
                                                 'property-detail-share',
-                                            'share_link' => home_url(
-                                                add_query_arg([], $wp->request),
-                                            ),
+                                            'share_link' => $property_link,
                                         ],
                                     );
                                 }
                                 ?>
                             </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
