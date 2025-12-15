@@ -193,52 +193,6 @@ echo $first_line . '<br>' . $second_line;
                     !empty($networks)
                 ) { ?>
                     <div class="c-team-card__contact-wrapper">
-                        <?php if (!empty($contact['email'])): ?>
-                            <p class="c-team-card__contact --is-email">
-                                <?php oo_get_template(
-                                    'components',
-                                    '',
-                                    'component-email',
-                                    [
-                                        'email' => $contact['email'],
-                                        'additional_link_class' => $bg_color
-                                            ? '--is-underlined --text-color --on-' .
-                                                $bg_color
-                                            : '--is-underlined --text-color',
-                                        'aria-label' => sprintf(
-                                            esc_attr__(
-                                                'E-Mail senden an %s',
-                                                'oo_theme',
-                                            ),
-                                            $contact['email'],
-                                        ),
-                                    ],
-                                ); ?>
-                            </p>
-                        <?php endif; ?>
-                        <?php if (!empty($contact['phone'])): ?>
-                            <p class="c-team-card__contact --is-phone">
-                                <?php oo_get_template(
-                                    'components',
-                                    '',
-                                    'component-contact-numbers',
-                                    [
-                                        'number' => $contact['phone'],
-                                        'country_code' =>
-                                            $contact['phone-country'],
-                                        'additional_link_class' => $bg_color
-                                            ? '--is-underlined --text-color --on-' .
-                                                $bg_color
-                                            : '--is-underlined --text-color',
-                                        'aria-label' => esc_attr__(
-                                            'Telefonnummer %s anrufen',
-                                            'oo_theme',
-                                        ),
-                                    ],
-                                ); ?>
-                            </p>
-                        <?php endif; ?>
-
                         <?php if (!empty($contact['mobile'])): ?>
                             <p class="c-team-card__contact --is-mobile">
                                 <?php oo_get_template(
@@ -260,9 +214,28 @@ echo $first_line . '<br>' . $second_line;
                                     ],
                                 ); ?>
                             </p>
-                        <?php endif; ?>
-
-                        <?php if (!empty($contact['fax'])): ?>
+                        <?php elseif (!empty($contact['phone'])): ?>
+                            <p class="c-team-card__contact --is-phone">
+                                <?php oo_get_template(
+                                    'components',
+                                    '',
+                                    'component-contact-numbers',
+                                    [
+                                        'number' => $contact['phone'],
+                                        'country_code' =>
+                                            $contact['phone-country'],
+                                        'additional_link_class' => $bg_color
+                                            ? '--is-underlined --text-color --on-' .
+                                                $bg_color
+                                            : '--is-underlined --text-color',
+                                        'aria-label' => esc_attr__(
+                                            'Telefonnummer %s anrufen',
+                                            'oo_theme',
+                                        ),
+                                    ],
+                                ); ?>
+                            </p>
+                        <?php elseif (!empty($contact['fax'])): ?>
                             <p class="c-team-card__contact --is-fax">
                                 <?php oo_get_template(
                                     'components',
@@ -279,6 +252,29 @@ echo $first_line . '<br>' . $second_line;
                                         'aria-label' => esc_attr__(
                                             'Fax an %s senden',
                                             'oo_theme',
+                                        ),
+                                    ],
+                                ); ?>
+                            </p>
+                        <?php endif; ?>
+                        <?php if (!empty($contact['email'])): ?>
+                            <p class="c-team-card__contact --is-email">
+                                <?php oo_get_template(
+                                    'components',
+                                    '',
+                                    'component-email',
+                                    [
+                                        'email' => $contact['email'],
+                                        'additional_link_class' => $bg_color
+                                            ? '--is-underlined --text-color --on-' .
+                                                $bg_color
+                                            : '--is-underlined --text-color',
+                                        'aria-label' => sprintf(
+                                            esc_attr__(
+                                                'E-Mail senden an %s',
+                                                'oo_theme',
+                                            ),
+                                            $contact['email'],
                                         ),
                                     ],
                                 ); ?>

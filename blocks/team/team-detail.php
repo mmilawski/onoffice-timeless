@@ -175,30 +175,12 @@ if ($rating_provider === 'google') {
                         )
                     ) { ?>
                         <div class="c-team-detail__contact-block">
-                            <?php if (!empty($contact['email'])): ?>
-                                <p class="c-team-detail__contact --is-email">
-                                    <?php oo_get_template(
-                                        'components',
-                                        '',
-                                        'component-email',
-                                        [
-                                            'email' => $contact['email'],
-                                            'additional_link_class' =>
-                                                '--is-underlined --text-color',
-                                            'aria-label' => sprintf(
-                                                esc_attr__(
-                                                    'E-Mail senden an %s',
-                                                    'oo_theme',
-                                                ),
-                                                $contact['email'],
-                                            ),
-                                        ],
-                                    ); ?>
-                                </p>
-                            <?php endif; ?>
-
                             <?php if (!empty($contact['phone'])): ?>
                                 <p class="c-team-detail__contact --is-phone">
+                                    <?php esc_html_e(
+                                        'Tel.:',
+                                        'oo_theme',
+                                    ); ?>
                                     <?php oo_get_template(
                                         'components',
                                         '',
@@ -220,6 +202,10 @@ if ($rating_provider === 'google') {
 
                             <?php if (!empty($contact['mobile'])): ?>
                                 <p class="c-team-detail__contact --is-mobile">
+                                    <?php esc_html_e(
+                                        'Mobile:',
+                                        'oo_theme',
+                                    ); ?>
                                     <?php oo_get_template(
                                         'components',
                                         '',
@@ -241,6 +227,10 @@ if ($rating_provider === 'google') {
 
                             <?php if (!empty($contact['fax'])): ?>
                                 <p class="c-team-detail__contact --is-fax">
+                                    <?php esc_html_e(
+                                        'Fax:',
+                                        'oo_theme',
+                                    ); ?>
                                     <?php oo_get_template(
                                         'components',
                                         '',
@@ -254,6 +244,27 @@ if ($rating_provider === 'google') {
                                             'aria-label' => esc_attr__(
                                                 'Fax an %s senden',
                                                 'oo_theme',
+                                            ),
+                                        ],
+                                    ); ?>
+                                </p>
+                            <?php endif; ?>
+                            <?php if (!empty($contact['email'])): ?>
+                                <p class="c-team-detail__contact --is-email">
+                                    <?php oo_get_template(
+                                        'components',
+                                        '',
+                                        'component-email',
+                                        [
+                                            'email' => $contact['email'],
+                                            'additional_link_class' =>
+                                                '--is-underlined --text-color',
+                                            'aria-label' => sprintf(
+                                                esc_attr__(
+                                                    'E-Mail senden an %s',
+                                                    'oo_theme',
+                                                ),
+                                                $contact['email'],
                                             ),
                                         ],
                                     ); ?>
