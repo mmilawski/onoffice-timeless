@@ -876,7 +876,9 @@ jQuery(document).ready(function() {
       }
 
       const innerslider = $slider.hasClass("--is-properties-images-slider");
-      const outerslider = $slider.hasClass("--is-properties-slider") || $slider.hasClass("--is-properties-similar-slider");
+      const outerslider = $slider.hasClass("--is-properties-slider") || 
+                    $slider.hasClass("--is-properties-similar-slider") || 
+                    $slider.hasClass("--is-properties-units-slider");
 
       if (outerslider) {
         const $btnNextOuter = $slider.find(".c-slider__navigation:not(.--is-properties-images-slider) .c-slider__arrow.--next");

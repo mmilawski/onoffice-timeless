@@ -12,6 +12,10 @@
   &__track {
   }
 
+  &__slider-container {
+    padding: 0 1rem;
+  }
+
   &__slide {
     outline: $outline !important;
     outline-offset: $outline-offset !important;
@@ -144,18 +148,6 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
-
-    @include media-breakpoint-up(lg) {
-      margin-left: 7.625rem;
-      margin-right: 7.625rem;
-    }
-
-    .--is-property-details-slider & {
-      margin-left: 0;
-      margin-right: 0;
-    }
 
     &.--is-properties-images-slider {
       &.--empty {
@@ -550,7 +542,8 @@
       }
     }
 
-    &.--is-properties-similar-slider {
+    &.--is-properties-similar-slider,
+    &.--is-properties-units-slider {
       #{$c-slider}__list {
         display: grid;
         gap: 2rem;
