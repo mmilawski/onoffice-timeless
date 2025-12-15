@@ -180,9 +180,10 @@ echo $first_line . '<br>' . $second_line;
             <div class="c-team-card__row --contact">
 
                 <?php if (!empty($card['languages'])) { ?>
-                    <p class="c-team-card__languages"><?php echo $card[
-                        'languages'
-                    ]; ?></p>
+                    <p class="c-team-card__languages">
+                        <?php esc_html_e('Sprachen:', 'oo_theme'); ?> 
+                        <?php echo $card['languages']; ?>
+                    </p>
                 <?php } ?>
                 
                 <?php if (
@@ -194,8 +195,12 @@ echo $first_line . '<br>' . $second_line;
                 ) { ?>
                     <div class="c-team-card__contact-wrapper">
                         <?php if (!empty($contact['mobile'])): ?>
-                            <p class="c-team-card__contact --is-mobile">
-                                <?php oo_get_template(
+                            <dl class="c-team-card__contact --is-mobile">
+                                <dt class="c-team-card__contact-label"><?php esc_html_e(
+                                    'Mobile:',
+                                    'oo_theme',
+                                ); ?></dt>
+                                <dd class="c-team-card__contact-value"><?php oo_get_template(
                                     'components',
                                     '',
                                     'component-contact-numbers',
@@ -212,32 +217,42 @@ echo $first_line . '<br>' . $second_line;
                                             'oo_theme',
                                         ),
                                     ],
-                                ); ?>
-                            </p>
+                                ); ?></dd>
+                            </dl>
                         <?php elseif (!empty($contact['phone'])): ?>
-                            <p class="c-team-card__contact --is-phone">
-                                <?php oo_get_template(
-                                    'components',
-                                    '',
-                                    'component-contact-numbers',
-                                    [
-                                        'number' => $contact['phone'],
-                                        'country_code' =>
-                                            $contact['phone-country'],
-                                        'additional_link_class' => $bg_color
-                                            ? '--is-underlined --text-color --on-' .
-                                                $bg_color
-                                            : '--is-underlined --text-color',
-                                        'aria-label' => esc_attr__(
-                                            'Telefonnummer %s anrufen',
-                                            'oo_theme',
-                                        ),
-                                    ],
-                                ); ?>
-                            </p>
+                            <dl class="c-team-card__contact --is-phone">
+                                <dt class="c-team-card__contact-label"><?php esc_html_e(
+                                    'Tel.:',
+                                    'oo_theme',
+                                ); ?></dt>    
+                                <dd class="c-team-card__contact-value">
+                                    <?php oo_get_template(
+                                        'components',
+                                        '',
+                                        'component-contact-numbers',
+                                        [
+                                            'number' => $contact['phone'],
+                                            'country_code' =>
+                                                $contact['phone-country'],
+                                            'additional_link_class' => $bg_color
+                                                ? '--is-underlined --text-color --on-' .
+                                                    $bg_color
+                                                : '--is-underlined --text-color',
+                                            'aria-label' => esc_attr__(
+                                                'Telefonnummer %s anrufen',
+                                                'oo_theme',
+                                            ),
+                                        ],
+                                    ); ?>
+                                </dd>
+                            </dl>
                         <?php elseif (!empty($contact['fax'])): ?>
-                            <p class="c-team-card__contact --is-fax">
-                                <?php oo_get_template(
+                            <dl class="c-team-card__contact --is-fax">
+                                <dt class="c-team-card__contact-label"><?php esc_html_e(
+                                    'Fax:',
+                                    'oo_theme',
+                                ); ?></dt>
+                                <dd class="c-team-card__contact-value"><?php oo_get_template(
                                     'components',
                                     '',
                                     'component-contact-numbers',
@@ -254,12 +269,16 @@ echo $first_line . '<br>' . $second_line;
                                             'oo_theme',
                                         ),
                                     ],
-                                ); ?>
-                            </p>
+                                ); ?></dd>
+                            </dl>
                         <?php endif; ?>
                         <?php if (!empty($contact['email'])): ?>
-                            <p class="c-team-card__contact --is-email">
-                                <?php oo_get_template(
+                            <dl class="c-team-card__contact --is-email">
+                                <dt class="c-team-card__contact-label"><?php esc_html_e(
+                                    'E-Mail:',
+                                    'oo_theme',
+                                ); ?></dt>
+                                <dd class="c-team-card__contact-value"><?php oo_get_template(
                                     'components',
                                     '',
                                     'component-email',
@@ -277,8 +296,8 @@ echo $first_line . '<br>' . $second_line;
                                             $contact['email'],
                                         ),
                                     ],
-                                ); ?>
-                            </p>
+                                ); ?></dd>
+                            </dl>
                         <?php endif; ?>
                             </div>
                 <?php } ?>

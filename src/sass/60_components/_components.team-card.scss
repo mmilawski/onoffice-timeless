@@ -345,7 +345,28 @@
 
   &__contact {
     hyphens: auto;
-    word-break: break-word;
+    display: block;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    .c-team-card__contact-label {
+      word-break: keep-all;
+      display: inline;
+      margin-right: 0.5rem;
+    }
+
+    .c-team-card__contact-value {
+      display: inline;
+      word-break: break-all;
+    }
+
+    &.--is-email {
+      -webkit-line-clamp: 2;
+    }
   }
 
   &__button {
