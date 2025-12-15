@@ -157,9 +157,10 @@ if ($rating_provider === 'google') {
                           <?php endif; ?>
 
                     <?php if (!empty($card['languages'])) { ?>
-                        <p class="c-team-detail__languages"><?php echo $card[
-                            'languages'
-                        ]; ?></p>
+                        <p class="c-team-detail__languages">
+                            <?php esc_html_e('Sprachen:', 'oo_theme'); ?> 
+                            <?php echo $card['languages']; ?>
+                        </p>
                     <?php } ?>
 
 
@@ -176,12 +177,12 @@ if ($rating_provider === 'google') {
                     ) { ?>
                         <div class="c-team-detail__contact-block">
                             <?php if (!empty($contact['phone'])): ?>
-                                <p class="c-team-detail__contact --is-phone">
-                                    <?php esc_html_e(
+                                <dl class="c-team-detail__contact --is-phone">
+                                    <dt class="c-team-detail__contact-label"><?php esc_html_e(
                                         'Tel.:',
                                         'oo_theme',
-                                    ); ?>
-                                    <?php oo_get_template(
+                                    ); ?></dt>
+                                    <dd class="c-team-detail__contact-value"><?php oo_get_template(
                                         'components',
                                         '',
                                         'component-contact-numbers',
@@ -196,17 +197,17 @@ if ($rating_provider === 'google') {
                                                 'oo_theme',
                                             ),
                                         ],
-                                    ); ?>
-                                </p>
+                                    ); ?></dd>
+                                </dl>
                             <?php endif; ?>
 
                             <?php if (!empty($contact['mobile'])): ?>
-                                <p class="c-team-detail__contact --is-mobile">
-                                    <?php esc_html_e(
+                                <dl class="c-team-detail__contact --is-mobile">
+                                    <dt class="c-team-detail__contact-label"><?php esc_html_e(
                                         'Mobile:',
                                         'oo_theme',
-                                    ); ?>
-                                    <?php oo_get_template(
+                                    ); ?></dt>
+                                    <dd class="c-team-detail__contact-value"><?php oo_get_template(
                                         'components',
                                         '',
                                         'component-contact-numbers',
@@ -221,17 +222,17 @@ if ($rating_provider === 'google') {
                                                 'oo_theme',
                                             ),
                                         ],
-                                    ); ?>
-                                </p>
+                                    ); ?></dd>
+                                </dl>
                             <?php endif; ?>
 
                             <?php if (!empty($contact['fax'])): ?>
-                                <p class="c-team-detail__contact --is-fax">
-                                    <?php esc_html_e(
+                                <dl class="c-team-detail__contact --is-fax">
+                                    <dt class="c-team-detail__contact-label"><?php esc_html_e(
                                         'Fax:',
                                         'oo_theme',
-                                    ); ?>
-                                    <?php oo_get_template(
+                                    ); ?></dt>
+                                    <dd class="c-team-detail__contact-value"><?php oo_get_template(
                                         'components',
                                         '',
                                         'component-contact-numbers',
@@ -246,12 +247,16 @@ if ($rating_provider === 'google') {
                                                 'oo_theme',
                                             ),
                                         ],
-                                    ); ?>
-                                </p>
+                                    ); ?></dd>
+                                </dl>
                             <?php endif; ?>
                             <?php if (!empty($contact['email'])): ?>
-                                <p class="c-team-detail__contact --is-email">
-                                    <?php oo_get_template(
+                                <dl class="c-team-detail__contact --is-email">
+                                    <dt class="c-team-detail__contact-label"><?php esc_html_e(
+                                        'E-Mail:',
+                                        'oo_theme',
+                                    ); ?>
+                                    <dd class="c-team-detail__contact-value"><?php oo_get_template(
                                         'components',
                                         '',
                                         'component-email',
@@ -267,8 +272,8 @@ if ($rating_provider === 'google') {
                                                 $contact['email'],
                                             ),
                                         ],
-                                    ); ?>
-                                </p>
+                                    ); ?></dd>
+                                </dl>
                             <?php endif; ?>
                         </div>
                         <?php if (!empty($networks)): ?>
