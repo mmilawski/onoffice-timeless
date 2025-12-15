@@ -13,9 +13,9 @@
 
   &__overlay {
     position: absolute;
-    bottom: 1.5rem; // 24px from bottom
-    left: 1.5rem; // 24px from left
-    right: 1.5rem; // 24px from right
+    bottom: 1.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
     display: flex;
     flex-direction: column;
     background-color: var(--oo-color-transparent-bg-80);

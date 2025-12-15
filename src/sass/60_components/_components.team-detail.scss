@@ -104,8 +104,8 @@
   top: 0.625rem;
   right: 0.625rem;
   z-index: 10;
-  width: 34px;
-  height: 34px;
+  width: $icon-size;
+  height: $icon-size;
   padding: 0;
   background: transparent;
   border: none;
@@ -116,8 +116,8 @@
   cursor: pointer;
 
   .c-button__icon {
-    width: 34px;
-    height: 34px;
+    width: $icon-size;
+    height: $icon-size;
     display: flex;
     align-items: center;
     justify-content: center;
