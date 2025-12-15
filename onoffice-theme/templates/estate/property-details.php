@@ -959,7 +959,7 @@ while ($current_property = $pEstates->estateIterator()) {
                             ? esc_attr($property_ogulo_link['title'])
                             : esc_attr__('360°-Rundgang starten', 'oo_theme');
 
-                        echo '<a class="c-button --ghost" href="' .
+                        echo '<a class="c-button" href="' .
                             esc_attr($property_ogulo_link['url']) .
                             '" target="_blank" rel="noopener noreferrer" aria-label="' .
                             esc_attr(
@@ -1044,7 +1044,7 @@ while ($current_property = $pEstates->estateIterator()) {
                             ? esc_attr($property_movie_link['title'])
                             : esc_html__('Video starten', 'oo_theme');
 
-                        echo '<a class="c-button --ghost" href="' .
+                        echo '<a class="c-button" href="' .
                             esc_attr($property_movie_link['url']) .
                             '" rel="noopener noreferrer" aria-label="' .
                             esc_attr(
@@ -1102,7 +1102,7 @@ while ($current_property = $pEstates->estateIterator()) {
                             ? esc_attr($property_link['title'])
                             : esc_attr__('Link öffnen', 'oo_theme');
 
-                        echo '<a class="c-button --ghost" href="' .
+                        echo '<a class="c-button" href="' .
                             esc_attr($property_link['url']) .
                             '" rel="noopener noreferrer" aria-label="' .
                             esc_attr(
@@ -1168,7 +1168,7 @@ while ($current_property = $pEstates->estateIterator()) {
                             ? esc_attr($property_object_link['title'])
                             : esc_attr__('Objekt-Link öffnen', 'oo_theme');
 
-                        echo '<a class="c-button --ghost" href="' .
+                        echo '<a class="c-button" href="' .
                             esc_attr($property_object_link['url']) .
                             '" rel="noopener noreferrer" aria-label="' .
                             esc_attr(
