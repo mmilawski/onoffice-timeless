@@ -67,7 +67,8 @@
     }
 
     .--bg-light & {
-      scrollbar-color: var(--oo-color-light-text, var(--oo-color-text)) transparent;
+      scrollbar-color: var(--oo-color-light-text, var(--oo-color-text))
+        transparent;
 
       &::-webkit-scrollbar-thumb {
         background: var(--oo-color-light-text, var(--oo-color-text));
@@ -80,7 +81,8 @@
     }
 
     .--bg-dark & {
-      scrollbar-color: var(--oo-color-dark-text, var(--oo-color-text)) transparent;
+      scrollbar-color: var(--oo-color-dark-text, var(--oo-color-text))
+        transparent;
 
       &::-webkit-scrollbar-thumb {
         background: var(--oo-color-dark-text, var(--oo-color-text));
@@ -93,7 +95,8 @@
     }
 
     .--bg-primary & {
-      scrollbar-color: var(--oo-color-primary-text, var(--oo-color-text)) transparent;
+      scrollbar-color: var(--oo-color-primary-text, var(--oo-color-text))
+        transparent;
 
       &::-webkit-scrollbar-thumb {
         background: var(--oo-color-primary-text, var(--oo-color-text));
@@ -106,7 +109,8 @@
     }
 
     .--bg-secondary & {
-      scrollbar-color: var(--oo-color-secondary-text, var(--oo-color-text)) transparent;
+      scrollbar-color: var(--oo-color-secondary-text, var(--oo-color-text))
+        transparent;
 
       &::-webkit-scrollbar-thumb {
         background: var(--oo-color-secondary-text, var(--oo-color-text));
