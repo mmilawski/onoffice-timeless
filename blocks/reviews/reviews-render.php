@@ -21,6 +21,7 @@ $show_date = filter_var(
 // Settings
 $settings = get_field('settings') ?? [];
 $bg_color = $settings['bg_color'] ?? 'bg-transparent';
+$third_parties = get_field('third_parties', 'option') ?? null;
 $slider = get_field('slider') ?? [];
 $is_slider = filter_var($slider['slider'] ?? null, FILTER_VALIDATE_BOOLEAN);
 
@@ -308,7 +309,7 @@ $max_num_pages = $reviews_query->max_num_pages ?? null;
             ); ?></span>
             <?php echo $tooltip_html; ?>
 </div>
-<?php if ($rating && !$is_sticky_overall_google_rating) { ?>
+<?php if (isset($rating['rating']) && !$is_sticky_overall_google_rating) { ?>
     <div class="c-reviews__google-wrapper">
         <div class="c-reviews__google-total"><?php echo $rating[
             'rating'
