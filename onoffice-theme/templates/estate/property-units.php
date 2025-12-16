@@ -23,65 +23,69 @@ if (
             </div>
         </div>
 
-        <div id="unitslider" class="c-property-details__units-slider c-slider --is-properties-units-slider splide"
-            data-splide='{
-                "perPage": 3,
-                "perMove": 1,
-                "gap": "1rem",
-                "snap": true,
-                "lazyLoad": "nearby",
-                "pagination": false,
-                "arrows": false,
-                "page": false,
-                "breakpoints": {
-                    "768": {
-                    "perPage": 1
-                    }
-                }
-                }'>
-            <div class="c-slider__track splide__track">
-                <div class="c-slider__list splide__list">
-                    <?php
-                    $pEstates->resetEstateIterator();
-                    while ($current_property = $pEstates->estateIterator()):
-                        $property_id = $pEstates->getCurrentMultiLangEstateMainId();
-
-                        foreach ($current_property as $field => $value) {
-                            if (in_array($field, $dontEcho, true)) {
-                                unset($current_property[$field]);
-                            }
+        <div class="c-property-details__unit-container o-container-fluid"> 
+            <div id="unitslider" class="c-property-details__units-slider c-slider --is-properties-units-slider splide"
+                data-splide='{
+                    "perPage": 3,
+                    "perMove": 1,
+                    "gap": "1rem",
+                    "snap": true,
+                    "lazyLoad": "nearby",
+                    "pagination": false,
+                    "arrows": false,
+                    "page": false,
+                    "breakpoints": {
+                        "768": {
+                        "perPage": 1
                         }
-                        $slider = ['slider' => 'yes'];
-                        $bg_color = 'bg-transparent';
-                        $is_slider = true;
+                    }
+                    }'>
+                <div class="c-slider__track splide__track">
+                    <div class="c-slider__list splide__list">
+                        <?php
+                        $pEstates->resetEstateIterator();
+                        while ($current_property = $pEstates->estateIterator()):
+                            $property_id = $pEstates->getCurrentMultiLangEstateMainId();
 
-                        require 'property-card.php';
-                    endwhile;
-                    ?>
-                </div>
-            </div>
+                            foreach ($current_property as $field => $value) {
+                                if (in_array($field, $dontEcho, true)) {
+                                    unset($current_property[$field]);
+                                }
+                            }
+                            $slider = ['slider' => 'yes'];
+                            $bg_color = 'bg-transparent';
+                            $is_slider = true;
 
-            <div class="c-slider__navigation splide__navigation o-container --is-properties-slider">
-                <div class="c-slider__progress splide__progress">
-                    <div class="c-slider__progress-bar splide__progress-bar"></div>
+                            require 'property-card.php';
+                        endwhile;
+                        ?>
+                    </div>
                 </div>
-                <div class="c-slider__arrows splide__arrows">
-                    <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
-                        <span class="c-slider__arrow-text u-screen-reader-only">
-                            <?php esc_html_e('Vorheriges', 'oo_theme'); ?>
-                        </span>
-                        <span class="c-slider__arrow-icon --chevron-left"><?php oo_get_icon(
-                            'chevron-left',
-                        ); ?></span>
-                    </button>
-                    <button class="c-slider__arrow --next splide__arrow splide__arrow--next">
-                        <span class="c-slider__arrow-text u-screen-reader-only">
-                            <?php esc_html_e('Nächstes', 'oo_theme'); ?>
-                        </span>
-                        <span class="c-slider__arrow-icon --chevron-right"><?php oo_get_icon(
-                            'chevron-right',
-                        ); ?></span>
-                    </button>
+
+                <div class="c-slider__navigation splide__navigation o-container --is-properties-slider">
+                    <div class="c-slider__progress splide__progress">
+                        <div class="c-slider__progress-bar splide__progress-bar"></div>
+                    </div>
+                    <div class="c-slider__arrows splide__arrows">
+                        <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
+                            <span class="c-slider__arrow-text u-screen-reader-only">
+                                <?php esc_html_e('Vorheriges', 'oo_theme'); ?>
+                            </span>
+                            <span class="c-slider__arrow-icon --chevron-left"><?php oo_get_icon(
+                                'chevron-left',
+                                true,
+                            ); ?></span>
+                        </button>
+                        <button class="c-slider__arrow --next splide__arrow splide__arrow--next">
+                            <span class="c-slider__arrow-text u-screen-reader-only">
+                                <?php esc_html_e('Nächstes', 'oo_theme'); ?>
+                            </span>
+                            <span class="c-slider__arrow-icon --chevron-right"><?php oo_get_icon(
+                                'chevron-right',
+                                true,
+                            ); ?></span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
