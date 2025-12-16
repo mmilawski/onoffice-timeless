@@ -650,7 +650,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                 </div>
                             </div>
                             <div class="c-slider__slider-container o-container">
-                                <div class="c-slider__navigation splide__navigation o-row">
+                                <div class="c-slider__navigation splide__navigation">
                                     <div class="c-slider__arrows splide__arrows">
                                         <button class="c-slider__arrow c-slider__arrow--prev splide__arrow splide__arrow--prev">
                                             <span class="u-screen-reader-only"><?php esc_html_e(
@@ -1555,7 +1555,7 @@ while ($current_property = $pEstates->estateIterator()) {
                             </div>
 
                             <div class="c-slider__slider-container o-container">
-                                <div class="c-slider__navigation splide__navigation o-row">
+                                <div class="c-slider__navigation splide__navigation">
                                     <div class="c-slider__arrows splide__arrows">
                                         <button class="c-slider__arrow c-slider__arrow--prev splide__arrow splide__arrow--prev">
                                             <span class="u-screen-reader-only"><?php esc_html_e(
