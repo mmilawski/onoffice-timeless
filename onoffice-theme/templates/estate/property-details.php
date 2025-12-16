@@ -1618,31 +1618,51 @@ while ($current_property = $pEstates->estateIterator()) {
                             ) {
 
                                 $content = $field['value'];
-                                $field_toggle_id = 'property-features-' . $field['field'];
+                                $field_toggle_id =
+                                    'property-features-' . $field['field'];
                                 ?>
                                 <div class="c-property-details__text u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">
                                     <h2 class="c-property-details__headline o-headline --h2">
-                                        <?php esc_html_e($field['label'], 'oo_theme'); ?>
+                                        <?php esc_html_e(
+                                            $field['label'],
+                                            'oo_theme',
+                                        ); ?>
                                     </h2>
                                     
-                                    <div class="c-property-details__text-content" id="<?php echo esc_attr($field_toggle_id); ?>">
+                                    <div class="c-property-details__text-content" id="<?php echo esc_attr(
+                                        $field_toggle_id,
+                                    ); ?>">
                                         <?php echo nl2br(
                                             $show_secret_sale_block
                                                 ? '...'
-                                                : esc_html($content)
+                                                : esc_html($content),
                                         ); ?>
                                     </div>
 
                                     <button class="c-property-details__more c-read-more"
-                                            data-open-text="<?php esc_html_e('Mehr anzeigen', 'oo_theme'); ?>"
-                                            data-close-text="<?php esc_html_e('Weniger anzeigen', 'oo_theme'); ?>"
+                                            data-open-text="<?php esc_html_e(
+                                                'Mehr anzeigen',
+                                                'oo_theme',
+                                            ); ?>"
+                                            data-close-text="<?php esc_html_e(
+                                                'Weniger anzeigen',
+                                                'oo_theme',
+                                            ); ?>"
                                             aria-expanded="false" 
-                                            aria-controls="<?php echo esc_attr($field_toggle_id); ?>"
+                                            aria-controls="<?php echo esc_attr(
+                                                $field_toggle_id,
+                                            ); ?>"
                                             style="display: none;">
-                                        <?php echo esc_html_e('Mehr anzeigen', 'oo_theme'); ?>
+                                        <?php echo esc_html_e(
+                                            'Mehr anzeigen',
+                                            'oo_theme',
+                                        ); ?>
                                     </button>
 
-                                    <?php if ($field['field'] === 'lage' && !empty($map)): ?>
+                                    <?php if (
+                                        $field['field'] === 'lage' &&
+                                        !empty($map)
+                                    ): ?>
                                         <div class="c-property-details__map">
                                             <?php echo $map; ?>
                                         </div>
@@ -1873,27 +1893,44 @@ while ($current_property = $pEstates->estateIterator()) {
                             ) {
 
                                 $content = $field['value'];
-                                $field_toggle_id = 'property-other-' . $field['field'];
+                                $field_toggle_id =
+                                    'property-other-' . $field['field'];
                                 ?>
                                 <div class="c-property-details__text u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">
                                     <h2 class="c-property-details__headline o-headline --h2">
-                                        <?php esc_html_e($field['label'], 'oo_theme'); ?>
+                                        <?php esc_html_e(
+                                            $field['label'],
+                                            'oo_theme',
+                                        ); ?>
                                     </h2>
                                     
-                                    <div class="c-property-details__text-content" id="<?php echo esc_attr($field_toggle_id); ?>">
+                                    <div class="c-property-details__text-content" id="<?php echo esc_attr(
+                                        $field_toggle_id,
+                                    ); ?>">
                                         <?php echo nl2br(
                                             $show_secret_sale_block
                                                 ? '...'
-                                                : esc_html($content)
+                                                : esc_html($content),
                                         ); ?>
                                     </div>
 
                                     <button class="c-property-details__more c-read-more"
-                                            data-open-text="<?php esc_html_e('Mehr anzeigen', 'oo_theme'); ?>"
-                                            data-close-text="<?php esc_html_e('Weniger anzeigen', 'oo_theme'); ?>"
+                                            data-open-text="<?php esc_html_e(
+                                                'Mehr anzeigen',
+                                                'oo_theme',
+                                            ); ?>"
+                                            data-close-text="<?php esc_html_e(
+                                                'Weniger anzeigen',
+                                                'oo_theme',
+                                            ); ?>"
                                             aria-expanded="false" 
-                                            aria-controls="<?php echo esc_attr($field_toggle_id); ?>">
-                                        <?php echo esc_html_e('Mehr anzeigen', 'oo_theme'); ?>
+                                            aria-controls="<?php echo esc_attr(
+                                                $field_toggle_id,
+                                            ); ?>">
+                                        <?php echo esc_html_e(
+                                            'Mehr anzeigen',
+                                            'oo_theme',
+                                        ); ?>
                                     </button>
                                 </div>
                             <?php
