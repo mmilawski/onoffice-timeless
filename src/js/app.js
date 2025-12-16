@@ -264,24 +264,22 @@ jQuery(document).ready(function() {
               $(firstOption).prop('selected', true);
           }
       }
-
-      var plugins = {
-          'oo_remove_button': {
-              'className': 'ts-item-remove',
-              'title': window.ooTimelessTheme.translations.removeThisItem || 'Remove this item',
-              'label': '',
-              'position': 'before'
-          },
-      };
-
+      var plugins = {};
       if (isMultiselect) {
-          plugins['oo_checkbox_options'] = {
-              'className': 'o-control__input',
-              'checkedClassNames': ['ts-checked'],
-              'uncheckedClassNames': ['ts-unchecked'],
-          };
-      }
-
+        plugins['oo_remove_button'] = {
+            'className': 'ts-item-remove',
+            'title': window.ooTimelessTheme.translations.removeThisItem || 'Remove this item',
+            'label': '',
+            'position': 'before'
+        };
+    
+        plugins['oo_checkbox_options'] = {
+            'className': 'o-control__input',
+            'checkedClassNames': ['ts-checked'],
+            'uncheckedClassNames': ['ts-unchecked'],
+        };
+    }
+      var is_sorting = select.hasClass('onofficeSortListSelector');
       const is_regionaler_zusatz = select.length && select[0].id === 'regionaler_zusatz';
 
       const tom = new TomSelect(select, {
@@ -294,9 +292,13 @@ jQuery(document).ready(function() {
           field: "text",
           direction: "asc"
         },
+        placeholder: is_sorting ? "Bitte auswählen" : "",
         plugins: plugins,
         onInitialize: function() {
           let labelText = '';
+          if (!isMultiselect) {
+          this.control_input.setAttribute('readonly', true);
+          }
 
           // 1. Primary Method: Try to get the label from the original <select>
           if (this.input.labels && this.input.labels.length > 0) {
@@ -1456,7 +1458,6 @@ function initVideoToggle() {
   
       btn.attr('aria-pressed', newState);
       btn.attr('aria-label', newLabel);
-      btn.find('.c-banner__sr-label').text(newLabel);
     });
 }
 

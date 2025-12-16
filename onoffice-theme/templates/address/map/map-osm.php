@@ -27,7 +27,12 @@ use onOffice\WPlugin\ViewFieldModifier\AddressViewFieldModifierTypes;
 
 /* @var $pAddresses AddressList */
 
-return function (AddressList $pAddressClone) {
+return function (
+    AddressList $pAddressClone,
+    string $map_color = 'colored',
+    string $marker_color = 'currentColor',
+    string $map_zoom = 'no',
+) {
     $pAddressClone->resetAddressesIterator();
     $address_data = [];
 
@@ -60,10 +65,6 @@ return function (AddressList $pAddressClone) {
         return;
     }
 
-    // Styling
-    $colors = get_field('colors', 'option') ?? null;
-    $primary_color = $colors['global']['primary'] ?? 'currentColor';
-
     // Scripts
     wp_enqueue_style('oo-leaflet-style');
     wp_enqueue_style('oo-leaflet-marker-cluster-style');
@@ -73,10 +74,22 @@ return function (AddressList $pAddressClone) {
     wp_enqueue_script('oo-init-open-street-map-marker-cluster');
     ?>
 
-    <div class="c-map --is-open-street-map" data-max-zoom="12" data-marker-color="<?php echo $primary_color; ?>" style="width: 100%;" aria-label="<?php echo esc_html__(
-    'Karte mit Adressenstandorten',
-    'oo_theme',
-); ?>">
+    <div class="c-map --is-open-street-map --is-<?php echo esc_attr(
+        $map_color,
+    ); ?>" 
+         data-max-zoom="<?php echo esc_attr(
+             $map_zoom === 'yes' ? '20' : '12',
+         ); ?>" 
+         data-scroll-zoom="<?php echo esc_attr(
+             $map_zoom === 'yes' ? 'true' : 'false',
+         ); ?>"
+         data-marker-color="<?php echo esc_attr($marker_color); ?>" 
+         data-map-color="<?php echo esc_attr($map_color); ?>" 
+         style="width: 100%;" 
+         aria-label="<?php echo esc_attr__(
+             'Karte mit Adressenstandorten',
+             'oo_theme',
+         ); ?>">
         <?php foreach ($address_data as $address) {
 
             $position = $address['position'] ?? [];
