@@ -216,6 +216,10 @@
       justify-self: center;
       align-self: flex-end;
 
+      @include media-breakpoint-up(md) {
+        grid-row: 2;
+      }
+
       @include media-breakpoint-down(sm) {
         position: absolute;
       }
@@ -270,6 +274,9 @@
           visibility: hidden;
         }
       }
+      @include media-breakpoint-up(md) {
+        grid-row: 2;
+      }
     }
 
     #{$c-form}__wrapper {
@@ -283,13 +290,15 @@
       }
 
       #{$c-form}__button-wrapper {
+        display: flex;
+        flex-direction: column;
         gap: 2.5rem;
-        align-items: flex-end;
         @include media-breakpoint-up(md) {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          row-gap: 0;
           .leadform-submit {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
+            display: contents;
           }
         }
       }
@@ -312,22 +321,6 @@
 
       .--bg-secondary & {
         background-color: var(--oo-color-secondary-bg, var(--oo-color-bg));
-      }
-    }
-
-    #{$c-form}__button-wrapper {
-      @include media-breakpoint-up(md) {
-        display: flex;
-        justify-content: space-between;
-      }
-      @include media-breakpoint-down(sm) {
-        display: flex;
-        flex-direction: column;
-        align-content: space-between;
-        gap: 1.5rem;
-        .leadform-submit {
-          width: 100%;
-        }
       }
     }
 
@@ -380,6 +373,10 @@
           opacity: 0.5;
         }
       }
+    }
+
+    .uc-text-embedding {
+      grid-column: 1 / -1;
     }
   }
 
