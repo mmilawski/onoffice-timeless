@@ -399,11 +399,7 @@
       }
     }
     #{$c-slider}__controls {
-      bottom: -1.5rem;
-
-      @include media-breakpoint-up(sm) {
-        bottom: 0.5rem;
-      }
+      bottom: 10px;
     }
     #{$c-slider}__pagination {
       width: 50%;

@@ -547,6 +547,10 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 2.5rem;
+
+    #{$c-property-details}__headline {
+      padding: 0 1rem;
+    }
   }
 
   &__energy-content {
