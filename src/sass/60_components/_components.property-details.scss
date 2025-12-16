@@ -432,6 +432,23 @@
   }
 
   &__text-content {
+    &.--shorten {
+      max-height: calc(1.5rem * 10);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 10;
+      line-clamp: 10;
+      -webkit-box-orient: vertical;
+      transition: max-height 0.25s ease-in-out;
+
+      &.--is-open {
+        max-height: none;
+        -webkit-line-clamp: unset;
+        line-clamp: unset;
+        overflow: visible;
+      }
+    }
   }
 
   &__features {
@@ -493,11 +510,7 @@
   &__calculator-content {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-
-    @include media-breakpoint-up(xl) {
-      gap: 1rem;
-    }
+    gap: 2.5rem;
   }
 
   &__calculator {

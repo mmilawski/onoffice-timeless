@@ -1412,8 +1412,8 @@ function applyResponsiveTextShortening() {
   // review slider
   shortenElements('.c-review-card', '.c-review-card__text', '.c-review-card__text');
 
-  // property list
-  shortenElements('.c-property-details__text-wrapper', '.c-property-details__text-content', '.c-property-details__text-content');
+  // property detail
+  shortenElements('.c-property-details__text', '.c-property-details__text-content', '.c-property-details__text-content');
   
   // team 
   shortenElements('.c-team-card', '.c-team-card__description', '.c-team-card__description');

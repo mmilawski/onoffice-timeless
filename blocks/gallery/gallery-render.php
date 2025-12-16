@@ -269,7 +269,10 @@ $slides_destroy = $slides_count < 5 ? true : false;
                                 </button>
                                 <button class="c-slider__arrow --next splide__arrow splide__arrow--next">
                                     <span class="c-slider__arrow-text u-screen-reader-only">
-                                        <?php esc_html_e('Nächstes', 'oo_theme'); ?>
+                                        <?php esc_html_e(
+                                            'Nächstes',
+                                            'oo_theme',
+                                        ); ?>
                                     </span>
                                     <span class="c-slider__arrow-icon --chevron-right">
                                         <?php oo_get_icon('chevron-right'); ?>
