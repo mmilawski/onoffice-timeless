@@ -40,9 +40,82 @@
     padding: 1.5rem;
     overflow-y: auto;
     height: 100%;
+    scrollbar-width: thin;
+    scrollbar-color: var(--oo-color-text) transparent;
 
     @include media-breakpoint-up(md) {
       padding-left: 1rem;
+    }
+
+    // Webkit scrollbar styling (Chrome, Safari, Edge)
+    &::-webkit-scrollbar {
+      width: 0.25rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--oo-color-text);
+      border-radius: 0.125rem;
+      opacity: 0.3;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      opacity: 0.5;
+    }
+
+    .--bg-light & {
+      scrollbar-color: var(--oo-color-light-text, var(--oo-color-text)) transparent;
+
+      &::-webkit-scrollbar-thumb {
+        background: var(--oo-color-light-text, var(--oo-color-text));
+        opacity: 0.3;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        opacity: 0.5;
+      }
+    }
+
+    .--bg-dark & {
+      scrollbar-color: var(--oo-color-dark-text, var(--oo-color-text)) transparent;
+
+      &::-webkit-scrollbar-thumb {
+        background: var(--oo-color-dark-text, var(--oo-color-text));
+        opacity: 0.3;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        opacity: 0.5;
+      }
+    }
+
+    .--bg-primary & {
+      scrollbar-color: var(--oo-color-primary-text, var(--oo-color-text)) transparent;
+
+      &::-webkit-scrollbar-thumb {
+        background: var(--oo-color-primary-text, var(--oo-color-text));
+        opacity: 0.3;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        opacity: 0.5;
+      }
+    }
+
+    .--bg-secondary & {
+      scrollbar-color: var(--oo-color-secondary-text, var(--oo-color-text)) transparent;
+
+      &::-webkit-scrollbar-thumb {
+        background: var(--oo-color-secondary-text, var(--oo-color-text));
+        opacity: 0.3;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        opacity: 0.5;
+      }
     }
   }
 
