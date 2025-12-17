@@ -74,26 +74,93 @@
     &.c-icon-button {
       width: 2.5rem;
       height: 2.5rem;
-      &.--on-bg-transparent,
-      .--bg-transparent & {
-        @include plain-visited() {
-          background-color: var(--oo-color-primary);
-        }
+
+      @include plain-visited() {
+        color: var(--oo-color-contrast-primary);
+        background-color: var(--oo-color-primary);
       }
 
       @include hover() {
         background-color: var(--oo-color-mix-primary-contrast-20);
       }
 
+      @include focus-visible() {
+        outline-color: var(--oo-color-primary);
+      }
+
       @include active() {
         background-color: var(--oo-color-mix-primary-contrast-40);
+      }
+
+      .--bg-light & {
+        @include plain-visited() {
+          color: var(--oo-color-light-contrast-primary);
+          background-color: var(--oo-color-light-primary);
+        }
+        @include hover() {
+          background-color: var(
+            --oo-color-light-mix-primary-contrast-20,
+            var(--oo-color-mix-primary-contrast-20)
+          );
+        }
+        @include active() {
+          background-color: var(
+            --oo-color-light-mix-primary-contrast-40,
+            var(--oo-color-mix-primary-contrast-40)
+          );
+        }
+      }
+
+      .--bg-dark & {
+        @include plain-visited() {
+          color: var(--oo-color-dark-contrast-primary);
+          background-color: var(--oo-color-dark-primary);
+        }
+        @include hover() {
+          background-color: var(
+            --oo-color-dark-mix-primary-contrast-20,
+            var(--oo-color-mix-primary-contrast-20)
+          );
+        }
+        @include active() {
+          background-color: var(
+            --oo-color-dark-mix-primary-contrast-40,
+            var(--oo-color-mix-primary-contrast-40)
+          );
+        }
+      }
+
+      .--bg-primary & {
+        @include plain-visited() {
+          color: var(--oo-color-primary-contrast-primary);
+          background-color: var(--oo-color-primary-primary);
+        }
+        @include hover() {
+          background-color: var(
+            --oo-color-primary-mix-primary-contrast-20,
+            var(--oo-color-mix-primary-contrast-20)
+          );
+        }
+      }
+
+      .--bg-secondary & {
+        @include plain-visited() {
+          color: var(--oo-color-secondary-contrast-primary);
+          background-color: var(--oo-color-secondary-primary);
+        }
+        @include hover() {
+          background-color: var(
+            --oo-color-secondary-mix-primary-contrast-20,
+            var(--oo-color-mix-primary-contrast-20)
+          );
+        }
       }
 
       .c-icon-button__icon {
         width: $icon-size-small;
         height: $icon-size-small;
         &.--filled {
-          fill: var(--oo-color-contrast-primary);
+          fill: currentColor;
         }
       }
     }
