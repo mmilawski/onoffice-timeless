@@ -1872,15 +1872,6 @@ while ($current_property = $pEstates->estateIterator()) {
                     <?php } ?>
                 </div>
             </div>
-        <?php
-        $text_group_two = ob_get_clean();
-
-        if (!empty(trim(strip_tags($text_group_two)))) {
-            echo '<div class="c-property-details__texts-wrapper">';
-            echo $text_group_two;
-            echo '</div>';
-        }
-        ?>
 
         <?php ob_start(); ?>
             <div class="c-property-details__texts o-container">
@@ -2050,11 +2041,11 @@ while ($current_property = $pEstates->estateIterator()) {
                 </div>
             </div>
         <?php
-        $text_group_three = ob_get_clean();
+        $text_group_two = ob_get_clean();
 
-        if (!empty(trim(strip_tags($text_group_three)))) {
+        if (!empty(trim(strip_tags($text_group_two)))) {
             echo '<div class="c-property-details__texts-wrapper">';
-            echo $text_group_three;
+            echo $text_group_two;
             echo '</div>';
         }
         ?>

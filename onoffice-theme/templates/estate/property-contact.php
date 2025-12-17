@@ -127,7 +127,7 @@ if (!empty($pEstates->getEstateContacts())) {
         'Ort',
     ]);
 
-    $address_fields = array_filter($address_fields, function($field) {
+    $address_fields = array_filter($address_fields, function ($field) {
         return strtolower($field) !== 'jobtitle';
     });
 
@@ -305,11 +305,11 @@ if (!empty($pEstates->getEstateContacts())) {
         echo '<div class="c-contact-person__data-wrapper">';
 
         $custom_job_title = null;
-        
+
         foreach ($contact_data as $key => $value) {
             if (strtolower($key) === 'jobtitle') {
                 $custom_job_title = $value;
-                break; 
+                break;
             }
         }
 
