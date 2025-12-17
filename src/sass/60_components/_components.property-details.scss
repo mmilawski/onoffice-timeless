@@ -105,9 +105,7 @@
   }
 
   &__media-wrapper {
-    @include media-breakpoint-up(md) {
-      margin-top: 5rem;
-    }
+    margin-bottom: 2.5rem;
   }
 
   &__media,
@@ -115,11 +113,7 @@
   &__similar {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-
-    @include media-breakpoint-up(xl) {
-      gap: 2rem;
-    }
+    gap: 2.5rem;
   }
 
   &__unit-container {
@@ -524,16 +518,11 @@
   &__fields {
   }
 
-  &__calculator-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
-  }
-
   &__calculator {
     display: grid;
     gap: 2rem;
     padding: 1.5rem;
+    margin-bottom: 2.5rem;
 
     .--bg-light & {
       background-color: var(--oo-color-light-mix-bg-contrast-05);
@@ -550,6 +539,12 @@
     .--bg-transparent & {
       background-color: var(--oo-color-mix-bg-contrast-05);
     }
+  }
+
+  &__calculator-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
   }
 
   &__energy {
@@ -637,7 +632,6 @@
       grid-template-columns: 1fr;
       gap: 5rem;
       margin: 5rem 0;
-      align-items: center;
 
       @include media-breakpoint-up(md) {
         grid-template-columns: 1fr 1fr;
