@@ -79,7 +79,7 @@ if ($config['type'] === 'enterprise') {
             let form = document.querySelector('form[id^="onoffice-form"] input[name="oo_formno"][value="<?php echo esc_js(
                 $formNo,
             ); ?>"]')?.parentElement;
-            let btn = form?.querySelector('.oo-js-submit-button);
+            let btn = form?.querySelector('.oo-js-submit-button');
             if (form && btn && onOffice?.captchaControl) {
                 onOffice.captchaControl(form, btn);
             }
