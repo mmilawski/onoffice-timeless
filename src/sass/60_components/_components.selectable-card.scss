@@ -44,6 +44,9 @@
 
   // State: selected
   &.--is-selected {
+    background-color: var(--oo-color-primary);
+    border-color: var(--oo-color-primary);
+
     .--bg-light & {
       background-color: var(--oo-color-light-primary);
       border-color: var(--oo-color-light-primary);

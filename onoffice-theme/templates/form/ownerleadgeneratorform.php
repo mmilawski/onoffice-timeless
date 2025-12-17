@@ -151,15 +151,14 @@ if ($showFormAsModal):
     // Use the form modal component
     oo_get_template('components', '', 'component-form-modal', [
         'modal_id' => 'leadform-modal-' . $pForm->getFormId(),
-        'modal_title' =>
-            $pageTitles[0] ?? __('Ihre Immobilie bewerten lassen', 'oo_theme'),
+        'modal_title' => __('Ihre Immobilie bewerten lassen', 'oo_theme'),
         'pageTitles' => $pageTitles,
         'button_text' => __('Bewertung starten', 'oo_theme'),
         'button_class' => 'c-button --primary',
         'form_content' => $form_content,
         'form_id' => $pForm->getFormId(),
         'form_no' => $pForm->getFormNo(),
-        'additional_dialog_class' => '--is-form-modal',
+        'additional_dialog_class' => '--is-form-modal --is-leadgen',
     ]);
     // Render form directly
 else:

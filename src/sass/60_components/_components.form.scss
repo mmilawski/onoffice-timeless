@@ -226,12 +226,12 @@
 
       @include media-breakpoint-only(xs) {
         right: 1rem;
-        top: 1rem;
+        top: 0.75rem;
       }
 
       @include media-breakpoint-only(sm) {
         right: 1.5rem;
-        top: 1rem;
+        top: 0.75rem;
       }
 
       .--bg-light & {
@@ -283,7 +283,12 @@
       display: flex;
       flex-direction: column;
       gap: 2.5rem;
-      padding: 1.5rem;
+      padding: 2rem 1rem;
+
+      @include media-breakpoint-up(md) {
+        padding: 1.5rem;
+      }
+
       #{$c-form}__button-wrapper {
         display: flex;
         flex-direction: column;
@@ -328,7 +333,7 @@
       @include media-breakpoint-up(md) {
         gap: 2rem;
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
       .c-form__field-group:has(
           .o-label[data-icon-button-group]:not([style*='display: none']):not(

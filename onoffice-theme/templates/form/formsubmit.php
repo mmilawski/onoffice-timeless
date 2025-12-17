@@ -21,7 +21,6 @@
 // Settings
 $post_id = get_the_ID();
 $is_popup = get_post_type($post_id) === OO_POPUPS_CPT_ID ?? false;
-$buttonDisabled = '';
 
 if ($is_popup) {
     $settings = get_field('popup', $post_id)['settings'] ?? null;
