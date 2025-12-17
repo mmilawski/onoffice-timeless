@@ -368,6 +368,7 @@
     }
 
     &.--is-layout-slider {
+      margin-bottom: 2.5rem;
       #{$c-property-details}__gallery-picture {
         @include media-breakpoint-up(md) {
           height: 25rem;
@@ -454,7 +455,7 @@
       @include media-breakpoint-up(lg) {
         -webkit-line-clamp: 10;
         line-clamp: 10;
-    }
+      }
       -webkit-box-orient: vertical;
       transition: max-height 0.25s ease-in-out;
 

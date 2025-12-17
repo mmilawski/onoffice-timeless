@@ -81,7 +81,7 @@ while ($current_property = $pEstates->estateIterator()) {
 
     // pictures
     $property_pictures = $pEstates->getEstatePictures();
-    foreach ($property_pictures as $id) {
+    foreach ($property_pictures as $text_group_two) {
         $photos = true;
         $first_picture = true;
     }
@@ -218,16 +218,16 @@ while ($current_property = $pEstates->estateIterator()) {
     $title_image = null;
     $sorted_pictures = [];
 
-    foreach ($property_pictures as $id) {
-        $picture_values = $pEstates->getEstatePictureValues($id);
+    foreach ($property_pictures as $text_group_two) {
+        $picture_values = $pEstates->getEstatePictureValues($text_group_two);
 
         if (
             $picture_values['type'] ===
             \onOffice\WPlugin\Types\ImageTypes::TITLE
         ) {
-            $title_image = $id;
+            $title_image = $text_group_two;
         } else {
-            $sorted_pictures[] = $id;
+            $sorted_pictures[] = $text_group_two;
         }
     }
 
@@ -236,7 +236,7 @@ while ($current_property = $pEstates->estateIterator()) {
     }
     ?>
 
-    <section class="c-property-details o-section --bg-transparent <?php echo $show_secret_sale_block
+    <section class="c-property-details o-section --bg-transparent<?php echo $show_secret_sale_block
         ? '--blurry'
         : ''; ?>">
 
@@ -378,8 +378,10 @@ while ($current_property = $pEstates->estateIterator()) {
 
         if ($photos && !$show_secret_sale_block) {
             $has_slides = false;
-            foreach ($sorted_pictures as $id) {
-                $check_values = $pEstates->getEstatePictureValues($id);
+            foreach ($sorted_pictures as $text_group_two) {
+                $check_values = $pEstates->getEstatePictureValues(
+                    $text_group_two,
+                );
                 if ($check_values['type'] === 'Grundriss') {
                     continue;
                 }
@@ -417,10 +419,13 @@ while ($current_property = $pEstates->estateIterator()) {
                         >
                             <div class="c-slider__track splide__track">
                                 <div class="c-slider__list splide__list">
-                                    <?php foreach ($sorted_pictures as $id) {
+                                    <?php foreach (
+                                        $sorted_pictures
+                                        as $text_group_two
+                                    ) {
 
                                         $picture_values = $pEstates->getEstatePictureValues(
-                                            $id,
+                                            $text_group_two,
                                         );
 
                                         if (
@@ -451,7 +456,7 @@ while ($current_property = $pEstates->estateIterator()) {
 
                                         $image = [
                                             'url' => $pEstates->getEstatePictureUrl(
-                                                $id,
+                                                $text_group_two,
                                             ),
                                             'alt' => $image_alt,
                                         ];
@@ -1282,67 +1287,156 @@ while ($current_property = $pEstates->estateIterator()) {
         ob_start();
 
         if ($photos && !$show_secret_sale_block) {
-            $has_floorplans = false;
-            foreach ($sorted_pictures as $id) {
-                $check_values = $pEstates->getEstatePictureValues($id);
+            $floorplan_ids = [];
+            foreach ($sorted_pictures as $text_group_two) {
+                $check_values = $pEstates->getEstatePictureValues(
+                    $text_group_two,
+                );
                 if ($check_values['type'] === 'Grundriss') {
-                    $has_floorplans = true;
-                    break;
+                    $floorplan_ids[] = $text_group_two;
                 }
             }
 
-            if ($has_floorplans) {
+            $floorplan_count = count($floorplan_ids);
 
-                // Load Lightbox
-                wp_enqueue_script('oo-glightbox-script');
-                wp_enqueue_style('oo-glightbox-style');
-                ?>
+            if ($floorplan_count > 0) {
+                if ($floorplan_count === 1) {
+
+                    $text_group_two = $floorplan_ids[0];
+                    $picture_values = $pEstates->getEstatePictureValues(
+                        $text_group_two,
+                    );
+
+                    $image_alt = $picture_values['title']
+                        ? esc_html($picture_values['title'])
+                        : esc_html__('Grundriss', 'oo_theme');
+
+                    $image_widths = [
+                        'xs' => 543,
+                        'sm' => 512,
+                        'md' => 694,
+                        'lg' => 608,
+                        'xl' => 736,
+                        'xxl' => 864,
+                        'xxxl' => 952,
+                    ];
+
+                    $image = [
+                        'url' => $pEstates->getEstatePictureUrl(
+                            $text_group_two,
+                        ),
+                        'alt' => $image_alt,
+                    ];
+                    ?>
+                    <div class="c-property-details__container o-container --single-floorplan">
+                         <div class="c-property-details__gallery --is-layout-slider --single-floorplan u-text-center">
+                            <?php oo_get_template(
+                                'components',
+                                '',
+                                'component-image',
+                                [
+                                    'image' => $image,
+                                    'loading' => 'lazy',
+                                    'picture_class' =>
+                                        'c-property-details__gallery-picture o-picture',
+                                    'image_class' =>
+                                        'c-property-details__gallery-image o-image',
+                                    'dimensions' => [
+                                        '575' => [
+                                            'w' => $image_widths['xs'],
+                                            'h' => round(
+                                                ($image_widths['xs'] * 2) / 3,
+                                            ),
+                                        ],
+                                        '1600' => [
+                                            'w' => $image_widths['xxxl'],
+                                            'h' => $image_widths['xxxl'],
+                                        ],
+                                        '1400' => [
+                                            'w' => $image_widths['xxl'],
+                                            'h' => $image_widths['xxl'],
+                                        ],
+                                        '1200' => [
+                                            'w' => $image_widths['xl'],
+                                            'h' => $image_widths['xl'],
+                                        ],
+                                        '992' => [
+                                            'w' => $image_widths['lg'],
+                                            'h' => $image_widths['lg'],
+                                        ],
+                                        '768' => [
+                                            'w' => $image_widths['md'],
+                                            'h' => round(
+                                                ($image_widths['md'] * 2) / 3,
+                                            ),
+                                        ],
+                                        '576' => [
+                                            'w' => $image_widths['sm'],
+                                            'h' => round(
+                                                ($image_widths['sm'] * 2) / 3,
+                                            ),
+                                        ],
+                                    ],
+                                ],
+                            ); ?>
+                        </div>
+                    </div>
+                    <?php
+                } else {
+
+                    $slider_type = $floorplan_count === 2 ? 'slide' : 'loop';
+                    $slider_rewind = 'false';
+
+                    $splide_config = sprintf(
+                        '{
+                            "type":"%s",
+                            "rewind":%s,
+                            "perPage":1,
+                            "padding":"20rem",
+                            "gap":16,
+                            "arrows":true,
+                            "snap":true,
+                            "lazyLoad":false,
+                            "pagination":true,
+                            "updateOnMove":true,
+                            "focus":"center",
+                            "classes":{"page":"c-slider__page splide__pagination__page"},
+                            "breakpoints": {
+                                "1200": { "padding":"10rem" },
+                                "992": { "padding":"5rem" },
+                                "576": { "padding":"2.5rem", "gap": 8 }
+                            }
+                        }',
+                        $slider_type,
+                        $slider_rewind,
+                    );
+
+                    // Load Lightbox
+                    wp_enqueue_script('oo-glightbox-script');
+                    wp_enqueue_style('oo-glightbox-style');
+                    ?>
                     <div class="c-property-details__container o-container-fluid">
                         <div 
-                            class="c-property-details__gallery c-slider splide --auto-height --is-property-details-slider --is-layout-slider"
-                            data-splide='{
-                                "type":"loop",
-                                "perPage":1,
-                                "padding":"20rem",
-                                "gap":16,
-                                "arrows":true,
-                                "snap":true,
-                                "lazyLoad":false,
-                                "pagination":true,
-                                "updateOnMove":true,
-                                "focus":"center",
-                                "classes":{"page":"c-slider__page splide__pagination__page"},
-                                "breakpoints": {
-                                    "1200": { "padding":"10rem" },
-                                    "992": { "padding":"5rem" },
-                                    "576": { "padding":"2.5rem", "gap": 8 }
-                                }
-                            }'
+                            class="c-property-details__gallery c-slider splide --auto-height --is-layout-slider"
+                            data-splide='<?php echo $splide_config; ?>'
                         >
                             <div class="c-slider__track splide__track">
                                 <div class="c-slider__list splide__list">
-                                    <?php foreach ($sorted_pictures as $id) {
+                                    <?php foreach (
+                                        $floorplan_ids
+                                        as $text_group_two
+                                    ) {
 
                                         $picture_values = $pEstates->getEstatePictureValues(
-                                            $id,
+                                            $text_group_two,
                                         );
-
-                                        if (
-                                            $picture_values['type'] !==
-                                            'Grundriss'
-                                        ) {
-                                            continue;
-                                        }
-
-                                        // Image alt text
                                         $image_alt = $picture_values['title']
                                             ? esc_html($picture_values['title'])
                                             : esc_html__(
-                                                'Immobilienbild',
+                                                'Grundriss',
                                                 'oo_theme',
                                             );
 
-                                        // Image width variants
                                         $image_widths = [
                                             'xs' => 543,
                                             'sm' => 512,
@@ -1355,12 +1449,11 @@ while ($current_property = $pEstates->estateIterator()) {
 
                                         $image = [
                                             'url' => $pEstates->getEstatePictureUrl(
-                                                $id,
+                                                $text_group_two,
                                             ),
                                             'alt' => $image_alt,
                                         ];
 
-                                        // Lightbox Cloud Image
                                         $lightbox_url =
                                             'https://acnaayzuen.cloudimg.io/v7/' .
                                             $image['url'] .
@@ -1384,7 +1477,6 @@ while ($current_property = $pEstates->estateIterator()) {
                                             ],
                                         ];
 
-                                        // Responsive image helpers
                                         $lightbox_image_breakpoints = '';
                                         $lightbox_image_sizes = '';
 
@@ -1412,7 +1504,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                         ?>
                                         
                                         <a class="c-property-details__gallery-link glightbox c-slider__slide splide__slide"
-                                        data-gallery="gallery"
+                                        data-gallery="gallery-floorplan"
                                         href="<?php echo esc_url(
                                             $lightbox_url,
                                         ) .
@@ -1595,6 +1687,7 @@ while ($current_property = $pEstates->estateIterator()) {
                         </div>
                     </div>
                 <?php
+                }
             }
         }
         $floorplan_content = ob_get_clean();
