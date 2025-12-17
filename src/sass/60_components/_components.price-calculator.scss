@@ -41,6 +41,10 @@
       font-size: 1.125rem;
       font-weight: 600;
 
+      @include media-breakpoint-up(md) {
+        padding-left: 3rem;
+      }
+
       #{$c-price-calculator}__value {
         font-size: 1.125rem;
         font-weight: 600;
