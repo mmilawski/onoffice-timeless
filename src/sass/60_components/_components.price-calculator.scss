@@ -3,8 +3,12 @@
 
   width: 100%;
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1fr;
   gap: 2rem;
+
+  @include media-breakpoint-up(md) {
+    grid-template-columns: 2fr 1fr;
+  }
 
   @include media-breakpoint-up(lg) {
     gap: 5rem;
@@ -33,7 +37,7 @@
     &.--is-total-cost {
       font-weight: $font-weight-text-bold;
       margin-top: 0.5rem;
-      padding-left: 3rem;
+      padding-left: 2rem;
       font-size: 1.125rem;
       font-weight: 600;
 
@@ -45,10 +49,14 @@
   }
 
   &__color-indicator {
-    display: inline-block;
-    width: 2rem;
-    height: 2rem;
-    padding-right: 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    aspect-ratio: 1/1;
+    
+    @include media-breakpoint-up(md) {
+      width: 2rem;
+      height: 2rem;
+    }
   }
 
   &__criteria {
