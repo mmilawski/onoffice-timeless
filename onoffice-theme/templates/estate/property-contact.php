@@ -127,6 +127,10 @@ if (!empty($pEstates->getEstateContacts())) {
         'Ort',
     ]);
 
+    $address_fields = array_filter($address_fields, function($field) {
+        return strtolower($field) !== 'jobtitle';
+    });
+
     $labels_fields = [
         'Email',
         'email',
@@ -139,6 +143,9 @@ if (!empty($pEstates->getEstateContacts())) {
 
     $contacts = $pEstates->getEstateContacts();
     $headline = oo_get_contacts_headline($contacts);
+    $headline = str_replace(['Ihre ', 'Ihr '], '', $headline);
+    $headline = rtrim($headline, ': ') . ':';
+    $headline = ucfirst($headline);
     $contact_count = is_array($contacts) ? count($contacts) : 0;
 
     foreach ($pEstates->getEstateContacts() as $contact_data) {
@@ -296,6 +303,21 @@ if (!empty($pEstates->getEstateContacts())) {
         echo '</h2>';
 
         echo '<div class="c-contact-person__data-wrapper">';
+
+        $custom_job_title = null;
+        
+        foreach ($contact_data as $key => $value) {
+            if (strtolower($key) === 'jobtitle') {
+                $custom_job_title = $value;
+                break; 
+            }
+        }
+
+        if (!empty($custom_job_title)) {
+            echo '<p class="c-contact-person__data --is-jobtitle">';
+            echo esc_html($custom_job_title);
+            echo '</p>';
+        }
 
         if ($job_title) {
             echo '<p class="c-contact-person__jobtitle">';
