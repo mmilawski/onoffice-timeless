@@ -631,6 +631,11 @@
   &__form {
     scroll-margin-top: $mobile-header-height;
     scroll-snap-align: start;
+    padding: 0;
+
+    .c-form__property-context {
+      padding: 0 1rem;
+    }
 
     @include media-breakpoint-up(xxl) {
       scroll-margin-top: $desktop-header-height;
@@ -642,7 +647,7 @@
       gap: 5rem;
       margin: 5rem 0;
 
-      @include media-breakpoint-up(md) {
+      @include media-breakpoint-up(xl) {
         grid-template-columns: 1fr 1fr;
         gap: 9rem;
         margin: 10rem 0;
