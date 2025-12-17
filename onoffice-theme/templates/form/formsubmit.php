@@ -28,7 +28,7 @@ if ($is_popup) {
     $settings = get_field('settings', $post_id) ?? null;
 }
 
-$buttonClass = 'c-form__button c-button';
+$buttonClass = 'c-form__button c-button oo-js-submit-button';
 $buttonLabel = esc_html($pForm->getGenericSetting('submitButtonLabel'));
 
 /** @var \onOffice\WPlugin\Form $pForm */
@@ -76,10 +76,10 @@ if ($config['type'] === 'enterprise') {
             ooRecaptchaClassicSubmit(<?php echo json_encode($formNo); ?>);
         };
         document.addEventListener('DOMContentLoaded', function() {
-            var form = document.querySelector('form[id^="onoffice-form"] input[name="oo_formno"][value="<?php echo esc_js(
+            let form = document.querySelector('form[id^="onoffice-form"] input[name="oo_formno"][value="<?php echo esc_js(
                 $formNo,
             ); ?>"]')?.parentElement;
-            var btn = form?.querySelector('.c-form__button');
+            let btn = form?.querySelector('.oo-js-submit-button);
             if (form && btn && onOffice?.captchaControl) {
                 onOffice.captchaControl(form, btn);
             }
