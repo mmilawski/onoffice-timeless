@@ -582,24 +582,6 @@ jQuery(document).ready(function() {
 
   // Open popup
   const openPopup = document.querySelectorAll('.--open-popup');
-  const popUpHeadline = document.querySelectorAll('.c-popup__headline');
-
-  // Trim Popup Headine
-  if (popUpHeadline.length > 0) {
-    popUpHeadline.forEach(function(headline) {
-      const originalText = headline.textContent;
-      const lineHeight = parseFloat(window.getComputedStyle(headline).lineHeight);
-      const maxHeight = lineHeight * 5;
-
-      let truncatedText = originalText;
-      headline.textContent = truncatedText;
-
-      while (headline.scrollHeight > maxHeight) {
-        truncatedText = truncatedText.slice(0, -1);
-        headline.textContent = truncatedText + '…';
-      }
-    });
-  }
 
   if (openPopup.length > 0) {
     openPopup.forEach(button => {

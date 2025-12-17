@@ -457,20 +457,34 @@
     }
   }
 
-  &.--is--popup {
+  .--is-popup & {
     #{$c-form}__fieldset {
-      gap: 1.5rem;
+      padding: 0;
+      background: transparent;
+      .--bg-light &,
+      .--bg-dark &,
+      .--bg-primary &,
+      .--bg-secondary &,
+      .--bg-transparent & {
+        background: transparent;
+      }
     }
-
-    // Sticky Pop-up
-    .--is-widget.--is-sticky & {
-      #{$c-form}__fieldset {
-        grid-template-columns: minmax(0, 1fr);
-        gap: 1rem;
-
+    #{$c-form}__body {
+      grid-template-columns: minmax(0, 1fr);
+      :not(.--no-image) & {
         & > * {
           // remove grid-column: span 2 for all elements
           grid-column: auto;
+        }
+      }
+      .--no-image & {
+        @include media-breakpoint-up(md) {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+
+          .--is-textarea,
+          .--is-boolean {
+            grid-column: span 2;
+          }
         }
       }
     }
