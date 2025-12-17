@@ -246,6 +246,11 @@
     0.9,
     var(--oo-color-bg)
   );
+  #{--oo-color-light-transparent-primary-10}: transparent-color(
+    var(--oo-color-light-primary),
+    0.1,
+    var(--oo-color-bg)
+  );
   #{--oo-color-light-contrast-primary}: contrast-color(
     var(--oo-color-light-primary),
     var(--oo-color-primary)
@@ -336,6 +341,11 @@
   #{--oo-color-dark-transparent-bg-90}: transparent-color(
     var(--oo-color-dark-bg),
     0.9,
+    var(--oo-color-bg)
+  );
+  #{--oo-color-dark-transparent-primary-10}: transparent-color(
+    var(--oo-color-dark-primary),
+    0.1,
     var(--oo-color-bg)
   );
   #{--oo-color-dark-contrast-primary}: contrast-color(
@@ -436,6 +446,11 @@
     0.9,
     var(--oo-color-bg)
   );
+  #{--oo-color-primary-transparent-primary-10}: transparent-color(
+    var(--oo-color-primary-primary),
+    0.1,
+    var(--oo-color-bg)
+  );
   #{--oo-color-primary-contrast-primary}: contrast-color(
     var(--oo-color-primary-primary),
     var(--oo-color-primary)
@@ -532,6 +547,11 @@
   #{--oo-color-secondary-transparent-bg-90}: transparent-color(
     var(--oo-color-secondary-bg),
     0.9,
+    var(--oo-color-bg)
+  );
+  #{--oo-color-secondary-transparent-primary-10}: transparent-color(
+    var(--oo-color-secondary-primary),
+    0.1,
     var(--oo-color-bg)
   );
   #{--oo-color-secondary-contrast-primary}: contrast-color(
@@ -631,9 +651,14 @@
     var(--oo-color-primary)
   );
 
-  #{--oo-color-header-bg-contrast}: contrast-color(
+  #{--oo-color-header-contrast-bg}: contrast-color(
     var(--oo-color-header-bg),
     var(--oo-color-bg)
+  );
+
+  #{--oo-color-header-contrast-primary}: contrast-color(
+    var(--oo-color-header-primary),
+    var(--oo-color-primary)
   );
 
   #{--oo-color-header-mix-bg-contrast-05}: mix-color-with-contrast(
@@ -669,10 +694,22 @@
   );
 
   // footer
+  #{--oo-color-footer-contrast-bg}: contrast-color(
+    var(--oo-color-footer-bg),
+    var(--oo-color-bg)
+  );
+
   #{--oo-color-footer-contrast-primary}: contrast-color(
     var(--oo-color-footer-primary),
     var(--oo-color-primary)
   );
+
+  #{--oo-color-footer-mix-bg-contrast-05}: mix-color-with-contrast(
+    var(--oo-color-footer-bg),
+    0.05,
+    var(--oo-color-bg)
+  );
+
   #{--oo-color-footer-mix-text-contrast-30}: mix-color-with-contrast(
     var(--oo-color-footer-text),
     0.3,

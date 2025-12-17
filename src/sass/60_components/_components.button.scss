@@ -46,6 +46,7 @@
   }
 
   @include hover() {
+    color: var(--oo-color-contrast-primary);
     background-color: var(--oo-color-mix-primary-contrast-20);
     border-color: var(--oo-color-mix-primary-contrast-20);
   }
@@ -513,5 +514,10 @@
   &.--show-more {
     display: inline-block;
     margin-top: 1rem;
+  }
+
+  &.--open-popup {
+    margin: 0 1rem;
+    max-width: calc(100% - 2rem);
   }
 }

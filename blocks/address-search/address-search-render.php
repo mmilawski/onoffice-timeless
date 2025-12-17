@@ -39,7 +39,7 @@ if (!empty(get_field('address_search_result'))) {
 
         <?php if (!empty($shortcode)) { ?>
             <div class="c-property-search__content o-row --position-center">
-                <div class="c-property-search__shortcode o-col-12 o-col-lg-10 o-col-xl-8">
+                <div class="c-property-search__shortcode o-col-12 o-col-lg-10 o-col-xl-9 u-offset-lg-1 --<?php echo $bg_color; ?>">
                     <?php echo do_shortcode($shortcode); ?>
                 </div>
             </div>
