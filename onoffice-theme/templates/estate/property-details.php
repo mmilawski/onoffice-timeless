@@ -1300,6 +1300,9 @@ while ($current_property = $pEstates->estateIterator()) {
             $floorplan_count = count($floorplan_ids);
 
             if ($floorplan_count > 0) {
+                wp_enqueue_script('oo-glightbox-script');
+                wp_enqueue_style('oo-glightbox-style');
+
                 if ($floorplan_count === 1) {
 
                     $text_group_two = $floorplan_ids[0];
@@ -1327,58 +1330,120 @@ while ($current_property = $pEstates->estateIterator()) {
                         ),
                         'alt' => $image_alt,
                     ];
+
+                    $lightbox_url =
+                        'https://acnaayzuen.cloudimg.io/v7/' .
+                        $image['url'] .
+                        '?force_format=webp&org_if_sml=1';
+                    $lightbox_image_size_list = [
+                        [
+                            'id' => 'mobile',
+                            'breakpoint' => 767,
+                            'image_size' => 767,
+                        ],
+                        [
+                            'id' => 'tablet',
+                            'breakpoint' => 768,
+                            'image_size' => 1200,
+                        ],
+                        [
+                            'id' => 'desktop',
+                            'breakpoint' => 1200,
+                            'image_size' => 1920,
+                        ],
+                    ];
+                    $lightbox_image_breakpoints = '';
+                    $lightbox_image_sizes = '';
+                    foreach ($lightbox_image_size_list as $key => $size) {
+                        $is_last =
+                            $key === array_key_last($lightbox_image_size_list);
+                        $separator = $is_last ? '' : ',';
+                        if ($key === 0) {
+                            $lightbox_image_breakpoints .= "(max-width: {$size['breakpoint']}px) {$size['image_size']}px,";
+                            $lightbox_image_sizes .= "{$lightbox_url}&w={$size['image_size']} {$size['breakpoint']}w,";
+                            continue;
+                        }
+                        $lightbox_image_breakpoints .= "(min-width:{$size['breakpoint']}px) {$size['image_size']}px{$separator}";
+                        $lightbox_image_sizes .= "{$lightbox_url}&w={$size['image_size']} {$size['breakpoint']}w{$separator}";
+                    }
                     ?>
                     <div class="c-property-details__container o-container --single-floorplan">
                          <div class="c-property-details__gallery --is-layout-slider --single-floorplan u-text-center">
-                            <?php oo_get_template(
-                                'components',
-                                '',
-                                'component-image',
-                                [
-                                    'image' => $image,
-                                    'loading' => 'lazy',
-                                    'picture_class' =>
-                                        'c-property-details__gallery-picture o-picture',
-                                    'image_class' =>
-                                        'c-property-details__gallery-image o-image',
-                                    'dimensions' => [
-                                        '575' => [
-                                            'w' => $image_widths['xs'],
-                                            'h' => round(
-                                                ($image_widths['xs'] * 2) / 3,
-                                            ),
-                                        ],
-                                        '1600' => [
-                                            'w' => $image_widths['xxxl'],
-                                            'h' => $image_widths['xxxl'],
-                                        ],
-                                        '1400' => [
-                                            'w' => $image_widths['xxl'],
-                                            'h' => $image_widths['xxl'],
-                                        ],
-                                        '1200' => [
-                                            'w' => $image_widths['xl'],
-                                            'h' => $image_widths['xl'],
-                                        ],
-                                        '992' => [
-                                            'w' => $image_widths['lg'],
-                                            'h' => $image_widths['lg'],
-                                        ],
-                                        '768' => [
-                                            'w' => $image_widths['md'],
-                                            'h' => round(
-                                                ($image_widths['md'] * 2) / 3,
-                                            ),
-                                        ],
-                                        '576' => [
-                                            'w' => $image_widths['sm'],
-                                            'h' => round(
-                                                ($image_widths['sm'] * 2) / 3,
-                                            ),
+                            <a class="c-property-details__gallery-link glightbox"
+                               data-gallery="gallery-floorplan"
+                               href="<?php echo esc_url($lightbox_url) .
+                                   '&w=' .
+                                   end($lightbox_image_size_list)[
+                                       'image_size'
+                                   ]; ?>"
+                               data-sizes="<?php echo esc_attr(
+                                   $lightbox_image_breakpoints,
+                               ); ?>"
+                               data-srcset="<?php echo esc_attr(
+                                   $lightbox_image_sizes,
+                               ); ?>"
+                               data-caption="<?php echo esc_attr(
+                                   $image['alt'],
+                               ); ?>"
+                               title="<?php echo esc_attr($image['alt']); ?>"
+                            >
+                                <?php oo_get_template(
+                                    'components',
+                                    '',
+                                    'component-image',
+                                    [
+                                        'image' => $image,
+                                        'loading' => 'lazy',
+                                        'picture_class' =>
+                                            'c-property-details__gallery-picture o-picture',
+                                        'image_class' =>
+                                            'c-property-details__gallery-image o-image',
+                                        'dimensions' => [
+                                            '575' => [
+                                                'w' => $image_widths['xs'],
+                                                'h' => round(
+                                                    ($image_widths['xs'] * 2) /
+                                                        3,
+                                                ),
+                                            ],
+                                            '1600' => [
+                                                'w' => $image_widths['xxxl'],
+                                                'h' => $image_widths['xxxl'],
+                                            ],
+                                            '1400' => [
+                                                'w' => $image_widths['xxl'],
+                                                'h' => $image_widths['xxl'],
+                                            ],
+                                            '1200' => [
+                                                'w' => $image_widths['xl'],
+                                                'h' => $image_widths['xl'],
+                                            ],
+                                            '992' => [
+                                                'w' => $image_widths['lg'],
+                                                'h' => $image_widths['lg'],
+                                            ],
+                                            '768' => [
+                                                'w' => $image_widths['md'],
+                                                'h' => round(
+                                                    ($image_widths['md'] * 2) /
+                                                        3,
+                                                ),
+                                            ],
+                                            '576' => [
+                                                'w' => $image_widths['sm'],
+                                                'h' => round(
+                                                    ($image_widths['sm'] * 2) /
+                                                        3,
+                                                ),
+                                            ],
                                         ],
                                     ],
-                                ],
-                            ); ?>
+                                ); ?>
+                                <div class="c-slider__fullscreen c-icon-button">
+                                    <span class="u-screen-reader-only"><?php esc_html_e('Vergrößern', 'oo_theme'); ?></span>
+                                    <?php echo oo_get_icon('resize', true, ['class' => 'c-icon-button__icon']); ?>
+                                </div>
+                            </a>
                         </div>
                     </div>
                     <?php
@@ -1410,10 +1475,6 @@ while ($current_property = $pEstates->estateIterator()) {
                         $slider_type,
                         $slider_rewind,
                     );
-
-                    // Load Lightbox
-                    wp_enqueue_script('oo-glightbox-script');
-                    wp_enqueue_style('oo-glightbox-style');
                     ?>
                     <div class="c-property-details__container o-container-fluid">
                         <div 
@@ -2029,9 +2090,9 @@ while ($current_property = $pEstates->estateIterator()) {
                             $raw_values->getValueRaw($property_id)['elements'][
                                 'energyClass'
                             ] ?? '';
-                        $energy_class_permitted_values = $pEstates->getPermittedValues(
-                            'energyClass',
-                        );
+                        $energy_class_permitted_values = $pEstates->getShowEnergyCertificate()
+                            ? $pEstates->getPermittedValues('energyClass')
+                            : [];
                         $energy_certificate_type =
                             $raw_values->getValueRaw($property_id)['elements'][
                                 'energieausweistyp'
