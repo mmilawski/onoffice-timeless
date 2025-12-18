@@ -60,19 +60,17 @@
     }
   }
 
-  // First banner gets more padding-top because of the transparent header
   & > *:first-child {
     .c-banner__slide {
-      .--is-header-style-transparent & {
-        @include media-breakpoint-up(lg) {
-          padding-top: calc(
-            $mobile-header-height + $desktop-section-padding-top
-          );
-        }
-        @include media-breakpoint-up(xxl) {
-          padding-top: calc(
-            $desktop-header-height + $desktop-section-padding-top
-          );
+      margin-top: 3.75rem;
+
+      @include media-breakpoint-up(xl) {
+        margin-top: 2.5rem;
+      }
+
+      &.--content-is-left {
+        .c-banner__container {
+          padding-top: 0;
         }
       }
     }

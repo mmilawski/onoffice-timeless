@@ -286,6 +286,7 @@ if (!function_exists('renderFieldEstateSearch')) {
                     $inputClass .
                     '" ' .
                     $inputType .
+                    ' ' .
                     renderAutocomplete($fieldName) .
                     ' name="' .
                     esc_attr($fieldName) .
@@ -301,6 +302,7 @@ if (!function_exists('renderFieldEstateSearch')) {
                     $inputClass .
                     '" ' .
                     $inputType .
+                    ' ' .
                     renderAutocomplete($fieldName) .
                     ' name="' .
                     esc_attr($fieldName) .
@@ -317,6 +319,7 @@ if (!function_exists('renderFieldEstateSearch')) {
                 $inputClass .
                 '" ' .
                 $inputType .
+                ' ' .
                 renderAutocomplete($fieldName) .
                 ' name="' .
                 esc_attr($fieldName) .
@@ -335,6 +338,7 @@ if (!function_exists('renderFieldEstateSearch')) {
                 $inputClass .
                 '" ' .
                 $inputType .
+                ' ' .
                 renderAutocomplete($fieldName) .
                 ' name="' .
                 esc_attr($fieldName) .
@@ -631,9 +635,9 @@ if (!function_exists('renderFormField')) {
             $output .=
                 '<textarea class="o-textarea" name="' .
                 esc_html($fieldName) .
-                '"' .
-                renderAutocomplete($fieldName) .
+                '" ' .
                 $requiredAttribute .
+                renderAutocomplete($fieldName) .
                 '>' .
                 $selectedValue .
                 '</textarea><div class="c-form__error-message"></div>';
@@ -659,8 +663,8 @@ if (!function_exists('renderFormField')) {
                 '" name="' .
                 esc_html($fieldName) .
                 '" size="1" ' .
-                renderAutocomplete($fieldName) .
                 $requiredAttribute .
+                renderAutocomplete($fieldName) .
                 ' data-placeholder="' .
                 esc_html__('Bitte wählen', 'oo_theme') .
                 '">';
