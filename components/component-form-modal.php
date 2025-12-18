@@ -49,11 +49,15 @@ $additional_dialog_class = $args['additional_dialog_class'] ?? '';
     <div class="c-dialog__wrapper">
         <?php if ($show_header): ?>
             <div class="c-dialog__header">
-                <h2 id="<?php echo esc_attr(
-                    $modal_id,
-                ); ?>-title" class="c-dialog__title">
-                    <?php echo esc_html($modal_title); ?>
-                </h2>
+                <?php if (
+                    !str_contains($additional_dialog_class, '--is-leadgen')
+                ) { ?>
+                    <h2 id="<?php echo esc_attr(
+                        $modal_id,
+                    ); ?>-title" class="c-dialog__title">
+                        <?php echo esc_html($modal_title); ?>
+                    </h2>
+                <?php } ?>
                 <button class="c-dialog__close --close-popup c-icon-button" 
                     aria-label="<?php esc_attr_e(
                         'Fenster schließen',

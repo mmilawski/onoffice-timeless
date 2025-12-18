@@ -143,8 +143,7 @@
   }
 
   &__required {
-    position: absolute;
-    right: 0;
+    align-self: flex-end;
     font-size: 0.875rem;
   }
 
@@ -200,6 +199,8 @@
 
   &.--is-owner-leadgenerator-form {
     #{$c-form}__header {
+      flex-direction: column;
+      align-items: flex-start;
       // Hide this element on large screens and up (desktop).
       &.--is-mobile-only {
         @include media-breakpoint-up(md) {
@@ -212,20 +213,25 @@
     }
 
     #{$c-form}__progress {
-      position: absolute;
+      justify-self: center;
+      align-self: flex-end;
+
+      @include media-breakpoint-up(md) {
+        grid-row: 2;
+      }
+
+      @include media-breakpoint-down(sm) {
+        position: absolute;
+      }
+
       @include media-breakpoint-only(xs) {
         right: 1rem;
-        top: 1rem;
+        top: 0.75rem;
       }
 
       @include media-breakpoint-only(sm) {
         right: 1.5rem;
-        top: 1rem;
-      }
-
-      @include media-breakpoint-up(md) {
-        left: 50%;
-        transform: translate(-50%, 50%);
+        top: 0.75rem;
       }
 
       .--bg-light & {
@@ -259,56 +265,76 @@
 
     #{$c-form}__button {
       margin-top: 0;
+      &.--is-hidden {
+        display: none;
+        // Remove element on mobile to avoid extra height/padding in vertical layout
+        // Keep space on desktop horizontal layout using visibility: hidden
+        @include media-breakpoint-up(md) {
+          display: block;
+          visibility: hidden;
+        }
+      }
+      @include media-breakpoint-up(md) {
+        grid-row: 2;
+      }
     }
 
     #{$c-form}__wrapper {
       display: flex;
       flex-direction: column;
       gap: 2.5rem;
+      padding: 2rem 1rem;
 
       @include media-breakpoint-up(md) {
-        .leadform-forward,
-        .leadform-submit {
-          margin-left: auto;
-        }
-        gap: 5rem;
+        padding: 1.5rem;
       }
 
-      &.--bg-transparent {
+      #{$c-form}__button-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+        @include media-breakpoint-up(md) {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          row-gap: 0;
+          .leadform-submit {
+            display: contents;
+          }
+        }
+      }
+
+      .--bg-transparent & {
         background-color: var(--oo-color-bg);
       }
 
-      &.--bg-light {
+      .--bg-light & {
         background-color: var(--oo-color-light-bg, var(--oo-color-bg));
       }
 
-      &.--bg-dark {
+      .--bg-dark & {
         background-color: var(--oo-color-dark-bg, var(--oo-color-bg));
       }
 
-      &.--bg-primary {
+      .--bg-primary & {
         background-color: var(--oo-color-primary-bg, var(--oo-color-bg));
       }
 
-      &.--bg-secondary {
+      .--bg-secondary & {
         background-color: var(--oo-color-secondary-bg, var(--oo-color-bg));
       }
     }
 
-    #{$c-form}__button-wrapper {
-      @include media-breakpoint-up(md) {
-        display: flex;
-        justify-content: space-between;
-      }
-      @include media-breakpoint-down(sm) {
-        display: flex;
-        flex-direction: column;
-        align-content: space-between;
-        gap: 1.5rem;
-      }
-    }
-
     #{$c-form}__fieldset {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      padding: 0;
+
+      @include media-breakpoint-up(md) {
+        gap: 2rem;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
       .c-form__field-group:has(
           .o-label[data-icon-button-group]:not([style*='display: none']):not(
               [style*='display:none']
@@ -348,9 +374,9 @@
         }
       }
     }
-    #{$c-form}__required {
-      display: flex;
-      justify-content: flex-end;
+
+    .uc-text-embedding {
+      grid-column: 1 / -1;
     }
   }
 
@@ -542,17 +568,5 @@
     #{$c-form}__fieldset {
       background-color: var(--oo-color-bg);
     }
-  }
-}
-
-.lead-lightbox {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-
-  @include media-breakpoint-up(md) {
-    gap: 2rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
   }
 }
