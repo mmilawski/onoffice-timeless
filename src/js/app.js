@@ -1563,7 +1563,9 @@ document.addEventListener('DOMContentLoaded', function() {
             errorMessage = window.ooTimelessTheme.translations.requiredCheckbox || 'Please accept.';
           }
         }
-
+        else if (input.validity.rangeUnderflow) {
+          errorMessage = window.ooTimelessTheme.translations.numberTooSmall || 'Please enter a larger value.';
+        }
         showError(input, errorMessage);
       } else {
         hideError(input);
