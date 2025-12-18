@@ -686,11 +686,11 @@ while ($current_property = $pEstates->estateIterator()) {
                                             ); ?>
                                         </button>
                                     </div>
-                                </div>
-                            </div>
 
-                            <div class="c-slider__controls splide__controls">
-                                <ul class="c-slider__pagination splide__pagination"></ul>
+                                    <div class="c-slider__pagination-wrapper">
+                                        <ul class="c-slider__pagination splide__pagination"></ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1678,11 +1678,11 @@ while ($current_property = $pEstates->estateIterator()) {
                                             ); ?>
                                         </button>
                                     </div>
-                                </div>
-                            </div>
 
-                            <div class="c-slider__controls splide__controls">
-                                <ul class="c-slider__pagination splide__pagination"></ul>
+                                    <div class="c-slider__pagination-wrapper what">
+                                        <ul class="c-slider__pagination splide__pagination"></ul>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

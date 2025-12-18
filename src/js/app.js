@@ -793,28 +793,33 @@ jQuery(document).ready(function() {
     });
   }
 
-
-  // Slider
+// Slider
   const $sliders = $('.c-slider');
 
   function innerSliderUpdateTabIndex($slider) {
-    $slider.find('.c-property-card__picture-wrapper').each(function() {
+    $slider.find('.c-property-card__picture-wrapper').each(function () {
       this.tabIndex = $(this).hasClass('is-visible') ? 0 : -1;
     });
   }
 
   function outerSliderUpdateTabIndex($slider) {
-    $slider.find('.c-property-card').each(function() {
+    $slider.find('.c-property-card').each(function () {
       const $slide = $(this);
       if ($slide.hasClass('is-visible')) {
         const $innerSlider = $slide.find('.c-slider').first();
         if ($innerSlider.length) {
           innerSliderUpdateTabIndex($innerSlider);
         }
-        $slide.find('button').each(function() { this.tabIndex = 0; });
-        $slide.find('.c-property-card__button').each(function() { this.tabIndex = 0; });
+        $slide.find('button').each(function () {
+          this.tabIndex = 0;
+        });
+        $slide.find('.c-property-card__button').each(function () {
+          this.tabIndex = 0;
+        });
       } else {
-        $slide.find('button, a').each(function() { this.tabIndex = -1; });
+        $slide.find('button, a').each(function () {
+          this.tabIndex = -1;
+        });
       }
     });
   }
@@ -823,12 +828,74 @@ jQuery(document).ready(function() {
     let innerSliderTotalCount = 0;
     let innerSliderMountedCount = 0;
 
-    $sliders.each(function() {
+    $sliders.each(function () {
       const slider = this;
       const $slider = $(slider);
-      const splide = new Splide(slider);
+      const splide = new Splide(slider, {
+        classes: {
+          page: 'c-slider__page splide__pagination__page',
+          pagination: 'splide__pagination c-slider__pagination',
+        },
+      });
 
-      const hasVideoIframe = $slider.find('iframe[src*="youtube"], iframe[src*="vimeo"]').length > 0;
+      function updatePaginationWindow() {
+        const $wrapper = $slider.find('.c-slider__pagination-wrapper');
+        const $pagination = $wrapper.find('.splide__pagination');
+        const $dots = $pagination.find('.splide__pagination__page');
+        const total = $dots.length;
+
+        if (total === 0) return;
+
+        const totalWidth = ($pagination[0] && $pagination[0].scrollWidth) || 0;
+        const wrapperInnerWidth = $wrapper.innerWidth() || 0;
+
+        // If all dots fit in the window, center the container and reset transform
+        if (totalWidth <= wrapperInnerWidth) {
+          $wrapper.css('justify-content', 'center');
+          $pagination.css('transform', 'translateX(0)');
+          return;
+        } else {
+          $wrapper.css('justify-content', 'flex-start');
+        }
+
+        const activeIdx = splide.index;
+        const $activeDot = $dots.eq(activeIdx);
+
+        if ($activeDot.length === 0) return;
+
+        // Calculate center points to keep the active dot in the middle of the wrapper
+        const paginationRect = $pagination[0].getBoundingClientRect();
+        const activeRect = $activeDot[0].getBoundingClientRect();
+        const activeCenter =
+          activeRect.left - paginationRect.left + activeRect.width / 2;
+        const desiredCenter = wrapperInnerWidth / 2;
+
+        let translate = activeCenter - desiredCenter;
+
+        // Clamp translation so it doesn't slide past the first or last dots
+        const maxTranslate = Math.max(0, totalWidth - wrapperInnerWidth);
+        translate = Math.max(0, Math.min(translate, maxTranslate));
+
+        $pagination.css('transform', `translateX(-${translate}px)`);
+      }
+
+      function ensurePaginationReady() {
+        const $dots = $slider.find(
+          '.c-slider__pagination-wrapper .splide__pagination__page',
+        );
+        if ($dots.length === 0) {
+          setTimeout(ensurePaginationReady, 50);
+          return;
+        }
+        updatePaginationWindow();
+      }
+
+      splide.on('mounted', ensurePaginationReady);
+      splide.on('move', updatePaginationWindow);
+      splide.on('refresh', ensurePaginationReady);
+
+      const hasVideoIframe =
+        $slider.find('iframe[src*="youtube"], iframe[src*="vimeo"]').length > 0;
       if (hasVideoIframe) {
         const sanitize = () => sanitizeClonedYouTubeIframes(slider);
         splide.on('mounted', sanitize);
@@ -836,79 +903,98 @@ jQuery(document).ready(function() {
         splide.on('refresh', sanitize);
       }
 
+      // Lightbox integration for clones
       if ($slider.hasClass('c-property-details__gallery')) {
-        $slider.on('click', '.splide__slide--clone', function(e) {
-            e.preventDefault();
-            e.stopImmediatePropagation();
-            
-            if (typeof window.ooLightbox !== 'undefined') {
-                const clickedUrl = $(this).attr('href');
-                
-                const slideIndex = window.ooLightbox.elements.findIndex(element => 
-                    element.href === clickedUrl || element.node.href === clickedUrl
-                );
+        $slider.on('click', '.splide__slide--clone', function (e) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
 
-                if (slideIndex > -1) {
-                    setTimeout(() => {
-                        window.ooLightbox.openAt(slideIndex);
-                    }, 10);
-                }
+          if (typeof window.ooLightbox !== 'undefined') {
+            const clickedUrl = $(this).attr('href');
+            const slideIndex = window.ooLightbox.elements.findIndex(
+              (element) =>
+                element.href === clickedUrl || element.node.href === clickedUrl,
+            );
+
+            if (slideIndex > -1) {
+              setTimeout(() => {
+                window.ooLightbox.openAt(slideIndex);
+              }, 10);
             }
+          }
         });
       }
 
-      const innerslider = $slider.hasClass("--is-properties-images-slider");
-      const outerslider = $slider.hasClass("--is-properties-slider") || 
-                    $slider.hasClass("--is-properties-similar-slider") || 
-                    $slider.hasClass("--is-properties-units-slider");
+      // Tab Index and Hierarchy Logic
+      const innerslider = $slider.hasClass('--is-properties-images-slider');
+      const outerslider =
+        $slider.hasClass('--is-properties-slider') ||
+        $slider.hasClass('--is-properties-similar-slider') ||
+        $slider.hasClass('--is-properties-units-slider');
 
       if (outerslider) {
-        const $btnNextOuter = $slider.find(".c-slider__navigation:not(.--is-properties-images-slider) .c-slider__arrow.--next");
-        const $btnPrevOuter = $slider.find(".c-slider__navigation:not(.--is-properties-images-slider) .c-slider__arrow.--prev");
+        const $btnNextOuter = $slider.find(
+          '.c-slider__navigation:not(.--is-properties-images-slider) .c-slider__arrow.--next',
+        );
+        const $btnPrevOuter = $slider.find(
+          '.c-slider__navigation:not(.--is-properties-images-slider) .c-slider__arrow.--prev',
+        );
 
-        $btnNextOuter.on('click', e => {
-          splide.go('+1');
-        });
+        $btnNextOuter.on('click', (e) => splide.go('+1'));
+        $btnPrevOuter.on('click', (e) => splide.go('-1'));
 
-        $btnPrevOuter.on('click', e => {
-          splide.go('-1');
-        });
-
-        splide.on('moved', () => requestAnimationFrame(() => requestAnimationFrame(() => outerSliderUpdateTabIndex($slider))));
+        splide.on('moved', () =>
+          requestAnimationFrame(() =>
+            requestAnimationFrame(() => outerSliderUpdateTabIndex($slider)),
+          ),
+        );
       } else if (innerslider) {
         innerSliderTotalCount++;
-        splide.on('mounted', () => requestAnimationFrame(() => requestAnimationFrame(() => {
-          innerSliderUpdateTabIndex($slider);
-          innerSliderMountedCount++;
-          if (innerSliderMountedCount === innerSliderTotalCount) {
-            $('.c-property-list__slider').each(function() {
-              outerSliderUpdateTabIndex($(this));
-            });
-          }
-        })));
-        splide.on('moved', () => requestAnimationFrame(() => requestAnimationFrame(() => innerSliderUpdateTabIndex($slider))));
+        splide.on('mounted', () =>
+          requestAnimationFrame(() =>
+            requestAnimationFrame(() => {
+              innerSliderUpdateTabIndex($slider);
+              innerSliderMountedCount++;
+              if (innerSliderMountedCount === innerSliderTotalCount) {
+                $('.c-property-list__slider').each(function () {
+                  outerSliderUpdateTabIndex($(this));
+                });
+              }
+            }),
+          ),
+        );
+        splide.on('moved', () =>
+          requestAnimationFrame(() =>
+            requestAnimationFrame(() => innerSliderUpdateTabIndex($slider)),
+          ),
+        );
       }
 
-      // progress bar animation
+      // Progress bar animation
       const bar = $slider.find('.c-slider__progress-bar')[0];
       if (bar) {
-        splide.on('mounted move', function() {
+        splide.on('mounted move', function () {
           const end = splide.Components.Controller.getEnd() + 1;
-          bar.style.width = String(100 * (splide.index + 1) / end) + '%';
+          bar.style.width = String((100 * (splide.index + 1)) / end) + "%";
         });
       }
 
+      // Focus handling
       const manuallyHandleFocus = !!innerslider || !!outerslider;
-
-      splide.on('overflow', function(isOverflow) {
+      splide.on('overflow', function (isOverflow) {
         splide.options = {
-          focusableNodes: manuallyHandleFocus ? '' : 'a, button, input, textarea, select:not([aria-hidden])'
+          focusableNodes: manuallyHandleFocus
+            ? ''
+            : 'a, button, input, textarea, select:not([aria-hidden])',
         };
       });
 
-      splide.on('mounted', function() {
+      // Autoslide item placement
+      splide.on('mounted', function () {
         const $pagination = $slider.find('.splide__pagination').first();
-        const $autoslideItem = $pagination.find('.c-slider__autoslide-item').first();
+        const $autoslideItem = $pagination
+          .find('.c-slider__autoslide-item')
+          .first();
         if ($pagination.length && $autoslideItem.length) {
           $pagination.append($autoslideItem);
         }
@@ -917,7 +1003,6 @@ jQuery(document).ready(function() {
       splide.mount();
     });
   }
-
 
   // Toogle Property Card
   const propertyFeatureOpenerButton = $('.c-property-details__more');

@@ -89,20 +89,54 @@
     }
   }
 
-  &__pagination {
-    position: static;
+  &__pagination-wrapper {
+    overflow: hidden;
+    width: auto;
     display: flex;
     gap: 0.5rem;
+    $slider-pagination-visible: 5;
+    $slider-dot-extra: 0.125rem;
+    $slider-dot-total: $icon-wrapper-size-small + $slider-dot-extra;
+    max-width: $slider-dot-total * $slider-pagination-visible;
+    margin-inline: auto;
+    padding: 0.5rem 0;
 
-    .--is-property-details-slider & {
+    .--is-property-details-slider &,
+    .--is-layout-slider & {
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
     }
 
+    @include media-breakpoint-up(lg) {
+      $slider-pagination-visible: 9;
+      max-width: $slider-dot-total * $slider-pagination-visible;
+    }
+    @include media-breakpoint-up(xl) {
+      $slider-pagination-visible: 13;
+      max-width: $slider-dot-total * $slider-pagination-visible;
+    }
+  }
+
+  &__pagination {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    position: static;
+    padding-inline: 0;
+    transition: transform 0.25s ease-in-out;
+    gap: 0.5rem;
     li {
       line-height: inherit;
       display: flex;
+      padding: 0.5rem 0;
+      // Prevents overlfow cropping when focus on dot. Only works when applied directly to <li>.. apparently
+      &:first-child {
+        padding-left: 1rem;
+      }
+
+      &:last-child {
+        padding-right: 1rem;
+      }
     }
   }
 
@@ -147,6 +181,7 @@
   &__navigation {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 1.5rem;
 
     &.--is-properties-images-slider {
@@ -376,7 +411,8 @@
     }
   }
 
-  &.--is-property-details-slider {
+  &.--is-property-details-slider,
+  &.--is-layout-slider {
     position: relative;
 
     #{$c-slider}__navigation {
@@ -398,13 +434,11 @@
         left: 1rem;
       }
     }
-    #{$c-slider}__controls {
-      bottom: 10px;
-    }
     #{$c-slider}__pagination {
       width: 50%;
 
-      .--is-property-details-slider & {
+      .--is-property-details-slider &,
+      .--is-layout-slider & {
         display: flex;
       }
 
