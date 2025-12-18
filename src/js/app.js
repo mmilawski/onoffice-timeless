@@ -577,75 +577,79 @@ jQuery(document).ready(function() {
     );
   }
 
+  function setPopupEventListener(openPopup){
+    if (openPopup.length > 0) {
+      openPopup.forEach(button => {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
+          // Get the ID of the popup from the data-popup attribute
+          const popupId = button.getAttribute('data-popup');
+          const popupElement = document.getElementById(popupId);
+
+          if (!popupElement) {
+            return;
+          }
+
+          if (popupElement) {
+            const closeButton = popupElement.querySelector('.c-popup__close, .--close-popup');
+            if (popupElement instanceof HTMLDialogElement && typeof popupElement.showModal === 'function') {
+              popupElement.showModal();
+            }
+            popupElement.classList.add('--is-open');
+            document.body.classList.add('--modal-open');
+            if(closeButton){
+                setTimeout(() => {
+                    closeButton.focus();
+                }, 100);
+            }
+
+            function closePopup() {
+              if (popupElement.dataset.unclosable === 'true') {
+                  const propertyListUrl = window.ooTimelessTheme?.urls?.propertyList || '/';
+                  const referrer = document.referrer;
+                  
+                  if (referrer && referrer !== window.location.href) {
+                      window.location.href = referrer;
+                  } else {
+                      window.location.href = propertyListUrl;
+                  }
+                  return; // Stop further execution
+              }
+
+              popupElement.classList.remove('--is-open');
+              if (popupElement instanceof HTMLDialogElement && typeof popupElement.close === 'function') {
+                popupElement.close();
+              }
+              document.body.classList.remove('--modal-open');
+            }
+
+            if (closeButton) {
+              closeButton.addEventListener('click', closePopup);
+            }
+
+            popupElement.addEventListener('click', (event) => {
+              if (event.target === popupElement) {
+                closePopup();
+              }
+            });
+
+            // Close popup on press ESC
+            document.addEventListener('keydown', function(event) {
+              if (event.key === 'Escape') {
+                e.preventDefault();
+                closePopup();
+              }
+            });
+          }
+        });
+      });
+    }
+  }
+
   // Open popup
   const openPopup = document.querySelectorAll('.--open-popup');
-
-  if (openPopup.length > 0) {
-    openPopup.forEach(button => {
-      button.addEventListener('click', function(e) {
-        e.preventDefault();
-        // Get the ID of the popup from the data-popup attribute
-        const popupId = button.getAttribute('data-popup');
-        const popupElement = document.getElementById(popupId);
-
-        if (!popupElement) {
-          return;
-        }
-
-        if (popupElement) {
-          const closeButton = popupElement.querySelector('.c-popup__close, .--close-popup');
-          if (popupElement instanceof HTMLDialogElement && typeof popupElement.showModal === 'function') {
-            popupElement.showModal();
-          }
-          popupElement.classList.add('--is-open');
-          document.body.classList.add('--modal-open');
-          if(closeButton){
-              setTimeout(() => {
-                  closeButton.focus();
-              }, 100);
-          }
-
-          function closePopup() {
-            if (popupElement.dataset.unclosable === 'true') {
-                const propertyListUrl = window.ooTimelessTheme?.urls?.propertyList || '/';
-                const referrer = document.referrer;
-                
-                if (referrer && referrer !== window.location.href) {
-                    window.location.href = referrer;
-                } else {
-                    window.location.href = propertyListUrl;
-                }
-                return; // Stop further execution
-            }
-
-            popupElement.classList.remove('--is-open');
-            if (popupElement instanceof HTMLDialogElement && typeof popupElement.close === 'function') {
-              popupElement.close();
-            }
-            document.body.classList.remove('--modal-open');
-          }
-
-          if (closeButton) {
-            closeButton.addEventListener('click', closePopup);
-          }
-
-          popupElement.addEventListener('click', (event) => {
-            if (event.target === popupElement) {
-              closePopup();
-            }
-          });
-
-          // Close popup on press ESC
-          document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-              e.preventDefault();
-              closePopup();
-            }
-          });
-        }
-      });
-    });
-  }
+  setPopupEventListener(openPopup)
+  
 
   // Lightbox
   const lightboxClass = document.querySelectorAll('.glightbox');
@@ -888,10 +892,33 @@ jQuery(document).ready(function() {
         }
       });
 
+      if(slider.classList.contains('--is-team-slider')){
+        splide.on('ready', function() {
+          const openPopup = slider.querySelectorAll('.--open-popup-team-slider')
+          setPopupEventListener(openPopup)
+        })
+      }
+
       splide.mount();
     });
   }
 
+  // Debounced resize event listener for team slider popups
+  const debouncedTeamSliderResize = debounce(() => {
+    const openPopup = document.querySelectorAll('.--is-team-slider .--open-popup-team-slider');
+    if (openPopup.length > 0) {
+      // Remove existing event listeners by cloning nodes
+      openPopup.forEach(button => {
+        const newButton = button.cloneNode(true);
+        button.parentNode.replaceChild(newButton, button);
+      });
+      // Re-query after cloning and attach fresh listeners
+      const refreshedPopup = document.querySelectorAll('.--is-team-slider .--open-popup-team-slider');
+      setPopupEventListener(refreshedPopup);
+    }
+  }, 500);
+
+  window.addEventListener('resize', debouncedTeamSliderResize);
 
   // Toogle Property Card
   const propertyFeatureOpenerButton = $('.c-property-details__more');
@@ -1533,7 +1560,9 @@ document.addEventListener('DOMContentLoaded', function() {
             errorMessage = window.ooTimelessTheme.translations.requiredCheckbox || 'Please accept.';
           }
         }
-
+        else if (input.validity.rangeUnderflow) {
+          errorMessage = window.ooTimelessTheme.translations.numberTooSmall || 'Please enter a larger value.';
+        }
         showError(input, errorMessage);
       } else {
         hideError(input);
