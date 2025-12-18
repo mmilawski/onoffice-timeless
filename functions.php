@@ -43,6 +43,7 @@ if (function_exists('oo_setup_parent_theme')) {
         [OO_SHARED_PATH . '/build/js/tomselect/tom-select.min.js', ['jquery']],
         [OO_SHARED_PATH . '/build/js/splide/splide.js', []],
         [OO_SHARED_PATH . '/build/js/firefox-iframe-fix.js', ['jquery']],
+        [OO_SHARED_PATH . '/build/js/usercentrics-helpers.js', []],
         [
             OO_PARENT_PATH . '/build/js/app.js',
             [
@@ -86,7 +87,7 @@ if (function_exists('oo_setup_parent_theme')) {
                     'next' => __('Nächster', 'oo_theme'),
                     'close' => __('Schließen', 'oo_theme'),
                     'invalidEmail' => __(
-                        'Bitte geben Sie eine gültige E-Mail-Adresse ein',
+                        'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
                         'oo_theme',
                     ),
                     'invalidDate' => __(
@@ -98,11 +99,15 @@ if (function_exists('oo_setup_parent_theme')) {
                         'oo_theme',
                     ),
                     'requiredSelect' => __(
-                        'Bitte wählen Sie einen Wert aus',
+                        'Bitte wählen Sie einen Wert aus.',
+                        'oo_theme',
+                    ),
+                    'numberTooSmall' => __(
+                        'Bitte geben Sie einen größeren Wert ein.',
                         'oo_theme',
                     ),
                     'requiredCheckbox' => __(
-                        'Bitte bestätigen Sie das Feld',
+                        'Bitte bestätigen Sie das Feld.',
                         'oo_theme',
                     ),
                 ],
