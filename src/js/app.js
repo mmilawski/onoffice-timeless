@@ -580,24 +580,7 @@ jQuery(document).ready(function() {
     );
   }
 
-  function setPopupEventListener(openPopup, popUpHeadline){
-    // Trim Popup Headine
-    if (popUpHeadline.length > 0) {
-      popUpHeadline.forEach(function(headline) {
-        const originalText = headline.textContent;
-        const lineHeight = parseFloat(window.getComputedStyle(headline).lineHeight);
-        const maxHeight = lineHeight * 5;
-
-        let truncatedText = originalText;
-        headline.textContent = truncatedText;
-
-        while (headline.scrollHeight > maxHeight) {
-          truncatedText = truncatedText.slice(0, -1);
-          headline.textContent = truncatedText + '…';
-        }
-      });
-    }
-
+  function setPopupEventListener(openPopup){
     if (openPopup.length > 0) {
       openPopup.forEach(button => {
         button.addEventListener('click', function(e) {
@@ -668,8 +651,7 @@ jQuery(document).ready(function() {
 
   // Open popup
   const openPopup = document.querySelectorAll('.--open-popup');
-  const popUpHeadline = document.querySelectorAll('.c-popup__headline');
-  setPopupEventListener(openPopup, popUpHeadline)
+  setPopupEventListener(openPopup)
   
 
   // Lightbox
@@ -916,7 +898,7 @@ jQuery(document).ready(function() {
       if(slider.classList.contains('--is-team-slider')){
         splide.on('ready', function() {
           const openPopup = slider.querySelectorAll('.--open-popup-team-slider')
-          setPopupEventListener(openPopup, [])
+          setPopupEventListener(openPopup)
         })
       }
 
@@ -935,7 +917,7 @@ jQuery(document).ready(function() {
       });
       // Re-query after cloning and attach fresh listeners
       const refreshedPopup = document.querySelectorAll('.--is-team-slider .--open-popup-team-slider');
-      setPopupEventListener(refreshedPopup, []);
+      setPopupEventListener(refreshedPopup);
     }
   }, 500);
 
