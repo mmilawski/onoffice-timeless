@@ -692,4 +692,12 @@
     position: relative;
     z-index: 1;
   }
+
+  @at-root {
+    .glightbox-container .gbtn.disabled {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+    }
+  }
 }
