@@ -115,13 +115,22 @@ if (!function_exists('renderFieldEstateSearch')) {
 
         // type and class
         if (in_array($typeCurrentInput, $typesFloat)) {
-            $inputType = 'type="number" step="1"';
             $inputClass = 'o-input --number';
+            $fieldsHalfStep = [
+                'anzahl_zimmer',
+                'anzahl_schlafzimmer',
+                'anzahl_badezimmer',
+            ];
+            if (in_array($fieldName, $fieldsHalfStep)) {
+                $inputType = 'type="number" step="0.5" min="0.5"';
+            } else {
+                $inputType = 'type="number" step="1" min="1"';
+            }
         } elseif (in_array($typeCurrentInput, $typesDate)) {
             $inputType = 'type="date"';
             $inputClass = 'o-input --date';
         } elseif ($fieldName == 'radius') {
-            $inputType = 'type="number" step="1"';
+            $inputType = 'type="number" step="1" min="1"';
             $inputClass = 'o-input --radius';
         } elseif ($typeCurrentInput === 'hidden') {
             $inputType = 'type="hidden"';
@@ -133,7 +142,10 @@ if (!function_exists('renderFieldEstateSearch')) {
         // placeholder
         if (str_contains($fieldName, 'miete')) {
             $placeholder = esc_html__('z.B. "950"', 'oo_theme');
-        } elseif (str_contains($fieldName, 'preis')) {
+        } elseif (
+            str_contains($fieldName, 'preis') &&
+            $fieldName !== 'preisAufAnfrage'
+        ) {
             $placeholder = esc_html__('z.B. "500.000"', 'oo_theme');
         } elseif (str_contains($fieldName, 'flaeche')) {
             $placeholder = esc_html__('z.B. "80"', 'oo_theme');
@@ -274,6 +286,7 @@ if (!function_exists('renderFieldEstateSearch')) {
                     $inputClass .
                     '" ' .
                     $inputType .
+                    ' ' .
                     renderAutocomplete($fieldName) .
                     ' name="' .
                     esc_attr($fieldName) .
@@ -289,6 +302,7 @@ if (!function_exists('renderFieldEstateSearch')) {
                     $inputClass .
                     '" ' .
                     $inputType .
+                    ' ' .
                     renderAutocomplete($fieldName) .
                     ' name="' .
                     esc_attr($fieldName) .
@@ -305,6 +319,7 @@ if (!function_exists('renderFieldEstateSearch')) {
                 $inputClass .
                 '" ' .
                 $inputType .
+                ' ' .
                 renderAutocomplete($fieldName) .
                 ' name="' .
                 esc_attr($fieldName) .
@@ -323,6 +338,7 @@ if (!function_exists('renderFieldEstateSearch')) {
                 $inputClass .
                 '" ' .
                 $inputType .
+                ' ' .
                 renderAutocomplete($fieldName) .
                 ' name="' .
                 esc_attr($fieldName) .
@@ -619,9 +635,9 @@ if (!function_exists('renderFormField')) {
             $output .=
                 '<textarea class="o-textarea" name="' .
                 esc_html($fieldName) .
-                '"' .
-                renderAutocomplete($fieldName) .
+                '" ' .
                 $requiredAttribute .
+                renderAutocomplete($fieldName) .
                 '>' .
                 $selectedValue .
                 '</textarea><div class="c-form__error-message"></div>';
@@ -647,8 +663,8 @@ if (!function_exists('renderFormField')) {
                 '" name="' .
                 esc_html($fieldName) .
                 '" size="1" ' .
-                renderAutocomplete($fieldName) .
                 $requiredAttribute .
+                renderAutocomplete($fieldName) .
                 ' data-placeholder="' .
                 esc_html__('Bitte wählen', 'oo_theme') .
                 '">';
@@ -758,7 +774,16 @@ if (!function_exists('renderFormField')) {
                 $typeCurrentInput ===
                     'urn:onoffice-de-ns:smart:2.5:dbAccess:dataType:float'
             ) {
-                $inputType = 'type="number" step="1"';
+                $fieldsHalfStep = [
+                    'anzahl_zimmer',
+                    'anzahl_schlafzimmer',
+                    'anzahl_badezimmer',
+                ];
+                if (in_array($fieldName, $fieldsHalfStep)) {
+                    $inputType = 'type="number" step="0.5" min="0.5"';
+                } else {
+                    $inputType = 'type="number" step="1" min="1"';
+                }
                 $inputClass = 'o-input --number';
             } elseif (
                 $typeCurrentInput ===
@@ -766,12 +791,17 @@ if (!function_exists('renderFormField')) {
                 $typeCurrentInput ===
                     'urn:onoffice-de-ns:smart:2.5:dbAccess:dataType:decimal'
             ) {
-                $inputType = 'type="number" step="1"';
+                $inputType = 'type="number" step="1" min="1"';
                 $inputClass = 'o-input --number';
             } elseif ($fieldName == 'Email') {
                 $inputType = 'type="email"';
-
                 $inputClass = 'o-input --email';
+            } elseif (
+                $typeCurrentInput ===
+                onOffice\WPlugin\Types\FieldTypes::FIELD_TYPE_DATE
+            ) {
+                $inputType = 'type="date"';
+                $inputClass = 'o-input --date';
             }
 
             if (

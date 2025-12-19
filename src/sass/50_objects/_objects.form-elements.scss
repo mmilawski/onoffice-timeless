@@ -1383,6 +1383,7 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
 
     &:before {
       content: '';
+      align-self: center;
       width: $form-control-wrapper;
       height: $form-control-wrapper;
       flex-shrink: 0;
@@ -1399,12 +1400,12 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
 
     &:after {
       content: '';
+      align-self: center;
       display: block;
       width: $form-control-icon;
       height: $form-control-icon;
       position: absolute;
       left: calc(($form-control-wrapper / 2) - ($form-control-icon / 2));
-      top: calc(($form-control-wrapper / 2) - ($form-control-icon / 2));
       background-size: 100%;
       background-repeat: no-repeat;
       background-position: center;
