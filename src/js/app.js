@@ -265,21 +265,19 @@ jQuery(document).ready(function() {
           }
       }
       var plugins = {};
-      if (isMultiselect) {
-        plugins['oo_remove_button'] = {
-            'className': 'ts-item-remove',
-            'title': window.ooTimelessTheme.translations.removeThisItem || 'Remove this item',
-            'label': '',
-            'position': 'before'
-        };
-    
-        plugins['oo_checkbox_options'] = {
-            'className': 'o-control__input',
-            'checkedClassNames': ['ts-checked'],
-            'uncheckedClassNames': ['ts-unchecked'],
-        };
-    }
-      var is_sorting = select.hasClass('onofficeSortListSelector');
+      plugins['oo_remove_button'] = {
+          'className': 'ts-item-remove',
+          'title': window.ooTimelessTheme.translations.removeThisItem || 'Remove this item',
+          'label': '',
+          'position': 'before'
+      };
+
+      plugins['oo_checkbox_options'] = {
+          'className': 'o-control__input',
+          'checkedClassNames': ['ts-checked'],
+          'uncheckedClassNames': ['ts-unchecked'],
+      }
+
       const is_regionaler_zusatz = select.length && select[0].id === 'regionaler_zusatz';
 
       const tom = new TomSelect(select, {
@@ -292,7 +290,6 @@ jQuery(document).ready(function() {
           field: "text",
           direction: "asc"
         },
-        placeholder: is_sorting ? "Bitte auswählen" : "",
         plugins: plugins,
         onInitialize: function() {
           let labelText = '';

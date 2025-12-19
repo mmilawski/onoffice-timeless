@@ -1,3 +1,9 @@
+$dialog-bg-themes: (
+  light: var(--oo-color-light-bg, var(--oo-color-bg)),
+  dark: var(--oo-color-dark-bg, var(--oo-color-bg)),
+  primary: var(--oo-color-primary-bg, var(--oo-color-bg)),
+  secondary: var(--oo-color-secondary-bg, var(--oo-color-bg)),
+);
 .c-dialog {
   $c-dialog: &;
 
@@ -39,7 +45,6 @@
 
   &__header {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     align-items: flex-start;
     gap: 1rem;
@@ -65,7 +70,8 @@
 
   &.--is-form {
     height: 80%;
-    width: 80%;
+    width: 100%;
+    max-width: none;
 
     @include media-breakpoint-up(lg) {
       width: 60vw;
@@ -74,28 +80,30 @@
     }
 
     #{$c-dialog}__header {
-      padding: 2.5rem 2.5rem 0 2.5rem;
-      justify-content: space-between;
+      padding: 0;
+      justify-content: end;
       align-items: flex-start;
     }
 
-    #{$c-dialog}__title {
-      color: var(
-        --oo-color-headline,
-        --oo-color-text
-      ); // Temporarily until customer area styles are not overridden
-
-      hyphens: auto;
-      text-wrap-style: balance;
-      word-break: break-word;
-
-      @include media-breakpoint-up(sm) {
-        hyphens: manual;
-      }
+    #{$c-dialog}__wrapper {
+      gap: 0;
     }
 
     #{$c-dialog}__content {
-      padding: 0 2.5rem 2rem;
+      padding: 0;
+      @include media-breakpoint-up(md) {
+        padding: 0 2.5rem 2rem;
+      }
+    }
+
+    #{$c-dialog}__close {
+      background-color: transparent;
+    }
+
+    @each $name, $color in $dialog-bg-themes {
+      .--bg-#{$name} & {
+        background-color: $color;
+      }
     }
   }
 
