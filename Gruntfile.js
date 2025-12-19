@@ -201,7 +201,7 @@ module.exports = function (grunt) {
           'blocks/**/src/sass/*.scss',
           'child-blocks/**/src/sass/*.scss',
         ],
-        tasks: ['dart-sass'],
+        tasks: ['dart-sass', 'postcss'],
       },
       js: {
         files: [
@@ -222,7 +222,7 @@ module.exports = function (grunt) {
     // Autoprefixer
     postcss: {
       options: {
-        processors: [require('autoprefixer')],
+        processors: [require('autoprefixer')()],
       },
       dist: {
         src: 'build/css/style.css',
@@ -254,8 +254,8 @@ module.exports = function (grunt) {
           proxy: {
             target: process.env.LOCAL_DEV_URI,
             proxyOptions: {
-              secure: false
-            }
+              secure: false,
+            },
           }
         },
       },
@@ -312,13 +312,21 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-dart-sass');
-  grunt.loadNpmTasks('grunt-postcss');
+  grunt.loadNpmTasks('@lodder/grunt-postcss');
   grunt.loadNpmTasks('grunt-browser-sync');
   grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-contrib-clean');
 
   // Register tasks
-  grunt.registerTask('default', ['dart-sass', 'postcss', 'uglify']);
-  grunt.registerTask('dev', ['browserSync', 'watch']);
-  grunt.registerTask('release', ['sass', 'postcss', 'uglify']);
+  grunt.registerTask('default', ['build']);
+  grunt.registerTask('build', ['dart-sass', 'postcss', 'uglify']);
+
+  // Default dev, no BrowserSync
+  grunt.registerTask('dev', ['build', 'watch']);
+
+  // Dev with BrowserSync, opt-in
+  grunt.registerTask('dev:bs', ['build', 'browserSync', 'watch']);
+
+  // Release
+  grunt.registerTask('release', ['build']);
 };
