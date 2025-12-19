@@ -318,7 +318,14 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
 
   // Register tasks
-  grunt.registerTask('default', ['dart-sass', 'postcss', 'uglify']);
-  grunt.registerTask('dev', ['dart-sass', 'postcss', 'uglify', 'browserSync', 'watch']);
-  grunt.registerTask('release', ['sass', 'postcss', 'uglify']);
+  grunt.registerTask('build', ['dart-sass', 'postcss', 'uglify']);
+
+  // Default dev, no BrowserSync
+  grunt.registerTask('dev', ['build', 'watch']);
+
+  // Dev with BrowserSync, opt-in
+  grunt.registerTask('dev:bs', ['build', 'browserSync', 'watch']);
+
+  // Release
+  grunt.registerTask('release', ['build']);
 };
