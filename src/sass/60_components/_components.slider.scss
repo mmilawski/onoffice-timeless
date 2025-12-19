@@ -119,7 +119,8 @@
   }
 
   &__pagination {
-    display: inline-flex;
+    display: inline-flex !important;
+    justify-content: flex-start;
     flex-wrap: nowrap;
     position: static;
     padding-inline: 0;
@@ -436,8 +437,6 @@
       }
     }
     #{$c-slider}__pagination {
-      width: 50%;
-
       .--is-property-details-slider &,
       .--is-layout-slider & {
         display: flex;
