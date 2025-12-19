@@ -318,6 +318,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
 
   // Register tasks
+  grunt.registerTask('default', ['build']);
   grunt.registerTask('build', ['dart-sass', 'postcss', 'uglify']);
 
   // Default dev, no BrowserSync
