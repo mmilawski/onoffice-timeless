@@ -254,9 +254,9 @@ module.exports = function (grunt) {
           proxy: {
             target: process.env.LOCAL_DEV_URI,
             proxyOptions: {
-              secure: false
-            }
-          }
+              secure: false,
+            },
+          },
         },
       },
     },

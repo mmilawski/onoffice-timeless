@@ -1440,8 +1440,13 @@ while ($current_property = $pEstates->estateIterator()) {
                                     ],
                                 ); ?>
                                 <div class="c-slider__fullscreen c-icon-button">
-                                    <span class="u-screen-reader-only"><?php esc_html_e('Vergrößern', 'oo_theme'); ?></span>
-                                    <?php echo oo_get_icon('resize', true, ['class' => 'c-icon-button__icon']); ?>
+                                    <span class="u-screen-reader-only"><?php esc_html_e(
+                                        'Vergrößern',
+                                        'oo_theme',
+                                    ); ?></span>
+                                    <?php echo oo_get_icon('resize', true, [
+                                        'class' => 'c-icon-button__icon',
+                                    ]); ?>
                                 </div>
                             </a>
                         </div>
