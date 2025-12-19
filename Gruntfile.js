@@ -249,9 +249,14 @@ module.exports = function (grunt) {
           ],
         },
         options: {
-          browser: ['chrome.exe'],
           watchTask: true,
-          proxy: process.env.LOCAL_DEV_URI,
+          https: true,
+          proxy: {
+            target: process.env.LOCAL_DEV_URI,
+            proxyOptions: {
+              secure: false
+            }
+          }
         },
       },
     },
