@@ -205,6 +205,7 @@
   &__arrows {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   &__arrow {
@@ -384,8 +385,7 @@
     position: relative;
     #{$c-slider}__navigation {
       width: 100%;
-      height: auto;
-      aspect-ratio: 4 / 3;
+      height: 100%;
       position: absolute;
       top: 0;
       left: 0;
@@ -401,6 +401,7 @@
     }
     #{$c-slider}__arrow {
       pointer-events: auto;
+      top: unset;
 
       &.--next {
         right: 1rem;
