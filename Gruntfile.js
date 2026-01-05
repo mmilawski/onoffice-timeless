@@ -256,7 +256,7 @@ module.exports = function (grunt) {
             proxyOptions: {
               secure: false,
             },
-          }
+          },
         },
       },
     },
