@@ -29,6 +29,7 @@ $energy_fields = [
     'energieausweistyp',
     'energieausweis_gueltig_bis',
     'energyClass',
+    'energieeffizienzklasse',
     'energietraeger',
     'energiepassAusstelldatum',
     'erschliessung',
