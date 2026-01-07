@@ -984,6 +984,7 @@ jQuery(document).ready(function() {
       const manuallyHandleFocus = !!innerslider || !!outerslider;
       splide.on('overflow', function (isOverflow) {
         splide.options = {
+          drag: isOverflow,
           focusableNodes: manuallyHandleFocus
             ? ''
             : 'a, button, input, textarea, select:not([aria-hidden])',
