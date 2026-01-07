@@ -62,9 +62,6 @@ if ($config['type'] === 'enterprise') {
             ooRecaptchaUsercentrics(<?php echo json_encode($formNo); ?>);
         });
     </script>
-    <button class="c-form__button c-button"> <?php echo esc_html(
-        $pForm->getGenericSetting('submitButtonLabel'),
-    ); ?></button>
 <?php
 } else {
     // TODO: Remove later, when Enterprise reCAPTCHA is fully rolled out
