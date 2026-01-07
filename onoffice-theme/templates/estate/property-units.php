@@ -8,10 +8,8 @@ $dontEcho = [
     'sonstige_angaben',
 ];
 
-if (
-    (bool) $pEstates->estateIterator() === true &&
-    !empty($pEstates->estateIterator())
-): ?>
+$pEstates->resetEstateIterator();
+if ($pEstates->estateIterator()): ?>
     <div class="c-property-details__units-wrapper">
         <div class="c-property-details__units o-container">
             <div class="c-property-details__units-row o-row">
@@ -39,25 +37,15 @@ if (
                         "perPage": 1
                         }
                     }
-                    }'>
+                }'>
                 <div class="c-slider__track splide__track">
                     <div class="c-slider__list splide__list">
                         <?php
                         $pEstates->resetEstateIterator();
-                        while ($current_property = $pEstates->estateIterator()):
-                            $property_id = $pEstates->getCurrentMultiLangEstateMainId();
+                        $is_slider = true;
+                        $bg_color = 'bg-transparent';
 
-                            foreach ($current_property as $field => $value) {
-                                if (in_array($field, $dontEcho, true)) {
-                                    unset($current_property[$field]);
-                                }
-                            }
-                            $slider = ['slider' => 'yes'];
-                            $bg_color = 'bg-transparent';
-                            $is_slider = true;
-
-                            require 'property-card.php';
-                        endwhile;
+                        require 'property-card.php';
                         ?>
                     </div>
                 </div>
