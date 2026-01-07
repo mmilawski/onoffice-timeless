@@ -817,7 +817,8 @@ if (!function_exists('renderFormField')) {
                 if (str_contains($fieldName, 'zimmer')) {
                     $placeholderAddition = ' ...';
                 } elseif (str_contains($fieldName, 'flaeche')) {
-                    $placeholderAddition = ' (in m²)';
+                    $placeholderAddition =
+                        ' ' . esc_html__('(in m²)', 'oo_theme');
                 } else {
                     $placeholderAddition = '';
                 }
@@ -861,7 +862,7 @@ if (!function_exists('renderFormField')) {
                         '" value="' .
                         $value .
                         '" placeholder="' .
-                        esc_attr($rangeDescription) .
+                        $uniqueLabel .
                         $placeholderAddition .
                         '" ' .
                         $requiredAttribute .
