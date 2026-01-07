@@ -635,6 +635,10 @@
 
     .c-form__property-context {
       padding: 0 1rem;
+      
+      @include media-breakpoint-up(xl) {
+        margin-top: calc(1.5rem + 2.5rem + 2.5rem + 0.5rem);
+      }
     }
 
     @include media-breakpoint-up(xxl) {
