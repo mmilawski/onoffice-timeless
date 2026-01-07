@@ -8,6 +8,13 @@ $dontEcho = [
     'sonstige_angaben',
 ];
 
+$countEstates = clone $pEstates;
+$totalUnits = 0;
+$countEstates->resetEstateIterator();
+while ($countEstates->estateIterator()) {
+    $totalUnits++;
+}
+
 $pEstates->resetEstateIterator();
 if ($pEstates->estateIterator()): ?>
     <div class="c-property-details__units-wrapper">
@@ -31,10 +38,11 @@ if ($pEstates->estateIterator()): ?>
                     "lazyLoad": "nearby",
                     "pagination": false,
                     "arrows": false,
+                    "drag": <?php echo $totalUnits >= 4 ? 'true' : 'false'; ?>,
                     "page": false,
                     "breakpoints": {
                         "768": {
-                        "perPage": 1
+                            "perPage": 1
                         }
                     }
                 }'>
@@ -50,31 +58,36 @@ if ($pEstates->estateIterator()): ?>
                     </div>
                 </div>
 
-                <div class="c-slider__navigation splide__navigation o-container --is-properties-slider">
-                    <div class="c-slider__progress splide__progress">
-                        <div class="c-slider__progress-bar splide__progress-bar"></div>
+                <?php if ($totalUnits >= 4): ?>
+                    <div class="c-slider__navigation splide__navigation o-container --is-properties-slider">
+                        <div class="c-slider__progress splide__progress">
+                            <div class="c-slider__progress-bar splide__progress-bar"></div>
+                        </div>
+                        <div class="c-slider__arrows splide__arrows">
+                            <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
+                                <span class="c-slider__arrow-text u-screen-reader-only">
+                                    <?php esc_html_e(
+                                        'Vorheriges',
+                                        'oo_theme',
+                                    ); ?>
+                                </span>
+                                <span class="c-slider__arrow-icon --chevron-left"><?php oo_get_icon(
+                                    'chevron-left',
+                                    true,
+                                ); ?></span>
+                            </button>
+                            <button class="c-slider__arrow --next splide__arrow splide__arrow--next">
+                                <span class="c-slider__arrow-text u-screen-reader-only">
+                                    <?php esc_html_e('Nächstes', 'oo_theme'); ?>
+                                </span>
+                                <span class="c-slider__arrow-icon --chevron-right"><?php oo_get_icon(
+                                    'chevron-right',
+                                    true,
+                                ); ?></span>
+                            </button>
+                        </div>
                     </div>
-                    <div class="c-slider__arrows splide__arrows">
-                        <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
-                            <span class="c-slider__arrow-text u-screen-reader-only">
-                                <?php esc_html_e('Vorheriges', 'oo_theme'); ?>
-                            </span>
-                            <span class="c-slider__arrow-icon --chevron-left"><?php oo_get_icon(
-                                'chevron-left',
-                                true,
-                            ); ?></span>
-                        </button>
-                        <button class="c-slider__arrow --next splide__arrow splide__arrow--next">
-                            <span class="c-slider__arrow-text u-screen-reader-only">
-                                <?php esc_html_e('Nächstes', 'oo_theme'); ?>
-                            </span>
-                            <span class="c-slider__arrow-icon --chevron-right"><?php oo_get_icon(
-                                'chevron-right',
-                                true,
-                            ); ?></span>
-                        </button>
-                    </div>
-                </div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
