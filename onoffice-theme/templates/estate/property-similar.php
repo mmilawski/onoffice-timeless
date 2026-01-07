@@ -9,7 +9,6 @@ $dontEcho = [
 
 set_current_header_level(2);
 
-// 1. Count the similar properties
 $countSimilar = clone $pEstates;
 $totalSimilar = 0;
 $countSimilar->resetEstateIterator();
