@@ -1746,7 +1746,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                         </button>
                                     </div>
 
-                                    <div class="c-slider__pagination-wrapper what">
+                                    <div class="c-slider__pagination-wrapper">
                                         <ul class="c-slider__pagination splide__pagination"></ul>
                                     </div>
                                 </div>
