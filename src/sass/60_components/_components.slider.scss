@@ -29,47 +29,11 @@
   }
 
   &__autoslide-toggle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--oo-color-contrast-primary);
-    background-color: var(--oo-color-primary);
-    border: 0;
     outline: $outline !important;
     outline-offset: $outline-offset !important;
-    opacity: 1;
-    width: $icon-wrapper-size;
-    height: $icon-wrapper-size;
-    padding: 0.25rem;
-    pointer-events: auto;
-
-    #{$c-slider}__icon {
-      width: $icon-size;
-      height: $icon-size;
-
-      @include media-breakpoint-up(xl) {
-        width: $icon-size;
-        height: $icon-size;
-      }
-    }
-
-    @include plain-visited() {
-      color: var(--oo-color-contrast-primary);
-      background-color: var(--oo-color-primary);
-      opacity: 1;
-    }
-
-    @include hover() {
-      background-color: var(--oo-color-mix-primary-contrast-20);
-      opacity: 1;
-    }
 
     @include focus-visible() {
       outline-color: var(--oo-color-primary) !important;
-    }
-
-    @include active() {
-      background-color: var(--oo-color-mix-primary-contrast-40);
     }
   }
 
@@ -116,28 +80,40 @@
       $slider-pagination-visible: 13;
       max-width: $slider-dot-total * $slider-pagination-visible;
     }
+
+    #{$c-slider}__pagination {
+      display: inline-flex !important;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      position: static;
+      padding-inline: 0;
+      transition: transform 0.25s ease-in-out;
+      gap: 0.5rem;
+
+      li {
+        line-height: inherit;
+        display: flex;
+        padding: 0.5rem 0;
+        // Prevents overlfow cropping when focus on dot. Only works when applied directly to <li>.. apparently
+        &:first-child {
+          padding-left: 1rem;
+        }
+
+        &:last-child {
+          padding-right: 1rem;
+        }
+      }
+    }
   }
 
   &__pagination {
-    display: inline-flex !important;
-    justify-content: flex-start;
-    flex-wrap: nowrap;
     position: static;
-    padding-inline: 0;
-    transition: transform 0.25s ease-in-out;
+    display: flex;
     gap: 0.5rem;
+
     li {
       line-height: inherit;
       display: flex;
-      padding: 0.5rem 0;
-      // Prevents overlfow cropping when focus on dot. Only works when applied directly to <li>.. apparently
-      &:first-child {
-        padding-left: 1rem;
-      }
-
-      &:last-child {
-        padding-right: 1rem;
-      }
     }
   }
 
@@ -308,7 +284,7 @@
   &.--auto-height {
     #{$c-slider}__slide {
       &:not(.is-active) {
-        max-height: inherit;
+        max-height: 0;
         @include media-breakpoint-up(xl) {
           max-height: inherit;
         }
@@ -329,12 +305,26 @@
   }
 
   &.--is-link-boxes-slider {
+    #{$c-slider}__navigation {
+      margin: 0 1rem;
+
+      @include media-breakpoint-up(md) {
+        margin: 0 0;
+      }
+    }
   }
 
   &.--is-news-slider {
   }
 
   &.--is-team-slider {
+    #{$c-slider}__arrows {
+      margin: 0 1rem;
+
+      @include media-breakpoint-up(md) {
+        margin: 0 0;
+      }
+    }
   }
 
   &.--is-reviews-slider {
@@ -356,7 +346,10 @@
 
   &.--is-google-review {
   }
+
   &.--is-banner-slider {
+    position: static;
+
     #{$c-slider}__navigation {
       pointer-events: none;
     }
@@ -381,6 +374,7 @@
       pointer-events: auto;
     }
   }
+
   &.--is-properties-images-slider {
     gap: 0;
     position: relative;
@@ -455,37 +449,6 @@
     }
   }
 
-  &.--is-banner-slider {
-    position: relative;
-    #{$c-slider}__navigation {
-      pointer-events: none;
-    }
-
-    #{$c-slider}__arrows {
-      height: 100%;
-    }
-    #{$c-slider}__arrow {
-      pointer-events: auto;
-
-      .--is-header-style-transparent & {
-        @include media-breakpoint-up(lg) {
-          transform: translateY(calc(-50% + 3rem));
-        }
-
-        @include media-breakpoint-up(xxl) {
-          transform: translateY(calc(-50% + 7rem));
-        }
-      }
-
-      &.--next {
-        right: 1rem;
-      }
-      &.--prev {
-        left: 1rem;
-      }
-    }
-  }
-
   &.--is-gallery-slider {
     #{$c-slider}__list {
       gap: 0.5rem;
@@ -493,6 +456,10 @@
       @include media-breakpoint-up(lg) {
         gap: 1rem;
       }
+    }
+
+    #{$c-slider}__navigation {
+      margin: 0 auto; // the gallery slider section is container-fluid, but the navigation has o-container class
     }
   }
 
@@ -666,7 +633,6 @@
     }
   }
 
-  &.--on-bg-light,
   .--bg-light & {
     #{$c-slider}__page {
       @include plain-visited() {
@@ -706,15 +672,15 @@
       @include focus-visible() {
         outline-color: var(--oo-color-light-text) !important;
       }
-      @include active() {
-        background-color: var(--oo-color-light-mix-primary-contrast-40);
-      }
-      @include disabled() {
+    }
+
+    #{$c-slider}__autoslide-toggle {
+      @include focus-visible() {
+        outline-color: var(--oo-color-light-text) !important;
       }
     }
   }
 
-  &.--on-bg-dark,
   .--bg-dark & {
     #{$c-slider}__page {
       @include plain-visited() {
@@ -754,15 +720,15 @@
       @include focus-visible() {
         outline-color: var(--oo-color-dark-text) !important;
       }
-      @include active() {
-        background-color: var(--oo-color-dark-mix-primary-contrast-40);
-      }
-      @include disabled() {
+    }
+
+    #{$c-slider}__autoslide-toggle {
+      @include focus-visible() {
+        outline-color: var(--oo-color-dark-text) !important;
       }
     }
   }
 
-  &.--on-bg-primary,
   .--bg-primary & {
     #{$c-slider}__page {
       @include plain-visited() {
@@ -802,15 +768,15 @@
       @include focus-visible() {
         outline-color: var(--oo-color-primary-text) !important;
       }
-      @include active() {
-        background-color: var(--oo-color-primary-mix-primary-contrast-40);
-      }
-      @include disabled() {
+    }
+
+    #{$c-slider}__autoslide-toggle {
+      @include focus-visible() {
+        outline-color: var(--oo-color-primary-text) !important;
       }
     }
   }
 
-  &.--on-bg-secondary,
   .--bg-secondary & {
     #{$c-slider}__page {
       @include plain-visited() {
@@ -850,15 +816,15 @@
       @include focus-visible() {
         outline-color: var(--oo-color-secondary-text) !important;
       }
-      @include active() {
-        background-color: var(--oo-color-secondary-mix-primary-contrast-40);
-      }
-      @include disabled() {
+    }
+
+    #{$c-slider}__autoslide-toggle {
+      @include focus-visible() {
+        outline-color: var(--oo-color-primary-text) !important;
       }
     }
   }
 
-  &.--on-bg-footer,
   .--bg-footer & {
     #{$c-slider}__page {
       @include plain-visited() {
@@ -897,15 +863,15 @@
       @include focus-visible() {
         outline-color: var(--oo-color-footer-text) !important;
       }
-      @include active() {
-        background-color: var(--oo-color-footer-mix-primary-contrast-40);
-      }
-      @include disabled() {
+    }
+
+    #{$c-slider}__autoslide-toggle {
+      @include focus-visible() {
+        outline-color: var(--oo-color-secondary-text) !important;
       }
     }
   }
 
-  &.--on-bg-transparent,
   .--bg-transparent & {
     #{$c-slider}__page {
       @include plain-visited() {
@@ -953,8 +919,10 @@
       @include active() {
         background-color: var(--oo-color-mix-primary-contrast-40);
       }
-
-      @include disabled() {
+    }
+    #{$c-slider}__autoslide-toggle {
+      @include focus-visible() {
+        outline-color: var(--oo-color-text) !important;
       }
     }
   }
