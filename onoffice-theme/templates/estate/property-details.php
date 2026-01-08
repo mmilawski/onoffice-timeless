@@ -406,7 +406,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                 "gap":16,
                                 "arrows":true,
                                 "snap":true,
-                                "lazyLoad":false,
+                                "lazyLoad":true,
                                 "pagination":true,
                                 "updateOnMove":true,
                                 "focus":"center",
@@ -1457,25 +1457,22 @@ while ($current_property = $pEstates->estateIterator()) {
 
                     $slider_type = $floorplan_count === 2 ? 'slide' : 'loop';
                     $slider_rewind = 'false';
-
                     $splide_config = sprintf(
                         '{
                             "type":"%s",
                             "rewind":%s,
-                            "perPage":1,
-                            "padding":"20rem",
+                            "autoWidth":true,
+                            "drag":true,
+                            "focus":"center",
                             "gap":16,
                             "arrows":true,
                             "snap":true,
                             "lazyLoad":false,
                             "pagination":true,
                             "updateOnMove":true,
-                            "focus":"center",
                             "classes":{"page":"c-slider__page splide__pagination__page"},
                             "breakpoints": {
-                                "1200": { "padding":"10rem" },
-                                "992": { "padding":"5rem" },
-                                "576": { "padding":"2.5rem", "gap": 8 }
+                                "576": { "gap": 8 }
                             }
                         }',
                         $slider_type,
