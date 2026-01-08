@@ -17,10 +17,11 @@
   &__overview {
     width: 100%;
     display: grid;
-    gap: 0.5rem;
+    row-gap: 1rem;
 
     @include media-breakpoint-up(md) {
       order: 1;
+      row-gap: 0.5rem;
     }
   }
 
