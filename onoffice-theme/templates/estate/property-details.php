@@ -406,7 +406,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                 "gap":16,
                                 "arrows":true,
                                 "snap":true,
-                                "lazyLoad":true,
+                                "lazyLoad":false,
                                 "pagination":true,
                                 "updateOnMove":true,
                                 "focus":"center",
@@ -1454,31 +1454,22 @@ while ($current_property = $pEstates->estateIterator()) {
                     </div>
                     <?php
                 } else {
-
-                    $slider_type = $floorplan_count === 2 ? 'slide' : 'loop';
-                    $slider_rewind = 'false';
-                    $splide_config = sprintf(
-                        '{
-                            "type":"%s",
-                            "rewind":%s,
-                            "autoWidth":true,
-                            "drag":true,
-                            "focus":"center",
-                            "gap":16,
-                            "arrows":true,
-                            "snap":true,
-                            "lazyLoad":false,
-                            "pagination":true,
-                            "updateOnMove":true,
-                            "classes":{"page":"c-slider__page splide__pagination__page"},
-                            "breakpoints": {
-                                "576": { "gap": 8 }
-                            }
-                        }',
-                        $slider_type,
-                        $slider_rewind,
-                    );
-                    ?>
+                    $splide_config = '{
+                        "type":"loop",
+                        "autoWidth":true,
+                        "drag":true,
+                        "focus":"center",
+                        "gap":16,
+                        "arrows":true,
+                        "snap":true,
+                        "lazyLoad":false,
+                        "pagination":true,
+                        "updateOnMove":true,
+                        "classes":{"page":"c-slider__page splide__pagination__page"},
+                        "breakpoints": {
+                            "576": { "gap": 8 }
+                        }
+                    }'; ?>
                     <div class="c-property-details__container o-container-fluid">
                         <div 
                             class="c-property-details__gallery c-slider splide --auto-height --is-layout-slider"

@@ -374,6 +374,24 @@
         object-fit: contain;
       }
     }
+
+    &.--is-static {
+      .splide__track {
+        overflow: visible !important;
+      }
+
+      .splide__list {
+        display: flex !important;
+        justify-content: space-around !important;
+        transform: translateX(0) !important;
+        width: 100% !important;
+      }
+
+      .c-property-details__gallery-link {
+        margin: 0 !important;
+        flex-shrink: 0;
+      }
+    }
   }
 
   &__open-lightbox {

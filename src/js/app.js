@@ -1010,6 +1010,40 @@ jQuery(document).ready(function() {
         })
       }
 
+      if ($slider.hasClass('--is-layout-slider')) {
+        splide.on('mounted resized', function () {
+            const isOverflowing = splide.Components.Layout.isOverflow();
+            
+            if (!isOverflowing) {
+                if (!$slider.hasClass('--is-static')) {
+                    $slider.addClass('--is-static');
+                    
+                    splide.options = { 
+                        type: 'slide', 
+                        drag: false,
+                        arrows: false,
+                        pagination: false,
+                        focus: 0 
+                    };
+                    splide.refresh(); 
+                }
+            } else {
+                if ($slider.hasClass('--is-static')) {
+                    $slider.removeClass('--is-static');
+                    
+                    splide.options = { 
+                        type: 'loop', 
+                        drag: true,
+                        arrows: true,
+                        pagination: true,
+                        focus: 'center'
+                    };
+                    splide.refresh();
+                }
+            }
+        });
+      }
+
       splide.mount();
     });
   }
