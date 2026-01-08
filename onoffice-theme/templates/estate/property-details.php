@@ -1301,10 +1301,20 @@ while ($current_property = $pEstates->estateIterator()) {
             $floorplan_count = count($floorplan_ids);
 
             if ($floorplan_count > 0) {
+
                 wp_enqueue_script('oo-glightbox-script');
                 wp_enqueue_style('oo-glightbox-style');
-
-                if ($floorplan_count === 1) {
+                ?>
+                <div class="c-property-details__container o-container">
+                    <div class="c-property-details__row o-row">
+                        <div class="u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">
+                            <h2 class="c-property-details__headline o-headline --h2">
+                                <?php esc_html_e('Grundrisse', 'oo_theme'); ?>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                <?php if ($floorplan_count === 1) {
 
                     $text_group_two = $floorplan_ids[0];
                     $picture_values = $pEstates->getEstatePictureValues(

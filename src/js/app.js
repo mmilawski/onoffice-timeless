@@ -928,7 +928,6 @@ jQuery(document).ready(function() {
 
       // Tab Index and Hierarchy Logic
       const innerslider = $slider.hasClass('--is-properties-images-slider');
-      const isLayoutSlider = $slider.hasClass('--is-layout-slider');
       const outerslider =
         $slider.hasClass('--is-properties-slider') ||
         $slider.hasClass('--is-properties-similar-slider') ||
@@ -985,7 +984,7 @@ jQuery(document).ready(function() {
       const manuallyHandleFocus = !!innerslider || !!outerslider;
       splide.on('overflow', function (isOverflow) {
         splide.options = {
-          drag: isLayoutSlider ? true : isOverflow,
+          drag: isOverflow,
           focusableNodes: manuallyHandleFocus
             ? ''
             : 'a, button, input, textarea, select:not([aria-hidden])',
