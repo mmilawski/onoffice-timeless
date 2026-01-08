@@ -359,19 +359,19 @@
 
     &.--is-layout-slider {
       margin-bottom: 2.5rem;
-      
+
       #{$c-property-details}__gallery-picture {
-        width: auto; // Add this to ensure it doesn't force 100% width
-        max-width: 100%; 
-        
+        width: auto;
+        max-width: 100%;
+
         @include media-breakpoint-up(md) {
           height: 25rem;
         }
       }
 
-      #{$c-property-details}__gallery-image { 
-        width: auto; // Allow image to dictate its own width based on height
-        object-fit: contain; 
+      #{$c-property-details}__gallery-image {
+        width: auto;
+        object-fit: contain;
       }
     }
   }
