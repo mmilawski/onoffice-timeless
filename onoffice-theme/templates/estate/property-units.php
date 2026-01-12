@@ -29,8 +29,9 @@ if ($pEstates->estateIterator()): ?>
         </div>
 
         <div class="c-property-details__unit-container o-container-fluid"> 
-            <div id="unitslider" class="c-property-details__units-slider c-slider --is-properties-units-slider splide"
-                data-splide='{
+            <div id="unitslider" 
+                 class="c-property-details__units-slider c-slider --is-properties-units-slider splide"
+                 data-splide='{
                     "perPage": 3,
                     "perMove": 1,
                     "gap": "1rem",
@@ -38,14 +39,16 @@ if ($pEstates->estateIterator()): ?>
                     "lazyLoad": "nearby",
                     "pagination": false,
                     "arrows": false,
-                    "drag": <?php echo $totalUnits >= 4 ? 'true' : 'false'; ?>,
-                    "page": false,
                     "breakpoints": {
+                        "992": {
+                            "perPage": 2
+                        },
                         "768": {
                             "perPage": 1
                         }
                     }
                 }'>
+                
                 <div class="c-slider__track splide__track">
                     <div class="c-slider__list splide__list">
                         <?php
@@ -58,36 +61,37 @@ if ($pEstates->estateIterator()): ?>
                     </div>
                 </div>
 
-                <?php if ($totalUnits >= 4): ?>
-                    <div class="c-slider__navigation splide__navigation o-container --is-properties-slider">
-                        <div class="c-slider__progress splide__progress">
-                            <div class="c-slider__progress-bar splide__progress-bar"></div>
-                        </div>
-                        <div class="c-slider__arrows splide__arrows">
-                            <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev">
-                                <span class="c-slider__arrow-text u-screen-reader-only">
-                                    <?php esc_html_e(
-                                        'Vorheriges',
-                                        'oo_theme',
-                                    ); ?>
-                                </span>
-                                <span class="c-slider__arrow-icon --chevron-left"><?php oo_get_icon(
-                                    'chevron-left',
-                                    true,
-                                ); ?></span>
-                            </button>
-                            <button class="c-slider__arrow --next splide__arrow splide__arrow--next">
-                                <span class="c-slider__arrow-text u-screen-reader-only">
-                                    <?php esc_html_e('Nächstes', 'oo_theme'); ?>
-                                </span>
-                                <span class="c-slider__arrow-icon --chevron-right"><?php oo_get_icon(
-                                    'chevron-right',
-                                    true,
-                                ); ?></span>
-                            </button>
-                        </div>
+                <div class="c-slider__navigation splide__navigation o-container --is-properties-slider">
+                    <div class="c-slider__progress splide__progress">
+                        <div class="c-slider__progress-bar splide__progress-bar"></div>
                     </div>
-                <?php endif; ?>
+                    
+                    <div class="c-slider__arrows splide__arrows">
+                        <button class="c-slider__arrow --prev splide__arrow splide__arrow--prev" aria-label="<?php esc_attr_e(
+                            'Vorheriges',
+                            'oo_theme',
+                        ); ?>">
+                            <span class="c-slider__arrow-text u-screen-reader-only">
+                                <?php esc_html_e('Vorheriges', 'oo_theme'); ?>
+                            </span>
+                            <span class="c-slider__arrow-icon --chevron-left">
+                                <?php oo_get_icon('chevron-left'); ?>
+                            </span>
+                        </button>
+                        
+                        <button class="c-slider__arrow --next splide__arrow splide__arrow--next" aria-label="<?php esc_attr_e(
+                            'Nächstes',
+                            'oo_theme',
+                        ); ?>">
+                            <span class="c-slider__arrow-text u-screen-reader-only">
+                                <?php esc_html_e('Nächstes', 'oo_theme'); ?>
+                            </span>
+                            <span class="c-slider__arrow-icon --chevron-right">
+                                <?php oo_get_icon('chevron-right'); ?>
+                            </span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

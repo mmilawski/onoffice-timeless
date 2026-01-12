@@ -1009,7 +1009,11 @@ jQuery(document).ready(function() {
         })
       }
 
-      if ($slider.hasClass('--is-layout-slider')) {
+      const shouldCheckOverflow = $slider.hasClass('--is-layout-slider') || 
+      $slider.hasClass('--is-properties-similar-slider') ||
+      $slider.hasClass('--is-properties-units-slider');
+
+      if (shouldCheckOverflow) {
         splide.on('mounted resized', function () {
             const isOverflowing = splide.Components.Layout.isOverflow();
             
@@ -1033,7 +1037,7 @@ jQuery(document).ready(function() {
                     splide.options = { 
                         type: 'loop', 
                         drag: true,
-                        arrows: true,
+                        arrows: false,
                         pagination: true,
                         focus: 'center'
                     };
