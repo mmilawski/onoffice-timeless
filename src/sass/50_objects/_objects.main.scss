@@ -62,12 +62,6 @@
 
   & > *:first-child {
     .c-banner__slide {
-      margin-top: 3.75rem;
-
-      @include media-breakpoint-up(xl) {
-        margin-top: 2.5rem;
-      }
-
       &.--content-is-left {
         .c-banner__container {
           padding-top: 0;
