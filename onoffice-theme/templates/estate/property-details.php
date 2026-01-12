@@ -57,6 +57,14 @@ $iframe_display = filter_var(
     FILTER_VALIDATE_BOOLEAN,
 );
 
+$property_detail_opts = get_field('general', 'option')['property_detail'] ?? [];
+$is_share_available = isset($property_detail_opts['property_share_button'])
+    ? filter_var(
+        $property_detail_opts['property_share_button'],
+        FILTER_VALIDATE_BOOLEAN,
+    )
+    : true;
+
 /** @var EstateDetail $pEstates */
 
 $pEstates->resetEstateIterator();
@@ -74,7 +82,7 @@ while ($current_property = $pEstates->estateIterator()) {
 
     // pictures
     $property_pictures = $pEstates->getEstatePictures();
-    foreach ($property_pictures as $id) {
+    foreach ($property_pictures as $text_group_two) {
         $photos = true;
         $first_picture = true;
     }
@@ -211,16 +219,16 @@ while ($current_property = $pEstates->estateIterator()) {
     $title_image = null;
     $sorted_pictures = [];
 
-    foreach ($property_pictures as $id) {
-        $picture_values = $pEstates->getEstatePictureValues($id);
+    foreach ($property_pictures as $text_group_two) {
+        $picture_values = $pEstates->getEstatePictureValues($text_group_two);
 
         if (
             $picture_values['type'] ===
             \onOffice\WPlugin\Types\ImageTypes::TITLE
         ) {
-            $title_image = $id;
+            $title_image = $text_group_two;
         } else {
-            $sorted_pictures[] = $id;
+            $sorted_pictures[] = $text_group_two;
         }
     }
 
@@ -229,1128 +237,1856 @@ while ($current_property = $pEstates->estateIterator()) {
     }
     ?>
 
-    <section class="c-property-details o-section --bg-transparent <?php echo $show_secret_sale_block
+    <section class="c-property-details o-section --bg-transparent<?php echo $show_secret_sale_block
         ? '--blurry'
         : ''; ?>">
 
-    <?php if ($iframe_display) { ?>
-        <a class="c-button c-property-details__back-button" href="javascript:history.back();"><?php esc_html_e(
-            'Zurück',
-            'oo_theme',
-        ); ?></a>
-    <?php } ?>
+        <?php if ($iframe_display) { ?>
+            <a class="c-button c-property-details__back-button" href="javascript:history.back();"><?php esc_html_e(
+                'Zurück',
+                'oo_theme',
+            ); ?></a>
+        <?php } ?>
 
-        <div class="c-property-details__banner">
-            <?php if ($show_secret_sale_block) { ?>
-                <?php
-                // --- SECRET SALE: PLACEHOLDER IMAGE ---
-
-                $placeholder_image_url = oo_get_secret_sale_placeholder();
-                if (!empty($placeholder_image_url)) {
-                    oo_get_template('components', '', 'component-image', [
-                        'image' => [
-                            'url' => $placeholder_image_url,
-                            'alt' => esc_html__('Platzhalterbild', 'oo_theme'),
-                        ],
-                        'picture_class' =>
-                            'c-property-details__banner-picture o-picture',
-                        'image_class' =>
-                            'c-property-details__banner-image o-image',
-                        'loading' => 'eager',
-                    ]);
-                } else {
-                    echo '<div class="c-property-details__banner-picture --is-placeholder"></div>';
-                }
-                ?>
-            <?php } elseif (
-                !empty($property_pictures) &&
-                is_array($property_pictures)
-            ) {
-                foreach ($sorted_pictures as $id) {
-                    $picture_values = $pEstates->getEstatePictureValues($id);
-                    if ($first_picture === true) {
-                        if ($picture_values['title'] == true) {
-                            $image_alt = esc_html($picture_values['title']);
-                        } else {
-                            $image_alt = esc_html__(
-                                'Immobilienbild',
-                                'oo_theme',
-                            );
-                        }
-                        $image = [
-                            'url' => $pEstates->getEstatePictureUrl($id),
-                            'alt' => $image_alt,
-                        ];
-
-                        oo_get_template('components', '', 'component-image', [
-                            'image' => $image,
-                            'picture_class' =>
-                                'c-property-details__banner-picture o-picture',
-                            'image_class' =>
-                                'c-property-details__banner-image o-image',
-                            'loading' => 'eager',
-                            'decoding' => 'auto',
-                            'dimensions' => [
-                                '575' => [
-                                    'w' => '400',
-                                    'h' => '400',
-                                ],
-                                '1600' => [
-                                    'w' => '1920',
-                                    'h' => round((1920 * 9) / 16),
-                                ],
-                                '1400' => [
-                                    'w' => '1600',
-                                    'h' => round((1600 * 9) / 16),
-                                ],
-                                '1200' => [
-                                    'w' => '1400',
-                                    'h' => round((1400 * 9) / 16),
-                                ],
-                                '992' => [
-                                    'w' => '1200',
-                                    'h' => round((1200 * 9) / 16),
-                                ],
-                                '768' => [
-                                    'w' => '992',
-                                    'h' => '992',
-                                ],
-                                '576' => [
-                                    'w' => '768',
-                                    'h' => '768',
-                                ],
-                            ],
-                        ]);
-                    }
-
-                    $first_picture = false;
-                }
-            } else {
-                echo '<div class="c-property-details__banner-picture --is-placeholder"></div>';
-            } ?>
-            <div class="c-property-details__banner-wrapper o-container">
-                <div class="c-property-details__banner-content o-col-12 o-col-lg-10 o-col-xl-8">
-                    <?php if ($show_secret_sale_block): ?>
-                        <?php
-                        // --- SECRET SALE: PLACEHOLDER TITLE & PRICE ---
-                        ?>
-                        <h1 class="c-property-details__title o-headline --h2">
-                            <?php esc_html_e(
-                                'Exklusives Objekt',
-                                'oo_theme',
-                            ); ?>
-                        </h1>
-                        <p class="c-property-details__price">
-                            <?php esc_html_e(
-                                'Kaufpreis',
-                                'oo_theme',
-                            ); ?>: xxx.xxx
-                        </p>
-                    <?php else: ?>
-                    <?php if (
-                        $property_status ||
-                        (Favorites::isFavorizationEnabled() &&
-                            !$is_reference &&
-                            !$iframe_display)
-                    ) { ?>
-                        <div class="c-property-details__banner-flags c-flags <?= !$property_status &&
-                        Favorites::isFavorizationEnabled()
-                            ? '--only-favorite'
-                            : '' ?>">
-                        <?php } ?>
-
-                        <?php if ($property_status) { ?>
-                            <span class="c-property-details__status c-flag --property-status">
-                                <?php echo ucfirst($property_status); ?>
-                            </span>
-                        <?php } ?>
-
-                        <?php
-                        if (
-                            Favorites::isFavorizationEnabled() &&
-                            !$is_reference &&
-                            !$iframe_display
-                        ) {
-
-                            $favorite_label = Favorites::getFavorizationLabel();
-                            if ($favorite_label == 'Watchlist') {
-                                $favorite_text = esc_html__(
-                                    'Zur Merkliste hinzufügen',
-                                    'oo_theme',
-                                );
-                                $favorite_icon = 'bookmark';
-                            } else {
-                                $favorite_text = esc_html__(
-                                    'Zu Favoriten hinzufügen',
-                                    'oo_theme',
-                                );
-                                $favorite_icon =
-                                    $favorite_label == 'Watchlist'
-                                        ? 'bookmark'
-                                        : 'heart';
-                            }
+        <div class="c-property-details__header-wrapper">
+            <div class="c-property-details__header o-container">
+                <div class="c-property-details__header-row o-row">
+                    <div class="c-property-details__header-content u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">
+                        <?php if ($show_secret_sale_block): ?>
+                            <?php
+                            // --- SECRET SALE: PLACEHOLDER TITLE & PRICE ---
                             ?>
-                            <button class="c-property-details__favorite c-icon-button" data-onoffice-property-id="<?php echo $property_id; ?>" aria-label="<?php echo $favorite_text; ?>">
-                                <?php oo_get_icon($favorite_icon, true, [
-                                    'class' => 'c-icon-button__icon --favorite',
-                                ]); ?>
-                            </button>
-                        <?php
-                        }
-
-                        if (
+                            <h1 class="c-property-details__title o-headline --h1">
+                                <?php esc_html_e(
+                                    'Exklusives Objekt',
+                                    'oo_theme',
+                                ); ?>
+                            </h1>
+                            <p class="c-property-details__price o-headline --h3">
+                                <?php esc_html_e(
+                                    'Kaufpreis',
+                                    'oo_theme',
+                                ); ?>: xxx.xxx
+                            </p>
+                        <?php else: ?>
+                        <?php if (
                             $property_status ||
                             (Favorites::isFavorizationEnabled() &&
                                 !$is_reference &&
                                 !$iframe_display)
                         ) { ?>
-                        </div>
-                    <?php }
+                            <div class="c-property-details__banner-flags c-flags <?= !$property_status &&
+                            Favorites::isFavorizationEnabled()
+                                ? '--only-favorite'
+                                : '' ?>">
+                            <?php } ?>
 
-                        if ($current_property['objekttitel']) { ?>
-                        <h1 class="c-property-details__title o-headline --h2">
-                            <?php echo $current_property['objekttitel']; ?>
-                        </h1>
-                    <?php }
-                        ?>
-                    <?php if ($price_fields_available) { ?>
-                        <?php foreach ($price_fields as $price_field) {
+                            <?php if ($property_status) { ?>
+                                <span class="c-property-details__status c-flag --property-status">
+                                    <?php echo ucfirst($property_status); ?>
+                                </span>
+                            <?php } ?>
 
-                            $price_value = $current_property[$price_field];
+                            <?php
                             if (
-                                (is_numeric($price_value) &&
-                                    0 == $price_value) ||
-                                $price_value == '0000-00-00' ||
-                                $price_value == '0.00' ||
-                                $price_value == '' ||
-                                empty($price_value)
+                                Favorites::isFavorizationEnabled() &&
+                                !$is_reference &&
+                                !$iframe_display
                             ) {
-                                continue;
-                            }
-                            ?>
-                            <p class="c-property-details__price">
-                                <?php
-                                esc_html_e(
-                                    $pEstates->getFieldLabel($price_field),
-                                );
 
-                                echo ':';
-                                ?>
-                                <?php if (is_array($price_value)) {
-                                    esc_html_e(implode(', ', $price_value));
+                                $favorite_label = Favorites::getFavorizationLabel();
+                                if ($favorite_label == 'Watchlist') {
+                                    $favorite_text = esc_html__(
+                                        'Zur Merkliste hinzufügen',
+                                        'oo_theme',
+                                    );
+                                    $favorite_icon = 'heart';
                                 } else {
-                                    echo esc_html($price_value);
-                                } ?>
-                            </p>
-                        <?php
-                        } ?>
-                    <?php } ?>
-                    <?php endif; ?>
+                                    $favorite_text = esc_html__(
+                                        'Zu Favoriten hinzufügen',
+                                        'oo_theme',
+                                    );
+                                    $favorite_icon =
+                                        $favorite_label == 'Watchlist'
+                                            ? 'heart'
+                                            : 'heart';
+                                }
+                                ?>
+                                <button class="c-property-details__favorite c-icon-button" data-onoffice-property-id="<?php echo $property_id; ?>" aria-label="<?php echo $favorite_text; ?>">
+                                    <?php oo_get_icon($favorite_icon, true, [
+                                        'class' =>
+                                            'c-icon-button__icon --favorite',
+                                    ]); ?>
+                                </button>
+                            <?php
+                            }
+
+                            if (
+                                $property_status ||
+                                (Favorites::isFavorizationEnabled() &&
+                                    !$is_reference &&
+                                    !$iframe_display)
+                            ) { ?>
+                            </div>
+                        <?php }
+
+                            if ($current_property['objekttitel']) { ?>
+                            <h1 class="c-property-details__title o-headline --h1">
+                                <?php echo $current_property['objekttitel']; ?>
+                            </h1>
+                        <?php }
+                            ?>
+                        <?php if ($price_fields_available) { ?>
+                            <?php foreach ($price_fields as $price_field) {
+
+                                $price_value = $current_property[$price_field];
+                                if (
+                                    (is_numeric($price_value) &&
+                                        0 == $price_value) ||
+                                    $price_value == '0000-00-00' ||
+                                    $price_value == '0.00' ||
+                                    $price_value == '' ||
+                                    empty($price_value)
+                                ) {
+                                    continue;
+                                }
+                                ?>
+                                <p class="c-property-details__price o-headline --h3">
+                                    <?php
+                                    esc_html_e(
+                                        $pEstates->getFieldLabel($price_field),
+                                    );
+
+                                    echo ':';
+                                    ?>
+                                    <?php if (is_array($price_value)) {
+                                        esc_html_e(implode(', ', $price_value));
+                                    } else {
+                                        echo esc_html($price_value);
+                                    } ?>
+                                </p>
+                            <?php
+                            } ?>
+                        <?php } ?>
+                        <?php endif; ?>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="c-property-details__container o-container">
-            <?php if ($photos && !$show_secret_sale_block) {
+        <?php
+        ob_start();
+
+        if ($photos && !$show_secret_sale_block) {
+            $has_slides = false;
+            foreach ($sorted_pictures as $text_group_two) {
+                $check_values = $pEstates->getEstatePictureValues(
+                    $text_group_two,
+                );
+                if ($check_values['type'] === 'Grundriss') {
+                    continue;
+                }
+                $has_slides = true;
+                break;
+            }
+
+            if ($has_slides) {
 
                 // Load Lightbox
                 wp_enqueue_script('oo-glightbox-script');
                 wp_enqueue_style('oo-glightbox-style');
                 ?>
-
-                <div class="c-property-details__gallery">
-
-                    <?php
-                    $i = 1;
-
-                    foreach ($sorted_pictures as $id) {
-
-                        $picture_values = $pEstates->getEstatePictureValues(
-                            $id,
-                        );
-                        if ($picture_values['title'] == true) {
-                            $image_alt = esc_html($picture_values['title']);
-                        } else {
-                            $image_alt = esc_html__(
-                                'Immobilienbild',
-                                'oo_theme',
-                            );
-                        }
-
-                        $image = [
-                            'url' => $pEstates->getEstatePictureUrl($id),
-                            'alt' => $image_alt,
-                        ];
-
-                        //  Lightbox Cloud Image
-                        $lightbox_image_options =
-                            '?force_format=webp&org_if_sml=1';
-                        $lightbox_url =
-                            'https://acnaayzuen.cloudimg.io/v7/' .
-                            $image['url'] .
-                            $lightbox_image_options;
-
-                        $lightbox_image_size_list =
-                            [
-                                [
-                                    'id' => 'mobile',
-                                    'breakpoint' => '767',
-                                    'image_size' => '767',
-                                ],
-                                [
-                                    'id' => 'tablet',
-                                    'breakpoint' => '768',
-                                    'image_size' => '1200',
-                                ],
-                                [
-                                    'id' => 'desktop',
-                                    'breakpoint' => '1200',
-                                    'image_size' => '1920',
-                                ],
-                            ] ?? [];
-
-                        // Helpers
-                        $lightbox_mobile_breakpoint = '';
-                        $lightbox_image_breakpoints = '';
-                        $lightbox_image_full_size = '';
-                        $lightbox_image_sizes = '';
-
-                        if (is_array($lightbox_image_size_list)) {
-                            foreach (
-                                $lightbox_image_size_list
-                                as $key => $size
-                            ) {
-                                $is_first =
-                                    $key ==
-                                    array_key_first($lightbox_image_size_list);
-                                $is_last =
-                                    $key ==
-                                    array_key_last($lightbox_image_size_list);
-                                $separator = !$is_last ? ',' : '';
-                                $is_last_image_size = $is_last
-                                    ? ',' .
-                                        end($lightbox_image_size_list)[
-                                            'image_size'
-                                        ] .
-                                        'w'
-                                    : $separator;
-
-                                // Change breakpoints for mobile
-                                if ($is_first) {
-                                    $lightbox_image_breakpoints .=
-                                        '(max-width: ' .
-                                        $size['breakpoint'] .
-                                        'px) ' .
-                                        $size['image_size'] .
-                                        'px,';
-                                    $lightbox_image_sizes .=
-                                        $lightbox_url .
-                                        '&w=' .
-                                        $size['image_size'] .
-                                        ' ' .
-                                        $size['breakpoint'] .
-                                        'w,';
+                    <div class="c-property-details__container o-container-fluid">
+                        <div 
+                            class="c-property-details__gallery c-slider splide --auto-height --is-property-details-slider"
+                            data-splide='{
+                                "type":"loop",
+                                "perPage":1,
+                                "padding":"20rem",
+                                "gap":16,
+                                "arrows":true,
+                                "snap":true,
+                                "lazyLoad":false,
+                                "pagination":true,
+                                "updateOnMove":true,
+                                "focus":"center",
+                                "classes":{"page":"c-slider__page splide__pagination__page"},
+                                "breakpoints": {
+                                    "1200": { "padding":"10rem" },
+                                    "992": { "padding":"5rem" },
+                                    "576": { "padding":"2.5rem", "gap": 8 }
                                 }
-
-                                // Skip first Item
-                                if ($key === 0) {
-                                    continue;
-                                }
-
-                                // Breakpoints
-                                $lightbox_image_breakpoints .=
-                                    '(min-width:' .
-                                    $size['breakpoint'] .
-                                    'px) ' .
-                                    $size['image_size'] .
-                                    'px' .
-                                    $separator;
-
-                                // Sources
-                                $lightbox_image_sizes .=
-                                    $lightbox_url .
-                                    '&w=' .
-                                    $size['image_size'] .
-                                    ' ' .
-                                    $size['breakpoint'] .
-                                    'w' .
-                                    $is_last_image_size;
-                            }
-                        }
-                        ?>
-                        <a class="c-property-details__gallery-link glightbox" data-gallery="gallery"
-                            href="<?php echo $lightbox_url .
-                                '&w=' .
-                                end($lightbox_image_size_list)[
-                                    'image_size'
-                                ]; ?>"
-                            data-sizes="<?php echo $lightbox_image_breakpoints; ?>"
-                            data-srcset="<?php echo $lightbox_image_sizes; ?>"
-                            data-caption="<?php echo $image['alt']; ?>"
-                            title="<?php echo $image['alt']; ?>"
-                            aria-label="<?php echo sprintf(
-                                esc_attr_x(
-                                    'Bild %s vergrößert anzeigen',
-                                    'oo_theme',
-                                ),
-                                $image['alt'],
-                            ); ?>">
-                            <?php oo_get_template(
-                                'components',
-                                '',
-                                'component-image',
-                                [
-                                    'image' => $image,
-                                    'picture_class' =>
-                                        'c-property-details__gallery-picture o-picture',
-                                    'image_class' =>
-                                        'c-property-details__gallery-image o-image',
-                                    'dimensions' => [
-                                        '575' => [
-                                            'h' => round((575 * 2) / 3),
-                                        ],
-                                        '1600' => [
-                                            'h' => round((369 * 2) / 3),
-                                        ],
-                                        '1400' => [
-                                            'h' => round((336 * 2) / 3),
-                                        ],
-                                        '1200' => [
-                                            'h' => round((288 * 2) / 3),
-                                        ],
-                                        '992' => [
-                                            'h' => round((480 * 2) / 3),
-                                        ],
-                                        '768' => [
-                                            'h' => round((726 * 2) / 3),
-                                        ],
-                                        '576' => [
-                                            'h' => round((544 * 2) / 3),
-                                        ],
-                                    ],
-                                ],
-                            ); ?>
-                            <span class="c-property-details__open-lightbox">
-                                <?php oo_get_icon('plus', true, [
-                                    'class' =>
-                                        'c-property-details__open-lightbox-icon',
-                                ]); ?>
-                            </span>
-                        </a>
-                    <?php $i++;
-                    }
-                    ?>
-                </div>
-            <?php
-            } ?>
-
-            <div class="c-property-details__buttons-wrapper c-buttons">
-                <?php
-                if (!empty($shortcode_form)) { ?>
-                    <a href="#request" class="c-property-details__request c-button"><?php esc_html_e(
-                        'Sofortanfrage',
-                        'oo_theme',
-                    ); ?></a>
-                <?php }
-                if ($pEstates->getDocument() != '') { ?>
-                    <a class="c-property-details__expose-button c-button --has-icon --ghost" href="<?php echo $pEstates->getDocument(); ?>">
-                        <span class="c-button__text">
-                            <?php esc_html_e('Details als PDF', 'oo_theme'); ?>
-                        </span>
-                        <span class="c-button__icon"><?php oo_get_icon(
-                            'download',
-                        ); ?></span>
-                    </a>
-                <?php }
-                ?>
-
-                <div class="c-property-details__share">
-                    <?php
-                    global $wp;
-
-                    $property_detail_page =
-                        get_field('general', 'option')['property_detail'] ?? [];
-                    $property_share_button =
-                        filter_var(
-                            $property_detail_page['property_share_button'],
-                            FILTER_VALIDATE_BOOLEAN,
-                        ) ?? false;
-
-                    if ($property_share_button) {
-                        oo_get_template('components', '', 'component-share', [
-                            'button_class' =>
-                                'c-property-details__share-button c-button --ghost',
-                            'button_icon' => 'share',
-                            'popup_id' => 'property-detail-share',
-                            'share_link' => home_url(
-                                add_query_arg([], $wp->request),
-                            ),
-                        ]);
-                    }
-                    ?>
-                </div>
-            </div>
-
-            <?php $filtered_features = array_filter(
-                $property_features,
-                function ($category) {
-                    return !empty($category);
-                },
-            ); ?>
-            
-            <div class="c-property-details__fields-row o-row">
-                <?php foreach (
-                    $filtered_features
-                    as $group_name => $features
-                ): ?>
-                    <?php
-                    $boolean_features = [];
-                    $regular_features = [];
-
-                    foreach ($features as $feature) {
-                        if ($feature['type'] === 'boolean') {
-                            $boolean_features[] = $feature;
-                        } else {
-                            $regular_features[] = $feature;
-                        }
-                    }
-
-                    $true_boolean_features = array_filter(
-                        $boolean_features,
-                        function ($feature) {
-                            return $feature['value'] === 'Ja';
-                        },
-                    );
-
-                    if (
-                        empty($true_boolean_features) &&
-                        empty($regular_features)
-                    ) {
-                        continue;
-                    }
-                    ?>
-
-                    <div class="c-property-details__fields-group o-col-12 o-col-lg-6">
-                        <h2 class="c-property-details__headline o-headline --h2">
-                            <?php echo esc_html($group_name); ?>
-                        </h2>
-
-                        <?php if (!empty($true_boolean_features)): ?>
-                            <div class="c-property-details__features c-item-features">
-                                <?php foreach (
-                                    $true_boolean_features
-                                    as $feature
-                                ): ?>
-                                    <span class="c-item-features__item"><?php echo esc_html(
-                                        $feature['label'],
-                                    ); ?></span>
-                                <?php endforeach; ?>
-                            </div>
-                        <?php endif; ?>
-
-                        <?php if (!empty($regular_features)): ?>
-                            <div class="c-property-details__fields c-item-fields">
-                                <?php foreach (
-                                    $regular_features
-                                    as $feature
-                                ): ?>
-                                    <?php if (
-                                        ($raw_values->getValueRaw($property_id)[
-                                            'elements'
-                                        ]['provisionsfrei'] ??
-                                            null) ===
-                                            '1' &&
-                                        in_array(
-                                            $field,
-                                            [
-                                                'innen_courtage',
-                                                'aussen_courtage',
-                                            ],
-                                            true,
-                                        )
+                            }'
+                        >
+                            <div class="c-slider__track splide__track">
+                                <div class="c-slider__list splide__list">
+                                    <?php foreach (
+                                        $sorted_pictures
+                                        as $text_group_two
                                     ) {
-                                        continue;
-                                    } ?>
-                                    <dl class="c-item-fields__item">
-                                        <dt class="c-item-fields__label"><?php echo esc_html(
-                                            $feature['label'],
-                                        ); ?></dt>
-                                        <dd class="c-item-fields__value">
-                                            <?php echo is_array(
-                                                $feature['value'],
-                                            )
-                                                ? esc_html(
-                                                    implode(
-                                                        ', ',
-                                                        $feature['value'],
-                                                    ),
-                                                )
-                                                : esc_html(
-                                                    $feature['value'],
-                                                ); ?>
-                                        </dd>
-                                    </dl>
-                                <?php endforeach; ?>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                <?php endforeach; ?>
-            </div>
 
-            <div class="c-property-details__row o-row">
-                <div class="c-property-details__main o-col-12 o-col-lg-8">
-                    <?php // Ogulo
-
-    if (!empty($property_ogulo_embeds) || !empty($property_ogulo_links)) {
-                        echo '<div class="c-property-details__media">';
-                        echo '<h2 class="c-property-details__headline o-headline --h2">' .
-                            esc_html__('360° Rundgänge', 'oo_theme') .
-                            '</h2>';
-
-                        if (
-                            !empty($property_ogulo_embeds) &&
-                            is_array($property_ogulo_embeds)
-                        ) {
-                            echo '<div class="c-property-details__embeds">';
-
-                            foreach (
-                                $property_ogulo_embeds
-                                as $property_ogulo_embed
-                            ) {
-                                echo '<div class="c-property-details__iframe --is-' .
-                                    oo_get_service_domain_without_tld(
-                                        $property_ogulo_embed['url'],
-                                    ) .
-                                    '">';
-                                echo $property_ogulo_embed['player'];
-                                echo '</div>';
-                            }
-
-                            echo '</div>';
-                        }
-
-                        if (
-                            !empty($property_ogulo_links) &&
-                            is_array($property_ogulo_links)
-                        ) {
-                            echo '<div class="c-property-details__buttons c-buttons">';
-                            foreach (
-                                $property_ogulo_links
-                                as $property_ogulo_link
-                            ) {
-                                // Button Text
-                                $button_title = !empty(
-                                    $property_ogulo_link['title']
-                                )
-                                    ? esc_attr($property_ogulo_link['title'])
-                                    : esc_attr__(
-                                        '360°-Rundgang starten',
-                                        'oo_theme',
-                                    );
-
-                                echo '<a class="c-button --ghost" href="' .
-                                    esc_attr($property_ogulo_link['url']) .
-                                    '" target="_blank" rel="noopener noreferrer" aria-label="' .
-                                    esc_attr(
-                                        sprintf(
-                                            __(
-                                                '360°-Rundgang von %s starten (Öffnet in neuem Tab)',
-                                                'oo_theme',
-                                            ),
-                                            $button_title,
-                                        ),
-                                    ) .
-                                    '">' .
-                                    $button_title .
-                                    '</a>';
-                            }
-                            echo '</div>';
-                        }
-
-                        echo '</div>';
-                    } ?>
-
-
-                    <?php
-                    // Movie
-                    if (
-                        !empty($property_movie_players) ||
-                        !empty($property_movie_links)
-                    ) {
-                        echo '<div class="c-property-details__media">';
-                        echo '<h2 class="c-property-details__headline o-headline --h2">' .
-                            esc_html__('Videos', 'oo_theme') .
-                            '</h2>';
-
-                        // GET MOVIE PLAYERS
-                        if (
-                            !empty($property_movie_players) &&
-                            is_array($property_movie_players)
-                        ) {
-                            echo '<div class="c-property-details__embeds">';
-
-                            foreach (
-                                $property_movie_players
-                                as $property_movie_player
-                            ) {
-                                echo '<div class="c-property-details__video --is-' .
-                                    oo_get_service_domain_without_tld(
-                                        $property_movie_player['url'],
-                                    ) .
-                                    '">';
-                                if (
-                                    isset($property_movie_player['player']) &&
-                                    strpos(
-                                        $property_movie_player['player'],
-                                        '<a',
-                                    ) !== false
-                                ) {
-                                    echo '<iframe class="c-property-details__iframe" src="' .
-                                        $property_movie_player['url'] .
-                                        '" title="' .
-                                        esc_attr__(
-                                            'Externer Video Inhalt',
-                                            'oo_theme',
-                                        ) .
-                                        '"></iframe>';
-                                } else {
-                                    echo $property_movie_player['player'];
-                                }
-                                echo '</div>';
-                            }
-
-                            echo '</div>';
-                        }
-
-                        // GET MOVIE LINKS
-                        if (
-                            !empty($property_movie_links) &&
-                            is_array($property_movie_links)
-                        ) {
-                            echo '<div class="c-property-details__buttons c-buttons">';
-                            foreach (
-                                $property_movie_links
-                                as $property_movie_link
-                            ) {
-                                // Button Text
-                                $button_title = !empty(
-                                    $property_movie_link['title']
-                                )
-                                    ? esc_attr($property_movie_link['title'])
-                                    : esc_html__('Video starten', 'oo_theme');
-
-                                echo '<a class="c-button --ghost" href="' .
-                                    esc_attr($property_movie_link['url']) .
-                                    '" rel="noopener noreferrer" aria-label="' .
-                                    esc_attr(
-                                        sprintf(
-                                            __(
-                                                'Video von %s starten (Öffnet in neuem Tab)',
-                                                'oo_theme',
-                                            ),
-                                            $button_title,
-                                        ),
-                                    ) .
-                                    '" target="_blank">' .
-                                    $button_title .
-                                    '</a>';
-                            }
-                            echo '</div>';
-                        }
-
-                        echo '</div>';
-                    }
-
-                    // Links
-                    if (
-                        !empty($property_links) ||
-                        !empty($property_link_embeds)
-                    ) {
-                        echo '<div class="c-property-details__media">';
-                        echo '<h2 class="c-property-details__headline o-headline --h2">' .
-                            esc_html__('Links', 'oo_theme') .
-                            '</h2>';
-
-                        if (
-                            !empty($property_link_embeds) &&
-                            is_array($property_link_embeds)
-                        ) {
-                            echo '<div class="c-property-details__embeds">';
-
-                            foreach (
-                                $property_link_embeds
-                                as $property_link_embed
-                            ) {
-                                echo '<div class="c-property-details__iframe --is-' .
-                                    oo_get_service_domain_without_tld(
-                                        $property_link_embed['url'],
-                                    ) .
-                                    '">';
-                                echo $property_link_embed['player'];
-                                echo '</div>';
-                            }
-
-                            echo '</div>';
-                        }
-
-                        if (
-                            !empty($property_links) &&
-                            is_array($property_links)
-                        ) {
-                            echo '<div class="c-property-details__buttons c-buttons">';
-                            foreach ($property_links as $property_link) {
-                                // Button Text
-                                $button_title = !empty($property_link['title'])
-                                    ? esc_attr($property_link['title'])
-                                    : esc_attr__('Link öffnen', 'oo_theme');
-
-                                echo '<a class="c-button --ghost" href="' .
-                                    esc_attr($property_link['url']) .
-                                    '" rel="noopener noreferrer" aria-label="' .
-                                    esc_attr(
-                                        sprintf(
-                                            __(
-                                                'Link von %s öffnen (Öffnet in neuem Tab)',
-                                                'oo_theme',
-                                            ),
-                                            $button_title,
-                                        ),
-                                    ) .
-                                    '" target="_blank">' .
-                                    $button_title .
-                                    '</a>';
-                            }
-                            echo '</div>';
-                        }
-
-                        echo '</div>';
-                    }
-                    ?>
-
-                    <?php
-                    // Objects
-                    if (
-                        !empty($property_object_embeds) ||
-                        !empty($property_object_links)
-                    ) {
-                        echo '<div class="c-property-details__media">';
-                        echo '<h2 class="c-property-details__headline o-headline --h2">' .
-                            esc_html__('Objekte', 'oo_theme') .
-                            '</h2>';
-
-                        if (
-                            !empty($property_object_embeds) &&
-                            is_array($property_object_embeds)
-                        ) {
-                            echo '<div class="c-property-details__embeds">';
-
-                            foreach (
-                                $property_object_embeds
-                                as $property_object_embed
-                            ) {
-                                echo '<div class="c-property-details__iframe --is-' .
-                                    oo_get_service_domain_without_tld(
-                                        $property_object_embed['url'],
-                                    ) .
-                                    '">';
-                                echo $property_object_embed['player'];
-                                echo '</div>';
-                            }
-
-                            echo '</div>';
-                        }
-
-                        if (
-                            !empty($property_object_links) &&
-                            is_array($property_object_links)
-                        ) {
-                            echo '<div class="c-property-details__buttons c-buttons">';
-                            foreach (
-                                $property_object_links
-                                as $property_object_link
-                            ) {
-                                // Button Text
-                                $button_title = !empty(
-                                    $property_object_link['title']
-                                )
-                                    ? esc_attr($property_object_link['title'])
-                                    : esc_attr__(
-                                        'Objekt-Link öffnen',
-                                        'oo_theme',
-                                    );
-
-                                echo '<a class="c-button --ghost" href="' .
-                                    esc_attr($property_object_link['url']) .
-                                    '" rel="noopener noreferrer" aria-label="' .
-                                    esc_attr(
-                                        sprintf(
-                                            __(
-                                                'Objekt-Link von %s öffnen (Öffnet in neuem Tab)',
-                                                'oo_theme',
-                                            ),
-                                            $button_title,
-                                        ),
-                                    ) .
-                                    '" target="_blank" title="' .
-                                    $button_title .
-                                    '">' .
-                                    $button_title .
-                                    '</a>';
-                            }
-                            echo '</div>';
-                        }
-
-                        echo '</div>';
-                    }
-
-                    if (!empty($pEstates->getTotalCostsData())) {
-                        $totalCostsData = $pEstates->getTotalCostsData(); ?>
-                        <div class="c-property-details__text-wrapper">
-                            <h2 class="c-property-details__headline o-headline --h2">
-                                <?php echo __(
-                                    'Gesamtpreiskalkulator',
-                                    'oo_theme',
-                                ); ?>
-                            </h2>
-                            <div class="c-property-details__calculator --is-price-calculator">
-                                <div class="c-price-calculator">
-                                <div class="c-price-calculator__chart">
-                                        <?php
-                                        $values = [
-                                            $totalCostsData['kaufpreis']['raw'],
-                                            $totalCostsData['bundesland'][
-                                                'raw'
-                                            ],
-                                            $totalCostsData['aussen_courtage'][
-                                                'raw'
-                                            ],
-                                            $totalCostsData['notary_fees'][
-                                                'raw'
-                                            ],
-                                            $totalCostsData[
-                                                'land_register_entry'
-                                            ]['raw'],
-                                        ];
-                                        $valuesTitle = [
-                                            $totalCostsData['kaufpreis'][
-                                                'default'
-                                            ],
-                                            $totalCostsData['bundesland'][
-                                                'default'
-                                            ],
-                                            $totalCostsData['aussen_courtage'][
-                                                'default'
-                                            ],
-                                            $totalCostsData['notary_fees'][
-                                                'default'
-                                            ],
-                                            $totalCostsData[
-                                                'land_register_entry'
-                                            ]['default'],
-                                        ];
-                                        $chart = new EstateCostsChart(
-                                            $values,
-                                            $valuesTitle,
+                                        $picture_values = $pEstates->getEstatePictureValues(
+                                            $text_group_two,
                                         );
-                                        echo $chart->generateSVG();
-                                        ?>
-                                    </div>
-                                    <div class="c-price-calculator__overview">
-                                        <div class="c-price-calculator__item">
-                                            <span class="c-price-calculator__color-indicator oo-donut-chart-color0"></span>
-                                            <dl class="c-price-calculator__criteria">
-                                                <dt class="c-price-calculator__label">
-                                                    <?php echo esc_html_e(
-                                                        $pEstates->getFieldLabel(
-                                                            'kaufpreis',
-                                                        ),
-                                                    ); ?>
-                                                    </dt>
-                                                <dd class="c-price-calculator__value">
-                                                    <?php echo esc_html(
-                                                        $totalCostsData[
-                                                            'kaufpreis'
-                                                        ]['default'],
-                                                    ); ?>
-                                                </dd>
-                                            </dl>
-                                        </div>
-                                        <div class="c-price-calculator__item">
-                                            <span class="c-price-calculator__color-indicator oo-donut-chart-color1"></span>
-                                            <dl class="c-price-calculator__criteria">
-                                                <dt class="c-price-calculator__label"><?php esc_html_e(
-                                                    'Grunderwerbsteuer',
-                                                    'oo_theme',
-                                                ); ?></dt>
-                                                <dd class="c-price-calculator__value"><?php echo esc_html(
-                                                    $totalCostsData[
-                                                        'bundesland'
-                                                    ]['default'],
-                                                ); ?></dd>
-                                            </dl>
-                                        </div>
-                                        <div class="c-price-calculator__item">
-                                            <span class="c-price-calculator__color-indicator oo-donut-chart-color2"></span>
-                                            <dl class="c-price-calculator__criteria">
-                                                <dt class="c-price-calculator__label"><?php esc_html_e(
-                                                    'Maklerprovision',
-                                                    'oo_theme',
-                                                ); ?></dt>
-                                                <dd class="c-price-calculator__value"><?php echo esc_html(
-                                                    $totalCostsData[
-                                                        'aussen_courtage'
-                                                    ]['default'],
-                                                ); ?></dd>
-                                            </dl>
-                                        </div>
-                                        <div class="c-price-calculator__item">
-                                            <span class="c-price-calculator__color-indicator oo-donut-chart-color3"></span>
-                                            <dl class="c-price-calculator__criteria">
-                                                <dt class="c-price-calculator__label"><?php esc_html_e(
-                                                    'Notargebühren *',
-                                                    'oo_theme',
-                                                ); ?></dt>
-                                                <dd class="c-price-calculator__value"><?php echo esc_html(
-                                                    $totalCostsData[
-                                                        'notary_fees'
-                                                    ]['default'],
-                                                ); ?></dd>
-                                            </dl>
-                                        </div>
-                                        <div class="c-price-calculator__item">
-                                            <span class="c-price-calculator__color-indicator oo-donut-chart-color4"></span>
-                                            <dl class="c-price-calculator__criteria">
-                                                <dt class="c-price-calculator__label"><?php esc_html_e(
-                                                    'Grundbucheintrag *',
-                                                    'oo_theme',
-                                                ); ?></dt>
-                                                <dd class="c-price-calculator__value"><?php echo esc_html(
-                                                    $totalCostsData[
-                                                        'land_register_entry'
-                                                    ]['default'],
-                                                ); ?></dd>
-                                            </dl>
-                                        </div>
-                                        <div class="c-price-calculator__item --is-total-cost">
-                                            <dl class="c-price-calculator__criteria">
-                                                <dt class="c-price-calculator__label oo-total-costs-label"><?php esc_html_e(
-                                                    'Gesamtkosten',
-                                                    'oo_theme',
-                                                ); ?></dt>
-                                                <dd class="c-price-calculator__value"><?php echo esc_html(
-                                                    $totalCostsData[
-                                                        'total_costs'
-                                                    ]['default'],
-                                                ); ?></dd>
-                                            </dl>
-                                        </div>
-                                        <div class="c-price-calculator__notice">
-                                            <?php echo esc_html_e(
-                                                '* Für die Berechnung der Notar- und Grundbuchkosten wird ein Standardwert von 1,5% bzw. 0,5% verwendet.',
+
+                                        if (
+                                            $picture_values['type'] ===
+                                            'Grundriss'
+                                        ) {
+                                            continue;
+                                        }
+
+                                        // Image alt text
+                                        $image_alt = $picture_values['title']
+                                            ? esc_html($picture_values['title'])
+                                            : esc_html__(
+                                                'Immobilienbild',
                                                 'oo_theme',
+                                            );
+
+                                        // Image width variants
+                                        $image_widths = [
+                                            'xs' => 543,
+                                            'sm' => 512,
+                                            'md' => 694,
+                                            'lg' => 608,
+                                            'xl' => 736,
+                                            'xxl' => 864,
+                                            'xxxl' => 952,
+                                        ];
+
+                                        $image = [
+                                            'url' => $pEstates->getEstatePictureUrl(
+                                                $text_group_two,
+                                            ),
+                                            'alt' => $image_alt,
+                                        ];
+
+                                        // Lightbox Cloud Image
+                                        $lightbox_url =
+                                            'https://acnaayzuen.cloudimg.io/v7/' .
+                                            $image['url'] .
+                                            '?force_format=webp&org_if_sml=1';
+
+                                        $lightbox_image_size_list = [
+                                            [
+                                                'id' => 'mobile',
+                                                'breakpoint' => 767,
+                                                'image_size' => 767,
+                                            ],
+                                            [
+                                                'id' => 'tablet',
+                                                'breakpoint' => 768,
+                                                'image_size' => 1200,
+                                            ],
+                                            [
+                                                'id' => 'desktop',
+                                                'breakpoint' => 1200,
+                                                'image_size' => 1920,
+                                            ],
+                                        ];
+
+                                        // Responsive image helpers
+                                        $lightbox_image_breakpoints = '';
+                                        $lightbox_image_sizes = '';
+
+                                        foreach (
+                                            $lightbox_image_size_list
+                                            as $key => $size
+                                        ) {
+                                            $is_first = $key === 0;
+                                            $is_last =
+                                                $key ===
+                                                array_key_last(
+                                                    $lightbox_image_size_list,
+                                                );
+                                            $separator = $is_last ? '' : ',';
+
+                                            if ($is_first) {
+                                                $lightbox_image_breakpoints .= "(max-width: {$size['breakpoint']}px) {$size['image_size']}px,";
+                                                $lightbox_image_sizes .= "{$lightbox_url}&w={$size['image_size']} {$size['breakpoint']}w,";
+                                                continue;
+                                            }
+
+                                            $lightbox_image_breakpoints .= "(min-width:{$size['breakpoint']}px) {$size['image_size']}px{$separator}";
+                                            $lightbox_image_sizes .= "{$lightbox_url}&w={$size['image_size']} {$size['breakpoint']}w{$separator}";
+                                        }
+                                        ?>
+                                        
+                                        <a class="c-property-details__gallery-link glightbox c-slider__slide splide__slide"
+                                        data-gallery="gallery"
+                                        href="<?php echo esc_url(
+                                            $lightbox_url,
+                                        ) .
+                                            '&w=' .
+                                            end($lightbox_image_size_list)[
+                                                'image_size'
+                                            ]; ?>"
+                                        data-sizes="<?php echo esc_attr(
+                                            $lightbox_image_breakpoints,
+                                        ); ?>"
+                                        data-srcset="<?php echo esc_attr(
+                                            $lightbox_image_sizes,
+                                        ); ?>"
+                                        data-caption="<?php echo esc_attr(
+                                            $image['alt'],
+                                        ); ?>"
+                                        title="<?php echo esc_attr(
+                                            $image['alt'],
+                                        ); ?>"
+                                        aria-label="<?php echo sprintf(
+                                            esc_attr_x(
+                                                'Bild %s vergrößert anzeigen',
+                                                'oo_theme',
+                                            ),
+                                            $image['alt'],
+                                        ); ?>">
+
+                                            <?php oo_get_template(
+                                                'components',
+                                                '',
+                                                'component-image',
+                                                [
+                                                    'image' => $image,
+                                                    'loading' => 'eager',
+                                                    'picture_class' =>
+                                                        'c-property-details__gallery-picture o-picture',
+                                                    'image_class' =>
+                                                        'c-property-details__gallery-image o-image',
+                                                    'dimensions' => [
+                                                        '575' => [
+                                                            'w' =>
+                                                                $image_widths[
+                                                                    'xs'
+                                                                ],
+                                                            'h' => round(
+                                                                ($image_widths[
+                                                                    'xs'
+                                                                ] *
+                                                                    2) /
+                                                                    3,
+                                                            ),
+                                                        ],
+                                                        '1600' => [
+                                                            'w' =>
+                                                                $image_widths[
+                                                                    'xxxl'
+                                                                ],
+                                                            'h' =>
+                                                                $image_widths[
+                                                                    'xxxl'
+                                                                ],
+                                                        ],
+                                                        '1400' => [
+                                                            'w' =>
+                                                                $image_widths[
+                                                                    'xxl'
+                                                                ],
+                                                            'h' =>
+                                                                $image_widths[
+                                                                    'xxl'
+                                                                ],
+                                                        ],
+                                                        '1200' => [
+                                                            'w' =>
+                                                                $image_widths[
+                                                                    'xl'
+                                                                ],
+                                                            'h' =>
+                                                                $image_widths[
+                                                                    'xl'
+                                                                ],
+                                                        ],
+                                                        '992' => [
+                                                            'w' =>
+                                                                $image_widths[
+                                                                    'lg'
+                                                                ],
+                                                            'h' =>
+                                                                $image_widths[
+                                                                    'lg'
+                                                                ],
+                                                        ],
+                                                        '768' => [
+                                                            'w' =>
+                                                                $image_widths[
+                                                                    'md'
+                                                                ],
+                                                            'h' => round(
+                                                                ($image_widths[
+                                                                    'md'
+                                                                ] *
+                                                                    2) /
+                                                                    3,
+                                                            ),
+                                                        ],
+                                                        '576' => [
+                                                            'w' =>
+                                                                $image_widths[
+                                                                    'sm'
+                                                                ],
+                                                            'h' => round(
+                                                                ($image_widths[
+                                                                    'sm'
+                                                                ] *
+                                                                    2) /
+                                                                    3,
+                                                            ),
+                                                        ],
+                                                    ],
+                                                ],
                                             ); ?>
-                                        </div>
+                                            <div class="c-slider__fullscreen c-icon-button splide__fullscreen">
+                                                <span class="u-screen-reader-only"><?php esc_html_e(
+                                                    'Vergrößern',
+                                                    'oo_theme',
+                                                ); ?></span>
+                                                <?php echo oo_get_icon(
+                                                    'resize',
+                                                    true,
+                                                    [
+                                                        'class' =>
+                                                            'c-icon-button__icon',
+                                                    ],
+                                                ); ?>
+                                            </div>
+                                        </a>
+                                    <?php
+                                    } ?>
+                                </div>
+                            </div>
+                            <div class="c-slider__slider-container o-container">
+                                <div class="c-slider__navigation splide__navigation">
+                                    <div class="c-slider__arrows splide__arrows">
+                                        <button class="c-slider__arrow c-slider__arrow--prev splide__arrow splide__arrow--prev">
+                                            <span class="u-screen-reader-only"><?php esc_html_e(
+                                                'Vorheriges',
+                                                'oo_theme',
+                                            ); ?></span>
+                                            <?php echo oo_get_icon(
+                                                'chevron-left',
+                                                true,
+                                                [
+                                                    'class' =>
+                                                        'c-slider__icon splide__icon',
+                                                ],
+                                            ); ?>
+                                        </button>
+                                        <button class="c-slider__arrow c-slider__arrow--next splide__arrow splide__arrow--next">
+                                            <span class="u-screen-reader-only"><?php esc_html_e(
+                                                'Nächstes',
+                                                'oo_theme',
+                                            ); ?></span>
+                                            <?php echo oo_get_icon(
+                                                'chevron-right',
+                                                true,
+                                                [
+                                                    'class' =>
+                                                        'c-slider__icon splide__icon',
+                                                ],
+                                            ); ?>
+                                        </button>
+                                    </div>
+
+                                    <div class="c-slider__pagination-wrapper">
+                                        <ul class="c-slider__pagination splide__pagination"></ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    <?php
+                    </div>
+                <?php
+            }
+        }
+        $main_gallery_content = ob_get_clean();
+
+        if (!empty($main_gallery_content)) {
+            echo '<div class="c-property-details__gallery-wrapper">';
+            echo $main_gallery_content;
+            echo '</div>';
+        }
+        ?>
+
+        <div class="c-property-details__fields-wrapper">
+            <div class="c-property-details__container o-container">
+
+                <?php $filtered_features = array_filter(
+                    $property_features,
+                    function ($category) {
+                        return !empty($category);
+                    },
+                ); ?>
+                
+                <div class="c-property-details__fields-row o-row">
+                    <div class="c-property-details__fields-content u-offset-lg-1 o-col-12 o-col-lg-10">
+
+                        <?php echo '<h2 class="c-property-details__headline o-headline --h2">' .
+                            esc_html__('Immobiliendetails', 'oo_theme') .
+                            '</h2>'; ?>
+                        <div class="c-property-details__fields-main o-row">
+
+                            <?php foreach (
+                                $filtered_features
+                                as $group_name => $features
+                            ): ?>
+                                <?php
+                                $boolean_features = [];
+                                $regular_features = [];
+
+                                foreach ($features as $feature) {
+                                    if ($feature['type'] === 'boolean') {
+                                        $boolean_features[] = $feature;
+                                    } else {
+                                        $regular_features[] = $feature;
+                                    }
+                                }
+
+                                $true_boolean_features = array_filter(
+                                    $boolean_features,
+                                    function ($feature) {
+                                        return $feature['value'] === 'Ja';
+                                    },
+                                );
+
+                                if (
+                                    empty($true_boolean_features) &&
+                                    empty($regular_features)
+                                ) {
+                                    continue;
+                                }
+                                ?>
+
+
+                                <div class="c-property-details__fields-group o-col-md-6">
+                                    <span class="c-property-details__headline">
+                                        <?php echo esc_html($group_name); ?>
+                                    </span>
+
+                                    <?php if (
+                                        !empty($true_boolean_features)
+                                    ): ?>
+                                        <div class="c-property-details__features c-item-features">
+                                            <?php foreach (
+                                                $true_boolean_features
+                                                as $feature
+                                            ): ?>
+                                                <span class="c-item-features__item"><?php echo esc_html(
+                                                    $feature['label'],
+                                                ); ?></span>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <?php if (!empty($regular_features)): ?>
+                                        <div class="c-property-details__fields c-item-fields">
+                                            <?php foreach (
+                                                $regular_features
+                                                as $feature
+                                            ): ?>
+                                                <?php if (
+                                                    ($raw_values->getValueRaw(
+                                                        $property_id,
+                                                    )['elements'][
+                                                        'provisionsfrei'
+                                                    ] ??
+                                                        null) ===
+                                                        '1' &&
+                                                    in_array(
+                                                        $field,
+                                                        [
+                                                            'innen_courtage',
+                                                            'aussen_courtage',
+                                                        ],
+                                                        true,
+                                                    )
+                                                ) {
+                                                    continue;
+                                                } ?>
+                                                <dl class="c-item-fields__item">
+                                                    <dd class="c-item-fields__value">
+                                                        <?php echo is_array(
+                                                            $feature['value'],
+                                                        )
+                                                            ? esc_html(
+                                                                implode(
+                                                                    ', ',
+                                                                    $feature[
+                                                                        'value'
+                                                                    ],
+                                                                ),
+                                                            )
+                                                            : esc_html(
+                                                                $feature[
+                                                                    'value'
+                                                                ],
+                                                            ); ?>
+                                                    </dd>
+                                                    <dt class="c-item-fields__label"><?php echo esc_html(
+                                                        $feature['label'],
+                                                    ); ?></dt>
+                                                </dl>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="c-property-details__buttons-wrapper">
+            <div class="c-property-details__container o-container">
+                <div class="c-property-details__row o-row">
+                    <div class="c-property-details__main u-offset-lg-1 o-col-12 o-col-lg-10">
+
+                        <div class="c-property-details__buttons-content c-buttons">
+                            <?php
+                            if (!empty($shortcode_form)) { ?>
+                                <a href="#request" class="c-property-details__request c-button"><?php esc_html_e(
+                                    'Sofortanfrage',
+                                    'oo_theme',
+                                ); ?></a>
+                            <?php }
+                            if ($pEstates->getDocument() != '') { ?>
+                                <a class="c-property-details__expose-button c-button --has-icon --ghost" href="<?php echo $pEstates->getDocument(); ?>">
+                                    <span class="c-button__text">
+                                        <?php esc_html_e(
+                                            'Details als PDF',
+                                            'oo_theme',
+                                        ); ?>
+                                    </span>
+                                    <span class="c-button__icon"><?php oo_get_icon(
+                                        'download',
+                                    ); ?></span>
+                                </a>
+                            <?php }
+                            ?>
+                        
+                            <?php if ($is_share_available) { ?>
+                            <div class="c-property-details__share">
+                                <?php
+                                global $wp;
+
+                                $property_detail_page =
+                                    get_field('general', 'option')[
+                                        'property_detail'
+                                    ] ?? [];
+                                $property_share_button =
+                                    filter_var(
+                                        $property_detail_page[
+                                            'property_share_button'
+                                        ],
+                                        FILTER_VALIDATE_BOOLEAN,
+                                    ) ?? false;
+
+                                if ($property_share_button) {
+                                    oo_get_template(
+                                        'components',
+                                        '',
+                                        'component-share',
+                                        [
+                                            'button_class' =>
+                                                'c-property-details__share-button c-button --ghost',
+                                            'button_icon' => 'share',
+                                            'popup_id' =>
+                                                'property-detail-share',
+                                            'share_link' => $property_link,
+                                        ],
+                                    );
+                                }
+                                ?>
+                            </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <?php ob_start(); ?>
+        <div class="c-property-details__container o-container">
+            <div class="c-property-details__row o-row">
+                <?php require_once 'property-contact.php'; ?>
+            </div>
+        </div>
+        <?php
+        $contacts_content = ob_get_clean();
+        if (!empty(trim(strip_tags($contacts_content)))) {
+            echo '<div class="c-property-details__contacts-wrapper">';
+            echo $contacts_content;
+            echo '</div>';
+        }
+        ?>
+    
+        <?php if (!empty($pEstates->getEstateUnits())) { ?>
+            <?php echo $pEstates->getEstateUnits(); ?>
+        <?php } ?>
+
+        <?php ob_start(); ?>
+            <div class="c-property-details__container o-container">
+
+            <?php // Ogulo
+
+    if (!empty($property_ogulo_embeds) || !empty($property_ogulo_links)) {
+                echo '<div class="c-property-details__row o-row">';
+                echo '<div class="c-property-details__media u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">';
+                echo '<h2 class="c-property-details__headline o-headline --h2">' .
+                    esc_html__('360° Rundgänge', 'oo_theme') .
+                    '</h2>';
+
+                if (
+                    !empty($property_ogulo_embeds) &&
+                    is_array($property_ogulo_embeds)
+                ) {
+                    echo '<div class="c-property-details__embeds">';
+
+                    foreach ($property_ogulo_embeds as $property_ogulo_embed) {
+                        echo '<div class="c-property-details__iframe --is-' .
+                            oo_get_service_domain_without_tld(
+                                $property_ogulo_embed['url'],
+                            ) .
+                            '">';
+                        echo $property_ogulo_embed['player'];
+                        echo '</div>';
+                    }
+                    echo '</div>';
+                }
+
+                if (
+                    !empty($property_ogulo_links) &&
+                    is_array($property_ogulo_links)
+                ) {
+                    echo '<div class="c-property-details__buttons c-buttons">';
+                    foreach ($property_ogulo_links as $property_ogulo_link) {
+                        // Button Text
+                        $button_title = !empty($property_ogulo_link['title'])
+                            ? esc_attr($property_ogulo_link['title'])
+                            : esc_attr__('360°-Rundgang starten', 'oo_theme');
+
+                        echo '<a class="c-button" href="' .
+                            esc_attr($property_ogulo_link['url']) .
+                            '" target="_blank" rel="noopener noreferrer" aria-label="' .
+                            esc_attr(
+                                sprintf(
+                                    __(
+                                        '360°-Rundgang von %s starten (Öffnet in neuem Tab)',
+                                        'oo_theme',
+                                    ),
+                                    $button_title,
+                                ),
+                            ) .
+                            '">' .
+                            $button_title .
+                            '</a>';
+                    }
+                    echo '</div>';
+                }
+
+                echo '</div>';
+                echo '</div>';
+            } ?>
+
+
+            <?php
+            // Movie
+            if (
+                !empty($property_movie_players) ||
+                !empty($property_movie_links)
+            ) {
+                echo '<div class="c-property-details__row o-row">';
+                echo '<div class="c-property-details__media u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">';
+                echo '<h2 class="c-property-details__headline o-headline --h2">' .
+                    esc_html__('Videos', 'oo_theme') .
+                    '</h2>';
+
+                // GET MOVIE PLAYERS
+                if (
+                    !empty($property_movie_players) &&
+                    is_array($property_movie_players)
+                ) {
+                    echo '<div class="c-property-details__embeds">';
+
+                    foreach (
+                        $property_movie_players
+                        as $property_movie_player
+                    ) {
+                        echo '<div class="c-property-details__video --is-' .
+                            oo_get_service_domain_without_tld(
+                                $property_movie_player['url'],
+                            ) .
+                            '">';
+                        if (
+                            isset($property_movie_player['player']) &&
+                            strpos($property_movie_player['player'], '<a') !==
+                                false
+                        ) {
+                            echo '<iframe class="c-property-details__iframe" src="' .
+                                $property_movie_player['url'] .
+                                '" title="' .
+                                esc_attr__(
+                                    'Externer Video Inhalt',
+                                    'oo_theme',
+                                ) .
+                                '"></iframe>';
+                        } else {
+                            echo $property_movie_player['player'];
+                        }
+                        echo '</div>';
+                    }
+                    echo '</div>';
+                }
+
+                // GET MOVIE LINKS
+                if (
+                    !empty($property_movie_links) &&
+                    is_array($property_movie_links)
+                ) {
+                    echo '<div class="c-property-details__buttons c-buttons">';
+                    foreach ($property_movie_links as $property_movie_link) {
+                        // Button Text
+                        $button_title = !empty($property_movie_link['title'])
+                            ? esc_attr($property_movie_link['title'])
+                            : esc_html__('Video starten', 'oo_theme');
+
+                        echo '<a class="c-button" href="' .
+                            esc_attr($property_movie_link['url']) .
+                            '" rel="noopener noreferrer" aria-label="' .
+                            esc_attr(
+                                sprintf(
+                                    __(
+                                        'Video von %s starten (Öffnet in neuem Tab)',
+                                        'oo_theme',
+                                    ),
+                                    $button_title,
+                                ),
+                            ) .
+                            '" target="_blank">' .
+                            $button_title .
+                            '</a>';
+                    }
+                    echo '</div>';
+                }
+
+                echo '</div>';
+                echo '</div>';
+            }
+
+            // Links
+            if (!empty($property_links) || !empty($property_link_embeds)) {
+                echo '<div class="c-property-details__row o-row">';
+                echo '<div class="c-property-details__media u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">';
+                echo '<h2 class="c-property-details__headline o-headline --h2">' .
+                    esc_html__('Links', 'oo_theme') .
+                    '</h2>';
+
+                if (
+                    !empty($property_link_embeds) &&
+                    is_array($property_link_embeds)
+                ) {
+                    echo '<div class="c-property-details__embeds">';
+
+                    foreach ($property_link_embeds as $property_link_embed) {
+                        echo '<div class="c-property-details__iframe --is-' .
+                            oo_get_service_domain_without_tld(
+                                $property_link_embed['url'],
+                            ) .
+                            '">';
+                        echo $property_link_embed['player'];
+                        echo '</div>';
                     }
 
-                    if (!empty($property_free_texts)) {
+                    echo '</div>';
+                }
+
+                if (!empty($property_links) && is_array($property_links)) {
+                    echo '<div class="c-property-details__buttons c-buttons">';
+                    foreach ($property_links as $property_link) {
+                        // Button Text
+                        $button_title = !empty($property_link['title'])
+                            ? esc_attr($property_link['title'])
+                            : esc_attr__('Link öffnen', 'oo_theme');
+
+                        echo '<a class="c-button" href="' .
+                            esc_attr($property_link['url']) .
+                            '" rel="noopener noreferrer" aria-label="' .
+                            esc_attr(
+                                sprintf(
+                                    __(
+                                        'Link von %s öffnen (Öffnet in neuem Tab)',
+                                        'oo_theme',
+                                    ),
+                                    $button_title,
+                                ),
+                            ) .
+                            '" target="_blank">' .
+                            $button_title .
+                            '</a>';
+                    }
+                    echo '</div>';
+                }
+
+                echo '</div>';
+                echo '</div>';
+            }
+            ?>
+
+            <?php // Objects
+
+    if (!empty($property_object_embeds) || !empty($property_object_links)) {
+                echo '<div class="c-property-details__row o-row">';
+                echo '<div class="c-property-details__media u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">';
+                echo '<h2 class="c-property-details__headline o-headline --h2">' .
+                    esc_html__('Objekte', 'oo_theme') .
+                    '</h2>';
+
+                if (
+                    !empty($property_object_embeds) &&
+                    is_array($property_object_embeds)
+                ) {
+                    echo '<div class="c-property-details__embeds">';
+
+                    foreach (
+                        $property_object_embeds
+                        as $property_object_embed
+                    ) {
+                        echo '<div class="c-property-details__iframe --is-' .
+                            oo_get_service_domain_without_tld(
+                                $property_object_embed['url'],
+                            ) .
+                            '">';
+                        echo $property_object_embed['player'];
+                        echo '</div>';
+                    }
+
+                    echo '</div>';
+                }
+
+                if (
+                    !empty($property_object_links) &&
+                    is_array($property_object_links)
+                ) {
+                    echo '<div class="c-property-details__buttons c-buttons">';
+                    foreach ($property_object_links as $property_object_link) {
+                        // Button Text
+                        $button_title = !empty($property_object_link['title'])
+                            ? esc_attr($property_object_link['title'])
+                            : esc_attr__('Objekt-Link öffnen', 'oo_theme');
+
+                        echo '<a class="c-button" href="' .
+                            esc_attr($property_object_link['url']) .
+                            '" rel="noopener noreferrer" aria-label="' .
+                            esc_attr(
+                                sprintf(
+                                    __(
+                                        'Objekt-Link von %s öffnen (Öffnet in neuem Tab)',
+                                        'oo_theme',
+                                    ),
+                                    $button_title,
+                                ),
+                            ) .
+                            '" target="_blank" title="' .
+                            $button_title .
+                            '">' .
+                            $button_title .
+                            '</a>';
+                    }
+                    echo '</div>';
+                }
+
+                echo '</div>';
+                echo '</div>';
+            } ?>
+            </div>
+        <?php
+        $media_content = ob_get_clean();
+        if (!empty(trim(strip_tags($media_content)))) {
+            echo '<div class="c-property-details__media-wrapper">';
+            echo $media_content;
+            echo '</div>';
+        }
+        ?>
+        
+        <?php ob_start(); ?>
+            <div class="c-property-details__texts o-container">
+                <div class="c-property-details__texts-row o-row">
+                <?php if (!empty($property_free_texts)) {
+                    foreach ($property_free_texts as $field) {
+                        if (
+                            $field['field'] === 'objektbeschreibung' &&
+                            $field['has_value']
+                        ) {
+
+                            $content = $field['value'];
+                            $field_toggle_id =
+                                'more-property-features-' . $field['field'];
+                            ?>
+                            <div class="c-property-details__text u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">
+                                <h2 class="c-property-details__headline o-headline --h2">
+                                    <?php esc_html_e(
+                                        $field['label'],
+                                        'oo_theme',
+                                    ); ?>
+                                </h2>
+                                
+                                <div class="c-property-details__text-content" id="<?php echo esc_attr(
+                                    $field_toggle_id,
+                                ); ?>">
+                                    <?php echo nl2br(
+                                        $show_secret_sale_block
+                                            ? '...'
+                                            : esc_html($content),
+                                    ); ?>
+                                </div>
+
+                                <button class="c-property-details__more c-read-more"
+                                        data-open-text="<?php esc_html_e(
+                                            'Mehr anzeigen',
+                                            'oo_theme',
+                                        ); ?>"
+                                        data-close-text="<?php esc_html_e(
+                                            'Weniger anzeigen',
+                                            'oo_theme',
+                                        ); ?>"
+                                        aria-expanded="false" 
+                                        aria-controls="<?php echo esc_attr(
+                                            $field_toggle_id,
+                                        ); ?>"
+                                        style="display: none;"> <?php echo esc_html_e(
+                                            'Mehr anzeigen',
+                                            'oo_theme',
+                                        ); ?>
+                                </button>
+
+                                <?php if (
+                                    $field['field'] === 'lage' &&
+                                    !empty($map)
+                                ): ?>
+                                    <div class="c-property-details__map">
+                                        <?php echo $map; ?>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        <?php
+                        }
+                    }
+                } ?>
+                </div>
+            </div>
+        <?php
+        $text_group_one = ob_get_clean();
+
+        if (!empty(trim(strip_tags($text_group_one)))) {
+            echo '<div class="c-property-details__texts-wrapper">';
+            echo $text_group_one;
+            echo '</div>';
+        }
+        ?>
+
+        <?php
+        ob_start();
+
+        if ($photos && !$show_secret_sale_block) {
+            $floorplan_ids = [];
+            foreach ($sorted_pictures as $text_group_two) {
+                $check_values = $pEstates->getEstatePictureValues(
+                    $text_group_two,
+                );
+                if ($check_values['type'] === 'Grundriss') {
+                    $floorplan_ids[] = $text_group_two;
+                }
+            }
+
+            $floorplan_count = count($floorplan_ids);
+
+            if ($floorplan_count > 0) {
+
+                wp_enqueue_script('oo-glightbox-script');
+                wp_enqueue_style('oo-glightbox-style');
+                ?>
+                <div class="c-property-details__container o-container">
+                    <div class="c-property-details__row o-row">
+                        <div class="u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">
+                            <h2 class="c-property-details__headline o-headline --h2">
+                                <?php esc_html_e('Grundrisse', 'oo_theme'); ?>
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+                <?php if ($floorplan_count === 1) {
+
+                    $text_group_two = $floorplan_ids[0];
+                    $picture_values = $pEstates->getEstatePictureValues(
+                        $text_group_two,
+                    );
+
+                    $image_alt = $picture_values['title']
+                        ? esc_html($picture_values['title'])
+                        : esc_html__('Grundriss', 'oo_theme');
+
+                    $image_widths = [
+                        'xs' => 543,
+                        'sm' => 512,
+                        'md' => 694,
+                        'lg' => 608,
+                        'xl' => 736,
+                        'xxl' => 864,
+                        'xxxl' => 952,
+                    ];
+
+                    $image = [
+                        'url' => $pEstates->getEstatePictureUrl(
+                            $text_group_two,
+                        ),
+                        'alt' => $image_alt,
+                    ];
+
+                    $lightbox_url =
+                        'https://acnaayzuen.cloudimg.io/v7/' .
+                        $image['url'] .
+                        '?force_format=webp&org_if_sml=1';
+                    $lightbox_image_size_list = [
+                        [
+                            'id' => 'mobile',
+                            'breakpoint' => 767,
+                            'image_size' => 767,
+                        ],
+                        [
+                            'id' => 'tablet',
+                            'breakpoint' => 768,
+                            'image_size' => 1200,
+                        ],
+                        [
+                            'id' => 'desktop',
+                            'breakpoint' => 1200,
+                            'image_size' => 1920,
+                        ],
+                    ];
+                    $lightbox_image_breakpoints = '';
+                    $lightbox_image_sizes = '';
+                    foreach ($lightbox_image_size_list as $key => $size) {
+                        $is_last =
+                            $key === array_key_last($lightbox_image_size_list);
+                        $separator = $is_last ? '' : ',';
+                        if ($key === 0) {
+                            $lightbox_image_breakpoints .= "(max-width: {$size['breakpoint']}px) {$size['image_size']}px,";
+                            $lightbox_image_sizes .= "{$lightbox_url}&w={$size['image_size']} {$size['breakpoint']}w,";
+                            continue;
+                        }
+                        $lightbox_image_breakpoints .= "(min-width:{$size['breakpoint']}px) {$size['image_size']}px{$separator}";
+                        $lightbox_image_sizes .= "{$lightbox_url}&w={$size['image_size']} {$size['breakpoint']}w{$separator}";
+                    }
+                    ?>
+                    <div class="c-property-details__container o-container --single-floorplan">
+                         <div class="c-property-details__gallery --is-layout-slider --single-floorplan u-text-center">
+                            <a class="c-property-details__gallery-link glightbox"
+                               data-gallery="gallery-floorplan"
+                               href="<?php echo esc_url($lightbox_url) .
+                                   '&w=' .
+                                   end($lightbox_image_size_list)[
+                                       'image_size'
+                                   ]; ?>"
+                               data-sizes="<?php echo esc_attr(
+                                   $lightbox_image_breakpoints,
+                               ); ?>"
+                               data-srcset="<?php echo esc_attr(
+                                   $lightbox_image_sizes,
+                               ); ?>"
+                               data-caption="<?php echo esc_attr(
+                                   $image['alt'],
+                               ); ?>"
+                               title="<?php echo esc_attr($image['alt']); ?>"
+                            >
+                                <?php oo_get_template(
+                                    'components',
+                                    '',
+                                    'component-image',
+                                    [
+                                        'image' => $image,
+                                        'loading' => 'lazy',
+                                        'picture_class' =>
+                                            'c-property-details__gallery-picture o-picture',
+                                        'image_class' =>
+                                            'c-property-details__gallery-image o-image',
+                                        'dimensions' => [
+                                            '575' => [
+                                                'w' => $image_widths['xs'],
+                                                'h' => round(
+                                                    ($image_widths['xs'] * 2) /
+                                                        3,
+                                                ),
+                                            ],
+                                            '1600' => [
+                                                'w' => $image_widths['xxxl'],
+                                                'h' => $image_widths['xxxl'],
+                                            ],
+                                            '1400' => [
+                                                'w' => $image_widths['xxl'],
+                                                'h' => $image_widths['xxl'],
+                                            ],
+                                            '1200' => [
+                                                'w' => $image_widths['xl'],
+                                                'h' => $image_widths['xl'],
+                                            ],
+                                            '992' => [
+                                                'w' => $image_widths['lg'],
+                                                'h' => $image_widths['lg'],
+                                            ],
+                                            '768' => [
+                                                'w' => $image_widths['md'],
+                                                'h' => round(
+                                                    ($image_widths['md'] * 2) /
+                                                        3,
+                                                ),
+                                            ],
+                                            '576' => [
+                                                'w' => $image_widths['sm'],
+                                                'h' => round(
+                                                    ($image_widths['sm'] * 2) /
+                                                        3,
+                                                ),
+                                            ],
+                                        ],
+                                    ],
+                                ); ?>
+                                <div class="c-slider__fullscreen c-icon-button">
+                                    <span class="u-screen-reader-only"><?php esc_html_e(
+                                        'Vergrößern',
+                                        'oo_theme',
+                                    ); ?></span>
+                                    <?php echo oo_get_icon('resize', true, [
+                                        'class' => 'c-icon-button__icon',
+                                    ]); ?>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <?php
+                } else {
+                    $splide_config = '{
+                        "type":"loop",
+                        "autoWidth":true,
+                        "drag":true,
+                        "focus":"center",
+                        "gap":16,
+                        "arrows":true,
+                        "snap":true,
+                        "lazyLoad":false,
+                        "pagination":true,
+                        "updateOnMove":true,
+                        "classes":{"page":"c-slider__page splide__pagination__page"},
+                        "breakpoints": {
+                            "576": { "gap": 8 }
+                        }
+                    }'; ?>
+                    <div class="c-property-details__container o-container-fluid">
+                        <div 
+                            class="c-property-details__gallery c-slider splide --auto-height --is-layout-slider"
+                            data-splide='<?php echo $splide_config; ?>'
+                        >
+                            <div class="c-slider__track splide__track">
+                                <div class="c-slider__list splide__list">
+                                    <?php foreach (
+                                        $floorplan_ids
+                                        as $text_group_two
+                                    ) {
+
+                                        $picture_values = $pEstates->getEstatePictureValues(
+                                            $text_group_two,
+                                        );
+                                        $image_alt = $picture_values['title']
+                                            ? esc_html($picture_values['title'])
+                                            : esc_html__(
+                                                'Grundriss',
+                                                'oo_theme',
+                                            );
+
+                                        $image_widths = [
+                                            'xs' => 543,
+                                            'sm' => 512,
+                                            'md' => 694,
+                                            'lg' => 608,
+                                            'xl' => 736,
+                                            'xxl' => 864,
+                                            'xxxl' => 952,
+                                        ];
+
+                                        $image = [
+                                            'url' => $pEstates->getEstatePictureUrl(
+                                                $text_group_two,
+                                            ),
+                                            'alt' => $image_alt,
+                                        ];
+
+                                        $lightbox_url =
+                                            'https://acnaayzuen.cloudimg.io/v7/' .
+                                            $image['url'] .
+                                            '?force_format=webp&org_if_sml=1';
+
+                                        $lightbox_image_size_list = [
+                                            [
+                                                'id' => 'mobile',
+                                                'breakpoint' => 767,
+                                                'image_size' => 767,
+                                            ],
+                                            [
+                                                'id' => 'tablet',
+                                                'breakpoint' => 768,
+                                                'image_size' => 1200,
+                                            ],
+                                            [
+                                                'id' => 'desktop',
+                                                'breakpoint' => 1200,
+                                                'image_size' => 1920,
+                                            ],
+                                        ];
+
+                                        $lightbox_image_breakpoints = '';
+                                        $lightbox_image_sizes = '';
+
+                                        foreach (
+                                            $lightbox_image_size_list
+                                            as $key => $size
+                                        ) {
+                                            $is_first = $key === 0;
+                                            $is_last =
+                                                $key ===
+                                                array_key_last(
+                                                    $lightbox_image_size_list,
+                                                );
+                                            $separator = $is_last ? '' : ',';
+
+                                            if ($is_first) {
+                                                $lightbox_image_breakpoints .= "(max-width: {$size['breakpoint']}px) {$size['image_size']}px,";
+                                                $lightbox_image_sizes .= "{$lightbox_url}&w={$size['image_size']} {$size['breakpoint']}w,";
+                                                continue;
+                                            }
+
+                                            $lightbox_image_breakpoints .= "(min-width:{$size['breakpoint']}px) {$size['image_size']}px{$separator}";
+                                            $lightbox_image_sizes .= "{$lightbox_url}&w={$size['image_size']} {$size['breakpoint']}w{$separator}";
+                                        }
+                                        ?>
+                                        
+                                        <a class="c-property-details__gallery-link glightbox c-slider__slide splide__slide"
+                                        data-gallery="gallery-floorplan"
+                                        href="<?php echo esc_url(
+                                            $lightbox_url,
+                                        ) .
+                                            '&w=' .
+                                            end($lightbox_image_size_list)[
+                                                'image_size'
+                                            ]; ?>"
+                                        data-sizes="<?php echo esc_attr(
+                                            $lightbox_image_breakpoints,
+                                        ); ?>"
+                                        data-srcset="<?php echo esc_attr(
+                                            $lightbox_image_sizes,
+                                        ); ?>"
+                                        data-caption="<?php echo esc_attr(
+                                            $image['alt'],
+                                        ); ?>"
+                                        title="<?php echo esc_attr(
+                                            $image['alt'],
+                                        ); ?>"
+                                        aria-label="<?php echo sprintf(
+                                            esc_attr_x(
+                                                'Bild %s vergrößert anzeigen',
+                                                'oo_theme',
+                                            ),
+                                            $image['alt'],
+                                        ); ?>">
+
+                                            <?php oo_get_template(
+                                                'components',
+                                                '',
+                                                'component-image',
+                                                [
+                                                    'image' => $image,
+                                                    'loading' => 'eager',
+                                                    'picture_class' =>
+                                                        'c-property-details__gallery-picture o-picture',
+                                                    'image_class' =>
+                                                        'c-property-details__gallery-image o-image',
+                                                    'dimensions' => [
+                                                        '575' => [
+                                                            'w' =>
+                                                                $image_widths[
+                                                                    'xs'
+                                                                ],
+                                                            'h' => round(
+                                                                ($image_widths[
+                                                                    'xs'
+                                                                ] *
+                                                                    2) /
+                                                                    3,
+                                                            ),
+                                                        ],
+                                                        '1600' => [
+                                                            'w' =>
+                                                                $image_widths[
+                                                                    'xxxl'
+                                                                ],
+                                                            'h' =>
+                                                                $image_widths[
+                                                                    'xxxl'
+                                                                ],
+                                                        ],
+                                                        '1400' => [
+                                                            'w' =>
+                                                                $image_widths[
+                                                                    'xxl'
+                                                                ],
+                                                            'h' =>
+                                                                $image_widths[
+                                                                    'xxl'
+                                                                ],
+                                                        ],
+                                                        '1200' => [
+                                                            'w' =>
+                                                                $image_widths[
+                                                                    'xl'
+                                                                ],
+                                                            'h' =>
+                                                                $image_widths[
+                                                                    'xl'
+                                                                ],
+                                                        ],
+                                                        '992' => [
+                                                            'w' =>
+                                                                $image_widths[
+                                                                    'lg'
+                                                                ],
+                                                            'h' =>
+                                                                $image_widths[
+                                                                    'lg'
+                                                                ],
+                                                        ],
+                                                        '768' => [
+                                                            'w' =>
+                                                                $image_widths[
+                                                                    'md'
+                                                                ],
+                                                            'h' => round(
+                                                                ($image_widths[
+                                                                    'md'
+                                                                ] *
+                                                                    2) /
+                                                                    3,
+                                                            ),
+                                                        ],
+                                                        '576' => [
+                                                            'w' =>
+                                                                $image_widths[
+                                                                    'sm'
+                                                                ],
+                                                            'h' => round(
+                                                                ($image_widths[
+                                                                    'sm'
+                                                                ] *
+                                                                    2) /
+                                                                    3,
+                                                            ),
+                                                        ],
+                                                    ],
+                                                ],
+                                            ); ?>
+                                            <div class="c-slider__fullscreen c-icon-button splide__fullscreen">
+                                                <span class="u-screen-reader-only"><?php esc_html_e(
+                                                    'Vergrößern',
+                                                    'oo_theme',
+                                                ); ?></span>
+                                                <?php echo oo_get_icon(
+                                                    'resize',
+                                                    true,
+                                                    [
+                                                        'class' =>
+                                                            'c-icon-button__icon',
+                                                    ],
+                                                ); ?>
+                                            </div>
+                                        </a>
+                                    <?php
+                                    } ?>
+                                </div>
+                            </div>
+
+                            <div class="c-slider__slider-container o-container">
+                                <div class="c-slider__navigation splide__navigation">
+                                    <div class="c-slider__arrows splide__arrows">
+                                        <button class="c-slider__arrow c-slider__arrow--prev splide__arrow splide__arrow--prev">
+                                            <span class="u-screen-reader-only"><?php esc_html_e(
+                                                'Vorheriges',
+                                                'oo_theme',
+                                            ); ?></span>
+                                            <?php echo oo_get_icon(
+                                                'chevron-left',
+                                                true,
+                                                [
+                                                    'class' =>
+                                                        'c-slider__icon splide__icon',
+                                                ],
+                                            ); ?>
+                                        </button>
+                                        <button class="c-slider__arrow c-slider__arrow--next splide__arrow splide__arrow--next">
+                                            <span class="u-screen-reader-only"><?php esc_html_e(
+                                                'Nächstes',
+                                                'oo_theme',
+                                            ); ?></span>
+                                            <?php echo oo_get_icon(
+                                                'chevron-right',
+                                                true,
+                                                [
+                                                    'class' =>
+                                                        'c-slider__icon splide__icon',
+                                                ],
+                                            ); ?>
+                                        </button>
+                                    </div>
+
+                                    <div class="c-slider__pagination-wrapper">
+                                        <ul class="c-slider__pagination splide__pagination"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php
+                }
+            }
+        }
+        $floorplan_content = ob_get_clean();
+
+        if (!empty($floorplan_content)) {
+            echo '<div class="c-property-details__gallery-wrapper">';
+            echo $floorplan_content;
+            echo '</div>';
+        }
+        ?>
+        
+        <?php ob_start(); ?>
+            <div class="c-property-details__texts o-container">
+                <div class="c-property-details__texts-row o-row">
+                    <?php if (!empty($property_free_texts)) {
                         foreach ($property_free_texts as $field) {
-                            if ($field['has_value']) {
+                            if (
+                                $field['field'] !== 'objektbeschreibung' &&
+                                $field['field'] !== 'sonstige_angaben' &&
+                                $field['has_value']
+                            ) {
 
                                 $content = $field['value'];
                                 $field_toggle_id =
-                                    'more-property-features' .
-                                    '-' .
-                                    $field['field'];
+                                    'property-features-' . $field['field'];
                                 ?>
-                                <div class="c-property-details__text-wrapper">
+                                <div class="c-property-details__text u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">
                                     <h2 class="c-property-details__headline o-headline --h2">
                                         <?php esc_html_e(
                                             $field['label'],
                                             'oo_theme',
                                         ); ?>
                                     </h2>
-                                    <div class="c-property-details__text">
-                                        <div class="c-property-details__text-content --shorten" id="<?php echo esc_attr(
-                                            $field_toggle_id,
-                                        ); ?>">
-                                            <?php echo nl2br(
-                                                $show_secret_sale_block
-                                                    ? '...'
-                                                    : esc_html($content),
-                                            ); ?>
-                                        </div>
-                                        <button class="c-property-details__more c-read-more"
-                                                data-open-text="<?php esc_html_e(
-                                                    'Mehr anzeigen',
-                                                    'oo_theme',
-                                                ); ?>"
-                                                data-close-text="<?php esc_html_e(
-                                                    'Weniger anzeigen',
-                                                    'oo_theme',
-                                                ); ?>"
-                                                aria-expanded="false" aria-controls="<?php echo $field_toggle_id; ?>">
-                                            <?php echo esc_html_e(
+                                    
+                                    <div class="c-property-details__text-content" id="<?php echo esc_attr(
+                                        $field_toggle_id,
+                                    ); ?>">
+                                        <?php echo nl2br(
+                                            $show_secret_sale_block
+                                                ? '...'
+                                                : esc_html($content),
+                                        ); ?>
+                                    </div>
+
+                                    <button class="c-property-details__more c-read-more"
+                                            data-open-text="<?php esc_html_e(
                                                 'Mehr anzeigen',
                                                 'oo_theme',
-                                            ); ?>
-                                        </button>
-                                        <?php if (
-                                            $field['field'] === 'lage' &&
-                                            !empty($map)
-                                        ): ?>
-                                            <div class="c-property-details__map">
-                                                <?php echo $map; ?>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
+                                            ); ?>"
+                                            data-close-text="<?php esc_html_e(
+                                                'Weniger anzeigen',
+                                                'oo_theme',
+                                            ); ?>"
+                                            aria-expanded="false" 
+                                            aria-controls="<?php echo esc_attr(
+                                                $field_toggle_id,
+                                            ); ?>"
+                                            style="display: none;">
+                                        <?php echo esc_html_e(
+                                            'Mehr anzeigen',
+                                            'oo_theme',
+                                        ); ?>
+                                    </button>
+
+                                    <?php if (
+                                        $field['field'] === 'lage' &&
+                                        !empty($map)
+                                    ): ?>
+                                        <div class="c-property-details__map">
+                                            <?php echo $map; ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             <?php
                             }
                         }
-                    }
-                    ?>
+                    } ?>
+
+                    <?php if (!empty($pEstates->getTotalCostsData())) {
+                        $totalCostsData = $pEstates->getTotalCostsData(); ?>
+                             <div class="c-property-details__calculator-content u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">
+                                <h2 class="c-property-details__headline o-headline --h2">
+                                    <?php echo __(
+                                        'Gesamtpreiskalkulator',
+                                        'oo_theme',
+                                    ); ?>
+                                </h2>
+                                <div class="c-property-details__calculator --is-price-calculator">
+                                    <div class="c-price-calculator">
+                                        <div class="c-price-calculator__chart">
+                                            <?php
+                                            $values = [
+                                                $totalCostsData['kaufpreis'][
+                                                    'raw'
+                                                ],
+                                                $totalCostsData['bundesland'][
+                                                    'raw'
+                                                ],
+                                                $totalCostsData[
+                                                    'aussen_courtage'
+                                                ]['raw'],
+                                                $totalCostsData['notary_fees'][
+                                                    'raw'
+                                                ],
+                                                $totalCostsData[
+                                                    'land_register_entry'
+                                                ]['raw'],
+                                            ];
+                                            $valuesTitle = [
+                                                $totalCostsData['kaufpreis'][
+                                                    'default'
+                                                ],
+                                                $totalCostsData['bundesland'][
+                                                    'default'
+                                                ],
+                                                $totalCostsData[
+                                                    'aussen_courtage'
+                                                ]['default'],
+                                                $totalCostsData['notary_fees'][
+                                                    'default'
+                                                ],
+                                                $totalCostsData[
+                                                    'land_register_entry'
+                                                ]['default'],
+                                            ];
+                                            $chart = new EstateCostsChart(
+                                                $values,
+                                                $valuesTitle,
+                                            );
+                                            echo $chart->generateSVG();
+                                            ?>
+                                        </div>
+                                        <div class="c-price-calculator__overview">
+                                            <div class="c-price-calculator__item">
+                                                <span class="c-price-calculator__color-indicator oo-donut-chart-color0"></span>
+                                                <dl class="c-price-calculator__criteria">
+                                                    <dt class="c-price-calculator__label">
+                                                        <?php echo esc_html_e(
+                                                            $pEstates->getFieldLabel(
+                                                                'kaufpreis',
+                                                            ),
+                                                        ); ?>
+                                                        </dt>
+                                                    <dd class="c-price-calculator__value">
+                                                        <?php echo esc_html(
+                                                            $totalCostsData[
+                                                                'kaufpreis'
+                                                            ]['default'],
+                                                        ); ?>
+                                                    </dd>
+                                                </dl>
+                                            </div>
+                                            <div class="c-price-calculator__item">
+                                                <span class="c-price-calculator__color-indicator oo-donut-chart-color1"></span>
+                                                <dl class="c-price-calculator__criteria">
+                                                    <dt class="c-price-calculator__label"><?php esc_html_e(
+                                                        'Grunderwerbsteuer',
+                                                        'oo_theme',
+                                                    ); ?></dt>
+                                                    <dd class="c-price-calculator__value"><?php echo esc_html(
+                                                        $totalCostsData[
+                                                            'bundesland'
+                                                        ]['default'],
+                                                    ); ?></dd>
+                                                </dl>
+                                            </div>
+                                            <div class="c-price-calculator__item">
+                                                <span class="c-price-calculator__color-indicator oo-donut-chart-color2"></span>
+                                                <dl class="c-price-calculator__criteria">
+                                                    <dt class="c-price-calculator__label"><?php esc_html_e(
+                                                        'Maklerprovision',
+                                                        'oo_theme',
+                                                    ); ?></dt>
+                                                    <dd class="c-price-calculator__value"><?php echo esc_html(
+                                                        $totalCostsData[
+                                                            'aussen_courtage'
+                                                        ]['default'],
+                                                    ); ?></dd>
+                                                </dl>
+                                            </div>
+                                            <div class="c-price-calculator__item">
+                                                <span class="c-price-calculator__color-indicator oo-donut-chart-color3"></span>
+                                                <dl class="c-price-calculator__criteria">
+                                                    <dt class="c-price-calculator__label"><?php esc_html_e(
+                                                        'Notargebühren *',
+                                                        'oo_theme',
+                                                    ); ?></dt>
+                                                    <dd class="c-price-calculator__value"><?php echo esc_html(
+                                                        $totalCostsData[
+                                                            'notary_fees'
+                                                        ]['default'],
+                                                    ); ?></dd>
+                                                </dl>
+                                            </div>
+                                            <div class="c-price-calculator__item">
+                                                <span class="c-price-calculator__color-indicator oo-donut-chart-color4"></span>
+                                                <dl class="c-price-calculator__criteria">
+                                                    <dt class="c-price-calculator__label"><?php esc_html_e(
+                                                        'Grundbucheintrag *',
+                                                        'oo_theme',
+                                                    ); ?></dt>
+                                                    <dd class="c-price-calculator__value"><?php echo esc_html(
+                                                        $totalCostsData[
+                                                            'land_register_entry'
+                                                        ]['default'],
+                                                    ); ?></dd>
+                                                </dl>
+                                            </div>
+                                            <div class="c-price-calculator__item --is-total-cost">
+                                                <dl class="c-price-calculator__criteria">
+                                                    <dt class="c-price-calculator__label oo-total-costs-label"><?php esc_html_e(
+                                                        'Gesamtkosten',
+                                                        'oo_theme',
+                                                    ); ?></dt>
+                                                    <dd class="c-price-calculator__value"><?php echo esc_html(
+                                                        $totalCostsData[
+                                                            'total_costs'
+                                                        ]['default'],
+                                                    ); ?></dd>
+                                                </dl>
+                                            </div>
+                                            <div class="c-price-calculator__notice">
+                                                <?php echo esc_html_e(
+                                                    '* Für die Berechnung der Notar- und Grundbuchkosten wird ein Standardwert von 1,5% bzw. 0,5% verwendet.',
+                                                    'oo_theme',
+                                                ); ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    <?php
+                    } ?>
+
                     <?php if (!empty($area_butler_url)) { ?>
-                        <div class="c-property-details__text-wrapper">
+                        <div class="c-property-details__text-content u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">
                             <h2 class="c-property-details__headline o-headline --h2">
                                 <?php echo __('Infrastruktur', 'oo_theme'); ?>
                             </h2>
-                            <span class="c-property-details__iframe --is-areabutler"><iframe src="
-                                <?php echo esc_html(
-                                    $area_butler_url['value'],
-                                ); ?>
-                                " class="--is-areabutler" data-usercentrics="AreaButler"
-                                 title="<?php echo sprintf(
-                                     esc_attr__(
-                                         'Externer Inhalt von %s',
-                                         'oo_theme',
-                                     ),
-                                     'AreaButler',
-                                 ); ?>"></iframe></span>
+                            <span class="c-property-details__iframe --is-areabutler">
+                                <iframe src="
+                                    <?php echo esc_html(
+                                        $area_butler_url['value'],
+                                    ); ?>
+                                    " class="--is-areabutler" data-usercentrics="AreaButler"
+                                    title="<?php echo sprintf(
+                                        esc_attr__(
+                                            'Externer Inhalt von %s',
+                                            'oo_theme',
+                                        ),
+                                        'AreaButler',
+                                    ); ?>">
+                                </iframe>
+                            </span>
                             <?php if (!empty($infrastructure_info)) { ?>
                                 <div class="c-property-details__text">
-                                <div class="c-item-fields">
-                                <?php foreach (
-                                    $infrastructure_info
-                                    as $info
-                                ) { ?>
-                                    <dl class="c-item-fields__item">
-                                        <dt class="c-item-fields__label">
-                                            <?php echo $info['label']; ?>
-                                        </dt>
-                                        <dd class="c-item-fields__value">
-                                            <?php echo $info['value']; ?>
-                                        </dd>
-                                    </dl>
-                                <?php } ?>
-                                </div></div>
+                                    <div class="c-item-fields">
+                                    <?php foreach (
+                                        $infrastructure_info
+                                        as $info
+                                    ) { ?>
+                                        <dl class="c-item-fields__item">
+                                            <dt class="c-item-fields__value">
+                                                <?php echo $info['value']; ?>
+                                            </dt>
+                                            <dd class="c-item-fields__label">
+                                                <?php echo $info['label']; ?>
+                                            </dd>
+                                        </dl>
+                                    <?php } ?>
+                                    </div>
+                                </div>
                             <?php } ?>
                         </div>
                     <?php } ?>
+                </div>
+            </div>
+
+        <?php ob_start(); ?>
+            <div class="c-property-details__texts o-container">
+                <div class="c-property-details__texts-row o-row">
+                    <?php if (!empty($property_free_texts)) {
+                        foreach ($property_free_texts as $field) {
+                            if (
+                                $field['field'] === 'sonstige_angaben' &&
+                                $field['has_value']
+                            ) {
+
+                                $content = $field['value'];
+                                $field_toggle_id =
+                                    'property-other-' . $field['field'];
+                                ?>
+                                <div class="c-property-details__text u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">
+                                    <h2 class="c-property-details__headline o-headline --h2">
+                                        <?php esc_html_e(
+                                            $field['label'],
+                                            'oo_theme',
+                                        ); ?>
+                                    </h2>
+                                    
+                                    <div class="c-property-details__text-content" id="<?php echo esc_attr(
+                                        $field_toggle_id,
+                                    ); ?>">
+                                        <?php echo nl2br(
+                                            $show_secret_sale_block
+                                                ? '...'
+                                                : esc_html($content),
+                                        ); ?>
+                                    </div>
+
+                                    <button class="c-property-details__more c-read-more"
+                                            data-open-text="<?php esc_html_e(
+                                                'Mehr anzeigen',
+                                                'oo_theme',
+                                            ); ?>"
+                                            data-close-text="<?php esc_html_e(
+                                                'Weniger anzeigen',
+                                                'oo_theme',
+                                            ); ?>"
+                                            aria-expanded="false" 
+                                            aria-controls="<?php echo esc_attr(
+                                                $field_toggle_id,
+                                            ); ?>">
+                                        <?php echo esc_html_e(
+                                            'Mehr anzeigen',
+                                            'oo_theme',
+                                        ); ?>
+                                    </button>
+                                </div>
+                            <?php
+                            }
+                        }
+                    } ?>
+
                     <?php if ($energy_fields_available) {
 
                         // Fetch required values
@@ -1358,9 +2094,9 @@ while ($current_property = $pEstates->estateIterator()) {
                             $raw_values->getValueRaw($property_id)['elements'][
                                 'energyClass'
                             ] ?? '';
-                        $energy_class_permitted_values = $pEstates->getPermittedValues(
-                            'energyClass',
-                        );
+                        $energy_class_permitted_values = $pEstates->getShowEnergyCertificate()
+                            ? $pEstates->getPermittedValues('energyClass')
+                            : [];
                         $energy_certificate_type =
                             $raw_values->getValueRaw($property_id)['elements'][
                                 'energieausweistyp'
@@ -1370,7 +2106,7 @@ while ($current_property = $pEstates->estateIterator()) {
                         ]['energy_certificate'];
                         ?>
 
-                        <div class="c-property-details__energy">
+                        <div class="c-property-details__energy u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl-8">
                             <h2 class="c-property-details__headline o-headline --h2">
                                 <?= esc_html(
                                     $pEstates->getFieldLabel(
@@ -1379,108 +2115,114 @@ while ($current_property = $pEstates->estateIterator()) {
                                 ) ?>
                             </h2>
 
-                            <?php if (
-                                !empty($energy_class_permitted_values) &&
-                                !empty($energy_class) &&
-                                $pEstates->getShowEnergyCertificate()
-                            ): ?>
-                                <?php oo_render_energy_certificate(
-                                    $energy_class_permitted_values,
-                                    $energy_class,
-                                    $labels,
-                                ); ?>
-                            <?php endif; ?>
+                            <div class="c-property-details__energy-content">
+                                <?php if (
+                                    !empty($energy_class_permitted_values) &&
+                                    !empty($energy_class) &&
+                                    $pEstates->getShowEnergyCertificate()
+                                ): ?>
+                                    <?php oo_render_energy_certificate(
+                                        $energy_class_permitted_values,
+                                        $energy_class,
+                                        $labels,
+                                    ); ?>
+                                <?php endif; ?>
 
-                            <div class="c-item-fields">
-                                <?php
-                                // Ensure required field is present depending on type
-                                if (
-                                    $energy_certificate_type ===
-                                        'Endenergiebedarf' &&
-                                    !in_array(
-                                        'endenergiebedarf',
-                                        $energy_fields,
-                                        true,
-                                    )
-                                ) {
-                                    $energy_fields[] = 'endenergiebedarf';
-                                } elseif (
-                                    $energy_certificate_type ===
-                                        'Energieverbrauchskennwert' &&
-                                    !in_array(
-                                        'energieverbrauchskennwert',
-                                        $energy_fields,
-                                        true,
-                                    )
-                                ) {
-                                    $energy_fields[] =
-                                        'energieverbrauchskennwert';
-                                }
-
-                                foreach ($energy_fields_ordered as $field):
-
-                                    if (!isset($current_property[$field])) {
-                                        continue;
-                                    }
-
-                                    $value = $current_property[$field];
+                                <div class="c-item-fields">
+                                    <?php
+                                    // Ensure required field is present depending on type
                                     if (
-                                        oo_is_invalid_energy_value(
-                                            $value,
-                                            $field,
-                                            $property_id,
-                                            $raw_values,
+                                        $energy_certificate_type ===
+                                            'Endenergiebedarf' &&
+                                        !in_array(
+                                            'endenergiebedarf',
+                                            $energy_fields,
+                                            true,
                                         )
                                     ) {
-                                        continue;
+                                        $energy_fields[] = 'endenergiebedarf';
+                                    } elseif (
+                                        $energy_certificate_type ===
+                                            'Energieverbrauchskennwert' &&
+                                        !in_array(
+                                            'energieverbrauchskennwert',
+                                            $energy_fields,
+                                            true,
+                                        )
+                                    ) {
+                                        $energy_fields[] =
+                                            'energieverbrauchskennwert';
                                     }
+
+                                    foreach ($energy_fields_ordered as $field):
+
+                                        if (!isset($current_property[$field])) {
+                                            continue;
+                                        }
+
+                                        $value = $current_property[$field];
+                                        if (
+                                            oo_is_invalid_energy_value(
+                                                $value,
+                                                $field,
+                                                $property_id,
+                                                $raw_values,
+                                            )
+                                        ) {
+                                            continue;
+                                        }
+                                        ?>
+                                        <dl class="c-item-fields__item">
+                                            <dd class="c-item-fields__value">
+                                                <?php if (is_array($value)): ?>
+                                                    <?= esc_html(
+                                                        implode(', ', $value),
+                                                    ) ?>
+                                                <?php else: ?>
+                                                    <?= esc_html($value) ?>
+                                                <?php endif; ?>
+                                            </dd>
+                                            <dt class="c-item-fields__label"><?= esc_html(
+                                                $pEstates->getFieldLabel(
+                                                    $field,
+                                                ),
+                                            ) ?></dt>
+                                        </dl>
+                                    <?php
+                                    endforeach;
                                     ?>
-                                    <dl class="c-item-fields__item">
-                                        <dt class="c-item-fields__label"><?= esc_html(
-                                            $pEstates->getFieldLabel($field),
-                                        ) ?></dt>
-                                        <dd class="c-item-fields__value">
-                                            <?php if (is_array($value)): ?>
-                                                <?= esc_html(
-                                                    implode(', ', $value),
-                                                ) ?>
-                                            <?php else: ?>
-                                                <?= esc_html($value) ?>
-                                            <?php endif; ?>
-                                        </dd>
-                                    </dl>
-                                <?php
-                                endforeach;
-                                ?>
+                                </div>
                             </div>
                         </div>
                     <?php
                     } ?>
-
-                    <?php if (!empty($pEstates->getEstateUnits())) { ?>
-                        <div class="c-property-details__units">
-                            <?php echo $pEstates->getEstateUnits(); ?>
-                        </div>
-                    <?php } ?>
-
-
-                    <?php if (!empty($shortcode_form)) { ?>
-                        <div id="request" class="c-property-details__form">
-                            <?php echo do_shortcode($shortcode_form); ?>
-                        </div>
-                    <?php } ?>
-
-                </div>
-
-                <div class="c-property-details__aside o-col-12 o-col-lg-4">
-
-                    <?php require_once 'property-contact.php'; ?>
-
-                    <?php echo $pEstates->getSimilarEstates(); ?>
-
                 </div>
             </div>
-        </div>
+        <?php
+        $text_group_two = ob_get_clean();
+
+        if (!empty(trim(strip_tags($text_group_two)))) {
+            echo '<div class="c-property-details__texts-wrapper">';
+            echo $text_group_two;
+            echo '</div>';
+        }
+        ?>
+
+        <?php if (!empty($shortcode_form)) { ?>
+            <div class="c-property-details__form-wrapper">
+                <div class="c-property-details__form o-container">
+                    <div class="c-property-details__form-row o-row">
+                        <div id="request" class="c-property-details__form-content o-col-12 o-col-lg-12">
+                            <?php echo do_shortcode($shortcode_form); ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <?php } ?>
+
+        <?php echo $pEstates->getSimilarEstates(); ?>
+
     </section>
 <?php
 }

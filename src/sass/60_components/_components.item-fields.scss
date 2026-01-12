@@ -1,20 +1,45 @@
 .c-item-fields {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  align-items: start;
+
+  @include media-breakpoint-up(xl) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   &__item {
-    padding: 0.25rem 0;
-    border-bottom: 1px solid var(--oo-color-mix-bg-contrast-50);
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 0.75rem 0.625rem;
 
     @include media-breakpoint-up(xl) {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-flow: row;
+      align-items: start;
+    }
+
+    .--bg-light & {
+      background-color: var(--oo-color-light-bg);
+    }
+    .--bg-dark & {
+      background-color: var(--oo-color-dark-bg);
+    }
+    .--bg-primary & {
+      background-color: var(--oo-color-primary-bg);
+    }
+    .--bg-secondary & {
+      background-color: var(--oo-color-secondary-bg);
+    }
+    .--bg-transparent & {
+      background-color: var(--oo-color-bg);
     }
   }
 
   &__label {
+    font-size: $small-font-size;
   }
 
   &__value {
-    font-weight: $font-weight-text-bold;
-    font-family: $font-family-text-bold;
     hyphens: auto;
     word-break: break-word;
   }

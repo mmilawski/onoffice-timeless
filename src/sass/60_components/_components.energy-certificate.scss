@@ -1,13 +1,10 @@
 .c-energy-certificate {
   $c-energy-certificate: &;
 
-  border: 1px solid var(--oo-color-mix-bg-text-50);
-  background: var(--oo-color-energy-bg);
   color: var(--oo-color-contrast-energy-bg);
   display: flex;
   white-space: nowrap;
   gap: 0.5rem;
-  padding: 1rem;
 
   &__class {
     display: flex;

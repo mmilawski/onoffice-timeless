@@ -1,5 +1,6 @@
 .c-property-card {
   $c-property-card: &;
+  min-height: 0;
 
   @include media-breakpoint-up(lg) {
     display: grid;
@@ -74,70 +75,151 @@
     &.c-icon-button {
       width: 2.5rem;
       height: 2.5rem;
-      &.--on-bg-transparent,
-      .--bg-transparent & {
-        @include plain-visited() {
-          background-color: var(--oo-color-primary);
-        }
+
+      @include plain-visited() {
+        color: var(--oo-color-contrast-primary);
+        background-color: var(--oo-color-primary);
       }
 
       @include hover() {
         background-color: var(--oo-color-mix-primary-contrast-20);
       }
 
+      @include focus-visible() {
+        outline-color: var(--oo-color-primary);
+      }
+
       @include active() {
         background-color: var(--oo-color-mix-primary-contrast-40);
+      }
+
+      .--bg-light & {
+        @include plain-visited() {
+          color: var(--oo-color-light-contrast-primary);
+          background-color: var(--oo-color-light-primary);
+        }
+        @include hover() {
+          background-color: var(
+            --oo-color-light-mix-primary-contrast-20,
+            var(--oo-color-mix-primary-contrast-20)
+          );
+        }
+        @include active() {
+          background-color: var(
+            --oo-color-light-mix-primary-contrast-40,
+            var(--oo-color-mix-primary-contrast-40)
+          );
+        }
+      }
+
+      .--bg-dark & {
+        @include plain-visited() {
+          color: var(--oo-color-dark-contrast-primary);
+          background-color: var(--oo-color-dark-primary);
+        }
+        @include hover() {
+          background-color: var(
+            --oo-color-dark-mix-primary-contrast-20,
+            var(--oo-color-mix-primary-contrast-20)
+          );
+        }
+        @include active() {
+          background-color: var(
+            --oo-color-dark-mix-primary-contrast-40,
+            var(--oo-color-mix-primary-contrast-40)
+          );
+        }
+      }
+
+      .--bg-primary & {
+        @include plain-visited() {
+          color: var(--oo-color-primary-contrast-primary);
+          background-color: var(--oo-color-primary-primary);
+        }
+        @include hover() {
+          background-color: var(
+            --oo-color-primary-mix-primary-contrast-20,
+            var(--oo-color-mix-primary-contrast-20)
+          );
+        }
+      }
+
+      .--bg-secondary & {
+        @include plain-visited() {
+          color: var(--oo-color-secondary-contrast-primary);
+          background-color: var(--oo-color-secondary-primary);
+        }
+        @include hover() {
+          background-color: var(
+            --oo-color-secondary-mix-primary-contrast-20,
+            var(--oo-color-mix-primary-contrast-20)
+          );
+        }
       }
 
       .c-icon-button__icon {
         width: $icon-size-small;
         height: $icon-size-small;
         &.--filled {
-          fill: var(--oo-color-contrast-primary);
+          fill: currentColor;
         }
       }
     }
   }
 
   &__button {
-    grid-column: -2;
-    align-self: end;
-    align-content: center;
-    flex-wrap: wrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     display: flex;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-    hyphens: manual;
-    height: 100%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     min-height: 4rem;
     padding: 0 2rem;
+    width: 100%;
+    grid-column: 2;
+
+    @include media-breakpoint-up(lg) {
+      grid-column: 2 / 3;
+      width: auto;
+      margin-top: 0;
+    }
+
+    &-text {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      hyphens: manual;
+    }
 
     &.--open-popup {
-      margin: 0;
       max-width: 100%;
+      margin: 0;
     }
   }
 
   &__content {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     gap: 1rem;
     padding: 1rem;
 
     @include media-breakpoint-up(lg) {
       padding: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr;
     }
   }
-
   &__main-content-group {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1rem;
+
+    @include media-breakpoint-up(md) {
+      gap: 1.5rem;
+    }
   }
 
   &__title {

@@ -12,6 +12,10 @@
   &__track {
   }
 
+  &__slider-container {
+    padding: 0;
+  }
+
   &__slide {
     outline: $outline !important;
     outline-offset: $outline-offset !important;
@@ -46,6 +50,59 @@
     @include media-breakpoint-up(xl) {
       height: auto;
       bottom: 2rem;
+    }
+  }
+
+  &__pagination-wrapper {
+    overflow: hidden;
+    width: auto;
+    display: flex;
+    gap: 0.5rem;
+    $slider-pagination-visible: 5;
+    $slider-dot-extra: 0.125rem;
+    $slider-dot-total: $icon-wrapper-size-small + $slider-dot-extra;
+    max-width: $slider-dot-total * $slider-pagination-visible;
+    margin-inline: auto;
+    padding: 0.5rem 0;
+
+    .--is-property-details-slider &,
+    .--is-layout-slider & {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    @include media-breakpoint-up(lg) {
+      $slider-pagination-visible: 9;
+      max-width: $slider-dot-total * $slider-pagination-visible;
+    }
+    @include media-breakpoint-up(xl) {
+      $slider-pagination-visible: 13;
+      max-width: $slider-dot-total * $slider-pagination-visible;
+    }
+
+    #{$c-slider}__pagination {
+      display: inline-flex !important;
+      justify-content: flex-start;
+      flex-wrap: nowrap;
+      position: static;
+      padding-inline: 0;
+      transition: transform 0.25s ease-in-out;
+      gap: 0.5rem;
+
+      li {
+        line-height: inherit;
+        display: flex;
+        padding: 0.5rem 0;
+        // Prevents overlfow cropping when focus on dot. Only works when applied directly to <li>.. apparently
+        &:first-child {
+          padding-left: 1rem;
+        }
+
+        &:last-child {
+          padding-right: 1rem;
+        }
+      }
     }
   }
 
@@ -101,14 +158,8 @@
   &__navigation {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 1.5rem;
-    margin-left: 1rem;
-    margin-right: 1rem;
-
-    @include media-breakpoint-up(lg) {
-      margin-left: 7.625rem;
-      margin-right: 7.625rem;
-    }
 
     &.--is-properties-images-slider {
       &.--empty {
@@ -131,6 +182,7 @@
   &__arrows {
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   &__arrow {
@@ -215,6 +267,17 @@
     }
   }
 
+  &__fullscreen {
+    display: none;
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+
+    @include media-breakpoint-up(sm) {
+      display: flex;
+    }
+  }
+
   &.--loop {
   }
 
@@ -242,12 +305,26 @@
   }
 
   &.--is-link-boxes-slider {
+    #{$c-slider}__navigation {
+      margin: 0 1rem;
+
+      @include media-breakpoint-up(md) {
+        margin: 0 0;
+      }
+    }
   }
 
   &.--is-news-slider {
   }
 
   &.--is-team-slider {
+    #{$c-slider}__arrows {
+      margin: 0 1rem;
+
+      @include media-breakpoint-up(md) {
+        margin: 0 0;
+      }
+    }
   }
 
   &.--is-reviews-slider {
@@ -282,10 +359,7 @@
       justify-content: center;
       align-items: center;
       margin: 2.5rem auto 2.5rem auto;
-
-      @include media-breakpoint-up(xl) {
-        padding: 0;
-      }
+      padding: 0;
     }
 
     #{$c-slider}__controls {
@@ -306,8 +380,7 @@
     position: relative;
     #{$c-slider}__navigation {
       width: 100%;
-      height: auto;
-      aspect-ratio: 4 / 3;
+      height: 100%;
       position: absolute;
       top: 0;
       left: 0;
@@ -323,12 +396,55 @@
     }
     #{$c-slider}__arrow {
       pointer-events: auto;
+      top: unset;
 
       &.--next {
         right: 1rem;
       }
       &.--prev {
         left: 1rem;
+      }
+    }
+  }
+
+  &.--is-property-details-slider,
+  &.--is-layout-slider {
+    position: relative;
+
+    #{$c-slider}__navigation {
+      width: 100%;
+      height: auto;
+    }
+
+    #{$c-slider}__arrows {
+      height: 100%;
+    }
+    #{$c-slider}__arrow {
+      pointer-events: auto;
+      top: 0;
+
+      &.--next {
+        right: 1rem;
+      }
+      &.--prev {
+        left: 1rem;
+      }
+    }
+    #{$c-slider}__pagination {
+      .--is-property-details-slider &,
+      .--is-layout-slider & {
+        display: flex;
+      }
+
+      @include media-breakpoint-up(sm) {
+        width: 100%;
+      }
+    }
+    &:not(.is-overflow) {
+      > #{$c-slider}__navigation,
+      > #{$c-slider}__progress,
+      > #{$c-slider}__arrows {
+        display: flex;
       }
     }
   }
@@ -340,6 +456,10 @@
       @include media-breakpoint-up(lg) {
         gap: 1rem;
       }
+    }
+
+    #{$c-slider}__navigation {
+      margin: 0 auto; // the gallery slider section is container-fluid, but the navigation has o-container class
     }
   }
 
@@ -416,7 +536,8 @@
       }
     }
 
-    &.--is-properties-similar-slider {
+    &.--is-properties-similar-slider,
+    &.--is-properties-units-slider {
       #{$c-slider}__list {
         display: grid;
         gap: 2rem;

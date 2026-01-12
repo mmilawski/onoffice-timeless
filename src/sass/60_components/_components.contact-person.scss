@@ -27,10 +27,32 @@
     overflow: hidden;
   }
 
+  &__headline {
+    margin-bottom: 1.5rem;
+
+    @include media-breakpoint-up(md) {
+      margin-bottom: 2.5rem;
+    }
+  }
+
+  &__content {
+    padding-top: 2.5rem;
+
+    @include media-breakpoint-up(xl) {
+      padding-top: 5rem;
+    }
+  }
+
+  &__data {
+    &.--is-jobtitle {
+      margin-bottom: 0.5rem;
+    }
+  }
+
   &__name {
     margin: 0;
     &:not(:last-child) {
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
     }
   }
 

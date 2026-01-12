@@ -129,7 +129,7 @@ $property_count = method_exists($pEstates, 'getEstateOverallCount')
             </div>
 
             <div class="c-slider__navigation__wrapper o-container">
-            <div class="c-slider__navigation splide__navigation --is-properties-slider o-row">
+            <div class="c-slider__navigation splide__navigation --is-properties-slider">
                 <div class="c-slider__progress splide__progress">
                     <div class="c-slider__progress-bar splide__progress-bar"></div>
                 </div>

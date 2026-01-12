@@ -110,12 +110,13 @@
         outline-color 0.25s ease-in-out, opacity 0.25s ease-in-out;
 
       @include plain-visited() {
-        color: var(--oo-color-contrast-primary);
-        background-color: var(--oo-color-primary);
+        color: var(--oo-color-primary);
+        background-color: var(--oo-color-mix-bg-contrast-05);
       }
 
       @include hover() {
-        background-color: var(--oo-color-mix-primary-contrast-20);
+        color: var(--oo-color-mix-bg-contrast-05);
+        background-color: var(--oo-color-primary);
       }
 
       @include focus-visible() {

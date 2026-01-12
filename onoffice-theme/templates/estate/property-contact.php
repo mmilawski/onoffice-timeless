@@ -110,7 +110,7 @@ function oo_property_field_type($field, $item)
 }
 
 if (!empty($pEstates->getEstateContacts())) {
-    echo '<div class="c-property-details__contacts">';
+    echo '<div class="c-property-details__contacts u-offset-lg-1 o-col-12 o-col-lg-10 o-col-xl">';
 
     $configured_address_fields = $pEstates->getAddressFields();
 
@@ -127,6 +127,10 @@ if (!empty($pEstates->getEstateContacts())) {
         'Ort',
     ]);
 
+    $address_fields = array_filter($address_fields, function ($field) {
+        return strtolower($field) !== 'jobtitle';
+    });
+
     $labels_fields = [
         'Email',
         'email',
@@ -139,22 +143,17 @@ if (!empty($pEstates->getEstateContacts())) {
 
     $contacts = $pEstates->getEstateContacts();
     $headline = oo_get_contacts_headline($contacts);
+    $headline = str_replace(['Ihre ', 'Ihr '], '', $headline);
+    $headline = rtrim($headline, ': ') . ':';
+    $headline = ucfirst($headline);
     $contact_count = is_array($contacts) ? count($contacts) : 0;
-
-    echo '<h2 class="c-property-details__headline o-headline">';
-    echo $headline;
-    echo '</h2>';
-
-    if ($contact_count > 1) {
-        echo '<div class="c-property-details__contacts-wrapper">';
-    }
 
     foreach ($pEstates->getEstateContacts() as $contact_data) {
         if (!isset($contact_data['id'])) {
             continue;
         }
 
-        echo '<div class="c-property-details__contact c-contact-person">';
+        echo '<div class="c-property-details__contacts-row o-row">';
 
         if ($contact_data['imageUrl']) {
             $image = '';
@@ -188,6 +187,7 @@ if (!empty($pEstates->getEstateContacts())) {
             $contact_image_width_xxxl = '460';
 
             if (!empty($image)) {
+                echo '<div class="c-property-details__contact c-contact-person o-col-6 o-col-md-5">';
                 $contact_link = isset($contact_data['id'])
                     ? $pEstates->getAddressLink($contact_data['id'])
                     : '';
@@ -242,6 +242,7 @@ if (!empty($pEstates->getEstateContacts())) {
                 if (!empty($contact_link)) {
                     echo '</a>';
                 }
+                echo '</div>';
             }
         }
 
@@ -294,13 +295,40 @@ if (!empty($pEstates->getEstateContacts())) {
             !empty($street_output) ||
             !empty($city_output)
         ) {
-            echo '<div class="c-contact-person__content">';
+            echo '<div class="c-contact-person__content o-col-12 u-offset-lg-1 o-col-md-6">';
+        }
+
+        echo '<h2 class="c-contact-person__headline o-headline">';
+        echo $headline;
+        echo '</h2>';
+
+        echo '<div class="c-contact-person__data-wrapper">';
+
+        $custom_job_title = null;
+
+        foreach ($contact_data as $key => $value) {
+            if (strtolower($key) === 'jobtitle') {
+                $custom_job_title = $value;
+                break;
+            }
+        }
+
+        if (!empty($custom_job_title)) {
+            echo '<p class="c-contact-person__data --is-jobtitle">';
+            echo esc_html($custom_job_title);
+            echo '</p>';
+        }
+
+        if ($job_title) {
+            echo '<p class="c-contact-person__jobtitle">';
+            echo esc_html($job_title);
+            echo '</p>';
         }
 
         if ($name_output) {
-            echo '<h3 class="c-contact-person__name o-headline --h3">';
+            echo '<p class="c-contact-person__name o-headline --h4">';
             echo esc_html($name_output);
-            echo '</h3>';
+            echo '</p>';
         }
 
         // Output all other configured fields.
@@ -352,6 +380,8 @@ if (!empty($pEstates->getEstateContacts())) {
                 '</p>';
         }
 
+        echo '</div>';
+
         if (
             !empty($name_output) ||
             !empty($address_fields) ||
@@ -363,10 +393,5 @@ if (!empty($pEstates->getEstateContacts())) {
 
         echo '</div>';
     }
-
-    if ($contact_count > 1 == true) {
-        echo '</div>';
-    }
-
     echo '</div>';
 } ?>

@@ -250,7 +250,7 @@ $slides_destroy = $slides_count < 5 ? true : false;
                             } ?>
                         </div>
                     </div>
-                    <div class="c-slider__navigation splide__navigation">
+                    <div class="c-slider__navigation splide__navigation o-container">
                         <div class="c-slider__progress splide__progress">
                             <div class="c-slider__progress-bar splide__progress-bar"></div>
                         </div>
