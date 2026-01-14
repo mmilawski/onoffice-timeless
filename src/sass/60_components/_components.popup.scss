@@ -454,3 +454,67 @@
     visibility: visible;
   }
 }
+.c-popup {
+  $c-popup: &;
+
+  &.--is-login {
+    margin: auto;
+    width: fit-content;
+    #{$c-popup}__wrapper {
+      background: var(--oo-color-bg);
+      @include media-breakpoint-up(md) {
+        min-width: 450px;
+        width: auto;
+      }
+    }
+
+    #{$c-popup}__content {
+      width: 100%;
+      padding: 2rem;
+    }
+
+    #{$c-popup}__close {
+      min-width: unset;
+      background-color: var(--oo-color-mix-bg-contrast-05);
+      color: var(--oo-color-header-contrast-bg);
+      width: 2.5rem;
+      height: 2.5rem;
+      border-color: transparent;
+      padding: 0;
+      right: 0;
+      top: 0;
+      position: absolute;
+
+      @include media-breakpoint-up(md) {
+        width: 3.375rem;
+        height: 3.375rem;
+      }
+
+      .c-button__icon {
+        width: 34px;
+        height: 34px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include media-breakpoint-up(md) {
+          width: 2.5rem;
+          height: 2.5rem;
+        }
+        svg {
+          height: 24px;
+          @include media-breakpoint-up(md) {
+            height: 34px;
+          }
+          line {
+            stroke-width: 1.5;
+          }
+        }
+      }
+
+      &:hover {
+        color: var(--oo-color-header-contrast-primary);
+        background-color: var(--oo-color-header-primary);
+      }
+    }
+  }
+}
