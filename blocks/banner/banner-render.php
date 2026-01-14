@@ -19,7 +19,7 @@ $pause_on_hover = filter_var(
     get_field('pause_on_hover') ?? true,
     FILTER_VALIDATE_BOOLEAN,
 );
-$slide_speed = intval(get_field('slide_speed') ?? 1000);
+$slide_speed = floatval(get_field('slide_speed') ?? 1) * 1000;
 
 // Check if all slides have content type 'none'
 $all_slides_are_none =
