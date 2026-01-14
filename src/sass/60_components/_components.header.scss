@@ -16,7 +16,10 @@
   &.--logo-transparent {
     background-color: var(--oo-color-header-transparent-bg-80);
     position: fixed;
-    top: auto;
+    top: 0;
+    &.--has-no-bg-picture {
+      top: auto;
+    }
 
     &.--main-nav-open {
       background-color: var(--oo-color-header-bg, var(--oo-color-bg));

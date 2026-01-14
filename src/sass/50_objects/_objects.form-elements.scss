@@ -1,8 +1,8 @@
 $form-height: 2.375rem;
 $form-margin: 0; // Margin
-$form-padding: 0.6875rem 1rem; // Padding
-$form-padding-top: 1rem; // Padding top
-$form-padding-right: 1rem; // Padding right
+$form-padding: 0.25rem 0.75rem; // Padding
+$form-padding-top: 0.25rem; // Padding top
+$form-padding-right: 0.75rem; // Padding right
 $form-remove-wrapper: 1rem; // Size of the remove background
 $form-remove-size: 1rem; // Size of the remove icon
 $form-select-size: 0.75rem; // Size of the select arrow icon
@@ -461,8 +461,8 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
   &.onofficeSortListSelector {
     position: relative;
     padding: unset;
-    height: 3.375rem;
-    max-height: 3.375rem;
+    height: 2.5rem;
+    max-height: 2.5rem;
     border: $form-border $form-border-color;
     outline: $form-outline;
     transition: outline-color $form-duration $form-timing,

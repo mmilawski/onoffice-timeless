@@ -25,7 +25,7 @@
   &__fieldset {
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
+    gap: 1rem;
     padding: 1.5rem;
     background-color: var(--oo-color-bg);
 
@@ -96,7 +96,7 @@
   &__body {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 1.5rem 2rem;
+    gap: 1rem 2rem;
     align-items: flex-end;
 
     @include media-breakpoint-up(md) {
