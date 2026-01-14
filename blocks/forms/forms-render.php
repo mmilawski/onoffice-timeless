@@ -39,7 +39,7 @@ $bg_color = $settings['bg_color'] ?? 'bg-transparent';
             </div>
         <?php } ?>
         <?php if (!empty($shortcode)) { ?>
-            <div class="c-forms__wrapper u-offset-lg-1 o-col-lg-6">
+            <div class="c-forms__wrapper o-col-lg-7 o-col-xl-6 u-offset-xl-1">
                 <div class="c-forms__form">
                     <?php echo do_shortcode($shortcode); ?>
                 </div>
