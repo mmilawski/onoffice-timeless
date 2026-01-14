@@ -29,6 +29,14 @@
     transform: translateX(-50%) translateY(-50%);
     font-weight: normal;
 
+    @include media-breakpoint-between(xs, sm) {
+      left: 0 !important;
+      right: 0 !important;
+      transform: none;
+      width: 80vw;
+      margin: auto !important;
+    }
+
     @include media-breakpoint-up(lg) {
       width: 30rem;
       padding: 1.5rem;
