@@ -61,11 +61,9 @@
   }
 
   & > *:first-child {
-    .c-banner__slide {
-      &.--content-is-left {
-        .c-banner__container {
-          padding-top: 0;
-        }
+    &.--content-is-left {
+      .c-banner__container {
+        padding-top: 0;
       }
     }
   }

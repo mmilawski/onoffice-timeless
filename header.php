@@ -62,11 +62,14 @@ if (empty($header_modules_left) && empty($header_modules_right)) {
         'oo_theme',
     ); ?></a>
 
-    <header id="masthead" class="c-header --bg-header
-    <?php if ($logo['size']) {
-        echo '--logo-' . $logo['size'];
-    } ?> <?php if (!$has_bg_picture) {
-     echo '--has-no-bg-picture --fixed';
+    <header id="masthead" class="c-header --bg-header <?php if (
+        $logo['appearance']
+    ) {
+        echo '--logo-' . $logo['appearance'];
+    } ?> <?php if ($logo['size']) {
+     echo '--logo-' . $logo['size'];
+ } ?> <?php if (!$has_bg_picture) {
+     echo '--has-no-bg-picture';
  } ?>">
 
         <?php if (

@@ -102,6 +102,10 @@
       padding-block: 0;
       margin-top: 0;
     }
+
+    .c-header.--logo-transparent ~ * & {
+      padding-top: var(--header-height, 5rem);
+    }
   }
 
   &__row {
