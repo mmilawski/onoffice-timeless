@@ -26,9 +26,7 @@
     gap: 0;
     overflow: hidden;
 
-    &:hover,
-    &:focus,
-    &:focus-within {
+    &[aria-expanded='true'] {
       gap: 0;
       max-height: calc(100% - 3rem);
 

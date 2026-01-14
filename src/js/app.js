@@ -577,6 +577,57 @@ jQuery(document).ready(function() {
     );
   }
 
+  function setTeamOverlayOpen(card, open=true) {
+    const overlay = card.querySelector('.c-team-card__overlay')
+    const children = Array.from(overlay.children);    
+    overlay.setAttribute("aria-expanded", open);
+    children.forEach((child) => {
+      if(child.classList.contains("c-button")) return;
+      open ? child.removeAttribute("inert") : child.setAttribute("inert", '');
+    });
+  }
+
+  function setupTeamOverlayHandling() {
+    const teamCards = document.querySelectorAll('.c-team-card')
+    const teamCardsByAriaLabelledBy = {}
+    teamCards.forEach(teamCard=>{
+      const ariaLabelledBy = teamCard.getAttribute('aria-labelledby')
+      if(!Object.keys(teamCardsByAriaLabelledBy).includes(ariaLabelledBy)){
+        teamCardsByAriaLabelledBy[ariaLabelledBy] = []
+      }
+      teamCardsByAriaLabelledBy[ariaLabelledBy].push(teamCard)
+    })
+
+    teamCards.forEach((teamCard) => {
+      const overlay = teamCard.querySelector('.c-team-card__overlay')
+      const children = Array.from(overlay.children);
+      const expandButton = children.find(child => child.classList.contains("--more"));
+      const retractButton = children.find(child => child.classList.contains("--less"));
+      setTeamOverlayOpen(teamCard, false);
+
+      // expanding and rectracting all clones to hide splide's recycling of nodes,
+      // otherwise you could see an expanded card jumping to its clone's position
+      const ariaLabelledBy = teamCard.getAttribute('aria-labelledby')
+      const teamCardClones = teamCardsByAriaLabelledBy[ariaLabelledBy]
+      
+      retractButton.addEventListener("click", (event) => {
+        teamCardClones.forEach(teamCardClone => setTeamOverlayOpen(teamCardClone, false));    
+        if (event.detail === 0) {
+          expandButton.focus();
+        }
+      });
+
+      expandButton.addEventListener("click", (event) => {
+        teamCardClones.forEach(teamCardClone => setTeamOverlayOpen(teamCardClone, true));    
+        if (event.detail === 0) {
+          retractButton.focus();
+        }
+      });
+    })
+  }
+
+  setupTeamOverlayHandling();
+
   function setPopupEventListener(openPopup){
     if (openPopup.length > 0) {
       openPopup.forEach(button => {
@@ -591,17 +642,15 @@ jQuery(document).ready(function() {
           }
 
           if (popupElement) {
+            setTimeout(() => {
+                popupElement.focus();
+            }, 10);
             const closeButton = popupElement.querySelector('.c-popup__close, .--close-popup');
             if (popupElement instanceof HTMLDialogElement && typeof popupElement.showModal === 'function') {
               popupElement.showModal();
             }
             popupElement.classList.add('--is-open');
             document.body.classList.add('--modal-open');
-            if(closeButton){
-                setTimeout(() => {
-                    closeButton.focus();
-                }, 100);
-            }
 
             function closePopup() {
               if (popupElement.dataset.unclosable === 'true') {
@@ -1000,6 +1049,7 @@ jQuery(document).ready(function() {
         if ($pagination.length && $autoslideItem.length) {
           $pagination.append($autoslideItem);
         }
+        setupTeamOverlayHandling();
       });
 
       if(slider.classList.contains('--is-team-slider')){
@@ -1905,3 +1955,4 @@ function initNewsCardNavigation() {
 
 // Usage (don't include this part, just for reference):
 jQuery(window).on('load', initNewsCardNavigation);
+

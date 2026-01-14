@@ -124,18 +124,7 @@ if ($rating_provider === 'google') {
     <?php } else { ?>
         <div class="c-team-card__picture"></div>
     <?php } ?>
-    <div class="c-team-card__overlay">
-        <div class="c-team-card__icon c-button --only-icon --more">
-            <span class="c-button__icon --plus">
-                <?php oo_get_icon('plus'); ?>
-            </span>
-        </div>
-        <div class="c-team-card__icon c-button --only-icon --less">
-            <span class="c-button__icon --minus">    
-                <?php oo_get_icon('minus'); ?>
-            </span>
-        </div>
-
+    <div class="c-team-card__overlay" aria-expanded="false">
         <?php if (!empty($job)) { ?>
             <div class="c-team-card__row --job">
                 <p id="desc-<?php echo $post_id; ?>" class="c-team-card__job"><?php echo $job; ?></p>
@@ -332,5 +321,15 @@ echo $first_line . '<br>' . $second_line;
                 </button>
             </div>
         <?php } ?>
+        <button class="c-team-card__icon c-button --only-icon --more">
+            <span class="c-button__icon --plus">
+                <?php oo_get_icon('plus'); ?>
+            </span>
+        </button>
+        <button class="c-team-card__icon c-button --only-icon --less">
+            <span class="c-button__icon --minus">
+                <?php oo_get_icon('minus'); ?>
+            </span>
+        </button>
     </div>
 </article>
