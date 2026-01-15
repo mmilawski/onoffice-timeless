@@ -74,9 +74,9 @@ if ($rating_provider === 'google') {
             'Fenster schließen',
             'oo_theme',
         ); ?>">
-            <span class="c-icon-button__icon --close"><?php oo_get_icon(
-                'close',
-            ); ?></span>
+            <?php echo oo_get_icon('close', true, [
+                'class' => 'c-icon-button__icon --close',
+            ]); ?>
         </button>
         <div class="c-dialog__content" id="team-<?php echo $post_id; ?>-desc">
             <div class="c-team-detail"> 
