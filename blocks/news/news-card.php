@@ -61,6 +61,13 @@ $excerpt = !empty($card['excerpt']['wysiwyg_excerpt'])
     ? $card['excerpt']['wysiwyg_excerpt']
     : $details['text_wysiwyg'] ?? null;
 
+if ($excerpt) {
+    $words = preg_split('/\s+/', trim($excerpt));
+    if (count($words) > 50) {
+        $excerpt = implode(' ', array_slice($words, 0, 50)) . '...';
+    }
+}
+
 // Settings
 $settings = get_field('settings') ?? [];
 $bg_color = $settings['bg_color'] ?? 'bg-transparent';
@@ -79,18 +86,6 @@ $image_width_lg = '444';
 $image_width_xl = '540';
 $image_width_xxl = '636';
 $image_width_xxxl = '702';
-
-// Excerpt
-$excerpt_limit =
-    apply_filters(
-        'oo_set_news_excerpt_count_limit',
-        OO_NEWS_EXCERPT_WORDS_LIMIT,
-    ) ?? null;
-$excerpt_delimiter =
-    apply_filters('oo_set_news_excerpt_delimiter', '&nbsp;...') ?? null;
-$excerpt_trim =
-    wp_trim_words($excerpt, $excerpt_limit, $excerpt_delimiter) ?? null;
-$excerpt_word_count = str_word_count(strip_tags($excerpt)) ?? null;
 
 // Helpers
 $link_title_date = esc_html($title);
@@ -183,11 +178,7 @@ $link_title_more = sprintf(
             <?php } ?>
 			<?php if (!empty($excerpt)) { ?>
 				<div class="c-news-card__text o-text --is-wysiwyg">
-					<?php if ($excerpt_word_count > $excerpt_limit) {
-         echo $excerpt_trim;
-     } else {
-         echo $excerpt;
-     } ?>
+					<?php echo $excerpt; ?>
 				</div>
 			<?php } ?>
 
