@@ -36,6 +36,9 @@
     &.--is-matterport {
     }
 
+    &.--is-flatfinder {
+    }
+
     &.--is-sprengnetter {
       aspect-ratio: auto;
     }
@@ -66,6 +69,17 @@
       aspect-ratio: auto;
     }
 
+    &.--is-erblotse {
+    }
+
+    &.--is-fiba-immohyp-zinsinfo {
+      min-height: 900px;
+
+      @include media-breakpoint-up(xl) {
+        min-height: 1000px;
+      }
+    }
+
     &.--is-heyflow {
     }
 
@@ -78,6 +92,10 @@
 
     &.--is-maklaro {
       aspect-ratio: auto;
+    }
+
+    &.--is-avvocato-andreani {
+      min-height: 650px;
     }
 
     &.--is-prohyp {
@@ -164,6 +182,64 @@
 
     &.--is-provenexpert {
       aspect-ratio: unset;
+    }
+
+    &.--is-itrk {
+    }
+
+    &.--is-ivd {
+      min-height: 900px;
+    }
+
+    &.--is-energieausweis-vorschau {
+    }
+
+    &.--is-hausverkauf-energieausweis {
+    }
+
+    &.--is-finlink {
+      min-height: 900px;
+
+      @include media-breakpoint-up(xl) {
+        min-height: 1000px;
+      }
+    }
+
+    &.--is-fincrm {
+      aspect-ratio: auto;
+    }
+
+    &.--is-dasinvest {
+      min-height: 700px;
+    }
+
+    &.--is-europace {
+      min-height: 1700px;
+      @include media-breakpoint-up(md) {
+        min-height: 1300px;
+      }
+    }
+
+    &.--is-immobillie {
+      min-height: 600px;
+    }
+
+    &.--is-immofenster {
+      min-height: 700px;
+    }
+
+    &.--is-wohnrechner {
+      min-height: 1100px;
+    }
+  }
+
+  &__itrk-legaltext {
+    & h2 {
+      margin-top: 2rem;
+    }
+
+    @include media-breakpoint-up(md) {
+      margin-top: 4rem;
     }
   }
 }
