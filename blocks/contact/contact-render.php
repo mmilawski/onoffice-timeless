@@ -484,55 +484,26 @@ $sub_header_level = !empty($header_level) ? $header_level + 1 : 3;
                                 'oo_theme',
                             ) .
                             '">';
-                        $map = $address['maps'] ?? [];
+                        $map_field_value = $address['maps'] ?? [];
+                        $map = is_array($map_field_value)
+                            ? $map_field_value
+                            : [];
+
                         if (
-                            $map_type == 'open-street-map' &&
-                            !empty($address['street']) &&
-                            !empty($address['zip'])
+                            $map_type === 'open-street-map' &&
+                            function_exists('oo_get_osm_coords')
                         ) {
-                            $q = $address['street'] . ' ' . $address['zip'];
-                            $map['street_name'] = $address['street'];
-                            $url =
-                                'https://nominatim.openstreetmap.org/search?q=' .
-                                urlencode($q) .
-                                '&format=json&polygon=1&addressdetails=1';
-                            $options = [
-                                'http' => [
-                                    'method' => 'GET',
-                                    'header' =>
-                                        "Accept-language: de\r\nUser-Agent: Mozilla/5.0 \r\n",
-                                ],
-                            ];
-                            $context = stream_context_create($options);
-                            $response = file_get_contents(
-                                $url,
-                                false,
-                                $context,
+                            $osm_coords = oo_get_osm_coords(
+                                $address['street'] ?? '',
+                                $address['zip'] ?? '',
                             );
-                            if ($response === false) {
-                                error_log(
-                                    'OpenStreetMap-Request failed: ' .
-                                        $response,
-                                );
+
+                            if (is_array($osm_coords)) {
+                                $map['lat'] = $osm_coords['lat'] ?? null;
+                                $map['lng'] = $osm_coords['lng'] ?? null;
+                                $map['place_id'] =
+                                    $osm_coords['place_id'] ?? null;
                             }
-                            if ($response === [] || $response === '[]') {
-                                error_log(
-                                    'OpenStreetMap-Request no Coordinates found',
-                                );
-                            }
-                            $data = json_decode($response);
-                            if (
-                                empty($data[0]) ||
-                                !isset($data[0]->lat) ||
-                                !isset($data[0]->lon)
-                            ) {
-                                error_log(
-                                    'OpenStreetMap-Request no Coordinates found',
-                                );
-                            }
-                            $map['lat'] = $data[0]->lat;
-                            $map['lng'] = $data[0]->lon;
-                            $map['place_id'] = $data[0]->place_id;
                         }
                         $map_lat = $map['lat'] ?? null;
                         $map_lng = $map['lng'] ?? null;
