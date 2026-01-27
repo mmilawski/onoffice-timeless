@@ -1,0 +1,35 @@
+// ==========================================================================
+// Third-Party Integrations
+// ==========================================================================
+
+// ProvenExpert
+// --------------------------------------------------------------------------
+
+// Hide ProvenExpert bottom bar on mobile (not responsive by ProvenExpert)
+#ProvenExpert_widgetbar_container {
+  @media (max-width: 1139px) {
+    display: none;
+  }
+}
+
+.ProvenExpert_widget_container {
+  display: block !important;
+  width: fit-content;
+}
+
+// Add padding to global ProvenExpert widgets for spacing from edge
+.--is-global .provenExpertWidgetContent,
+.--is-global .ProvenExpert_widget_container {
+  padding: 2rem 1rem;
+}
+
+// ProSeal Widget positioning
+.pe-pro-seal {
+  // Ensure minimum bottom spacing on all devices
+  bottom: 100px !important;
+
+  // Add extra spacing on mobile devices
+  @media (max-width: 767px) {
+    bottom: 100px !important;
+  }
+}

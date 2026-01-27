@@ -168,3 +168,10 @@
     padding-bottom: 4rem;
   }
 }
+
+// Add padding to footer__bottom when ProvenExpert bottom bar widget is present
+body:has(.provenExpertWidgetContent) .c-footer__bottom {
+  @include media-breakpoint-up(lg) {
+    padding-bottom: 50px;
+  }
+}

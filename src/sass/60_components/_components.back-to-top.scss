@@ -74,3 +74,10 @@
     transform: translateY(-4rem);
   }
 }
+
+// Move up when ProvenExpert bottom bar is present
+body:has(.provenExpertWidgetContent) .c-back-to-top {
+  @include media-breakpoint-up(md) {
+    bottom: 4.5rem;
+  }
+}
