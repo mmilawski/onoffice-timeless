@@ -228,7 +228,7 @@
     }
   }
 
-  & + *:not(&) {
+  & + *:not(&):not(.c-customer-area.--logged-in) {
     padding-top: $mobile-section-padding-top;
     @include media-breakpoint-up(xl) {
       padding-top: $desktop-section-padding-top;

@@ -43,14 +43,18 @@
   $bg-colors: 'transparent', 'light', 'dark', 'primary', 'secondary';
 
   // remove padding if sections with the same color are underneath each other
-  @each $color in $bg-colors {
-    // apply only if both are forms
-    &.--bg-#{$color}.c-forms:not(.--has-bg-image)
-      + &.--bg-#{$color}.c-forms:not(.--has-bg-image),
-    // apply only if neither is a form
-    &.--bg-#{$color}:not(.c-forms):not(.--has-bg-image)
-      + &.--bg-#{$color}:not(.c-forms):not(.--has-bg-image) {
-      padding-top: 0;
+  // but not when section has --logged-in (customer area logged-in state)
+  // and do not collapse customer-area spacing in logged-out state
+  &:not(.--logged-in):not(.c-banner) {
+    @each $color in $bg-colors {
+      // apply only if both are forms
+      &.--bg-#{$color}.c-forms:not(.--has-bg-image)
+        + &.--bg-#{$color}.c-forms:not(.--has-bg-image),
+      // apply only if neither is a form
+      &.--bg-#{$color}:not(.c-forms):not(.--has-bg-image)
+        + &.--bg-#{$color}:not(.c-forms):not(.--has-bg-image) {
+        padding-top: 0;
+      }
     }
   }
 }
