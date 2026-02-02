@@ -50,7 +50,7 @@ $energy_fields = [
     'energiepassJahrgang',
 ];
 
-$price_fields = ['kaufpreis', 'kaltmiete'];
+$price_fields = get_price_fields();
 
 $iframe_display = filter_var(
     get_field('iframe_display', 'option')['display_as_iframe'] ?? false,
