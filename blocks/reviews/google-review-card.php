@@ -55,14 +55,14 @@ if (
      $photo,
  ); ?>" alt="<?php echo htmlspecialchars(
     $author,
-); ?>" width="48" height="48"/> <?php } ?>
+); ?>" width="64" height="64"/> <?php } ?>
 
                 
 
 </div>
-                            <div><p class="c-google-review-card__name o-headline --h3"><?php echo htmlspecialchars(
+                            <div><span class="c-google-review-card__name o-headline --h5"><?php echo htmlspecialchars(
                                 $author,
-                            ); ?></p>
+                            ); ?></span>
                                         <p class="c-google-review-card__date">
                                             <?php echo htmlspecialchars(
                                                 $date,
@@ -118,25 +118,107 @@ if (
                                 <?php echo htmlspecialchars($text); ?>
                             </p>
                         </div>
-
-                        <button class="c-google-review-card__more c-read-more" 
-                            data-open-text="<?php esc_html_e(
-                                'Mehr anzeigen',
-                                'oo_theme',
-                            ); ?>"
-                            data-close-text="<?php esc_html_e(
-                                'Weniger anzeigen',
-                                'oo_theme',
-                            ); ?>"
-                            aria-expanded="false" aria-controls="<?php echo $uniqid; ?>">
-                            <?php echo esc_html__(
-                                'Mehr anzeigen',
-                                'oo_theme',
-                            ); ?>
+                        <button class="c-google-review-card__more c-read-more --open-popup"
+                                data-review-show-more
+                                data-popup="<?php echo $uniqid; ?>-dialog"
+                                aria-haspopup="dialog"
+                                data-open-text="<?php esc_html_e(
+                                    'Mehr anzeigen',
+                                    'oo_theme',
+                                ); ?>"
+                                data-close-text="<?php esc_html_e(
+                                    'Weniger anzeigen',
+                                    'oo_theme',
+                                ); ?>"
+                                aria-expanded="false"
+                                aria-controls="<?php echo $uniqid; ?>">
+                            <?php esc_html_e('Mehr anzeigen', 'oo_theme'); ?>
                         </button>
                     </div>
                 <?php } ?>
             </article>
+            <dialog id="<?php echo $uniqid; ?>-dialog" class="c-dialog --is-review --<?php echo $bg_color; ?>" aria-labelledby="<?php echo $uniqid; ?>-dialog">
+                <div class="c-dialog__wrapper">
+                    <button class="c-dialog__close c-icon-button --close-popup" aria-label="<?php esc_html_e(
+                        'Fenster schließen',
+                        'oo_theme',
+                    ); ?>">
+                        <?php oo_get_icon('close', true, [
+                            'class' => 'c-icon-button__icon --close',
+                        ]); ?>
+                    </button>
+                    <div class="c-review-google-detail">
+                        <div class="c-review-google-detail__author">
+                            <?php if (!empty($author) && !empty($photo)) { ?>
+                                <div class="c-review-google-detail__image">
+                                    <img loading="lazy" referrerpolicy="no-referrer" src="<?php echo htmlspecialchars(
+                                        $photo,
+                                    ); ?>" alt="<?php echo htmlspecialchars(
+    $author,
+); ?>" width="64" height="64"/>
+                                </div>
+                                <div class="c-review-google-detail__info">
+                                    <span class="c-review-google-detail__name o-headline --h5"><?php echo htmlspecialchars(
+                                        $author,
+                                    ); ?></span>
+                                    <?php if (!empty($date)) { ?>
+                                        <p class="c-review-google-detail__date">
+                                            <?php echo htmlspecialchars(
+                                                $date,
+                                            ); ?>
+                                        </p>
+                                    <?php } ?>
+                                </div>
+                            <?php } ?>
+                        </div>
+                        <?php if ($rating) { ?>
+                            <?php
+                            $rating = round($rating * 2) / 2;
+                            $stars_total = 5;
+                            ?>
+                            <div class="c-review-google-detail__stars c-stars --star-color-<?php echo $color_stars; ?>" role="img" aria-label="<?php echo sprintf(
+    esc_attr__('Bewertung: %1$s von %2$s Sternen', 'oo_theme'),
+    $rating,
+    $stars_total,
+); ?>">
+                                <?php
+                                for ($i = 0; $i < floor($rating); $i++) {
+                                    $stars_total--;
+                                    echo '<span class="c-stars__star --filled">';
+                                    oo_get_icon('star');
+                                    echo '</span>';
+                                }
+
+                                if ($rating - floor($rating) === 0.5) {
+                                    $stars_total--;
+                                    echo '<span class="c-stars__star --half">';
+                                    echo '<span class="c-stars__star --filled">';
+                                    oo_get_icon('star');
+                                    echo '</span>';
+                                    echo '<span class="c-stars__star --empty">';
+                                    oo_get_icon('star');
+                                    echo '</span>';
+                                    echo '</span>';
+                                }
+
+                                for ($i = 0; $i < $stars_total; $i++) {
+                                    echo '<span class="c-stars__star --empty">';
+                                    oo_get_icon('star');
+                                    echo '</span>';
+                                }
+                                ?>
+                            </div>
+                        <?php } ?>
+                        <div class="c-review-google-detail__content">
+                            <?php if (!empty($text)) { ?>
+                                <div class="c-review-google-detail__text o-text --is-wysiwyg">
+                                    <?php echo htmlspecialchars($text); ?>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            </dialog>
         <?php
         }}
 }

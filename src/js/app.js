@@ -1,7 +1,6 @@
 $ = jQuery;
 
 jQuery(document).ready(function() {
-
   if( $('.c-table').length > 0  ) {
     $('.c-table').each(function( index, element) {
 
@@ -507,36 +506,27 @@ jQuery(document).ready(function() {
   }
 
   // Read more
-  const readMoreButton = document.querySelectorAll('.c-read-more, .c-property-details__more, .c-address-details__more');
-  if( readMoreButton.length > 0 ) {
-    readMoreButton.forEach(button => {
+  function toggleReadMoreText(button) {
       const openClass = '--is-open';
-    
+
       const targetId = button.getAttribute('aria-controls');
       const content = document.getElementById(targetId);
       const parentContainer = button.parentNode;
-    
+
       if (!content) return;
-    
       const openText = button.getAttribute('data-open-text');
       const closeText = button.getAttribute('data-close-text');
-    
-      button.addEventListener('click', event => {
-        event.preventDefault();
-      
-        const isExpanded = button.getAttribute('aria-expanded') === 'true';
-        const shouldExpand = !isExpanded;
-      
-        button.setAttribute('aria-expanded', String(shouldExpand));
-        content.classList.toggle(openClass, shouldExpand);
-        button.classList.toggle(openClass, shouldExpand);
-        button.textContent = shouldExpand ? closeText : openText;
-      
-        if (isExpanded && parentContainer) {
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      const shouldExpand = !isExpanded;
+
+      button.setAttribute('aria-expanded', String(shouldExpand));
+      content.classList.toggle(openClass, shouldExpand);
+      button.classList.toggle(openClass, shouldExpand);
+      button.textContent = shouldExpand ? closeText : openText;
+
+      if (isExpanded && parentContainer) {
           parentContainer.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    });
+      }
   }
 
   // Function to apply text shortening, read-more button and visibility adjustments based on word count and screen size
@@ -626,78 +616,87 @@ jQuery(document).ready(function() {
     })
   }
 
-  setupTeamOverlayHandling();
+    function togglePopupEventListener(button){
+        // Get the ID of the popup from the data-popup attribute
+        const popupId = button.getAttribute('data-popup');
+        const popupElement = document.getElementById(popupId);
 
-  function setPopupEventListener(openPopup){
-    if (openPopup.length > 0) {
-      openPopup.forEach(button => {
-        button.addEventListener('click', function(e) {
-          e.preventDefault();
-          // Get the ID of the popup from the data-popup attribute
-          const popupId = button.getAttribute('data-popup');
-          const popupElement = document.getElementById(popupId);
-
-          if (!popupElement) {
+        if (!popupElement) {
             return;
-          }
+        }
 
-          if (popupElement) {
+        if (popupElement) {
             setTimeout(() => {
                 popupElement.focus();
             }, 10);
             const closeButton = popupElement.querySelector('.c-popup__close, .--close-popup');
             if (popupElement instanceof HTMLDialogElement && typeof popupElement.showModal === 'function') {
-              popupElement.showModal();
+                popupElement.showModal();
             }
             popupElement.classList.add('--is-open');
             document.body.classList.add('--modal-open');
 
             function closePopup() {
-              if (popupElement.dataset.unclosable === 'true') {
-                  const propertyListUrl = window.ooTimelessTheme?.urls?.propertyList || '/';
-                  const referrer = document.referrer;
-                  
-                  if (referrer && referrer !== window.location.href) {
-                      window.location.href = referrer;
-                  } else {
-                      window.location.href = propertyListUrl;
-                  }
-                  return; // Stop further execution
-              }
+                if (popupElement.dataset.unclosable === 'true') {
+                    const propertyListUrl = window.ooTimelessTheme?.urls?.propertyList || '/';
+                    const referrer = document.referrer;
 
-              popupElement.classList.remove('--is-open');
-              if (popupElement instanceof HTMLDialogElement && typeof popupElement.close === 'function') {
-                popupElement.close();
-              }
-              document.body.classList.remove('--modal-open');
+                    if (referrer && referrer !== window.location.href) {
+                        window.location.href = referrer;
+                    } else {
+                        window.location.href = propertyListUrl;
+                    }
+                    return; // Stop further execution
+                }
+
+                popupElement.classList.remove('--is-open');
+                if (popupElement instanceof HTMLDialogElement && typeof popupElement.close === 'function') {
+                    popupElement.close();
+                }
+                document.body.classList.remove('--modal-open');
             }
 
             if (closeButton) {
-              closeButton.addEventListener('click', closePopup);
+                closeButton.addEventListener('click', closePopup);
             }
 
             popupElement.addEventListener('click', (event) => {
-              if (event.target === popupElement) {
-                closePopup();
-              }
+                if (event.target === popupElement) {
+                    closePopup();
+                }
             });
 
             // Close popup on press ESC
             document.addEventListener('keydown', function(event) {
-              if (event.key === 'Escape') {
-                e.preventDefault();
-                closePopup();
-              }
+                if (event.key === 'Escape') {
+                    e.preventDefault();
+                    closePopup();
+                }
             });
-          }
-        });
-      });
+        }
     }
-  }
 
-  // Open popup
-  const openPopup = document.querySelectorAll('.--open-popup');
-  setPopupEventListener(openPopup)
+    setupTeamOverlayHandling();
+  // Handle buttons which open extended content
+  const showMoreButtons = document.querySelectorAll('.--open-popup, .c-read-more, .c-property-details__more, .c-address-details__more');
+    showMoreButtons.forEach(button => {
+        const isReview = button.hasAttribute('data-review-show-more');
+        const readMoreClasses = ['c-read-more', 'c-property-details__more', 'c-address-details__more'];
+        const hasReadMore = readMoreClasses.some(rmClass => button.classList.contains(rmClass));
+        const hasPopup = button.classList.contains('--open-popup');
+
+        button.addEventListener('click', function(e) {
+            const isMobile = () => window.innerWidth <= 768;
+            e.preventDefault();
+            if (isReview) {
+                return isMobile() ? toggleReadMoreText(button) : togglePopupEventListener(button);
+            } else if (hasReadMore) {
+                toggleReadMoreText(button);
+            } else if (hasPopup) {
+                togglePopupEventListener(button);
+            }
+        });
+    });
   
 
   // Lightbox
@@ -1055,7 +1054,12 @@ jQuery(document).ready(function() {
       if(slider.classList.contains('--is-team-slider')){
         splide.on('ready', function() {
           const openPopup = slider.querySelectorAll('.--open-popup-team-slider')
-          setPopupEventListener(openPopup)
+            openPopup.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    togglePopupEventListener(button);
+                });
+            });
         })
       }
 
@@ -1112,7 +1116,12 @@ jQuery(document).ready(function() {
       });
       // Re-query after cloning and attach fresh listeners
       const refreshedPopup = document.querySelectorAll('.--is-team-slider .--open-popup-team-slider');
-      setPopupEventListener(refreshedPopup);
+        refreshedPopup.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                togglePopupEventListener(button);
+            });
+        });
     }
   }, 500);
 
