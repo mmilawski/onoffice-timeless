@@ -7,7 +7,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-up(lg) {
       gap: 2rem;
     }
   }
@@ -16,7 +16,7 @@
     display: flex;
     gap: 1.5rem;
     margin-bottom: 1rem;
-    @include media-breakpoint-up(xxl) {
+    @include media-breakpoint-up(lg) {
       gap: 2rem;
       margin-bottom: 3rem;
     }
@@ -30,10 +30,9 @@
 
   &__wrapper {
     display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    gap: 2.5rem;
     @include media-breakpoint-up(lg) {
-      gap: 2rem;
+      gap: 5rem;
     }
   }
 
@@ -49,28 +48,38 @@
   }
 
   &__addresses {
-    display: grid;
-    gap: 1.5rem;
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    padding: 0;
 
     @include media-breakpoint-up(lg) {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-    }
-
-    @include media-breakpoint-up(xxl) {
-      grid-template-columns: repeat(3, 1fr);
+      padding-right: 1rem;
+      padding-left: 1rem;
     }
   }
 
   &__slider {
   }
 
-  &__pagination {
-  }
-
   &__buttons-wrapper {
   }
 
   &__buttons {
+    padding-top: 1rem;
+    @include media-breakpoint-up(lg) {
+      padding-top: 1rem;
+    }
+  }
+
+  &__shortcode {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    padding: 0;
+    @include media-breakpoint-up(lg) {
+      gap: 5rem;
+    }
   }
 }

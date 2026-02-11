@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-up(lg) {
       gap: 2rem;
     }
   }
@@ -14,7 +14,7 @@
     display: flex;
     flex-direction: row;
     gap: 1.5rem;
-    @include media-breakpoint-up(xl) {
+    @include media-breakpoint-up(lg) {
       gap: 2rem;
     }
   }
@@ -26,23 +26,16 @@
   }
 
   &__shortcode {
-    padding: 0 1.5rem 1.5rem 1.5rem;
-    background-color: var(--oo-color-bg);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 
-    &.--bg-light {
-      background-color: var(--oo-color-light-bg, var(--oo-color-bg));
+    @include media-breakpoint-up(lg) {
+      gap: 5rem;
     }
 
-    &.--bg-dark {
-      background-color: var(--oo-color-dark-bg, var(--oo-color-bg));
-    }
-
-    &.--bg-primary {
-      background-color: var(--oo-color-primary-bg, var(--oo-color-bg));
-    }
-
-    &.--bg-secondary {
-      background-color: var(--oo-color-secondary-bg, var(--oo-color-bg));
+    & .c-form__fieldset {
+      padding: 0;
     }
   }
 }

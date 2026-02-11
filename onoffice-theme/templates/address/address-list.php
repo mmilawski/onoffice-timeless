@@ -62,25 +62,35 @@ $agent_count = method_exists($pAddressList, 'getAddressOverallCount')
 ?>
 
 <?php if ($agent_count > 0) { ?>
-    <?php if (!$is_slider) { ?>
-        <?php if ($map_html && $is_show_map) { ?>
-            <div class="c-address-list__map-wrapper">
+
+   <?php if ($map_html && $is_show_map) { ?>
+    <div class="c-address-list__container o-container">
+        <div class="o-row">
+            <div class="c-address-list__map-wrapper o-col-12 o-col-lg-10 u-offset-lg-1">
                 <?php echo $map_html; ?>
             </div>
+        </div>
+        </div>   
         <?php } ?>
 
-        <div class="c-address-list__wrapper">
 
-            <div class="c-address-list__nav o-row">
-                <p class="c-address-list__count o-col-12 o-col-md-6">
-                    <?php printf(
-                        esc_html__('%d Berater gefunden', 'oo_theme'),
-                        $agent_count,
-                    ); ?>
-                </p>
+        <div class="c-address-list__container o-container">
+            <div class="c-address-list__wrapper o-row">
+                <div class="c-address-list__nav o-col-12 o-col-lg-10 u-offset-lg-1">
+                    <p class="c-address-list__count">
+                            <?php printf(
+                                esc_html__('%d Berater gefunden', 'oo_theme'),
+                                $agent_count,
+                            ); ?>
+                    </p>
+                </div>
             </div>
-
-            <div class="c-address-list__addresses">
+        </div>
+   
+ <?php if (!$is_slider) { ?>
+    <div class="c-address-list__container o-container">
+        <div class="c-address-list__wrapper o-row">
+            <div class="c-address-list__addresses o-col-12 o-col-lg-10 u-offset-lg-1">
                 <?php foreach (
                     $pAddressList->getRows()
                     as $address_id => $current_address
@@ -91,12 +101,15 @@ $agent_count = method_exists($pAddressList, 'getAddressOverallCount')
 
             <?php oo_get_template('components', '', 'component-pagination', [
                 'type' => 'address',
-                'class' => 'c-address-list__pagination --on-' . $bg_color,
+                'class' =>
+                    'c-address-list__pagination o-col-12 --on-' . $bg_color,
                 'anchor' => $anchor,
             ]); ?>
-        </div>
+      </div>
+      </div>
     <?php } else { ?>
-        <div class="c-address-lz__slider --on-<?php echo $bg_color; ?> c-slider --is-addresses-slider splide" data-splide='{"perPage":1,"perMove":1,"gap":32,"pagination":false,"snap":true,"lazyLoad":"nearby","mediaQuery":"min","breakpoints":{"991":{"perPage":2},"1400":{"perPage":3}}}'>
+       
+        <div id="outerslider" class="c-address-list__slider --on-<?php echo $bg_color; ?> c-slider --is-addresses-slider splide" data-splide='{"perPage":1,"perMove":1,"gap":32,"pagination":false,"arrows":true,"page":false,"snap":true,"lazyLoad":"nearby","mediaQuery":"min","breakpoints":{"992":{"perPage":3},"1400":{"perPage":4}}}'>
             <div class="c-slider__track splide__track">
                 <div class="c-slider__list splide__list">
                     <?php foreach (
@@ -108,7 +121,8 @@ $agent_count = method_exists($pAddressList, 'getAddressOverallCount')
                 </div>
             </div>
 
-            <div class="c-slider__navigation splide__navigation">
+            <div class="c-slider__navigation__wrapper o-container">
+            <div class="c-slider__navigation splide__navigation --is-addresses-slider">
                 <div class="c-slider__progress splide__progress">
                     <div class="c-slider__progress-bar splide__progress-bar"></div>
                 </div>
@@ -133,13 +147,21 @@ $agent_count = method_exists($pAddressList, 'getAddressOverallCount')
                     </button>
                 </div>
             </div>
+            </div>
         </div>
+       
     <?php } ?>
 <?php } else { ?>
-    <p class="c-address-list__count --no-addresses">
-        <?php printf(
-            esc_html__('%d Berater gefunden', 'oo_theme'),
-            $agent_count,
-        ); ?>
-    </p>
+    <div class="c-address-list__container o-container">
+            <div class="c-address-list__wrapper o-row">
+                <div class="c-address-list__nav o-col-12 o-col-lg-10 u-offset-lg-1">
+                    <p class="c-address-list__count --no-addresses">
+                            <?php printf(
+                                esc_html__('%d Berater gefunden', 'oo_theme'),
+                                $agent_count,
+                            ); ?>
+                    </p>
+                </div>
+            </div>
+        </div>
 <?php } ?>

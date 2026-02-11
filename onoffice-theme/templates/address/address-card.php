@@ -126,6 +126,7 @@ foreach ($current_address as $field => $value) {
         (is_array($value) &&
             empty(trim(implode(', ', array_filter($value)), ', '))) ||
         $value == '0000-00-00' ||
+        $value == '0000-00-00 00:00:00' ||
         $value == '0.00' ||
         $value == 'Nein' ||
         $value == 'No' ||
@@ -164,7 +165,7 @@ foreach ($current_address as $field => $value) {
 }
 ?>
 
-<article class="c-address-card --bg-transparent <?php if ($is_slider) {
+<article class="c-address-card <?php if ($is_slider) {
     echo '--on-slider c-slider__slide splide__slide';
 } ?>">
     <?php
@@ -250,6 +251,7 @@ foreach ($current_address as $field => $value) {
     ?>
 
     <div class="c-address-card__content">
+        <div class="c-address-card__name-wrapper">
         <?php if (!empty($full_name)) { ?>
             <?php echo "<h{$header_level} " .
                 'class="c-address-card__name o-headline --h3">' .
@@ -257,31 +259,46 @@ foreach ($current_address as $field => $value) {
                 "</h{$header_level}>"; ?>
         <?php } ?>
 
-        <?php if (!empty($current_address['jobTitle'])) { ?>
-            <p class="c-address-card__job">
-                <?php echo $current_address['jobTitle']; ?>
-            </p>
-        <?php } ?>
+        <?php
+        $position = !empty($current_address['Position_iU'])
+            ? $current_address['Position_iU']
+            : (!empty($current_address['jobPosition'])
+                ? $current_address['jobPosition']
+                : (!empty($current_address['jobTitle'])
+                    ? $current_address['jobTitle']
+                    : ''));
 
-        <?php if (!empty($current_address['jobPosition'])) { ?>
-            <p class="c-address-card__job">
-                <?php echo $current_address['jobPosition']; ?>
+        if (!empty($position)) { ?>
+                <p class="c-address-card__job">
+                    <?php if (!empty($current_address['Zusatz1'])) {
+                        echo sprintf(
+                            esc_attr_x(
+                                '%1$s bei %2$s',
+                                'Jobbezeichnung bei Arbeitgeber',
+                                'oo_theme',
+                            ),
+                            $position,
+                            $current_address['Zusatz1'],
+                        );
+                    } else {
+                        echo $position;
+                    } ?>
             </p>
-        <?php } ?>
-
-        <?php if (!empty($current_address['Zusatz1'])) { ?>
-            <p class="c-address-card__job">
-                <?php echo $current_address['Zusatz1']; ?>
-            </p>
-        <?php } ?>
-
+        <?php }
+        ?>
+        </div>
         <?php if (!empty($address_fields_available)) { ?>
-            <div class="c-address-card__fields">
-                <?php
-                foreach ($address_features as $address_feature) {
+            <div class="c-address-card__fields c-item-features">
+                <?php foreach ($address_features as $address_feature) {
                     $field = $address_feature['field'];
                     $label = $address_feature['label'];
                     $value = $address_feature['value'];
+
+                    $isMultipleItems = is_array($value) && count($value) > 1;
+
+                    if (is_array($value)) {
+                        $value = implode(', ', $value);
+                    }
 
                     if (
                         $field == 'phone' ||
@@ -289,14 +306,22 @@ foreach ($current_address as $field => $value) {
                         $field == 'Telefon2'
                     ) {
                         $class = '--is-phone';
-                        $link = preg_match('/[0-9]/', $value)
-                            ? 'tel:' . oo_clean_link_number($value)
-                            : '';
+                        if (!$isMultipleItems && preg_match('/\d+/', $value)) {
+                            $link = 'tel:' . oo_clean_link_number($value);
+                        } else {
+                            $link = '';
+                        }
                     } elseif ($field == 'mobile') {
                         $class = '--is-mobile';
-                        $link = preg_match('/[0-9]/', $value)
-                            ? 'tel:' . oo_clean_link_number($value)
-                            : '';
+
+                        if (
+                            !$isMultipleItems &&
+                            preg_match('/[0-9]/', $value)
+                        ) {
+                            $link = 'tel:' . oo_clean_link_number($value);
+                        } else {
+                            $link = '';
+                        }
                     } elseif (
                         $field == 'fax' ||
                         $field == 'Telefax' ||
@@ -304,15 +329,28 @@ foreach ($current_address as $field => $value) {
                         $field == 'Telefax2'
                     ) {
                         $class = '--is-fax';
-                        $link = preg_match('/[0-9]/', $value)
-                            ? 'fax:' . oo_clean_link_number($value)
-                            : '';
+                        if (
+                            !$isMultipleItems &&
+                            preg_match('/[0-9]/', $value)
+                        ) {
+                            $link = 'fax:' . oo_clean_link_number($value);
+                        } else {
+                            $link = '';
+                        }
                     } elseif ($field == 'email' || $field == 'Email') {
-                        $email_utf8 = oo_clean_acf_email_utf8($value);
-                        $email_ascii = oo_clean_acf_email_ascii($value);
-                        $value = oo_antispambot(esc_html($email_utf8));
                         $class = '--is-email';
-                        $link = 'mailto:' . antispambot(esc_html($email_ascii));
+                        if (
+                            !$isMultipleItems &&
+                            filter_var($value, FILTER_VALIDATE_EMAIL)
+                        ) {
+                            $email_utf8 = oo_clean_acf_email_utf8($value);
+                            $email_ascii = oo_clean_acf_email_ascii($value);
+                            $value = oo_antispambot(esc_html($email_utf8));
+                            $link =
+                                'mailto:' . antispambot(esc_html($email_ascii));
+                        } else {
+                            $link = '';
+                        }
                     } elseif ($field == 'Homepage' || $field == 'url') {
                         $class = '--is-website';
                         $check_url = preg_match('~^https?://~i', $value)
@@ -339,13 +377,10 @@ foreach ($current_address as $field => $value) {
                         $target = '';
                     }
 
-                    echo '<dl class="c-address-card__item ' .
+                    echo '<dl class="c-address-card__item c-item-features__item ' .
                         (!empty($class) ? $class : '') .
                         '">';
-                    echo '<dt class="c-address-card__label">' .
-                        esc_html($label) .
-                        ':</dt>';
-                    echo '<dd class="c-address-card__value">';
+                    echo '<dt class="c-address-card__value c-item-features__value">';
                     if (!empty($link)) {
                         echo '<a class="c-link --text-color --on-bg-transparent" href="' .
                             $link .
@@ -359,74 +394,78 @@ foreach ($current_address as $field => $value) {
                             ? esc_html(implode(', ', $value))
                             : esc_html($value);
                     }
+
+                    echo '</dt>';
+                    echo '<dd class="c-address-card__label c-item-features__label">';
+                    echo esc_html($label);
                     echo '</dd>';
                     echo '</dl>';
-                }
-
-                if (!empty($reviews)) {
-                    echo '<a class="c-link --underlined --text-color --on-bg-transparent" href="' .
-                        $reviews .
-                        '" rel="noopener noreferrer" aria-label="' .
-                        esc_attr(
-                            sprintf(
-                                __(
-                                    'Bewertungen für %s ansehen (Öffnet in neuem Tab)',
-                                    'oo_theme',
-                                ),
-                                $full_name,
-                            ),
-                        ) .
-                        '" target="_blank">' .
-                        __('Bewertungen ansehen', 'oo_theme') .
-                        '</a>';
-                }
-                ?>
+                } ?>
             </div>
         <?php } ?>
-    </div>
+       
 
-    <?php if (
-        $network_fields_available ||
-        !empty($address_link) ||
-        !empty($phone)
-    ) { ?>
-        <div class="c-address-card__footer">
-            <?php if ($network_fields_available) {
-                echo '<ul class="c-address-card__networks c-social-media --is-content">';
-                foreach ($network_features as $network_feature) {
-                    $field = $network_feature['field'];
-                    $label = $network_feature['label'];
-                    $value = $network_feature['value'];
 
-                    $icon = match ($label) {
-                        'Facebook' => 'facebook',
-                        'Instagram' => 'instagram',
-                        'LinkedIn' => 'linkedin',
-                        'Pinterest' => 'pinterest',
-                        'TikTok' => 'tiktok',
-                        'Twitter' => 'x',
-                        'Xing' => 'xing',
-                        'YouTube' => 'youtube',
-                        default => null,
-                    };
 
-                    echo '<li class="c-social-media__item --' . $icon . '">';
-                    echo '<a class="c-social-media__link" href="' .
-                        esc_url($value) .
-                        '" rel="noopener noreferrer" target="_blank">';
-                    oo_get_icon($icon);
-                    echo '<span class="c-social-media__text u-screen-reader-only">' .
-                        $label .
-                        '</span>';
-                    echo '</a>';
-                    echo '</li>';
-                }
-                echo '</ul>';
-            } ?>
+<?php
+$networks = [];
 
-            <?php if (!empty($address_link) || !empty($phone)) { ?>
+if ($network_fields_available && !empty($network_features)) {
+    foreach ($network_features as $feature) {
+        $field = $feature['field'];
+        $label = $feature['label'];
+        $value = $feature['value'];
+
+        if (!empty($value)) {
+            $networks[$field] = [
+                'title' => $label,
+                'url' => esc_url($value),
+                'target' => '_blank',
+            ];
+        }
+    }
+}
+
+if (!empty($reviews) || !empty($networks)) { ?>
+        <div class="c-address-card__networks"> 
+            <?php
+            if (!empty($reviews)) {
+                echo '<a class="c-link --text-color --on-bg-transparent" href="' .
+                    $reviews .
+                    '" rel="noopener noreferrer" aria-label="' .
+                    esc_attr(
+                        sprintf(
+                            __(
+                                'Bewertungen für %s ansehen (Öffnet in neuem Tab)',
+                                'oo_theme',
+                            ),
+                            $full_name,
+                        ),
+                    ) .
+                    '" target="_blank">' .
+                    __('Bewertungen ansehen', 'oo_theme') .
+                    '</a>';
+            }
+
+            if ($networks && array_filter($networks)): ?>
+            <div class="c-address-card__row --social">
+            <?php oo_get_template('components', '', 'component-social-media', [
+                'networks' => $networks,
+                'additional_container_class' =>
+                    'c-address-card__social-links --is-address-card',
+            ]); ?>
+        </div>
+        <?php endif;
+            ?>
+
+        </div>
+        <?php }
+
+if (!empty($address_link)) { ?>
+    <div class="c-address-card__footer">
+
                 <div class="c-address-card__buttons c-buttons">
-                    <?php if (!empty($address_link)) { ?>
+             
                         <a href="<?php echo $address_link; ?>" class="c-address-card__button --is-detail c-button" aria-label="<?php echo !empty(
     $full_name
 )
@@ -437,22 +476,9 @@ foreach ($current_address as $field => $value) {
     ); ?>">
                             <?php echo __('Details anzeigen', 'oo_theme'); ?>
                         </a>
-                    <?php } ?>
-                    <?php if (!empty($phone_url)) { ?>
-                        <a class="c-address-card__button --is-phone c-icon-button --bigger" href="<?php echo $phone_url; ?>" aria-label="<?php echo !empty(
-    $full_name
-)
-    ? sprintf(esc_html_x('Anrufen bei %s', 'oo_theme'), $full_name)
-    : sprintf(
-        esc_html_x('Anrufen bei Adresse Nr. %d', 'oo_theme'),
-        $address_id,
-    ); ?>">
-                            <span class="c-icon-button__icon --phone"><?php oo_get_icon(
-                                'phone',
-                            ); ?></span>
-                        </a>
-                    <?php } ?>
-                    <?php if (!empty($address_link)) { ?>
+                  
+           
+                   
                         <a href="<?php echo $address_link; ?>#contact_form" class="c-address-card__button --is-form c-button --ghost" aria-label="<?php echo !empty(
     $full_name
 )
@@ -463,9 +489,12 @@ foreach ($current_address as $field => $value) {
     ); ?>">
                             <?php echo __('Kontaktformular', 'oo_theme'); ?>
                         </a>
-                    <?php } ?>
+               
                 </div>
-            <?php } ?>
+        
         </div>
-    <?php } ?>
+        
+    <?php }
+?>
+    </div>
 </article>

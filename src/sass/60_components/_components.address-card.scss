@@ -1,16 +1,52 @@
 .c-address-card {
   $c-address-card: &;
+  display: grid;
+  align-content: start;
+  .--is-addresses-slider & {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
 
-  display: flex;
-  flex-direction: column;
-  background-color: var(--oo-color-mix-bg-text-05);
-  color: var(--oo-color-text);
+  @include media-breakpoint-up(lg) {
+    grid-template-columns: 1fr 2fr;
+  }
 
-  &__wrapper,
-  &__link {
+  .--bg-transparent & {
+    background-color: var(
+      --oo-color-mix-bg-contrast-10,
+      var(--oo-color-primary)
+    );
+  }
+
+  .--bg-light & {
+    background-color: var(
+      --oo-color-light-mix-bg-contrast-10,
+      var(--oo-color-primary)
+    );
+  }
+  .--bg-dark & {
+    background-color: var(
+      --oo-color-dark-mix-bg-contrast-10,
+      var(--oo-color-primary)
+    );
+  }
+  .--bg-primary & {
+    background-color: var(
+      --oo-color-primary-mix-bg-contrast-10,
+      var(--oo-color-primary)
+    );
+  }
+  .--bg-secondary & {
+    background-color: var(
+      --oo-color-secondary-mix-bg-contrast-10,
+      var(---oo-color-primary)
+    );
+  }
+
+  &__wrapper {
     position: relative;
     overflow: hidden;
-    background-color: var(--oo-color-transparent-primary-10);
+    padding: 0;
   }
 
   &__link {
@@ -27,11 +63,20 @@
 
   &__picture {
     width: 100%;
-    height: auto;
-    aspect-ratio: 1 / 1;
+    height: 100%;
+
+    @include media-breakpoint-up(lg) {
+      aspect-ratio: 1 / 1;
+    }
+
+    .--is-addresses-slider & {
+      height: auto;
+      aspect-ratio: 1 / 1;
+    }
   }
 
   &__image {
+    object-position: center center;
   }
 
   &__flag {
@@ -40,32 +85,40 @@
     left: $flag-offset;
     display: flex;
     width: fit-content;
+    text-transform: uppercase;
   }
 
   &__content {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-    gap: 1rem;
-    padding: 1rem;
+    gap: 1.5rem;
+    padding: 1.5rem 1rem;
+    @include media-breakpoint-up(lg) {
+      padding: 1.5rem;
+    }
+
+    #{$c-address-card}__fields {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      @include media-breakpoint-up(lg) {
+        padding-top: 1rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
   }
 
   &__name {
   }
 
-  &__job {
-    font-family: $font-family-text-bold;
-    font-weight: $font-weight-text-bold;
-  }
-
-  &__fields {
+  &__name-wrapper {
     display: flex;
+    gap: 0.5rem;
     flex-direction: column;
   }
 
+  &__job {
+  }
+
   &__item {
-    display: flex;
-    gap: 0.5rem;
   }
 
   &__label {
@@ -73,8 +126,6 @@
   }
 
   &__value {
-    hyphens: auto;
-    word-break: break-word;
   }
 
   &__reviews {
@@ -82,41 +133,49 @@
 
   &__footer {
     display: flex;
-    flex-direction: column;
+    flex-direction: vertical;
     gap: 2rem;
-    padding: 1rem;
+    flex: 1;
+    align-items: flex-end;
+    padding-top: 1rem;
   }
 
   &__networks {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 2rem;
+    flex-wrap: wrap;
+
+    @include media-breakpoint-up(lg) {
+      flex-direction: row;
+    }
+
+    & .--social {
+      @include media-breakpoint-up(lg) {
+        margin-left: auto;
+      }
+    }
   }
 
   &__buttons {
     display: grid;
-    grid-template-areas: 'detail phone' 'form form';
-    grid-template-columns: 1fr auto;
-    @include media-breakpoint-up(md) {
-      display: flex;
-      flex-wrap: wrap;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+
+    @include media-breakpoint-up(lg) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.5rem;
+    }
+
+    .--on-slider & {
+      grid-template-columns: repeat(1, minmax(0, 1fr));
     }
   }
 
   &__button {
-    @include media-breakpoint-up(md) {
-      flex: 1 1 calc(50% - 1rem);
-      white-space: nowrap;
-    }
-
-    &.--is-detail {
-      grid-area: detail;
-    }
-    &.--is-phone {
-      grid-area: phone;
-      @include media-breakpoint-up(md) {
-        display: none;
-      }
-    }
-    &.--is-form {
-      grid-area: form;
-    }
+    width: 100%;
   }
 }
