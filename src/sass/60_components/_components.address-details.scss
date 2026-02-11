@@ -6,6 +6,8 @@
   flex-direction: column;
 
   &__container {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   &__row {
@@ -21,6 +23,7 @@
   &__main {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 1rem;
   }
 
@@ -66,14 +69,14 @@
     @include media-breakpoint-up(lg) {
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 2.5rem;
     }
   }
 
   &__sidebar-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 2.5rem;
     padding-inline: 1rem;
     width: 100%;
 
@@ -88,7 +91,6 @@
   &__picture {
     overflow: hidden;
     aspect-ratio: 1/1;
-    order: -1;
     margin-inline: 1rem;
     width: calc(100% - 2rem);
     height: auto;
@@ -110,6 +112,13 @@
   }
 
   &__button-share {
+    width: 100%;
+
+    &.c-button.--open-popup {
+      margin: 0;
+      max-width: 100%;
+      justify-content: center;
+    }
   }
 
   &__properties {
@@ -120,5 +129,36 @@
   }
 
   &__form {
+    .c-forms__container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+      justify-content: space-between;
+
+      @include media-breakpoint-down(md) {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
+  }
+
+  // Address text features
+  &__text-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__text-content {
+    &.--shorten {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 16;
+      line-clamp: 16;
+      overflow: hidden;
+    }
+  }
+
+  &__text-more {
+    align-self: flex-start;
   }
 }

@@ -34,6 +34,7 @@ $dont_echo = [
     'Name',
     'jobTitle',
     'jobPosition',
+    'Position_iU',
     'Zusatz1',
     'bewertungslinkWebseite',
     'laengengrad',
@@ -298,6 +299,8 @@ foreach ($current_address as $field => $value) {
 
                     if (is_array($value)) {
                         $value = implode(', ', $value);
+                    } elseif (!is_string($value)) {
+                        $value = (string) $value;
                     }
 
                     if (

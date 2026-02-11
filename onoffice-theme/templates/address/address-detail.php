@@ -29,6 +29,7 @@ $dont_echo = [
     'Name',
     'jobTitle',
     'jobPosition',
+    'Position_iU',
     'Zusatz1',
     'bewertungslinkWebseite',
     'bildWebseite',
@@ -131,6 +132,9 @@ foreach ($current_address_array as $address_id => $current_address) {
     $shortcode_reference_properties = $pAddressList->getShortCodeReferenceEstates();
     $shortcode_form = $pAddressList->getShortCodeForm();
 
+    // properties count
+    $properties_count = $pAddressList->getCountEstates($address_id);
+
     // fields
     $address_features = [];
     $address_fields_available = false;
@@ -145,6 +149,7 @@ foreach ($current_address_array as $address_id => $current_address) {
             (is_array($value) &&
                 empty(trim(implode(', ', array_filter($value)), ', '))) ||
             $value == '0000-00-00' ||
+            $value == '0000-00-00 00:00:00' ||
             $value == '0.00' ||
             $value == 'Nein' ||
             $value == 'No' ||
@@ -214,27 +219,37 @@ foreach ($current_address_array as $address_id => $current_address) {
                             </h1>
                         <?php } ?>
 
-                        <?php if (!empty($job_title)) { ?>
-                            <p class="c-address-details__job">
-                                <?php echo $job_title; ?>
-                            </p>
-                        <?php } ?>
+                        <?php
+                        $position = !empty($current_address['Position_iU'])
+                            ? $current_address['Position_iU']
+                            : (!empty($current_address['jobPosition'])
+                                ? $current_address['jobPosition']
+                                : (!empty($current_address['jobTitle'])
+                                    ? $current_address['jobTitle']
+                                    : ''));
 
-                        <?php if (!empty($job_position)) { ?>
+                        if (!empty($position)) { ?>
                             <p class="c-address-details__job">
-                                <?php echo $job_position; ?>
+                                <?php if (!empty($current_address['Zusatz1'])) {
+                                    echo sprintf(
+                                        esc_attr_x(
+                                            '%1$s bei %2$s',
+                                            'Jobbezeichnung bei Arbeitgeber',
+                                            'oo_theme',
+                                        ),
+                                        $position,
+                                        $current_address['Zusatz1'],
+                                    );
+                                } else {
+                                    echo $position;
+                                } ?>
                             </p>
-                        <?php } ?>
-
-                        <?php if (!empty($full_name) && !empty($company)) { ?>
-                            <p class="c-address-details__job">
-                                <?php echo $company; ?>
-                            </p>
-                        <?php } ?>
+                        <?php }
+                        ?>
 
                         <?php if (!empty($reviews)) { ?>
                             <p class="c-address-details__reviews">
-                                <a class="c-link --underlined --text-color --on-<?php echo $bg_color; ?>" href="<?php echo $reviews; ?>" aria-label="<?php esc_attr_e(
+                                <a class="c-link --text-color --on-<?php echo $bg_color; ?>" href="<?php echo $reviews_url; ?>" aria-label="<?php esc_attr_e(
     'Bewertungen ansehen (Öffnet in neuem Tab)',
     'oo_theme',
 ); ?>" rel="noopener noreferrer" target="_blank">
@@ -257,6 +272,15 @@ foreach ($current_address_array as $address_id => $current_address) {
                                 $label = $address_feature['label'];
                                 $value = $address_feature['value'];
 
+                                $isMultipleItems =
+                                    is_array($value) && count($value) > 1;
+
+                                if (is_array($value)) {
+                                    $value = implode(', ', $value);
+                                } elseif (!is_string($value)) {
+                                    $value = (string) $value;
+                                }
+
                                 if ($fields_counter > $fields_more) {
                                     if ($number === $fields_more) { ?>
                                         <div class="c-address-details__features-wrapper" id="more-address-features">
@@ -269,14 +293,28 @@ foreach ($current_address_array as $address_id => $current_address) {
                                     $field == 'Telefon2'
                                 ) {
                                     $class = '--is-phone';
-                                    $link = preg_match('/[0-9]/', $value)
-                                        ? 'tel:' . oo_clean_link_number($value)
-                                        : '';
+                                    if (
+                                        !$isMultipleItems &&
+                                        preg_match('/[0-9]/', $value)
+                                    ) {
+                                        $link =
+                                            'tel:' .
+                                            oo_clean_link_number($value);
+                                    } else {
+                                        $link = '';
+                                    }
                                 } elseif ($field == 'mobile') {
                                     $class = '--is-mobile';
-                                    $link = preg_match('/[0-9]/', $value)
-                                        ? 'tel:' . oo_clean_link_number($value)
-                                        : '';
+                                    if (
+                                        !$isMultipleItems &&
+                                        preg_match('/[0-9]/', $value)
+                                    ) {
+                                        $link =
+                                            'tel:' .
+                                            oo_clean_link_number($value);
+                                    } else {
+                                        $link = '';
+                                    }
                                 } elseif (
                                     $field == 'fax' ||
                                     $field == 'Telefax' ||
@@ -284,26 +322,43 @@ foreach ($current_address_array as $address_id => $current_address) {
                                     $field == 'Telefax2'
                                 ) {
                                     $class = '--is-fax';
-                                    $link = preg_match('/[0-9]/', $value)
-                                        ? 'fax:' . oo_clean_link_number($value)
-                                        : '';
+                                    if (
+                                        !$isMultipleItems &&
+                                        preg_match('/[0-9]/', $value)
+                                    ) {
+                                        $link =
+                                            'fax:' .
+                                            oo_clean_link_number($value);
+                                    } else {
+                                        $link = '';
+                                    }
                                 } elseif (
                                     $field == 'email' ||
                                     $field == 'Email'
                                 ) {
-                                    $email_utf8 = oo_clean_acf_email_utf8(
-                                        $value,
-                                    );
-                                    $email_ascii = oo_clean_acf_email_ascii(
-                                        $value,
-                                    );
-                                    $value = oo_antispambot(
-                                        esc_html($email_utf8),
-                                    );
                                     $class = '--is-email';
-                                    $link =
-                                        'mailto:' .
-                                        antispambot(esc_html($email_ascii));
+                                    if (
+                                        !$isMultipleItems &&
+                                        filter_var(
+                                            $value,
+                                            FILTER_VALIDATE_EMAIL,
+                                        )
+                                    ) {
+                                        $email_utf8 = oo_clean_acf_email_utf8(
+                                            $value,
+                                        );
+                                        $email_ascii = oo_clean_acf_email_ascii(
+                                            $value,
+                                        );
+                                        $value = oo_antispambot(
+                                            esc_html($email_utf8),
+                                        );
+                                        $link =
+                                            'mailto:' .
+                                            antispambot(esc_html($email_ascii));
+                                    } else {
+                                        $link = '';
+                                    }
                                 } elseif (
                                     $field == 'Homepage' ||
                                     $field == 'url'
@@ -469,7 +524,9 @@ foreach ($current_address_array as $address_id => $current_address) {
                                         ),
                                     ) .
                                     '" target="_blank">';
-                                oo_get_icon($icon);
+                                oo_get_icon($icon, true, [
+                                    'class' => 'c-social-media__icon',
+                                ]);
                                 echo '<span class="c-social-media__text u-screen-reader-only">' .
                                     $label .
                                     '</span>';
@@ -479,7 +536,7 @@ foreach ($current_address_array as $address_id => $current_address) {
                             echo '</ul>';
                         } ?>
 
-                        <div class="c-address-details__buttons c-buttons --is-column --align-start">
+                        <div class="c-address-details__buttons c-buttons --is-column">
                             <?php if (!empty($shortcode_form)) { ?>
                                 <a class="c-address-details__button-contact c-button" href="#contact_form"><?php esc_html_e(
                                     'Kontaktieren Sie mich',
@@ -518,26 +575,19 @@ foreach ($current_address_array as $address_id => $current_address) {
         <section class="c-address-details__properties c-property-list --is-address-details o-section --<?php echo $bg_color; ?>">
             <div class="c-property-list__container o-container">
                 <div class="c-property-list__content o-row">
-                    <h2 class="c-property-list__headline o-col-12 o-col-xl-8 o-headline --h2"><?php esc_html_e(
-                        'Mein Portfolio',
-                        'oo_theme',
+                    <h2 class="c-property-list__headline o-col-12 o-col-xl-8 o-headline --h2"><?php echo esc_html(
+                        sprintf(
+                            _n(
+                                '%d Inserat',
+                                '%d Inserate',
+                                $properties_count,
+                                'oo_theme',
+                            ),
+                            $properties_count,
+                        ),
                     ); ?></h2>
                 </div>
                 <?php echo do_shortcode($shortcode_active_properties); ?>
-            </div>
-        </section>
-    <?php } ?>
-
-    <?php if (!empty($shortcode_reference_properties)) { ?>
-        <section class="c-address-details__properties c-property-list --is-address-details o-section --<?php echo $bg_color; ?>">
-            <div class="c-property-list__container o-container">
-                <div class="c-property-list__content o-row">
-                    <h2 class="c-property-list__headline o-col-12 o-col-xl-8 o-headline --h2"><?php esc_html_e(
-                        'Meine Referenzen',
-                        'oo_theme',
-                    ); ?></h2>
-                </div>
-                <?php echo do_shortcode($shortcode_reference_properties); ?>
             </div>
         </section>
     <?php } ?>
@@ -553,23 +603,41 @@ foreach ($current_address_array as $address_id => $current_address) {
     $label,
 ); ?>">
                 <div class="c-text__container o-container">
-                    <div class="c-text__row o-row --position-center">
+                    <div class="c-text__row o-row">
                         <h2 class="c-text__headline o-col-12 o-col-xl-8 o-headline --h2">
                             <?php echo nl2br($label); ?>
                         </h2>
                     </div>
-                    <div class="c-text__columns o-row --position-center">
+                    <div class="c-text__columns o-row">
                         <div class="c-text__content o-col-12 o-col-xl-8">
-                            <div class="c-text__text o-text --is-wysiwyg">
-                                <p>
-                                    <?php echo nl2br(
-                                        htmlspecialchars(
-                                            $value,
-                                            ENT_QUOTES,
-                                            'UTF-8',
-                                        ),
+                            <div class="c-address-details__text-wrapper">
+                                <div class="c-address-details__text-content o-text --is-wysiwyg">
+                                    <p>
+                                        <?php echo nl2br(
+                                            htmlspecialchars(
+                                                $value,
+                                                ENT_QUOTES,
+                                                'UTF-8',
+                                            ),
+                                        ); ?>
+                                    </p>
+                                </div>
+                                <button class="c-address-details__text-more c-read-more" 
+                                    data-open-text="<?php esc_html_e(
+                                        'Mehr anzeigen',
+                                        'oo_theme',
+                                    ); ?>"
+                                    data-close-text="<?php esc_html_e(
+                                        'Weniger anzeigen',
+                                        'oo_theme',
+                                    ); ?>"
+                                    aria-expanded="false"
+                                    style="display: none;">
+                                    <?php echo esc_html__(
+                                        'Mehr anzeigen',
+                                        'oo_theme',
                                     ); ?>
-                                </p>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -579,6 +647,20 @@ foreach ($current_address_array as $address_id => $current_address) {
         ?>
     <?php
     } ?>
+
+        <?php if (!empty($shortcode_reference_properties)) { ?>
+        <section class="c-address-details__properties c-property-list --is-address-details o-section --<?php echo $bg_color; ?>">
+            <div class="c-property-list__container o-container">
+                <div class="c-property-list__content o-row">
+                    <h2 class="c-property-list__headline o-col-12 o-col-xl-8 o-headline --h2"><?php esc_html_e(
+                        'Meine Referenzen',
+                        'oo_theme',
+                    ); ?></h2>
+                </div>
+                <?php echo do_shortcode($shortcode_reference_properties); ?>
+            </div>
+        </section>
+    <?php } ?>
 
     <?php if (!empty($shortcode_form)) { ?>
         <section class="c-address-details__form c-forms o-section o-section --<?php echo $bg_color; ?>" id="contact_form">
@@ -592,7 +674,7 @@ foreach ($current_address_array as $address_id => $current_address) {
                     </h2>
                 </div>
                 <div class="c-forms__content o-row --position-center">
-                    <div class="c-forms__form detail-contact-form o-col-12 o-col-lg-10 o-col-xl-8">
+                    <div class="c-forms__form c-address-details__contact-form">
                         <?php echo do_shortcode($shortcode_form); ?>
                     </div>
                 </div>

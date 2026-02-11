@@ -1,3 +1,4 @@
+
 $ = jQuery;
 
 jQuery(document).ready(function() {
@@ -531,7 +532,6 @@ jQuery(document).ready(function() {
 
   // Function to apply text shortening, read-more button and visibility adjustments based on word count and screen size
   applyResponsiveTextShortening();
-
 
   // Accordion
   if (document.querySelectorAll('.c-accordion').length > 0) {
@@ -1589,6 +1589,33 @@ function applyResponsiveTextShortening() {
           .show()
           .attr('aria-expanded', 'false')
           .text($readMore.data('open-text') || 'weiterlesen...');
+        
+        // Attach click handler only once to prevent duplicate event listeners
+        // This check is necessary because applyResponsiveTextShortening() is called
+        // both on page load and on window resize events
+        if (!$readMore.data('click-handler-added')) {
+          $readMore.on('click', function(e) {
+            e.preventDefault();
+            const $btn = $(this);
+            const isExpanded = $btn.attr('aria-expanded') === 'true';
+            const openText = $btn.data('open-text') || 'weiterlesen...';
+            const closeText = $btn.data('close-text') || 'weniger anzeigen';
+
+            if (isExpanded) {
+              // Collapse: Apply --shorten class to limit text to configured line-clamp
+              $textEl.addClass('--shorten');
+              $btn.attr('aria-expanded', 'false').text(openText);
+              // Scroll back to the beginning of the content for better UX
+              $root[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+              // Expand: Remove --shorten class to show full text content
+              $textEl.removeClass('--shorten');
+              $btn.attr('aria-expanded', 'true').text(closeText);
+            }
+          });
+          // Mark this button as having a click handler to prevent duplicates
+          $readMore.data('click-handler-added', true);
+        }
       } else {
         $textEl.removeClass('--shorten');
         $readMore.hide();
@@ -1604,6 +1631,9 @@ function applyResponsiveTextShortening() {
 
   // property detail
   shortenElements('.c-property-details__text', '.c-property-details__text-content', '.c-property-details__text-content');
+  
+  // address text features
+  shortenElements('.c-address-details__text-wrapper', '.c-address-details__text-content', '.c-address-details__text-content');
   
   // team 
   shortenElements('.c-team-card', '.c-team-card__description', '.c-team-card__description');
