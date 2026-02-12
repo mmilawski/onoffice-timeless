@@ -62,10 +62,7 @@ $excerpt = !empty($card['excerpt']['wysiwyg_excerpt'])
     : $details['text_wysiwyg'] ?? null;
 
 if ($excerpt) {
-    $words = preg_split('/\s+/', trim($excerpt));
-    if (count($words) > 50) {
-        $excerpt = implode(' ', array_slice($words, 0, 50)) . '...';
-    }
+    $excerpt = oo_excerpt_no_links_trim_words($excerpt);
 }
 
 // Settings
