@@ -80,6 +80,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
     $property_url = esc_url($pEstatesClone->getEstateLink());
     $property_id = $pEstatesClone->getCurrentMultiLangEstateMainId();
     $raw_values = $pEstatesClone->getRawValues();
+    $is_address_shared = !empty($current_property['strasse']);
     $is_reference = filter_var(
         $raw_values->getValueRaw($property_id)['elements']['referenz'] ?? null,
         FILTER_VALIDATE_BOOLEAN,
@@ -399,9 +400,11 @@ while ($current_property = $pEstatesClone->estateIterator()):
 
 
         <div class="c-property-card__top <?php if (
-            !$current_property['plz'] &&
-            !$current_property['ort'] &&
-            !$current_property['land']
+            ($is_address_shared &&
+                !$current_property['plz'] &&
+                !$current_property['ort'] &&
+                !$current_property['land']) ||
+            (!$is_address_shared && !$current_property['ort'])
         ) {
             echo '--empty';
         } ?>">
@@ -417,86 +420,80 @@ while ($current_property = $pEstatesClone->estateIterator()):
         </span>
 
         <span class="c-property-card__location-value"> 
-            <?php
-            if ($current_property['plz']) {
-                echo $current_property['plz'];
-            }
-            if (
-                ($current_property['plz'] || $current_property['ort']) &&
-                $current_property['land']
-            ) {
-                echo ', ';
-            }
-            if ($current_property['land']) {
-                echo $current_property['land'];
-            }
-            ?>
+            <?php if ($is_address_shared) {
+                if ($current_property['plz']) {
+                    echo $current_property['plz'];
+                }
+                if (
+                    ($current_property['plz'] || $current_property['ort']) &&
+                    $current_property['land']
+                ) {
+                    echo ', ';
+                }
+                if ($current_property['land']) {
+                    echo $current_property['land'];
+                }
+            } else {
+                echo '&nbsp;';
+            } ?>
         </span>
 </div>
 
+<?php if ($is_price_fields) { ?>
+    <?php foreach ($price_fields as $price_field) {
 
+        $price_value = $current_property[$price_field];
+        if (
+            (is_numeric($price_value) && 0 == $price_value) ||
+            $price_value == '0000-00-00' ||
+            $price_value == '0.00' ||
+            (is_string($price_value) &&
+                $price_value !== '' &&
+                !is_numeric($price_value) &&
+                ($raw_values->getValueRaw($property_id)['elements'][
+                    $price_field
+                ] ??
+                    null) ===
+                    '0') || // skip negative boolean fields
+            $price_value == '' ||
+            empty($price_value)
+        ) {
+            continue;
+        }
 
+        $class = '--text-color';
+        if (
+            $masking_attributes = oo_apply_secret_sale_masking(
+                $price_field,
+                $is_secret_sale,
+            )
+        ) {
+            $price_value = $masking_attributes['value'];
+            $class = $masking_attributes['class'];
+        }
+        ?>
+        <div class="c-property-card__price">
+            <span class="c-property-card__price-value <?php echo esc_attr(
+                $class,
+            ); ?>">
 
-
-
-
-        <?php if ($is_price_fields) { ?>
-            <?php foreach ($price_fields as $price_field) {
-
-                $price_value = $current_property[$price_field];
-                if (
-                    (is_numeric($price_value) && 0 == $price_value) ||
-                    $price_value == '0000-00-00' ||
-                    $price_value == '0.00' ||
-                    (is_string($price_value) &&
-                        $price_value !== '' &&
-                        !is_numeric($price_value) &&
-                        ($raw_values->getValueRaw($property_id)['elements'][
-                            $price_field
-                        ] ??
-                            null) ===
-                            '0') || // skip negative boolean fields
-                    $price_value == '' ||
-                    empty($price_value)
-                ) {
-                    continue;
-                }
-
-                $class = '--text-color';
-                if (
-                    $masking_attributes = oo_apply_secret_sale_masking(
-                        $price_field,
-                        $is_secret_sale,
-                    )
-                ) {
-                    $price_value = $masking_attributes['value'];
-                    $class = $masking_attributes['class'];
-                }
-                ?>
-                <div class="c-property-card__price">
-                    <span class="c-property-card__price-value <?php echo esc_attr(
-                        $class,
-                    ); ?>">
-
-                    <?php if (is_array($price_value)) {
-                        esc_html_e(implode(', ', $price_value));
-                    } else {
-                        echo esc_html($price_value);
-                    } ?>
-
-                   
-                        </span>
-                        <span class="c-property-card__price-label">
-                        <?php esc_html_e(
-                            $pEstates->getFieldLabel($price_field),
-                        ); ?>
-                       
-                    </span>
-                </div>
-            <?php
+            <?php if (is_array($price_value)) {
+                esc_html_e(implode(', ', $price_value));
+            } else {
+                echo esc_html($price_value);
             } ?>
-        <?php } ?>
+
+
+                </span>
+                <span class="c-property-card__price-label">
+                <?php esc_html_e($pEstates->getFieldLabel($price_field)); ?>
+
+            </span>
         </div>
+    <?php
+    } ?>
+<?php } ?>
+</div>
 
 <div class="c-property-card__features c-item-features">
         <?php if ($is_fields) { ?>
@@ -520,6 +517,12 @@ while ($current_property = $pEstatesClone->estateIterator()):
                         in_array($field, $dont_echo) ||
                         in_array($field, $location_fields) ||
                         in_array($field, $price_fields)
+                    ) {
+                        continue;
+                    }
+                    if (
+                        !$is_address_shared &&
+                        in_array($field, ['plz', 'hausnummer', 'strasse'], true)
                     ) {
                         continue;
                     }

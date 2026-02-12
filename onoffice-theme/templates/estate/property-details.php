@@ -134,6 +134,10 @@ while ($current_property = $pEstates->estateIterator()) {
     $energy_fields_available = false;
     $price_fields_available = false;
 
+    $is_address_shared = !empty(
+        $raw_values->getValueRaw($property_id)['elements']['strasse'] ?? ''
+    );
+
     foreach ($current_property as $field => $value) {
         if (
             (is_numeric($value) && 0 == $value) ||
@@ -148,6 +152,13 @@ while ($current_property = $pEstates->estateIterator()) {
             $value == '' ||
             empty($value) ||
             in_array($field, $dont_echo)
+        ) {
+            continue;
+        }
+
+        if (
+            !$is_address_shared &&
+            in_array($field, ['plz', 'hausnummer', 'strasse'], true)
         ) {
             continue;
         }
