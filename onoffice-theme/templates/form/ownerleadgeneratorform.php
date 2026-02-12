@@ -72,7 +72,7 @@ if ($pForm->getFormStatus() !== FormPost::MESSAGE_SUCCESS) {
 // Capture form content in buffer
 ob_start();
 ?>
-<form method="post" action="#onoffice-form" id="onoffice-form-<?php echo $pForm->getFormNo(); ?>" class="c-form --is-owner-leadgenerator-form">
+<form method="post" action="#onoffice-form" id="onoffice-form-<?php echo $pForm->getFormNo(); ?>" class="c-form --is-owner-leadgenerator-form --custom-validation">
     <input type="hidden" name="oo_formid" value="<?php echo $pForm->getFormId(); ?>">
     <input type="hidden" name="oo_formno" value="<?php echo $pForm->getFormNo(); ?>">
     <?php wp_nonce_field(

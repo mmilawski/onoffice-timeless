@@ -265,6 +265,17 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     background-size: 1.25rem;
     outline: none;
   }
+
+  .c-selectable-card {
+    &.has-error {
+      border: 1px solid $form-invalid-color;
+
+      &:hover,
+      &:focus {
+        border-color: $form-invalid-color;
+      }
+    }
+  }
 }
 
 .c-form.--validated {

@@ -467,6 +467,7 @@ if (!function_exists('renderIconButtonsField')) {
             $fieldLabel .
             $addition .
             '</span>';
+        $output .= '<div class="c-form__error-message"></div>';
 
         // Hidden input to store the actual value for form submission
         $output .=

@@ -166,16 +166,6 @@
     display: none;
   }
 
-  &.has-error {
-    border-color: var(--oo-color-error);
-    border-width: 2px;
-
-    &:hover,
-    &:focus {
-      border-color: var(--oo-color-error);
-    }
-  }
-
   // State: hover
   @include hover() {
     background-color: var(--oo-color-mix-primary-contrast-20);
