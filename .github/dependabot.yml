@@ -5,3 +5,7 @@ updates:
   schedule:
     interval: daily
     time: "04:00"
+  ignore:
+    # not allowed to update, because newer versions change the formatting of the code
+    - dependency-name: "prettier"
+    - dependency-name: "@prettier/plugin-php"
