@@ -845,6 +845,14 @@ jQuery(document).ready(function() {
 // Slider
   const $sliders = $('.c-slider');
 
+  // refresh property image sliders
+  const propertyImageSliders = [];
+
+  function refreshPropertyImageSliders() {
+    if (!propertyImageSliders.length) return;
+    propertyImageSliders.forEach(slider => slider.refresh());
+  }
+
   function innerSliderUpdateTabIndex($slider) {
     $slider.find('.c-property-card__picture-wrapper').each(function () {
       this.tabIndex = $(this).hasClass('is-visible') ? 0 : -1;
@@ -1102,8 +1110,16 @@ jQuery(document).ready(function() {
       }
 
       splide.mount();
+
+      // push property image sliders
+      if ($slider.hasClass('--is-properties-images-slider')) {
+        propertyImageSliders.push(splide);
+      }
     });
   }
+
+  // refresh property image sliders
+  refreshPropertyImageSliders();
 
   // Debounced resize event listener for team slider popups
   const debouncedTeamSliderResize = debounce(() => {
@@ -1449,6 +1465,63 @@ jQuery(document).ready(function() {
       }, 20);
     });
   }
+
+  // Change property list view
+  const propertyViewSwitch = document.querySelectorAll('.c-property-list__switch');
+  if (propertyViewSwitch) {
+    propertyViewSwitch.forEach(wrapper => {
+      const radioInputs = wrapper.querySelectorAll('.c-property-list__switch-radio');
+      if (!radioInputs) return;
+
+      radioInputs.forEach(radio => {
+        radio.addEventListener('change', () => {
+          const type = radio.id.includes('view-list') ? 'view-list' : 'view-tile';
+          const view = type === 'view-list' ? 'listview' : 'tileview';
+
+          // change switches
+          propertyViewSwitch.forEach(wrapper => {
+            const radioInputs = wrapper.querySelectorAll('.c-property-list__switch-radio');
+            radioInputs.forEach(radioInput => {
+              const label = wrapper.querySelector(`label[for="${radioInput.id}"]`);
+              if (!label) return;
+
+              if ((type === 'view-list' && radioInput.id.includes('view-list')) ||
+                  (type === 'view-tile' && radioInput.id.includes('view-tile'))) {
+                label.classList.add('--checked');
+                radioInput.checked = true;
+                radioInput.setAttribute('checked', 'checked');
+              } else {
+                label.classList.remove('--checked');
+                radioInput.checked = false;
+                radioInput.removeAttribute('checked');
+              }
+            });
+          });
+
+          // switch only allowed property listings
+          const propertyLists = document.querySelectorAll('.c-property-list.--switch-view');
+          if (!propertyLists) return;
+          
+          propertyLists.forEach(list => {
+            list.classList.remove('--listview', '--tileview');
+            list.classList.add('--' + view);
+
+            const status = list.querySelector('.c-property-list__switch-status');
+            if (!status) return;
+            const listText = status.getAttribute('data-list-text');
+            const tileText = status.getAttribute('data-tile-text');
+            status.textContent = view === 'listview' ? listText : tileText;
+          });
+
+          const date = new Date();
+          date.setTime(date.getTime() + 30*24*60*60*1000); // 30 days
+          document.cookie = `oo_theme_view_preference=${view}; expires=${date.toUTCString()}; path=/`;
+
+          refreshPropertyImageSliders();
+        });
+      });
+    });
+  }
 });
 
 // Fixed Header on scroll
@@ -1638,10 +1711,6 @@ function applyResponsiveTextShortening() {
   // team 
   shortenElements('.c-team-card', '.c-team-card__description', '.c-team-card__description');
 }
-
-
-
-
 
 // Select2 copy class
 function select2CopyClasses(data, container) {

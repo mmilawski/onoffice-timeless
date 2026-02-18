@@ -30,7 +30,7 @@ if ($pEstates->estateIterator()): ?>
 
         <div class="c-property-details__unit-container o-container-fluid"> 
             <div id="unitslider" 
-                 class="c-property-details__units-slider c-slider --is-properties-units-slider splide"
+                 class="c-property-details__units-slider --tile c-slider --is-properties-units-slider splide"
                  data-splide='{
                     "perPage": 3,
                     "perMove": 1,

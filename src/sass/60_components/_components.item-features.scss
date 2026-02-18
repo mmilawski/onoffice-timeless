@@ -5,6 +5,12 @@
   gap: 0.5rem;
   line-height: normal;
 
+  @include media-breakpoint-up(xl) {
+    .--list & {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
   &__item {
     border: 0px;
     padding: 0.625rem;

@@ -28,8 +28,7 @@ if ($totalSimilar > 0): ?>
             </div>
         </div>
         
-        <div id="outerslider" 
-             class="c-property-details__similar-slider c-slider --is-properties-similar-slider splide" 
+        <div id="outerslider" class="c-property-details__similar-slider --tile c-slider --is-properties-similar-slider splide" 
              data-splide='{
                 "perPage": 3,
                 "perMove": 1,

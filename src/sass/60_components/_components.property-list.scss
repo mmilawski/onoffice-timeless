@@ -44,15 +44,26 @@
   &__nav {
   }
 
+  &__nav-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem 2rem;
+
+    @include media-breakpoint-up(lg) {
+      flex-direction: row;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+  }
+
   &__count {
     font-size: 1.5rem;
     text-transform: uppercase;
     display: flex;
     justify-content: flex-start;
-    padding-top: 1.5rem;
 
     @include media-breakpoint-up(lg) {
-      padding-top: 0;
+      margin-left: auto;
       justify-content: flex-end;
       align-items: flex-end;
     }
@@ -79,28 +90,167 @@
       width: 100%;
     }
   }
-  &__properties {
-    display: grid;
-    grid-template-rows: none;
-    grid-auto-rows: max-content;
-    gap: 1.5rem;
 
-    @include media-breakpoint-up(xs) {
-      grid-template-columns: repeat(1, 1fr);
-      gap: 1rem;
-      padding: 0;
-    }
+  &__switch {
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: none;
 
     @include media-breakpoint-up(lg) {
-      grid-template-columns: repeat(2, 1fr);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.25rem 1rem;
+      width: 100%;
+      justify-content: flex-end;
+    }
+  }
+
+  &__switch-legend {
+    @include media-breakpoint-up(lg) {
+      width: auto;
+      text-align: right;
+    }
+  }
+
+  &__switch-radio {
+    position: absolute;
+    opacity: 0;
+    appearance: none;
+    margin: 0;
+    pointer-events: none;
+  }
+
+  &__switch-label {
+    --oo-switch-color: var(--oo-color-mix-bg-contrast-05);
+    --oo-switch-hover-color: var(--oo-color-primary);
+
+    display: inline-flex;
+    color: var(--oo-switch-color);
+    outline: $outline;
+    outline-offset: $outline-offset;
+    cursor: pointer;
+    transition: color 0.25s ease-in-out, outline-color 0.25s ease-in-out;
+
+    &.--checked {
+      color: var(--oo-switch-hover-color);
     }
 
-    @include media-breakpoint-up(xxl) {
-      grid-template-columns: repeat(3, 1fr);
+    @include hover() {
+      color: var(--oo-switch-hover-color);
+    }
+
+    .--bg-light & {
+      --oo-switch-color: var(--oo-color-light-mix-bg-contrast-05);
+      --oo-switch-hover-color: var(--oo-color-light-primary);
+    }
+
+    .--bg-dark & {
+      --oo-switch-color: var(--oo-color-dark-mix-bg-contrast-05);
+      --oo-switch-hover-color: var(--oo-color-dark-primary);
+    }
+
+    .--bg-primary & {
+      --oo-switch-color: var(--oo-color-primary-mix-bg-contrast-05);
+      --oo-switch-hover-color: var(--oo-color-primary-primary);
+    }
+
+    .--bg-secondary & {
+      --oo-switch-color: var(--oo-color-secondary-mix-bg-contrast-05);
+      --oo-switch-hover-color: var(--oo-color-secondary-primary);
+    }
+
+    .--bg-transparent & {
+      --oo-switch-color: var(--oo-color-mix-bg-contrast-05);
+      --oo-switch-hover-color: var(--oo-color-primary);
+    }
+  }
+
+  &__switch-radio:checked + &__switch-label {
+    color: var(--oo-switch-hover-color);
+  }
+
+  &__switch-radio:focus + &__switch-label,
+  &__switch-radio:focus-visible + &__switch-label,
+  &__switch-radio:focus-within + &__switch-label {
+    outline-color: var(--oo-switch-hover-color);
+  }
+
+  &__switch-icon {
+    width: $icon-size;
+    height: $icon-size;
+  }
+
+  &__switch-status {
+  }
+
+  &__properties {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    grid-template-rows: none;
+    grid-auto-rows: max-content;
+    gap: 1rem;
+    padding: 0;
+
+    &.--tile {
+      @include media-breakpoint-up(lg) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.5rem;
+      }
+
+      @include media-breakpoint-up(xxl) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .--tileview & {
+        display: grid;
+      }
+      .--listview & {
+        @include media-breakpoint-up(lg) {
+          display: none;
+        }
+      }
+    }
+
+    &.--list {
+      gap: 2rem;
+      .--tileview & {
+        display: none;
+      }
+      .--listview & {
+        display: none;
+        @include media-breakpoint-up(lg) {
+          display: grid;
+        }
+      }
     }
   }
 
   &__slider {
+    &.--tile {
+      .--tileview & {
+        display: flex;
+      }
+      .--listview & {
+        @include media-breakpoint-up(lg) {
+          display: none;
+        }
+      }
+    }
+
+    &.--list {
+      .--tileview & {
+        display: none;
+      }
+      .--listview & {
+        display: none;
+        @include media-breakpoint-up(lg) {
+          display: flex;
+          gap: 2rem;
+        }
+      }
+    }
   }
 
   &__pagination {

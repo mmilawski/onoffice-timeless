@@ -7,11 +7,93 @@
     grid-template-rows: auto 1fr;
   }
 
-  &__inner-wrapper {
+  .--tile & {
+    background-color: var(--oo-color-mix-bg-contrast-10);
+    .--bg-light & {
+      background-color: var(--oo-color-light-mix-bg-contrast-10);
+    }
+    .--bg-dark & {
+      background-color: var(--oo-color-dark-mix-bg-contrast-10);
+    }
+    .--bg-primary & {
+      background-color: var(--oo-color-primary-mix-bg-contrast-10);
+    }
+    .--bg-secondary & {
+      background-color: var(--oo-color-secondary-mix-bg-contrast-10);
+    }
+    .--bg-transparent & {
+      background-color: var(--oo-color-mix-bg-contrast-10);
+    }
+  }
+
+  .--list & {
+    --oo-container-offset: 0;
+    --oo-image-column-width: 1fr;
+
+    display: flex;
+
+    @each $breakpoint, $container-width in $container-max-widths {
+      @if index(xl xxl xxxl, $breakpoint) {
+        @include media-breakpoint-up($breakpoint) {
+          --oo-container-offset: calc(
+            ((100vw - #{$container-width}) / 2) + 3rem
+          );
+        }
+      }
+    }
+
+    &:nth-child(odd) {
+      &::after {
+        content: '';
+        width: var(--oo-container-offset);
+        height: 100%;
+      }
+    }
+    &:nth-child(even) {
+      &::before {
+        content: '';
+        width: var(--oo-container-offset);
+        height: 100%;
+      }
+    }
+  }
+
+  &__list-wrapper {
+    display: grid;
+    grid-template-columns: var(--oo-image-column-width) 1fr;
+    background-color: var(--oo-color-mix-bg-contrast-10);
+    width: 100%;
+
+    @include media-breakpoint-up(xl) {
+      --oo-image-column-width: calc(41.6666666667%); // image 5 col
+    }
+
+    @include media-breakpoint-up(lg) {
+      .--even & {
+        grid-template-columns: 1fr var(--oo-image-column-width);
+      }
+    }
+
+    .--bg-light & {
+      background-color: var(--oo-color-light-mix-bg-contrast-10);
+    }
+    .--bg-dark & {
+      background-color: var(--oo-color-dark-mix-bg-contrast-10);
+    }
+    .--bg-primary & {
+      background-color: var(--oo-color-primary-mix-bg-contrast-10);
+    }
+    .--bg-secondary & {
+      background-color: var(--oo-color-secondary-mix-bg-contrast-10);
+    }
+    .--bg-transparent & {
+      background-color: var(--oo-color-mix-bg-contrast-10);
+    }
   }
 
   &__inner {
     position: relative;
+    aspect-ratio: 3 / 2;
     overflow: hidden;
 
     .--bg-transparent & {
@@ -49,23 +131,35 @@
 
   &__picture {
     aspect-ratio: 3 / 2;
+  }
 
-    &-wrapper {
-      cursor: default;
-      pointer-events: none;
-      @include media-breakpoint-up(lg) {
-        cursor: pointer;
-        pointer-events: auto;
-      }
-      @include focus-visible() {
-        outline: $outline !important;
-        outline-offset: -4px !important;
-        outline-color: var(--oo-color-primary) !important;
-      }
+  &__picture-wrapper {
+    cursor: default;
+    pointer-events: none;
+    @include media-breakpoint-up(lg) {
+      cursor: pointer;
+      pointer-events: auto;
+    }
+    @include focus-all() {
+      outline: $outline !important;
+      outline-offset: -4px !important;
+      outline-color: var(--oo-color-primary) !important;
     }
   }
 
   &__image {
+  }
+
+  &__flags {
+    .--list & {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+    }
+    .--list.--even & {
+      right: auto;
+      left: 0.5rem;
+    }
   }
 
   &__status {
@@ -183,20 +277,26 @@
       margin-top: 0;
     }
 
-    &-text {
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      hyphens: manual;
+    @include media-breakpoint-up(xl) {
+      .--list & {
+        grid-column: 3 / 4;
+      }
     }
 
     &.--open-popup {
       max-width: 100%;
       margin: 0;
     }
+  }
+
+  &__button-text {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    hyphens: manual;
   }
 
   &__content {
@@ -210,6 +310,12 @@
       display: grid;
       grid-template-columns: 1fr;
       grid-template-rows: 1fr;
+    }
+
+    .--list & {
+      @include media-breakpoint-up(xl) {
+        padding: 2rem;
+      }
     }
   }
   &__main-content-group {
@@ -233,8 +339,10 @@
     hyphens: manual;
     text-transform: uppercase;
 
-    @include media-breakpoint-up(lg) {
-      min-height: 5rem;
+    .--tile & {
+      @include media-breakpoint-up(lg) {
+        min-height: 5rem;
+      }
     }
 
     &.o-headline {
@@ -247,90 +355,69 @@
   }
 
   &__top {
-    display: grid;
-    gap: 0.5rem;
-    grid-template-columns: repeat(2, 1fr);
+    .--tile & {
+      display: grid;
+      gap: 0.5rem;
+      grid-template-columns: repeat(2, 1fr);
+    }
   }
 
   &__price {
     display: flex;
-
     flex-direction: column;
-    text-align: right;
 
-    &-value {
-      font-weight: 600;
-      font-size: 1.125rem;
-
-      &.--blurry {
-        filter: blur(8px);
-        -webkit-filter: blur(8px);
-        pointer-events: none;
-        user-select: none;
-        position: relative;
-        z-index: 1;
-      }
+    .--tile & {
+      text-align: right;
     }
+  }
 
-    &-label {
-      font-size: 0.875rem;
+  &__price-value {
+    font-weight: 600;
+    font-size: 1.125rem;
+
+    &.--blurry {
+      filter: blur(8px);
+      -webkit-filter: blur(8px);
+      pointer-events: none;
+      user-select: none;
+      position: relative;
+      z-index: 1;
     }
+  }
+
+  &__price-label {
+    font-size: 0.875rem;
   }
 
   &__location {
-    display: flex;
-
-    flex-direction: column;
-
-    &-label {
-      font-weight: 600;
+    .--tile & {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  &__location + &__title {
+    .--list & {
+      margin-top: -1.25rem;
+    }
+  }
+  &__location-value {
+    font-family: $font-family-text-bold;
+    font-weight: $font-weight-text-bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    .--tile & {
       font-size: 1.125rem;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 1;
-    }
-
-    &-value {
-      font-size: 0.875rem;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 1;
     }
   }
-
-  .--bg-transparent & {
-    background-color: var(
-      --oo-color-mix-bg-contrast-10,
-      var(--oo-color-primary)
-    );
-  }
-
-  .--bg-light & {
-    background-color: var(
-      --oo-color-light-mix-bg-contrast-10,
-      var(--oo-color-primary)
-    );
-  }
-  .--bg-dark & {
-    background-color: var(
-      --oo-color-dark-mix-bg-contrast-10,
-      var(--oo-color-primary)
-    );
-  }
-  .--bg-primary & {
-    background-color: var(
-      --oo-color-primary-mix-bg-contrast-10,
-      var(--oo-color-primary)
-    );
-  }
-  .--bg-secondary & {
-    background-color: var(
-      --oo-color-secondary-mix-bg-contrast-10,
-      var(---oo-color-primary)
-    );
+  &__location-label {
+    font-size: 0.875rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
   }
 }

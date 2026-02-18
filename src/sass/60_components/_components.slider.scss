@@ -162,7 +162,7 @@
     gap: 1.5rem;
 
     &.--is-properties-images-slider {
-      &.--empty {
+      &.--hidden {
         display: none;
       }
     }
@@ -493,14 +493,19 @@
     &.--is-properties-slider {
       #{$c-slider}__list {
         display: grid;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
         gap: 2rem;
+      }
+      &.--tile {
+        #{$c-slider}__list {
+          @include media-breakpoint-up(lg) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.5rem;
+          }
 
-        @include media-breakpoint-up(lg) {
-          grid-template-columns: repeat(2, 1fr);
-        }
-
-        @include media-breakpoint-up(xxl) {
-          grid-template-columns: repeat(3, 1fr);
+          @include media-breakpoint-up(xxl) {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+          }
         }
       }
     }

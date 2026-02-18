@@ -58,7 +58,7 @@ set_current_header_level(2);
         </div>
     <?php } ?>
 
-    <div id="outerslider" class="c-property-list__slider --on-<?php echo $bg_color; ?> c-slider --is-properties-slider splide" data-splide='{"perPage":1,"perMove":1,"gap":32,"pagination":false,"arrows":false,"page":false,"snap":true,"lazyLoad":"nearby","mediaQuery":"min","breakpoints":{"992":{"perPage":2},"1400":{"perPage":3}}}'>
+    <div class="c-property-list__slider --on-<?php echo $bg_color; ?> --tile c-slider --is-properties-slider splide" data-splide='{"perPage":1,"perMove":1,"gap":32,"pagination":false,"arrows":false,"page":false,"snap":true,"lazyLoad":"nearby","mediaQuery":"min","breakpoints":{"992":{"perPage":2},"1400":{"perPage":3}}}'>
         <div class="c-slider__track splide__track">
             <div class="c-slider__list splide__list">
                 <?php require 'property-card.php'; ?>

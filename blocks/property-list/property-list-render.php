@@ -2,8 +2,31 @@
 // Content
 $headline = get_field('headline') ?? [];
 $text = get_field('text') ?? [];
+$listselection = get_field('listselection') ?? null;
 $shortcode = get_field('shortcode') ?? null;
 $buttons = get_field('buttons') ?? [];
+
+$output_shortcode = !empty($listselection) ? $listselection : $shortcode;
+
+// Presentation / Layout
+$presentation_group = get_field('presentation') ?? [];
+$presentation = $presentation_group['presentation'] ?? 'tileview';
+
+$permit_switch_view = get_field('permit_switch_view') ?? [];
+$is_view_switch = filter_var(
+    $permit_switch_view['permit_switch_view'] ?? null,
+    FILTER_VALIDATE_BOOLEAN,
+);
+
+if ($is_view_switch) {
+    $list_setting_cookie = 'oo_theme_view_preference';
+    if (
+        isset($_COOKIE[$list_setting_cookie]) &&
+        in_array($_COOKIE[$list_setting_cookie], ['listview', 'tileview'])
+    ) {
+        $presentation = $_COOKIE[$list_setting_cookie];
+    }
+}
 
 // Settings
 $settings = get_field('settings') ?? [];
@@ -21,11 +44,12 @@ $size = !empty($headline['text'])
 set_current_header_level($size);
 ?>
 
-<section <?php oo_block_id(
-    $block,
-); ?> class="c-property-list o-section --<?php echo $bg_color; ?>">
-    <div class="c-property-list__container o-container">
-        <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
+<section <?php oo_block_id($block); ?> class="c-property-list <?php echo '--' .
+     $presentation; ?> <?php echo $is_view_switch
+     ? '--switch-view'
+     : ''; ?> o-section --<?php echo $bg_color; ?>">
+    <?php if (!empty($headline['text']) || !empty($text['wysiwyg'])) { ?>
+        <div class="c-property-list__container o-container">
             <div class="c-property-list__content o-row">
                 <?php if (!empty($headline['text'])) {
                     oo_get_template('components', '', 'component-headline', [
@@ -40,20 +64,17 @@ set_current_header_level($size);
                     </div>
                 <?php } ?>
             </div>
-        <?php } ?>
         </div>
+    <?php } ?>
 
+    <?php if (!empty($output_shortcode)) {
+        echo '<div class="c-property-list__container">';
+        echo do_shortcode($output_shortcode);
+        echo '</div>';
+    } ?>
 
-
-
-        <?php if (!empty($shortcode)) {
-            echo '<div class="c-property-list__container">';
-            echo do_shortcode($shortcode);
-            echo '</div>';
-        } ?>
-
-        <?php if (!empty($buttons['buttons'][0]['link'])) { ?>
-            <div class="c-property-list__container o-container">
+    <?php if (!empty($buttons['buttons'][0]['link'])) { ?>
+        <div class="c-property-list__container o-container">
             <div class="c-property-list__buttons-wrapper o-row">
                 <?php oo_get_template('components', '', 'component-buttons', [
                     'buttons' => $buttons['buttons'],
@@ -63,8 +84,7 @@ set_current_header_level($size);
                     'additional_container_class' =>
                         'c-property-list__buttons o-col-12',
                 ]); ?>
-           
-        <?php } ?>
+            </div>
         </div>
-    </div>
+    <?php } ?>
 </section>
