@@ -204,6 +204,7 @@
     cursor: pointer;
     transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
       outline-color 0.25s ease-in-out, opacity 0.25s ease-in-out;
+    touch-action: manipulation; // Prevents Safari's "Double-Tap-to-Zoom" feature on mobile devices. Zoom gets triggered if user taps too fast on slider controls.
 
     @include plain-visited() {
       color: var(--oo-color-contrast-bg);
