@@ -286,6 +286,7 @@ jQuery(document).ready(function() {
         create: false,
         diacritics: true,
         maxOptions: false,
+        dropdownParent: 'body',
         sortField: is_regionaler_zusatz ? null : {
           field: "text",
           direction: "asc"
@@ -338,6 +339,20 @@ jQuery(document).ready(function() {
 
           // Replace the control's content with the new structured content
           this.control.appendChild(controlInner);
+
+          const themeMap = {
+            '--bg-light':       '--theme-light',
+            '--bg-dark':        '--theme-dark',
+            '--bg-primary':     '--theme-primary',
+            '--bg-secondary':   '--theme-secondary',
+            '--bg-footer':      '--theme-footer',
+            '--bg-transparent': '--theme-transparent',
+          };
+          const wrapper = this.wrapper;
+          const matchedBg = Object.keys(themeMap).find(cls => wrapper.closest('.' + cls));
+          if (matchedBg) {
+            this.dropdown.classList.add(themeMap[matchedBg]);
+          }
         },
         onItemAdd: function(value, item) {
           this.items_wrapper.appendChild(item);

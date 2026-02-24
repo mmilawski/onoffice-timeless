@@ -1168,6 +1168,176 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
   }
 }
 
+// Standalone .ts-dropdown styles for teleported dropdowns (dropdownParent: 'body')
+// Keep in sync with the nested .ts-wrapper .ts-dropdown block above.
+.ts-dropdown {
+  color: $form-color;
+  background-color: $form-bg;
+  outline: $form-outline-dropdown;
+  border-radius: 0;
+  border: none;
+  overflow: hidden;
+  margin: 0;
+  text-align: left;
+
+  .ts-dropdown-content {
+    padding: 0.5rem 0;
+    scrollbar-color: $form-color transparent;
+
+    .ts-dropdown__item {
+      display: flex;
+      flex-direction: row;
+      font-size: 1rem;
+      min-height: 2.25rem;
+      padding: 0.25rem 0.75rem;
+
+      &.o-control {
+        margin-top: unset;
+      }
+
+      &.active {
+        background-color: $form-bg;
+        color: $form-color;
+        text-decoration: underline;
+      }
+
+      &.level-0 {
+        font-family: $font-family-text-bold;
+        font-weight: $font-weight-text-bold;
+      }
+      &.level-1 {
+        padding-left: 1.5rem;
+      }
+      &.level-2 {
+        padding-left: 3rem;
+      }
+      &.level-3 {
+        padding-left: 4.5rem;
+      }
+      &.level-4 {
+        padding-left: 6rem;
+      }
+      &.level-5 {
+        padding-left: 7.5rem;
+      }
+    }
+  }
+
+  // Fallback item styles (without .ts-dropdown-content wrapper)
+  &__item {
+    display: flex;
+    flex-direction: row;
+    font-size: 1rem;
+    min-height: 2.25rem;
+    padding: 0.25rem 0.75rem;
+  }
+
+  &__label {
+    &::before {
+      margin-top: unset;
+    }
+    &::after {
+      margin-top: unset;
+    }
+  }
+
+  &__text {
+    display: block;
+    align-self: center;
+    height: 100%;
+    line-height: $global-line-height;
+  }
+
+  &.--theme-light {
+    color: $form-light-color;
+    background-color: $form-light-bg;
+    outline: $form-light-outline-dropdown;
+
+    .ts-dropdown-content {
+      scrollbar-color: $form-light-color transparent;
+
+      .ts-dropdown__item.active {
+        background-color: $form-light-bg;
+        color: $form-light-color;
+      }
+    }
+  }
+
+  &.--theme-dark {
+    color: $form-dark-color;
+    background-color: $form-dark-bg;
+    outline: $form-dark-outline-dropdown;
+
+    .ts-dropdown-content {
+      scrollbar-color: $form-dark-color transparent;
+
+      .ts-dropdown__item.active {
+        background-color: $form-dark-bg;
+        color: $form-dark-color;
+      }
+    }
+  }
+
+  &.--theme-primary {
+    color: $form-primary-color;
+    background-color: $form-primary-bg;
+    outline: $form-primary-outline-dropdown;
+
+    .ts-dropdown-content {
+      scrollbar-color: $form-primary-color transparent;
+
+      .ts-dropdown__item.active {
+        background-color: $form-primary-bg;
+        color: $form-primary-color;
+      }
+    }
+  }
+
+  &.--theme-secondary {
+    color: $form-secondary-color;
+    background-color: $form-secondary-bg;
+    outline: $form-secondary-outline-dropdown;
+
+    .ts-dropdown-content {
+      scrollbar-color: $form-secondary-color transparent;
+
+      .ts-dropdown__item.active {
+        background-color: $form-secondary-bg;
+        color: $form-secondary-color;
+      }
+    }
+  }
+
+  &.--theme-footer {
+    color: $form-footer-color;
+    background-color: $form-footer-bg;
+    outline: $form-footer-outline-dropdown;
+
+    .ts-dropdown-content {
+      scrollbar-color: $form-footer-color transparent;
+
+      .ts-dropdown__item.active {
+        background-color: $form-footer-bg;
+        color: $form-footer-color;
+      }
+    }
+  }
+
+  &.--theme-transparent {
+    color: $form-color;
+    background-color: $form-bg;
+
+    .ts-dropdown-content {
+      scrollbar-color: $form-color transparent;
+
+      .ts-dropdown__item.active {
+        background-color: $form-bg;
+        color: $form-color;
+      }
+    }
+  }
+}
+
 /* Textarea */
 .o-textarea {
   appearance: none;
