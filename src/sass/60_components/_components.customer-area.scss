@@ -1,100 +1,6 @@
 .c-customer-area {
   $customer-area: &;
 
-  &.--logged-in {
-    // Apply header-size offset only for transparent-logo headers
-    @supports selector(body:has(.c-header)) {
-      body:has(.c-header.--logo-transparent.--logo-small) & {
-        padding-top: calc(#{$mobile-section-padding-top} + #{$logo-height-sm});
-
-        @include media-breakpoint-up(xl) {
-          padding-top: calc(
-            #{$desktop-section-padding-top} + #{$logo-height-sm}
-          );
-        }
-      }
-
-      body:has(.c-header.--logo-transparent.--logo-medium) & {
-        padding-top: calc(
-          #{$mobile-section-padding-top} + #{$mobile-logo-height-md}
-        );
-
-        @include media-breakpoint-up(xl) {
-          padding-top: calc(
-            #{$desktop-section-padding-top} + #{$logo-height-md}
-          );
-        }
-      }
-
-      body:has(.c-header.--logo-transparent.--logo-large) & {
-        padding-top: calc(
-          #{$mobile-section-padding-top} + #{$mobile-logo-height-lg}
-        );
-
-        @include media-breakpoint-up(xl) {
-          padding-top: calc(
-            #{$desktop-section-padding-top} + #{$logo-height-lg}
-          );
-        }
-      }
-
-      body:has(.c-header.--logo-transparent.--logo-extra-large) & {
-        padding-top: calc(
-          #{$mobile-section-padding-top} + #{$mobile-logo-height-xl}
-        );
-
-        @include media-breakpoint-up(xl) {
-          padding-top: calc(
-            #{$desktop-section-padding-top} + #{$logo-height-xl}
-          );
-        }
-      }
-    }
-
-    .c-header.--logo-transparent.--logo-small ~ & {
-      padding-top: calc(#{$mobile-section-padding-top} + #{$logo-height-sm});
-
-      @include media-breakpoint-up(xl) {
-        padding-top: calc(#{$desktop-section-padding-top} + #{$logo-height-sm});
-      }
-    }
-
-    .c-header.--logo-transparent.--logo-medium ~ & {
-      padding-top: calc(
-        #{$mobile-section-padding-top} + #{$mobile-logo-height-md}
-      );
-
-      @include media-breakpoint-up(xl) {
-        padding-top: calc(#{$desktop-section-padding-top} + #{$logo-height-md});
-      }
-    }
-
-    .c-header.--logo-transparent.--logo-large ~ & {
-      padding-top: calc(
-        #{$mobile-section-padding-top} + #{$mobile-logo-height-lg}
-      );
-
-      @include media-breakpoint-up(xl) {
-        padding-top: calc(#{$desktop-section-padding-top} + #{$logo-height-lg});
-      }
-    }
-
-    .c-header.--logo-transparent.--logo-extra-large ~ & {
-      padding-top: calc(
-        #{$mobile-section-padding-top} + #{$mobile-logo-height-xl}
-      );
-
-      @include media-breakpoint-up(xl) {
-        padding-top: calc(#{$desktop-section-padding-top} + #{$logo-height-xl});
-      }
-    }
-
-    #{$customer-area}__content,
-    #{$customer-area}__buttons {
-      display: none;
-    }
-  }
-
   &__container {
     display: flex;
     flex-direction: column;
@@ -118,17 +24,6 @@
   }
 
   &.--logged-in {
-    // Apply fixed 7.5rem offset for white-logo headers only
-    @supports selector(body:has(.c-header)) {
-      body:has(.c-header.--logo-white) & {
-        padding-top: 7.5rem;
-      }
-    }
-
-    .c-header.--logo-white ~ & {
-      padding-top: 7.5rem;
-    }
-
     #{$customer-area}__content,
     #{$customer-area}__buttons {
       display: none;

@@ -1540,24 +1540,8 @@ jQuery(document).ready(function() {
 });
 
 // Fixed Header on scroll
-jQuery(window).on('scroll', function(e) {
-  const header  = $(".c-header"); 
-  const mainContainer = $('.o-main');
-  const navheight = header.outerHeight();
-  const scroll = $(window).scrollTop();
-
-  if ( scroll > navheight) {
-    header.addClass("--fixed");
-    mainContainer.addClass("--header-fixed");
-    
-  } else {
-    header.removeClass("--fixed");
-    mainContainer.removeClass("--header-fixed");
-  }
-  
-});
-
-jQuery(window).on('load', function(){
+addEventListener("scroll", (event) => {
+  document.getElementById("masthead").classList.toggle("--fixed", window.scrollY > 0);
 });
 
 // Initialize last known viewport dimensions
