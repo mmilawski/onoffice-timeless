@@ -44,6 +44,7 @@ if (function_exists('oo_setup_parent_theme')) {
         [OO_SHARED_PATH . '/build/js/splide/splide.js', []],
         [OO_SHARED_PATH . '/build/js/firefox-iframe-fix.js', ['jquery']],
         [OO_SHARED_PATH . '/build/js/usercentrics-helpers.js', []],
+        [OO_PARENT_PATH . '/build/js/success-counter.js', []],
         [
             OO_PARENT_PATH . '/build/js/app.js',
             [
@@ -242,6 +243,12 @@ add_filter('onoffice_block_setup', function ($blocks) {
         ],
         'oo/shortcode' => [
             'path' => OO_SHARED_PATH . '/blocks/shortcode',
+        ],
+        'oo/success-counter' => [
+            'path' => OO_SHARED_PATH . '/blocks/success-counter',
+            'override-parent-render' =>
+                OO_PARENT_PATH .
+                '/blocks/success-counter/success-counter-render.php',
         ],
     ]);
 });

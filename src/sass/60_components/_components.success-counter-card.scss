@@ -1,0 +1,121 @@
+.c-success-counter-card {
+  $c-success-counter-card: &;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: 100%;
+  background-color: var(--oo-color-mix-bg-contrast-05);
+  padding: 1.5rem;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  &__icon-container,
+  &__icon {
+    width: 3.75rem;
+    height: 3.75rem;
+
+    @include media-breakpoint-up(md) {
+      width: 5rem;
+      height: 5rem;
+    }
+  }
+
+  &__number {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--oo-color-primary);
+    line-height: 1;
+
+    @include media-breakpoint-up(md) {
+      font-size: 2.5rem;
+    }
+  }
+
+  &__prefix {
+    white-space: pre-wrap;
+  }
+
+  &__postfix {
+    white-space: pre-wrap;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  &__title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--oo-color-text);
+    hyphens: auto;
+    hyphenate-limit-chars: 6 3 3;
+    overflow-wrap: break-word;
+  }
+
+  &__text {
+  }
+
+  .--bg-light & {
+    background-color: var(--oo-color-light-mix-bg-contrast-05);
+
+    #{$c-success-counter-card}__number {
+      color: var(--oo-color-light-primary);
+    }
+
+    #{$c-success-counter-card}__title {
+      color: var(--oo-color-light-text);
+    }
+  }
+  .--bg-dark & {
+    background-color: var(--oo-color-dark-mix-bg-contrast-05);
+
+    #{$c-success-counter-card}__number {
+      color: var(--oo-color-dark-primary);
+    }
+
+    #{$c-success-counter-card}__title {
+      color: var(--oo-color-dark-text);
+    }
+  }
+  .--bg-primary & {
+    background-color: var(--oo-color-primary-mix-bg-contrast-05);
+
+    #{$c-success-counter-card}__number {
+      color: var(--oo-color-primary-primary);
+    }
+
+    #{$c-success-counter-card}__title {
+      color: var(--oo-color-primary-text);
+    }
+  }
+  .--bg-secondary & {
+    background-color: var(--oo-color-secondary-mix-bg-contrast-05);
+
+    #{$c-success-counter-card}__number {
+      color: var(--oo-color-secondary-primary);
+    }
+
+    #{$c-success-counter-card}__title {
+      color: var(--oo-color-secondary-text);
+    }
+  }
+  .--bg-transparent & {
+    background-color: var(--oo-color-mix-bg-contrast-05);
+
+    #{$c-success-counter-card}__number {
+      color: var(--oo-color-primary);
+    }
+
+    #{$c-success-counter-card}__title {
+      color: var(--oo-color-text);
+    }
+  }
+}

@@ -342,6 +342,13 @@
     }
   }
 
+  &.--is-success-counter-slider {
+    #{$c-slider}__track {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+  }
+
   &.--is-google-review {
   }
 
