@@ -1,6 +1,13 @@
 .c-customer-area {
   $customer-area: &;
 
+  &.--logged-in {
+    #{$customer-area}__content,
+    #{$customer-area}__buttons {
+      display: none;
+    }
+  }
+
   &__container {
     display: flex;
     flex-direction: column;

@@ -142,7 +142,7 @@ echo $is_image;
             <?php } ?>
 
             <?php if (!empty($text['wysiwyg'])) { ?>
-                <div class="c-review-card__text o-text --is-wysiwyg"id="<?php echo $uniqid; ?>">
+                <div class="c-review-card__text o-text --is-wysiwyg" id="<?php echo $uniqid; ?>">
                     <?php echo $text['wysiwyg']; ?>
                 </div>
 

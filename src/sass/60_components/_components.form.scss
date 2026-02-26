@@ -2,20 +2,13 @@
   $c-form: &;
 
   position: relative;
-  scroll-margin-top: calc($mobile-header-height + $mobile-section-padding-top);
+  scroll-margin-top: $mobile-header-height;
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
-  @include media-breakpoint-up(xl) {
-    scroll-margin-top: calc(
-      $mobile-header-height + $desktop-section-padding-top
-    );
-  }
   @include media-breakpoint-up(xxl) {
-    scroll-margin-top: calc(
-      $desktop-header-height + $desktop-section-padding-top
-    );
+    scroll-margin-top: $desktop-header-height;
     gap: 2rem;
   }
 
@@ -198,6 +191,7 @@
   }
 
   &.--is-owner-leadgenerator-form {
+    width: 100%;
     #{$c-form}__header {
       flex-direction: column;
       align-items: flex-start;
@@ -415,22 +409,13 @@
   &.--is-banner-search-form {
     width: 100%;
     #{$c-form}__body {
-      scroll-margin-top: calc(
-        $mobile-header-height + $mobile-section-padding-top
-      );
+      scroll-margin-top: $mobile-header-height;
       scroll-snap-align: start;
       @include media-breakpoint-up(md) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
-      @include media-breakpoint-up(xl) {
-        scroll-margin-top: calc(
-          $mobile-header-height + $desktop-section-padding-top
-        );
-      }
       @include media-breakpoint-up(xxl) {
-        scroll-margin-top: calc(
-          $desktop-header-height + $desktop-section-padding-top
-        );
+        scroll-margin-top: $desktop-header-height;
       }
     }
     #{$c-form}__more {

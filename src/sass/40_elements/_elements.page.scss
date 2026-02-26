@@ -7,21 +7,52 @@
  */
 html,
 body {
-  height: 100%;
+  height: auto;
   font-size: $global-rem-size;
   line-height: $global-line-height;
   font-family: $font-family-text;
   font-weight: $font-weight-text;
   background-color: var(--oo-color-bg);
   color: var(--oo-color-text);
-
-  &.--is-header-style-white {
-    height: auto;
-  }
 }
 
 html {
   scroll-behavior: auto;
+}
+
+body {
+  &.--logo-small {
+    --header-height: calc(#{$logo-height-sm} + 2rem); // logo + padding
+    @include media-breakpoint-up(xl) {
+      --header-height: calc(
+        #{$logo-height-sm} + 2rem + 2.75rem
+      ); // logo + padding + meta height
+    }
+  }
+  &.--logo-medium {
+    --header-height: calc(#{$logo-height-md} + 2rem); // logo + padding
+    @include media-breakpoint-up(xl) {
+      --header-height: calc(
+        #{$logo-height-md} + 2rem + 2.75rem
+      ); // logo + padding + meta height
+    }
+  }
+  &.--logo-large {
+    --header-height: calc(#{$logo-height-lg} + 2rem); // logo + padding
+    @include media-breakpoint-up(xl) {
+      --header-height: calc(
+        #{$logo-height-lg} + 2rem + 2.75rem
+      ); // logo + padding + meta height
+    }
+  }
+  &.--logo-extra-large {
+    --header-height: calc(#{$logo-height-xl} + 2rem); // logo + padding
+    @include media-breakpoint-up(xl) {
+      --header-height: calc(
+        #{$logo-height-xl} + 2rem + 2.75rem
+      ); // logo + padding + meta height
+    }
+  }
 }
 
 header,

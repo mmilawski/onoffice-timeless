@@ -29,25 +29,7 @@ if ($pEstates->estateIterator()): ?>
         </div>
 
         <div class="c-property-details__unit-container o-container-fluid"> 
-            <div id="unitslider" 
-                 class="c-property-details__units-slider --tile c-slider --is-properties-units-slider splide"
-                 data-splide='{
-                    "perPage": 3,
-                    "perMove": 1,
-                    "gap": "1rem",
-                    "snap": true,
-                    "lazyLoad": "nearby",
-                    "pagination": false,
-                    "arrows": false,
-                    "breakpoints": {
-                        "992": {
-                            "perPage": 2
-                        },
-                        "768": {
-                            "perPage": 1
-                        }
-                    }
-                }'>
+            <div id="unitslider" class="c-property-details__units-slider --tile c-slider --is-properties-units-slider splide" data-splide='{"perPage":1,"perMove":1,"gap":32,"pagination":false,"arrows":false,"page":false,"snap":true,"lazyLoad":"nearby","mediaQuery":"min","breakpoints":{"992":{"perPage":2},"1400":{"perPage":3}}}'>
                 
                 <div class="c-slider__track splide__track">
                     <div class="c-slider__list splide__list">

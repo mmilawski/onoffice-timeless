@@ -163,33 +163,18 @@
       flex-direction: row;
     }
 
-    .--is-header-style-white & {
-      @include media-breakpoint-up(xxl) {
-        min-height: calc(100dvh - $desktop-header-height);
-      }
-    }
-
     &-wrapper {
       @include media-breakpoint-up(xl) {
         width: inherit;
 
         position: relative;
-        padding-top: calc($mobile-header-height + $desktop-section-padding-top);
+        padding-top: $desktop-section-padding-top;
         padding-bottom: 7.5rem;
         z-index: 500;
       }
 
       @include media-breakpoint-up(xxl) {
-        padding-top: calc(
-          $desktop-header-height + $desktop-section-padding-top
-        );
-      }
-
-      .--is-header-style-white & {
-        @include media-breakpoint-up(xxl) {
-          padding-top: $desktop-section-padding-top;
-          padding-bottom: 7.5rem;
-        }
+        padding-top: $desktop-section-padding-top;
       }
     }
 
@@ -209,12 +194,6 @@
 
       &.--is-placeholder {
         background-color: var(--oo-color-transparent-primary-10);
-      }
-
-      .--is-header-style-white & {
-        @include media-breakpoint-up(xxl) {
-          min-height: calc(100dvh - $desktop-header-height);
-        }
       }
     }
 
@@ -344,13 +323,13 @@
 
       @include media-breakpoint-up(md) {
         aspect-ratio: unset;
-        height: 50vh;
+        height: 25rem;
         width: 100%;
         max-width: 100%;
       }
 
       @include media-breakpoint-up(xl) {
-        height: 75vh;
+        height: 40rem;
       }
     }
 
@@ -377,6 +356,7 @@
 
       @include media-breakpoint-up(lg) {
         margin-bottom: 0;
+        max-width: 90vw;
       }
     }
 
@@ -385,7 +365,7 @@
       box-shadow: 0px 0px 0px $outline-offset var(--oo-color-contrast-primary);
     }
 
-    &.--is-layout-slider {
+    &.--is-floorplan-slider {
       margin-bottom: 2.5rem;
 
       #{$c-property-details}__gallery-picture {

@@ -596,7 +596,10 @@ if (
      $property_id,
  ); ?>">
                     <span class="c-property-card__button-text">
-                        <?php esc_html_e('Zur Detailansicht', 'oo_theme'); ?>
+                        <?php esc_html_e(
+                            'Zur Detail&shy;ansicht',
+                            'oo_theme',
+                        ); ?>
                     </span>
                 </a>
             <?php endif; ?>

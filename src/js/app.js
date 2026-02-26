@@ -582,54 +582,39 @@ jQuery(document).ready(function() {
     );
   }
 
-  function setTeamOverlayOpen(card, open=true) {
-    const overlay = card.querySelector('.c-team-card__overlay')
-    const children = Array.from(overlay.children);    
-    overlay.setAttribute("aria-expanded", open);
-    children.forEach((child) => {
-      if(child.classList.contains("c-button")) return;
-      open ? child.removeAttribute("inert") : child.setAttribute("inert", '');
+  // Team
+  const teamCard = document.querySelectorAll('.c-team-card');
+  if (teamCard.length > 0) {
+    teamCard.forEach(card => {
+      const button = card.querySelector('.c-team-card__icon');
+      const id = card.dataset.team;
+
+      const setCardState = (card, open) => {
+        const overlay = card.querySelector('.c-team-card__overlay');
+        const button = card.querySelector('.c-team-card__icon');
+    
+        Array.from(overlay.children).forEach(child => {
+          if (!child.classList.contains('c-button') && !child.classList.contains('c-team-card__icon')) {
+            open ? child.removeAttribute('inert') : child.setAttribute('inert', '');
+          }
+        });
+
+        overlay.classList.toggle('--open', open);
+    
+        button.setAttribute('aria-expanded', open);
+        button.setAttribute('aria-label', open ? button.dataset.closeText : button.dataset.openText);
+        button.classList.toggle('--less', open);
+        button.classList.toggle('--more', !open);
+      };
+    
+      setCardState(card, false);
+    
+      button.addEventListener('click', () => {
+        const open = button.getAttribute('aria-expanded') !== 'true';
+        document.querySelectorAll(`.c-team-card[data-team="${id}"]`).forEach(card => setCardState(card, open));
+      });
     });
-  }
-
-  function setupTeamOverlayHandling() {
-    const teamCards = document.querySelectorAll('.c-team-card')
-    const teamCardsByAriaLabelledBy = {}
-    teamCards.forEach(teamCard=>{
-      const ariaLabelledBy = teamCard.getAttribute('aria-labelledby')
-      if(!Object.keys(teamCardsByAriaLabelledBy).includes(ariaLabelledBy)){
-        teamCardsByAriaLabelledBy[ariaLabelledBy] = []
-      }
-      teamCardsByAriaLabelledBy[ariaLabelledBy].push(teamCard)
-    })
-
-    teamCards.forEach((teamCard) => {
-      const overlay = teamCard.querySelector('.c-team-card__overlay')
-      const children = Array.from(overlay.children);
-      const expandButton = children.find(child => child.classList.contains("--more"));
-      const retractButton = children.find(child => child.classList.contains("--less"));
-      setTeamOverlayOpen(teamCard, false);
-
-      // expanding and rectracting all clones to hide splide's recycling of nodes,
-      // otherwise you could see an expanded card jumping to its clone's position
-      const ariaLabelledBy = teamCard.getAttribute('aria-labelledby')
-      const teamCardClones = teamCardsByAriaLabelledBy[ariaLabelledBy]
-      
-      retractButton.addEventListener("click", (event) => {
-        teamCardClones.forEach(teamCardClone => setTeamOverlayOpen(teamCardClone, false));    
-        if (event.detail === 0) {
-          expandButton.focus();
-        }
-      });
-
-      expandButton.addEventListener("click", (event) => {
-        teamCardClones.forEach(teamCardClone => setTeamOverlayOpen(teamCardClone, true));    
-        if (event.detail === 0) {
-          retractButton.focus();
-        }
-      });
-    })
-  }
+  };
 
     function togglePopupEventListener(button){
         // Get the ID of the popup from the data-popup attribute
@@ -691,7 +676,6 @@ jQuery(document).ready(function() {
         }
     }
 
-    setupTeamOverlayHandling();
   // Handle buttons which open extended content
   const showMoreButtons = document.querySelectorAll('.--open-popup, .c-read-more, .c-property-details__more, .c-address-details__more');
     showMoreButtons.forEach(button => {
@@ -725,10 +709,10 @@ jQuery(document).ready(function() {
       <div class="gcontainer c-lightbox__container">
         <div id="glightbox-slider" class="gslider c-lightbox__slider"></div>
         <button class="gprev gbtn c-lightbox__icon-wrapper --arrow --prev" tabindex="0" aria-label="${window.ooTimelessTheme.translations.previous || 'Previous'}">
-          <svg class="c-lightbox__icon --arrow" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" role="img" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+          <svg class="c-lightbox__icon --arrow" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 41 41" role="img" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M27.34,20.5h-13.68M13.66,20.5l5.99-5.99M13.66,20.5l5.99,5.99"/><path d="M40.5,20.5C40.5,9.45,31.55.5,20.5.5S.5,9.45.5,20.5s8.95,20,20,20,20-8.95,20-20Z"/></svg>
         </button>
         <button class="gnext gbtn c-lightbox__icon-wrapper --arrow --next" tabindex="1" aria-label="${window.ooTimelessTheme.translations.next || 'Next'}">
-          <svg class="c-lightbox__icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" role="img" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+          <svg class="c-lightbox__icon --arrow" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 41 41" role="img" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M13.66,20.5h13.68M27.34,20.5l-5.99,5.99M27.34,20.5l-5.99-5.99"/><path d="M.5,20.5c0,11.05,8.95,20,20,20s20-8.95,20-20S31.55.5,20.5.5.5,9.45.5,20.5Z"/></svg>
         </button>
       </div>
     </div>`;
@@ -739,7 +723,7 @@ jQuery(document).ready(function() {
         <div class="ginner-container c-lightbox__content">
           <div class="gslide-media c-lightbox__media">
             <button class="gclose gbtn c-lightbox__icon-wrapper --close" tabindex="2" aria-label="${window.ooTimelessTheme.translations.close || 'Close'}">
-              <svg class="c-lightbox__icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" role="img" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+              <svg class="c-lightbox__icon" xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 41 41" role="img" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14.84,26.16l5.66-5.66M26.16,14.84l-5.66,5.66M20.5,20.5l-5.66-5.66M20.5,20.5l5.66,5.66"/><path d="M20.5,40.5c11.05,0,20-8.95,20-20S31.55.5,20.5.5.5,9.45.5,20.5s8.95,20,20,20Z"/></svg>
             </button>
           </div>
           <div class="gslide-description c-lightbox__description-wrapper">
@@ -1054,8 +1038,11 @@ jQuery(document).ready(function() {
       // Focus handling
       const manuallyHandleFocus = !!innerslider || !!outerslider;
       splide.on('overflow', function (isOverflow) {
+        splide.go( 0 );
+
         splide.options = {
           drag: isOverflow,
+          clones: isOverflow ? undefined : 0,
           focusableNodes: manuallyHandleFocus
             ? ''
             : 'a, button, input, textarea, select:not([aria-hidden])',
@@ -1071,7 +1058,6 @@ jQuery(document).ready(function() {
         if ($pagination.length && $autoslideItem.length) {
           $pagination.append($autoslideItem);
         }
-        setupTeamOverlayHandling();
       });
 
       if(slider.classList.contains('--is-team-slider')){
@@ -1086,9 +1072,7 @@ jQuery(document).ready(function() {
         })
       }
 
-      const shouldCheckOverflow = $slider.hasClass('--is-layout-slider') || 
-      $slider.hasClass('--is-properties-similar-slider') ||
-      $slider.hasClass('--is-properties-units-slider');
+      const shouldCheckOverflow = $slider.hasClass('--is-floorplan-slider') || $slider.hasClass('--is-property-details-slider') || $slider.hasClass('--is-properties-similar-slider') || $slider.hasClass('--is-properties-units-slider');
 
       if (shouldCheckOverflow) {
         splide.on('mounted resized', function () {
@@ -1236,9 +1220,6 @@ jQuery(document).ready(function() {
 
     });
   }
-
-  // Correct padding for first element in main
-  correctFirstElementPadding();
 
   // Scroll Back To Top Button
   const scrollBackToTop = document.querySelector('.c-back-to-top');
@@ -1563,8 +1544,6 @@ jQuery(window).on('resize', function() {
         menuOpenClose();
       }
 
-      // Correct padding for first element in main if header
-      correctFirstElementPadding();
       // Function to apply text shortening, read-more button and visibility adjustments based on word count and screen size
       applyResponsiveTextShortening();
     }
@@ -1583,51 +1562,6 @@ function menuOpenClose() {
   $(".c-main-nav__item").toggleClass("--is-open");
   $(".c-main-nav__button .--open").toggle();
   $(".c-main-nav__button .--close").toggle();
-}
-
-// Correct padding for first element in main
-function correctFirstElementPadding() {
-  const body = document.body;
-  const header = document.getElementsByClassName('c-header'); 
-
-  if (header.length === 0) {
-    body.style.removeProperty('--header-height');
-    return;
-  }
-
-  let headerHeight = header[0].offsetHeight;
-  let headerHeightRounded = Math.round(headerHeight);
-
-  let firstElement = document.querySelector('.o-main > :first-child');
-  if (!firstElement) {
-    body.style.removeProperty('--header-height');
-    return;
-  }
-
-  let firstElementPaddingTop = 0;
-
-  if(firstElement.classList.contains('c-banner')) {
-    firstElement = firstElement.querySelector('.c-banner__slide');
-    firstElementPaddingTop = parseInt(window.getComputedStyle(firstElement, null).getPropertyValue('padding-top'));
-  } else if(firstElement.classList.contains('c-property-details')) {
-    firstElement = firstElement.querySelector('.c-property-details__banner-wrapper');
-    firstElementPaddingTop = parseInt(window.getComputedStyle(firstElement, null).getPropertyValue('padding-top'));
-  } else if(firstElement.classList.contains('c-news-details')) {
-    let firstChildElement = firstElement.querySelector(':first-child');
-    if(firstChildElement.classList.contains('c-news-details__info')) {
-      firstElementPaddingTop = parseInt(window.getComputedStyle(firstChildElement, null).getPropertyValue('padding-top'));
-    }
-  } else if(firstElement.classList.contains('o-section')) {
-    firstElementPaddingTop = parseInt(window.getComputedStyle(firstElement, null).getPropertyValue('padding-top'));
-  }
-
-  if (firstElementPaddingTop === 0 && headerHeightRounded <= firstElementPaddingTop) {
-    body.style.removeProperty('--header-height');
-    return;
-  }
-
-  body.style.setProperty('--header-height', `${headerHeightRounded}px`);
-  
 }
 
 // Function to apply text shortening, read-more button and visibility adjustments based on word count and screen size

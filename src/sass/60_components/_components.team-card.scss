@@ -26,15 +26,15 @@
     gap: 0;
     overflow: hidden;
 
-    &[aria-expanded='true'] {
+    &.--open {
       gap: 0;
       max-height: calc(100% - 3rem);
 
       .c-team-card__icon {
-        &.--less {
+        .--less {
           display: flex;
         }
-        &.--more {
+        .--more {
           display: none;
         }
       }
@@ -91,97 +91,73 @@
   }
 
   &__icon {
+    padding: 0;
+    background: transparent;
+    border: 0;
     position: absolute;
     bottom: 1.375rem;
     right: 1.5rem;
     z-index: 1;
-    transition: all 0.25s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--oo-color-text);
+    height: 2.5rem;
+    width: 2.5rem;
+    outline: $outline;
+    outline-offset: $outline-offset;
+    cursor: pointer;
+    transition: color 0.25s ease-in-out, outline-color 0.25s ease-in-out;
 
-    &.c-button {
-      width: 2.5rem;
-      height: 2.5rem;
-      padding: 0;
-      border: 1px solid var(--oo-color-text);
-      border-radius: 50%;
-      background: transparent;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--oo-color-text);
-      opacity: 0.8;
-      transition: all 0.25s ease-in-out;
+    .--bg-light & {
+      color: var(--oo-color-light-text, var(--oo-color-text));
+    }
+
+    .--bg-dark & {
+      color: var(--oo-color-dark-text, var(--oo-color-text));
+    }
+
+    .--bg-primary & {
+      color: var(--oo-color-primary-text, var(--oo-color-text));
+    }
+
+    .--bg-secondary & {
+      color: var(--oo-color-secondary-text, var(--oo-color-text));
+    }
+
+    @include hover-focus() {
+      color: var(--oo-color-primary);
+
       .--bg-light & {
-        border-color: var(--oo-color-light-text, var(--oo-color-text));
-        color: var(--oo-color-light-text, var(--oo-color-text));
+        color: var(--oo-color-light-primary, var(--oo-color-primary));
       }
 
       .--bg-dark & {
-        border-color: var(--oo-color-dark-text, var(--oo-color-text));
-        color: var(--oo-color-dark-text, var(--oo-color-text));
+        color: var(--oo-color-dark-primary, var(--oo-color-primary));
       }
 
       .--bg-primary & {
-        border-color: var(--oo-color-primary-text, var(--oo-color-text));
-        color: var(--oo-color-primary-text, var(--oo-color-text));
+        color: var(--oo-color-primary-primary, var(--oo-color-primary));
       }
 
       .--bg-secondary & {
-        border-color: var(--oo-color-secondary-text, var(--oo-color-text));
-        color: var(--oo-color-secondary-text, var(--oo-color-text));
-      }
-
-      .c-button__icon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        svg {
-          width: 0.75rem;
-          height: 0.75rem;
-          fill: none;
-          stroke: currentColor;
-          stroke-width: 2;
-        }
-      }
-
-      &:hover,
-      &:focus,
-      &:focus-within {
-        opacity: 1;
-        background-color: var(--oo-color-text);
-        color: var(--oo-color-bg);
-
-        .--bg-light & {
-          background-color: var(--oo-color-light-text, var(--oo-color-text));
-          color: var(--oo-color-light-bg, var(--oo-color-bg));
-        }
-
-        .--bg-dark & {
-          background-color: var(--oo-color-dark-text, var(--oo-color-text));
-          color: var(--oo-color-dark-bg, var(--oo-color-bg));
-        }
-
-        .--bg-primary & {
-          background-color: var(--oo-color-primary-text, var(--oo-color-text));
-          color: var(--oo-color-primary-bg, var(--oo-color-bg));
-        }
-
-        .--bg-secondary & {
-          background-color: var(
-            --oo-color-secondary-text,
-            var(--oo-color-text)
-          );
-          color: var(--oo-color-secondary-bg, var(--oo-color-bg));
-        }
+        color: var(--oo-color-secondary-primary, var(--oo-color-primary));
       }
     }
 
-    &.--more {
+    @include focus-all {
+      outline-color: currentColor;
+    }
+
+    .--more {
       display: flex;
     }
-    &.--less {
+    .--less {
       display: none;
     }
+  }
+
+  &__icon-svg {
   }
 
   &__row {
@@ -220,6 +196,7 @@
     }
 
     &.--job {
+      order: -1;
       overflow: hidden;
       transition: opacity 0.6s ease-in-out, padding-bottom 0.1s ease-in-out 0.5s;
 
@@ -303,14 +280,12 @@
 
     &.--action {
       padding-top: 2.5rem;
-      .c-button {
-        justify-content: start;
-      }
 
       .c-team-card__button {
         color: var(--oo-color-text);
         margin-left: 0;
         margin-right: 0;
+        justify-content: start;
 
         .--on-bg-light & {
           color: var(--oo-color-light-text);
@@ -329,8 +304,7 @@
   }
 
   &__name {
-    font-size: 1.125rem;
-    line-height: 1.625rem;
+    @include font-size($desktop-h5-font-size, $desktop-h5-line-height);
     width: calc(100% - 3rem);
     text-align: left;
     display: -webkit-box;
@@ -374,12 +348,6 @@
     text-decoration: underline;
     font-size: inherit;
     line-height: inherit;
-
-    &:hover,
-    &:focus,
-    &:focus-within {
-      opacity: 0.8;
-    }
   }
 
   &.--on-bg-light {

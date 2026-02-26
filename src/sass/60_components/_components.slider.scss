@@ -64,13 +64,9 @@
     max-width: $slider-dot-total * $slider-pagination-visible;
     margin-inline: auto;
     padding: 0.5rem 0;
-
-    .--is-property-details-slider &,
-    .--is-layout-slider & {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 
     @include media-breakpoint-up(lg) {
       $slider-pagination-visible: 9;
@@ -316,12 +312,22 @@
   }
 
   &.--is-team-slider {
+    overflow: visible;
+
+    #{$c-slider}__track {
+      contain: layout;
+      overflow: visible;
+    }
     #{$c-slider}__arrows {
-      margin: 0 1rem;
+      margin-inline: 1rem;
 
       @include media-breakpoint-up(md) {
-        margin: 0 0;
+        margin-inline: 0;
       }
+    }
+
+    [class*='--clone']:not(.is-active) {
+      pointer-events: none;
     }
   }
 
@@ -415,7 +421,7 @@
   }
 
   &.--is-property-details-slider,
-  &.--is-layout-slider {
+  &.--is-floorplan-slider {
     position: relative;
 
     #{$c-slider}__navigation {
@@ -438,20 +444,19 @@
       }
     }
     #{$c-slider}__pagination {
-      .--is-property-details-slider &,
-      .--is-layout-slider & {
-        display: flex;
-      }
+      display: flex;
 
       @include media-breakpoint-up(sm) {
         width: 100%;
       }
     }
     &:not(.is-overflow) {
-      > #{$c-slider}__navigation,
-      > #{$c-slider}__progress,
-      > #{$c-slider}__arrows {
-        display: flex;
+      #{$c-slider}__list {
+        justify-content: center;
+
+        &:last-child {
+          margin: 0 !important;
+        }
       }
     }
   }
@@ -476,6 +481,26 @@
     > #{$c-slider}__progress,
     > #{$c-slider}__arrows {
       display: none;
+    }
+  }
+
+  // when slider is initialized and not active
+  &.is-initialized:not(.is-active) {
+    &.--is-team-slider {
+      #{$c-slider}__list {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1rem;
+        @include media-breakpoint-up(md) {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        @include media-breakpoint-up(xxl) {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+      #{$c-slider}__navigation {
+        display: none;
+      }
     }
   }
 
@@ -552,19 +577,28 @@
     &.--is-properties-units-slider {
       #{$c-slider}__list {
         display: grid;
+        grid-template-columns: repeat(1, minmax(0, 1fr));
         gap: 2rem;
+
+        @include media-breakpoint-up(lg) {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 1.5rem;
+        }
+
+        @include media-breakpoint-up(xxl) {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
       }
     }
 
     &.--is-team-slider {
       #{$c-slider}__list {
         display: grid;
-        gap: 3rem 0;
+        gap: 1rem;
         @include media-breakpoint-up(md) {
           grid-template-columns: repeat(2, 1fr);
-          gap: 5rem 2rem;
         }
-        @include media-breakpoint-up(xl) {
+        @include media-breakpoint-up(xxl) {
           grid-template-columns: repeat(3, 1fr);
         }
       }

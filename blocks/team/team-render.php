@@ -48,6 +48,15 @@ $query_args = [
 
 $team_query = new WP_Query($query_args);
 
+// destroy sliders if not enough slides
+$slides_count = $team_query->have_posts() ? $team_query->post_count : 0;
+
+$destroy_xs = $slides_count <= 1 ? true : false;
+$destroy_md = $slides_count <= 2 ? true : false;
+$destroy_xxl = $slides_count <= 3 ? true : false;
+$type_md = $slides_count <= 3 ? 'slide' : 'loop';
+$type_xxl = $slides_count <= 4 ? 'slide' : 'loop';
+
 // set header level for submodule
 $size = !empty($headline['text'])
     ? sanitize_header_level($headline['size'])
@@ -59,46 +68,59 @@ set_current_header_level($size);
     $block,
 ); ?>  class="c-team o-section --<?php echo $bg_color; ?>">
     <div class="c-team__container o-container">
-        <div class="c-team__row o-row">
-            <?php if (
-                !empty($headline['text']) ||
-                !empty($text['wysiwyg'])
-            ) { ?>
-                <div class="c-team__content o-col-12 o-col-lg-10 o-col-xl-8 u-offset-lg-1">
-                    <?php if (!empty($headline['text'])) { ?>
-                        <?php oo_get_template(
-                            'components',
-                            '',
-                            'component-headline',
-                            [
-                                'headline' => $headline,
-                                'additional_headline_class' =>
-                                    'c-team__headline',
-                            ],
-                        ); ?>
-                    <?php } ?>
+        <?php if (
+            !empty($headline['text']) ||
+            !empty($text['wysiwyg']) ||
+            !empty($buttons['buttons'][0]['link'])
+        ) { ?>
+            <div class="c-team__row o-row">
+                <?php if (
+                    !empty($headline['text']) ||
+                    !empty($text['wysiwyg'])
+                ) { ?>
+                    <div class="c-team__content o-col-12 o-col-lg-10 o-col-xl-8 u-offset-lg-1">
+                        <?php if (!empty($headline['text'])) { ?>
+                            <?php oo_get_template(
+                                'components',
+                                '',
+                                'component-headline',
+                                [
+                                    'headline' => $headline,
+                                    'additional_headline_class' =>
+                                        'c-team__headline',
+                                ],
+                            ); ?>
+                        <?php } ?>
 
-                    <?php if (!empty($text['wysiwyg'])) { ?>
-                        <div class="c-team__text o-text --is-wysiwyg">
-                            <?php echo $text['wysiwyg']; ?>
-                        </div>
-                    <?php } ?>
-                </div>
-            <?php } ?>
-            <?php if (!empty($buttons['buttons'][0]['link'])) { ?>
-                <?php oo_get_template('components', '', 'component-buttons', [
-                    'buttons' => $buttons['buttons'],
+                        <?php if (!empty($text['wysiwyg'])) { ?>
+                            <div class="c-team__text o-text --is-wysiwyg">
+                                <?php echo $text['wysiwyg']; ?>
+                            </div>
+                        <?php } ?>
+                    </div>
+                <?php } ?>
+                <?php if (!empty($buttons['buttons'][0]['link'])) { ?>
+                    <?php oo_get_template(
+                        'components',
+                        '',
+                        'component-buttons',
+                        [
+                            'buttons' => $buttons['buttons'],
 
-                    'additional_button_class' => $bg_color
-                        ? '--on-' . $bg_color
-                        : '',
-                    'additional_container_class' =>
-                        'c-team__buttons o-col-12 o-col-xl-8 u-offset-lg-1',
-                ]); ?>
-            <?php } ?>
+                            'additional_button_class' => $bg_color
+                                ? '--on-' . $bg_color
+                                : '',
+                            'additional_container_class' =>
+                                'c-team__buttons o-col-12 o-col-lg-10 o-col-xl-8 u-offset-lg-1',
+                        ],
+                    ); ?>
+                <?php } ?>
+            </div>
+        <?php } ?>
+        <div class="c-team__wrapper">
             <?php if ($team_query->have_posts()): ?>
                 <?php if (!$is_slider) { ?>
-                    <div class="c-team__members o-col-12">
+                    <div class="c-team__members">
                         <?php
                         while ($team_query->have_posts()):
                             $team_query->the_post();
@@ -109,8 +131,16 @@ set_current_header_level($size);
                         ?>
                     </div>
                 <?php } else { ?>
-                    <div class="c-team__slider --on-<?php echo $bg_color; ?> c-slider --is-team-slider splide" data-splide='{"type":"loop","perPage":1,"gap":0,"snap":true,"lazyLoad":"nearby","mediaQuery":"min","focus":0,"classes":{"page":"c-slider__page splide__pagination__page"},"breakpoints":{"768":{"perPage":2, "gap":16},"1400":{"perPage":3}}}'>
-                        <div class="c-slider__track splide__track o-col-12 o-col-xl-10">
+                    <div class="c-team__slider --on-<?php echo $bg_color; ?> c-slider --is-team-slider splide" data-splide='{"type":"slide","perPage":1,"gap":0,"snap":true,"lazyLoad":"nearby","mediaQuery":"min","focus":0,"classes":{"page":"c-slider__page splide__pagination__page"},"destroy": <?php echo json_encode(
+     $destroy_xs,
+ ); ?>,"breakpoints": {"768": { "type": <?php echo json_encode(
+    $type_md,
+); ?>,"perPage":2, "gap":16, "destroy": <?php echo json_encode(
+    $destroy_md,
+); ?> },"1400": { "type": <?php echo json_encode(
+     $type_xxl,
+ ); ?>, "perPage":3, "destroy": <?php echo json_encode($destroy_xxl); ?> }}}'>
+                        <div class="c-slider__track splide__track">
                             <div class="c-slider__list splide__list">
                                 <?php
                                 while ($team_query->have_posts()):
@@ -122,27 +152,31 @@ set_current_header_level($size);
                                 ?> 
                             </div>
                         </div>
-                        <div class="c-slider__arrows splide__arrows">
-                            <button class="c-slider__arrow --prev c-button --only-icon --square splide__arrow splide__arrow--prev">
-                                <span class="u-screen-reader-only"><?php esc_html_e(
-                                    'Vorheriges',
-                                    'oo_theme',
-                                ); ?></span>
-                                <span class="c-button__icon --chevron-left"><?php oo_get_icon(
-                                    'chevron-left',
-                                ); ?></span>
-                            </button>
-                            <button class="c-slider__arrow --next c-button --only-icon --square splide__arrow splide__arrow--next">
-                                <span class="u-screen-reader-only"><?php esc_html_e(
-                                    'Nächstes',
-                                    'oo_theme',
-                                ); ?></span>
-                                <span class="c-button__icon --chevron-right"><?php oo_get_icon(
-                                    'chevron-right',
-                                ); ?></span>
-                            </button>
+                        <div class="c-slider__navigation splide__navigation">
+                            <div class="c-slider__arrows splide__arrows">
+                                <button class="c-slider__arrow --prev c-button --only-icon --square splide__arrow splide__arrow--prev">
+                                    <span class="u-screen-reader-only"><?php esc_html_e(
+                                        'Vorheriges',
+                                        'oo_theme',
+                                    ); ?></span>
+                                    <span class="c-button__icon --chevron-left"><?php oo_get_icon(
+                                        'chevron-left',
+                                    ); ?></span>
+                                </button>
+                                <button class="c-slider__arrow --next c-button --only-icon --square splide__arrow splide__arrow--next">
+                                    <span class="u-screen-reader-only"><?php esc_html_e(
+                                        'Nächstes',
+                                        'oo_theme',
+                                    ); ?></span>
+                                    <span class="c-button__icon --chevron-right"><?php oo_get_icon(
+                                        'chevron-right',
+                                    ); ?></span>
+                                </button>
+                            </div>
+                            <div class="c-slider__pagination-wrapper">
+                                <ul class="c-slider__pagination splide__pagination"></ul>
+                            </div>
                         </div>
-                        <ul class="c-slider__pagination splide__pagination"></ul>
                     </div>
                 <?php } ?>
             <?php endif; ?>

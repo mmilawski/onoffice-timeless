@@ -37,6 +37,8 @@ $image_width_xl = '450';
 $image_width_xxl = '343';
 $image_width_xxxl = '378';
 
+$uniqid = 'team-' . uniqid();
+
 $rating_provider = $card['rating_provider'] ?? null;
 $rating = 0.0;
 $google_api_key = $card['google_api_key'] ?? null;
@@ -45,6 +47,9 @@ $place_id_override = $card['place_id'] ?? null;
 $proven_expert_username = $card['proven_expert_username'] ?? null;
 $proven_expert_password = $card['proven_expert_password'] ?? null;
 $proven_expert_url = '';
+
+// get header level from parent block
+$header_level = get_current_header_level() + 1;
 
 if ($rating_provider === 'google') {
     if (!empty($place_id_override)) {
@@ -77,13 +82,11 @@ if ($rating_provider === 'google') {
 }
 ?>
 
-<article role="group" <?php if (!empty($name)) {
-    echo 'aria-labelledby="name-' . $post_id . '"';
-} ?> <?php if (!empty($job)) {
-     echo 'aria-describedby="desc-' . $post_id . '"';
- } ?> class="c-team-card --on-<?php echo $bg_color; ?> <?php if ($is_slider) {
+<article class="c-team-card --on-<?php echo $bg_color; ?> <?php if (
+     $is_slider
+ ) {
      echo '--on-slider c-slider__slide splide__slide';
- } ?>">
+ } ?>" data-team="<?php echo $uniqid; ?>">
     <?php if (!empty($image)) { ?>
         <?php oo_get_template('components', '', 'component-image', [
             'image' => $image,
@@ -124,24 +127,35 @@ if ($rating_provider === 'google') {
     <?php } else { ?>
         <div class="c-team-card__picture"></div>
     <?php } ?>
-    <div class="c-team-card__overlay" aria-expanded="false">
-        <?php if (!empty($job)) { ?>
-            <div class="c-team-card__row --job">
-                <p id="desc-<?php echo $post_id; ?>" class="c-team-card__job"><?php echo $job; ?></p>
-            </div>
-        <?php } ?>
-
+    <div class="c-team-card__overlay">
         <div class="c-team-card__row --name">
             <?php if (!empty($name)) { ?>
-                <p id="name-<?php echo $post_id; ?>" class="c-team-card__name"><?php
-$words = explode(' ', $name);
-$word_count = count($words);
-$first_line = implode(' ', array_slice($words, 0, ceil($word_count / 2)));
-$second_line = implode(' ', array_slice($words, ceil($word_count / 2)));
-echo $first_line . '<br>' . $second_line;
-?></p>
+                <?php
+                $words = explode(' ', $name);
+                $word_count = count($words);
+                $first_line = implode(
+                    ' ',
+                    array_slice($words, 0, ceil($word_count / 2)),
+                );
+                $second_line = implode(
+                    ' ',
+                    array_slice($words, ceil($word_count / 2)),
+                );
+                echo "<h{$header_level} " .
+                    'class="c-team-card__name o-headline">' .
+                    $first_line .
+                    '<br>' .
+                    $second_line .
+                    "</h{$header_level}>";
+                ?>
             <?php } ?>
         </div>
+
+        <?php if (!empty($job)) { ?>
+            <div class="c-team-card__row --job">
+                <p class="c-team-card__job"><?php echo $job; ?></p>
+            </div>
+        <?php } ?>
 
         <?php if (
             !empty($card['rating_provider']) &&
@@ -321,15 +335,23 @@ echo $first_line . '<br>' . $second_line;
                 </button>
             </div>
         <?php } ?>
-        <button class="c-team-card__icon c-button --only-icon --more">
-            <span class="c-button__icon --plus">
-                <?php oo_get_icon('plus'); ?>
-            </span>
-        </button>
-        <button class="c-team-card__icon c-button --only-icon --less">
-            <span class="c-button__icon --minus">
-                <?php oo_get_icon('minus'); ?>
-            </span>
+
+        <button class="c-team-card__icon" data-open-text="<?php esc_html_e(
+            'Kontaktinformationen anzeigen',
+            'oo_theme',
+        ); ?>" data-close-text="<?php esc_html_e(
+    'Kontaktinformationen ausblenden',
+    'oo_theme',
+); ?>" aria-label="<?php esc_html_e(
+    'Kontaktinformationen anzeigen',
+    'oo_theme',
+); ?>" aria-expanded="false">
+            <?php oo_get_icon('plus', true, [
+                'class' => 'c-team-card__icon-svg --more',
+            ]); ?>
+            <?php oo_get_icon('minus', true, [
+                'class' => 'c-team-card__icon-svg --less',
+            ]); ?>
         </button>
     </div>
 </article>

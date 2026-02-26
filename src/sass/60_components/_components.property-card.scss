@@ -267,7 +267,7 @@
     justify-content: center;
     text-align: center;
     min-height: 4rem;
-    padding: 0 2rem;
+    padding: 0 0.625rem;
     width: 100%;
     grid-column: 2;
 
@@ -278,6 +278,7 @@
     }
 
     @include media-breakpoint-up(xl) {
+      padding: 0 2rem;
       .--list & {
         grid-column: 3 / 4;
       }

@@ -2,8 +2,8 @@
   $c-header: &;
 
   width: 100%;
-  z-index: 999;
-  position: fixed;
+  z-index: 9999;
+  position: sticky;
   left: 0;
   right: 0;
   top: 0;
@@ -197,7 +197,7 @@
     }
 
     @include media-breakpoint-up(xxl) {
-      padding: 0;
+      padding: 0 1rem;
     }
   }
   &__meta-row {
@@ -236,17 +236,8 @@
         flex-basis: 50%;
         text-align: right;
         justify-content: flex-end;
+        margin-left: auto;
       }
-    }
-  }
-
-  &.--fixed {
-    z-index: 9999;
-    background-color: var(--oo-color-header-bg, var(--oo-color-bg));
-    margin-top: 0;
-
-    #{$c-header}__nav-wrapper {
-      margin-top: 0;
     }
   }
 

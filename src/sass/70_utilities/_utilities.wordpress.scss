@@ -2,7 +2,7 @@
 body {
   &.admin-bar {
     .c-header.--fixed {
-      top: 0;
+      top: 2.875rem;
       @media (min-width: 783px) {
         top: 2rem;
       }
