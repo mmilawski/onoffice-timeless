@@ -234,6 +234,7 @@ if (!function_exists('renderFieldEstateSearch')) {
             $output .= '</select>';
             $output .= '</div>';
         } elseif (in_array($typeCurrentInput, $typesBoolean)) {
+            $isSelected = $selectedValue;
             $output .= '<div class="o-label --is-single-select">';
             $output .=
                 '<label for="' . $fieldName . '_' . $formId . '-ts-control">';
@@ -253,21 +254,21 @@ if (!function_exists('renderFieldEstateSearch')) {
                 '">';
             $output .=
                 '<option value="" ' .
-                ($isSelected ? ' selected' : '') .
+                ($isSelected === null ? ' selected' : '') .
                 '>' .
                 $placeholder .
                 '</option>';
             $output .=
                 '<option value="y" ' .
-                ($isSelected ? ' selected' : '') .
+                ($isSelected === true ? ' selected' : '') .
                 '>' .
                 esc_html__('Ja', 'oo_theme') .
                 '</option>';
             $output .=
                 '<option value="n" ' .
-                ($isSelected ? ' selected' : '') .
+                ($isSelected === false ? ' selected' : '') .
                 '>' .
-                esc_html__('Nein', 'oo_theme') .
+                esc_html__('Nein / Keine Angabe', 'oo_theme') .
                 '</option>';
             $output .= '</select>';
             $output .= '</div>';
