@@ -29,20 +29,24 @@ if (file_exists(__DIR__ . '/shared/setup.php')) {
 
 // Init
 if (function_exists('oo_setup_parent_theme')) {
-    // STYLES
+    $reset_handle = oo_make_handle(
+        'theme',
+        OO_PARENT_PATH . '/build/css/reset.css',
+    );
     $oo_styles = [
         OO_PARENT_PATH . '/build/css/reset.css',
         OO_SHARED_PATH . '/build/css/tomselect/tom-select.css',
         OO_SHARED_PATH . '/build/css/splide/splide.css',
-        [OO_PARENT_PATH . '/build/css/style.css', ['oo-glightbox-style']],
+        [
+            OO_PARENT_PATH . '/build/css/style.css',
+            [$reset_handle, 'oo-glightbox-style'],
+        ],
         OO_SHARED_PATH . '/build/css/nouislider/nouislider.css',
     ];
-
     // SCRIPTS
     $oo_scripts = [
         [OO_SHARED_PATH . '/build/js/tomselect/tom-select.min.js', ['jquery']],
         [OO_SHARED_PATH . '/build/js/splide/splide.js', []],
-        [OO_SHARED_PATH . '/build/js/firefox-iframe-fix.js', ['jquery']],
         [OO_SHARED_PATH . '/build/js/usercentrics-helpers.js', []],
         [OO_PARENT_PATH . '/build/js/success-counter.js', []],
         [

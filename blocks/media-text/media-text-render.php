@@ -25,6 +25,8 @@ if (!empty($video)) {
         'controls' => 1,
         'hd' => 1,
         'autohide' => 1,
+        'enablejsapi' => 1,
+        'origin' => home_url(),
         'rel' => 0,
     ];
     $new_src = add_query_arg($params, $src);
