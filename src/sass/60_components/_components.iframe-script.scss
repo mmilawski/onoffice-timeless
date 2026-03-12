@@ -127,6 +127,8 @@
 
     &.--is-baufipasst {
       display: flex;
+      justify-content: center;
+      aspect-ratio: auto;
     }
 
     &.--is-eTracker {
