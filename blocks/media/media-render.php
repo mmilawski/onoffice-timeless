@@ -61,7 +61,7 @@ if ($width_container == 'content-width') {
     $media_width_xs = '544';
     $media_width_sm = '512';
     $media_width_md = '694';
-    $media_width_lg = '928';
+    $media_width_lg = '768';
     $media_width_xl = '736';
     $media_width_xxl = '864';
     $media_width_xxxl = '952';

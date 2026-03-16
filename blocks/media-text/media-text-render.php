@@ -57,13 +57,13 @@ if (!empty($video)) {
 }
 
 // Media width
-$media_width_xs = '544';
-$media_width_sm = '512';
-$media_width_md = '694';
-$media_width_lg = '448';
-$media_width_xl = '352';
-$media_width_xxl = '416';
-$media_width_xxxl = '460';
+$media_width_xs = '544'; // Max stretch at 575 window
+$media_width_sm = '512'; // Max stretch at 767 window
+$media_width_md = '694'; // Max stretch at 991 window
+$media_width_lg = '368'; // Max stretch at 1199 window
+$media_width_xl = '448'; // Max stretch at 1399 window
+$media_width_xxl = '528'; // Max stretch at 1599 window
+$media_width_xxxl = '584';
 ?>
 
 <section <?php oo_block_id(

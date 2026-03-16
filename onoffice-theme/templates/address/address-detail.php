@@ -119,6 +119,7 @@ foreach ($current_address_array as $address_id => $current_address) {
         'alt' => $image_alt,
     ];
 
+    // image widths
     $image_width_xs = '543';
     $image_width_sm = '512';
     $image_width_md = '694';

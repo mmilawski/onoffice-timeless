@@ -20,13 +20,13 @@ $is_description = filter_var(
 );
 
 // Image width
-$image_width_xs = '510';
-$image_width_sm = '511';
-$image_width_md = '693';
-$image_width_lg = '927';
-$image_width_xl = '463';
-$image_width_xxl = '543';
-$image_width_xxxl = '598';
+$image_width_xs = '575';
+$image_width_sm = '767';
+$image_width_md = '350';
+$image_width_lg = '424';
+$image_width_xl = '385';
+$image_width_xxl = '439';
+$image_width_xxxl = '528';
 
 $rating_provider = $card['rating_provider'];
 $rating = 0.0;

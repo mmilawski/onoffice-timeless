@@ -75,14 +75,22 @@ $is_date = filter_var(
     FILTER_VALIDATE_BOOLEAN,
 );
 
-// Image height
-$image_width_xs = '539';
-$image_width_sm = '508';
-$image_width_md = '690';
-$image_width_lg = '444';
-$image_width_xl = '540';
-$image_width_xxl = '636';
-$image_width_xxxl = '702';
+// Image dimensions
+$image_width_xs = '543';
+$image_width_sm = '512';
+$image_width_md = '694';
+
+if (!$is_slider) {
+    $image_width_lg = '387';
+    $image_width_xl = '467';
+    $image_width_xxl = '547';
+    $image_width_xxxl = '602';
+} else {
+    $image_width_lg = '288';
+    $image_width_xl = '352';
+    $image_width_xxl = '416';
+    $image_width_xxxl = '460';
+}
 
 // Helpers
 $link_title_date = esc_html($title);
@@ -116,31 +124,31 @@ $link_title_more = sprintf(
        'dimensions' => [
            '575' => [
                'w' => $image_width_xs,
-               'h' => round(($image_width_xs * 3) / 4),
+               'h' => round(($image_width_xs * 2) / 3),
            ],
            '1600' => [
                'w' => $image_width_xxxl,
-               'h' => round(($image_width_xxxl * 3) / 4),
+               'h' => round(($image_width_xxxl * 2) / 3),
            ],
            '1400' => [
                'w' => $image_width_xxl,
-               'h' => round(($image_width_xxl * 3) / 4),
+               'h' => round(($image_width_xxl * 2) / 3),
            ],
            '1200' => [
                'w' => $image_width_xl,
-               'h' => round(($image_width_xl * 3) / 4),
+               'h' => round(($image_width_xl * 2) / 3),
            ],
            '992' => [
                'w' => $image_width_lg,
-               'h' => round(($image_width_lg * 3) / 4),
+               'h' => round(($image_width_lg * 2) / 3),
            ],
            '768' => [
                'w' => $image_width_md,
-               'h' => round(($image_width_md * 3) / 4),
+               'h' => round(($image_width_md * 2) / 3),
            ],
            '576' => [
                'w' => $image_width_sm,
-               'h' => round(($image_width_sm * 3) / 4),
+               'h' => round(($image_width_sm * 2) / 3),
            ],
        ],
    ]); ?>

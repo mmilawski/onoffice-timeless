@@ -29,13 +29,13 @@ $slider = get_field('slider') ?? [];
 $is_slider = filter_var($slider['slider'] ?? null, FILTER_VALIDATE_BOOLEAN);
 
 // Image width
-$image_width_xs = '543';
-$image_width_sm = '512';
-$image_width_md = '330';
-$image_width_lg = '448';
-$image_width_xl = '450';
-$image_width_xxl = '343';
-$image_width_xxxl = '378';
+$image_width_xs = '575';
+$image_width_sm = '767';
+$image_width_md = '339';
+$image_width_lg = '456';
+$image_width_xl = '552';
+$image_width_xxl = '427';
+$image_width_xxxl = '471';
 
 $uniqid = 'team-' . uniqid();
 

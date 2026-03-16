@@ -104,13 +104,14 @@ $image = [
     'alt' => $image_alt,
 ];
 
-$image_width_xs = '542';
-$image_width_sm = '510';
-$image_width_md = '692';
-$image_width_lg = '446';
-$image_width_xl = '542';
-$image_width_xxl = '414';
-$image_width_xxxl = '458';
+// image widths
+$image_width_xs = '575';
+$image_width_sm = '544';
+$image_width_md = '726';
+$image_width_lg = '366'; // based on height when image is slightly squashed
+$image_width_xl = '310';
+$image_width_xxl = '363';
+$image_width_xxxl = '400';
 
 // get header level from parent block
 $header_level = get_current_header_level() + 1;

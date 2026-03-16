@@ -17,13 +17,13 @@ $is_date = filter_var(
 );
 
 // Image height
-$image_width_xs = '539';
-$image_width_sm = '508';
-$image_width_md = '690';
-$image_width_lg = '444';
-$image_width_xl = '540';
-$image_width_xxl = '636';
-$image_width_xxxl = '702';
+$image_width_xs = '543';
+$image_width_sm = '512';
+$image_width_md = '694';
+$image_width_lg = '448';
+$image_width_xl = '544';
+$image_width_xxl = '640';
+$image_width_xxxl = '706';
 
 // Set Alt attribute for background image
 $image['alt'] = $image['alt'] ?? $title;
@@ -88,31 +88,31 @@ $image['alt'] = $image['alt'] ?? $title;
                         'dimensions' => [
                             '575' => [
                                 'w' => $image_width_xs,
-                                'h' => round(($image_width_xs * 2) / 3),
+                                'h' => round(($image_width_xs * 3) / 4),
                             ],
                             '1600' => [
                                 'w' => $image_width_xxxl,
-                                'h' => round(($image_width_xxxl * 2) / 3),
+                                'h' => round(($image_width_xxxl * 3) / 4),
                             ],
                             '1400' => [
                                 'w' => $image_width_xxl,
-                                'h' => round(($image_width_xxl * 2) / 3),
+                                'h' => round(($image_width_xxl * 3) / 4),
                             ],
                             '1200' => [
                                 'w' => $image_width_xl,
-                                'h' => round(($image_width_xl * 2) / 3),
+                                'h' => round(($image_width_xl * 3) / 4),
                             ],
                             '992' => [
                                 'w' => $image_width_lg,
-                                'h' => round(($image_width_lg * 2) / 3),
+                                'h' => round(($image_width_lg * 3) / 4),
                             ],
                             '768' => [
                                 'w' => $image_width_md,
-                                'h' => round(($image_width_md * 2) / 3),
+                                'h' => round(($image_width_md * 3) / 4),
                             ],
                             '576' => [
                                 'w' => $image_width_sm,
-                                'h' => round(($image_width_sm * 2) / 3),
+                                'h' => round(($image_width_sm * 3) / 4),
                             ],
                         ],
                     ]); ?>

@@ -137,14 +137,22 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
 
                         $has_video = true;
                     }
-                    // Background width
-                    $background_width_xs = '576';
-                    $background_width_sm = '768';
-                    $background_width_md = '992';
-                    $background_width_lg = '1200';
-                    $background_width_xl = '1400';
-                    $background_width_xxl = '1600';
-                    $background_width_xxxl = '1920';
+
+                    $background_width_xs = '575';
+                    $background_width_sm = '544';
+                    $background_width_md = '726';
+
+                    if ($type == 'none') {
+                        $background_width_lg = '960';
+                        $background_width_xl = '1152';
+                        $background_width_xxl = '1344';
+                        $background_width_xxxl = '1476';
+                    } else {
+                        $background_width_lg = '600';
+                        $background_width_xl = '700';
+                        $background_width_xxl = '800';
+                        $background_width_xxxl = '960';
+                    }
                     ?>
 
                     <div class="c-banner__slide --content-<?php echo $type; ?> --background-<?php echo $background; ?> <?php

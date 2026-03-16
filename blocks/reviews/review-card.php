@@ -21,14 +21,9 @@ $slider = get_field('slider') ?? [];
 $is_slider = filter_var($slider['slider'] ?? null, FILTER_VALIDATE_BOOLEAN);
 $is_image = empty($image) ? ' --has-no-image' : '';
 
-// Image height
-$image_width_xs = '505';
-$image_width_sm = '510';
-$image_width_md = '329';
-$image_width_lg = '446';
-$image_width_xl = '350';
-$image_width_xxl = '414';
-$image_width_xxxl = '458';
+// Image dimensions
+$image_width_card = '100';
+$image_width_dialog = '184';
 
 $uniqid = 'review-' . uniqid();
 ?>
@@ -51,32 +46,32 @@ echo $is_image;
                     'additional_cloudimg_params' => '&func=crop&gravity=face',
                     'dimensions' => [
                         '575' => [
-                            'w' => $image_width_xs,
-                            'h' => $image_width_xs,
+                            'w' => $image_width_card,
+                            'h' => $image_width_card,
                         ],
                         '1600' => [
-                            'w' => $image_width_xxxl,
-                            'h' => $image_width_xxxl,
+                            'w' => $image_width_card,
+                            'h' => $image_width_card,
                         ],
                         '1400' => [
-                            'w' => $image_width_xxl,
-                            'h' => $image_width_xxl,
+                            'w' => $image_width_card,
+                            'h' => $image_width_card,
                         ],
                         '1200' => [
-                            'w' => $image_width_xl,
-                            'h' => $image_width_xl,
+                            'w' => $image_width_card,
+                            'h' => $image_width_card,
                         ],
                         '992' => [
-                            'w' => $image_width_lg,
-                            'h' => $image_width_lg,
+                            'w' => $image_width_card,
+                            'h' => $image_width_card,
                         ],
                         '768' => [
-                            'w' => $image_width_md,
-                            'h' => $image_width_md,
+                            'w' => $image_width_card,
+                            'h' => $image_width_card,
                         ],
                         '576' => [
-                            'w' => $image_width_sm,
-                            'h' => $image_width_sm,
+                            'w' => $image_width_card,
+                            'h' => $image_width_card,
                         ],
                     ],
                 ]); ?>
@@ -192,32 +187,32 @@ echo $is_image;
                                     '&func=crop&gravity=face',
                                 'dimensions' => [
                                     '575' => [
-                                        'w' => $image_width_xs,
-                                        'h' => $image_width_xs,
+                                        'w' => $image_width_dialog,
+                                        'h' => $image_width_dialog,
                                     ],
                                     '1600' => [
-                                        'w' => $image_width_xxxl,
-                                        'h' => $image_width_xxxl,
+                                        'w' => $image_width_dialog,
+                                        'h' => $image_width_dialog,
                                     ],
                                     '1400' => [
-                                        'w' => $image_width_xxl,
-                                        'h' => $image_width_xxl,
+                                        'w' => $image_width_dialog,
+                                        'h' => $image_width_dialog,
                                     ],
                                     '1200' => [
-                                        'w' => $image_width_xl,
-                                        'h' => $image_width_xl,
+                                        'w' => $image_width_dialog,
+                                        'h' => $image_width_dialog,
                                     ],
                                     '992' => [
-                                        'w' => $image_width_lg,
-                                        'h' => $image_width_lg,
+                                        'w' => $image_width_dialog,
+                                        'h' => $image_width_dialog,
                                     ],
                                     '768' => [
-                                        'w' => $image_width_md,
-                                        'h' => $image_width_md,
+                                        'w' => $image_width_dialog,
+                                        'h' => $image_width_dialog,
                                     ],
                                     '576' => [
-                                        'w' => $image_width_sm,
-                                        'h' => $image_width_sm,
+                                        'w' => $image_width_dialog,
+                                        'h' => $image_width_dialog,
                                     ],
                                 ],
                             ],

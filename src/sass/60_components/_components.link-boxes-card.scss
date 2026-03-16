@@ -32,7 +32,6 @@
     }
 
     &.--has-svg {
-      align-items: center;
       justify-content: left;
       padding: 1.5rem 1.5rem 0;
     }
@@ -56,6 +55,9 @@
   }
 
   &__picture {
+    .--has-icon & {
+      width: auto;
+    }
   }
 
   &__image {
@@ -64,6 +66,7 @@
     .--has-icon & {
       object-fit: contain;
       object-position: left;
+      width: min-content;
     }
   }
 

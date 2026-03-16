@@ -35,32 +35,24 @@ if ($is_slider) {
     $image_width_lg = '120';
     $image_width_xl = '90';
     $image_width_xxl = '100';
-    $image_width_xxxl = '130';
-
-    $image_height_xs = '';
-    $image_height_sm = '';
-    $image_height_md = '';
-    $image_height_lg = '';
-    $image_height_xl = '';
-    $image_height_xxl = '';
-    $image_height_xxxl = '';
+    $image_width_xxxl = '111';
 } else {
-    $image_width_xs = '240';
-    $image_width_sm = '240';
-    $image_width_md = '160';
-    $image_width_lg = '210';
-    $image_width_xl = '160';
-    $image_width_xxl = '190';
-    $image_width_xxxl = '140';
-
-    $image_height_xs = '';
-    $image_height_sm = '';
-    $image_height_md = '';
-    $image_height_lg = '';
-    $image_height_xl = '';
-    $image_height_xxl = '';
-    $image_height_xxxl = '';
+    $image_width_xs = '252';
+    $image_width_sm = '236';
+    $image_width_md = '327';
+    $image_width_lg = '444';
+    $image_width_xl = '148';
+    $image_width_xxl = '180';
+    $image_width_xxxl = '126';
 }
+
+$image_height_xs = $image_width_xs;
+$image_height_sm = $image_width_sm;
+$image_height_md = $image_width_md;
+$image_height_lg = $image_width_lg;
+$image_height_xl = $image_width_xl;
+$image_height_xxl = $image_width_xxl;
+$image_height_xxxl = $image_width_xxxl;
 
 if ($is_slider) { ?>
     <div class="c-seals --is-slider">

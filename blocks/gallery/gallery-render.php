@@ -9,16 +9,8 @@ $images = $gallery['repeater'] ?? [];
 $settings = get_field('settings') ?? [];
 $bg_color = $settings['bg_color'] ?? 'bg-transparent';
 
-// Image Sizes
-$image_max_height = '350';
-
-$image_width_xxxl = '369';
-$image_width_xxl = '336';
-$image_width_xl = '288';
-$image_width_lg = '480';
-$image_width_md = '363';
-$image_width_sm = '272';
-
+$image_height_mobile = '180';
+$image_height_desktop = '350';
 // Slider
 $slider = get_field('slider') ?? [];
 $is_slider = filter_var($slider['slider'] ?? null, FILTER_VALIDATE_BOOLEAN);
@@ -105,35 +97,28 @@ $slides_destroy = $slides_count < 5 ? true : false;
                                             'image_class' =>
                                                 'c-gallery__image o-image',
                                             'additional_cloudimg_params' =>
-                                                '&func=bound&gravity=center&org_if_sml=1',
+                                                '&gravity=center&org_if_sml=1',
                                             'dimensions' => [
                                                 '575' => [
-                                                    'w' => $image_width_sm,
-                                                    'h' => $image_max_height,
+                                                    'h' => $image_height_mobile,
                                                 ],
                                                 '1600' => [
-                                                    'w' => $image_width_xxxl,
-                                                    'h' => $image_max_height,
+                                                    'h' => $image_height_desktop,
                                                 ],
                                                 '1400' => [
-                                                    'w' => $image_width_xxl,
-                                                    'h' => $image_max_height,
+                                                    'h' => $image_height_desktop,
                                                 ],
                                                 '1200' => [
-                                                    'w' => $image_width_xl,
-                                                    'h' => $image_max_height,
+                                                    'h' => $image_height_desktop,
                                                 ],
                                                 '992' => [
-                                                    'w' => $image_width_lg,
-                                                    'h' => $image_max_height,
+                                                    'h' => $image_height_desktop,
                                                 ],
                                                 '768' => [
-                                                    'w' => $image_width_md,
-                                                    'h' => $image_max_height,
+                                                    'h' => $image_height_desktop,
                                                 ],
                                                 '576' => [
-                                                    'w' => $image_width_sm,
-                                                    'h' => $image_max_height,
+                                                    'h' => $image_height_mobile,
                                                 ],
                                             ],
                                         ],
@@ -206,35 +191,28 @@ $slides_destroy = $slides_count < 5 ? true : false;
                                                 'image_class' =>
                                                     'c-gallery__image o-image',
                                                 'additional_cloudimg_params' =>
-                                                    '&func=bound&gravity=center',
+                                                    '&gravity=center',
                                                 'dimensions' => [
                                                     '575' => [
-                                                        'w' => $image_width_sm,
-                                                        'h' => $image_max_height,
+                                                        'h' => $image_height_mobile,
                                                     ],
                                                     '1600' => [
-                                                        'w' => $image_width_xxxl,
-                                                        'h' => $image_max_height,
+                                                        'h' => $image_height_desktop,
                                                     ],
                                                     '1400' => [
-                                                        'w' => $image_width_xxl,
-                                                        'h' => $image_max_height,
+                                                        'h' => $image_height_desktop,
                                                     ],
                                                     '1200' => [
-                                                        'w' => $image_width_xl,
-                                                        'h' => $image_max_height,
+                                                        'h' => $image_height_desktop,
                                                     ],
                                                     '992' => [
-                                                        'w' => $image_width_lg,
-                                                        'h' => $image_max_height,
+                                                        'h' => $image_height_desktop,
                                                     ],
                                                     '768' => [
-                                                        'w' => $image_width_md,
-                                                        'h' => $image_max_height,
+                                                        'h' => $image_height_desktop,
                                                     ],
                                                     '576' => [
-                                                        'w' => $image_width_sm,
-                                                        'h' => $image_max_height,
+                                                        'h' => $image_height_mobile,
                                                     ],
                                                 ],
                                             ],

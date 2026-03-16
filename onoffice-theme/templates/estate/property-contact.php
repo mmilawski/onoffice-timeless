@@ -178,13 +178,13 @@ if (!empty($pEstates->getEstateContacts())) {
             ];
 
             // image width
-            $contact_image_width_xs = '543';
-            $contact_image_width_sm = '512';
-            $contact_image_width_md = '694';
-            $contact_image_width_lg = '288';
-            $contact_image_width_xl = '352';
-            $contact_image_width_xxl = '416';
-            $contact_image_width_xxxl = '460';
+            $contact_image_width_xs = '256';
+            $contact_image_width_sm = '240';
+            $contact_image_width_md = '271';
+            $contact_image_width_lg = '302';
+            $contact_image_width_xl = '408';
+            $contact_image_width_xxl = '482';
+            $contact_image_width_xxxl = '532';
 
             if (!empty($image)) {
                 echo '<div class="c-property-details__contact c-contact-person o-col-6 o-col-md-5">';
