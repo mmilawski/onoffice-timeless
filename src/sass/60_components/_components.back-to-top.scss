@@ -81,3 +81,8 @@ body:has(.provenExpertWidgetContent) .c-back-to-top {
     bottom: 4.5rem;
   }
 }
+
+// Move up when Superchat widget launcher is present (bottom-right corner)
+body.has-superchat .c-back-to-top {
+  bottom: 6rem;
+}
