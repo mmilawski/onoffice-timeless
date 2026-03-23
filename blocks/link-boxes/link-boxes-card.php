@@ -45,6 +45,8 @@ $is_slider = filter_var($slider['slider'], FILTER_VALIDATE_BOOLEAN);
     ?>
     
     <?php if (
+        !empty($card['image']['url']) ||
+        !empty($content['url']) ||
         !empty($headline) ||
         !empty($text['wysiwyg']) ||
         !empty($link['url'])
@@ -93,14 +95,18 @@ $is_slider = filter_var($slider['slider'], FILTER_VALIDATE_BOOLEAN);
                 ]);
             }
             ?>
-        <?php if (!empty($link['url'])) { ?>
-            </a>
-        <?php } else { ?>
-            </div>
-        <?php } ?>
+            <?php if (!empty($link['url'])) { ?>
+                </a>
+            <?php } else { ?>
+                </div>
+            <?php } ?>
         <?php
         } ?>
-
+        <?php if (
+            !empty($headline) ||
+            !empty($text['wysiwyg']) ||
+            !empty($link['url'])
+        ) { ?>
             <div class="c-link-boxes-card__content">
 
                 <?php if (!empty($headline)) { ?>
@@ -135,7 +141,8 @@ $is_slider = filter_var($slider['slider'], FILTER_VALIDATE_BOOLEAN);
                 <?php
                 } ?>
             </div>
-    </article>  
+        <?php } ?>
+    </article>
     <?php } ?>
 <?php
 } ?>
