@@ -161,6 +161,9 @@
       }
     }
     &.--is-slider {
+      .--is-provenexpert {
+        scale: 0.55;
+      }
     }
   }
   &.--bg-light {
