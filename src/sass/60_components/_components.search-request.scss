@@ -1,0 +1,36 @@
+.c-search-request {
+  $search-request: &;
+
+  &__container {
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    @include media-breakpoint-up(xl) {
+      gap: 3.75rem;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__form-wrapper {
+    padding-inline: 1rem;
+    width: 100%;
+
+    @include media-breakpoint-up(lg) {
+      padding-inline: 0;
+    }
+  }
+
+  &__headline {
+  }
+
+  &__text {
+  }
+}

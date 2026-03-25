@@ -278,6 +278,12 @@ if (is_plugin_active('oo-vue-addons/on-office-vue-addons.php')) {
                     OO_PARENT_PATH .
                     '/blocks/leadgenerator/leadgenerator-render.php',
             ],
+            'oo/search-request' => [
+                'path' => OO_SHARED_PATH . '/blocks/search-request',
+                'override-parent-render' =>
+                    OO_PARENT_PATH .
+                    '/blocks/search-request/search-request-render.php',
+            ],
         ]);
     });
 }
