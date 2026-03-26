@@ -1916,48 +1916,75 @@ if ($show_secret_sale_block): ?>
 
 do_action('oo_secretsale_logactivity', $property_id, $is_secret_sale);
 
-if (Favorites::isFavorizationEnabled()) { ?>
-    <?php wp_enqueue_script('oo-favorites-script'); ?>
+$isMPSWatchlistActive = false;
 
-    <script>
-        jQuery(document).ready(function($) {
-            onofficeFavorites = new onOffice.favorites(<?php echo json_encode(
-                Favorites::COOKIE_NAME,
-            ); ?>);
-            onOffice.addFavoriteButtonLabel = function(i, element) {
-                var favorite = $(element);
-                var propertyId = favorite.attr('data-onoffice-property-id');
-                var favoriteIcon = favorite.find('.--favorite');
-                var favoriteClass = '--filled';
-                if (!onofficeFavorites.favoriteExists(propertyId)) {
-                    favorite.attr('aria-label', '<?php if (
-                        $favorite_label == 'Watchlist'
-                    ) {
-                        esc_html_e('Zur Merkliste hinzufügen', 'oo_theme');
+if (class_exists('OnOfficeVueAddons\Service\WatchlistService')) {
+    $watchlistService = new OnOfficeVueAddons\Service\WatchlistService();
+    $isMPSWatchlistActive = $watchlistService->is_watchlist_active();
+}
+
+if ($isMPSWatchlistActive && !$is_reference):
+    wp_enqueue_script('on_office_vue_addons-watchlist');
+    wp_localize_script('on_office_vue_addons-watchlist', 'watchlist_options', [
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'nonce' => wp_create_nonce('on_office_vue_addons_nonce'),
+        'labels' => [
+            'add' =>
+                $favorite_label == 'Watchlist'
+                    ? __('Zur Merkliste hinzufügen', 'oo_theme')
+                    : __('Zu Favoriten hinzufügen', 'oo_theme'),
+            'remove' =>
+                $favorite_label == 'Watchlist'
+                    ? __('Von Merkliste entfernen', 'oo_theme')
+                    : __('Von Favoriten entfernen', 'oo_theme'),
+        ],
+    ]);
+else:
+    if (Favorites::isFavorizationEnabled()) {
+        wp_enqueue_script('oo-favorites-script'); ?>
+
+        <script>
+            jQuery(document).ready(function($) {
+                onofficeFavorites = new onOffice.favorites(<?php echo json_encode(
+                    Favorites::COOKIE_NAME,
+                ); ?>);
+                onOffice.addFavoriteButtonLabel = function(i, element) {
+                    var favorite = $(element);
+                    var propertyId = favorite.attr('data-onoffice-property-id');
+                    var favoriteIcon = favorite.find('.--favorite');
+                    var favoriteClass = '--filled';
+                    if (!onofficeFavorites.favoriteExists(propertyId)) {
+                        favorite.attr('aria-label', '<?php if (
+                            $favorite_label == 'Watchlist'
+                        ) {
+                            esc_html_e('Zur Merkliste hinzufügen', 'oo_theme');
+                        } else {
+                            esc_html_e('Zu Favoriten hinzufügen', 'oo_theme');
+                        } ?>');
+                        favoriteIcon.removeClass(favoriteClass);
+                        favorite.on('click', function() {
+                            onofficeFavorites.add(propertyId);
+                            onOffice.addFavoriteButtonLabel(0, favorite);
+                        });
                     } else {
-                        esc_html_e('Zu Favoriten hinzufügen', 'oo_theme');
-                    } ?>');
-                    favoriteIcon.removeClass(favoriteClass);
-                    favorite.on('click', function() {
-                        onofficeFavorites.add(propertyId);
-                        onOffice.addFavoriteButtonLabel(0, favorite);
-                    });
-                } else {
-                    favorite.attr('aria-label', '<?php if (
-                        $favorite_label == 'Watchlist'
-                    ) {
-                        esc_html_e('Von Merkliste entfernen', 'oo_theme');
-                    } else {
-                        esc_html_e('Von Favoriten entfernen', 'oo_theme');
-                    } ?>');
-                    favoriteIcon.addClass(favoriteClass);
-                    favorite.on('click', function() {
-                        onofficeFavorites.remove(propertyId);
-                        onOffice.addFavoriteButtonLabel(0, favorite);
-                    });
-                }
-            };
-            $('.c-property-details__favorite').each(onOffice.addFavoriteButtonLabel);
-        });
-    </script>
-<?php } ?>
+                        favorite.attr('aria-label', '<?php if (
+                            $favorite_label == 'Watchlist'
+                        ) {
+                            esc_html_e('Von Merkliste entfernen', 'oo_theme');
+                        } else {
+                            esc_html_e('Von Favoriten entfernen', 'oo_theme');
+                        } ?>');
+                        favoriteIcon.addClass(favoriteClass);
+                        favorite.on('click', function() {
+                            onofficeFavorites.remove(propertyId);
+                            onOffice.addFavoriteButtonLabel(0, favorite);
+                        });
+                    }
+                };
+                $('.c-property-details__favorite').each(onOffice.addFavoriteButtonLabel);
+            });
+        </script>
+    <?php
+    }
+endif;
+?>

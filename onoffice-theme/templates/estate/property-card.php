@@ -650,51 +650,77 @@ if (
 endwhile;
 ?>
 
-<?php if (Favorites::isFavorizationEnabled()) { ?>
-    <?php wp_enqueue_script('oo-favorites-script'); ?>
+<?php
+$isMPSWatchlistActive = false;
+if (class_exists('OnOfficeVueAddons\Service\WatchlistService')) {
+    $watchlistService = new OnOfficeVueAddons\Service\WatchlistService();
+    $isMPSWatchlistActive = $watchlistService->is_watchlist_active();
+}
+if ($isMPSWatchlistActive):
+    wp_enqueue_script('on_office_vue_addons-watchlist');
+    wp_localize_script('on_office_vue_addons-watchlist', 'watchlist_options', [
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'nonce' => wp_create_nonce('on_office_vue_addons_nonce'),
+        'labels' => [
+            'add' =>
+                $favorite_label == 'Watchlist'
+                    ? __('Zur Merkliste hinzufügen', 'oo_theme')
+                    : __('Zu Favoriten hinzufügen', 'oo_theme'),
+            'remove' =>
+                $favorite_label == 'Watchlist'
+                    ? __('Von Merkliste entfernen', 'oo_theme')
+                    : __('Von Favoriten entfernen', 'oo_theme'),
+        ],
+    ]);
+else:
+    if (Favorites::isFavorizationEnabled()) {
+        wp_enqueue_script('oo-favorites-script'); ?>
 
-    <script>
-        jQuery(document).ready(function($) {
-            onofficeFavorites = new onOffice.favorites(<?php echo json_encode(
-                Favorites::COOKIE_NAME,
-            ); ?>);
-            onOffice.addFavoriteButtonLabel = function(i, element) {
-                var favorite = $(element);
-                var propertyId = favorite.attr('data-onoffice-property-id');
-                var favoriteText = favorite.find('.u-screen-reader-text');
-                var favoriteIcon = favorite.find('.--favorite');
-                var favoriteClass = '--filled';
-                if (!onofficeFavorites.favoriteExists(propertyId)) {
-                    var labelAdd = '<?php echo esc_js(
-                        $favorite_label == 'Watchlist'
-                            ? __('Zur Merkliste hinzufügen', 'oo_theme')
-                            : __('Zu Favoriten hinzufügen', 'oo_theme'),
-                    ); ?>';
-                    favoriteText.text(labelAdd);
-                    favorite.attr('title', labelAdd);
-                    favorite.attr('aria-label', labelAdd);
-                    favoriteIcon.removeClass(favoriteClass);
-                    favorite.on('click', function() {
-                        onofficeFavorites.add(propertyId);
-                        onOffice.addFavoriteButtonLabel(0, favorite);
-                    });
-                } else {
-                    var labelRemove = '<?php echo esc_js(
-                        $favorite_label == 'Watchlist'
-                            ? __('Von Merkliste entfernen', 'oo_theme')
-                            : __('Von Favoriten entfernen', 'oo_theme'),
-                    ); ?>';
-                    favoriteText.text(labelRemove);
-                    favorite.attr('title', labelRemove);
-                    favorite.attr('aria-label', labelRemove);
-                    favoriteIcon.addClass(favoriteClass);
-                    favorite.on('click', function() {
-                        onofficeFavorites.remove(propertyId);
-                        onOffice.addFavoriteButtonLabel(0, favorite);
-                    });
-                }
-            };
-            $('.c-property-card__favorite').each(onOffice.addFavoriteButtonLabel);
-        });
-    </script>
-<?php } ?>
+        <script>
+            jQuery(document).ready(function($) {
+                onofficeFavorites = new onOffice.favorites(<?php echo json_encode(
+                    Favorites::COOKIE_NAME,
+                ); ?>);
+                onOffice.addFavoriteButtonLabel = function(i, element) {
+                    var favorite = $(element);
+                    var propertyId = favorite.attr('data-onoffice-property-id');
+                    var favoriteText = favorite.find('.u-screen-reader-text');
+                    var favoriteIcon = favorite.find('.--favorite');
+                    var favoriteClass = '--filled';
+                    if (!onofficeFavorites.favoriteExists(propertyId)) {
+                        var labelAdd = '<?php echo esc_js(
+                            $favorite_label == 'Watchlist'
+                                ? __('Zur Merkliste hinzufügen', 'oo_theme')
+                                : __('Zu Favoriten hinzufügen', 'oo_theme'),
+                        ); ?>';
+                        favoriteText.text(labelAdd);
+                        favorite.attr('title', labelAdd);
+                        favorite.attr('aria-label', labelAdd);
+                        favoriteIcon.removeClass(favoriteClass);
+                        favorite.on('click', function() {
+                            onofficeFavorites.add(propertyId);
+                            onOffice.addFavoriteButtonLabel(0, favorite);
+                        });
+                    } else {
+                        var labelRemove = '<?php echo esc_js(
+                            $favorite_label == 'Watchlist'
+                                ? __('Von Merkliste entfernen', 'oo_theme')
+                                : __('Von Favoriten entfernen', 'oo_theme'),
+                        ); ?>';
+                        favoriteText.text(labelRemove);
+                        favorite.attr('title', labelRemove);
+                        favorite.attr('aria-label', labelRemove);
+                        favoriteIcon.addClass(favoriteClass);
+                        favorite.on('click', function() {
+                            onofficeFavorites.remove(propertyId);
+                            onOffice.addFavoriteButtonLabel(0, favorite);
+                        });
+                    }
+                };
+                $('.c-property-card__favorite').each(onOffice.addFavoriteButtonLabel);
+            });
+        </script>
+    <?php
+    }
+endif;
+ ?>
