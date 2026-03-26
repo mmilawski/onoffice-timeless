@@ -110,6 +110,45 @@ while ($current_property = $pEstates->estateIterator()) {
         array_unshift($sorted_photos, $title_image);
     }
 
+    $recently_viewed_elements =
+        $raw_values->getValueRaw($property_id)['elements'] ?? [];
+    $recently_viewed_picture_id = $sorted_photos[0] ?? null;
+    $recently_viewed_snapshot = [
+        'estate_id' => (int) $property_id,
+        'mainLangId' => (int) $property_id,
+        'viewed_at' => gmdate('c'),
+        'titelbild_url' => $recently_viewed_picture_id
+            ? $pEstates->getEstatePictureUrl($recently_viewed_picture_id)
+            : null,
+        'objekttitel' => $current_property['objekttitel'] ?? null,
+        'objektart' => $recently_viewed_elements['objektart'] ?? null,
+        '_objektart' => $recently_viewed_elements['_objektart'] ?? null,
+        'objekttyp' => $recently_viewed_elements['objekttyp'] ?? null,
+        '_objekttyp' => $recently_viewed_elements['_objekttyp'] ?? null,
+        'vermarktungsart' =>
+            $recently_viewed_elements['vermarktungsart'] ?? null,
+        '_vermarktungsart' =>
+            $recently_viewed_elements['_vermarktungsart'] ?? null,
+        'plz' => $current_property['plz'] ?? null,
+        'ort' => $current_property['ort'] ?? null,
+        'kaufpreis' => isset($current_property['kaufpreis'])
+            ? (string) $current_property['kaufpreis']
+            : null,
+        'kaltmiete' => isset($current_property['kaltmiete'])
+            ? (string) $current_property['kaltmiete']
+            : null,
+        'warmmiete' => isset($current_property['warmmiete'])
+            ? (string) $current_property['warmmiete']
+            : null,
+        'preisAufAnfrage' => filter_var(
+            $recently_viewed_elements['preisAufAnfrage'] ?? false,
+            FILTER_VALIDATE_BOOLEAN,
+        ),
+        'wohnflaeche' => isset($current_property['wohnflaeche'])
+            ? (string) $current_property['wohnflaeche']
+            : null,
+    ];
+
     // videos
     $property_movie_players = $pEstates->getMovieEmbedPlayers();
     $property_movie_links = $pEstates->getEstateMovieLinks();
@@ -1915,7 +1954,43 @@ if ($show_secret_sale_block): ?>
 <?php endif;
 
 do_action('oo_secretsale_logactivity', $property_id, $is_secret_sale);
+?>
+    <script>
+    (function() {
+        var snapshot = <?php echo wp_json_encode($recently_viewed_snapshot); ?>;
+        var storageKey = 'oo_recently_viewed';
+        var maxItems = 10;
 
+        if (!snapshot || !snapshot.estate_id) {
+            return;
+        }
+
+        snapshot.viewed_at = new Date().toISOString();
+
+        try {
+            var rawItems = window.localStorage.getItem(storageKey);
+            var items = rawItems ? JSON.parse(rawItems) : [];
+
+            if (!Array.isArray(items)) {
+                items = [];
+            }
+
+            items = items.filter(function(item) {
+                return Number(item && item.estate_id) !== Number(snapshot.estate_id);
+            });
+
+            items.unshift(snapshot);
+
+            window.localStorage.setItem(
+                storageKey,
+                JSON.stringify(items.slice(0, maxItems)),
+            );
+        } catch (error) {
+            console.warn('Could not store recently viewed estate.', error);
+        }
+    })();
+    </script>
+<?php
 $isMPSWatchlistActive = false;
 
 if (class_exists('OnOfficeVueAddons\Service\WatchlistService')) {
@@ -1987,4 +2062,5 @@ else:
     <?php
     }
 endif;
+
 ?>
