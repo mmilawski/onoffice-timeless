@@ -82,7 +82,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
     unset($current_property['vermarktungsstatus']);
 
     $property_url = esc_url($pEstatesClone->getEstateLink());
-    $property_id = $pEstatesClone->getCurrentMultiLangEstateMainId();
+    $property_id = $pEstatesClone->getCurrentEstateId();
     $raw_values = $pEstatesClone->getRawValues();
     $is_address_shared = !empty($current_property['strasse']);
     $is_reference = filter_var(
@@ -163,7 +163,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
     $pictures_count = is_array($property_pictures)
         ? count($property_pictures)
         : 0;
-    $is_visible_property_detail = !$is_reference || !$is_restricted_view;
+    $is_visible_property_detail = !$is_reference || ($is_reference && !$is_restricted_view);
 
     $layout = $layout ?? 'tile';
 
