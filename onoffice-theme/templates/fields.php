@@ -327,6 +327,29 @@ if (!function_exists('renderFieldEstateSearch')) {
                 '" value="' .
                 esc_attr($selectedValue) .
                 '" >';
+        } elseif ($fieldName === 'geo_search') {
+            $inputClass .= ' geo-search-input';
+            $lengthAttr =
+                !is_null($properties['length']) && $fieldName != 'radius'
+                    ? 'maxlength="' . esc_attr($properties['length']) . '"'
+                    : '';
+            $output .= '<label class="o-label --is-input">';
+            $output .= $fieldLabel;
+            $output .=
+                '<input aria-hidden="true" tabindex="-1" role="presentation" class="' .
+                $inputClass .
+                '" ' .
+                $inputType .
+                ' id="' .
+                esc_attr($fieldName) .
+                '" name="' .
+                esc_attr($fieldName) .
+                '" value="' .
+                esc_attr($selectedValue) .
+                '" ' .
+                $lengthAttr .
+                '>';
+            $output .= '</label>';
         } else {
             $lengthAttr =
                 !is_null($properties['length']) && $fieldName != 'radius'

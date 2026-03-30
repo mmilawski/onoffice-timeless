@@ -22,6 +22,27 @@ include get_stylesheet_directory() . '/onoffice-theme/templates/fields.php';
 
 // Early return if no fields
 $visible = $pEstates->getVisibleFilterableFields();
+
+$hasGeoSearch =
+    method_exists($pEstates, 'hasGeoFilter') && $pEstates->hasGeoFilter();
+$maxFieldsBeforeReadMore = 12;
+if ($hasGeoSearch) {
+    wp_enqueue_script('oo-geo-search-form-script');
+    $visible['geo_search'] = [
+        'type' => 'select',
+        'label' => esc_attr__('PLZ/Ort', 'oo_theme'),
+        'value' => isset($_GET['geo_search'])
+            ? sanitize_text_field(wp_unslash($_GET['geo_search']))
+            : '',
+    ];
+    $visible['geo_search_text'] = [
+        'type' => 'hidden',
+        'value' => isset($_GET['geo_search_text'])
+            ? sanitize_text_field(wp_unslash($_GET['geo_search_text']))
+            : '',
+    ];
+}
+
 if (!is_array($visible) || count($visible) === 0) {
     return;
 }
@@ -52,7 +73,18 @@ $formId = sanitize_key($getListName());
      echo '--is-banner-search-form';
  } else {
      echo '--is-search-form ';
- } ?>" data-estate-search-name="<?php echo esc_attr($getListName()); ?>">
+ } ?> <?php if (!empty($bg_color)) {
+     echo ' --on-' . $bg_color;
+ } ?>" data-estate-search-name="<?php echo esc_attr($getListName()); ?>"
+    <?php if (
+        method_exists($pEstates, 'hasGeoFilter') &&
+        $pEstates->hasGeoFilter()
+    ): ?>
+        data-geo-filter="<?php echo esc_attr(
+            wp_json_encode($pEstates->getGeoFilter()),
+        ); ?>"
+    <?php endif; ?>>
+
     <div class="c-form__fieldset --<?php echo $bg_color; ?>">
         <div class="c-form__body">
             <?php
@@ -65,9 +97,9 @@ $formId = sanitize_key($getListName());
                         <div class="c-form__field-wrapper" id="<?php echo $uniqid; ?>">
                     <?php }
                     renderFieldEstateSearch($inputName, $properties, $formId);
-                    if ($number == $fields_counter - 1) { ?>
-                        </div>
-
+                    ?>
+                    <?php if ($number == $fields_counter - 1) { ?>
+                    </div> 
                         <button class="c-form__more c-read-more --text-align-center"
                             data-open-text="<?php esc_html_e(
                                 'Mehr anzeigen',
@@ -87,8 +119,7 @@ $formId = sanitize_key($getListName());
                         <button class="c-form__button c-button">
                             <?php echo esc_attr__('Suchen', 'oo_theme'); ?>
                         </button>
-                    <?php }
-                    ?>
+                    <?php } ?>
                 <?php
                 } else {
                     renderFieldEstateSearch(

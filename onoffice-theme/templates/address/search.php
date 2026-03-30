@@ -22,6 +22,28 @@ include get_stylesheet_directory() . '/onoffice-theme/templates/fields.php';
 
 // Early return if no fields
 $visible = $pAddressList->getVisibleFilterableFields();
+
+$hasGeoSearch =
+    method_exists($pAddressList, 'getHasGeoFilter') &&
+    $pAddressList->getHasGeoFilter();
+$maxFieldsBeforeReadMore = 12;
+if ($hasGeoSearch) {
+    wp_enqueue_script('oo-geo-search-form-script');
+    $visible['geo_search'] = [
+        'type' => 'select',
+        'label' => esc_attr__('PLZ/Ort', 'oo_theme'),
+        'value' => isset($_GET['geo_search'])
+            ? sanitize_text_field(wp_unslash($_GET['geo_search']))
+            : '',
+    ];
+    $visible['geo_search_text'] = [
+        'type' => 'hidden',
+        'value' => isset($_GET['geo_search_text'])
+            ? sanitize_text_field(wp_unslash($_GET['geo_search_text']))
+            : '',
+    ];
+}
+
 if (!is_array($visible) || count($visible) === 0) {
     return;
 }
@@ -49,12 +71,21 @@ $uniqid = 'address-search-' . uniqid();
 <form <?php if (!empty($result)) {
     echo 'action="' . get_permalink($result) . '"';
 } ?> method="get" class="c-form <?php if ($is_banner) {
-     echo '--is-banner-search-form';
+     echo '--is-banner-search-form  --small-corners';
  } else {
      echo '--is-search-form ';
  } ?> <?php if (!empty($bg_color)) {
-     echo '--on-' . $bg_color;
- } ?>" data-estate-search-name="<?php echo esc_attr($getListName()); ?>">
+     echo ' --on-' . $bg_color;
+ } ?>" data-estate-search-name="<?php echo esc_attr($getListName()); ?>"
+    <?php if (
+        method_exists($pAddressList, 'getHasGeoFilter') &&
+        $pAddressList->getHasGeoFilter()
+    ): ?>
+        data-geo-filter="<?php echo esc_attr(
+            wp_json_encode($pAddressList->getGeoFilter()),
+        ); ?>"
+    <?php endif; ?>>
+
     <div class="c-form__fieldset --<?php echo $bg_color; ?>">
         <div class="c-form__body">
         <?php
@@ -67,34 +98,10 @@ $uniqid = 'address-search-' . uniqid();
                     <div class="c-form__field-wrapper" id="<?php echo $uniqid; ?>">
                 <?php }
                 renderFieldEstateSearch($inputName, $properties, $uniqid);
-                if ($number == $fields_counter - 1) {
-                    if (
-                        method_exists($pAddressList, 'getHasGeoFilter') &&
-                        $pAddressList->getHasGeoFilter()
-                    ) {
-                        echo '<script>window.geoFilter = ' .
-                            json_encode($pAddressList->getGeoFilter()) .
-                            '</script>';
-                        renderFieldEstateSearch(
-                            'geo_search',
-                            [
-                                'type' => 'select',
-                                'label' => esc_attr__('PLZ/Ort', 'oo_theme'),
-                                'value' => $_GET['geo_search'] ?? '',
-                            ],
-                            $uniqid,
-                        );
-                        renderFieldEstateSearch(
-                            'geo_search_text',
-                            [
-                                'type' => 'hidden',
-                                'value' => $_GET['geo_search_text'] ?? '',
-                            ],
-                            $uniqid,
-                        );
-                    } ?>
-                    </div>
-
+                ?>
+                
+                <?php if ($number == $fields_counter - 1) { ?>
+                </div>
                     <button class="c-form__more c-read-more --full-width" 
                         data-open-text="<?php esc_html_e(
                             'Mehr anzeigen',
@@ -115,38 +122,11 @@ $uniqid = 'address-search-' . uniqid();
                     } ?>">
                         <?php echo esc_attr__('Suchen', 'oo_theme'); ?>
                     </button>
-                <?php
-                }
-                ?>
+                <?php } ?>
             <?php
             } else {
                 renderFieldEstateSearch($inputName, $properties, $uniqid); ?>
-                <?php if ($number == $fields_counter - 1) {
-                    if (
-                        method_exists($pAddressList, 'getHasGeoFilter') &&
-                        $pAddressList->getHasGeoFilter()
-                    ) {
-                        echo '<script>window.geoFilter = ' .
-                            json_encode($pAddressList->getGeoFilter()) .
-                            '</script>';
-                        renderFieldEstateSearch(
-                            'geo_search',
-                            [
-                                'type' => 'select',
-                                'label' => esc_attr__('PLZ/Ort', 'oo_theme'),
-                                'value' => $_GET['geo_search'] ?? '',
-                            ],
-                            $uniqid,
-                        );
-                        renderFieldEstateSearch(
-                            'geo_search_text',
-                            [
-                                'type' => 'hidden',
-                                'value' => $_GET['geo_search_text'] ?? '',
-                            ],
-                            $uniqid,
-                        );
-                    } ?>
+                <?php if ($number == $fields_counter - 1) { ?>
                     <button class="c-form__button c-button <?php if (
                         !empty($bg_color)
                     ) {
@@ -154,8 +134,7 @@ $uniqid = 'address-search-' . uniqid();
                     } ?>">
                         <?php echo esc_attr__('Suchen', 'oo_theme'); ?>
                     </button>
-                <?php
-                }
+                <?php }
             }
             $number++;
         }
