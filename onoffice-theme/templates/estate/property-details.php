@@ -807,21 +807,19 @@ while ($current_property = $pEstates->estateIterator()) {
                                     'oo_theme',
                                 ); ?></a>
                             <?php }
-                            if ($pEstates->getDocument() != '') { ?>
-                                <a class="c-property-details__expose-button c-button --has-icon --ghost" href="<?php echo $pEstates->getDocument(); ?>">
-                                    <span class="c-button__text">
-                                        <?php esc_html_e(
-                                            'Details als PDF',
-                                            'oo_theme',
-                                        ); ?>
-                                    </span>
-                                    <span class="c-button__icon"><?php oo_get_icon(
-                                        'download',
-                                    ); ?></span>
-                                </a>
-                            <?php }
+                            if ($pEstates->getDocument() != '') {
+                                oo_get_template(
+                                    'components',
+                                    '',
+                                    'component-expose-button',
+                                    [
+                                        'pEstates' => $pEstates,
+                                        'property_id' => $property_id,
+                                        'property_link' => $property_link,
+                                    ],
+                                );
+                            }
                             ?>
-                        
                             <?php if ($is_share_available) { ?>
                             <div class="c-property-details__share">
                                 <?php
@@ -1954,7 +1952,10 @@ if ($show_secret_sale_block): ?>
 <?php endif;
 
 do_action('oo_secretsale_logactivity', $property_id, $is_secret_sale);
-?>
+
+if (Favorites::isFavorizationEnabled()) { ?>
+    <?php wp_enqueue_script('oo-favorites-script'); ?>
+
     <script>
     (function() {
         var snapshot = <?php echo wp_json_encode($recently_viewed_snapshot); ?>;
@@ -2062,6 +2063,19 @@ else:
     <?php
     }
 endif;
-
-
 ?>
+<?php if (isset($_GET['revocation_token'])): ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                var btn = document.querySelector('.c-property-details__expose .c-button');
+                if (btn) {
+                    window.location.href = btn.getAttribute('href');
+                }
+            }, 300);
+        });
+        if (window.location.search) {
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    </script>
+<?php endif;}?>
