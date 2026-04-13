@@ -163,7 +163,8 @@ while ($current_property = $pEstatesClone->estateIterator()):
     $pictures_count = is_array($property_pictures)
         ? count($property_pictures)
         : 0;
-    $is_visible_property_detail = !$is_reference || ($is_reference && !$is_restricted_view);
+    $is_visible_property_detail =
+        !$is_reference || ($is_reference && !$is_restricted_view);
 
     $layout = $layout ?? 'tile';
 

@@ -2078,4 +2078,4 @@ endif;
             window.history.replaceState({}, document.title, window.location.pathname);
         }
     </script>
-<?php endif;}?>
+<?php endif;} ?>
