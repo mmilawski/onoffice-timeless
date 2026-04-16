@@ -6,6 +6,7 @@ $accordion = get_field('accordion') ?? null;
 
 // Settings
 $settings = get_field('settings') ?? null;
+$enable_faq_schema = (get_field('enable_faq_schema') ?? 'no') === 'yes';
 
 // set header level
 $header_level = !empty($headline['text'])
@@ -90,3 +91,8 @@ $header_level = !empty($headline['text'])
     </div>
 
 </section>
+
+<?php if ($enable_faq_schema && !empty($accordion)) {
+    oo_register_faq_schema($accordion);
+}
+?>
