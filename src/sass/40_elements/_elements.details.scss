@@ -1,0 +1,14 @@
+details {
+  transition: all 0.25s ease-in-out;
+  height: auto;
+  &[open] {
+    transition: all 0.25s ease-in-out;
+  }
+
+  summary::-webkit-details-marker,
+  summary::marker {
+    content: '';
+    transition: all 0.25s ease-in-out;
+    display: none !important;
+  }
+}

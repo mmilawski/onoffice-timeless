@@ -37,19 +37,4 @@
 
   &__text {
   }
-
-  Summary::-webkit-details-marker,
-  summary::marker {
-    content: '';
-    transition: all 0.25s ease-in-out;
-  }
-
-  details {
-    transition: all 0.25s ease-in-out;
-    height: auto;
-  }
-
-  details[open] {
-    transition: all 0.25s ease-in-out;
-  }
 }
