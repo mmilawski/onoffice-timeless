@@ -276,44 +276,49 @@ if (!function_exists('renderFieldEstateSearch')) {
             in_array($typeCurrentInput, $typesFloat) ||
             in_array($typeCurrentInput, $typesDate)
         ) {
-            $output .= '<label class="o-label --is-range">';
-            if (
-                str_contains($fieldName, 'preis') ||
-                str_contains($fieldName, 'miete')
-            ) {
-                $output .= $fieldLabel . ' ' . esc_html__('bis', 'oo_theme');
-                $output .=
-                    '<input class="' .
-                    $inputClass .
-                    '" ' .
-                    $inputType .
-                    ' ' .
-                    renderAutocomplete($fieldName) .
-                    ' name="' .
-                    esc_attr($fieldName) .
-                    '__bis" value="' .
-                    esc_attr(
-                        isset($selectedValue[1]) ? $selectedValue[1] : '',
-                    ) .
-                    '">';
-            } else {
-                $output .= $fieldLabel . ' ' . esc_html__('ab', 'oo_theme');
-                $output .=
-                    '<input class="' .
-                    $inputClass .
-                    '" ' .
-                    $inputType .
-                    ' ' .
-                    renderAutocomplete($fieldName) .
-                    ' name="' .
-                    esc_attr($fieldName) .
-                    '__von" value="' .
-                    esc_attr(
-                        isset($selectedValue[0]) ? $selectedValue[0] : '',
-                    ) .
-                    '">';
+            $displayMode = getRangeFieldDisplayMode($fieldName, $properties);
+            $fieldsToRender = [];
+
+            if ($displayMode !== 'toOnly') {
+                $fieldsToRender[] = [
+                    'modifier' =>
+                        $displayMode === 'range' ? ' --is-range-from' : '',
+                    'text' => 'ab',
+                    'suffix' => '__von',
+                    'value' => $selectedValue[0] ?? '',
+                ];
             }
-            $output .= '</label>';
+
+            if ($displayMode !== 'fromOnly') {
+                $fieldsToRender[] = [
+                    'modifier' =>
+                        $displayMode === 'range' ? ' --is-range-to' : '',
+                    'text' => 'bis',
+                    'suffix' => '__bis',
+                    'value' => $selectedValue[1] ?? '',
+                ];
+            }
+
+            foreach ($fieldsToRender as $field) {
+                $output .=
+                    '<label class="o-label --is-range' .
+                    $field['modifier'] .
+                    '">';
+                $output .=
+                    $fieldLabel . ' ' . esc_html__($field['text'], 'oo_theme');
+                $output .=
+                    '<input class="' .
+                    $inputClass .
+                    '" ' .
+                    $inputType .
+                    renderAutocomplete($fieldName) .
+                    ' name="' .
+                    esc_attr($fieldName . $field['suffix']) .
+                    '" value="' .
+                    esc_attr($field['value']) .
+                    '">';
+                $output .= '</label>';
+            }
         } elseif ($typeCurrentInput === 'hidden') {
             $output .=
                 '<input class="' .
@@ -1020,5 +1025,60 @@ if (!function_exists('renderCityField')) {
         $htmlSelect .= '</select><div class="c-form__error-message"></div>';
 
         return $htmlSelect;
+    }
+}
+
+if (!function_exists('getRangeFieldDisplayMode')) {
+    /**
+     * Checks the range display mode for a search form field (Estate Search)
+     *
+     * @param string $fieldName
+     * @param array $properties
+     * @return string 'range', 'fromOnly', 'toOnly'
+     */
+    function getRangeFieldDisplayMode(
+        string $fieldName,
+        array $properties,
+    ): string {
+        // Default is 'range' (from-to)
+        $hasMode = isset($properties['rangeFieldDisplayMode']);
+        $displayMode = $properties['rangeFieldDisplayMode'] ?? 'range';
+
+        // Fallback to old logic
+        if ($displayMode === 'range' && !$hasMode) {
+            if (
+                str_contains($fieldName, 'preis') ||
+                str_contains($fieldName, 'miete')
+            ) {
+                return 'toOnly';
+            } else {
+                return 'fromOnly';
+            }
+        }
+
+        return $displayMode;
+    }
+}
+
+if (!function_exists('getRangeFieldDisplayModeForForm')) {
+    /**
+     * Checks the range display mode for a form field (Searchcriteria)
+     *
+     * @param string $fieldName
+     * @param array $rangeFields
+     * @return string
+     */
+    function getRangeFieldDisplayModeForForm(
+        string $fieldName,
+        array $rangeFields,
+    ): string {
+        if (
+            str_contains($fieldName, 'preis') ||
+            str_contains($fieldName, 'miete')
+        ) {
+            return 'toOnly';
+        } else {
+            return 'fromOnly';
+        }
     }
 }
