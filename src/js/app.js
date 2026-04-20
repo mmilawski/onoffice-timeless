@@ -669,8 +669,8 @@ jQuery(document).ready(function() {
             // Close popup on press ESC
             document.addEventListener('keydown', function(event) {
                 if (event.key === 'Escape') {
-                    e.preventDefault();
-                    closePopup();
+                  event.preventDefault();
+                  closePopup();
                 }
             });
         }
