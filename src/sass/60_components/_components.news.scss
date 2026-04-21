@@ -28,6 +28,16 @@
   &__text {
   }
 
+  &__ajax-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+
+    @include media-breakpoint-up(xl) {
+      gap: 5rem;
+    }
+  }
+
   &__count {
     display: flex;
     justify-content: flex-start;
@@ -91,6 +101,9 @@
   }
 
   &__pagination {
+  }
+
+  &__buttons-wrapper {
   }
 
   &__buttons {

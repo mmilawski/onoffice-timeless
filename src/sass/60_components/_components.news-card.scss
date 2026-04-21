@@ -93,6 +93,12 @@
       margin-right: 8.333333%; // Gap only on content side
       &:nth-child(even) {
         margin-left: 8.333333%; // Gap only on content side when reversed
+        #{$c-news-card}__categories {
+          right: 0;
+          left: auto;
+          align-items: flex-end;
+          text-align: right;
+        }
       }
     }
   }
@@ -174,21 +180,7 @@
     }
   }
 
-  &__meta {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-
-    @include media-breakpoint-up(lg) {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      gap: 2rem;
-    }
-  }
-
   &__date {
-    background-color: transparent;
     color: var(--oo-color-text);
     padding: 0;
 
@@ -292,44 +284,66 @@
   }
 
   &__categories {
+    position: absolute;
+    top: 0.5rem;
+    right: auto;
+    left: 0;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 0.5rem;
-    max-height: 2.25rem; // Based on line-height (1.75) + padding (0.5)
-    overflow: hidden;
+    max-width: 50%;
   }
 
-  &__category.c-tag {
+  &__category {
     display: inline-flex;
     align-items: center;
     padding: 3px 12px;
     font-size: 1rem;
     line-height: 1.75;
-    background-color: var(--oo-color-bg);
-    color: var(--oo-color-contrast-bg);
+    background-color: var(--oo-color-primary);
+    color: var(--oo-color-contrast-primary);
 
     .--bg-light & {
-      background-color: var(--oo-color-light-bg, var(--oo-color-bg));
-      color: var(--oo-color-light-contrast-bg, var(--oo-color-contrast-bg));
+      background-color: var(--oo-color-light-primary, var(--oo-color-primary));
+      color: var(
+        --oo-color-light-contrast-primary,
+        var(--oo-color-contrast-primary)
+      );
     }
 
     .--bg-dark & {
-      background-color: var(--oo-color-dark-bg, var(--oo-color-bg));
-      color: var(--oo-color-dark-contrast-bg, var(--oo-color-contrast-bg));
+      background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
+      color: var(
+        --oo-color-dark-contrast-primary,
+        var(--oo-color-contrast-primary)
+      );
     }
 
     .--bg-primary & {
-      background-color: var(--oo-color-primary-bg, var(--oo-color-bg));
-      color: var(--oo-color-primary-contrast-bg, var(--oo-color-contrast-bg));
+      background-color: var(
+        --oo-color-primary-primary,
+        var(--oo-color-primary)
+      );
+      color: var(
+        --oo-color-primary-contrast-primary,
+        var(--oo-color-contrast-primary)
+      );
     }
 
     .--bg-secondary & {
-      background-color: var(--oo-color-secondary-bg, var(--oo-color-bg));
-      color: var(--oo-color-secondary-contrast-bg, var(--oo-color-contrast-bg));
+      background-color: var(
+        --oo-color-secondary-primary,
+        var(--oo-color-primary)
+      );
+      color: var(
+        --oo-color-secondary-contrast-primary,
+        var(--oo-color-contrast-primary)
+      );
     }
   }
 
-  &__title.o-headline {
+  &__title {
     color: var(--oo-color-headline);
     font-size: 1.5rem;
     line-height: 2.125rem;

@@ -18,7 +18,6 @@
       background-color: var(--oo-color-dark-primary, var(--oo-color-primary));
       color: var(--oo-color-dark-contrast-primary);
     }
-
     .--bg-primary & {
       color: var(--oo-color-primary-contrast-primary);
       background-color: var(
@@ -26,7 +25,6 @@
         var(--oo-color-primary)
       );
     }
-
     .--bg-secondary & {
       color: var(--oo-color-secondary-contrast-primary);
       background-color: var(

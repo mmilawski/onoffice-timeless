@@ -1,0 +1,68 @@
+.c-author {
+  $author: &;
+
+  color: var(--oo-color-text);
+  background-color: var(--oo-color-mix-bg-contrast-05);
+  display: grid;
+  padding: 0;
+
+  @include media-breakpoint-up(xl) {
+    grid-template-columns: 41.6666666667% 58.3333333333%;
+  }
+
+  &__picture {
+    background-color: var(--oo-color-mix-bg-text-10);
+    height: auto;
+    aspect-ratio: 3 / 4;
+    @include media-breakpoint-up(xl) {
+      border-bottom: 0;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  &__placeholder {
+    @include media-breakpoint-up(xl) {
+      background-color: var(--oo-color-transparent-primary-10);
+      height: auto;
+      aspect-ratio: 3 / 4;
+    }
+  }
+
+  &__content {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @include media-breakpoint-up(lg) {
+      padding: 2rem;
+      gap: 2rem;
+    }
+  }
+
+  &__author {
+    display: flex;
+    flex-direction: column;
+    color: var(--oo-color-primary);
+  }
+
+  &__label {
+    @include font-size($global-font-size, $global-line-height);
+    font-family: $font-family-text;
+    font-weight: $font-weight-text;
+    color: var(--oo-color-text);
+  }
+
+  &__description {
+    flex-grow: 1;
+  }
+
+  &__social-media {
+    margin-top: auto;
+  }
+}

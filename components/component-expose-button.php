@@ -11,7 +11,8 @@ if (!isset($pEstates) || !$pEstates->getDocument()) {
     return;
 }
 
-$property_link = (isset($property_link) && is_string($property_link)) ? $property_link : '';
+$property_link =
+    isset($property_link) && is_string($property_link) ? $property_link : '';
 
 $marketing_type = $pEstates->getRawValues()->getValueRaw($property_id)[
     'elements'

@@ -81,6 +81,9 @@ if (function_exists('oo_setup_parent_theme')) {
         function () use ($app_script_handle) {
             $pins = get_field('pins', 'option');
             $custom_pin = $pins['custom_pin'] ?? null;
+            wp_localize_script($app_script_handle, 'ajaxNews', [
+                'ajaxurl' => admin_url('admin-ajax.php'),
+            ]);
             wp_localize_script($app_script_handle, 'ooTimelessTheme', [
                 'translations' => [
                     'noResults' => __('Keine Ergebnisse', 'oo_theme'),

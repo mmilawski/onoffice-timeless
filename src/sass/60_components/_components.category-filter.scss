@@ -1,0 +1,271 @@
+.c-category-filter {
+  $c-category-filter: &;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2rem 0;
+
+  &__headline {
+  }
+
+  &__categories {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__list-item {
+    &.--all {
+      flex: 0 0 auto;
+      margin-right: 0.5rem;
+      position: relative;
+      outline: none;
+
+      &::after {
+        content: '';
+        position: absolute;
+        right: -0.5rem;
+        height: 100%;
+        border-left: 1px solid var(--oo-color-text);
+      }
+
+      @include focus-visible() {
+        & #{$c-category-filter}__item {
+          outline: $outline;
+          outline-offset: $outline-offset;
+          outline-color: var(--oo-color-primary);
+        }
+      }
+    }
+  }
+
+  &__item {
+    display: inline-block;
+    font-family: $font-family-button;
+    font-weight: $font-weight-button;
+    text-align: left;
+    margin: 0;
+    padding: 0.25rem 0.5rem;
+    color: var(--oo-color-text);
+    background: transparent;
+    border: 0;
+    outline: $outline;
+    outline-offset: $outline-offset;
+    cursor: pointer;
+    transition: color 0.25s ease-in-out, background-color 0.25s ease-in-out,
+      outline-color 0.25s ease-in-out;
+
+    @include visited-active() {
+      color: var(--oo-color-text);
+      background: transparent;
+    }
+
+    @include hover-focus() {
+      background-color: var(--oo-color-primary);
+      color: var(--oo-color-contrast-primary);
+    }
+
+    @include focus-visible() {
+      outline-color: var(--oo-color-primary);
+    }
+
+    &.--active {
+      background-color: var(--oo-color-primary);
+      color: var(--oo-color-contrast-primary);
+    }
+  }
+
+  .--bg-light & {
+    #{$c-category-filter}__list-item {
+      &.--all {
+        &::after {
+          border-color: var(--oo-color-light-text);
+        }
+
+        @include focus-visible() {
+          & #{$c-category-filter}__item {
+            outline-color: var(--oo-color-light-primary);
+          }
+        }
+      }
+    }
+    #{$c-category-filter}__item {
+      color: var(--oo-color-light-text);
+
+      @include visited-active() {
+        color: var(--oo-color-light-text);
+        background: transparent;
+      }
+
+      @include hover-focus() {
+        background-color: var(--oo-color-light-primary);
+        color: var(--oo-color-light-contrast-primary);
+      }
+
+      @include focus-visible() {
+        outline-color: var(--oo-color-light-primary);
+      }
+
+      &.--active {
+        background-color: var(--oo-color-light-primary);
+        color: var(--oo-color-light-contrast-primary);
+      }
+    }
+  }
+  .--bg-dark & {
+    #{$c-category-filter}__list-item {
+      &.--all {
+        &::after {
+          border-color: var(--oo-color-dark-text);
+        }
+
+        @include focus-visible() {
+          & #{$c-category-filter}__item {
+            outline-color: var(--oo-color-dark-primary);
+          }
+        }
+      }
+    }
+    #{$c-category-filter}__item {
+      color: var(--oo-color-dark-text);
+
+      @include visited-active() {
+        color: var(--oo-color-dark-text);
+        background: transparent;
+      }
+
+      @include hover-focus() {
+        background-color: var(--oo-color-dark-primary);
+        color: var(--oo-color-dark-contrast-primary);
+      }
+
+      @include focus-visible() {
+        outline-color: var(--oo-color-dark-primary);
+      }
+
+      &.--active {
+        background-color: var(--oo-color-dark-primary);
+        color: var(--oo-color-dark-contrast-primary);
+      }
+    }
+  }
+  .--bg-primary & {
+    #{$c-category-filter}__list-item {
+      &.--all {
+        &::after {
+          border-color: var(--oo-color-primary-text);
+        }
+
+        @include focus-visible() {
+          & #{$c-category-filter}__item {
+            outline-color: var(--oo-color-primary-primary);
+          }
+        }
+      }
+    }
+    #{$c-category-filter}__item {
+      color: var(--oo-color-primary-text);
+
+      @include visited-active() {
+        color: var(--oo-color-primary-text);
+        background: transparent;
+      }
+
+      @include hover-focus() {
+        background-color: var(--oo-color-primary-primary);
+        color: var(--oo-color-primary-contrast-primary);
+      }
+
+      @include focus-visible() {
+        outline-color: var(--oo-color-primary-primary);
+      }
+
+      &.--active {
+        background-color: var(--oo-color-primary-primary);
+        color: var(--oo-color-primary-contrast-primary);
+      }
+    }
+  }
+  .--bg-secondary & {
+    #{$c-category-filter}__list-item {
+      &.--all {
+        &::after {
+          border-color: var(--oo-color-secondary-text);
+        }
+
+        @include focus-visible() {
+          & #{$c-category-filter}__item {
+            outline-color: var(--oo-color-secondary-primary);
+          }
+        }
+      }
+    }
+    #{$c-category-filter}__item {
+      color: var(--oo-color-secondary-text);
+
+      @include visited-active() {
+        color: var(--oo-color-secondary-text);
+        background: transparent;
+      }
+
+      @include hover-focus() {
+        background-color: var(--oo-color-secondary-primary);
+        color: var(--oo-color-secondary-contrast-primary);
+      }
+
+      @include focus-visible() {
+        outline-color: var(--oo-color-secondary-primary);
+      }
+
+      &.--active {
+        background-color: var(--oo-color-secondary-primary);
+        color: var(--oo-color-secondary-contrast-primary);
+      }
+    }
+  }
+  .--bg-transparent & {
+    #{$c-category-filter}__list-item {
+      &.--all {
+        &::after {
+          border-color: var(--oo-color-text);
+        }
+
+        @include focus-visible() {
+          & #{$c-category-filter}__item {
+            outline-color: var(--oo-color-primary);
+          }
+        }
+      }
+    }
+    #{$c-category-filter}__item {
+      color: var(--oo-color-text);
+
+      @include visited-active() {
+        color: var(--oo-color-text);
+        background: transparent;
+      }
+
+      @include hover-focus() {
+        background-color: var(--oo-color-primary);
+        color: var(--oo-color-contrast-primary);
+      }
+
+      @include focus-visible() {
+        outline-color: var(--oo-color-primary);
+      }
+
+      &.--active {
+        background-color: var(--oo-color-primary);
+        color: var(--oo-color-contrast-primary);
+      }
+    }
+  }
+}

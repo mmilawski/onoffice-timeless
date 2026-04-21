@@ -2,10 +2,6 @@
 // Post ID
 $post_id = get_the_ID() ?? null;
 
-// Get categories for this post (excluding default "Uncategorized" category)
-require_once get_template_directory() . '/shared/includes/category.php';
-$categories = get_filtered_categories($post_id);
-
 // Get data from news-details block
 $details = [];
 $post_content = get_post_field('post_content', $post_id);
@@ -65,15 +61,36 @@ if ($excerpt) {
     $excerpt = oo_excerpt_no_links_trim_words($excerpt);
 }
 
+$categories = oo_get_filtered_categories($post_id);
+if (!empty($categories)) {
+    $categories = array_slice($categories, 0, 2);
+}
+
 // Settings
 $settings = get_field('settings') ?? [];
-$bg_color = $settings['bg_color'] ?? 'bg-transparent';
+if (!isset($bg_color)) {
+    $bg_color = $settings['bg_color'] ?? 'bg-transparent';
+}
 $slider = get_field('slider') ?? [];
 $is_slider = filter_var($slider['slider'] ?? null, FILTER_VALIDATE_BOOLEAN);
 $is_date = filter_var(
     get_field('general', 'option')['news']['show_date'] ?? true,
     FILTER_VALIDATE_BOOLEAN,
 );
+$is_categories = filter_var(
+    get_field('general', 'option')['news']['show_categories'] ?? true,
+    FILTER_VALIDATE_BOOLEAN,
+);
+
+$cat_names = wp_list_pluck(
+    (array) oo_get_filtered_categories($post_id),
+    'name',
+);
+$cat_names_lower = array_map('mb_strtolower', $cat_names);
+$cat_name_all = __('Alle', 'oo_theme');
+$cat_name_all_slug = sanitize_title($cat_name_all);
+array_unshift($cat_names_lower, $cat_name_all_slug);
+$cat_names_lower = array_unique($cat_names_lower);
 
 // Image dimensions
 $image_width_xxs = '382';
@@ -109,76 +126,75 @@ $link_title_more = sprintf(
 );
 ?>
 
-
 <article class="c-news-card --bg-transparent <?php if ($is_slider) {
     echo '--on-slider c-slider__slide splide__slide';
-} ?>">
+} ?>" data-category="<?php echo implode(',', $cat_names_lower); ?>">
     <?php if (!empty($link)) { ?>
         <a class="c-news-card__link" href="<?php echo $link; ?>" aria-label="<?php echo $link_title_date; ?>">
     <?php } else { ?>
         <div class="c-news-card__wrapper">
     <?php } ?>
-			<?php oo_get_template('components', '', 'component-image', [
-       'image' => $image,
-       'picture_class' => 'c-news-card__picture o-picture',
-       'image_class' => 'c-news-card__image o-image',
-       'dimensions' => [
-           '414' => [
-               'w' => $image_width_xxs,
-               'h' => round(($image_width_xxs * 2) / 3),
-           ],
-           '575' => [
-               'w' => $image_width_xs,
-               'h' => round(($image_width_xs * 2) / 3),
-           ],
-           '1600' => [
-               'w' => $image_width_xxxl,
-               'h' => round(($image_width_xxxl * 2) / 3),
-           ],
-           '1400' => [
-               'w' => $image_width_xxl,
-               'h' => round(($image_width_xxl * 2) / 3),
-           ],
-           '1200' => [
-               'w' => $image_width_xl,
-               'h' => round(($image_width_xl * 2) / 3),
-           ],
-           '992' => [
-               'w' => $image_width_lg,
-               'h' => round(($image_width_lg * 2) / 3),
-           ],
-           '768' => [
-               'w' => $image_width_md,
-               'h' => round(($image_width_md * 2) / 3),
-           ],
-           '576' => [
-               'w' => $image_width_sm,
-               'h' => round(($image_width_sm * 2) / 3),
-           ],
-       ],
-   ]); ?>
+        <?php oo_get_template('components', '', 'component-image', [
+            'image' => $image,
+            'picture_class' => 'c-news-card__picture o-picture',
+            'image_class' => 'c-news-card__image o-image',
+            'dimensions' => [
+                '414' => [
+                    'w' => $image_width_xxs,
+                    'h' => round(($image_width_xxs * 2) / 3),
+                ],
+                '575' => [
+                    'w' => $image_width_xs,
+                    'h' => round(($image_width_xs * 2) / 3),
+                ],
+                '1600' => [
+                    'w' => $image_width_xxxl,
+                    'h' => round(($image_width_xxxl * 2) / 3),
+                ],
+                '1400' => [
+                    'w' => $image_width_xxl,
+                    'h' => round(($image_width_xxl * 2) / 3),
+                ],
+                '1200' => [
+                    'w' => $image_width_xl,
+                    'h' => round(($image_width_xl * 2) / 3),
+                ],
+                '992' => [
+                    'w' => $image_width_lg,
+                    'h' => round(($image_width_lg * 2) / 3),
+                ],
+                '768' => [
+                    'w' => $image_width_md,
+                    'h' => round(($image_width_md * 2) / 3),
+                ],
+                '576' => [
+                    'w' => $image_width_sm,
+                    'h' => round(($image_width_sm * 2) / 3),
+                ],
+            ],
+        ]); ?>
+
+        <?php if ($is_categories && !empty($categories)) { ?>
+            <div class="c-news-card__categories">
+                <?php foreach ($categories as $category) { ?>
+                    <span class="c-news-card__category">
+                        <?php echo esc_html($category->name); ?>
+                    </span>
+                <?php } ?>
+            </div>
+        <?php } ?>
 
     <?php if (!empty($link)) { ?>
         </a>
     <?php } else { ?>
         </div>
     <?php } ?>
+
     <?php if (!empty($title) || !empty($excerpt) || !empty($link)) { ?>
-	    <div class="c-news-card__content">
-            <div class="c-news-card__meta">
-                <?php if (!empty($categories)) { ?>
-                    <div class="c-news-card__categories">
-                        <?php foreach ($categories as $category) { ?>
-                            <span class="c-news-card__category c-tag"><?php echo esc_html(
-                                $category->name,
-                            ); ?></span>
-                        <?php } ?>
-                    </div>
-                <?php } ?>
-                <?php if ($is_date && !empty($date)) { ?>
-                    <time class="c-news-card__date c-flag" datetime="<?php echo $dateYMD; ?>"><?php echo $date; ?></time>
-                <?php } ?>
-            </div>
+        <div class="c-news-card__content">
+            <?php if ($is_date && !empty($date)) { ?>
+                <time class="c-news-card__date" datetime="<?php echo $dateYMD; ?>"><?php echo $date; ?></time>
+            <?php } ?>
             
             <?php if (!empty($title)) { ?>
                 <?php echo "<h{$header_level} " .
@@ -186,22 +202,21 @@ $link_title_more = sprintf(
                     $title .
                     "</h{$header_level}>"; ?>
             <?php } ?>
-			<?php if (!empty($excerpt)) { ?>
-				<div class="c-news-card__text o-text --is-wysiwyg">
-					<?php echo $excerpt; ?>
-				</div>
-			<?php } ?>
+            <?php if (!empty($excerpt)) { ?>
+                <div class="c-news-card__text o-text --is-wysiwyg">
+                    <?php echo $excerpt; ?>
+                </div>
+            <?php } ?>
 
-			<?php if (!empty($link)) {
-       echo '<a class="c-news-card__more-link"  
-                aria-label="' .
-           esc_html__('Weiterlesen...', 'oo_theme') .
-           '" href="' .
-           $link .
-           '">';
-       echo esc_html__('Weiterlesen...', 'oo_theme');
-       echo '</a>';
-   } ?>
-		</div> 
-    <?php } ?> 
+            <?php if (!empty($link)) {
+                echo '<a class="c-news-card__more-link" aria-label="' .
+                    esc_html__('Weiterlesen...', 'oo_theme') .
+                    '" href="' .
+                    $link .
+                    '">';
+                echo esc_html__('Weiterlesen...', 'oo_theme');
+                echo '</a>';
+            } ?>
+        </div>
+    <?php } ?>
 </article>
