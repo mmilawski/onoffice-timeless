@@ -30,6 +30,9 @@
     &.--a {
       &:after {
         background-color: var(--oo-color-energy-class-a);
+        .--epbd-2024 & {
+          background-color: var(--oo-color-energy-class-a-plus);
+        }
       }
     }
 
@@ -66,6 +69,9 @@
     &.--g {
       &:after {
         background-color: var(--oo-color-energy-class-g);
+        .--epbd-2024 & {
+          background-color: var(--oo-color-energy-class-h);
+        }
       }
     }
 
@@ -88,6 +94,10 @@
       &.--a {
         background-color: var(--oo-color-energy-class-a);
         color: var(--oo-color-contrast-energy-a);
+        .--epbd-2024 & {
+          background-color: var(--oo-color-energy-class-a-plus);
+          color: var(--oo-color-contrast-energy-a-plus);
+        }
       }
 
       &.--b {
@@ -118,6 +128,10 @@
       &.--g {
         background-color: var(--oo-color-energy-class-g);
         color: var(--oo-color-contrast-energy-g);
+        .--epbd-2024 & {
+          background-color: var(--oo-color-energy-class-h);
+          color: var(--oo-color-contrast-energy-h);
+        }
       }
 
       &.--h {

@@ -283,11 +283,16 @@ while ($current_property = $pEstates->estateIterator()) {
             }
         }
     }
+
     // show infrastructure information with map instead of data sheet if possible
     if (!empty($area_butler_url)) {
         $infrastructure_info = $property_features['Infrastruktur'] ?? [];
         unset($property_features['Infrastruktur']);
     }
+
+    // energy certificate
+    $energy_certificate_expiry_date =
+        $current_property['energieausweis_gueltig_bis'] ?? '';
     ?>
 
     <section class="c-property-details o-section --bg-transparent<?php echo $show_secret_sale_block
@@ -1840,6 +1845,7 @@ while ($current_property = $pEstates->estateIterator()) {
                                         $energy_class_permitted_values,
                                         $energy_class,
                                         $labels,
+                                        $energy_certificate_expiry_date,
                                     ); ?>
                                 <?php endif; ?>
 

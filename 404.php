@@ -17,18 +17,18 @@ get_header();
 
     <?php echo oo_get_blocks_from_page($error_id); ?>
 
-	<?php while (have_posts()):
-     the_post();
+    <?php while (have_posts()):
+        the_post();
 
-     if (!is_404()):
-        the_content();
-     endif;
+        if (!is_404()):
+            the_content();
+        endif;
 
-     // If comments are open or we have at least one comment, load up the comment template.
-     if (comments_open() || get_comments_number()):
-         comments_template();
-     endif;
- endwhile;
+        // If comments are open or we have at least one comment, load up the comment template.
+        if (comments_open() || get_comments_number()):
+            comments_template();
+        endif;
+    endwhile;
 // End of the loop.
 ?>
 
