@@ -20,6 +20,7 @@ $is_description = filter_var(
 );
 
 // Image width
+$image_width_xxs = '414';
 $image_width_xs = '575';
 $image_width_sm = '767';
 $image_width_md = '350';
@@ -88,6 +89,10 @@ if ($rating_provider === 'google') {
                         'additional_cloudimg_params' =>
                             '&func=crop&gravity=face' ?? null,
                         'dimensions' => [
+                            '414' => [
+                                'w' => $image_width_xxs,
+                                'h' => $image_width_xxs,
+                            ],
                             '575' => [
                                 'w' => $image_width_xs,
                                 'h' => $image_width_xs,

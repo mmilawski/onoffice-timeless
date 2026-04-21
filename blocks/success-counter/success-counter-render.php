@@ -18,6 +18,7 @@ $slider = get_field('slider') ?? [];
 $is_slider = filter_var($slider['slider'] ?? null, FILTER_VALIDATE_BOOLEAN);
 
 // Background size
+$background_width_xxs = '414';
 $background_width_xs = '576';
 $background_width_sm = '768';
 $background_width_md = '992';
@@ -66,6 +67,7 @@ foreach (array_chunk($counters, $group_size) as $group_index => $group) {
                 'picture_class' => 'c-success-counter__picture o-picture',
                 'image_class' => 'c-success-counter__image o-image',
                 'dimensions' => [
+                    '414' => ['w' => $background_width_xxs],
                     '575' => ['w' => $background_width_xs],
                     '1600' => ['w' => $background_width_xxxl],
                     '1400' => ['w' => $background_width_xxl],

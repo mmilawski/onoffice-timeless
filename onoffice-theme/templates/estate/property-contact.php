@@ -178,6 +178,7 @@ if (!empty($pEstates->getEstateContacts())) {
             ];
 
             // image width
+            $contact_image_width_xxs = '175';
             $contact_image_width_xs = '256';
             $contact_image_width_sm = '240';
             $contact_image_width_md = '271';
@@ -208,6 +209,10 @@ if (!empty($pEstates->getEstateContacts())) {
                     'image_class' => 'c-contact-person__image o-image',
                     'additional_cloudimg_params' => '&func=crop&gravity=face',
                     'dimensions' => [
+                        '414' => [
+                            'w' => $contact_image_width_xxs,
+                            'h' => $contact_image_width_xxs,
+                        ],
                         '575' => [
                             'w' => $contact_image_width_xs,
                             'h' => $contact_image_width_xs,

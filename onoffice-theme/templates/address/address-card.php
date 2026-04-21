@@ -105,6 +105,7 @@ $image = [
 ];
 
 // image widths
+$image_width_xxs = '414';
 $image_width_xs = '575';
 $image_width_sm = '544';
 $image_width_md = '726';
@@ -199,6 +200,10 @@ foreach ($current_address as $field => $value) {
             'image_class' => 'c-address-card__image o-image',
             'additional_cloudimg_params' => '&func=crop&gravity=face',
             'dimensions' => [
+                '414' => [
+                    'w' => $image_width_xxs,
+                    'h' => $image_width_xxs,
+                ],
                 '575' => [
                     'w' => $image_width_xs,
                     'h' => $image_width_xs,

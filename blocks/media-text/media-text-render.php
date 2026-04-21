@@ -57,6 +57,7 @@ if (!empty($video)) {
 }
 
 // Media width
+$media_width_xxs = '382'; // Max stretch at 414 window
 $media_width_xs = '544'; // Max stretch at 575 window
 $media_width_sm = '512'; // Max stretch at 767 window
 $media_width_md = '694'; // Max stretch at 991 window
@@ -85,6 +86,10 @@ $media_width_xxxl = '584';
                         ' o-col-12 o-col-lg-5',
                     'image_class' => 'c-media-text__image o-image',
                     'dimensions' => [
+                        '414' => [
+                            'w' => $media_width_xxs,
+                            'h' => round(($media_width_xxs * 3) / 4),
+                        ],
                         '575' => [
                             'w' => $media_width_xs,
                             'h' => round(($media_width_xs * 3) / 4),
@@ -133,6 +138,10 @@ $media_width_xxxl = '584';
                     'image_class' => 'c-media-text__image',
                     'additional_cloudimg_params' => '&func=bound&org_if_sml=1',
                     'dimensions' => [
+                        '414' => [
+                            'w' => $media_width_xxs,
+                            'h' => $media_width_xxs,
+                        ],
                         '575' => [
                             'w' => $media_width_xs,
                             'h' => $media_width_xs,
@@ -187,6 +196,12 @@ $media_width_xxxl = '584';
                                     'image_class' =>
                                         'c-media-text__thumbnail-image o-image',
                                     'dimensions' => [
+                                        '414' => [
+                                            'w' => $media_width_xxs,
+                                            'h' => round(
+                                                ($media_width_xxs * 9) / 16,
+                                            ),
+                                        ],
                                         '575' => [
                                             'w' => $media_width_xs,
                                             'h' => round(

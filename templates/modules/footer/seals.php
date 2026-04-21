@@ -29,6 +29,7 @@ if (empty($seals)) {
 }
 
 if ($is_slider) {
+    $image_width_xxs = '90';
     $image_width_xs = '100';
     $image_width_sm = '130';
     $image_width_md = '80';
@@ -37,6 +38,7 @@ if ($is_slider) {
     $image_width_xxl = '100';
     $image_width_xxxl = '111';
 } else {
+    $image_width_xxs = '171';
     $image_width_xs = '252';
     $image_width_sm = '236';
     $image_width_md = '327';
@@ -46,6 +48,7 @@ if ($is_slider) {
     $image_width_xxxl = '126';
 }
 
+$image_height_xxs = $image_width_xxs;
 $image_height_xs = $image_width_xs;
 $image_height_sm = $image_width_sm;
 $image_height_md = $image_width_md;
@@ -103,6 +106,10 @@ if ($is_slider) { ?>
                                     'additional_cloudimg_params' =>
                                         '&func=bound&gravity=center&org_if_sml=1',
                                     'dimensions' => [
+                                        '414' => [
+                                            'w' => $image_width_xxs,
+                                            'h' => $image_height_xxs,
+                                        ],
                                         '575' => [
                                             'w' => $image_width_xs,
                                             'h' => $image_height_xs,
@@ -202,6 +209,10 @@ if ($is_slider) { ?>
                 'additional_cloudimg_params' =>
                     '&func=bound&gravity=center&org_if_sml=1',
                 'dimensions' => [
+                    '414' => [
+                        'w' => $image_width_xxs,
+                        'h' => $image_height_xxs,
+                    ],
                     '575' => [
                         'w' => $image_width_xs,
                         'h' => $image_height_xs,

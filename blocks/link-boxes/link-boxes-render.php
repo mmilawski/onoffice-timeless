@@ -15,6 +15,7 @@ $slider = get_field('slider') ?? [];
 $is_slider = filter_var($slider['slider'], FILTER_VALIDATE_BOOLEAN);
 
 // Background size
+$background_width_xxs = '414';
 $background_width_xs = '576';
 $background_width_sm = '768';
 $background_width_md = '992';
@@ -39,6 +40,9 @@ $background_width_xxxl = '1920';
             'picture_class' => 'c-link-boxes__picture o-picture',
             'image_class' => 'c-link-boxes__image o-image',
             'dimensions' => [
+                '414' => [
+                    'w' => $background_width_xxs,
+                ],
                 '575' => [
                     'w' => $background_width_xs,
                 ],

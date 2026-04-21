@@ -170,6 +170,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
 
     // image width
     if ($layout === 'tile') {
+        $image_width_xxs = '414';
         $image_width_xs = '575';
         $image_width_sm = '767';
         $image_width_md = '991';
@@ -178,6 +179,7 @@ while ($current_property = $pEstatesClone->estateIterator()):
         $image_width_xxl = '517';
         $image_width_xxxl = '624';
     } else {
+        $image_width_xxs = '414';
         $image_width_xs = '575';
         $image_width_sm = '767';
         $image_width_md = '991';
@@ -275,6 +277,10 @@ if ($pictures_count > 0) { ?>
                     $image_position_vertical .
                     $image_position_horizontal,
                 'dimensions' => [
+                    '414' => [
+                        'w' => $image_width_xxs,
+                        'h' => round(($image_width_xxs * 2) / 3),
+                    ],
                     '575' => [
                         'w' => $image_width_xs,
                         'h' => round(($image_width_xs * 2) / 3),

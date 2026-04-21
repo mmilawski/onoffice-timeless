@@ -16,6 +16,7 @@ $popup_id = get_the_id() ?? 'sticky';
 $type = $content['type'] ?? 'sticky';
 
 // Image Sizes
+$image_width_xxs = '414';
 $image_width_xs = '575';
 $image_width_sm = '767';
 $image_width_md = '460';
@@ -49,6 +50,10 @@ $image_width_xxxl = '460';
                     'c-popup-sticky-mobile-modal__picture o-picture',
                 'image_class' => 'c-popup-sticky-mobile-modal__image o-image',
                 'dimensions' => [
+                    '414' => [
+                        'w' => $image_width_xxs,
+                        'h' => round(($image_width_xxs * 2) / 3),
+                    ],
                     '575' => [
                         'w' => $image_width_xs,
                         'h' => round(($image_width_xs * 2) / 3),

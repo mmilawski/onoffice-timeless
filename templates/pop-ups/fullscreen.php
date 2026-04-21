@@ -16,6 +16,7 @@ $popup_id = get_the_id() ?? 'fullscreen';
 $type = $content['type'] ?? 'fullscreen';
 
 // Image Sizes
+$image_width_xxs = '414';
 $image_width_xs = '575';
 $image_width_sm = '767';
 $image_width_md = '991';
@@ -45,6 +46,10 @@ $image_width_xxxl = '492';
                         'c-popup-fullscreen__picture o-picture o-col-12 o-col-lg-4',
                     'image_class' => 'c-popup-fullscreen__image o-image',
                     'dimensions' => [
+                        '414' => [
+                            'w' => $image_width_xxs,
+                            'h' => round(($image_width_xxs * 2) / 3),
+                        ],
                         '575' => [
                             'w' => $image_width_xs,
                             'h' => round(($image_width_xs * 2) / 3),

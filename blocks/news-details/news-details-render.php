@@ -16,8 +16,9 @@ $is_date = filter_var(
     FILTER_VALIDATE_BOOLEAN,
 );
 
-// Image height
-$image_width_xs = '543';
+// Image width
+$image_width_xxs = '382';
+$image_width_xs = '544';
 $image_width_sm = '512';
 $image_width_md = '694';
 $image_width_lg = '448';
@@ -86,6 +87,10 @@ $image['alt'] = $image['alt'] ?? $title;
                         'picture_class' => 'c-news-details__picture o-picture',
                         'image_class' => 'c-news-details__image o-image',
                         'dimensions' => [
+                            '414' => [
+                                'w' => $image_width_xxs,
+                                'h' => round(($image_width_xxs * 3) / 4),
+                            ],
                             '575' => [
                                 'w' => $image_width_xs,
                                 'h' => round(($image_width_xs * 3) / 4),

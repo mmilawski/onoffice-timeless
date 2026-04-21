@@ -120,7 +120,8 @@ foreach ($current_address_array as $address_id => $current_address) {
     ];
 
     // image widths
-    $image_width_xs = '543';
+    $image_width_xxs = '414';
+    $image_width_xs = '544';
     $image_width_sm = '512';
     $image_width_md = '694';
     $image_width_lg = '288';
@@ -457,6 +458,10 @@ foreach ($current_address_array as $address_id => $current_address) {
                             'loading' => 'eager',
                             'decoding' => 'auto',
                             'dimensions' => [
+                                '414' => [
+                                    'w' => $image_width_xxs,
+                                    'h' => $image_width_xxs,
+                                ],
                                 '575' => [
                                     'w' => $image_width_xs,
                                     'h' => $image_width_xs,

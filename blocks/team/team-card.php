@@ -29,6 +29,7 @@ $slider = get_field('slider') ?? [];
 $is_slider = filter_var($slider['slider'] ?? null, FILTER_VALIDATE_BOOLEAN);
 
 // Image width
+$image_width_xxs = '414';
 $image_width_xs = '575';
 $image_width_sm = '767';
 $image_width_md = '339';
@@ -94,6 +95,10 @@ if ($rating_provider === 'google') {
             'image_class' => 'c-team-card__image o-image',
             'additional_cloudimg_params' => '&func=crop&gravity=face',
             'dimensions' => [
+                '414' => [
+                    'w' => $image_width_xxs,
+                    'h' => round(($image_width_xxs * 4) / 3),
+                ],
                 '575' => [
                     'w' => $image_width_xs,
                     'h' => round(($image_width_xs * 4) / 3),

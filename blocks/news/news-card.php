@@ -76,7 +76,8 @@ $is_date = filter_var(
 );
 
 // Image dimensions
-$image_width_xs = '543';
+$image_width_xxs = '382';
+$image_width_xs = '544';
 $image_width_sm = '512';
 $image_width_md = '694';
 
@@ -122,6 +123,10 @@ $link_title_more = sprintf(
        'picture_class' => 'c-news-card__picture o-picture',
        'image_class' => 'c-news-card__image o-image',
        'dimensions' => [
+           '414' => [
+               'w' => $image_width_xxs,
+               'h' => round(($image_width_xxs * 2) / 3),
+           ],
            '575' => [
                'w' => $image_width_xs,
                'h' => round(($image_width_xs * 2) / 3),

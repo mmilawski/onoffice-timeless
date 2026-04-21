@@ -58,6 +58,7 @@ if (!empty($video)) {
 
 // Media width
 if ($width_container == 'content-width') {
+    $media_width_xxs = '382';
     $media_width_xs = '544';
     $media_width_sm = '512';
     $media_width_md = '694';
@@ -66,6 +67,7 @@ if ($width_container == 'content-width') {
     $media_width_xxl = '864';
     $media_width_xxxl = '952';
 } elseif ($width_container == 'full-width') {
+    $media_width_xxs = '414';
     $media_width_xs = '576';
     $media_width_sm = '768';
     $media_width_md = '992';
@@ -128,6 +130,9 @@ if ($width_container == 'content-width') {
                         'additional_cloudimg_params' =>
                             '&gravity=' . $image_crop,
                         'dimensions' => [
+                            '414' => [
+                                'w' => $media_width_xxs,
+                            ],
                             '575' => [
                                 'w' => $media_width_xs,
                             ],
@@ -173,6 +178,12 @@ if ($width_container == 'content-width') {
                                         'additional_cloudimg_params' =>
                                             '&func=crop&gravity=' . $image_crop,
                                         'dimensions' => [
+                                            '414' => [
+                                                'w' => $media_width_xxs,
+                                                'h' => round(
+                                                    ($media_width_xxs * 9) / 16,
+                                                ),
+                                            ],
                                             '575' => [
                                                 'w' => $media_width_xs,
                                                 'h' => round(
@@ -298,6 +309,10 @@ if ($width_container == 'content-width') {
                     'additional_cloudimg_params' =>
                         '&func=crop&gravity=' . $image_crop,
                     'dimensions' => [
+                        '414' => [
+                            'w' => $media_width_xxs,
+                            'h' => round(($media_width_xxs * 3) / 4),
+                        ],
                         '575' => [
                             'w' => $media_width_xs,
                             'h' => round(($media_width_xs * 3) / 4),
@@ -350,6 +365,12 @@ if ($width_container == 'content-width') {
                                     'additional_cloudimg_params' =>
                                         '&func=crop&gravity=' . $image_crop,
                                     'dimensions' => [
+                                        '414' => [
+                                            'w' => $media_width_xxs,
+                                            'h' => round(
+                                                ($media_width_xxs * 9) / 16,
+                                            ),
+                                        ],
                                         '575' => [
                                             'w' => $media_width_xs,
                                             'h' => round(

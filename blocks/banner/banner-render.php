@@ -138,6 +138,7 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
                         $has_video = true;
                     }
 
+                    $background_width_xxs = '414';
                     $background_width_xs = '575';
                     $background_width_sm = '544';
                     $background_width_md = '726';
@@ -256,6 +257,14 @@ $banner_content_class = $all_slides_are_none ? ' --content-none' : '';
                                             'loading' => $slide_loading,
                                             'decoding' => $slide_decoding,
                                             'dimensions' => [
+                                                '414' => [
+                                                    'w' => $background_width_xxs,
+                                                    'h' => round(
+                                                        ($background_width_xxs *
+                                                            3) /
+                                                            4,
+                                                    ),
+                                                ],
                                                 '575' => [
                                                     'w' => $background_width_xs,
                                                     'h' => round(
