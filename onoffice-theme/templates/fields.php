@@ -197,7 +197,18 @@ if (!function_exists('renderFieldEstateSearch')) {
                 '</textarea>';
             $output .= '</label>';
         } elseif (in_array($typeCurrentInput, $typesMultiselect)) {
+            $singleSelect = false;
+            $isSelected = null;
+            if ($fieldName === 'country') {
+                $singleSelect = true;
+            }
             $htmlOptions = '';
+            $htmlOptions .=
+                '<option value="" ' .
+                ($isSelected === null ? ' selected' : '') .
+                '>' .
+                $placeholder .
+                '</option>';
             foreach ($permittedValues as $key => $value) {
                 if (is_array($selectedValue)) {
                     $isSelected = in_array($key, $selectedValue, true);
@@ -213,13 +224,14 @@ if (!function_exists('renderFieldEstateSearch')) {
                     esc_html($value) .
                     '</option>';
             }
-            $output .= '<div class="o-label --is-multiple-select">';
+            $output .= '<div class="o-label --is-' . ($singleSelect ? 'single' : 'multiple') . '-select">';
             $output .=
                 '<label for="' . $fieldName . '_' . $formId . '-ts-control">';
             $output .= $fieldLabel;
             $output .= '</label>';
             $output .=
-                '<select aria-hidden="true" tabindex="-1" class="o-select --multiple" ' .
+                '<select aria-hidden="true" tabindex="-1" class="o-select ' . ($singleSelect ? '--single' : '--multiple').
+                '" ' .
                 renderAutocomplete($fieldName) .
                 ' id="' .
                 esc_html($fieldName) .
@@ -227,7 +239,10 @@ if (!function_exists('renderFieldEstateSearch')) {
                 $formId .
                 '" name="' .
                 esc_html($fieldName) .
-                '[]" multiple="multiple" data-placeholder="' .
+                ($singleSelect ? '' : '[]').
+                '"'.
+                ($singleSelect ? '' : 'multiple="multiple" ').
+                'data-placeholder="' .
                 $placeholder .
                 '">';
             $output .= $htmlOptions;
