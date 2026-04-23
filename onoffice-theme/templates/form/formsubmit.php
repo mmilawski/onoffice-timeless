@@ -41,7 +41,22 @@ $config = oo_get_recaptcha_config();
 $formNo = $pForm->getFormNo();
 
 if ($config['type'] === 'none') {
-    echo '<button class="' . $buttonClass . '">' . $buttonLabel . '</button>';
+    $altchaConfig = oo_get_altcha_config();
+    if ($altchaConfig['type'] === 'altcha') {
+        wp_enqueue_script('oo-altcha');
+        oo_render_altcha(
+            $formNo,
+            $altchaConfig['serverUrl'],
+            $buttonClass,
+            $buttonLabel,
+        );
+    } else {
+        echo '<button class="' .
+            $buttonClass .
+            '">' .
+            $buttonLabel .
+            '</button>';
+    }
     return;
 }
 
