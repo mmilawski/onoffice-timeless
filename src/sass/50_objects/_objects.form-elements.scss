@@ -478,6 +478,13 @@ $form-footer-outline-dropdown: 3px solid var(--oo-color-footer-text);
     outline: $form-outline;
     transition: outline-color $form-duration $form-timing,
       border-color $form-duration $form-timing;
+
+    .c-property-list__sort & {
+      @include media-breakpoint-up(md) {
+        max-width: 100%;
+        width: 23rem;
+      }
+    }
   }
 
   &.focus {
