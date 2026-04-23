@@ -1148,7 +1148,7 @@ jQuery(document).ready(function() {
   if( propertyFeatureOpenerButton.length > 0 ) {
     propertyFeatureOpenerButton.on('click', function(e) {
       // Button 
-      let button = propertyFeatureOpenerButton;
+      let button = $(this);
       let activeClass = '--is-active';
       
       // Button Text 
@@ -1186,7 +1186,7 @@ jQuery(document).ready(function() {
   if( addressFeatureOpenerButton.length > 0 ) {
     addressFeatureOpenerButton.on('click', function(e) {
       // Button 
-      let button = addressFeatureOpenerButton;
+      let button = $(this);
       let activeClass = '--is-active';
       
       // Button Text 
@@ -1595,11 +1595,11 @@ function applyResponsiveTextShortening() {
           .show()
           .attr('aria-expanded', 'false')
           .text($readMore.data('open-text') || 'weiterlesen...');
-        
-        // Attach click handler only once to prevent duplicate event listeners
-        // This check is necessary because applyResponsiveTextShortening() is called
-        // both on page load and on window resize events
-        if (!$readMore.data('click-handler-added')) {
+
+        const hasNativeToggleTarget = $readMore.is('[aria-controls]');
+
+        // Buttons with aria-controls are handled by the generic read-more toggle.
+        if (!hasNativeToggleTarget && !$readMore.data('click-handler-added')) {
           $readMore.on('click', function(e) {
             e.preventDefault();
             const $btn = $(this);
@@ -1608,18 +1608,15 @@ function applyResponsiveTextShortening() {
             const closeText = $btn.data('close-text') || 'weniger anzeigen';
 
             if (isExpanded) {
-              // Collapse: Apply --shorten class to limit text to configured line-clamp
               $textEl.addClass('--shorten');
               $btn.attr('aria-expanded', 'false').text(openText);
-              // Scroll back to the beginning of the content for better UX
               $root[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
             } else {
-              // Expand: Remove --shorten class to show full text content
               $textEl.removeClass('--shorten');
               $btn.attr('aria-expanded', 'true').text(closeText);
             }
           });
-          // Mark this button as having a click handler to prevent duplicates
+
           $readMore.data('click-handler-added', true);
         }
       } else {
@@ -1637,11 +1634,11 @@ function applyResponsiveTextShortening() {
 
   // property detail
   shortenElements('.c-property-details__text', '.c-property-details__text-content', '.c-property-details__text-content');
-  
+
   // address text features
   shortenElements('.c-address-details__text-wrapper', '.c-address-details__text-content', '.c-address-details__text-content');
-  
-  // team 
+
+  // team
   shortenElements('.c-team-card', '.c-team-card__description', '.c-team-card__description');
 }
 
@@ -1671,21 +1668,21 @@ function getSlide(element) {
 function initVideoToggle() {
     $('.c-banner__video-playback-toggle').off('click').on('click', function (e) {
       e.preventDefault();
-  
+
       const btn = $(this);
       const slide = getSlide(this);
       const iframe = $(slide).find('iframe');
       const isPlaying = btn.attr('aria-pressed') === 'false';
       const labelPlay = btn.data('label-play');
       const labelPause = btn.data('label-pause');
-  
+
       // Toggle video playback
       iframe.each(function () {
         const isYouTube = this.src.includes('youtube');
         const isVimeo = this.src.includes('vimeo');
         const player = $(this).data('yt-player') || $(this).data('vimeo-player');
         if (!player) return;
-  
+
         try {
           if (isYouTube) {
             isPlaying ? player.pauseVideo() : player.playVideo();
@@ -1696,11 +1693,11 @@ function initVideoToggle() {
           console.warn('Video control failed', e);
         }
       });
-  
+
       // Update ARIA and screen reader label
       const newState = isPlaying ? 'true' : 'false';
       const newLabel = isPlaying ? labelPlay : labelPause;
-  
+
       btn.attr('aria-pressed', newState);
       btn.attr('aria-label', newLabel);
     });
