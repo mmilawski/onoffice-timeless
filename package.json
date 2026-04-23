@@ -22,7 +22,9 @@
 		"localtunnel": {
 			"axios": "^1.12.0"
 		},
-		"lodash": "^4.18.1"
+		"lodash": "^4.18.1",
+		"follow-redirects": "^1.16.0",
+		"browser-sync": "^3.0.3"
 	},
 	"repository": {
 		"type": "git",
