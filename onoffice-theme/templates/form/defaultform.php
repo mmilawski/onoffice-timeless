@@ -54,6 +54,10 @@ require 'info-messages.php';
 
 /* @var $pForm \onOffice\WPlugin\Form */
 foreach ($pForm->getInputFields() as $input => $table) {
+    if ($input === 'gdprhinttext') {
+        $addressValues[] = renderGdprHintText($pForm);
+        continue;
+    }
     $line = renderFormField($input, $pForm);
 
     $addressValues[] = $line;

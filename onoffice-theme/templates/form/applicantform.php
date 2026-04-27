@@ -51,7 +51,12 @@ foreach ($pForm->getInputFields() as $input => $table) {
             continue;
         }
     }
-    $line = renderFormField($input, $pForm);
+    if ($input === 'gdprhinttext') {
+        $line = renderGdprHintText($pForm);
+        $table = 'other';
+    } else {
+        $line = renderFormField($input, $pForm);
+    }
     if (
         in_array($input, ['gdprcheckbox', 'Id']) ||
         in_array($input, ['newsletter', 'Id']) ||

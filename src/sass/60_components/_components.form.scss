@@ -170,6 +170,11 @@
       grid-column: span 2;
     }
   }
+  .oo-gdpr-hint-text {
+    @include media-breakpoint-up(md) {
+      grid-column: span 2;
+    }
+  }
   .--is-range:has(*:nth-child(2)) {
     @include media-breakpoint-up(md) {
       grid-column: span 2;
@@ -340,7 +345,8 @@
         grid-column: 1 / -1;
       }
 
-      .c-form__field-group:has(.o-label.--is-textarea) {
+      .c-form__field-group:has(.o-label.--is-textarea),
+      .c-form__field-group:has(.oo-gdpr-hint-text) {
         // Force textarea groups to span all columns of the parent grid.
         grid-column: 1 / -1;
       }
@@ -495,6 +501,7 @@
           grid-template-columns: repeat(2, minmax(0, 1fr));
 
           .--is-textarea,
+          .oo-gdpr-hint-text,
           .--is-boolean {
             grid-column: span 2;
           }
