@@ -48,6 +48,8 @@ $energy_fields = [
     'ea_hwb_at',
     'ea_fgee_at',
     'energiepassJahrgang',
+    'leistungsindex_m2',
+    'leistungsindex_m3',
 ];
 
 $price_fields = get_price_fields();
